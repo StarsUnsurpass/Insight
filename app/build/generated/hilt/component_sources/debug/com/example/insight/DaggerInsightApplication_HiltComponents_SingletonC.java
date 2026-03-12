@@ -525,7 +525,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectInsightApplication(InsightApplication arg0) {
+    public void injectInsightApplication(InsightApplication insightApplication) {
     }
 
     @Override
