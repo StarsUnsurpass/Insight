@@ -18,7 +18,7 @@ class TextAnalyzer @Inject constructor(
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             recognizer.process(image)
-                .addOnSuccessListener { visionText ->
+                .addOnSuccessListener { _ ->
                     // Logic to handle detected text could be passed via callback or shared state
                 }
                 .addOnFailureListener { e ->

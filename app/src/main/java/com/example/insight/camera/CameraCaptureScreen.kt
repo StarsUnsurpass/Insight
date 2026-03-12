@@ -132,7 +132,6 @@ fun ScanningOverlay() {
         val rectHeight = height * 0.5f
         val left = (width - rectWidth) / 2
         val top = (height - rectHeight) / 2
-        val rect = Rect(left, top, left + rectWidth, top + rectHeight)
 
         // Dim background outside the crop area
         with(drawContext.canvas.nativeCanvas) {
