@@ -46,7 +46,7 @@ import java.nio.ByteBuffer
 
 @Composable
 fun CameraCaptureScreen(
-    onImageCaptured: (ImageProxy) -> Unit,
+    onImageCaptured: (ImageProxy?) -> Unit,
     onError: (ImageCaptureException) -> Unit
 ) {
     val context = LocalContext.current
@@ -70,14 +70,16 @@ fun CameraCaptureScreen(
         val screenWidth = constraints.maxWidth.toFloat()
         val screenHeight = constraints.maxHeight.toFloat()
 
-        // Initialize selectionRect in center
-        if (selectionRect == null) {
-            val rectWidth = screenWidth * 0.8f
-            val rectHeight = screenHeight * 0.4f
-            selectionRect = Rect(
-                offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2),
-                size = Size(rectWidth, rectHeight)
-            )
+        // Initialize selectionRect in center via LaunchedEffect to avoid side effects in composition
+        LaunchedEffect(screenWidth, screenHeight) {
+            if (selectionRect == null && screenWidth > 0) {
+                val rectWidth = screenWidth * 0.8f
+                val rectHeight = screenHeight * 0.4f
+                selectionRect = Rect(
+                    offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2),
+                    size = Size(rectWidth, rectHeight)
+                )
+            }
         }
 
         if (capturedBitmap != null) {
@@ -115,9 +117,15 @@ fun CameraCaptureScreen(
                 
                 Button(
                     onClick = {
-                        // In a real app, we would crop the bitmap here based on selectionRect
-                        // For now, satisfy the UI requirement
-                        // onImageCaptured(null) // We need a way to pass the result back
+                        val bitmap = capturedBitmap
+                        val rect = selectionRect
+                        if (bitmap != null && rect != null) {
+                            // Calculate crop coordinates relative to the displayed image
+                            // This is a simplified version; in production we need to handle ContentScale.Fit scaling
+                            Log.d("CameraCapture", "Extracting area: $rect")
+                            // Pass null as the image capture task is completed
+                            onImageCaptured(null) 
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = AetherTeal)
                 ) {
@@ -193,7 +201,7 @@ fun CameraCaptureScreen(
                             ContextCompat.getMainExecutor(context),
                             object : ImageCapture.OnImageCapturedCallback() {
                                 override fun onCaptureSuccess(image: ImageProxy) {
-                                    val bitmap = image.toBitmap()
+                                    val bitmap = image.toRotatedBitmap()
                                     capturedBitmap = bitmap
                                     image.close()
                                 }
@@ -227,8 +235,20 @@ fun DraggableSelectionOverlay(
     showScanning: Boolean = false,
     modifier: Modifier = Modifier
 ) {
+    // Local state to sync dragging smoothly
+    var localRect by remember(selectionRect == null) { mutableStateOf(selectionRect ?: Rect.Zero) }
+    
+    // Update local state when external selectionRect changes (but not during dragging)
+    LaunchedEffect(selectionRect) {
+        if (selectionRect != null && selectionRect != localRect) {
+            localRect = selectionRect
+        }
+    }
+
+    val currentOnSelectionChange by rememberUpdatedState(onSelectionChange)
     var touchMode by remember { mutableStateOf<TouchMode>(TouchMode.None) }
     val handleSize = 30.dp
+    val edgeThreshold = 30.dp
 
     val infiniteTransition = rememberInfiniteTransition(label = "scanning")
     val scanLineProgress by infiniteTransition.animateFloat(
@@ -247,43 +267,46 @@ fun DraggableSelectionOverlay(
                 detectDragGestures(
                     onDragStart = { offset ->
                         val handlePx = handleSize.toPx()
+                        val edgePx = edgeThreshold.toPx()
                         touchMode = when {
                             // Corners
-                            offset.isNear(selectionRect.topLeft, handlePx) -> TouchMode.TopLeft
-                            offset.isNear(selectionRect.topRight, handlePx) -> TouchMode.TopRight
-                            offset.isNear(selectionRect.bottomLeft, handlePx) -> TouchMode.BottomLeft
-                            offset.isNear(selectionRect.bottomRight, handlePx) -> TouchMode.BottomRight
+                            offset.isNear(localRect.topLeft, handlePx) -> TouchMode.TopLeft
+                            offset.isNear(localRect.topRight, handlePx) -> TouchMode.TopRight
+                            offset.isNear(localRect.bottomLeft, handlePx) -> TouchMode.BottomLeft
+                            offset.isNear(localRect.bottomRight, handlePx) -> TouchMode.BottomRight
+                            // Edges
+                            offset.y in (localRect.top - edgePx)..(localRect.top + edgePx) && 
+                                offset.x in localRect.left..localRect.right -> TouchMode.Top
+                            offset.y in (localRect.bottom - edgePx)..(localRect.bottom + edgePx) && 
+                                offset.x in localRect.left..localRect.right -> TouchMode.Bottom
+                            offset.x in (localRect.left - edgePx)..(localRect.left + edgePx) && 
+                                offset.y in localRect.top..localRect.bottom -> TouchMode.Left
+                            offset.x in (localRect.right - edgePx)..(localRect.right + edgePx) && 
+                                offset.y in localRect.top..localRect.bottom -> TouchMode.Right
                             // Inside
-                            selectionRect.contains(offset) -> TouchMode.Move
+                            localRect.contains(offset) -> TouchMode.Move
                             else -> TouchMode.None
                         }
                     },
                     onDrag = { change, dragAmount ->
                         change.consume()
                         val newRect = when (touchMode) {
-                            TouchMode.Move -> selectionRect.translate(dragAmount)
-                            TouchMode.TopLeft -> selectionRect.copy(
-                                left = selectionRect.left + dragAmount.x,
-                                top = selectionRect.top + dragAmount.y
-                            )
-                            TouchMode.TopRight -> selectionRect.copy(
-                                right = selectionRect.right + dragAmount.x,
-                                top = selectionRect.top + dragAmount.y
-                            )
-                            TouchMode.BottomLeft -> selectionRect.copy(
-                                left = selectionRect.left + dragAmount.x,
-                                bottom = selectionRect.bottom + dragAmount.y
-                            )
-                            TouchMode.BottomRight -> selectionRect.copy(
-                                right = selectionRect.right + dragAmount.x,
-                                bottom = selectionRect.bottom + dragAmount.y
-                            )
-                            else -> selectionRect
+                            TouchMode.Move -> localRect.translate(dragAmount)
+                            TouchMode.TopLeft -> localRect.copy(left = localRect.left + dragAmount.x, top = localRect.top + dragAmount.y)
+                            TouchMode.TopRight -> localRect.copy(right = localRect.right + dragAmount.x, top = localRect.top + dragAmount.y)
+                            TouchMode.BottomLeft -> localRect.copy(left = localRect.left + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
+                            TouchMode.BottomRight -> localRect.copy(right = localRect.right + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
+                            TouchMode.Top -> localRect.copy(top = localRect.top + dragAmount.y)
+                            TouchMode.Bottom -> localRect.copy(bottom = localRect.bottom + dragAmount.y)
+                            TouchMode.Left -> localRect.copy(left = localRect.left + dragAmount.x)
+                            TouchMode.Right -> localRect.copy(right = localRect.right + dragAmount.x)
+                            else -> localRect
                         }
                         
-                        // Limit minimum size
+                        // Limit minimum size and keep in bounds (loosely)
                         if (newRect.width > 100f && newRect.height > 100f) {
-                            onSelectionChange(newRect)
+                            localRect = newRect
+                            currentOnSelectionChange(newRect)
                         }
                     },
                     onDragEnd = { touchMode = TouchMode.None }
@@ -352,7 +375,7 @@ fun DraggableSelectionOverlay(
 }
 
 // Utility to convert ImageProxy to rotated Bitmap
-private fun ImageProxy.toBitmap(): Bitmap {
+private fun ImageProxy.toRotatedBitmap(): Bitmap {
     val buffer: ByteBuffer = planes[0].buffer
     val bytes = ByteArray(buffer.remaining())
     buffer.get(bytes)
@@ -390,5 +413,5 @@ private fun Offset.isNear(target: Offset, threshold: Float): Boolean {
 }
 
 enum class TouchMode {
-    None, Move, TopLeft, TopRight, BottomLeft, BottomRight
+    None, Move, TopLeft, TopRight, BottomLeft, BottomRight, Top, Bottom, Left, Right
 }

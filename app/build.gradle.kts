@@ -5,6 +5,14 @@ plugins {
     kotlin("kapt")
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     namespace = "com.example.insight"
     compileSdk = 36
