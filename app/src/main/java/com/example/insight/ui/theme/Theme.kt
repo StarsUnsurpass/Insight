@@ -4,30 +4,43 @@ import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme // Added import for lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+private val LightColorScheme = lightColorScheme(
+    primary = InkBlue,
+    secondary = SageGreen,
+    tertiary = HighlightYellow,
+    background = PaperWhite,
+    surface = SoftOatmeal,
+    onPrimary = PaperWhite,
+    onSecondary = PaperWhite,
+    onBackground = DarkText,
+    onSurface = DarkText
+)
+
 private val DarkColorScheme = darkColorScheme(
-    primary = AetherTeal,
-    secondary = OrchidMist,
-    tertiary = LunarFrost,
-    background = DeepVoid,
-    surface = GlassOverlay,
-    onPrimary = DeepVoid,
-    onSecondary = DeepVoid,
-    onBackground = LunarFrost,
-    onSurface = LunarFrost
+    primary = SageGreen,
+    secondary = InkBlue,
+    tertiary = HighlightYellow,
+    background = InkBlue,
+    surface = DarkText,
+    onPrimary = PaperWhite,
+    onSecondary = PaperWhite,
+    onBackground = PaperWhite,
+    onSurface = PaperWhite
 )
 
 @Composable
 fun InsightTheme(
-    darkTheme: Boolean = true, // Default to true based on design requirements
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = DarkColorScheme
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
