@@ -236,11 +236,11 @@ fun DraggableSelectionOverlay(
     modifier: Modifier = Modifier
 ) {
     // Local state to sync dragging smoothly
-    var localRect by remember(selectionRect == null) { mutableStateOf(selectionRect ?: Rect.Zero) }
+    var localRect by remember { mutableStateOf(selectionRect) }
     
     // Update local state when external selectionRect changes (but not during dragging)
     LaunchedEffect(selectionRect) {
-        if (selectionRect != null && selectionRect != localRect) {
+        if (selectionRect != localRect) {
             localRect = selectionRect
         }
     }
