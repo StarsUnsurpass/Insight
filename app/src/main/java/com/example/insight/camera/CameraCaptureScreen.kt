@@ -8,8 +8,10 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.*
@@ -42,38 +44,85 @@ fun CameraCaptureScreen(
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val previewView = remember { PreviewView(context) }
+
+    val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
+    var cameraProvider by remember { mutableStateOf<ProcessCameraProvider?>(null) }
     val imageCapture = remember { ImageCapture.Builder().build() }
-    val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-    LaunchedEffect(Unit) {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-        cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(previewView.surfaceProvider)
-            }
+    // selectionRect in pixels relative to the Box
+    var selectionRect by remember { mutableStateOf<Rect?>(null) }
 
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    lifecycleOwner,
-                    cameraSelector,
-                    preview,
-                    imageCapture
-                )
-            } catch (exc: Exception) {
-                Log.e("CameraCapture", "Use case binding failed", exc)
-            }
-        }, ContextCompat.getMainExecutor(context))
+    LaunchedEffect(cameraProviderFuture) {
+        cameraProvider = cameraProviderFuture.get()
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // 1. Camera Preview
-        AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize())
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val screenWidth = constraints.maxWidth.toFloat()
+        val screenHeight = constraints.maxHeight.toFloat()
 
-        // 2. Custom Scanning Overlay
-        ScanningOverlay()
+        // Initialize selectionRect in center
+        if (selectionRect == null) {
+            val rectWidth = screenWidth * 0.8f
+            val rectHeight = screenHeight * 0.4f
+            selectionRect = Rect(
+                offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2),
+                size = Size(rectWidth, rectHeight)
+            )
+        }
+
+        if (cameraProvider != null) {
+            AndroidView(
+                factory = { ctx ->
+                    PreviewView(ctx).apply {
+                        implementationMode = PreviewView.ImplementationMode.COMPATIBLE
+                    }
+                },
+                modifier = Modifier.fillMaxSize(),
+                update = { previewView ->
+                    val preview = Preview.Builder().build().also {
+                        it.setSurfaceProvider(previewView.surfaceProvider)
+                    }
+
+                    try {
+                        cameraProvider?.unbindAll()
+                        cameraProvider?.bindToLifecycle(
+                            lifecycleOwner,
+                            CameraSelector.DEFAULT_BACK_CAMERA,
+                            preview,
+                            imageCapture
+                        )
+                    } catch (exc: Exception) {
+                        Log.e("CameraCapture", "Use case binding failed", exc)
+                        try {
+                            cameraProvider?.bindToLifecycle(
+                                lifecycleOwner,
+                                CameraSelector.DEFAULT_FRONT_CAMERA,
+                                preview,
+                                imageCapture
+                            )
+                        } catch (e2: Exception) {
+                            Log.e("CameraCapture", "Front camera binding also failed", e2)
+                        }
+                    }
+                }
+            )
+        } else {
+            Box(
+                modifier = Modifier.fillMaxSize().background(DeepVoid),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = AetherTeal)
+            }
+        }
+
+        // 2. Custom Draggable Selection Overlay
+        selectionRect?.let { rect ->
+            DraggableSelectionOverlay(
+                selectionRect = rect,
+                onSelectionChange = { selectionRect = it },
+                modifier = Modifier.fillMaxSize()
+            )
+        }
 
         // 3. UI Controls
         Box(
@@ -88,6 +137,8 @@ fun CameraCaptureScreen(
                         ContextCompat.getMainExecutor(context),
                         object : ImageCapture.OnImageCapturedCallback() {
                             override fun onCaptureSuccess(image: ImageProxy) {
+                                // TODO: Cropping based on selectionRect can be done here or in the caller
+                                // For now, pass the image as is, but we could crop it to selectionRect
                                 onImageCaptured(image)
                             }
                             override fun onError(exception: ImageCaptureException) {
@@ -113,69 +164,129 @@ fun CameraCaptureScreen(
 }
 
 @Composable
-fun ScanningOverlay() {
-    val infiniteTransition = rememberInfiniteTransition(label = "scanning")
-    val scanLineY by infiniteTransition.animateFloat(
-        initialValue = 0.25f,
-        targetValue = 0.75f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "scanLine"
-    )
-
-    Canvas(modifier = Modifier.fillMaxSize()) {
+fun DraggableSelectionOverlay(
+    selectionRect: Rect,
+    onSelectionChange: (Rect) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var touchMode by remember { mutableStateOf<TouchMode>(TouchMode.None) }
+    val handleSize = 30.dp
+    
+    Canvas(
+        modifier = modifier
+            .pointerInput(Unit) {
+                detectDragGestures(
+                    onDragStart = { offset ->
+                        val handlePx = handleSize.toPx()
+                        touchMode = when {
+                            // Corners
+                            offset.isNear(selectionRect.topLeft, handlePx) -> TouchMode.TopLeft
+                            offset.isNear(selectionRect.topRight, handlePx) -> TouchMode.TopRight
+                            offset.isNear(selectionRect.bottomLeft, handlePx) -> TouchMode.BottomLeft
+                            offset.isNear(selectionRect.bottomRight, handlePx) -> TouchMode.BottomRight
+                            // Inside
+                            selectionRect.contains(offset) -> TouchMode.Move
+                            else -> TouchMode.None
+                        }
+                    },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        val newRect = when (touchMode) {
+                            TouchMode.Move -> selectionRect.translate(dragAmount)
+                            TouchMode.TopLeft -> selectionRect.copy(
+                                left = selectionRect.left + dragAmount.x,
+                                top = selectionRect.top + dragAmount.y
+                            )
+                            TouchMode.TopRight -> selectionRect.copy(
+                                right = selectionRect.right + dragAmount.x,
+                                top = selectionRect.top + dragAmount.y
+                            )
+                            TouchMode.BottomLeft -> selectionRect.copy(
+                                left = selectionRect.left + dragAmount.x,
+                                bottom = selectionRect.bottom + dragAmount.y
+                            )
+                            TouchMode.BottomRight -> selectionRect.copy(
+                                right = selectionRect.right + dragAmount.x,
+                                bottom = selectionRect.bottom + dragAmount.y
+                            )
+                            else -> selectionRect
+                        }
+                        
+                        // Limit minimum size
+                        if (newRect.width > 100f && newRect.height > 100f) {
+                            onSelectionChange(newRect)
+                        }
+                    },
+                    onDragEnd = { touchMode = TouchMode.None }
+                )
+            }
+    ) {
         val width = size.width
         val height = size.height
-        val rectWidth = width * 0.8f
-        val rectHeight = height * 0.5f
-        val left = (width - rectWidth) / 2
-        val top = (height - rectHeight) / 2
 
-        // Dim background outside the crop area
+        // Dim background outside
         with(drawContext.canvas.nativeCanvas) {
             val check = saveLayer(null, null)
             drawRect(Color.Black.copy(alpha = 0.6f))
             drawRoundRect(
                 color = Color.Transparent,
-                topLeft = Offset(left, top),
-                size = Size(rectWidth, rectHeight),
-                cornerRadius = CornerRadius(16.dp.toPx(), 16.dp.toPx()),
+                topLeft = selectionRect.topLeft,
+                size = selectionRect.size,
+                cornerRadius = CornerRadius(12.dp.toPx(), 12.dp.toPx()),
                 blendMode = BlendMode.Clear
             )
             restoreToCount(check)
         }
 
-        // Draw crop area border
+        // Draw selection border
         drawRoundRect(
-            color = AetherTeal.copy(alpha = 0.5f),
-            topLeft = Offset(left, top),
-            size = Size(rectWidth, rectHeight),
-            cornerRadius = CornerRadius(16.dp.toPx(), 16.dp.toPx()),
-            style = Stroke(width = 2.dp.toPx())
+            color = AetherTeal,
+            topLeft = selectionRect.topLeft,
+            size = selectionRect.size,
+            cornerRadius = CornerRadius(12.dp.toPx(), 12.dp.toPx()),
+            style = Stroke(width = 3.dp.toPx())
         )
 
-        // Draw scanning line
-        val currentLineY = top + (rectHeight * ((scanLineY - 0.25f) / 0.5f))
-        drawLine(
-            brush = Brush.horizontalGradient(
-                colors = listOf(Color.Transparent, AetherTeal, Color.Transparent)
-            ),
-            start = Offset(left, currentLineY),
-            end = Offset(left + rectWidth, currentLineY),
-            strokeWidth = 3.dp.toPx()
-        )
+        // Draw corner handles
+        val handleLength = 20.dp.toPx()
+        val handleStroke = 4.dp.toPx()
         
-        // Glow effect for scanning line
-        drawRect(
-            brush = Brush.verticalGradient(
-                colors = listOf(AetherTeal.copy(alpha = 0.2f), Color.Transparent),
-                startY = currentLineY,
-                endY = currentLineY + 20.dp.toPx()
-            ),
-            topLeft = Offset(left, currentLineY),
-            size = Size(rectWidth, 20.dp.toPx())
-        )
+        // Top-Left
+        drawCorner(selectionRect.topLeft, handleLength, handleStroke, type = 0)
+        // Top-Right
+        drawCorner(Offset(selectionRect.right, selectionRect.top), handleLength, handleStroke, type = 1)
+        // Bottom-Left
+        drawCorner(Offset(selectionRect.left, selectionRect.bottom), handleLength, handleStroke, type = 2)
+        // Bottom-Right
+        drawCorner(selectionRect.bottomRight, handleLength, handleStroke, type = 3)
     }
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCorner(
+    pos: Offset,
+    len: Float,
+    stroke: Float,
+    type: Int
+) {
+    val horizontal = when(type) {
+        0, 2 -> Offset(pos.x + len, pos.y)
+        1, 3 -> Offset(pos.x - len, pos.y)
+        else -> pos
+    }
+    val vertical = when(type) {
+        0, 1 -> Offset(pos.x, pos.y + len)
+        2, 3 -> Offset(pos.x, pos.y - len)
+        else -> pos
+    }
+    
+    drawLine(AetherTeal, pos, horizontal, stroke)
+    drawLine(AetherTeal, pos, vertical, stroke)
+}
+
+private fun Offset.isNear(target: Offset, threshold: Float): Boolean {
+    return (this - target).getDistance() < threshold
+}
+
+enum class TouchMode {
+    None, Move, TopLeft, TopRight, BottomLeft, BottomRight
 }
