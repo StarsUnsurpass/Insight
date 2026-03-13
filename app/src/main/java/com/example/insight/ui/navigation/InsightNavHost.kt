@@ -11,7 +11,10 @@ import com.example.insight.ui.screens.SolutionScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
 
+import com.example.insight.ui.screens.MainScreen
+
 sealed class Route(val path: String) {
+    object Main : Route("main")
     object Scanner : Route("scanner")
     object Solution : Route("solution")
     object Starfield : Route("starfield")
@@ -23,7 +26,18 @@ fun InsightNavHost() {
     val viewModel: InsightViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
-    NavHost(navController = navController, startDestination = Route.Scanner.path) {
+    NavHost(navController = navController, startDestination = Route.Main.path) {
+        composable(Route.Main.path) {
+            MainScreen(
+                onNavigateToScanner = {
+                    navController.navigate(Route.Scanner.path)
+                },
+                onNavigateToSolution = {
+                    navController.navigate(Route.Solution.path)
+                }
+            )
+        }
+        
         composable(Route.Scanner.path) {
             CameraCaptureScreen(
                 onImageCaptured = { _ ->
