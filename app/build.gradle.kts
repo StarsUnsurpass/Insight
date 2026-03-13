@@ -7,6 +7,9 @@ plugins {
 
 kapt {
     correctErrorTypes = true
+    javacOptions {
+        option("-Xlint:-processing")
+    }
 }
 
 android {
@@ -45,6 +48,7 @@ android {
 
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.add("-Xlint:-options")
+        options.compilerArgs.add("-Xlint:-processing")
     }
     buildFeatures {
         compose = true

@@ -12,12 +12,14 @@ import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
 
 import com.example.insight.ui.screens.MainScreen
+import com.example.insight.ui.screens.SettingsScreen
 
 sealed class Route(val path: String) {
     object Main : Route("main")
     object Scanner : Route("scanner")
     object Solution : Route("solution")
     object Starfield : Route("starfield")
+    object Settings : Route("settings")
 }
 
 @Composable
@@ -31,6 +33,9 @@ fun InsightNavHost() {
             MainScreen(
                 onNavigateToScanner = {
                     navController.navigate(Route.Scanner.path)
+                },
+                onNavigateToSettings = {
+                    navController.navigate(Route.Settings.path)
                 }
             )
         }
@@ -67,6 +72,17 @@ fun InsightNavHost() {
                 onClose = {
                     navController.popBackStack()
                 }
+            )
+        }
+
+        composable(Route.Settings.path) {
+            SettingsScreen(
+                preferences = uiState.preferences,
+                onBack = { navController.popBackStack() },
+                onUsernameChange = viewModel::updateUsername,
+                onDarkModeToggle = viewModel::updateDarkMode,
+                onThemeStyleChange = viewModel::updateThemeStyle,
+                onHapticToggle = viewModel::updateHapticFeedback
             )
         }
     }

@@ -39,6 +39,22 @@ class InsightViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun updateUsername(name: String) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(username = name)) }
+    }
+
+    fun updateDarkMode(enabled: Boolean) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(isDarkMode = enabled)) }
+    }
+
+    fun updateThemeStyle(style: ThemeStyle) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(themeStyle = style)) }
+    }
+
+    fun updateHapticFeedback(enabled: Boolean) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(hapticEnabled = enabled)) }
+    }
+
     fun reset() {
         _uiState.update { InsightUiState(screen = ScreenState.Scanning) }
     }

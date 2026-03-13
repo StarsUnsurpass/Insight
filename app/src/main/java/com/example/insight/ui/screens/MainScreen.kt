@@ -44,9 +44,14 @@ import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.theme.*
 import kotlin.math.hypot
 import kotlinx.coroutines.launch
+
+// 1. Precise positioning logic
+data class TabBounds(val centerBias: Float)
 
 enum class InsightTab(
     val title: String,
@@ -55,16 +60,21 @@ enum class InsightTab(
     val index: Int, // Slot index: 0, 1, 3, 4 (2 is Camera)
     val bias: Float // Offset bias from center: -2, -1, 1, 2 units of slotWidth
 ) {
-    Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
-    Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -1f),
-    Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 3, 1f), 
-    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 4, 2f)
+    Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -0.4f),
+    Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -0.2f),
+    Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 3, 0.2f), 
+    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 4, 0.4f)
 }
 
 @Composable
 fun MainScreen(
-    onNavigateToScanner: () -> Unit
+    onNavigateToScanner: () -> Unit,
+    onNavigateToSettings: () -> Unit
 ) {
+    val viewModel: InsightViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+    val preferences = uiState.preferences
+
     var selectedTab by remember { mutableStateOf(InsightTab.Home) }
     var isDockVisible by remember { mutableStateOf(true) }
     var isRevealing by remember { mutableStateOf(false) }
@@ -83,13 +93,13 @@ fun MainScreen(
         }
     }
 
-    // Dock Bounce Animation
+    // Dock Physics: Subtle Vertical Jump
     val dockBounceY = remember { Animatable(0f) }
     LaunchedEffect(selectedTab) {
         if (isInitialized) {
             launch {
                 dockBounceY.animateTo(-10f, spring(stiffness = Spring.StiffnessMediumLow))
-                dockBounceY.animateTo(0f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow))
+                dockBounceY.animateTo(0f, spring(dampingRatio = 0.6f, stiffness = Spring.StiffnessLow))
             }
         } else {
             isInitialized = true
@@ -103,15 +113,17 @@ fun MainScreen(
                     when (selectedTab) {
                         InsightTab.Home -> HomeTab()
                         InsightTab.Map -> MapTab()
-                        InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Switch to Analysis Tab */ })
-                        InsightTab.Profile -> ProfileTab()
+                        InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Not applicable */ })
+                        InsightTab.Profile -> ProfileTab(
+                            username = preferences.username,
+                            onNavigateToSettings = onNavigateToSettings
+                        )
                     }
                 }
 
-                // Liquid Width collapse to circular center dot
                 val dockWidth by animateDpAsState(
                     targetValue = if (isDockVisible) 340.dp else 72.dp,
-                    animationSpec = spring(dampingRatio = 0.7f, stiffness = 50f),
+                    animationSpec = spring(dampingRatio = 0.75f, stiffness = 50f),
                     label = "dock_width"
                 )
 
@@ -150,7 +162,6 @@ fun MainScreen(
         }
     }
 }
-
 @Composable
 fun GooeyDockContent(
     selectedTab: InsightTab,
@@ -160,10 +171,10 @@ fun GooeyDockContent(
     onCameraClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
-    val slotWidth = currentDockWidth / 5
-    
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        // 1. Liquid Base Surface
+
+        // 1. Background Base
         Surface(
             modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(36.dp),
@@ -173,44 +184,44 @@ fun GooeyDockContent(
             border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
         ) {}
 
-        // 2. Liquid Indicator (Stretch & Squash)
+        // 2. Liquid Elastic Indicator
         if (currentDockWidth > 200.dp) {
-            val targetOffset = slotWidth * selectedTab.bias
-            val indicatorSize = 52.dp
+            val slotWidth = currentDockWidth / 5
+            val targetLeft = (currentDockWidth / 2) + (340.dp * selectedTab.bias) - (26.dp)
+            val targetRight = (currentDockWidth / 2) + (340.dp * selectedTab.bias) + (26.dp)
             
-            // Independent edge springs for stretching effect
             val leftEdge by animateDpAsState(
-                targetValue = targetOffset - (indicatorSize / 2),
-                animationSpec = spring(dampingRatio = 0.8f, stiffness = 90f)
+                targetValue = targetLeft,
+                animationSpec = spring(dampingRatio = 0.8f, stiffness = 80f)
             )
             val rightEdge by animateDpAsState(
-                targetValue = targetOffset + (indicatorSize / 2),
-                animationSpec = spring(dampingRatio = 0.8f, stiffness = 90f)
+                targetValue = targetRight,
+                animationSpec = spring(dampingRatio = 0.8f, stiffness = 80f)
             )
 
             Box(
                 modifier = Modifier
-                    .size(width = (rightEdge - leftEdge).coerceAtLeast(indicatorSize), height = 52.dp)
-                    .offset(x = (leftEdge + rightEdge) / 2) // Centered on the calculated edges
+                    .size(width = (rightEdge - leftEdge).coerceAtLeast(52.dp), height = 52.dp)
+                    .align(Alignment.CenterStart)
+                    .offset(x = leftEdge)
                     .background(SageGreen.copy(alpha = 0.12f), CircleShape)
             )
         }
 
-        // 3. Icon Layer
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            val alpha by animateFloatAsState(
+        // 3. Precision Icon Layer
+        Box(modifier = Modifier.fillMaxSize()) {
+            val contentAlpha by animateFloatAsState(
                 targetValue = if (isVisible && currentDockWidth > 250.dp) 1f else 0f,
                 animationSpec = tween(250)
             )
 
-            // Side Tabs: Home, Map, Analysis, Profile
-            TabFluidItem(InsightTab.Home, selectedTab, alpha, slotWidth, onTabSelected)
-            TabFluidItem(InsightTab.Map, selectedTab, alpha, slotWidth, onTabSelected)
+            TabIconFluid(InsightTab.Home, selectedTab, contentAlpha, onTabSelected)
+            TabIconFluid(InsightTab.Map, selectedTab, contentAlpha, onTabSelected)
             
-            // Central Camera: LOCKED SIZE, NO SCALING during dock collapse
             Box(
                 modifier = Modifier
-                    .requiredSize(64.dp) // Absolute size lock
+                    .align(Alignment.Center)
+                    .size(60.dp)
                     .clip(CircleShape)
                     .background(SageGreen)
                     .clickable { 
@@ -222,28 +233,25 @@ fun GooeyDockContent(
                 Icon(imageVector = Icons.Default.CameraAlt, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
             }
 
-            TabFluidItem(InsightTab.Analysis, selectedTab, alpha, slotWidth, onTabSelected)
-            TabFluidItem(InsightTab.Profile, selectedTab, alpha, slotWidth, onTabSelected)
+            TabIconFluid(InsightTab.Analysis, selectedTab, contentAlpha, onTabSelected)
+            TabIconFluid(InsightTab.Profile, selectedTab, contentAlpha, onTabSelected)
         }
     }
 }
 
 @Composable
-fun BoxScope.TabFluidItem(
+fun BoxScope.TabIconFluid(
     tab: InsightTab,
     selectedTab: InsightTab,
     alpha: Float,
-    slotWidth: Dp,
     onTabSelected: (InsightTab) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val isSelected = selectedTab == tab
-    
-    // Position icons relative to the center based on current slot width
-    val xOffset = slotWidth * tab.bias
+    val xOffset = 340.dp * tab.bias
     
     if (alpha > 0.01f) {
-        val tint by animateColorAsState(if (isSelected) SageGreen else InkBlue.copy(alpha = 0.4f), tween(300))
+        val tint by animateColorAsState(if (isSelected) SageGreen else InkBlue.copy(alpha = 0.4f), tween(350))
         val scale by animateFloatAsState(if (isSelected) 1.25f else 1f, spring(Spring.DampingRatioMediumBouncy))
 
         Box(
@@ -274,8 +282,6 @@ fun BoxScope.TabFluidItem(
         }
     }
 }
-
-// --- Standard Tab Content (Retained for correctness) ---
 
 @Composable
 fun HomeTab() {
@@ -352,7 +358,10 @@ fun MapTab() {
 }
 
 @Composable
-fun ProfileTab() {
+fun ProfileTab(
+    username: String,
+    onNavigateToSettings: () -> Unit
+) {
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -361,7 +370,7 @@ fun ProfileTab() {
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text("王小明 同学", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold); Text("初三 (2) 班", style = MaterialTheme.typography.bodySmall, color = InkBlue.copy(alpha = 0.5f))
+                    Text("$username 同学", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold); Text("初三 (2) 班", style = MaterialTheme.typography.bodySmall, color = InkBlue.copy(alpha = 0.5f))
                 }
             }
         }
@@ -373,7 +382,12 @@ fun ProfileTab() {
         item {
             DashboardCard(title = "学习设置") {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    SettingRow(Icons.Default.PictureAsPdf, "导出错题本 (PDF)"); SettingRow(Icons.Default.CloudUpload, "数据同步"); SettingRow(Icons.Default.Settings, "偏好设置")
+                    SettingRow(Icons.Default.PictureAsPdf, "导出错题本 (PDF)"); SettingRow(Icons.Default.CloudUpload, "数据同步"); 
+                    SettingRow(
+                        icon = Icons.Default.Settings, 
+                        title = "偏好设置",
+                        onClick = onNavigateToSettings
+                    )
                 }
             }
         }
@@ -390,8 +404,13 @@ fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SettingRow(icon: ImageVector, title: String) {
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(enabled = onClick != null) { onClick?.invoke() }, 
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = InkBlue.copy(alpha = 0.6f))
         Spacer(modifier = Modifier.width(16.dp)); Text(title, style = MaterialTheme.typography.bodyMedium); Spacer(modifier = Modifier.weight(1f))
         Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.LightGray)
