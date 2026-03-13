@@ -221,9 +221,6 @@ fun DraggableSelectionOverlay(
                 )
             }
     ) {
-        val width = size.width
-        val height = size.height
-
         // Dim background outside
         with(drawContext.canvas.nativeCanvas) {
             val check = saveLayer(null, null)
