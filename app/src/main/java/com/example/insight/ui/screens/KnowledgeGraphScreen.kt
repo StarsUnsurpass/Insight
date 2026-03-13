@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
@@ -138,7 +138,7 @@ fun KnowledgeGraphScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text("生成针对【定语从句】的 10 道巩固特训", color = InkBlue)
-                            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null, tint = InkBlue)
+                            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = InkBlue)
                         }
                     }
                 }
@@ -247,10 +247,10 @@ fun RadarChart(
         )
 
         // 3. Labels
-        labels.forEachIndexed { j, label ->
+        labels.forEachIndexed { j, _ ->
             val angle = j * angleStep - Math.PI.toFloat() / 2
-            val x = center.x + (radius + 25.dp.toPx()) * cos(angle)
-            val y = center.y + (radius + 20.dp.toPx()) * sin(angle)
+            val _x = center.x + (radius + 25.dp.toPx()) * cos(angle)
+            val _y = center.y + (radius + 20.dp.toPx()) * sin(angle)
             
             // Note: In real implementation, we'd use nativeCanvas or a custom text drawer
             // For brevity, we focus on the geometry

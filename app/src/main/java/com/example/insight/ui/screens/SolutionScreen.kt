@@ -186,7 +186,7 @@ fun SolutionScreen(
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
                         AnalysisStepCard(
                             title = "破题思路",
-                            content = "定位文章第三段第二行，'ambitious yet essential' 对应了必要且有雄心的态度。",
+                            content = content,
                             icon = Icons.Outlined.Lightbulb
                         )
                         Spacer(modifier = Modifier.height(12.dp))

@@ -1,7 +1,0 @@
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\ui\screens\KnowledgeGraphScreen.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\ui\screens\SolutionScreen.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\camera\CameraCaptureScreen.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\graph\StarfieldComponent.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\ui\theme\Theme.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\ui\theme\Type.kt
-E:\Code\IDE\AndroidStudio\Insight\app\src\main\java\com\example\insight\ui\theme\Color.kt

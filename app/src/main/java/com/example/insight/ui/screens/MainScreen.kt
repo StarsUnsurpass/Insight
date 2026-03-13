@@ -7,8 +7,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -20,8 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.platform.LocalConfiguration
+import kotlin.math.hypot
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.insight.ui.theme.*
@@ -43,32 +56,87 @@ fun MainScreen(
     onNavigateToSolution: () -> Unit // For testing or direct access
 ) {
     var selectedTab by remember { mutableStateOf(InsightTab.Home) }
+    var isDockVisible by remember { mutableStateOf(true) }
+    var isRevealing by remember { mutableStateOf(false) }
 
-    Scaffold(
-        containerColor = PaperWhite,
-    ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            // Main Content
-            Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-                when (selectedTab) {
-                    InsightTab.Home -> HomeTab()
-                    InsightTab.Map -> MapTab()
-                    InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Not applicable here */ })
-                    InsightTab.Profile -> ProfileTab()
+    val config = LocalConfiguration.current
+    val screenWidth = config.screenWidthDp.dp
+    val screenHeight = config.screenHeightDp.dp
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                if (available.y < -10f && !isRevealing) {
+                    isDockVisible = false
+                } else if (available.y > 10f && !isRevealing) {
+                    isDockVisible = true
+                }
+                return Offset.Zero
+            }
+        }
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Scaffold(
+            containerColor = PaperWhite,
+        ) { innerPadding ->
+            Box(modifier = Modifier.fillMaxSize().nestedScroll(nestedScrollConnection)) {
+                // 1. Main Content
+                Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+                    when (selectedTab) {
+                        InsightTab.Home -> HomeTab()
+                        InsightTab.Map -> MapTab()
+                        InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Not applicable */ })
+                        InsightTab.Profile -> ProfileTab()
+                    }
+                }
+
+                // 2. Floating Dock & Gooey Container
+                val offsetY by animateFloatAsState(
+                    targetValue = if (isDockVisible) 0f else 250f,
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow
+                    ),
+                    label = "dock_offset"
+                )
+
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(horizontal = 16.dp)
+                        .padding(bottom = 24.dp)
+                        .graphicsLayer { translationY = offsetY }
+                ) {
+                    GooeyDock(
+                        selectedTab = selectedTab,
+                        onTabSelected = { selectedTab = it },
+                        onCameraClick = {
+                            isRevealing = true
+                        }
+                    )
                 }
             }
+        }
 
-            // Floating Dock (Apple Style)
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 16.dp)
-                    .padding(bottom = 24.dp)
-            ) {
-                FloatingDock(
-                    selectedTab = selectedTab,
-                    onTabSelected = { selectedTab = it },
-                    onCameraClick = onNavigateToScanner
+        // 3. Circular Reveal Layer
+        if (isRevealing) {
+            val revealProgress = remember { Animatable(0f) }
+            LaunchedEffect(Unit) {
+                revealProgress.animateTo(1f, animationSpec = tween(600, easing = FastOutSlowInEasing))
+                onNavigateToScanner()
+                // Reset after a delay or upon return
+                revealProgress.snapTo(0f)
+                isRevealing = false
+            }
+
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                val center = Offset(size.width / 2, size.height - 66.dp.toPx() - 24.dp.toPx())
+                val maxRadius = hypot(size.width, size.height)
+                drawCircle(
+                    color = SageGreen,
+                    radius = maxRadius * revealProgress.value,
+                    center = center
                 )
             }
         }
@@ -76,72 +144,77 @@ fun MainScreen(
 }
 
 @Composable
-fun FloatingDock(
+fun GooeyDock(
     selectedTab: InsightTab,
     onTabSelected: (InsightTab) -> Unit,
     onCameraClick: () -> Unit
 ) {
-    Surface(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(84.dp),
-        shape = RoundedCornerShape(42.dp),
-        color = Color.White.copy(alpha = 0.92f),
-        tonalElevation = 12.dp,
-        shadowElevation = 16.dp,
-        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
+            .height(100.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+        // The Dock Background (Mac Style)
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(72.dp)
+                .align(Alignment.BottomCenter),
+            shape = RoundedCornerShape(36.dp),
+            color = Color.White.copy(alpha = 0.95f),
+            tonalElevation = 8.dp,
+            shadowElevation = 12.dp,
+            border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
         ) {
-            // Left Tabs
-            Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
-                TabItem(InsightTab.Home, selectedTab == InsightTab.Home) { onTabSelected(InsightTab.Home) }
-                TabItem(InsightTab.Map, selectedTab == InsightTab.Map) { onTabSelected(InsightTab.Map) }
-            }
-
-            // Center Camera Button (Part of the Dock)
-            Box(
-                modifier = Modifier
-                    .size(68.dp)
-                    .clip(CircleShape)
-                    .background(SageGreen)
-                    .clickable { onCameraClick() },
-                contentAlignment = Alignment.Center
+            Row(
+                modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                val infiniteTransition = rememberInfiniteTransition(label = "ripple")
-                val rippleScale by infiniteTransition.animateFloat(
-                    initialValue = 1f,
-                    targetValue = 1.15f,
-                    animationSpec = infiniteRepeatable(
-                        animation = tween(2000, easing = LinearOutSlowInEasing),
-                        repeatMode = RepeatMode.Restart
-                    ),
-                    label = "rippleScale"
-                )
-                
-                // Pulsing outer ring inside the dock button
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .scale(rippleScale)
-                        .border(2.dp, Color.White.copy(alpha = 0.3f), CircleShape)
-                )
+                // Left Tabs
+                Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
+                    TabItem(InsightTab.Home, selectedTab == InsightTab.Home) { onTabSelected(InsightTab.Home) }
+                    TabItem(InsightTab.Map, selectedTab == InsightTab.Map) { onTabSelected(InsightTab.Map) }
+                }
 
-                Icon(
-                    imageVector = Icons.Default.CameraAlt,
-                    contentDescription = "扫描",
-                    modifier = Modifier.size(30.dp),
-                    tint = Color.White
-                )
-            }
+                // Middle Gap
+                Spacer(modifier = Modifier.width(80.dp))
 
-            // Right Tabs
-            Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
-                TabItem(InsightTab.Analysis, selectedTab == InsightTab.Analysis) { onTabSelected(InsightTab.Analysis) }
-                TabItem(InsightTab.Profile, selectedTab == InsightTab.Profile) { onTabSelected(InsightTab.Profile) }
+                // Right Tabs
+                Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
+                    TabItem(InsightTab.Analysis, selectedTab == InsightTab.Analysis) { onTabSelected(InsightTab.Analysis) }
+                    TabItem(InsightTab.Profile, selectedTab == InsightTab.Profile) { onTabSelected(InsightTab.Profile) }
+                }
             }
+        }
+
+        // The Separated Camera Button (The Water Drop)
+        var isPressed by remember { mutableStateOf(false) }
+        val dropScale by animateFloatAsState(
+            targetValue = if (isPressed) 0.85f else 1f,
+            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+            label = "drop_scale"
+        )
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .offset(y = 4.dp)
+                .size(76.dp)
+                .scale(dropScale)
+                .clip(CircleShape)
+                .background(SageGreen)
+                .clickable { 
+                    onCameraClick()
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.CameraAlt,
+                contentDescription = "扫描",
+                modifier = Modifier.size(32.dp),
+                tint = Color.White
+            )
         }
     }
 }
@@ -295,14 +368,98 @@ fun HistoryCard(index: Int) {
 
 @Composable
 fun MapTab() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("知识图谱系统", style = MaterialTheme.typography.titleMedium)
+    Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+        Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = InkBlue)
+        Text("系统化掌握 12 个核心考点领域", style = MaterialTheme.typography.bodySmall, color = InkBlue.copy(alpha = 0.5f))
+        
+        Spacer(modifier = Modifier.height(20.dp))
+        
+        val domains = listOf("时态语态", "从句结构", "词汇辨析", "阅读技巧", "写作模板", "听力精听")
+        
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(domains) { domain ->
+                Card(
+                    modifier = Modifier.height(140.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    border = BorderStroke(1.dp, InkBlue.copy(alpha = 0.05f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Box(modifier = Modifier.size(40.dp).background(SageGreen.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(imageVector = Icons.Default.AutoGraph, contentDescription = null, tint = SageGreen, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(modifier = Modifier.weight(1f))
+                        Text(domain, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.height(4.dp))
+                        LinearProgressIndicator(
+                            progress = 0.6f,
+                            modifier = Modifier.fillMaxWidth().height(4.dp).clip(CircleShape),
+                            color = SageGreen,
+                            trackColor = SageGreen.copy(alpha = 0.1f)
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun ProfileTab() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("个人中心", style = MaterialTheme.typography.titleMedium)
+    LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(modifier = Modifier.size(64.dp).background(SoftOatmeal, CircleShape), contentAlignment = Alignment.Center) {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = null, modifier = Modifier.size(32.dp), tint = SageGreen)
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text("王小明 同学", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("初三 (2) 班", style = MaterialTheme.typography.bodySmall, color = InkBlue.copy(alpha = 0.5f))
+                }
+            }
+        }
+        
+        item {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                StatCard("累计扫描", "128", Modifier.weight(1f))
+                StatCard("攻克考点", "42", Modifier.weight(1f))
+            }
+        }
+        
+        item {
+            DashboardCard(title = "学习设置") {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    SettingRow(Icons.Default.PictureAsPdf, "导出错题本 (PDF)")
+                    SettingRow(Icons.Default.CloudUpload, "数据同步")
+                    SettingRow(Icons.Default.Settings, "偏好设置")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
+    Card(modifier = modifier, shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = SageGreen.copy(alpha = 0.1f))) {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Text(label, style = MaterialTheme.typography.labelSmall, color = SageGreen)
+            Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = SageGreen)
+        }
+    }
+}
+
+@Composable
+fun SettingRow(icon: ImageVector, title: String) {
+    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = InkBlue.copy(alpha = 0.6f))
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(title, style = MaterialTheme.typography.bodyMedium)
+        Spacer(modifier = Modifier.weight(1f))
+        Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.LightGray)
     }
 }
