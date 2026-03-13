@@ -31,9 +31,6 @@ fun InsightNavHost() {
             MainScreen(
                 onNavigateToScanner = {
                     navController.navigate(Route.Scanner.path)
-                },
-                onNavigateToSolution = {
-                    navController.navigate(Route.Solution.path)
                 }
             )
         }
