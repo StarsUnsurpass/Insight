@@ -2,7 +2,9 @@ package com.example.insight.ui.screens
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -44,99 +46,102 @@ fun MainScreen(
 
     Scaffold(
         containerColor = PaperWhite,
-        floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = {
-            ScanningFAB(onClick = onNavigateToScanner)
-        },
-        bottomBar = {
-            MainBottomBar(
-                selectedTab = selectedTab,
-                onTabSelected = { selectedTab = it }
-            )
-        }
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-            when (selectedTab) {
-                InsightTab.Home -> HomeTab()
-                InsightTab.Map -> MapTab()
-                InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Not applicable here */ })
-                InsightTab.Profile -> ProfileTab()
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Main Content
+            Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+                when (selectedTab) {
+                    InsightTab.Home -> HomeTab()
+                    InsightTab.Map -> MapTab()
+                    InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Not applicable here */ })
+                    InsightTab.Profile -> ProfileTab()
+                }
+            }
+
+            // Floating Dock (Apple Style)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 24.dp)
+            ) {
+                FloatingDock(
+                    selectedTab = selectedTab,
+                    onTabSelected = { selectedTab = it },
+                    onCameraClick = onNavigateToScanner
+                )
             }
         }
     }
 }
 
 @Composable
-fun ScanningFAB(onClick: () -> Unit) {
-    val infiniteTransition = rememberInfiniteTransition(label = "ripple")
-    val rippleScale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.2f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearOutSlowInEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "rippleScale"
-    )
-    val rippleAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.4f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearOutSlowInEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "rippleAlpha"
-    )
-
-    Box(contentAlignment = Alignment.Center) {
-        // Ripple Effect
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .scale(rippleScale)
-                .background(SageGreen.copy(alpha = rippleAlpha), CircleShape)
-        )
-        
-        FloatingActionButton(
-            onClick = onClick,
-            shape = CircleShape,
-            containerColor = SageGreen,
-            contentColor = Color.White,
-            elevation = FloatingActionButtonDefaults.elevation(8.dp),
-            modifier = Modifier.size(64.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.CameraAlt,
-                contentDescription = "扫描",
-                modifier = Modifier.size(32.dp)
-            )
-        }
-    }
-}
-
-@Composable
-fun MainBottomBar(
+fun FloatingDock(
     selectedTab: InsightTab,
-    onTabSelected: (InsightTab) -> Unit
+    onTabSelected: (InsightTab) -> Unit,
+    onCameraClick: () -> Unit
 ) {
-    BottomAppBar(
-        containerColor = Color.White,
-        contentPadding = PaddingValues(horizontal = 8.dp),
-        tonalElevation = 8.dp,
-        modifier = Modifier.height(72.dp)
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(84.dp),
+        shape = RoundedCornerShape(42.dp),
+        color = Color.White.copy(alpha = 0.92f),
+        tonalElevation = 12.dp,
+        shadowElevation = 16.dp,
+        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
     ) {
-        // Left Tabs
-        Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
-            TabItem(InsightTab.Home, selectedTab == InsightTab.Home) { onTabSelected(InsightTab.Home) }
-            TabItem(InsightTab.Map, selectedTab == InsightTab.Map) { onTabSelected(InsightTab.Map) }
-        }
+        Row(
+            modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left Tabs
+            Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
+                TabItem(InsightTab.Home, selectedTab == InsightTab.Home) { onTabSelected(InsightTab.Home) }
+                TabItem(InsightTab.Map, selectedTab == InsightTab.Map) { onTabSelected(InsightTab.Map) }
+            }
 
-        Spacer(modifier = Modifier.width(72.dp)) // Space for FAB
+            // Center Camera Button (Part of the Dock)
+            Box(
+                modifier = Modifier
+                    .size(68.dp)
+                    .clip(CircleShape)
+                    .background(SageGreen)
+                    .clickable { onCameraClick() },
+                contentAlignment = Alignment.Center
+            ) {
+                val infiniteTransition = rememberInfiniteTransition(label = "ripple")
+                val rippleScale by infiniteTransition.animateFloat(
+                    initialValue = 1f,
+                    targetValue = 1.15f,
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(2000, easing = LinearOutSlowInEasing),
+                        repeatMode = RepeatMode.Restart
+                    ),
+                    label = "rippleScale"
+                )
+                
+                // Pulsing outer ring inside the dock button
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .scale(rippleScale)
+                        .border(2.dp, Color.White.copy(alpha = 0.3f), CircleShape)
+                )
 
-        // Right Tabs
-        Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
-            TabItem(InsightTab.Analysis, selectedTab == InsightTab.Analysis) { onTabSelected(InsightTab.Analysis) }
-            TabItem(InsightTab.Profile, selectedTab == InsightTab.Profile) { onTabSelected(InsightTab.Profile) }
+                Icon(
+                    imageVector = Icons.Default.CameraAlt,
+                    contentDescription = "扫描",
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.White
+                )
+            }
+
+            // Right Tabs
+            Row(modifier = Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceEvenly) {
+                TabItem(InsightTab.Analysis, selectedTab == InsightTab.Analysis) { onTabSelected(InsightTab.Analysis) }
+                TabItem(InsightTab.Profile, selectedTab == InsightTab.Profile) { onTabSelected(InsightTab.Profile) }
+            }
         }
     }
 }

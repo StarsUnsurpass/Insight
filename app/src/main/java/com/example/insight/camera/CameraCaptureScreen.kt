@@ -113,11 +113,10 @@ fun CameraCaptureScreen(
             }
         }
 
-        // 2. Overlay Layer (The Mask & Cutout)
+        // 2. Overlay Layer (The Mask & Static Cutout)
         selectionRect?.let { rect ->
-            DraggableSelectionOverlay(
+            StaticSelectionOverlay(
                 selectionRect = rect,
-                onSelectionChange = { selectionRect = it },
                 showScanning = capturedBitmap == null,
                 modifier = Modifier.fillMaxSize()
             )
@@ -314,22 +313,11 @@ fun ShutterButton(onClick: () -> Unit) {
 }
 
 @Composable
-fun DraggableSelectionOverlay(
+fun StaticSelectionOverlay(
     selectionRect: Rect,
-    onSelectionChange: (Rect) -> Unit,
     showScanning: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    var localRect by remember { mutableStateOf(selectionRect) }
-
-    LaunchedEffect(selectionRect) {
-        if (selectionRect != localRect) localRect = selectionRect
-    }
-
-    val currentOnSelectionChange by rememberUpdatedState(onSelectionChange)
-    var touchMode by remember { mutableStateOf<TouchMode>(TouchMode.None) }
-    val handleSize = 40.dp
-
     val infiniteTransition = rememberInfiniteTransition(label = "scanning")
     val scanLineProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -341,47 +329,13 @@ fun DraggableSelectionOverlay(
         label = "scanLine"
     )
 
-    Canvas(
-        modifier = modifier
-            .pointerInput(Unit) {
-                detectDragGestures(
-                    onDragStart = { offset ->
-                        val handlePx = handleSize.toPx()
-                        touchMode = when {
-                            offset.isNear(localRect.topLeft, handlePx) -> TouchMode.TopLeft
-                            offset.isNear(localRect.topRight, handlePx) -> TouchMode.TopRight
-                            offset.isNear(localRect.bottomLeft, handlePx) -> TouchMode.BottomLeft
-                            offset.isNear(localRect.bottomRight, handlePx) -> TouchMode.BottomRight
-                            localRect.contains(offset) -> TouchMode.Move
-                            else -> TouchMode.None
-                        }
-                    },
-                    onDrag = { change, dragAmount ->
-                        change.consume()
-                        val newRect = when (touchMode) {
-                            TouchMode.Move -> localRect.translate(dragAmount)
-                            TouchMode.TopLeft -> localRect.copy(left = localRect.left + dragAmount.x, top = localRect.top + dragAmount.y)
-                            TouchMode.TopRight -> localRect.copy(right = localRect.right + dragAmount.x, top = localRect.top + dragAmount.y)
-                            TouchMode.BottomLeft -> localRect.copy(left = localRect.left + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
-                            TouchMode.BottomRight -> localRect.copy(right = localRect.right + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
-                            else -> localRect
-                        }
-
-                        if (newRect.width > 150f && newRect.height > 80f) {
-                            localRect = newRect
-                            currentOnSelectionChange(newRect)
-                        }
-                    },
-                    onDragEnd = { touchMode = TouchMode.None }
-                )
-            }
-    ) {
+    Canvas(modifier = modifier) {
         // 1. Dark Mask with Cutout (Alpha 0.6)
         val path = Path().apply {
             addRect(Rect(0f, 0f, size.width, size.height))
             addRoundRect(
                 RoundRect(
-                    localRect,
+                    selectionRect,
                     CornerRadius(24.dp.toPx(), 24.dp.toPx())
                 )
             )
@@ -392,50 +346,46 @@ fun DraggableSelectionOverlay(
         // 2. Highlighting Selection Border
         drawRoundRect(
             color = Color.White.copy(alpha = 0.8f),
-            topLeft = localRect.topLeft,
-            size = localRect.size,
+            topLeft = selectionRect.topLeft,
+            size = selectionRect.size,
             cornerRadius = CornerRadius(24.dp.toPx(), 24.dp.toPx()),
             style = Stroke(width = 1.dp.toPx())
         )
 
         // 3. Dynamic Scanning Line
         if (showScanning) {
-            val currentLineY = localRect.top + (localRect.height * scanLineProgress)
+            val currentLineY = selectionRect.top + (selectionRect.height * scanLineProgress)
             val scanColor = SageGreen.copy(alpha = 0.9f)
-
+            
             drawLine(
                 brush = Brush.horizontalGradient(
                     colors = listOf(Color.Transparent, scanColor, Color.Transparent)
                 ),
-                start = Offset(localRect.left + 8.dp.toPx(), currentLineY),
-                end = Offset(localRect.right - 8.dp.toPx(), currentLineY),
+                start = Offset(selectionRect.left + 8.dp.toPx(), currentLineY),
+                end = Offset(selectionRect.right - 8.dp.toPx(), currentLineY),
                 strokeWidth = 2.dp.toPx()
             )
-
+            
             drawRect(
                 brush = Brush.verticalGradient(
                     colors = listOf(scanColor.copy(alpha = 0.2f), Color.Transparent),
                     startY = currentLineY,
                     endY = currentLineY + 60.dp.toPx()
                 ),
-                topLeft = Offset(localRect.left, currentLineY),
-                size = Size(localRect.width, 60.dp.toPx())
+                topLeft = Offset(selectionRect.left, currentLineY),
+                size = Size(selectionRect.width, 60.dp.toPx())
             )
         }
 
-        // 4. Premium Corner Handles
+        // 4. Premium Corner Handles (Static)
         val len = 24.dp.toPx()
         val thick = 4.dp.toPx()
         val cornerColor = Color.White
-
-        // TL
-        drawCorner(localRect.topLeft, len, thick, 0, cornerColor)
-        // TR
-        drawCorner(Offset(localRect.right, localRect.top), len, thick, 1, cornerColor)
-        // BL
-        drawCorner(Offset(localRect.left, localRect.bottom), len, thick, 2, cornerColor)
-        // BR
-        drawCorner(localRect.bottomRight, len, thick, 3, cornerColor)
+        
+        drawCorner(selectionRect.topLeft, len, thick, 0, cornerColor)
+        drawCorner(Offset(selectionRect.right, selectionRect.top), len, thick, 1, cornerColor)
+        drawCorner(Offset(selectionRect.left, selectionRect.bottom), len, thick, 2, cornerColor)
+        drawCorner(selectionRect.bottomRight, len, thick, 3, cornerColor)
     }
 }
 
@@ -448,8 +398,6 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCorner(
     drawLine(color, pos, v, stroke, cap = StrokeCap.Round)
 }
 
-private fun Offset.isNear(target: Offset, threshold: Float) = (this - target).getDistance() < threshold
-
 private fun ImageProxy.toRotatedBitmap(): Bitmap {
     val buffer = planes[0].buffer
     val bytes = ByteArray(buffer.remaining())
@@ -458,6 +406,4 @@ private fun ImageProxy.toRotatedBitmap(): Bitmap {
     val matrix = Matrix().apply { postRotate(imageInfo.rotationDegrees.toFloat()) }
     return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }
-
-enum class TouchMode { None, Move, TopLeft, TopRight, BottomLeft, BottomRight }
 
