@@ -2,29 +2,20 @@ package com.example.insight.ui.screens
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.shape.*
+import androidx.compose.material.icons.*
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.*
+import androidx.compose.ui.unit.*
 import com.example.insight.ui.theme.*
 import kotlinx.coroutines.delay
 
@@ -36,129 +27,162 @@ fun SolutionScreen(
     onBack: () -> Unit,
     onShowGraph: () -> Unit
 ) {
-    var displayedText by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
-
-    LaunchedEffect(content) {
-        content.forEach { char ->
-            displayedText += char
-            delay(30)
-        }
+    
+    // Animation states for staggered entry
+    var startAnimations by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        startAnimations = true
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(DeepVoid)) {
-        // Decorative Background Glows
-        Box(
+    Scaffold(
+        containerColor = PaperWhite,
+        topBar = {
+            TopAppBar(
+                title = { Text("智能批改解析", style = MaterialTheme.typography.headlineMedium) },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = DarkText)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = PaperWhite)
+            )
+        }
+    ) { padding ->
+        Column(
             modifier = Modifier
-                .offset(x = (-100).dp, y = 100.dp)
-                .size(300.dp)
-                .blur(80.dp)
-                .background(AetherTeal.copy(alpha = 0.1f), CircleShape)
-        )
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = 100.dp, y = 100.dp)
-                .size(400.dp)
-                .blur(100.dp)
-                .background(OrchidMist.copy(alpha = 0.1f), CircleShape)
-        )
-
-        Scaffold(
-            containerColor = Color.Transparent,
-            topBar = {
-                TopAppBar(
-                    title = { Text("AI 深度解析", style = MaterialTheme.typography.headlineMedium) },
-                    navigationIcon = {
-                        IconButton(onClick = onBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+                .fillMaxSize()
+                .padding(padding)
+                .background(PaperWhite)
+                .verticalScroll(scrollState)
+                .padding(horizontal = 20.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // 1. Captured Summary Card (The "Original" area)
+            AnalysisSectionCard(
+                title = "题目摘要",
+                visible = startAnimations,
+                delay = 0
+            ) {
+                Text(
+                    text = "Reading Comprehension - Section B",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = InkBlue,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
-        ) { padding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .padding(20.dp)
-                    .verticalScroll(scrollState)
+
+            // 2. The Answer Card
+            AnalysisSectionCard(
+                title = "核心答案",
+                visible = startAnimations,
+                delay = 200
             ) {
-                // Concept Tags (The "Starfield" preview)
-                Text(
-                    text = "关联考点",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = AetherTeal,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)
+                Surface(
+                    color = HighlightYellow.copy(alpha = 0.3f),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    items(concepts) { concept ->
+                    Text(
+                        text = "Correct Option: [C] - Refers to the psychological resilience.",
+                        modifier = Modifier.padding(12.dp),
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = DarkText
+                    )
+                }
+            }
+
+            // 3. Grammar Chips
+            AnalysisSectionCard(
+                title = "重点考点",
+                visible = startAnimations,
+                delay = 400
+            ) {
+                @OptIn(ExperimentalLayoutApi::class)
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    concepts.forEach { concept ->
                         SuggestionChip(
                             onClick = {},
-                            label = { Text(concept) },
+                            label = { Text(concept, style = MaterialTheme.typography.labelMedium) },
                             colors = SuggestionChipDefaults.suggestionChipColors(
-                                containerColor = GlassOverlay,
-                                labelColor = LunarFrost
+                                containerColor = SoftOatmeal,
+                                labelColor = InkBlue
                             ),
-                            border = BorderStroke(
-                                width = 1.dp,
-                                color = Color.White.copy(alpha = 0.1f)
-                            )
+                            border = BorderStroke(1.dp, SageGreen.copy(alpha = 0.3f)),
+                            shape = RoundedCornerShape(12.dp)
                         )
                     }
                 }
+            }
 
-                // The Solution Card
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(24.dp))
-                        .background(GlassOverlay),
-                    colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-                    shape = RoundedCornerShape(24.dp)
-                ) {
-                    Column(modifier = Modifier.padding(20.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                Icons.Default.AutoAwesome,
-                                contentDescription = null,
-                                tint = AetherTeal,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "解析思路",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = LunarFrost.copy(alpha = 0.5f)
-                            )
-                        }
-                        
-                        Spacer(modifier = Modifier.height(16.dp))
-                        
-                        Text(
-                            text = displayedText,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = LunarFrost,
-                            lineHeight = 28.sp
-                        )
-                    }
-                }
-                
-                Spacer(modifier = Modifier.height(32.dp))
-                
-                // Interaction Button (The "Magnetic" Feel)
-                Button(
-                    onClick = onShowGraph,
-                    modifier = Modifier.fillMaxWidth().height(56.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = AetherTeal),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Text("查看知识星图", color = DeepVoid, fontWeight = FontWeight.Bold)
-                }
+            // 4. Detailed Analysis (The Text)
+            AnalysisSectionCard(
+                title = "深度解析",
+                visible = startAnimations,
+                delay = 600
+            ) {
+                Text(
+                    text = content,
+                    style = MaterialTheme.typography.bodyLarge,
+                    lineHeight = 28.sp
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Bottom Action
+            Button(
+                onClick = onShowGraph,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(64.dp)
+                    .animateContentSize(),
+                colors = ButtonDefaults.buttonColors(containerColor = InkBlue),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
+            ) {
+                Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.width(12.dp))
+                Text("进入知识映射星图", style = MaterialTheme.typography.labelLarge)
+            }
+            
+            Spacer(modifier = Modifier.height(40.dp))
+        }
+    }
+}
+
+@Composable
+fun AnalysisSectionCard(
+    title: String,
+    visible: Boolean,
+    delay: Int,
+    content: @Composable () -> Unit
+) {
+    androidx.compose.animation.AnimatedVisibility(
+        visible = visible,
+        enter = expandVertically(animationSpec = tween(500, delayMillis = delay)) + 
+                fadeIn(animationSpec = tween(500, delayMillis = delay))
+    ) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = SoftOatmeal.copy(alpha = 0.5f)),
+            shape = RoundedCornerShape(24.dp),
+            border = BorderStroke(1.dp, InkBlue.copy(alpha = 0.05f))
+        ) {
+            Column(modifier = Modifier.padding(20.dp)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = SageGreen,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+                content()
             }
         }
     }

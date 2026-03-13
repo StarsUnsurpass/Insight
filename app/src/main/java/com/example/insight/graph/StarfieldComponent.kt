@@ -1,26 +1,24 @@
 package com.example.insight.graph
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.*
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.insight.ui.theme.AetherTeal
-import com.example.insight.ui.theme.LunarFrost
-import com.example.insight.ui.theme.OrchidMist
-import kotlin.math.sin
+import androidx.compose.ui.text.font.*
+import androidx.compose.ui.unit.*
+import com.example.insight.ui.theme.InkBlue
+import com.example.insight.ui.theme.SageGreen
+import com.example.insight.ui.theme.HighlightYellow
+import com.example.insight.ui.theme.DarkText
+import com.example.insight.ui.theme.SoftShadow
 
-@OptIn(ExperimentalTextApi::class)
+@OptIn(androidx.compose.ui.text.ExperimentalTextApi::class)
 @Composable
 fun StarfieldComponent(
     graphState: GraphState,
@@ -35,16 +33,16 @@ fun StarfieldComponent(
         }
     }
 
-    // Animation for breathing/shimmering
-    val infiniteTransition = rememberInfiniteTransition(label = "starfield")
-    val pulseScale by infiniteTransition.animateFloat(
-        initialValue = 0.8f,
-        targetValue = 1.2f,
+    // Animation for breathing/shimmering (more subtle "floating" effect)
+    val infiniteTransition = rememberInfiniteTransition(label = "conceptMap")
+    val floatOffset by infiniteTransition.animateFloat(
+        initialValue = -5f,
+        targetValue = 5f,
         animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
+            animation = tween(3000, easing = SineEasing),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "pulse"
+        label = "floating"
     )
 
     Canvas(
@@ -53,7 +51,6 @@ fun StarfieldComponent(
             .pointerInput(Unit) {
                 detectDragGestures { change, dragAmount ->
                     change.consume()
-                    // Simple global offset/drag, in a real app we'd map to specific nodes
                     nodeOffsets.keys.forEach { id ->
                         nodeOffsets[id] = nodeOffsets[id]!! + Offset(dragAmount.x / size.width, dragAmount.y / size.height)
                     }
@@ -63,7 +60,7 @@ fun StarfieldComponent(
         val width = size.width
         val height = size.height
 
-        // 1. Draw Edges (Threads)
+        // 1. Draw Edges (Threads) - Refined "Silk" lines
         graphState.edges.forEach { edge ->
             val startNode = nodeOffsets[edge.fromId] ?: return@forEach
             val endNode = nodeOffsets[edge.toId] ?: return@forEach
@@ -72,58 +69,59 @@ fun StarfieldComponent(
             val endPx = Offset(endNode.x * width, endNode.y * height)
 
             drawLine(
-                brush = Brush.linearGradient(
-                    colors = listOf(AetherTeal.copy(alpha = 0.3f), OrchidMist.copy(alpha = 0.3f))
-                ),
+                color = SageGreen.copy(alpha = 0.2f),
                 start = startPx,
                 end = endPx,
-                strokeWidth = 1.dp.toPx()
+                strokeWidth = 2.dp.toPx(),
+                cap = androidx.compose.ui.graphics.StrokeCap.Round
             )
         }
 
-        // 2. Draw Nodes
+        // 2. Draw Nodes - Refined "Pearls"
         graphState.nodes.forEach { node ->
             val offset = nodeOffsets[node.id] ?: return@forEach
-            val centerPx = Offset(offset.x * width, offset.y * height)
-            val baseRadius = 12.dp.toPx() * node.weight
+            val centerPx = Offset(offset.x * width, (offset.y * height) + floatOffset)
+            val baseRadius = 8.dp.toPx() * node.weight
             
-            // Glow Effect
+            // Soft Shadow/Glow
             drawCircle(
-                brush = Brush.radialGradient(
-                    colors = listOf(
-                        (if (node.type == NodeType.CENTER) AetherTeal else OrchidMist).copy(alpha = 0.4f * pulseScale),
-                        Color.Transparent
-                    ),
-                    center = centerPx,
-                    radius = baseRadius * 3
-                ),
-                center = centerPx,
-                radius = baseRadius * 3
+                color = SoftShadow,
+                center = centerPx + Offset(2.dp.toPx(), 2.dp.toPx()),
+                radius = baseRadius + 4.dp.toPx()
             )
 
-            // Core Sphere
+            // Core Node
+            val nodeColor = when(node.type) {
+                NodeType.CENTER -> InkBlue
+                NodeType.PREREQUISITE -> HighlightYellow
+                else -> SageGreen
+            }
+
             drawCircle(
-                color = if (node.type == NodeType.CENTER) AetherTeal else LunarFrost,
+                color = nodeColor,
                 center = centerPx,
                 radius = baseRadius
             )
 
-            // Label
+            // Label - Mind map style
             val textLayoutResult = textMeasurer.measure(
                 text = AnnotatedString(node.label),
                 style = TextStyle(
-                    color = LunarFrost,
+                    color = DarkText,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Medium
                 )
+            )
+            
+            // Draw a small background for the text to ensure legibility
+            val textTopLeft = Offset(
+                centerPx.x - textLayoutResult.size.width / 2,
+                centerPx.y + baseRadius + 6.dp.toPx()
             )
             
             drawText(
                 textLayoutResult = textLayoutResult,
-                topLeft = Offset(
-                    centerPx.x - textLayoutResult.size.width / 2,
-                    centerPx.y + baseRadius + 4.dp.toPx()
-                )
+                topLeft = textTopLeft
             )
         }
     }

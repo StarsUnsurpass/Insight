@@ -1,18 +1,17 @@
 package com.example.insight.ui.screens
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.insight.graph.*
-import com.example.insight.ui.theme.DeepVoid
+import com.example.insight.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +36,7 @@ fun KnowledgeGraphScreen(
         )
     )
 
-    Box(modifier = Modifier.fillMaxSize().background(DeepVoid)) {
+    Box(modifier = Modifier.fillMaxSize().background(PaperWhite)) {
         StarfieldComponent(
             graphState = mockGraph,
             modifier = Modifier.fillMaxSize()
@@ -48,10 +47,10 @@ fun KnowledgeGraphScreen(
             containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
-                    title = { Text("知识星图 (Beta)", style = MaterialTheme.typography.titleLarge) },
+                    title = { Text("知识星图 (Beta)", style = MaterialTheme.typography.titleLarge, color = InkBlue) },
                     actions = {
                         IconButton(onClick = onClose) {
-                            Icon(Icons.Default.Close, contentDescription = "Close")
+                            Icon(Icons.Default.Close, contentDescription = "Close", tint = DarkText)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)

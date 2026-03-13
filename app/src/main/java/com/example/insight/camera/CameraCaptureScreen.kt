@@ -248,6 +248,17 @@ fun CameraCaptureScreen(
     }
 }
 
+private fun ImageProxy.toRotatedBitmap(): Bitmap {
+    val buffer = planes[0].buffer
+    val bytes = ByteArray(buffer.remaining())
+    buffer.get(bytes)
+    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    val matrix = Matrix().apply {
+        postRotate(imageInfo.rotationDegrees.toFloat())
+    }
+    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+}
+
 @Composable
 fun DraggableSelectionOverlay(
     selectionRect: Rect,
