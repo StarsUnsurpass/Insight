@@ -1,60 +1,43 @@
 package com.example.insight.camera
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.util.Log
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PhotoCamera
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import androidx.compose.ui.draw.scale
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.Image
-import androidx.compose.material3.Surface
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
-import com.example.insight.ui.theme.InkBlue
-import com.example.insight.ui.theme.SageGreen
-import com.example.insight.ui.theme.PaperWhite
-import com.example.insight.ui.theme.HighlightYellow
-import com.example.insight.ui.theme.DarkText
+import com.example.insight.ui.theme.*
 import java.nio.ByteBuffer
 
 @Composable
@@ -69,34 +52,31 @@ fun CameraCaptureScreen(
     var cameraProvider by remember { mutableStateOf<ProcessCameraProvider?>(null) }
     val imageCapture = remember { ImageCapture.Builder().build() }
 
-    // selectionRect in pixels relative to the Box
     var selectionRect by remember { mutableStateOf<Rect?>(null) }
-    
-    // UI States
     var capturedBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var isFlashActive by remember { mutableStateOf(false) }
+    var scanMode by remember { mutableIntStateOf(0) } // 0: 单题解析, 1: 整页速搜
 
     LaunchedEffect(cameraProviderFuture) {
         cameraProvider = cameraProviderFuture.get()
     }
 
-    BoxWithConstraints(modifier = Modifier.fillMaxSize().background(InkBlue)) {
+    BoxWithConstraints(modifier = Modifier.fillMaxSize().background(Color.Black)) {
         val screenWidth = constraints.maxWidth.toFloat()
         val screenHeight = constraints.maxHeight.toFloat()
 
-        // Initialize selectionRect in center
         LaunchedEffect(screenWidth, screenHeight) {
             if (selectionRect == null && screenWidth > 0) {
                 val rectWidth = screenWidth * 0.85f
-                val rectHeight = screenHeight * 0.45f
+                val rectHeight = screenHeight * 0.4f
                 selectionRect = Rect(
-                    offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2),
+                    offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2 - 50f),
                     size = Size(rectWidth, rectHeight)
                 )
             }
         }
 
-        // --- Camera Preview / Background Layer ---
+        // 1. Camera Preview / Background Layer
         Box(modifier = Modifier.fillMaxSize()) {
             if (capturedBitmap != null) {
                 Image(
@@ -133,7 +113,7 @@ fun CameraCaptureScreen(
             }
         }
 
-        // --- Overlay Layer (Selection Box) ---
+        // 2. Overlay Layer (The Mask & Cutout)
         selectionRect?.let { rect ->
             DraggableSelectionOverlay(
                 selectionRect = rect,
@@ -143,8 +123,8 @@ fun CameraCaptureScreen(
             )
         }
 
-        // --- Flash Effect ---
-        androidx.compose.animation.AnimatedVisibility(
+        // 3. Flash Effect
+        AnimatedVisibility(
             visible = isFlashActive,
             enter = fadeIn(animationSpec = tween(50)),
             exit = fadeOut(animationSpec = tween(150))
@@ -152,111 +132,185 @@ fun CameraCaptureScreen(
             Box(Modifier.fillMaxSize().background(Color.White))
         }
 
-        // --- UI Panel (Gentle Efficiency Design) ---
-        Box(
+        // 4. Top Tool Bar (Minimal)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = { /* Flash Toggle */ }) {
+                Icon(Icons.Outlined.FlashAuto, "Flash", tint = Color.White)
+            }
+            IconButton(onClick = { /* History */ }) {
+                Icon(Icons.Outlined.History, "History", tint = Color.White)
+            }
+        }
+
+        // 5. Bottom Control Panel (The Center Piece)
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 40.dp)
+                .navigationBarsPadding()
+                .padding(bottom = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (capturedBitmap != null) {
-                // Review Controls in a "Paper" Card
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .height(100.dp),
-                    shape = RoundedCornerShape(32.dp),
-                    color = PaperWhite.copy(alpha = 0.9f),
-                    tonalElevation = 8.dp
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        TextButton(
-                            onClick = { capturedBitmap = null },
-                            colors = ButtonDefaults.textButtonColors(contentColor = InkBlue)
-                        ) {
-                            Text("重拍", style = MaterialTheme.typography.labelLarge)
-                        }
-                        
-                        Button(
-                            onClick = { onImageCaptured(null) },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = SageGreen),
-                            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
-                        ) {
-                            Text("确认提取", style = MaterialTheme.typography.labelLarge, color = Color.White)
-                        }
-                    }
-                }
-            } else {
-                // Capture Button with Glassmorphism
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    var isPressed by remember { mutableStateOf(false) }
-                    val scale by animateFloatAsState(
-                        targetValue = if (isPressed) 0.9f else 1f,
-                        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow),
-                        label = "shutterScale"
-                    )
-
-                    Surface(
+            // Mode Tabs
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color.Black.copy(alpha = 0.3f))
+                    .padding(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                listOf("单题解析", "整页速搜").forEachIndexed { index, title ->
+                    val isSelected = scanMode == index
+                    Box(
                         modifier = Modifier
-                            .size(84.dp)
-                            .scale(scale)
-                            .pointerInput(Unit) {
-                                detectTapGestures(
-                                    onPress = {
-                                        isPressed = true
-                                        try { awaitRelease() } finally { isPressed = false }
-                                    },
-                                    onTap = {
-                                        isFlashActive = true
-                                        imageCapture.takePicture(
-                                            ContextCompat.getMainExecutor(context),
-                                            object : ImageCapture.OnImageCapturedCallback() {
-                                                override fun onCaptureSuccess(image: ImageProxy) {
-                                                    capturedBitmap = image.toRotatedBitmap()
-                                                    image.close()
-                                                    isFlashActive = false
-                                                }
-                                                override fun onError(exception: ImageCaptureException) {
-                                                    onError(exception)
-                                                    isFlashActive = false
-                                                }
-                                            }
-                                        )
-                                    }
-                                )
-                            },
-                        shape = RoundedCornerShape(42.dp),
-                        color = Color.White.copy(alpha = 0.2f),
-                        border = androidx.compose.foundation.BorderStroke(4.dp, Color.White.copy(alpha = 0.8f))
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(if (isSelected) Color.White.copy(alpha = 0.2f) else Color.Transparent)
+                            .clickable { scanMode = index }
+                            .padding(horizontal = 16.dp, vertical = 6.dp)
                     ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize().padding(8.dp).background(Color.White, RoundedCornerShape(34.dp))
+                        Text(
+                            text = title,
+                            color = if (isSelected) Color.White else Color.White.copy(alpha = 0.6f),
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
                         )
                     }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Main Control Row
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 40.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Gallery Entrance
+                IconButton(
+                    onClick = { /* Gallery */ },
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color.White.copy(alpha = 0.15f), CircleShape)
+                        .border(1.dp, Color.White.copy(alpha = 0.2f), CircleShape)
+                ) {
+                    Icon(Icons.Outlined.PhotoLibrary, "Gallery", tint = Color.White)
+                }
+
+                // Shutter Button
+                ShutterButton(
+                    onClick = {
+                        isFlashActive = true
+                        imageCapture.takePicture(
+                            ContextCompat.getMainExecutor(context),
+                            object : ImageCapture.OnImageCapturedCallback() {
+                                override fun onCaptureSuccess(image: ImageProxy) {
+                                    capturedBitmap = image.toRotatedBitmap()
+                                    image.close()
+                                    isFlashActive = false
+                                    // Trigger navigation to solution
+                                    onImageCaptured(null)
+                                }
+                                override fun onError(exception: ImageCaptureException) {
+                                    onError(exception)
+                                    isFlashActive = false
+                                }
+                            }
+                        )
+                    }
+                )
+
+                // Flash Toggle / Settings
+                IconButton(
+                    onClick = { /* Settings */ },
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color.White.copy(alpha = 0.15f), CircleShape)
+                        .border(1.dp, Color.White.copy(alpha = 0.2f), CircleShape)
+                ) {
+                    Icon(Icons.Outlined.Tune, "Settings", tint = Color.White)
                 }
             }
         }
     }
 }
 
-private fun ImageProxy.toRotatedBitmap(): Bitmap {
-    val buffer = planes[0].buffer
-    val bytes = ByteArray(buffer.remaining())
-    buffer.get(bytes)
-    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    val matrix = Matrix().apply {
-        postRotate(imageInfo.rotationDegrees.toFloat())
+@Composable
+fun ShutterButton(onClick: () -> Unit) {
+    var isPressed by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.88f else 1f,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow),
+        label = "shutterScale"
+    )
+
+    val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
+    val shimmerProgress by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "shimmerProgress"
+    )
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(88.dp)
+            .scale(scale)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        isPressed = true
+                        try { awaitRelease() } finally { isPressed = false }
+                    },
+                    onTap = { onClick() }
+                )
+            }
+    ) {
+        // Outer shimmering ring
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawCircle(
+                color = Color.White.copy(alpha = 0.2f),
+                style = Stroke(width = 4.dp.toPx())
+            )
+            drawArc(
+                brush = Brush.sweepGradient(
+                    colors = listOf(Color.Transparent, SageGreen, Color.Transparent),
+                    center = center
+                ),
+                startAngle = shimmerProgress,
+                sweepAngle = 90f,
+                useCenter = false,
+                style = Stroke(width = 4.dp.toPx(), cap = StrokeCap.Round)
+            )
+        }
+
+        // Inner button
+        Box(
+            modifier = Modifier
+                .size(68.dp)
+                .background(Color.White, CircleShape)
+                .padding(4.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .border(2.dp, InkBlue.copy(alpha = 0.1f), CircleShape)
+            )
+        }
     }
-    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }
 
 @Composable
@@ -266,27 +320,22 @@ fun DraggableSelectionOverlay(
     showScanning: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    // Local state to sync dragging smoothly
     var localRect by remember { mutableStateOf(selectionRect) }
-    
-    // Update local state when external selectionRect changes (but not during dragging)
+
     LaunchedEffect(selectionRect) {
-        if (selectionRect != localRect) {
-            localRect = selectionRect
-        }
+        if (selectionRect != localRect) localRect = selectionRect
     }
 
     val currentOnSelectionChange by rememberUpdatedState(onSelectionChange)
     var touchMode by remember { mutableStateOf<TouchMode>(TouchMode.None) }
-    val handleSize = 30.dp
-    val edgeThreshold = 30.dp
+    val handleSize = 40.dp
 
     val infiniteTransition = rememberInfiniteTransition(label = "scanning")
     val scanLineProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = FastOutSlowInEasing),
+            animation = tween(2500, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
         label = "scanLine"
@@ -298,23 +347,11 @@ fun DraggableSelectionOverlay(
                 detectDragGestures(
                     onDragStart = { offset ->
                         val handlePx = handleSize.toPx()
-                        val edgePx = edgeThreshold.toPx()
                         touchMode = when {
-                            // Corners
                             offset.isNear(localRect.topLeft, handlePx) -> TouchMode.TopLeft
                             offset.isNear(localRect.topRight, handlePx) -> TouchMode.TopRight
                             offset.isNear(localRect.bottomLeft, handlePx) -> TouchMode.BottomLeft
                             offset.isNear(localRect.bottomRight, handlePx) -> TouchMode.BottomRight
-                            // Edges
-                            offset.y in (localRect.top - edgePx)..(localRect.top + edgePx) && 
-                                offset.x in localRect.left..localRect.right -> TouchMode.Top
-                            offset.y in (localRect.bottom - edgePx)..(localRect.bottom + edgePx) && 
-                                offset.x in localRect.left..localRect.right -> TouchMode.Bottom
-                            offset.x in (localRect.left - edgePx)..(localRect.left + edgePx) && 
-                                offset.y in localRect.top..localRect.bottom -> TouchMode.Left
-                            offset.x in (localRect.right - edgePx)..(localRect.right + edgePx) && 
-                                offset.y in localRect.top..localRect.bottom -> TouchMode.Right
-                            // Inside
                             localRect.contains(offset) -> TouchMode.Move
                             else -> TouchMode.None
                         }
@@ -327,15 +364,10 @@ fun DraggableSelectionOverlay(
                             TouchMode.TopRight -> localRect.copy(right = localRect.right + dragAmount.x, top = localRect.top + dragAmount.y)
                             TouchMode.BottomLeft -> localRect.copy(left = localRect.left + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
                             TouchMode.BottomRight -> localRect.copy(right = localRect.right + dragAmount.x, bottom = localRect.bottom + dragAmount.y)
-                            TouchMode.Top -> localRect.copy(top = localRect.top + dragAmount.y)
-                            TouchMode.Bottom -> localRect.copy(bottom = localRect.bottom + dragAmount.y)
-                            TouchMode.Left -> localRect.copy(left = localRect.left + dragAmount.x)
-                            TouchMode.Right -> localRect.copy(right = localRect.right + dragAmount.x)
                             else -> localRect
                         }
-                        
-                        // Limit minimum size and keep in bounds (loosely)
-                        if (newRect.width > 200f && newRect.height > 100f) {
+
+                        if (newRect.width > 150f && newRect.height > 80f) {
                             localRect = newRect
                             currentOnSelectionChange(newRect)
                         }
@@ -344,97 +376,88 @@ fun DraggableSelectionOverlay(
                 )
             }
     ) {
-        // Dim background outside
-        with(drawContext.canvas.nativeCanvas) {
-            val check = saveLayer(null, null)
-            drawRect(Color.Black.copy(alpha = 0.4f)) // Softer dimming
-            drawRoundRect(
-                color = Color.Transparent,
-                topLeft = localRect.topLeft,
-                size = localRect.size,
-                cornerRadius = CornerRadius(24.dp.toPx(), 24.dp.toPx()), // More rounded
-                blendMode = BlendMode.Clear
+        // 1. Dark Mask with Cutout (Alpha 0.6)
+        val path = Path().apply {
+            addRect(Rect(0f, 0f, size.width, size.height))
+            addRoundRect(
+                RoundRect(
+                    localRect,
+                    CornerRadius(24.dp.toPx(), 24.dp.toPx())
+                )
             )
-            restoreToCount(check)
+            fillType = PathFillType.EvenOdd
         }
+        drawPath(path, color = Color.Black.copy(alpha = 0.6f))
 
-        // Draw selection border
+        // 2. Highlighting Selection Border
         drawRoundRect(
-            color = SageGreen,
+            color = Color.White.copy(alpha = 0.8f),
             topLeft = localRect.topLeft,
             size = localRect.size,
             cornerRadius = CornerRadius(24.dp.toPx(), 24.dp.toPx()),
-            style = Stroke(width = 2.dp.toPx()) // Slightly thinner, more delicate
+            style = Stroke(width = 1.dp.toPx())
         )
 
-        // Draw scanning line
+        // 3. Dynamic Scanning Line
         if (showScanning) {
             val currentLineY = localRect.top + (localRect.height * scanLineProgress)
-            val scanColor = SageGreen.copy(alpha = 0.8f)
-            
+            val scanColor = SageGreen.copy(alpha = 0.9f)
+
             drawLine(
                 brush = Brush.horizontalGradient(
                     colors = listOf(Color.Transparent, scanColor, Color.Transparent)
                 ),
-                start = Offset(localRect.left + 10.dp.toPx(), currentLineY),
-                end = Offset(localRect.right - 10.dp.toPx(), currentLineY),
+                start = Offset(localRect.left + 8.dp.toPx(), currentLineY),
+                end = Offset(localRect.right - 8.dp.toPx(), currentLineY),
                 strokeWidth = 2.dp.toPx()
             )
-            
-            // Glow effect
+
             drawRect(
                 brush = Brush.verticalGradient(
-                    colors = listOf(scanColor.copy(alpha = 0.3f), Color.Transparent),
+                    colors = listOf(scanColor.copy(alpha = 0.2f), Color.Transparent),
                     startY = currentLineY,
-                    endY = currentLineY + 40.dp.toPx()
+                    endY = currentLineY + 60.dp.toPx()
                 ),
                 topLeft = Offset(localRect.left, currentLineY),
-                size = Size(localRect.width, 40.dp.toPx())
+                size = Size(localRect.width, 60.dp.toPx())
             )
         }
 
-        // Draw corner handles
-        val handleLength = 20.dp.toPx()
-        val handleStroke = 4.dp.toPx()
-        
-        // Top-Left
-        drawCorner(localRect.topLeft, handleLength, handleStroke, type = 0)
-        // Top-Right
-        drawCorner(Offset(localRect.right, localRect.top), handleLength, handleStroke, type = 1)
-        // Bottom-Left
-        drawCorner(Offset(localRect.left, localRect.bottom), handleLength, handleStroke, type = 2)
-        // Bottom-Right
-        drawCorner(localRect.bottomRight, handleLength, handleStroke, type = 3)
+        // 4. Premium Corner Handles
+        val len = 24.dp.toPx()
+        val thick = 4.dp.toPx()
+        val cornerColor = Color.White
+
+        // TL
+        drawCorner(localRect.topLeft, len, thick, 0, cornerColor)
+        // TR
+        drawCorner(Offset(localRect.right, localRect.top), len, thick, 1, cornerColor)
+        // BL
+        drawCorner(Offset(localRect.left, localRect.bottom), len, thick, 2, cornerColor)
+        // BR
+        drawCorner(localRect.bottomRight, len, thick, 3, cornerColor)
     }
 }
-
-// ... rest of implementation (omitted for brevity)
 
 private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCorner(
-    pos: Offset,
-    len: Float,
-    stroke: Float,
-    type: Int
+    pos: Offset, len: Float, stroke: Float, type: Int, color: Color
 ) {
-    val horizontal = when(type) {
-        0, 2 -> Offset(pos.x + len, pos.y)
-        1, 3 -> Offset(pos.x - len, pos.y)
-        else -> pos
-    }
-    val vertical = when(type) {
-        0, 1 -> Offset(pos.x, pos.y + len)
-        2, 3 -> Offset(pos.x, pos.y - len)
-        else -> pos
-    }
-    
-    drawLine(SageGreen, pos, horizontal, stroke, cap = StrokeCap.Round)
-    drawLine(SageGreen, pos, vertical, stroke, cap = StrokeCap.Round)
+    val h = when(type) { 0, 2 -> Offset(pos.x + len, pos.y); else -> Offset(pos.x - len, pos.y) }
+    val v = when(type) { 0, 1 -> Offset(pos.x, pos.y + len); else -> Offset(pos.x, pos.y - len) }
+    drawLine(color, pos, h, stroke, cap = StrokeCap.Round)
+    drawLine(color, pos, v, stroke, cap = StrokeCap.Round)
 }
 
-private fun Offset.isNear(target: Offset, threshold: Float): Boolean {
-    return (this - target).getDistance() < threshold
+private fun Offset.isNear(target: Offset, threshold: Float) = (this - target).getDistance() < threshold
+
+private fun ImageProxy.toRotatedBitmap(): Bitmap {
+    val buffer = planes[0].buffer
+    val bytes = ByteArray(buffer.remaining())
+    buffer.get(bytes)
+    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    val matrix = Matrix().apply { postRotate(imageInfo.rotationDegrees.toFloat()) }
+    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }
 
-enum class TouchMode {
-    None, Move, TopLeft, TopRight, BottomLeft, BottomRight, Top, Bottom, Left, Right
-}
+enum class TouchMode { None, Move, TopLeft, TopRight, BottomLeft, BottomRight }
+
