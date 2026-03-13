@@ -10,9 +10,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.insight.ui.navigation.InsightNavHost
+import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.theme.InsightTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,16 +27,7 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            setContent {
-                InsightTheme {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        InsightNavHost()
-                    }
-                }
-            }
+            showContent()
         } else {
             Toast.makeText(this, "需要摄像头权限才能使用扫描功能", Toast.LENGTH_LONG).show()
         }
@@ -56,7 +51,14 @@ class MainActivity : ComponentActivity() {
 
     private fun showContent() {
         setContent {
-            InsightTheme {
+            val viewModel: InsightViewModel = hiltViewModel()
+            val uiState by viewModel.uiState.collectAsState()
+            val preferences = uiState.preferences
+
+            InsightTheme(
+                style = preferences.themeStyle,
+                darkTheme = preferences.isDarkMode
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
