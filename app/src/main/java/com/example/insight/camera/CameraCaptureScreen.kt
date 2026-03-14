@@ -1,409 +1,263 @@
 package com.example.insight.camera
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.util.Log
 import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.core.ImageCapture.OnImageCapturedCallback
 import androidx.camera.view.PreviewView
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.*
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
-import com.example.insight.ui.theme.*
-import java.nio.ByteBuffer
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
+@SuppressLint("UnsafeOptInUsageError")
 @Composable
 fun CameraCaptureScreen(
-    onImageCaptured: (ImageProxy?) -> Unit,
+    onBack: () -> Unit,
+    onImageCaptured: (Bitmap) -> Unit,
     onError: (ImageCaptureException) -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-
-    val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    var cameraProvider by remember { mutableStateOf<ProcessCameraProvider?>(null) }
+    val scope = rememberCoroutineScope()
+    
+    val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
+    
+    // Use standard client as defined in AppModule
+    val textRecognizer = remember { TextRecognition.getClient() }
+    val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
 
-    var selectionRect by remember { mutableStateOf<Rect?>(null) }
-    var capturedBitmap by remember { mutableStateOf<Bitmap?>(null) }
-    var isFlashActive by remember { mutableStateOf(false) }
-    var scanMode by remember { mutableIntStateOf(0) } // 0: 单题解析, 1: 整页速搜
+    var screenRect by remember { mutableStateOf(Rect.Zero) }
+    var cropRect by remember { mutableStateOf(Rect(150f, 400f, 950f, 800f)) }
+    var isCapturing by remember { mutableStateOf(false) }
+    var detectedTextRect by remember { mutableStateOf<Rect?>(null) }
+    var activeHandle by remember { mutableStateOf<Handle?>(null) }
 
-    LaunchedEffect(cameraProviderFuture) {
-        cameraProvider = cameraProviderFuture.get()
+    LaunchedEffect(Unit) {
+        val cameraProviderFuture = androidx.camera.lifecycle.ProcessCameraProvider.getInstance(context)
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(previewView.surfaceProvider)
+            }
+
+            val imageAnalysis = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build()
+
+            imageAnalysis.setAnalyzer(cameraExecutor) { imageProxy ->
+                val mediaImage = imageProxy.image
+                if (mediaImage != null) {
+                    val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                    textRecognizer.process(image)
+                        .addOnSuccessListener { visionText ->
+                            val largestBlock = visionText.textBlocks.maxByOrNull { 
+                                (it.boundingBox?.width() ?: 0) * (it.boundingBox?.height() ?: 0)
+                            }
+                            largestBlock?.boundingBox?.let { box ->
+                                detectedTextRect = Rect(box.left.toFloat(), box.top.toFloat(), box.right.toFloat(), box.bottom.toFloat())
+                            }
+                        }
+                        .addOnCompleteListener { imageProxy.close() }
+                }
+            }
+
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    lifecycleOwner,
+                    CameraSelector.DEFAULT_BACK_CAMERA,
+                    preview,
+                    imageCapture,
+                    imageAnalysis
+                )
+            } catch (exc: Exception) {
+                Log.e("CameraCapture", "Use case binding failed", exc)
+            }
+        }, context.mainExecutor)
     }
 
-    BoxWithConstraints(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        val screenWidth = constraints.maxWidth.toFloat()
-        val screenHeight = constraints.maxHeight.toFloat()
+    Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
+        AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize())
 
-        LaunchedEffect(screenWidth, screenHeight) {
-            if (selectionRect == null && screenWidth > 0) {
-                val rectWidth = screenWidth * 0.85f
-                val rectHeight = screenHeight * 0.4f
-                selectionRect = Rect(
-                    offset = Offset((screenWidth - rectWidth) / 2, (screenHeight - rectHeight) / 2 - 50f),
-                    size = Size(rectWidth, rectHeight)
-                )
-            }
-        }
-
-        // 1. Camera Preview / Background Layer
-        Box(modifier = Modifier.fillMaxSize()) {
-            if (capturedBitmap != null) {
-                Image(
-                    bitmap = capturedBitmap!!.asImageBitmap(),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-            } else if (cameraProvider != null) {
-                AndroidView(
-                    factory = { ctx ->
-                        PreviewView(ctx).apply {
-                            implementationMode = PreviewView.ImplementationMode.COMPATIBLE
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize(),
-                    update = { previewView ->
-                        val preview = Preview.Builder().build().also {
-                            it.setSurfaceProvider(previewView.surfaceProvider)
-                        }
-                        try {
-                            cameraProvider?.unbindAll()
-                            cameraProvider?.bindToLifecycle(
-                                lifecycleOwner,
-                                CameraSelector.DEFAULT_BACK_CAMERA,
-                                preview,
-                                imageCapture
-                            )
-                        } catch (exc: Exception) {
-                            Log.e("CameraCapture", "Binding failed", exc)
-                        }
-                    }
-                )
-            }
-        }
-
-        // 2. Overlay Layer (The Mask & Static Cutout)
-        selectionRect?.let { rect ->
-            StaticSelectionOverlay(
-                selectionRect = rect,
-                showScanning = capturedBitmap == null,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        // 3. Flash Effect
-        AnimatedVisibility(
-            visible = isFlashActive,
-            enter = fadeIn(animationSpec = tween(50)),
-            exit = fadeOut(animationSpec = tween(150))
-        ) {
-            Box(Modifier.fillMaxSize().background(Color.White))
-        }
-
-        // 4. Top Tool Bar (Minimal)
-        Row(
+        Canvas(
             modifier = Modifier
-                .fillMaxWidth()
-                .statusBarsPadding()
-                .padding(horizontal = 20.dp, vertical = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+                .fillMaxSize()
+                .onGloballyPositioned { coordinates ->
+                    screenRect = Rect(0f, 0f, coordinates.size.width.toFloat(), coordinates.size.height.toFloat())
+                }
+                .pointerInput(Unit) {
+                    detectDragGestures(
+                        onDragStart = { offset -> activeHandle = hitTest(offset, cropRect) },
+                        onDrag = { change, dragAmount ->
+                            change.consume()
+                            cropRect = applyDelta(cropRect, dragAmount, activeHandle, screenRect)
+                        },
+                        onDragEnd = { activeHandle = null }
+                    )
+                }
+        ) {
+            val combinedPath = Path().apply { addRect(screenRect) }
+            val holePath = Path().apply { addRoundRect(RoundRect(cropRect, CornerRadius(12.dp.toPx()))) }
+            val cutPath = Path.combine(PathOperation.Difference, combinedPath, holePath)
+            drawPath(cutPath, color = Color.Black.copy(alpha = 0.6f))
+
+            drawRoundRect(
+                color = Color.White,
+                topLeft = cropRect.topLeft,
+                size = cropRect.size,
+                cornerRadius = CornerRadius(12.dp.toPx()),
+                style = Stroke(width = 2.dp.toPx())
+            )
+
+            drawCorner(cropRect, 20.dp.toPx(), 4.dp.toPx())
+        }
+
+        IconButton(
+            onClick = onBack,
+            modifier = Modifier.statusBarsPadding().padding(16.dp).align(Alignment.TopStart)
+        ) {
+            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+        }
+
+        Row(
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 48.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { /* Flash Toggle */ }) {
-                Icon(Icons.Outlined.FlashAuto, "Flash", tint = Color.White)
-            }
-            IconButton(onClick = { /* History */ }) {
-                Icon(Icons.Outlined.History, "History", tint = Color.White)
-            }
-        }
+            IconButton(onClick = {}) { Icon(Icons.Default.FlashOn, null, tint = Color.White) }
 
-        // 5. Bottom Control Panel (The Center Piece)
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .navigationBarsPadding()
-                .padding(bottom = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Mode Tabs
-            Row(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.Black.copy(alpha = 0.3f))
-                    .padding(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                listOf("单题解析", "整页速搜").forEachIndexed { index, title ->
-                    val isSelected = scanMode == index
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(if (isSelected) Color.White.copy(alpha = 0.2f) else Color.Transparent)
-                            .clickable { scanMode = index }
-                            .padding(horizontal = 16.dp, vertical = 6.dp)
-                    ) {
-                        Text(
-                            text = title,
-                            color = if (isSelected) Color.White else Color.White.copy(alpha = 0.6f),
-                            style = MaterialTheme.typography.labelMedium,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Main Control Row
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 40.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                // Gallery Entrance
-                IconButton(
-                    onClick = { /* Gallery */ },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(Color.White.copy(alpha = 0.15f), CircleShape)
-                        .border(1.dp, Color.White.copy(alpha = 0.2f), CircleShape)
-                ) {
-                    Icon(Icons.Outlined.PhotoLibrary, "Gallery", tint = Color.White)
-                }
-
-                // Shutter Button
-                ShutterButton(
-                    onClick = {
-                        isFlashActive = true
-                        imageCapture.takePicture(
-                            ContextCompat.getMainExecutor(context),
-                            object : ImageCapture.OnImageCapturedCallback() {
-                                override fun onCaptureSuccess(image: ImageProxy) {
-                                    capturedBitmap = image.toRotatedBitmap()
+            Surface(
+                onClick = {
+                    if (isCapturing) return@Surface
+                    isCapturing = true
+                    imageCapture.takePicture(
+                        cameraExecutor,
+                        object : OnImageCapturedCallback() {
+                            override fun onCaptureSuccess(image: ImageProxy) {
+                                scope.launch {
+                                    val bitmap = image.toBitmap()
+                                    val cropped = performCrop(bitmap, cropRect, screenRect, image.imageInfo.rotationDegrees)
+                                    onImageCaptured(cropped)
                                     image.close()
-                                    isFlashActive = false
-                                    // Trigger navigation to solution
-                                    onImageCaptured(null)
-                                }
-                                override fun onError(exception: ImageCaptureException) {
-                                    onError(exception)
-                                    isFlashActive = false
                                 }
                             }
-                        )
-                    }
-                )
-
-                // Flash Toggle / Settings
-                IconButton(
-                    onClick = { /* Settings */ },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(Color.White.copy(alpha = 0.15f), CircleShape)
-                        .border(1.dp, Color.White.copy(alpha = 0.2f), CircleShape)
-                ) {
-                    Icon(Icons.Outlined.Tune, "Settings", tint = Color.White)
+                            override fun onError(exception: ImageCaptureException) {
+                                onError(exception)
+                                isCapturing = false
+                            }
+                        }
+                    )
+                },
+                modifier = Modifier.size(80.dp),
+                shape = CircleShape,
+                color = Color.White
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    if (isCapturing) CircularProgressIndicator(modifier = Modifier.size(40.dp), color = Color.Black)
+                    else Box(modifier = Modifier.size(60.dp).border(2.dp, Color.Black, CircleShape))
                 }
             }
-        }
-    }
-}
 
-@Composable
-fun ShutterButton(onClick: () -> Unit) {
-    var isPressed by remember { mutableStateOf(false) }
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.88f else 1f,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow),
-        label = "shutterScale"
-    )
-
-    val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
-    val shimmerProgress by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "shimmerProgress"
-    )
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .size(88.dp)
-            .scale(scale)
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = {
-                        isPressed = true
-                        try { awaitRelease() } finally { isPressed = false }
-                    },
-                    onTap = { onClick() }
-                )
+            IconButton(onClick = {
+                detectedTextRect?.let { cropRect = inflateRect(it, 40f) }
+            }) {
+                Icon(Icons.Default.Check, null, tint = if (detectedTextRect != null) Color.Green else Color.White)
             }
-    ) {
-        // Outer shimmering ring
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            drawCircle(
-                color = Color.White.copy(alpha = 0.2f),
-                style = Stroke(width = 4.dp.toPx())
-            )
-            drawArc(
-                brush = Brush.sweepGradient(
-                    colors = listOf(Color.Transparent, SageGreen, Color.Transparent),
-                    center = center
-                ),
-                startAngle = shimmerProgress,
-                sweepAngle = 90f,
-                useCenter = false,
-                style = Stroke(width = 4.dp.toPx(), cap = StrokeCap.Round)
-            )
-        }
-
-        // Inner button
-        Box(
-            modifier = Modifier
-                .size(68.dp)
-                .background(Color.White, CircleShape)
-                .padding(4.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .border(2.dp, InkBlue.copy(alpha = 0.1f), CircleShape)
-            )
         }
     }
 }
 
-@Composable
-fun StaticSelectionOverlay(
-    selectionRect: Rect,
-    showScanning: Boolean = false,
-    modifier: Modifier = Modifier
-) {
-    val infiniteTransition = rememberInfiniteTransition(label = "scanning")
-    val scanLineProgress by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2500, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "scanLine"
-    )
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCorner(rect: Rect, len: Float, thickness: Float) {
+    drawPath(Path().apply {
+        moveTo(rect.left, rect.top + len)
+        lineTo(rect.left, rect.top)
+        lineTo(rect.left + len, rect.top)
+    }, Color.White, style = Stroke(width = thickness, cap = StrokeCap.Round))
+    drawPath(Path().apply {
+        moveTo(rect.right, rect.bottom - len)
+        lineTo(rect.right, rect.bottom)
+        lineTo(rect.right - len, rect.bottom)
+    }, Color.White, style = Stroke(width = thickness, cap = StrokeCap.Round))
+}
 
-    Canvas(modifier = modifier) {
-        // 1. Dark Mask with Cutout (Alpha 0.6)
-        val path = Path().apply {
-            addRect(Rect(0f, 0f, size.width, size.height))
-            addRoundRect(
-                RoundRect(
-                    selectionRect,
-                    CornerRadius(24.dp.toPx(), 24.dp.toPx())
-                )
-            )
-            fillType = PathFillType.EvenOdd
-        }
-        drawPath(path, color = Color.Black.copy(alpha = 0.6f))
+enum class Handle { TOP_LEFT, BOTTOM_RIGHT, CENTER }
 
-        // 2. Highlighting Selection Border
-        drawRoundRect(
-            color = Color.White.copy(alpha = 0.8f),
-            topLeft = selectionRect.topLeft,
-            size = selectionRect.size,
-            cornerRadius = CornerRadius(24.dp.toPx(), 24.dp.toPx()),
-            style = Stroke(width = 1.dp.toPx())
-        )
-
-        // 3. Dynamic Scanning Line
-        if (showScanning) {
-            val currentLineY = selectionRect.top + (selectionRect.height * scanLineProgress)
-            val scanColor = SageGreen.copy(alpha = 0.9f)
-            
-            drawLine(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(Color.Transparent, scanColor, Color.Transparent)
-                ),
-                start = Offset(selectionRect.left + 8.dp.toPx(), currentLineY),
-                end = Offset(selectionRect.right - 8.dp.toPx(), currentLineY),
-                strokeWidth = 2.dp.toPx()
-            )
-            
-            drawRect(
-                brush = Brush.verticalGradient(
-                    colors = listOf(scanColor.copy(alpha = 0.2f), Color.Transparent),
-                    startY = currentLineY,
-                    endY = currentLineY + 60.dp.toPx()
-                ),
-                topLeft = Offset(selectionRect.left, currentLineY),
-                size = Size(selectionRect.width, 60.dp.toPx())
-            )
-        }
-
-        // 4. Premium Corner Handles (Static)
-        val len = 24.dp.toPx()
-        val thick = 4.dp.toPx()
-        val cornerColor = Color.White
-        
-        drawCorner(selectionRect.topLeft, len, thick, 0, cornerColor)
-        drawCorner(Offset(selectionRect.right, selectionRect.top), len, thick, 1, cornerColor)
-        drawCorner(Offset(selectionRect.left, selectionRect.bottom), len, thick, 2, cornerColor)
-        drawCorner(selectionRect.bottomRight, len, thick, 3, cornerColor)
+private fun hitTest(offset: Offset, rect: Rect): Handle? {
+    val threshold = 40.dp.value
+    return when {
+        abs(offset.x - rect.left) < threshold && abs(offset.y - rect.top) < threshold -> Handle.TOP_LEFT
+        abs(offset.x - rect.right) < threshold && abs(offset.y - rect.bottom) < threshold -> Handle.BOTTOM_RIGHT
+        rect.contains(offset) -> Handle.CENTER
+        else -> null
     }
 }
 
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCorner(
-    pos: Offset, len: Float, stroke: Float, type: Int, color: Color
-) {
-    val h = when(type) { 0, 2 -> Offset(pos.x + len, pos.y); else -> Offset(pos.x - len, pos.y) }
-    val v = when(type) { 0, 1 -> Offset(pos.x, pos.y + len); else -> Offset(pos.x, pos.y - len) }
-    drawLine(color, pos, h, stroke, cap = StrokeCap.Round)
-    drawLine(color, pos, v, stroke, cap = StrokeCap.Round)
+private fun applyDelta(rect: Rect, delta: Offset, handle: Handle?, screen: Rect): Rect {
+    if (handle == null) return rect
+    return when (handle) {
+        Handle.TOP_LEFT -> rect.copy(left = (rect.left + delta.x).coerceIn(0f, rect.right - 100f), top = (rect.top + delta.y).coerceIn(0f, rect.bottom - 100f))
+        Handle.BOTTOM_RIGHT -> rect.copy(right = (rect.right + delta.x).coerceIn(rect.left + 100f, screen.right), bottom = (rect.bottom + delta.y).coerceIn(rect.top + 100f, screen.bottom))
+        Handle.CENTER -> {
+            val newRect = rect.translate(delta)
+            if (screen.contains(newRect.topLeft) && screen.contains(newRect.bottomRight)) newRect else rect
+        }
+    }
 }
 
-private fun ImageProxy.toRotatedBitmap(): Bitmap {
+private suspend fun performCrop(bitmap: Bitmap, cropRect: Rect, screenRect: Rect, rotation: Int): Bitmap = withContext(Dispatchers.Default) {
+    val matrix = Matrix().apply { postRotate(rotation.toFloat()) }
+    val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    val scaleX = rotatedBitmap.width.toFloat() / screenRect.width
+    val scaleY = rotatedBitmap.height.toFloat() / screenRect.height
+    val left = (cropRect.left * scaleX).toInt().coerceAtLeast(0)
+    val top = (cropRect.top * scaleY).toInt().coerceAtLeast(0)
+    val width = (cropRect.width * scaleX).toInt().coerceAtMost(rotatedBitmap.width - left)
+    val height = (cropRect.height * scaleY).toInt().coerceAtMost(rotatedBitmap.height - top)
+    Bitmap.createBitmap(rotatedBitmap, left, top, width, height)
+}
+
+private fun inflateRect(rect: Rect, delta: Float): Rect = Rect(rect.left - delta, top = rect.top - delta, right = rect.right + delta, bottom = rect.bottom + delta)
+
+private fun ImageProxy.toBitmap(): Bitmap {
     val buffer = planes[0].buffer
     val bytes = ByteArray(buffer.remaining())
     buffer.get(bytes)
-    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    val matrix = Matrix().apply { postRotate(imageInfo.rotationDegrees.toFloat()) }
-    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
 }
-

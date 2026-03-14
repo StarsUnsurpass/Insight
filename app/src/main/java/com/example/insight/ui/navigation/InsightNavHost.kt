@@ -53,6 +53,7 @@ fun InsightNavHost(viewModel: InsightViewModel) {
 
         composable(Route.Scanner.path) {
             CameraCaptureScreen(
+                onBack = { navController.popBackStack() },
                 onImageCaptured = { _ ->
                     viewModel.onTextCaptured("Mock captured text")
                     navController.navigate(Route.Solution.path)
