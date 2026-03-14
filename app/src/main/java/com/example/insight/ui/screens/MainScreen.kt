@@ -298,7 +298,14 @@ fun BoxScope.TabIconFluid(
 @Composable
 fun HomeTab(preferences: UserPreferences) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    var searchQuery by remember { mutableStateOf("") }
+    val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(20.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         item {
             Column(modifier = Modifier.padding(vertical = 12.dp)) {
                 Text(
@@ -314,22 +321,131 @@ fun HomeTab(preferences: UserPreferences) {
                 )
             }
         }
+
+        // --- Optimized Search Bar ---
         item {
             OutlinedTextField(
-                value = "", onValueChange = {}, placeholder = { Text("搜索题目或知识点...", style = MaterialTheme.typography.bodyMedium) },
-                modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp),
-                leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
-                trailingIcon = { Icon(Icons.Default.Mic, null, tint = primaryColor) },
-                colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f), focusedBorderColor = primaryColor)
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                placeholder = { 
+                    Text(
+                        "搜索题目或知识点...", 
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)
+                    ) 
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                shape = RoundedCornerShape(20.dp),
+                singleLine = true,
+                leadingIcon = { 
+                    Icon(
+                        imageVector = Icons.Default.Search, 
+                        contentDescription = "Search", 
+                        tint = primaryColor 
+                    ) 
+                },
+                trailingIcon = {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(
+                                imageVector = Icons.Default.Close, 
+                                contentDescription = "Clear",
+                                tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)
+                            )
+                        }
+                    } else {
+                        IconButton(onClick = { /* Voice Search */ }) {
+                            Icon(
+                                imageVector = Icons.Default.Mic, 
+                                contentDescription = "Voice", 
+                                tint = primaryColor 
+                            )
+                        }
+                    }
+                },
+                keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
+                    imeAction = androidx.compose.ui.text.input.ImeAction.Search
+                ),
+                keyboardActions = androidx.compose.foundation.text.KeyboardActions(
+                    onSearch = { 
+                        focusManager.clearFocus()
+                        // Logic for actual search execution
+                    }
+                ),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
+                    focusedBorderColor = primaryColor,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                    focusedContainerColor = MaterialTheme.colorScheme.surface
+                )
             )
         }
-        item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text(if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                TextButton(onClick = { }) { Text("全部", color = primaryColor, style = MaterialTheme.typography.labelMedium) }
+
+        // --- Conditional Content: Search vs Dashboard ---
+        if (searchQuery.isEmpty()) {
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(), 
+                    horizontalArrangement = Arrangement.SpaceBetween, 
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", 
+                        style = MaterialTheme.typography.titleSmall, 
+                        fontWeight = FontWeight.Bold
+                    )
+                    TextButton(onClick = { }) { 
+                        Text("全部", color = primaryColor, style = MaterialTheme.typography.labelMedium) 
+                    }
+                }
+            }
+            items(5) { index -> HistoryCard(index) }
+        } else {
+            // Mock Search Results Section
+            item {
+                Text(
+                    "搜索结果", 
+                    style = MaterialTheme.typography.labelMedium, 
+                    color = primaryColor,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            items(3) { index ->
+                SearchResultItem(query = searchQuery, index = index)
             }
         }
-        items(5) { index -> HistoryCard(index) }
+    }
+}
+
+@Composable
+fun SearchResultItem(query: String, index: Int) {
+    val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { /* Navigate */ },
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+    ) {
+        Row(
+            modifier = Modifier.padding(vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.History, 
+                contentDescription = null, 
+                tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                modifier = Modifier.size(20.dp)
+            )
+            @Suppress("DEPRECATION")
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = results[index % results.size],
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
     }
 }
 
