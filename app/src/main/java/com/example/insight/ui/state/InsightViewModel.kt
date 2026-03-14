@@ -43,6 +43,14 @@ class InsightViewModel @Inject constructor() : ViewModel() {
         _uiState.update { it.copy(preferences = it.preferences.copy(username = name)) }
     }
 
+    fun updateClassName(name: String) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(className = name)) }
+    }
+
+    fun updateUserRole(role: UserRole) {
+        _uiState.update { it.copy(preferences = it.preferences.copy(role = role)) }
+    }
+
     fun updateDarkMode(enabled: Boolean) {
         _uiState.update { it.copy(preferences = it.preferences.copy(isDarkMode = enabled)) }
     }

@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -46,6 +47,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.insight.ui.state.InsightViewModel
+import com.example.insight.ui.state.UserPreferences
+import com.example.insight.ui.state.UserRole
 import com.example.insight.ui.theme.*
 import kotlin.math.hypot
 import kotlinx.coroutines.launch
@@ -72,7 +75,7 @@ fun MainScreen(
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
 
-    var selectedTab by remember { mutableStateOf(InsightTab.Home) }
+    var selectedTab by rememberSaveable { mutableStateOf(InsightTab.Home) }
     var isDockVisible by remember { mutableStateOf(true) }
     var isRevealing by remember { mutableStateOf(false) }
     var isInitialized by remember { mutableStateOf(false) }
@@ -124,7 +127,7 @@ fun MainScreen(
                             InsightTab.Map -> MapTab()
                             InsightTab.Analysis -> KnowledgeGraphScreen()
                             InsightTab.Profile -> ProfileTab(
-                                username = preferences.username,
+                                preferences = preferences,
                                 onNavigateToSettings = onNavigateToSettings
                             )
                         }
@@ -381,29 +384,51 @@ fun MapTab() {
 }
 
 @Composable
-fun ProfileTab(username: String, onNavigateToSettings: () -> Unit) {
+fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(modifier = Modifier.size(64.dp).background(SoftOatmeal, CircleShape), contentAlignment = Alignment.Center) {
-                    Icon(imageVector = Icons.Default.Person, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
+                    Icon(imageVector = when(preferences.role) {
+                        UserRole.Student -> Icons.Default.Person
+                        UserRole.Teacher -> Icons.Default.CastForEducation
+                    }, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text("$username 同学", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold); Text("初三 (2) 班", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("${preferences.username} ", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Surface(
+                            color = primaryColor.copy(alpha = 0.1f),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = when(preferences.role) {
+                                    UserRole.Student -> "同学"
+                                    UserRole.Teacher -> "老师"
+                                },
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = primaryColor
+                            )
+                        }
+                    }
+                    Text(preferences.className, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
                 }
             }
         }
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                StatCard("累计扫描", "128", Modifier.weight(1f)); StatCard("攻克考点", "42", Modifier.weight(1f))
+                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "教学课件", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
+                StatCard(if (preferences.role == UserRole.Student) "攻克考点" else "批改人次", if (preferences.role == UserRole.Student) "42" else "356", Modifier.weight(1f))
             }
         }
         item {
             DashboardCard(title = "学习设置") {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    SettingRow(Icons.Default.PictureAsPdf, "导出错题本 (PDF)"); SettingRow(Icons.Default.CloudUpload, "数据同步"); 
+                    SettingRow(Icons.Default.PictureAsPdf, if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)")
+                    SettingRow(Icons.Default.CloudUpload, "数据同步")
                     SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
                 }
             }

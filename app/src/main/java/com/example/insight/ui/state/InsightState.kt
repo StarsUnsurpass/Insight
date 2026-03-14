@@ -11,8 +11,14 @@ enum class ThemeStyle {
     Default, Minimal, Modern, Ocean, Sunset, Sakura
 }
 
+enum class UserRole {
+    Student, Teacher
+}
+
 data class UserPreferences(
     val username: String = "王小明",
+    val className: String = "初三 (2) 班",
+    val role: UserRole = UserRole.Student,
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
     val hapticEnabled: Boolean = true

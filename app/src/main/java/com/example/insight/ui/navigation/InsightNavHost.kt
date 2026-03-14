@@ -1,18 +1,21 @@
 package com.example.insight.ui.navigation
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import com.example.insight.camera.CameraCaptureScreen
 import com.example.insight.ui.screens.KnowledgeGraphScreen
+import com.example.insight.ui.screens.MainScreen
+import com.example.insight.ui.screens.SettingsScreen
 import com.example.insight.ui.screens.SolutionScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
-
-import com.example.insight.ui.screens.MainScreen
-import com.example.insight.ui.screens.SettingsScreen
 
 sealed class Route(val path: String) {
     object Main : Route("main")
@@ -28,7 +31,10 @@ fun InsightNavHost() {
     val viewModel: InsightViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
-    NavHost(navController = navController, startDestination = Route.Main.path) {
+    NavHost(
+        navController = navController,
+        startDestination = Route.Main.path
+    ) {
         composable(Route.Main.path) {
             MainScreen(
                 onNavigateToScanner = {
@@ -39,7 +45,7 @@ fun InsightNavHost() {
                 }
             )
         }
-        
+
         composable(Route.Scanner.path) {
             CameraCaptureScreen(
                 onImageCaptured = { _ ->
@@ -49,14 +55,14 @@ fun InsightNavHost() {
                 onError = { /* Handle error */ }
             )
         }
-        
+
         composable(Route.Solution.path) {
             val state = uiState.screen
             if (state is ScreenState.Solution) {
                 SolutionScreen(
                     content = state.content,
                     concepts = state.concepts,
-                    onBack = {
+                    onBack = { 
                         viewModel.reset()
                         navController.popBackStack()
                     },
@@ -74,11 +80,15 @@ fun InsightNavHost() {
         composable(Route.Settings.path) {
             SettingsScreen(
                 preferences = uiState.preferences,
-                onBack = { navController.popBackStack() },
-                onUsernameChange = viewModel::updateUsername,
-                onDarkModeToggle = viewModel::updateDarkMode,
-                onThemeStyleChange = viewModel::updateThemeStyle,
-                onHapticToggle = viewModel::updateHapticFeedback
+                onBack = {
+                    navController.popBackStack()
+                },
+                onUsernameChange = { viewModel.updateUsername(it) },
+                onClassNameChange = { viewModel.updateClassName(it) },
+                onRoleChange = { viewModel.updateUserRole(it) },
+                onDarkModeToggle = { viewModel.updateDarkMode(it) },
+                onThemeStyleChange = { viewModel.updateThemeStyle(it) },
+                onHapticToggle = { viewModel.updateHapticFeedback(it) }
             )
         }
     }

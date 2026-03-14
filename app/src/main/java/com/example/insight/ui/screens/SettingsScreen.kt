@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.insight.ui.state.ThemeStyle
 import com.example.insight.ui.state.UserPreferences
+import com.example.insight.ui.state.UserRole
 import com.example.insight.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,11 +29,15 @@ fun SettingsScreen(
     preferences: UserPreferences,
     onBack: () -> Unit,
     onUsernameChange: (String) -> Unit,
+    onClassNameChange: (String) -> Unit,
+    onRoleChange: (UserRole) -> Unit,
     onDarkModeToggle: (Boolean) -> Unit,
     onThemeStyleChange: (ThemeStyle) -> Unit,
     onHapticToggle: (Boolean) -> Unit
 ) {
     var showNameDialog by remember { mutableStateOf(false) }
+    var showClassDialog by remember { mutableStateOf(false) }
+    var showRoleDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -66,6 +71,27 @@ fun SettingsScreen(
                     title = "用户名",
                     subtitle = preferences.username,
                     onClick = { showNameDialog = true }
+                )
+            }
+
+            item {
+                SettingItem(
+                    icon = Icons.Default.School,
+                    title = "班级",
+                    subtitle = preferences.className,
+                    onClick = { showClassDialog = true }
+                )
+            }
+
+            item {
+                SettingItem(
+                    icon = Icons.Default.Badge,
+                    title = "当前角色",
+                    subtitle = when(preferences.role) {
+                        UserRole.Student -> "同学"
+                        UserRole.Teacher -> "老师"
+                    },
+                    onClick = { showRoleDialog = true }
                 )
             }
 
@@ -131,6 +157,93 @@ fun SettingsScreen(
             onDismiss = { showThemeDialog = false }
         )
     }
+
+    if (showClassDialog) {
+        ClassEditDialog(
+            initialClass = preferences.className,
+            onConfirm = {
+                onClassNameChange(it)
+                showClassDialog = false
+            },
+            onDismiss = { showClassDialog = false }
+        )
+    }
+
+    if (showRoleDialog) {
+        RoleSelectionDialog(
+            currentRole = preferences.role,
+            onSelect = {
+                onRoleChange(it)
+                showRoleDialog = false
+            },
+            onDismiss = { showRoleDialog = false }
+        )
+    }
+}
+
+@Composable
+fun RoleSelectionDialog(
+    currentRole: UserRole,
+    onSelect: (UserRole) -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("选择当前角色") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                UserRole.entries.forEach { role ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onSelect(role) }
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = role == currentRole, onClick = null)
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = when(role) {
+                                UserRole.Student -> "同学"
+                                UserRole.Teacher -> "老师"
+                            }
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text("关闭", color = SageGreen) }
+        }
+    )
+}
+
+@Composable
+fun ClassEditDialog(
+    initialClass: String,
+    onConfirm: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var text by remember { mutableStateOf(initialClass) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("修改班级") },
+        text = {
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = { onConfirm(text) }) { Text("确认", color = SageGreen) }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("取消", color = Color.Gray) }
+        }
+    )
 }
 
 @Composable
