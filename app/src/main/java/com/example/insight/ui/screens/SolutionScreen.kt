@@ -36,7 +36,7 @@ fun SolutionScreen(
     val scrollState = rememberLazyListState()
     var isOcrVisible by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier.fillMaxSize().background(InkBlue)) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.primary)) {
         // 1. Background Layer (Blurred context)
         Box(modifier = Modifier.fillMaxSize().blur(20.dp).alpha(0.4f).background(Color.Black))
 
@@ -47,7 +47,7 @@ fun SolutionScreen(
                 .statusBarsPadding()
                 .padding(top = 20.dp),
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-            color = Color.White
+            color = MaterialTheme.colorScheme.surface
         ) {
             LazyColumn(
                 state = scrollState,
@@ -64,7 +64,7 @@ fun SolutionScreen(
                             modifier = Modifier
                                 .size(40.dp, 4.dp)
                                 .clip(CircleShape)
-                                .background(Color.LightGray.copy(alpha = 0.5f))
+                                .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
                         )
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
@@ -72,16 +72,16 @@ fun SolutionScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             IconButton(onClick = onBack) {
-                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = DarkText)
+                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
                             }
                             Text(
                                 "深度解析",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
-                                color = DarkText
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             IconButton(onClick = { /* Share */ }) {
-                                Icon(imageVector = Icons.Outlined.Share, contentDescription = "Share", tint = DarkText)
+                                Icon(imageVector = Icons.Outlined.Share, contentDescription = "Share", tint = MaterialTheme.colorScheme.onSurface)
                             }
                         }
                     }

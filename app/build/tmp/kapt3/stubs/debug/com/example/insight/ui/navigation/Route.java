@@ -1,6 +1,8 @@
 package com.example.insight.ui.navigation;
 
-import androidx.compose.runtime.*;
+import androidx.compose.runtime.Composable;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.ScreenState;
 

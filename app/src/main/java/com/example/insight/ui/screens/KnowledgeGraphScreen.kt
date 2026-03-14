@@ -19,12 +19,14 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.insight.ui.state.UserPreferences
+import com.example.insight.ui.state.UserRole
 import com.example.insight.ui.theme.*
 import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
-fun KnowledgeGraphScreen() {
+fun KnowledgeGraphScreen(preferences: UserPreferences) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +40,10 @@ fun KnowledgeGraphScreen() {
             color = MaterialTheme.colorScheme.onBackground
         )
         Text(
-            "Hi 同学 👋，本周已攻克 24 道易错题",
+            if (preferences.role == UserRole.Student) 
+                "Hi ${preferences.username} 同学 👋，本周已攻克 24 道易错题"
+            else 
+                "Hi ${preferences.username} 老师 🎓，本周班级平均准确率提升 12%",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
         )
@@ -112,18 +117,17 @@ fun KnowledgeGraphScreen() {
                         onClick = { /* Action */ },
                         modifier = Modifier.fillMaxWidth().height(56.dp),
                         shape = RoundedCornerShape(16.dp),
-                        border = BorderStroke(1.dp, InkBlue.copy(alpha = 0.1f))
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("生成针对【定语从句】的 10 道巩固特训", color = InkBlue)
-                            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = InkBlue)
+                            Text("生成针对【定语从句】的 10 道巩固特训", color = MaterialTheme.colorScheme.primary)
+                            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         }
-                    }
-                }
+                    }                }
             }
         }
     }
@@ -133,7 +137,7 @@ fun KnowledgeGraphScreen() {
 fun DashboardCard(title: String, content: @Composable () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(24.dp)
     ) {
@@ -157,7 +161,7 @@ fun ErrorFactorRow(label: String, percentage: Float, color: Color) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(label, style = MaterialTheme.typography.bodySmall, color = DarkText)
+            Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface)
             Text("${(percentage * 100).toInt()}%", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -229,7 +233,7 @@ fun RadarChart(
         )
 
         // 3. Labels
-        labels.forEachIndexed { j, _ ->
+        labels.forEach { _ ->
             // val angle = j * angleStep - Math.PI.toFloat() / 2
             // val _x = center.x + (radius + 25.dp.toPx()) * cos(angle)
             // val _y = center.y + (radius + 20.dp.toPx()) * sin(angle)

@@ -68,10 +68,10 @@ enum class InsightTab(
 
 @Composable
 fun MainScreen(
+    viewModel: InsightViewModel,
     onNavigateToScanner: () -> Unit,
     onNavigateToSettings: () -> Unit
 ) {
-    val viewModel: InsightViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
 
@@ -123,9 +123,9 @@ fun MainScreen(
                         label = "tab_transition"
                     ) { targetTab ->
                         when (targetTab) {
-                            InsightTab.Home -> HomeTab()
-                            InsightTab.Map -> MapTab()
-                            InsightTab.Analysis -> KnowledgeGraphScreen()
+                            InsightTab.Home -> HomeTab(preferences)
+                            InsightTab.Map -> MapTab(preferences)
+                            InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
                                 onNavigateToSettings = onNavigateToSettings
@@ -307,13 +307,22 @@ fun BoxScope.TabIconFluid(
 // --- Content Tabs (Retained for Integrity) ---
 
 @Composable
-fun HomeTab() {
+fun HomeTab(preferences: UserPreferences) {
     val primaryColor = MaterialTheme.colorScheme.primary
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             Column(modifier = Modifier.padding(vertical = 12.dp)) {
-                Text("早上好，同学 📚", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-                Text("今天也要保持思考哦。", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f))
+                Text(
+                    text = if (preferences.role == UserRole.Student) "早上好，${preferences.username} 同学 📚" else "您好，${preferences.username} 老师 🎓",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Text(
+                    text = if (preferences.role == UserRole.Student) "今天也要保持思考哦。" else "准备好开始今天的教学了吗？",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                )
             }
         }
         item {
@@ -327,7 +336,7 @@ fun HomeTab() {
         }
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text("最近扫描", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text(if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 TextButton(onClick = { }) { Text("全部", color = primaryColor, style = MaterialTheme.typography.labelMedium) }
             }
         }
@@ -342,7 +351,7 @@ fun HistoryCard(index: Int) {
     val primaryColor = MaterialTheme.colorScheme.primary
     Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.size(80.dp).clip(RoundedCornerShape(12.dp)).background(SoftOatmeal), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.size(80.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
                 Icon(Icons.Outlined.Description, null, tint = primaryColor.copy(alpha = 0.5f))
             }
             Spacer(modifier = Modifier.width(16.dp))
@@ -359,11 +368,15 @@ fun HistoryCard(index: Int) {
 }
 
 @Composable
-fun MapTab() {
+fun MapTab(preferences: UserPreferences) {
     val primaryColor = MaterialTheme.colorScheme.primary
     Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
         Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-        Text("系统化掌握 12 个核心考点领域", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+        Text(
+            text = if (preferences.role == UserRole.Student) "系统化掌握 12 个核心考点领域" else "管理班级 12 个核心考点掌握进度",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+        )
         Spacer(modifier = Modifier.height(20.dp))
         val domains = listOf("时态语态", "从句结构", "词汇辨析", "阅读技巧", "写作模板", "听力精听")
         LazyVerticalGrid(columns = GridCells.Fixed(2), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -389,7 +402,7 @@ fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier.size(64.dp).background(SoftOatmeal, CircleShape), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.size(64.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape), contentAlignment = Alignment.Center) {
                     Icon(imageVector = when(preferences.role) {
                         UserRole.Student -> Icons.Default.Person
                         UserRole.Teacher -> Icons.Default.CastForEducation

@@ -26,9 +26,8 @@ sealed class Route(val path: String) {
 }
 
 @Composable
-fun InsightNavHost() {
+fun InsightNavHost(viewModel: InsightViewModel) {
     val navController = rememberNavController()
-    val viewModel: InsightViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
     NavHost(
@@ -37,6 +36,7 @@ fun InsightNavHost() {
     ) {
         composable(Route.Main.path) {
             MainScreen(
+                viewModel = viewModel,
                 onNavigateToScanner = {
                     navController.navigate(Route.Scanner.path)
                 },
@@ -74,7 +74,7 @@ fun InsightNavHost() {
         }
 
         composable(Route.Starfield.path) {
-            KnowledgeGraphScreen()
+            KnowledgeGraphScreen(uiState.preferences)
         }
 
         composable(Route.Settings.path) {
