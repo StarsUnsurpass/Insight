@@ -45,8 +45,12 @@ android {
     }
 
     tasks.withType<JavaCompile>().configureEach {
-        options.compilerArgs.add("-Xlint:none")
-        options.compilerArgs.add("-nowarn")
+        options.compilerArgs.apply {
+            add("-Xlint:none")
+            add("-nowarn")
+            add("-Xlint:-deprecation")
+            add("-Xlint:-unchecked")
+        }
     }
     buildFeatures {
         compose = true

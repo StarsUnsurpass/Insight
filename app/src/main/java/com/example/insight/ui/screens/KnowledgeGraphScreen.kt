@@ -208,9 +208,6 @@ fun RadarChartAnimated(data: List<Float>, labels: List<String>) {
             // 3. Draw Nodes and Labels
             for (j in 0 until numPoints) {
                 val angle = j * angleStep - Math.PI.toFloat() / 2
-                val r = radius + 25.dp.toPx()
-                val x = center.x + r * cos(angle)
-                val y = center.y * 1.05f + r * sin(angle) // Adjust Y for label
                 
                 // Draw small dots at data points
                 val dataX = center.x + radius * data[j] * animationProgress.value * cos(angle)
