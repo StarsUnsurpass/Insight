@@ -1,28 +1,33 @@
-# Changelog
+# 更新日志
 
-All notable changes to this project will be documented in this file.
+## [1.2.0] - 2026-03-14
 
-## [Unreleased] - 2026-03-13
+### 新增功能
+- **沉浸式知识图谱星空引擎**：
+    - 实现基于 Canvas 的无限漫游画布，支持双指缩放与单指平移。
+    - 引入贝塞尔流光连线与动态节点渲染（掌握度颜色反馈）。
+    - 增加节点下钻交互，点击星辰即可平滑弹出考点解析面板。
+- **AI 导师学情诊断报告**：
+    - **打字机特效寄语**：模拟 AI 导师实时诊断，提供富有温度的教研建议。
+    - **五维能力雷达图**：具备生长动画的认知维度评估。
+    - **学习强度热力图**：GitHub 风格的 30 天学习负荷可视化。
+    - **错因深度剖析**：可视化展示概念盲区、审题偏差等归因百分比。
+- **工业级 PDF 导出系统**：
+    - **所见即所得预览**：提供 A4 比例的实时预览，支持标题修改与主题色动态切换。
+    - **混合渲染引擎**：采用 HTML 模板与隐藏 WebView 技术，解决分页截断难题，确保 PDF 文本可复制且排版专业。
+    - **一键分享**：集成 FileProvider 权限框架，支持报告直发微信、钉钉。
+- **首页搜索功能增强**：
+    - 增加清除按钮、语音搜索占位、软键盘搜索联动及动态结果展示。
 
-### Added
-- **Theme Engine**: Comprehensive dynamic skinning with 6 preset styles (Ocean, Sunset, Sakura, etc.).
-- **Z-Axis Zoom**: High-end spatial page transition for tab switching with parallax scaling.
-- **Settings System**: Fully functional preference screen for username, theme, and haptic feedback.
-- **Physical Dock Indicator**: Independent edge spring model for realistic "Squash & Stretch" liquid movement.
-- **MainScreen Integration**: Centralized root container managing navigation state and fluid Dock behavior.
+### 优化与修复
+- **全局状态同步**：重构 ViewModel 作用域，确保设置信息在全页面实时同步且本地持久化。
+- **完美适配深色模式**：彻底移除所有页面的硬编码颜色，修复深色模式下“黑色字体”看不清的问题。
+- **编译环境优化**：通过配置 JavaCompile 选项彻底压制 Hilt 生成代码的过时警告与提示。
+- **架构重构**：解决 DashboardCard 命名冲突，规范化 Type.kt 字体系统。
 
-### Changed
-- **Dock Refinement**: Precision pixel-perfect alignment using geometry center logic.
-- **Dock Collapse**: Extreme center collapse to 72dp with a physical size-locked camera pivot.
-- **Visual Standardization**: Unified primary color tokens across all screens for responsive theme support.
-- **Transition Choreography**: Optimized enter/exit scales (85% to 115%) for natural spatial flow.
+---
 
-### Fixed
-- Eliminated all Kapt unrecognized option warnings via compiler argument adjustments.
-- Resolved "initial sink" animation bug in MainScreen by introducing initialization gating.
-- Fixed pixel misalignment between icons and background indicators in the Dock.
-- Suppressed `statusBarColor` and `LinearProgressIndicator` API deprecation warnings.
-- Corrected navigation return paths to ensure `Settings` always goes back to `Profile`.
-
-### Security
-- Verified no sensitive keys or credentials in updated UI components.
+## [1.1.0] - 2026-03-13
+- 实现动态 Dock 导航栏与 Gooey 弹性动效。
+- 集成 CameraX 与 ML Kit 基础扫题逻辑。
+- 建立初中英语核心语法知识图谱基础模型。

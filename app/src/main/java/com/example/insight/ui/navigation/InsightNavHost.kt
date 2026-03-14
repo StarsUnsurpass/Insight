@@ -12,6 +12,7 @@ import androidx.camera.core.ImageProxy
 import com.example.insight.camera.CameraCaptureScreen
 import com.example.insight.ui.screens.KnowledgeGraphScreen
 import com.example.insight.ui.screens.MainScreen
+import com.example.insight.ui.screens.ReportExportScreen
 import com.example.insight.ui.screens.SettingsScreen
 import com.example.insight.ui.screens.SolutionScreen
 import com.example.insight.ui.state.InsightViewModel
@@ -23,6 +24,7 @@ sealed class Route(val path: String) {
     object Solution : Route("solution")
     object Starfield : Route("starfield")
     object Settings : Route("settings")
+    object Export : Route("export")
 }
 
 @Composable
@@ -42,6 +44,9 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToSettings = {
                     navController.navigate(Route.Settings.path)
+                },
+                onNavigateToExport = {
+                    navController.navigate(Route.Export.path)
                 }
             )
         }
@@ -89,6 +94,13 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onDarkModeToggle = { viewModel.updateDarkMode(it) },
                 onThemeStyleChange = { viewModel.updateThemeStyle(it) },
                 onHapticToggle = { viewModel.updateHapticFeedback(it) }
+            )
+        }
+
+        composable(Route.Export.path) {
+            ReportExportScreen(
+                preferences = uiState.preferences,
+                onBack = { navController.popBackStack() }
             )
         }
     }

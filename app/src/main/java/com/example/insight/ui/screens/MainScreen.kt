@@ -78,7 +78,8 @@ enum class InsightTab(
 fun MainScreen(
     viewModel: InsightViewModel,
     onNavigateToScanner: () -> Unit,
-    onNavigateToSettings: () -> Unit
+    onNavigateToSettings: () -> Unit,
+    onNavigateToExport: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -134,7 +135,8 @@ fun MainScreen(
                             InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
-                                onNavigateToSettings = onNavigateToSettings
+                                onNavigateToSettings = onNavigateToSettings,
+                                onNavigateToExport = onNavigateToExport
                             )
                         }
                     }
@@ -590,11 +592,12 @@ fun MapTab(preferences: UserPreferences) {
 }
 
 @Composable
-fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
+fun ProfileTab(
+    preferences: UserPreferences, 
+    onNavigateToSettings: () -> Unit,
+    onNavigateToExport: () -> Unit
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    val scope = rememberCoroutineScope()
-    var isExporting by remember { mutableStateOf(false) }
-    val context = LocalContext.current
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
@@ -635,20 +638,13 @@ fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
             }
         }
         item {
-            DashboardCard(title = "学习设置") {
+            ProfileDashboardCard(title = "学习设置") {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
                     SettingRow(
                         icon = Icons.Default.PictureAsPdf, 
                         title = exportTitle,
-                        onClick = {
-                            isExporting = true
-                            scope.launch {
-                                delay(3000)
-                                isExporting = false
-                                Toast.makeText(context, "${exportTitle.substring(0, 4)}已保存至下载目录", Toast.LENGTH_LONG).show()
-                            }
-                        }
+                        onClick = onNavigateToExport
                     )
                     SettingRow(Icons.Default.CloudUpload, "数据同步")
                     SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
@@ -656,9 +652,53 @@ fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
             }
         }
     }
+}
 
-    if (isExporting) {
-        ExportProgressDialog(role = preferences.role)
+@Composable
+fun ProfileDashboardCard(title: String, content: @Composable () -> Unit) {
+    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
+        Text(
+            title,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f),
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surface,
+            shape = RoundedCornerShape(28.dp),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+        ) {
+            Box(modifier = Modifier.padding(24.dp)) {
+                content()
+            }
+        }
+    }
+}
+
+@Composable
+fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    Card(modifier = modifier, shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.1f))) {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Text(label, style = MaterialTheme.typography.labelSmall, color = primaryColor); Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
+        }
+    }
+}
+
+@Composable
+fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(enabled = onClick != null) { onClick?.invoke() }
+            .padding(vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+        Spacer(modifier = Modifier.width(16.dp)); Text(title, style = MaterialTheme.typography.bodyMedium); Spacer(modifier = Modifier.weight(1f))
+        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
     }
 }
 
@@ -723,30 +763,5 @@ fun ExportProgressDialog(role: UserRole) {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    Card(modifier = modifier, shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.1f))) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = primaryColor); Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
-        }
-    }
-}
-
-@Composable
-fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(enabled = onClick != null) { onClick?.invoke() }
-            .padding(vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
-        Spacer(modifier = Modifier.width(16.dp)); Text(title, style = MaterialTheme.typography.bodyMedium); Spacer(modifier = Modifier.weight(1f))
-        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
     }
 }

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-29:12
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
 MERGED from [com.patrykandpatrick.vico:compose-m3:1.14.0] E:\DevTools\gradle-8.6\caches\transforms-3\6c0dd0f6d3b84c393fed112b28ca42d1\transformed\jetified-compose-m3-1.14.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.patrykandpatrick.vico:compose:1.14.0] E:\DevTools\gradle-8.6\caches\transforms-3\9806d0fec9f71a9340081092ed24f324\transformed\jetified-compose-1.14.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-video:1.3.1] E:\DevTools\gradle-8.6\caches\transforms-3\4b14ca124db461fd336cebb39f255440\transformed\jetified-camera-video-1.3.1\AndroidManifest.xml:2:1-7:12
@@ -124,8 +124,8 @@ ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:
 	android:name
 		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:19-67
 application
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-27:19
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-27:19
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-37:19
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-37:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\transforms-3\d88387e7186e89339cfa23f10736047b\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\transforms-3\d88387e7186e89339cfa23f10736047b\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-core:1.3.1] E:\DevTools\gradle-8.6\caches\transforms-3\67efc12efea1d2f1d350a50e340ec21d\transformed\jetified-camera-core-1.3.1\AndroidManifest.xml:23:5-34:19
@@ -202,6 +202,22 @@ category#android.intent.category.LAUNCHER
 ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
 		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:27-74
+provider#androidx.core.content.FileProvider
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:28:9-36:20
+	android:grantUriPermissions
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:32:13-47
+	android:authorities
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:30:13-67
+	android:exported
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:29:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:33:13-35:54
+	android:resource
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:35:17-51
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:34:17-67
 uses-sdk
 INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml

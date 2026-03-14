@@ -15,6 +15,18 @@ enum class UserRole {
     Student, Teacher
 }
 
+enum class DetailLevel {
+    MINIMAL, STANDARD, DETAILED
+}
+
+data class ReportConfig(
+    val reportTitle: String = "学情分析周报",
+    val themeColor: Int = 0xFF8BA18E.toInt(), // SageGreen as default
+    val includeRadarChart: Boolean = true,
+    val includeStudentList: Boolean = true,
+    val detailLevel: DetailLevel = DetailLevel.STANDARD
+)
+
 data class UserPreferences(
     val username: String = "用户",
     val className: String = "一年级一班",
