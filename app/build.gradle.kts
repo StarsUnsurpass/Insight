@@ -81,11 +81,11 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons.extended)
-    
+
     // Design
     implementation(libs.vico.compose)
     implementation(libs.vico.compose.m3)
-    
+
     // Net
     implementation(libs.retrofit)
     implementation(libs.okhttp.sse)
