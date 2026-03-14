@@ -20,12 +20,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.insight.ui.state.ReportConfig
+import com.example.insight.ui.state.ReportFont
+import com.example.insight.ui.state.ChartStyle
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.util.PdfExportHelper
 
@@ -68,7 +71,7 @@ fun ReportExportScreen(
                 .padding(padding)
                 .background(Color.LightGray.copy(alpha = 0.2f))
         ) {
-            // 1. WYSIWYG Previewer (A4 Ratio)
+            // 1. WYSIWYG Previewer
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -88,57 +91,78 @@ fun ReportExportScreen(
                 }
             }
 
-            // 2. Controller Panel
+            // 2. Advanced Controller Panel
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
                 color = MaterialTheme.colorScheme.surface,
                 tonalElevation = 8.dp
             ) {
-                Column(
+                LazyColumn(
                     modifier = Modifier.padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
-                    Text("导出设置", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                    item { Text("导出个性化设置", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold) }
                     
-                    // Title Editor
-                    OutlinedTextField(
-                        value = config.reportTitle,
-                        onValueChange = { config = config.copy(reportTitle = it) },
-                        label = { Text("报告标题") },
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
-                    )
+                    item {
+                        OutlinedTextField(
+                            value = config.reportTitle,
+                            onValueChange = { config = config.copy(reportTitle = it) },
+                            label = { Text("报告标题") },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                    }
 
-                    // Color Selector
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("主题色彩", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-                        val colors = listOf(Color(0xFF8BA18E), Color(0xFF2C3E50), Color(0xFFE57373), Color(0xFF64B5F6))
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            colors.forEach { color ->
-                                Box(
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                        .clip(CircleShape)
-                                        .background(color)
-                                        .border(
-                                            width = if (config.themeColor == color.toArgb()) 2.dp else 0.dp,
-                                            color = MaterialTheme.colorScheme.onSurface,
-                                            shape = CircleShape
-                                        )
-                                        .clickable { config = config.copy(themeColor = color.toArgb()) }
-                                )
+                    item {
+                        StyleSelector(
+                            label = "字体风格",
+                            options = listOf("无衬线" to ReportFont.SAN_SERIF, "衬线" to ReportFont.SERIF, "等宽" to ReportFont.MONOSPACE),
+                            selected = config.fontStyle,
+                            onSelect = { config = config.copy(fontStyle = it) }
+                        )
+                    }
+
+                    item {
+                        StyleSelector(
+                            label = "图表类型",
+                            options = listOf("雷达图" to ChartStyle.RADAR, "柱状图" to ChartStyle.BAR, "饼图" to ChartStyle.PIE),
+                            selected = config.chartStyle,
+                            onSelect = { config = config.copy(chartStyle = it) }
+                        )
+                    }
+
+                    item {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("主题色彩", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                            val colors = listOf(Color(0xFF8BA18E), Color(0xFF2C3E50), Color(0xFFE57373), Color(0xFF64B5F6))
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                colors.forEach { color ->
+                                    Box(
+                                        modifier = Modifier
+                                            .size(32.dp)
+                                            .clip(CircleShape)
+                                            .background(color)
+                                            .border(
+                                                width = if (config.themeColor == color.toArgb()) 2.dp else 0.dp,
+                                                color = MaterialTheme.colorScheme.onSurface,
+                                                shape = CircleShape
+                                            )
+                                            .clickable { config = config.copy(themeColor = color.toArgb()) }
+                                    )
+                                }
                             }
                         }
                     }
 
-                    // Toggles
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("包含成绩单", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-                        Switch(
-                            checked = config.includeStudentList,
-                            onCheckedChange = { config = config.copy(includeStudentList = it) }
-                        )
+                    item {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("包含成绩单", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                            Switch(
+                                checked = config.includeStudentList,
+                                onCheckedChange = { config = config.copy(includeStudentList = it) }
+                            )
+                        }
                     }
                 }
             }
@@ -151,10 +175,37 @@ fun ReportExportScreen(
 }
 
 @Composable
+fun <T> StyleSelector(
+    label: String,
+    options: List<Pair<String, T>>,
+    selected: T,
+    onSelect: (T) -> Unit
+) {
+    Column {
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+        Spacer(Modifier.height(8.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            options.forEach { (name, value) ->
+                FilterChip(
+                    selected = selected == value,
+                    onClick = { onSelect(value) },
+                    label = { Text(name) }
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun ReportA4Preview(config: ReportConfig, preferences: UserPreferences) {
     val themeColor = Color(config.themeColor)
+    val fontFamily = when(config.fontStyle) {
+        ReportFont.SAN_SERIF -> FontFamily.SansSerif
+        ReportFont.SERIF -> FontFamily.Serif
+        ReportFont.MONOSPACE -> FontFamily.Monospace
+    }
+
     Column(modifier = Modifier.padding(20.dp)) {
-        // Header
         Box(modifier = Modifier.fillMaxWidth().height(2.dp).background(themeColor))
         Spacer(modifier = Modifier.height(12.dp))
         Text(
@@ -162,6 +213,7 @@ fun ReportA4Preview(config: ReportConfig, preferences: UserPreferences) {
             style = MaterialTheme.typography.titleLarge,
             color = themeColor,
             fontWeight = FontWeight.Bold,
+            fontFamily = fontFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
@@ -175,26 +227,36 @@ fun ReportA4Preview(config: ReportConfig, preferences: UserPreferences) {
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        // Mock Section
+        Text("总体表现评估", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = themeColor, fontFamily = fontFamily)
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        // Mock Chart Illustration
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(4.dp, 16.dp) // Section indicator
-                .background(themeColor.copy(alpha = 0.1f), RoundedCornerShape(2.dp))
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        Text("总体表现评估", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = themeColor)
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        Box(modifier = Modifier.fillMaxWidth().height(60.dp).background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp)))
+                .height(100.dp)
+                .background(themeColor.copy(alpha = 0.05f), RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = when(config.chartStyle) {
+                    ChartStyle.RADAR -> Icons.Default.Hub
+                    ChartStyle.BAR -> Icons.Default.BarChart
+                    ChartStyle.PIE -> Icons.Default.PieChart
+                },
+                contentDescription = null,
+                tint = themeColor.copy(alpha = 0.4f),
+                modifier = Modifier.size(48.dp)
+            )
+        }
         
         if (config.includeStudentList) {
             Spacer(modifier = Modifier.height(24.dp))
-            Text("学生成绩单", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = themeColor)
+            Text("学生成绩单", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = themeColor, fontFamily = fontFamily)
             Spacer(modifier = Modifier.height(8.dp))
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 repeat(3) {
-                    Box(modifier = Modifier.fillMaxWidth().height(20.dp).background(Color(0xFFF5F5F5)))
+                    Box(modifier = Modifier.fillMaxWidth().height(16.dp).background(Color(0xFFF5F5F5)))
                 }
             }
         }

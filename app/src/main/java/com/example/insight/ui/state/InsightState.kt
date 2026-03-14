@@ -19,9 +19,19 @@ enum class DetailLevel {
     MINIMAL, STANDARD, DETAILED
 }
 
+enum class ReportFont {
+    SAN_SERIF, SERIF, MONOSPACE
+}
+
+enum class ChartStyle {
+    RADAR, BAR, PIE
+}
+
 data class ReportConfig(
     val reportTitle: String = "学情分析周报",
-    val themeColor: Int = 0xFF8BA18E.toInt(), // SageGreen as default
+    val themeColor: Int = 0xFF8BA18E.toInt(),
+    val fontStyle: ReportFont = ReportFont.SAN_SERIF,
+    val chartStyle: ChartStyle = ChartStyle.RADAR,
     val includeRadarChart: Boolean = true,
     val includeStudentList: Boolean = true,
     val detailLevel: DetailLevel = DetailLevel.STANDARD
