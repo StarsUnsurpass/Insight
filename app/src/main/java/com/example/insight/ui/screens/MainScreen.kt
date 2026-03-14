@@ -422,16 +422,16 @@ fun HomeTab(preferences: UserPreferences) {
                 )
             }
             items(3) { index ->
-                SearchResultItem(_query = searchQuery, index = index)
+                SearchResultItem(index = index)
             }
         }
     }
 }
 
 @Composable
-fun SearchResultItem(_query: String, index: Int) {
+fun SearchResultItem(index: Int) {
     val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
-    // Use the query to filter or highlight in a real scenario
+    // In a real scenario, we would use the query to filter/highlight
     val resultText = results[index % results.size]
     
     Card(

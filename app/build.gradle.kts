@@ -8,6 +8,9 @@ plugins {
 kapt {
     correctErrorTypes = true
     showProcessorStats = false
+    javacOptions {
+        option("-Xlint:-processing")
+    }
 }
 
 android {
@@ -98,6 +101,12 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    // Storage
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
 
     // Navigation
     implementation(libs.androidx.navigation.compose)

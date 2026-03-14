@@ -21,6 +21,7 @@ coroutines = "1.8.0"
 
 # Storage
 room = "2.6.1"
+datastore = "1.0.0"
 hilt = "2.50"
 hiltNavigationCompose = "1.1.0"
 navigationCompose = "2.7.7"
@@ -52,6 +53,12 @@ vico-compose-m3 = { group = "com.patrykandpatrick.vico", name = "compose-m3", ve
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp-sse = { group = "com.squareup.okhttp3", name = "okhttp-sse", version.ref = "okhttp" }
+
+# Storage
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 # Hilt & Navigation
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }

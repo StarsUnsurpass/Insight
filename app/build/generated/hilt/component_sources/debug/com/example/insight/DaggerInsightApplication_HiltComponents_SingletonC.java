@@ -7,6 +7,17 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.example.insight.data.datastore.PreferenceManager;
+import com.example.insight.data.local.AppDatabase;
+import com.example.insight.data.local.dao.DiagnosticDao;
+import com.example.insight.data.local.dao.KnowledgeDao;
+import com.example.insight.data.local.dao.ScanDao;
+import com.example.insight.data.repository.InsightRepository;
+import com.example.insight.di.AppModule_ProvideAppDatabaseFactory;
+import com.example.insight.di.AppModule_ProvideDiagnosticDaoFactory;
+import com.example.insight.di.AppModule_ProvideKnowledgeDaoFactory;
+import com.example.insight.di.AppModule_ProvidePreferenceManagerFactory;
+import com.example.insight.di.AppModule_ProvideScanDaoFactory;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.InsightViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -349,7 +360,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectMainActivity(MainActivity arg0) {
+    public void injectMainActivity(MainActivity mainActivity) {
     }
 
     @Override
@@ -435,7 +446,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.example.insight.ui.state.InsightViewModel 
-          return (T) new InsightViewModel(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));
+          return (T) new InsightViewModel(singletonCImpl.insightRepositoryProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -517,9 +528,35 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     private final SingletonCImpl singletonCImpl = this;
 
+    private Provider<PreferenceManager> providePreferenceManagerProvider;
+
+    private Provider<AppDatabase> provideAppDatabaseProvider;
+
+    private Provider<InsightRepository> insightRepositoryProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
+      initialize(applicationContextModuleParam);
 
+    }
+
+    private ScanDao scanDao() {
+      return AppModule_ProvideScanDaoFactory.provideScanDao(provideAppDatabaseProvider.get());
+    }
+
+    private KnowledgeDao knowledgeDao() {
+      return AppModule_ProvideKnowledgeDaoFactory.provideKnowledgeDao(provideAppDatabaseProvider.get());
+    }
+
+    private DiagnosticDao diagnosticDao() {
+      return AppModule_ProvideDiagnosticDaoFactory.provideDiagnosticDao(provideAppDatabaseProvider.get());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize(final ApplicationContextModule applicationContextModuleParam) {
+      this.providePreferenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<PreferenceManager>(singletonCImpl, 1));
+      this.provideAppDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<AppDatabase>(singletonCImpl, 2));
+      this.insightRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<InsightRepository>(singletonCImpl, 0));
     }
 
     @Override
@@ -539,6 +576,34 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
     @Override
     public ServiceComponentBuilder serviceComponentBuilder() {
       return new ServiceCBuilder(singletonCImpl);
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final SingletonCImpl singletonCImpl;
+
+      private final int id;
+
+      SwitchingProvider(SingletonCImpl singletonCImpl, int id) {
+        this.singletonCImpl = singletonCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // com.example.insight.data.repository.InsightRepository 
+          return (T) new InsightRepository(singletonCImpl.providePreferenceManagerProvider.get(), singletonCImpl.scanDao(), singletonCImpl.knowledgeDao(), singletonCImpl.diagnosticDao());
+
+          case 1: // com.example.insight.data.datastore.PreferenceManager 
+          return (T) AppModule_ProvidePreferenceManagerFactory.providePreferenceManager(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));
+
+          case 2: // com.example.insight.data.local.AppDatabase 
+          return (T) AppModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));
+
+          default: throw new AssertionError(id);
+        }
+      }
     }
   }
 }
