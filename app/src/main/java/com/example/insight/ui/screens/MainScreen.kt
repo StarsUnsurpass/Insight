@@ -413,15 +413,18 @@ fun HomeTab(preferences: UserPreferences) {
                 )
             }
             items(3) { index ->
-                SearchResultItem(query = searchQuery, index = index)
+                SearchResultItem(_query = searchQuery, index = index)
             }
         }
     }
 }
 
 @Composable
-fun SearchResultItem(query: String, index: Int) {
+fun SearchResultItem(_query: String, index: Int) {
     val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
+    // Use the query to filter or highlight in a real scenario
+    val resultText = results[index % results.size]
+    
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -441,7 +444,7 @@ fun SearchResultItem(query: String, index: Int) {
             @Suppress("DEPRECATION")
             Spacer(modifier = Modifier.width(16.dp))
             Text(
-                text = results[index % results.size],
+                text = resultText,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )
