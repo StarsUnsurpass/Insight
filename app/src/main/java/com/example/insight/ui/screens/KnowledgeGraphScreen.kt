@@ -25,47 +25,32 @@ import kotlin.math.sin
 
 @Composable
 fun KnowledgeGraphScreen() {
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background
-    ) { padding ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp) // Exact same padding as MapTab
+    ) {
+        // Header: Highly consistent with MapTab
+        Text(
+            "学情诊断报告",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+        Text(
+            "Hi 同学 👋，本周已攻克 24 道易错题",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+        )
+        
+        Spacer(modifier = Modifier.height(20.dp)) // Same spacing as MapTab
+
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding),
-            contentPadding = PaddingValues(20.dp),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(20.dp)
+            // Content is already inset by the parent Column padding
         ) {
-            // 0. Title (added to match other tabs and move up)
-            item {
-                Column(modifier = Modifier.padding(vertical = 12.dp)) {
-                    Text(
-                        "学情诊断报告",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-            }
-
-            // 1. Greeting & Overview
-            item {
-                Column {
-                    Text(
-                        "Hi, 同学 👋",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = InkBlue
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        "本周已攻克 24 道易错题，语法基础的薄弱点正在减少。",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = DarkText.copy(alpha = 0.7f)
-                    )
-                }
-            }
-
-            // 2. Ability Radar Chart Card
+            // 1. Ability Radar Chart Card
             item {
                 DashboardCard(title = "五维能力评估") {
                     Box(
@@ -83,7 +68,7 @@ fun KnowledgeGraphScreen() {
                 }
             }
 
-            // 3. Error Attribution Card
+            // 2. Error Attribution Card
             item {
                 DashboardCard(title = "弱点归因分析") {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -113,7 +98,7 @@ fun KnowledgeGraphScreen() {
                 }
             }
 
-            // 4. Actionable Measures
+            // 3. Actionable Measures
             item {
                 Column {
                     Text(
