@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,24 +23,10 @@ import com.example.insight.ui.theme.*
 import kotlin.math.cos
 import kotlin.math.sin
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KnowledgeGraphScreen(
-    onClose: () -> Unit
-) {
+fun KnowledgeGraphScreen() {
     Scaffold(
-        containerColor = PaperWhite,
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("学情诊断报告", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold) },
-                navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(imageVector = Icons.Default.Close, contentDescription = "Close", tint = DarkText)
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = PaperWhite)
-            )
-        }
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -50,12 +35,24 @@ fun KnowledgeGraphScreen(
             contentPadding = PaddingValues(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
+            // 0. Title (added to match other tabs and move up)
+            item {
+                Column(modifier = Modifier.padding(vertical = 12.dp)) {
+                    Text(
+                        "学情诊断报告",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            }
+
             // 1. Greeting & Overview
             item {
                 Column {
                     Text(
                         "Hi, 同学 👋",
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = InkBlue
                     )
@@ -248,9 +245,9 @@ fun RadarChart(
 
         // 3. Labels
         labels.forEachIndexed { j, _ ->
-            val angle = j * angleStep - Math.PI.toFloat() / 2
-            val _x = center.x + (radius + 25.dp.toPx()) * cos(angle)
-            val _y = center.y + (radius + 20.dp.toPx()) * sin(angle)
+            // val angle = j * angleStep - Math.PI.toFloat() / 2
+            // val _x = center.x + (radius + 25.dp.toPx()) * cos(angle)
+            // val _y = center.y + (radius + 20.dp.toPx()) * sin(angle)
             
             // Note: In real implementation, we'd use nativeCanvas or a custom text drawer
             // For brevity, we focus on the geometry

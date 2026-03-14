@@ -122,7 +122,7 @@ fun MainScreen(
                         when (targetTab) {
                             InsightTab.Home -> HomeTab()
                             InsightTab.Map -> MapTab()
-                            InsightTab.Analysis -> KnowledgeGraphScreen(onClose = { /* Switch to Analysis Tab */ })
+                            InsightTab.Analysis -> KnowledgeGraphScreen()
                             InsightTab.Profile -> ProfileTab(
                                 username = preferences.username,
                                 onNavigateToSettings = onNavigateToSettings

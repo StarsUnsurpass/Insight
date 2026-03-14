@@ -68,11 +68,7 @@ fun InsightNavHost() {
         }
 
         composable(Route.Starfield.path) {
-            KnowledgeGraphScreen(
-                onClose = {
-                    navController.popBackStack()
-                }
-            )
+            KnowledgeGraphScreen()
         }
 
         composable(Route.Settings.path) {
