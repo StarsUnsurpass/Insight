@@ -1,6 +1,7 @@
 package com.example.insight.ui.screens;
 
 import android.os.Build;
+import android.widget.Toast;
 import androidx.compose.animation.*;
 import androidx.compose.animation.core.*;
 import androidx.compose.foundation.layout.*;
@@ -18,6 +19,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection;
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource;
 import androidx.compose.ui.text.font.FontWeight;
 import androidx.compose.ui.unit.Dp;
+import androidx.compose.ui.window.DialogProperties;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.UserPreferences;
 import com.example.insight.ui.state.UserRole;

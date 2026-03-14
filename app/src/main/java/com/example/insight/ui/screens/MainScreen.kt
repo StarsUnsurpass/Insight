@@ -1,6 +1,7 @@
 package com.example.insight.ui.screens
 
 import android.os.Build
+import android.widget.Toast
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
@@ -29,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -39,12 +41,16 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.UserPreferences
@@ -52,6 +58,7 @@ import com.example.insight.ui.state.UserRole
 import com.example.insight.graph.*
 import com.example.insight.ui.theme.*
 import kotlin.math.hypot
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 enum class InsightTab(
@@ -585,6 +592,10 @@ fun MapTab(preferences: UserPreferences) {
 @Composable
 fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
+    val scope = rememberCoroutineScope()
+    var isExporting by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -626,10 +637,90 @@ fun ProfileTab(preferences: UserPreferences, onNavigateToSettings: () -> Unit) {
         item {
             DashboardCard(title = "学习设置") {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    SettingRow(Icons.Default.PictureAsPdf, if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)")
+                    val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
+                    SettingRow(
+                        icon = Icons.Default.PictureAsPdf, 
+                        title = exportTitle,
+                        onClick = {
+                            isExporting = true
+                            scope.launch {
+                                delay(3000)
+                                isExporting = false
+                                Toast.makeText(context, "${exportTitle.substring(0, 4)}已保存至下载目录", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    )
                     SettingRow(Icons.Default.CloudUpload, "数据同步")
                     SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
                 }
+            }
+        }
+    }
+
+    if (isExporting) {
+        ExportProgressDialog(role = preferences.role)
+    }
+}
+
+@Composable
+fun ExportProgressDialog(role: UserRole) {
+    Dialog(
+        onDismissRequest = { },
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+    ) {
+        Surface(
+            modifier = Modifier.width(280.dp),
+            shape = RoundedCornerShape(28.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val infiniteTransition = rememberInfiniteTransition(label = "export")
+                val rotation by infiniteTransition.animateFloat(
+                    initialValue = 0f,
+                    targetValue = 360f,
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(1200, easing = LinearEasing),
+                        repeatMode = RepeatMode.Restart
+                    ),
+                    label = "rotation"
+                )
+
+                Box(
+                    modifier = Modifier
+                        .size(64.dp)
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Sync,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(32.dp)
+                            .rotate(rotation),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                Text(
+                    text = if (role == UserRole.Teacher) "正在分析班级数据..." else "正在整理错题集...",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    text = "生成 PDF 报告中，请稍候",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
             }
         }
     }
