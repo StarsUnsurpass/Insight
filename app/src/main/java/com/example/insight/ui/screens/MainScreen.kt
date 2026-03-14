@@ -49,6 +49,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.ui.state.UserRole
+import com.example.insight.graph.*
 import com.example.insight.ui.theme.*
 import kotlin.math.hypot
 import kotlinx.coroutines.launch
@@ -58,7 +59,7 @@ enum class InsightTab(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
     val index: Int,
-    val bias: Float // Unified bias: -2, -1, 1, 2 representing slots relative to center
+    val bias: Float
 ) {
     Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
     Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -1f),
@@ -93,7 +94,6 @@ fun MainScreen(
         }
     }
 
-    // --- High-Fidelity Physics ---
     val dockBounceY = remember { Animatable(0f) }
     LaunchedEffect(selectedTab) {
         if (isInitialized) {
@@ -109,7 +109,6 @@ fun MainScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
             Box(modifier = Modifier.fillMaxSize().nestedScroll(nestedScrollConnection)) {
-                // 1. Main Content with Z-Axis Zoom Transition
                 Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
                     AnimatedContent(
                         targetState = selectedTab,
@@ -190,7 +189,6 @@ fun GooeyDockContent(
     val slotWidth = currentDockWidth / 5
     
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        // 1. Background Liquid Surface
         Surface(
             modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(36.dp),
@@ -200,12 +198,9 @@ fun GooeyDockContent(
             border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
         ) {}
 
-        // 2. Liquid Elastic Indicator (Synchronized with Icons)
         if (currentDockWidth > 200.dp) {
             val indicatorSize = 52.dp
             val targetCenterX = slotWidth * selectedTab.bias
-            
-            // Separate spring engines for left/right to achieve stretching
             val leftEdge by animateDpAsState(
                 targetValue = targetCenterX - (indicatorSize / 2),
                 animationSpec = spring(dampingRatio = 0.8f, stiffness = 90f)
@@ -218,13 +213,12 @@ fun GooeyDockContent(
             Box(
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .offset(x = (leftEdge + rightEdge) / 2) // Precision centering
+                    .offset(x = (leftEdge + rightEdge) / 2)
                     .size(width = (rightEdge - leftEdge).coerceAtLeast(indicatorSize), height = indicatorSize)
                     .background(primaryColor.copy(alpha = 0.12f), CircleShape)
             )
         }
 
-        // 3. Icon Layer (Unified Positioning)
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             val alpha by animateFloatAsState(
                 targetValue = if (isVisible && currentDockWidth > 200.dp) 1f else 0f,
@@ -234,7 +228,6 @@ fun GooeyDockContent(
             TabIconFluid(InsightTab.Home, selectedTab, alpha, slotWidth, onTabSelected)
             TabIconFluid(InsightTab.Map, selectedTab, alpha, slotWidth, onTabSelected)
             
-            // Central Camera: FIXED SIZE, CENTERED
             Box(
                 modifier = Modifier
                     .align(Alignment.Center)
@@ -267,8 +260,6 @@ fun BoxScope.TabIconFluid(
     val haptic = LocalHapticFeedback.current
     val isSelected = selectedTab == tab
     val primaryColor = MaterialTheme.colorScheme.primary
-    
-    // Exact center alignment based on the same slotWidth used by indicator
     val xOffset = slotWidth * tab.bias
     
     if (alpha > 0.01f) {
@@ -303,8 +294,6 @@ fun BoxScope.TabIconFluid(
         }
     }
 }
-
-// --- Content Tabs (Retained for Integrity) ---
 
 @Composable
 fun HomeTab(preferences: UserPreferences) {
@@ -367,29 +356,107 @@ fun HistoryCard(index: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapTab(preferences: UserPreferences) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
-        Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-        Text(
-            text = if (preferences.role == UserRole.Student) "系统化掌握 12 个核心考点领域" else "管理班级 12 个核心考点掌握进度",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+    val sheetState = rememberModalBottomSheetState()
+    var selectedNode by remember { mutableStateOf<KnowledgeNode?>(null) }
+    var showSheet by remember { mutableStateOf(false) }
+
+    val mockGraphState = remember {
+        GraphState(
+            nodes = listOf(
+                KnowledgeNode("n1", "初中核心语法", 0.9f, 500f, 300f),
+                KnowledgeNode("n2", "时态体系", 0.6f, 300f, 600f),
+                KnowledgeNode("n3", "从句基础", 0.8f, 700f, 600f),
+                KnowledgeNode("n4", "一般过去时", 0.9f, 150f, 900f),
+                KnowledgeNode("n5", "现在完成时", 0.3f, 400f, 950f),
+                KnowledgeNode("n6", "定语从句", 0.2f, 850f, 900f)
+            ),
+            edges = listOf(
+                KnowledgeEdge("n1", "n2"),
+                KnowledgeEdge("n1", "n3"),
+                KnowledgeEdge("n2", "n4"),
+                KnowledgeEdge("n2", "n5"),
+                KnowledgeEdge("n3", "n6"),
+                KnowledgeEdge("n4", "n5")
+            )
         )
-        Spacer(modifier = Modifier.height(20.dp))
-        val domains = listOf("时态语态", "从句结构", "词汇辨析", "阅读技巧", "写作模板", "听力精听")
-        LazyVerticalGrid(columns = GridCells.Fixed(2), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            items(domains) { domain ->
-                Card(modifier = Modifier.height(140.dp), shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.AutoGraph, null, tint = primaryColor, modifier = Modifier.size(20.dp))
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        Text(domain, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                        LinearProgressIndicator(progress = { 0.6f }, modifier = Modifier.fillMaxWidth().height(4.dp).clip(CircleShape), color = primaryColor, trackColor = primaryColor.copy(alpha = 0.1f))
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        StarfieldComponent(
+            graphState = mockGraphState,
+            onNodeClick = { node ->
+                selectedNode = node
+                showSheet = true
+            },
+            modifier = Modifier.fillMaxSize()
+        )
+
+        Column(modifier = Modifier.padding(20.dp).align(Alignment.TopStart)) {
+            Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
+            Text(
+                text = if (preferences.role == UserRole.Student) "探索你的星系：攻克节点以点亮星辰" else "班级知识图谱全貌",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+            )
+        }
+    }
+
+    if (showSheet && selectedNode != null) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surface
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 16.dp)
+                    .padding(bottom = 32.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(
+                    text = "考点: ${selectedNode!!.title}",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    val statusColor = if (selectedNode!!.masteryLevel > 0.8f) Color(0xFF81C784) else if (selectedNode!!.masteryLevel < 0.4f) Color(0xFFE57373) else MaterialTheme.colorScheme.primary
+                    val statusText = if (selectedNode!!.masteryLevel > 0.8f) "已掌握" else if (selectedNode!!.masteryLevel < 0.4f) "待突破" else "学习中"
+                    
+                    Surface(color = statusColor.copy(alpha = 0.1f), shape = RoundedCornerShape(8.dp)) {
+                        Text(statusText, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = statusColor, style = MaterialTheme.typography.labelSmall)
                     }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text("掌握度: ${(selectedNode!!.masteryLevel * 100).toInt()}%", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                }
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+
+                if (selectedNode!!.masteryLevel < 0.4f) {
+                    Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFE57373).copy(alpha = 0.05f)), border = BorderStroke(1.dp, Color(0xFFE57373).copy(alpha = 0.2f))) {
+                        Row(modifier = Modifier.padding(16.dp)) {
+                            Icon(Icons.Default.Warning, contentDescription = null, tint = Color(0xFFE57373))
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text("易错陷阱分析", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color(0xFFE57373))
+                                Text("经常与一般过去时混淆，忽略了动作对现在的影响。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface)
+                            }
+                        }
+                    }
+                }
+
+                Button(
+                    onClick = { /* Navigate to related questions */ },
+                    modifier = Modifier.fillMaxWidth().height(56.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text("获取 3 道高频真题", fontWeight = FontWeight.Bold)
                 }
             }
         }
