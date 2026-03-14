@@ -193,7 +193,7 @@ fun RoleSelectionDialog(
         title = { Text("选择当前角色") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                UserRole.entries.forEach { role ->
+                listOf(UserRole.Teacher, UserRole.Student).forEach { role ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -242,7 +242,7 @@ fun ClassEditDialog(
             TextButton(onClick = { onConfirm(text) }) { Text("确认", color = SageGreen) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = Color.Gray) }
+            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) }
         }
     )
 }
@@ -311,7 +311,7 @@ fun NameEditDialog(
             TextButton(onClick = { onConfirm(text) }) { Text("确认", color = SageGreen) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = Color.Gray) }
+            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) }
         }
     )
 }

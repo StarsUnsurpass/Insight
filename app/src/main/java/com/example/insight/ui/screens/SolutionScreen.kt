@@ -35,8 +35,9 @@ fun SolutionScreen(
 ) {
     val scrollState = rememberLazyListState()
     var isOcrVisible by remember { mutableStateOf(false) }
+    val primaryColor = MaterialTheme.colorScheme.primary
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.primary)) {
+    Box(modifier = Modifier.fillMaxSize().background(primaryColor)) {
         // 1. Background Layer (Blurred context)
         Box(modifier = Modifier.fillMaxSize().blur(20.dp).alpha(0.4f).background(Color.Black))
 
@@ -95,8 +96,8 @@ fun SolutionScreen(
                                 .fillMaxWidth()
                                 .height(160.dp)
                                 .clip(RoundedCornerShape(16.dp))
-                                .background(SoftOatmeal)
-                                .border(1.dp, Color.LightGray.copy(alpha = 0.3f), RoundedCornerShape(16.dp))
+                                .background(MaterialTheme.colorScheme.surfaceVariant)
+                                .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f), RoundedCornerShape(16.dp))
                         ) {
                             if (!isOcrVisible) {
                                 // Placeholder for original image
@@ -110,7 +111,7 @@ fun SolutionScreen(
                                     text = "Which of the following best describes the author's attitude towards the new policy?",
                                     modifier = Modifier.padding(20.dp),
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = DarkText
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                             }
                             
@@ -118,10 +119,11 @@ fun SolutionScreen(
                             TextButton(
                                 onClick = { isOcrVisible = !isOcrVisible },
                                 modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
-                                colors = ButtonDefaults.textButtonColors(contentColor = InkBlue)
+                                colors = ButtonDefaults.textButtonColors(contentColor = primaryColor)
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(imageVector = if (isOcrVisible) Icons.Default.Image else Icons.Default.TextFields, contentDescription = null, modifier = Modifier.size(16.dp))
+                                    @Suppress("DEPRECATION")
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(if (isOcrVisible) "查看原图" else "查看文本", style = MaterialTheme.typography.labelSmall)
                                 }
@@ -134,20 +136,20 @@ fun SolutionScreen(
                 item {
                     Card(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
-                        colors = CardDefaults.cardColors(containerColor = InkBlue),
+                        colors = CardDefaults.cardColors(containerColor = primaryColor),
                         shape = RoundedCornerShape(20.dp)
                     ) {
                         Column(modifier = Modifier.padding(20.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, tint = SageGreen, modifier = Modifier.size(20.dp))
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text("标准答案 / Standard Answer", style = MaterialTheme.typography.labelMedium, color = Color.White.copy(alpha = 0.7f))
+                                Text("标准答案 / Standard Answer", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f))
                             }
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
                                 "Option C: The policy is viewed as a necessary but ambitious step.",
                                 style = MaterialTheme.typography.titleLarge,
-                                color = Color.White,
+                                color = MaterialTheme.colorScheme.onPrimary,
                                 fontWeight = FontWeight.Bold
                             )
                         }
@@ -165,15 +167,15 @@ fun SolutionScreen(
                         ) {
                             concepts.forEach { concept ->
                                 Surface(
-                                    color = SoftOatmeal,
+                                    color = MaterialTheme.colorScheme.surfaceVariant,
                                     shape = RoundedCornerShape(12.dp),
-                                    border = BorderStroke(1.dp, InkBlue.copy(alpha = 0.05f))
+                                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
                                 ) {
                                     Text(
                                         text = concept,
                                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                                         style = MaterialTheme.typography.labelMedium,
-                                        color = InkBlue
+                                        color = primaryColor
                                     )
                                 }
                             }
@@ -216,7 +218,7 @@ fun SolutionScreen(
                             items(3) { index ->
                                 Card(
                                     modifier = Modifier.width(240.dp),
-                                    colors = CardDefaults.cardColors(containerColor = SoftOatmeal),
+                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                                     shape = RoundedCornerShape(16.dp)
                                 ) {
                                     Column(modifier = Modifier.padding(16.dp)) {
@@ -224,13 +226,13 @@ fun SolutionScreen(
                                             if (index == 0) "复习：一般过去时" else "类似真题：2023 模拟 B 篇",
                                             style = MaterialTheme.typography.titleSmall,
                                             fontWeight = FontWeight.Bold,
-                                            color = InkBlue
+                                            color = primaryColor
                                         )
                                         Spacer(modifier = Modifier.height(8.dp))
                                         Text(
                                             "在掌握此考点前，建议先巩固基础概念。",
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = DarkText.copy(alpha = 0.7f)
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                                         )
                                         Spacer(modifier = Modifier.height(12.dp))
                                         TextButton(onClick = { /* Jump */ }, contentPadding = PaddingValues(0.dp)) {
@@ -252,7 +254,7 @@ fun SolutionScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 20.dp)
                             .height(56.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = InkBlue),
+                        colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
                         shape = RoundedCornerShape(16.dp)
                     ) {
                         Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(20.dp))
@@ -267,19 +269,20 @@ fun SolutionScreen(
 
 @Composable
 fun AnalysisStepCard(title: String, content: String, icon: ImageVector) {
+    val primaryColor = MaterialTheme.colorScheme.primary
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SoftOatmeal)
+            .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(16.dp)
     ) {
         Icon(imageVector = icon, contentDescription = null, tint = SageGreen, modifier = Modifier.size(24.dp))
         Spacer(modifier = Modifier.width(12.dp))
         Column {
-            Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = InkBlue)
+            Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = primaryColor)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(content, style = MaterialTheme.typography.bodyMedium, color = DarkText, lineHeight = 22.sp)
+            Text(content, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface, lineHeight = 22.sp)
         }
     }
 }

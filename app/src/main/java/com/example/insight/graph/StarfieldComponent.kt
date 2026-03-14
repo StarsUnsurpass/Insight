@@ -4,6 +4,7 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.geometry.*
@@ -12,10 +13,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
-import com.example.insight.ui.theme.InkBlue
 import com.example.insight.ui.theme.SageGreen
 import com.example.insight.ui.theme.HighlightYellow
-import com.example.insight.ui.theme.DarkText
 import com.example.insight.ui.theme.SoftShadow
 
 @OptIn(androidx.compose.ui.text.ExperimentalTextApi::class)
@@ -26,6 +25,10 @@ fun StarfieldComponent(
 ) {
     val textMeasurer = rememberTextMeasurer()
     
+    // Move theme color resolution OUTSIDE the Canvas lambda
+    val themePrimary = MaterialTheme.colorScheme.primary
+    val themeOnSurface = MaterialTheme.colorScheme.onSurface
+
     // Physics-ish state for nodes
     val nodeOffsets = remember { 
         mutableStateMapOf<String, Offset>().apply {
@@ -33,7 +36,7 @@ fun StarfieldComponent(
         }
     }
 
-    // Animation for breathing/shimmering (more subtle "floating" effect)
+    // Animation for breathing/shimmering
     val infiniteTransition = rememberInfiniteTransition(label = "conceptMap")
     val floatOffset by infiniteTransition.animateFloat(
         initialValue = -5f,
@@ -60,7 +63,7 @@ fun StarfieldComponent(
         val width = size.width
         val height = size.height
 
-        // 1. Draw Edges (Threads) - Refined "Silk" lines
+        // 1. Draw Edges
         graphState.edges.forEach { edge ->
             val startNode = nodeOffsets[edge.fromId] ?: return@forEach
             val endNode = nodeOffsets[edge.toId] ?: return@forEach
@@ -77,7 +80,7 @@ fun StarfieldComponent(
             )
         }
 
-        // 2. Draw Nodes - Refined "Pearls"
+        // 2. Draw Nodes
         graphState.nodes.forEach { node ->
             val offset = nodeOffsets[node.id] ?: return@forEach
             val centerPx = Offset(offset.x * width, (offset.y * height) + floatOffset)
@@ -90,9 +93,9 @@ fun StarfieldComponent(
                 radius = baseRadius + 4.dp.toPx()
             )
 
-            // Core Node
+            // Core Node - Use the pre-resolved themePrimary
             val nodeColor = when(node.type) {
-                NodeType.CENTER -> InkBlue
+                NodeType.CENTER -> themePrimary
                 NodeType.PREREQUISITE -> HighlightYellow
                 else -> SageGreen
             }
@@ -103,17 +106,16 @@ fun StarfieldComponent(
                 radius = baseRadius
             )
 
-            // Label - Mind map style
+            // Label - Use the pre-resolved themeOnSurface
             val textLayoutResult = textMeasurer.measure(
                 text = AnnotatedString(node.label),
                 style = TextStyle(
-                    color = DarkText,
+                    color = themeOnSurface,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium
                 )
             )
             
-            // Draw a small background for the text to ensure legibility
             val textTopLeft = Offset(
                 centerPx.x - textLayoutResult.size.width / 2,
                 centerPx.y + baseRadius + 6.dp.toPx()

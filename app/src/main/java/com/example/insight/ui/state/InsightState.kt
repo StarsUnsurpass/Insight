@@ -16,9 +16,9 @@ enum class UserRole {
 }
 
 data class UserPreferences(
-    val username: String = "王小明",
-    val className: String = "初三 (2) 班",
-    val role: UserRole = UserRole.Student,
+    val username: String = "用户",
+    val className: String = "一年级一班",
+    val role: UserRole = UserRole.Teacher,
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
     val hapticEnabled: Boolean = true
