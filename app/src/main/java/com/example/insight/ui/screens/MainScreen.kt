@@ -171,12 +171,14 @@ fun MainScreen(
             val revealProgress = remember { Animatable(0f) }
             val themePrimary = MaterialTheme.colorScheme.primary
             LaunchedEffect(Unit) {
-                revealProgress.animateTo(1f, animationSpec = tween(600, easing = FastOutSlowInEasing))
+                revealProgress.animateTo(1f, animationSpec = tween(500, easing = FastOutSlowInEasing))
                 onNavigateToScanner()
-                revealProgress.snapTo(0f)
+                // Keep the color visible for a split second to avoid flash while camera loads
+                delay(300) 
                 isRevealing = false
             }
             Canvas(modifier = Modifier.fillMaxSize()) {
+                // Centered on the camera button's approximate position
                 val centerOffset = Offset(size.width / 2, size.height - 68.dp.toPx())
                 val maxRadius = hypot(size.width, size.height)
                 drawCircle(color = themePrimary, radius = maxRadius * revealProgress.value, center = centerOffset)

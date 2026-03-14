@@ -25,11 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.unit.sp
 import com.example.insight.ui.state.ReportConfig
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.util.PdfExportHelper
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +36,6 @@ fun ReportExportScreen(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     var config by remember { mutableStateOf(ReportConfig(reportTitle = "${preferences.className} 学情周报")) }
     var isGenerating by remember { mutableStateOf(false) }
 
@@ -204,4 +201,4 @@ fun ReportA4Preview(config: ReportConfig, preferences: UserPreferences) {
     }
 }
 
-private fun Modifier.height(min: Dp, max: Dp) = this.size(width = 4.dp, height = max)
+private fun Modifier.height(_min: Dp, max: Dp) = this.size(width = _min, height = max)

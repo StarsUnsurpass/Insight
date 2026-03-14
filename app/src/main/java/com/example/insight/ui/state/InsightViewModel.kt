@@ -37,6 +37,7 @@ class InsightViewModel @Inject constructor(
     private fun startAnalysis(text: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isStreaming = true) }
+            android.util.Log.d("InsightVM", "Analyzing: $text")
             delay(2000)
             val mockSolution = "基于题目解析：这是一个经典的虚拟语气结构。在本句中，'If' 引导的条件句使用了过去完成时，表示对过去的虚拟..."
             val mockConcepts = listOf("虚拟语气", "混合时态", "If条件句")
