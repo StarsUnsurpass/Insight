@@ -60,10 +60,10 @@ enum class InsightTab(
     val index: Int,
     val bias: Float
 ) {
-    Home("工作台", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
+    Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
     Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -1f),
     Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 2, 1f), 
-    Profile("主页", Icons.Filled.Person, Icons.Outlined.Person, 3, 2f)
+    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 3, 2f)
 }
 
 @Composable
@@ -81,8 +81,6 @@ fun MainScreen(
     var isDockVisible by remember { mutableStateOf(true) }
     var isRevealing by remember { mutableStateOf(false) }
     var isInitialized by remember { mutableStateOf(false) }
-
-    val haptic = LocalHapticFeedback.current
 
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
@@ -310,7 +308,6 @@ fun BoxScope.TabIconFluid(
 fun HomeTab(preferences: UserPreferences) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
-    val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -405,6 +402,7 @@ fun ProfileTab(
                         UserRole.Teacher -> Icons.Default.CastForEducation
                     }, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
                 }
+                @Suppress("DEPRECATION")
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -456,8 +454,8 @@ fun ProfileTab(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
+                border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"

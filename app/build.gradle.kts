@@ -7,10 +7,6 @@ plugins {
 
 kapt {
     correctErrorTypes = true
-    showProcessorStats = false
-    javacOptions {
-        option("-Xlint:-processing")
-    }
 }
 
 android {
