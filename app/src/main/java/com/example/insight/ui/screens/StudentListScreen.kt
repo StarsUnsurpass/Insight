@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.insight.data.local.entities.StudentEntity
 import com.example.insight.ui.theme.SageGreen
-import com.example.insight.util.ExcelImporter
+import com.example.insight.util.StudentImporter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,6 +36,7 @@ fun StudentListScreen(
 ) {
     val context = LocalContext.current
     var showAddDialog by remember { mutableStateOf(false) }
+    var showHelpDialog by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
     
     val filteredStudents = students.filter { it.name.contains(searchQuery, ignoreCase = true) }
@@ -44,7 +45,7 @@ fun StudentListScreen(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         uri?.let {
-            val imported = ExcelImporter.importStudentsFromExcel(context, it)
+            val imported = StudentImporter.importStudents(context, it)
             if (imported.isNotEmpty()) {
                 onImportStudents(imported)
             }
@@ -61,8 +62,11 @@ fun StudentListScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { launcher.launch("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") }) {
-                        Icon(Icons.Default.FileUpload, "Import Excel")
+                    IconButton(onClick = { showHelpDialog = true }) {
+                        Icon(Icons.Default.HelpOutline, "Help")
+                    }
+                    IconButton(onClick = { launcher.launch("*/*") }) {
+                        Icon(Icons.Default.FileUpload, "Import")
                     }
                     IconButton(onClick = { showAddDialog = true }) {
                         Icon(Icons.Default.PersonAdd, "Add Student")
@@ -106,6 +110,31 @@ fun StudentListScreen(
             }
         )
     }
+
+    if (showHelpDialog) {
+        ImportHelpDialog(onDismiss = { showHelpDialog = false })
+    }
+}
+
+@Composable
+fun ImportHelpDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("导入说明") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("支持格式：Excel (.xlsx)、Word (.docx)、ZIP 压缩包", fontWeight = FontWeight.Bold)
+                Text("内容规范：", fontWeight = FontWeight.Bold)
+                Text("1. 第一行为表头：姓名、性别、年龄、班级、分数")
+                Text("2. 性别请填写“男”或“女”")
+                Text("3. Word 导入需确保数据在表格中")
+                Text("4. ZIP 包内可包含多个符合规范的文档")
+            }
+        },
+        confirmButton = {
+            Button(onClick = onDismiss) { Text("知道了") }
+        }
+    )
 }
 
 @Composable

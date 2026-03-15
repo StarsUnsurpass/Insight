@@ -13,9 +13,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,7 +25,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
@@ -41,18 +37,13 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.ui.state.UserRole
@@ -69,10 +60,10 @@ enum class InsightTab(
     val index: Int,
     val bias: Float
 ) {
-    Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
+    Home("工作台", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
     Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -1f),
     Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 2, 1f), 
-    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 3, 2f)
+    Profile("主页", Icons.Filled.Person, Icons.Outlined.Person, 3, 2f)
 }
 
 @Composable
@@ -90,6 +81,8 @@ fun MainScreen(
     var isDockVisible by remember { mutableStateOf(true) }
     var isRevealing by remember { mutableStateOf(false) }
     var isInitialized by remember { mutableStateOf(false) }
+
+    val haptic = LocalHapticFeedback.current
 
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
@@ -132,7 +125,10 @@ fun MainScreen(
                         label = "tab_transition"
                     ) { targetTab ->
                         when (targetTab) {
-                            InsightTab.Home -> HomeTab(
+                            InsightTab.Home -> HomeTab(preferences = preferences)
+                            InsightTab.Map -> MapTab(preferences)
+                            InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
+                            InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
                                 students = uiState.students,
                                 onStudentClick = { 
@@ -140,12 +136,7 @@ fun MainScreen(
                                     onNavigateToStudentDetail(it) 
                                 },
                                 onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
-                                onImportStudents = { viewModel.importStudents(it) }
-                            )
-                            InsightTab.Map -> MapTab(preferences)
-                            InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
-                            InsightTab.Profile -> ProfileTab(
-                                preferences = preferences,
+                                onImportStudents = { viewModel.importStudents(it) },
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport
                             )
@@ -184,12 +175,10 @@ fun MainScreen(
             LaunchedEffect(Unit) {
                 revealProgress.animateTo(1f, animationSpec = tween(500, easing = FastOutSlowInEasing))
                 onNavigateToScanner()
-                // Keep the color visible for a split second to avoid flash while camera loads
                 delay(300) 
                 isRevealing = false
             }
             Canvas(modifier = Modifier.fillMaxSize()) {
-                // Centered on the camera button's approximate position
                 val centerOffset = Offset(size.width / 2, size.height - 68.dp.toPx())
                 val maxRadius = hypot(size.width, size.height)
                 drawCircle(color = themePrimary, radius = maxRadius * revealProgress.value, center = centerOffset)
@@ -318,38 +307,10 @@ fun BoxScope.TabIconFluid(
 }
 
 @Composable
-fun HomeTab(
-    preferences: UserPreferences,
-    students: List<com.example.insight.data.local.entities.StudentEntity>,
-    onStudentClick: (String) -> Unit,
-    onAddStudent: (String, Int, Int, String, Float) -> Unit,
-    onImportStudents: (List<com.example.insight.data.local.entities.StudentEntity>) -> Unit
-) {
+fun HomeTab(preferences: UserPreferences) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
-    var isManagingStudents by rememberSaveable { mutableStateOf(false) }
     val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
-
-    if (isManagingStudents && preferences.role == UserRole.Teacher) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            StudentListScreen(
-                students = students,
-                onStudentClick = onStudentClick,
-                onAddStudent = onAddStudent,
-                onImportStudents = onImportStudents
-            )
-            // Back button to return to Dashboard
-            SmallFloatingActionButton(
-                onClick = { isManagingStudents = false },
-                modifier = Modifier.padding(16.dp).align(Alignment.BottomStart),
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = primaryColor
-            ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
-            }
-        }
-        return
-    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -372,57 +333,15 @@ fun HomeTab(
             }
         }
 
-        // --- Optimized Search Bar ---
         item {
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                placeholder = { 
-                    Text(
-                        "搜索题目或知识点...", 
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)
-                    ) 
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 shape = RoundedCornerShape(20.dp),
                 singleLine = true,
-                leadingIcon = { 
-                    Icon(
-                        imageVector = Icons.Default.Search, 
-                        contentDescription = "Search", 
-                        tint = primaryColor 
-                    ) 
-                },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(
-                                imageVector = Icons.Default.Close, 
-                                contentDescription = "Clear",
-                                tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)
-                            )
-                        }
-                    } else {
-                        IconButton(onClick = { /* Voice Search */ }) {
-                            Icon(
-                                imageVector = Icons.Default.Mic, 
-                                contentDescription = "Voice", 
-                                tint = primaryColor 
-                            )
-                        }
-                    }
-                },
-                keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
-                    imeAction = androidx.compose.ui.text.input.ImeAction.Search
-                ),
-                keyboardActions = androidx.compose.foundation.text.KeyboardActions(
-                    onSearch = { 
-                        focusManager.clearFocus()
-                    }
-                ),
+                leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
                     focusedBorderColor = primaryColor,
@@ -432,41 +351,98 @@ fun HomeTab(
             )
         }
 
-        // --- Teacher Only: Class Management Section ---
+        if (searchQuery.isEmpty()) {
+            item {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text(if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                    TextButton(onClick = { }) { Text("全部", color = primaryColor) }
+                }
+            }
+            items(5) { index -> HistoryCard(index) }
+        } else {
+            items(3) { index -> SearchResultItem(index) }
+        }
+    }
+}
+
+@Composable
+fun ProfileTab(
+    preferences: UserPreferences, 
+    students: List<com.example.insight.data.local.entities.StudentEntity>,
+    onStudentClick: (String) -> Unit,
+    onAddStudent: (String, Int, Int, String, Float) -> Unit,
+    onImportStudents: (List<com.example.insight.data.local.entities.StudentEntity>) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onNavigateToExport: () -> Unit
+) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    var isManagingStudents by rememberSaveable { mutableStateOf(false) }
+
+    if (isManagingStudents && preferences.role == UserRole.Teacher) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            StudentListScreen(
+                students = students,
+                onStudentClick = onStudentClick,
+                onAddStudent = onAddStudent,
+                onImportStudents = onImportStudents
+            )
+            SmallFloatingActionButton(
+                onClick = { isManagingStudents = false },
+                modifier = Modifier.padding(16.dp).align(Alignment.BottomStart),
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = primaryColor
+            ) { Icon(Icons.AutoMirrored.Filled.ArrowBack, null) }
+        }
+        return
+    }
+
+    LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(modifier = Modifier.size(64.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape), contentAlignment = Alignment.Center) {
+                    Icon(imageVector = when(preferences.role) {
+                        UserRole.Student -> Icons.Default.Person
+                        UserRole.Teacher -> Icons.Default.CastForEducation
+                    }, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("${preferences.username} ", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Surface(color = primaryColor.copy(alpha = 0.1f), shape = RoundedCornerShape(8.dp)) {
+                            Text(text = when(preferences.role) { UserRole.Student -> "同学"; UserRole.Teacher -> "老师" }, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = primaryColor)
+                        }
+                    }
+                    Text(preferences.className, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                }
+            }
+        }
+
+        item {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "教学课件", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
+                StatCard(if (preferences.role == UserRole.Student) "攻克考点" else "批改人次", if (preferences.role == UserRole.Student) "42" else "356", Modifier.weight(1f))
+            }
+        }
+
         if (preferences.role == UserRole.Teacher) {
             item {
-                Text(
-                    "教务管理",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = primaryColor,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
+                Text("教务管理", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(12.dp))
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { isManagingStudents = true },
+                    modifier = Modifier.fillMaxWidth().clickable { isManagingStudents = true },
                     shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
                     border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
                 ) {
-                    Row(
-                        modifier = Modifier.padding(20.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .background(primaryColor, CircleShape),
-                            contentAlignment = Alignment.Center
-                        ) {
+                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(modifier = Modifier.size(48.dp).background(primaryColor, CircleShape), contentAlignment = Alignment.Center) {
                             Icon(Icons.Default.Group, null, tint = Color.White, modifier = Modifier.size(24.dp))
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                            Text("管理学生信息、导入名单及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                            Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                         }
                         Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = primaryColor)
                     }
@@ -474,37 +450,21 @@ fun HomeTab(
             }
         }
 
-        // --- Conditional Content: Search vs Dashboard ---
-        if (searchQuery.isEmpty()) {
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(), 
-                    horizontalArrangement = Arrangement.SpaceBetween, 
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", 
-                        style = MaterialTheme.typography.titleSmall, 
-                        fontWeight = FontWeight.Bold
-                    )
-                    TextButton(onClick = { }) { 
-                        Text("全部", color = primaryColor, style = MaterialTheme.typography.labelMedium) 
-                    }
+        item {
+            Text("应用配置", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(12.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
+                    SettingRow(icon = Icons.Default.PictureAsPdf, title = exportTitle, onClick = onNavigateToExport)
+                    SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
+                    SettingRow(Icons.Default.CloudUpload, "同步云端数据")
                 }
-            }
-            items(5) { index -> HistoryCard(index) }
-        } else {
-            // Mock Search Results Section
-            item {
-                Text(
-                    "搜索结果", 
-                    style = MaterialTheme.typography.labelMedium, 
-                    color = primaryColor,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            items(3) { index ->
-                SearchResultItem(index = index)
             }
         }
     }
@@ -513,32 +473,12 @@ fun HomeTab(
 @Composable
 fun SearchResultItem(index: Int) {
     val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
-    // In a real scenario, we would use the query to filter/highlight
     val resultText = results[index % results.size]
-    
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { /* Navigate */ },
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-    ) {
-        Row(
-            modifier = Modifier.padding(vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.History, 
-                contentDescription = null, 
-                tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                modifier = Modifier.size(20.dp)
-            )
-            @Suppress("DEPRECATION")
+    Card(modifier = Modifier.fillMaxWidth().clickable { }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
+        Row(modifier = Modifier.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(imageVector = Icons.Outlined.History, contentDescription = null, tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
             Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = resultText,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground
-            )
+            Text(text = resultText, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }
@@ -572,188 +512,23 @@ fun MapTab(preferences: UserPreferences) {
     val sheetState = rememberModalBottomSheetState()
     var selectedNode by remember { mutableStateOf<KnowledgeNode?>(null) }
     var showSheet by remember { mutableStateOf(false) }
-
-    val mockGraphState = remember {
-        GraphState(
-            nodes = listOf(
-                KnowledgeNode("n1", "初中核心语法", 0.9f, 500f, 300f),
-                KnowledgeNode("n2", "时态体系", 0.6f, 300f, 600f),
-                KnowledgeNode("n3", "从句基础", 0.8f, 700f, 600f),
-                KnowledgeNode("n4", "一般过去时", 0.9f, 150f, 900f),
-                KnowledgeNode("n5", "现在完成时", 0.3f, 400f, 950f),
-                KnowledgeNode("n6", "定语从句", 0.2f, 850f, 900f)
-            ),
-            edges = listOf(
-                KnowledgeEdge("n1", "n2"),
-                KnowledgeEdge("n1", "n3"),
-                KnowledgeEdge("n2", "n4"),
-                KnowledgeEdge("n2", "n5"),
-                KnowledgeEdge("n3", "n6"),
-                KnowledgeEdge("n4", "n5")
-            )
-        )
-    }
-
+    val mockGraphState = remember { GraphState(
+        nodes = listOf(KnowledgeNode("n1", "初中核心语法", 0.9f, 500f, 300f), KnowledgeNode("n2", "时态体系", 0.6f, 300f, 600f), KnowledgeNode("n3", "从句基础", 0.8f, 700f, 600f)),
+        edges = listOf(KnowledgeEdge("n1", "n2"), KnowledgeEdge("n1", "n3"))
+    ) }
     Box(modifier = Modifier.fillMaxSize()) {
-        StarfieldComponent(
-            graphState = mockGraphState,
-            onNodeClick = { node ->
-                selectedNode = node
-                showSheet = true
-            },
-            modifier = Modifier.fillMaxSize()
-        )
-
+        StarfieldComponent(graphState = mockGraphState, onNodeClick = { node -> selectedNode = node; showSheet = true }, modifier = Modifier.fillMaxSize())
         Column(modifier = Modifier.padding(20.dp).align(Alignment.TopStart)) {
-            Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-            Text(
-                text = if (preferences.role == UserRole.Student) "探索你的星系：攻克节点以点亮星辰" else "班级知识图谱全貌",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
-            )
+            Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Text(text = if (preferences.role == UserRole.Student) "探索你的星系" else "班级知识图谱", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
         }
     }
-
     if (showSheet && selectedNode != null) {
-        ModalBottomSheet(
-            onDismissRequest = { showSheet = false },
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.surface
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 16.dp)
-                    .padding(bottom = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "考点: ${selectedNode!!.title}",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val statusColor = if (selectedNode!!.masteryLevel > 0.8f) Color(0xFF81C784) else if (selectedNode!!.masteryLevel < 0.4f) Color(0xFFE57373) else MaterialTheme.colorScheme.primary
-                    val statusText = if (selectedNode!!.masteryLevel > 0.8f) "已掌握" else if (selectedNode!!.masteryLevel < 0.4f) "待突破" else "学习中"
-                    
-                    Surface(color = statusColor.copy(alpha = 0.1f), shape = RoundedCornerShape(8.dp)) {
-                        Text(statusText, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = statusColor, style = MaterialTheme.typography.labelSmall)
-                    }
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text("掌握度: ${(selectedNode!!.masteryLevel * 100).toInt()}%", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
-                }
-
-                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
-
-                if (selectedNode!!.masteryLevel < 0.4f) {
-                    Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFE57373).copy(alpha = 0.05f)), border = BorderStroke(1.dp, Color(0xFFE57373).copy(alpha = 0.2f))) {
-                        Row(modifier = Modifier.padding(16.dp)) {
-                            Icon(Icons.Default.Warning, contentDescription = null, tint = Color(0xFFE57373))
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column {
-                                Text("易错陷阱分析", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color(0xFFE57373))
-                                Text("经常与一般过去时混淆，忽略了动作对现在的影响。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface)
-                            }
-                        }
-                    }
-                }
-
-                Button(
-                    onClick = { /* Navigate to related questions */ },
-                    modifier = Modifier.fillMaxWidth().height(56.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-                ) {
-                    Text("获取 3 道高频真题", fontWeight = FontWeight.Bold)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun ProfileTab(
-    preferences: UserPreferences, 
-    onNavigateToSettings: () -> Unit,
-    onNavigateToExport: () -> Unit
-) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-
-    LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
-        item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier.size(64.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape), contentAlignment = Alignment.Center) {
-                    Icon(imageVector = when(preferences.role) {
-                        UserRole.Student -> Icons.Default.Person
-                        UserRole.Teacher -> Icons.Default.CastForEducation
-                    }, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("${preferences.username} ", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                        Surface(
-                            color = primaryColor.copy(alpha = 0.1f),
-                            shape = RoundedCornerShape(8.dp)
-                        ) {
-                            Text(
-                                text = when(preferences.role) {
-                                    UserRole.Student -> "同学"
-                                    UserRole.Teacher -> "老师"
-                                },
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = primaryColor
-                            )
-                        }
-                    }
-                    Text(preferences.className, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
-                }
-            }
-        }
-        item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "教学课件", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
-                StatCard(if (preferences.role == UserRole.Student) "攻克考点" else "批改人次", if (preferences.role == UserRole.Student) "42" else "356", Modifier.weight(1f))
-            }
-        }
-        item {
-            ProfileDashboardCard(title = "学习设置") {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
-                    SettingRow(
-                        icon = Icons.Default.PictureAsPdf, 
-                        title = exportTitle,
-                        onClick = onNavigateToExport
-                    )
-                    SettingRow(Icons.Default.CloudUpload, "数据同步")
-                    SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun ProfileDashboardCard(title: String, content: @Composable () -> Unit) {
-    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
-        Text(
-            title,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f),
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surface,
-            shape = RoundedCornerShape(28.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-        ) {
-            Box(modifier = Modifier.padding(24.dp)) {
-                content()
+        ModalBottomSheet(onDismissRequest = { showSheet = false }, sheetState = sheetState) {
+            Column(modifier = Modifier.fillMaxWidth().padding(24.dp).padding(bottom = 32.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Text(text = "考点: ${selectedNode!!.title}", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Text("掌握度: ${(selectedNode!!.masteryLevel * 100).toInt()}%")
+                Button(onClick = { }, modifier = Modifier.fillMaxWidth().height(56.dp), shape = RoundedCornerShape(16.dp)) { Text("获取高频真题") }
             }
         }
     }
@@ -771,13 +546,7 @@ fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(enabled = onClick != null) { onClick?.invoke() }
-            .padding(vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Row(modifier = Modifier.fillMaxWidth().clickable(enabled = onClick != null) { onClick?.invoke() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
         Spacer(modifier = Modifier.width(16.dp)); Text(title, style = MaterialTheme.typography.bodyMedium); Spacer(modifier = Modifier.weight(1f))
         Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
@@ -786,63 +555,13 @@ fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) 
 
 @Composable
 fun ExportProgressDialog(role: UserRole) {
-    Dialog(
-        onDismissRequest = { },
-        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
-    ) {
-        Surface(
-            modifier = Modifier.width(280.dp),
-            shape = RoundedCornerShape(28.dp),
-            color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
-        ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                val infiniteTransition = rememberInfiniteTransition(label = "export")
-                val rotation by infiniteTransition.animateFloat(
-                    initialValue = 0f,
-                    targetValue = 360f,
-                    animationSpec = infiniteRepeatable(
-                        animation = tween(1200, easing = LinearEasing),
-                        repeatMode = RepeatMode.Restart
-                    ),
-                    label = "rotation"
-                )
-
-                Box(
-                    modifier = Modifier
-                        .size(64.dp)
-                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Sync,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(32.dp)
-                            .rotate(rotation),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-                
+    Dialog(onDismissRequest = { }, properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)) {
+        Surface(modifier = Modifier.width(280.dp), shape = RoundedCornerShape(28.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
+            Column(modifier = Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                CircularProgressIndicator(modifier = Modifier.size(48.dp), color = MaterialTheme.colorScheme.primary)
                 Spacer(modifier = Modifier.height(24.dp))
-                
-                Text(
-                    text = if (role == UserRole.Teacher) "正在分析班级数据..." else "正在整理错题集...",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Text(
-                    text = "生成 PDF 报告中，请稍候",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
+                Text(text = if (role == UserRole.Teacher) "正在分析班级数据..." else "正在整理错题集...", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text(text = "生成 PDF 报告中，请稍候", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
             }
         }
     }
