@@ -379,16 +379,11 @@ fun ProfileTab(
         Box(modifier = Modifier.fillMaxSize()) {
             StudentListScreen(
                 students = students,
+                onBack = { isManagingStudents = false },
                 onStudentClick = onStudentClick,
                 onAddStudent = onAddStudent,
                 onImportStudents = onImportStudents
             )
-            SmallFloatingActionButton(
-                onClick = { isManagingStudents = false },
-                modifier = Modifier.padding(16.dp).align(Alignment.BottomStart),
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = primaryColor
-            ) { Icon(Icons.AutoMirrored.Filled.ArrowBack, null) }
         }
         return
     }
