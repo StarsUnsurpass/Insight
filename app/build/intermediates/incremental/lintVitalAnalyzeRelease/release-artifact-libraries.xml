@@ -864,6 +864,10 @@
       jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-android\1.7.3\38d9cad3a0b03a10453b56577984bdeb48edeed5\kotlinx-coroutines-android-1.7.3.jar"
       resolved="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"/>
   <library
+      name="com.squareup.retrofit2:converter-gson:2.9.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.9.0\fc93484fc67ab52b1e0ccbdaa3922d8a6678e097\converter-gson-2.9.0.jar"
+      resolved="com.squareup.retrofit2:converter-gson:2.9.0"/>
+  <library
       name="com.squareup.retrofit2:retrofit:2.9.0@jar"
       jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.9.0\d8fdfbd5da952141a665a403348b74538efc05ff\retrofit-2.9.0.jar"
       resolved="com.squareup.retrofit2:retrofit:2.9.0"/>
@@ -910,6 +914,45 @@
       jars="E:\DevTools\gradle-8.6\caches\transforms-3\caa40e19d0b4314481be128ca95f307b\transformed\jetified-savedstate-1.2.1\jars\classes.jar"
       resolved="androidx.savedstate:savedstate:1.2.1"
       folder="E:\DevTools\gradle-8.6\caches\transforms-3\caa40e19d0b4314481be128ca95f307b\transformed\jetified-savedstate-1.2.1"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="io.noties.markwon:ext-tables:4.6.2@aar"
+      jars="E:\DevTools\gradle-8.6\caches\transforms-3\7273430e7f649e1bb1cf5bd47aa62f4a\transformed\jetified-ext-tables-4.6.2\jars\classes.jar"
+      resolved="io.noties.markwon:ext-tables:4.6.2"
+      folder="E:\DevTools\gradle-8.6\caches\transforms-3\7273430e7f649e1bb1cf5bd47aa62f4a\transformed\jetified-ext-tables-4.6.2"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="io.noties.markwon:html:4.6.2@aar"
+      jars="E:\DevTools\gradle-8.6\caches\transforms-3\b3c79612638af0564868085c258f6d1e\transformed\jetified-html-4.6.2\jars\classes.jar"
+      resolved="io.noties.markwon:html:4.6.2"
+      folder="E:\DevTools\gradle-8.6\caches\transforms-3\b3c79612638af0564868085c258f6d1e\transformed\jetified-html-4.6.2"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="io.noties.markwon:core:4.6.2@aar"
+      jars="E:\DevTools\gradle-8.6\caches\transforms-3\e10b840a9d46829e5da5cf8555481ef8\transformed\jetified-core-4.6.2\jars\classes.jar"
+      resolved="io.noties.markwon:core:4.6.2"
+      folder="E:\DevTools\gradle-8.6\caches\transforms-3\e10b840a9d46829e5da5cf8555481ef8\transformed\jetified-core-4.6.2"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -1069,6 +1112,14 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="org.apache.poi:poi-ooxml:5.2.5@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.poi\poi-ooxml\5.2.5\df9f2c52371eeba24db8ea8cafa77285c3cc0742\poi-ooxml-5.2.5.jar"
+      resolved="org.apache.poi:poi-ooxml:5.2.5"/>
+  <library
+      name="org.apache.poi:poi-scratchpad:5.2.5@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.poi\poi-scratchpad\5.2.5\fc600cf765a49d73935a6e48a5b84f4abcdd0518\poi-scratchpad-5.2.5.jar"
+      resolved="org.apache.poi:poi-scratchpad:5.2.5"/>
+  <library
       name="org.jetbrains:annotations:23.0.0@jar"
       jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.jetbrains\annotations\23.0.0\8cc20c07506ec18e0834947b84a864bfc094484e\annotations-23.0.0.jar"
       resolved="org.jetbrains:annotations:23.0.0"/>
@@ -1089,6 +1140,18 @@
       symbolFile="R.txt"
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
+  <library
+      name="com.google.code.gson:gson:2.8.5@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.5\f645ed69d595b24d4cf8b3fbb64cc505bede8829\gson-2.8.5.jar"
+      resolved="com.google.code.gson:gson:2.8.5"/>
+  <library
+      name="com.atlassian.commonmark:commonmark-ext-gfm-tables:0.13.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.atlassian.commonmark\commonmark-ext-gfm-tables\0.13.0\c3a5ba4217cacc7833c697e5081da42ae996655f\commonmark-ext-gfm-tables-0.13.0.jar"
+      resolved="com.atlassian.commonmark:commonmark-ext-gfm-tables:0.13.0"/>
+  <library
+      name="com.atlassian.commonmark:commonmark:0.13.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.atlassian.commonmark\commonmark\0.13.0\d233ad1436f35c7f88e3488ce6c1e65425c1a059\commonmark-0.13.0.jar"
+      resolved="com.atlassian.commonmark:commonmark:0.13.0"/>
   <library
       name="com.google.android.datatransport:transport-api:2.2.0@aar"
       jars="E:\DevTools\gradle-8.6\caches\transforms-3\9336d5c275ed90a27a8a6136a8ce67c2\transformed\jetified-transport-api-2.2.0\jars\classes.jar"
@@ -1131,6 +1194,50 @@
       name="com.google.code.findbugs:jsr305:3.0.2@jar"
       jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar"
       resolved="com.google.code.findbugs:jsr305:3.0.2"/>
+  <library
+      name="org.apache.poi:poi:5.2.5@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.poi\poi\5.2.5\7e00f6b2f76375fe89022d5a7db8acb71cbd55f5\poi-5.2.5.jar"
+      resolved="org.apache.poi:poi:5.2.5"/>
+  <library
+      name="commons-codec:commons-codec:1.16.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\commons-codec\commons-codec\1.16.0\4e3eb3d79888d76b54e28b350915b5dc3919c9de\commons-codec-1.16.0.jar"
+      resolved="commons-codec:commons-codec:1.16.0"/>
+  <library
+      name="org.apache.commons:commons-collections4:4.4@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.commons\commons-collections4\4.4\62ebe7544cb7164d87e0637a2a6a2bdc981395e8\commons-collections4-4.4.jar"
+      resolved="org.apache.commons:commons-collections4:4.4"/>
+  <library
+      name="org.apache.commons:commons-math3:3.6.1@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.commons\commons-math3\3.6.1\e4ba98f1d4b3c80ec46392f25e094a6a2e58fcbf\commons-math3-3.6.1.jar"
+      resolved="org.apache.commons:commons-math3:3.6.1"/>
+  <library
+      name="commons-io:commons-io:2.15.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\commons-io\commons-io\2.15.0\5c3c2db10f6f797430a7f9c696b4d1273768c924\commons-io-2.15.0.jar"
+      resolved="commons-io:commons-io:2.15.0"/>
+  <library
+      name="com.zaxxer:SparseBitSet:1.3@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.zaxxer\SparseBitSet\1.3\533eac055afe3d5f614ea95e333afd6c2bde8f26\SparseBitSet-1.3.jar"
+      resolved="com.zaxxer:SparseBitSet:1.3"/>
+  <library
+      name="org.apache.poi:poi-ooxml-lite:5.2.5@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.poi\poi-ooxml-lite\5.2.5\eaa61452d8f0d13080fbb4757a392f09f90e4c49\poi-ooxml-lite-5.2.5.jar"
+      resolved="org.apache.poi:poi-ooxml-lite:5.2.5"/>
+  <library
+      name="org.apache.xmlbeans:xmlbeans:5.2.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.xmlbeans\xmlbeans\5.2.0\6198ac997b3f234f2b5393fa415f78fac2e06510\xmlbeans-5.2.0.jar"
+      resolved="org.apache.xmlbeans:xmlbeans:5.2.0"/>
+  <library
+      name="org.apache.logging.log4j:log4j-api:2.21.1@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.21.1\74c65e87b9ce1694a01524e192d7be989ba70486\log4j-api-2.21.1.jar"
+      resolved="org.apache.logging.log4j:log4j-api:2.21.1"/>
+  <library
+      name="org.apache.commons:commons-compress:1.25.0@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.25.0\9d35aec423da6c8a7f93d7e9e1c6b1d9fe14bb5e\commons-compress-1.25.0.jar"
+      resolved="org.apache.commons:commons-compress:1.25.0"/>
+  <library
+      name="com.github.virtuald:curvesapi:1.08@jar"
+      jars="E:\DevTools\gradle-8.6\caches\modules-2\files-2.1\com.github.virtuald\curvesapi\1.08\3d3d36568154059825089b289dcfca481fe44e2c\curvesapi-1.08.jar"
+      resolved="com.github.virtuald:curvesapi:1.08"/>
   <library
       name="androidx.appcompat:appcompat-resources:1.6.1@aar"
       jars="E:\DevTools\gradle-8.6\caches\transforms-3\bf2662e5421606ef9df0755c06b5f2a1\transformed\jetified-appcompat-resources-1.6.1\jars\classes.jar"

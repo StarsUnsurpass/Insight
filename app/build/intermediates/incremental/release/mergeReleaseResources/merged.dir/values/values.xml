@@ -263,6 +263,9 @@
     <item name="is_pooling_container_tag" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
+    <item name="markwon_drawables_scheduler" type="id"/>
+    <item name="markwon_drawables_scheduler_last_text_hashcode" type="id"/>
+    <item name="markwon_tables_scheduler" type="id"/>
     <item name="nav_controller_view_tag" type="id"/>
     <item name="pooling_container_listener_holder_tag" type="id"/>
     <item name="progress_circular" type="id"/>

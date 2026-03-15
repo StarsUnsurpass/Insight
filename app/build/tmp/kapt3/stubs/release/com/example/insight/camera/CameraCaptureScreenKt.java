@@ -21,9 +21,6 @@ import androidx.compose.ui.geometry.*;
 import androidx.compose.ui.graphics.*;
 import androidx.compose.ui.graphics.drawscope.Stroke;
 import androidx.compose.ui.text.font.FontWeight;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.text.TextRecognition;
-import com.google.mlkit.vision.text.TextRecognizer;
 import kotlinx.coroutines.Dispatchers;
 import java.util.concurrent.Executors;
 

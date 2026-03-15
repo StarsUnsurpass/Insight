@@ -81,3 +81,32 @@ interface StudentDao {
     @Query("SELECT * FROM student_table WHERE name LIKE '%' || :query || '%'")
     fun searchStudentsFlow(query: String): Flow<List<StudentEntity>>
 }
+
+@Dao
+interface LessonPlanDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPlan(plan: LessonPlanEntity)
+
+    @Update
+    suspend fun updatePlan(plan: LessonPlanEntity)
+
+    @Delete
+    suspend fun deletePlan(plan: LessonPlanEntity)
+
+    @Query("SELECT * FROM lesson_plan_table ORDER BY updatedAt DESC")
+    fun getAllPlansFlow(): Flow<List<LessonPlanEntity>>
+
+    @Query("SELECT * FROM lesson_plan_table WHERE planId = :id")
+    suspend fun getPlanById(id: String): LessonPlanEntity?
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertQuestionRef(ref: LessonQuestionCrossRef)
+
+    @Transaction
+    @Query("""
+        SELECT scan_record_table.* FROM scan_record_table 
+        INNER JOIN lesson_question_cross_ref ON scan_record_table.id = lesson_question_cross_ref.questionId 
+        WHERE lesson_question_cross_ref.planId = :planId
+    """)
+    fun getQuestionsForPlanFlow(planId: String): Flow<List<ScanRecordEntity>>
+}

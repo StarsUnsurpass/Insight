@@ -7,6 +7,8 @@ sealed class ScreenState {
     object Graph : ScreenState()
     object StudentList : ScreenState()
     data class StudentDetail(val studentId: String) : ScreenState()
+    object LessonPlanList : ScreenState()
+    data class LessonPlanEditor(val planId: String?) : ScreenState()
 }
 
 enum class ThemeStyle {
@@ -56,5 +58,8 @@ data class InsightUiState(
     val students: List<com.example.insight.data.local.entities.StudentEntity> = emptyList(),
     val selectedStudent: com.example.insight.data.local.entities.StudentEntity? = null,
     val studentScans: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList(),
-    val studentReport: com.example.insight.data.local.entities.DiagnosticReportEntity? = null
+    val studentReport: com.example.insight.data.local.entities.DiagnosticReportEntity? = null,
+    val lessonPlans: List<com.example.insight.data.local.entities.LessonPlanEntity> = emptyList(),
+    val selectedPlan: com.example.insight.data.local.entities.LessonPlanEntity? = null,
+    val planQuestions: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList()
 )

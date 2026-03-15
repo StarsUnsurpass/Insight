@@ -11,9 +11,11 @@ import com.example.insight.data.local.entities.*
         KnowledgeNodeEntity::class,
         KnowledgeEdgeEntity::class,
         DiagnosticReportEntity::class,
-        StudentEntity::class
+        StudentEntity::class,
+        LessonPlanEntity::class,
+        LessonQuestionCrossRef::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -21,4 +23,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun knowledgeDao(): KnowledgeDao
     abstract fun diagnosticDao(): DiagnosticDao
     abstract fun studentDao(): StudentDao
+    abstract fun lessonPlanDao(): LessonPlanDao
 }

@@ -14,7 +14,8 @@ class InsightRepository @Inject constructor(
     private val scanDao: ScanDao,
     private val knowledgeDao: KnowledgeDao,
     private val diagnosticDao: DiagnosticDao,
-    private val studentDao: StudentDao
+    private val studentDao: StudentDao,
+    private val lessonPlanDao: LessonPlanDao
 ) {
     // Preferences
     val userPreferencesFlow: Flow<UserPreferences> = preferenceManager.userPreferencesFlow
@@ -56,4 +57,15 @@ class InsightRepository @Inject constructor(
     suspend fun saveStudents(students: List<StudentEntity>) = studentDao.insertStudents(students)
     suspend fun updateStudent(student: StudentEntity) = studentDao.updateStudent(student)
     suspend fun deleteStudent(student: StudentEntity) = studentDao.deleteStudent(student)
+
+    // Lesson Plans
+    fun getAllPlans(): Flow<List<LessonPlanEntity>> = lessonPlanDao.getAllPlansFlow()
+    suspend fun getPlanById(id: String): LessonPlanEntity? = lessonPlanDao.getPlanById(id)
+    suspend fun savePlan(plan: LessonPlanEntity) = lessonPlanDao.insertPlan(plan)
+    suspend fun updatePlan(plan: LessonPlanEntity) = lessonPlanDao.updatePlan(plan)
+    suspend fun deletePlan(plan: LessonPlanEntity) = lessonPlanDao.deletePlan(plan)
+    suspend fun addQuestionToPlan(planId: String, questionId: String) = 
+        lessonPlanDao.insertQuestionRef(LessonQuestionCrossRef(planId, questionId))
+    fun getQuestionsForPlan(planId: String): Flow<List<ScanRecordEntity>> = 
+        lessonPlanDao.getQuestionsForPlanFlow(planId)
 }

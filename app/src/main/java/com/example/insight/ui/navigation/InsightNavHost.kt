@@ -7,16 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import com.example.insight.camera.CameraCaptureScreen
-import com.example.insight.ui.screens.KnowledgeGraphScreen
-import com.example.insight.ui.screens.MainScreen
-import com.example.insight.ui.screens.ReportExportScreen
-import com.example.insight.ui.screens.SettingsScreen
-import com.example.insight.ui.screens.SolutionScreen
-import com.example.insight.ui.screens.StudentDetailScreen
-import com.example.insight.ui.screens.StudentListScreen
+import com.example.insight.ui.screens.*
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
 
@@ -29,6 +21,8 @@ sealed class Route(val path: String) {
     object Export : Route("export")
     object StudentList : Route("student_list")
     object StudentDetail : Route("student_detail")
+    object LessonPlanList : Route("lesson_plan_list")
+    object LessonPlanEditor : Route("lesson_plan_editor")
 }
 
 @Composable
@@ -52,11 +46,11 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onNavigateToExport = {
                     navController.navigate(Route.Export.path)
                 },
-                onNavigateToStudentDetail = {
-                    navController.navigate(Route.StudentDetail.path)
-                },
                 onNavigateToStudentList = {
                     navController.navigate(Route.StudentList.path)
+                },
+                onNavigateToLessonPlans = {
+                    navController.navigate(Route.LessonPlanList.path)
                 }
             )
         }
@@ -133,12 +127,12 @@ fun InsightNavHost(viewModel: InsightViewModel) {
             StudentListScreen(
                 students = uiState.students,
                 onBack = { navController.popBackStack() },
-                onStudentClick = { 
-                    viewModel.selectStudent(it)
+                onStudentClick = { id ->
+                    viewModel.selectStudent(id)
                     navController.navigate(Route.StudentDetail.path)
                 },
                 onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
-                onImportStudents = { viewModel.importStudents(it) }
+                onImportStudents = { list -> viewModel.importStudents(list) }
             )
         }
 
@@ -152,6 +146,37 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 isStreaming = uiState.isStreaming,
                 onBack = { navController.popBackStack() },
                 onAnalyze = { viewModel.analyzeStudent(uiState.selectedStudent?.studentId ?: "") }
+            )
+        }
+
+        composable(Route.LessonPlanList.path) {
+            LessonPlanListScreen(
+                plans = uiState.lessonPlans,
+                onBack = { navController.popBackStack() },
+                onPlanClick = { id ->
+                    viewModel.selectPlan(id)
+                    navController.navigate(Route.LessonPlanEditor.path)
+                },
+                onCreateNew = {
+                    viewModel.selectPlan(null)
+                    navController.navigate(Route.LessonPlanEditor.path)
+                },
+                onDeletePlan = { viewModel.deletePlan(it) }
+            )
+        }
+
+        composable(Route.LessonPlanEditor.path) {
+            val aiOutput by viewModel.aiOutput.collectAsState()
+            LessonPlanEditorScreen(
+                plan = uiState.selectedPlan,
+                aiOutput = aiOutput,
+                isStreaming = uiState.isStreaming,
+                onBack = { navController.popBackStack() },
+                onSave = { t, c, cl ->
+                    viewModel.savePlan(t, c, cl)
+                    navController.popBackStack()
+                },
+                onGenerateAi = { viewModel.generateAiLessonPlan(it) }
             )
         }
     }

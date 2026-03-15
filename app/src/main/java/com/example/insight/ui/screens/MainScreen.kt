@@ -75,8 +75,8 @@ fun MainScreen(
     onNavigateToScanner: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
-    onNavigateToStudentDetail: (String) -> Unit,
-    onNavigateToStudentList: () -> Unit
+    onNavigateToStudentList: () -> Unit,
+    onNavigateToLessonPlans: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -133,6 +133,7 @@ fun MainScreen(
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
                                 onManageStudents = onNavigateToStudentList,
+                                onManageLessonPlans = onNavigateToLessonPlans,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport
                             )
@@ -364,6 +365,7 @@ fun HomeTab(preferences: UserPreferences) {
 fun ProfileTab(
     preferences: UserPreferences,
     onManageStudents: () -> Unit,
+    onManageLessonPlans: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit
 ) {
@@ -403,6 +405,8 @@ fun ProfileTab(
             item {
                 Text("教务管理", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(12.dp))
+                
+                // --- Class Management ---
                 Card(
                     modifier = Modifier.fillMaxWidth().clickable { onManageStudents() },
                     shape = RoundedCornerShape(24.dp),
@@ -418,6 +422,29 @@ fun ProfileTab(
                         Column(modifier = Modifier.weight(1f)) {
                             Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                             Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                        }
+                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
+                    }
+                }
+                
+                Spacer(modifier = Modifier.height(12.dp))
+                
+                // --- Lesson Plan Management ---
+                Card(
+                    modifier = Modifier.fillMaxWidth().clickable { onManageLessonPlans() },
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                ) {
+                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(Icons.Default.AutoAwesome, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("AI 智能教案管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text("AI 辅助备课、教案编写与教学输出", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                         }
                         Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }

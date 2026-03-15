@@ -6,6 +6,8 @@ import com.example.insight.data.repository.InsightRepository
 import com.example.insight.data.repository.DeepSeekRepository
 import com.example.insight.data.remote.DeepSeekMessage
 import com.example.insight.data.local.entities.StudentEntity
+import com.example.insight.data.local.entities.LessonPlanEntity
+import com.example.insight.data.local.entities.LessonQuestionCrossRef
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,6 +51,93 @@ class InsightViewModel @Inject constructor(
                 _uiState.update { it.copy(students = students) }
             }
         }
+
+        // Collect lesson plans
+        viewModelScope.launch {
+            repository.getAllPlans().collect { plans ->
+                _uiState.update { it.copy(lessonPlans = plans) }
+            }
+        }
+    }
+
+    // Lesson Plan Management
+    fun selectPlan(planId: String?) {
+        viewModelScope.launch {
+            if (planId == null) {
+                _uiState.update { it.copy(selectedPlan = null, planQuestions = emptyList()) }
+            } else {
+                val plan = repository.getPlanById(planId)
+                _uiState.update { it.copy(selectedPlan = plan) }
+                repository.getQuestionsForPlan(planId).collect { questions ->
+                    _uiState.update { it.copy(planQuestions = questions) }
+                }
+            }
+        }
+    }
+
+    fun savePlan(title: String, content: String, className: String, nodeId: String? = null) {
+        viewModelScope.launch {
+            val plan = uiState.value.selectedPlan?.copy(
+                title = title,
+                contentMarkdown = content,
+                targetClassName = className,
+                relatedKnowledgeNodeId = nodeId,
+                updatedAt = System.currentTimeMillis()
+            ) ?: LessonPlanEntity(
+                title = title,
+                contentMarkdown = content,
+                targetClassName = className,
+                relatedKnowledgeNodeId = nodeId
+            )
+            repository.savePlan(plan)
+        }
+    }
+
+    fun deletePlan(plan: LessonPlanEntity) {
+        viewModelScope.launch { repository.deletePlan(plan) }
+    }
+
+    fun generateAiLessonPlan(prompt: String) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isStreaming = true) }
+            _aiOutput.value = ""
+            
+            val apiKey = uiState.value.preferences.deepSeekApiKey
+            val systemPrompt = """
+                你是一位资深英语教师。请根据用户的需求生成一份专业的教案。
+                教案应包含：教学目标、核心语法/词汇讲解、例句展示、随堂练习。
+                使用 Markdown 格式，结构清晰。
+            """.trimIndent()
+
+            try {
+                deepSeekRepository.streamChat(
+                    apiKey,
+                    listOf(
+                        DeepSeekMessage("system", systemPrompt),
+                        DeepSeekMessage("user", prompt)
+                    )
+                ).collect { chunk ->
+                    _aiOutput.value += chunk
+                }
+            } catch (e: Exception) {
+                _aiOutput.value = "生成教案出错: ${e.message}"
+            } finally {
+                _uiState.update { it.copy(isStreaming = false) }
+            }
+        }
+    }
+
+    fun addQuestionToPlan(planId: String, questionId: String) {
+        viewModelScope.launch { repository.addQuestionToPlan(planId, questionId) }
+    }
+
+    fun navigateToLessonPlans() {
+        _uiState.update { it.copy(screen = ScreenState.LessonPlanList) }
+    }
+
+    fun navigateToLessonPlanEditor(planId: String?) {
+        selectPlan(planId)
+        _uiState.update { it.copy(screen = ScreenState.LessonPlanEditor(planId)) }
     }
 
     fun onImageCaptured(bitmap: Bitmap) {

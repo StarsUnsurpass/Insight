@@ -15,6 +15,8 @@ import com.example.insight.data.local.dao.DiagnosticDao;
 import com.example.insight.data.local.dao.DiagnosticDao_Impl;
 import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.KnowledgeDao_Impl;
+import com.example.insight.data.local.dao.LessonPlanDao;
+import com.example.insight.data.local.dao.LessonPlanDao_Impl;
 import com.example.insight.data.local.dao.ScanDao;
 import com.example.insight.data.local.dao.ScanDao_Impl;
 import com.example.insight.data.local.dao.StudentDao;
@@ -40,10 +42,12 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile StudentDao _studentDao;
 
+  private volatile LessonPlanDao _lessonPlanDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(3) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `scan_record_table` (`id` TEXT NOT NULL, `originalImagePath` TEXT NOT NULL, `ocrText` TEXT NOT NULL, `llmAnalysisJson` TEXT NOT NULL, `coreKnowledgeId` TEXT NOT NULL, `studentId` TEXT NOT NULL, `isMastered` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
@@ -51,8 +55,10 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_edge_table` (`edgeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fromNodeId` TEXT NOT NULL, `toNodeId` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `diagnostic_report_table` (`reportId` TEXT NOT NULL, `aiInsightText` TEXT NOT NULL, `radarVocabulary` REAL NOT NULL, `radarGrammar` REAL NOT NULL, `radarContext` REAL NOT NULL, `radarLogic` REAL NOT NULL, `radarCulture` REAL NOT NULL, `studentId` TEXT NOT NULL, `errorCauseJson` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`reportId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `student_table` (`studentId` TEXT NOT NULL, `name` TEXT NOT NULL, `gender` INTEGER NOT NULL, `age` INTEGER NOT NULL, `className` TEXT NOT NULL, `latestScore` REAL NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`studentId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_plan_table` (`planId` TEXT NOT NULL, `title` TEXT NOT NULL, `contentMarkdown` TEXT NOT NULL, `targetClassName` TEXT NOT NULL, `relatedKnowledgeNodeId` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`planId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_question_cross_ref` (`planId` TEXT NOT NULL, `questionId` TEXT NOT NULL, PRIMARY KEY(`planId`, `questionId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6753c75fe26cbdee62568a812f4fddad')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3915de7de54cacdccb59b66174859c08')");
       }
 
       @Override
@@ -62,6 +68,8 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `knowledge_edge_table`");
         db.execSQL("DROP TABLE IF EXISTS `diagnostic_report_table`");
         db.execSQL("DROP TABLE IF EXISTS `student_table`");
+        db.execSQL("DROP TABLE IF EXISTS `lesson_plan_table`");
+        db.execSQL("DROP TABLE IF EXISTS `lesson_question_cross_ref`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -188,9 +196,38 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoStudentTable + "\n"
                   + " Found:\n" + _existingStudentTable);
         }
+        final HashMap<String, TableInfo.Column> _columnsLessonPlanTable = new HashMap<String, TableInfo.Column>(7);
+        _columnsLessonPlanTable.put("planId", new TableInfo.Column("planId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("contentMarkdown", new TableInfo.Column("contentMarkdown", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("targetClassName", new TableInfo.Column("targetClassName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("relatedKnowledgeNodeId", new TableInfo.Column("relatedKnowledgeNodeId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysLessonPlanTable = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesLessonPlanTable = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoLessonPlanTable = new TableInfo("lesson_plan_table", _columnsLessonPlanTable, _foreignKeysLessonPlanTable, _indicesLessonPlanTable);
+        final TableInfo _existingLessonPlanTable = TableInfo.read(db, "lesson_plan_table");
+        if (!_infoLessonPlanTable.equals(_existingLessonPlanTable)) {
+          return new RoomOpenHelper.ValidationResult(false, "lesson_plan_table(com.example.insight.data.local.entities.LessonPlanEntity).\n"
+                  + " Expected:\n" + _infoLessonPlanTable + "\n"
+                  + " Found:\n" + _existingLessonPlanTable);
+        }
+        final HashMap<String, TableInfo.Column> _columnsLessonQuestionCrossRef = new HashMap<String, TableInfo.Column>(2);
+        _columnsLessonQuestionCrossRef.put("planId", new TableInfo.Column("planId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonQuestionCrossRef.put("questionId", new TableInfo.Column("questionId", "TEXT", true, 2, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysLessonQuestionCrossRef = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesLessonQuestionCrossRef = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoLessonQuestionCrossRef = new TableInfo("lesson_question_cross_ref", _columnsLessonQuestionCrossRef, _foreignKeysLessonQuestionCrossRef, _indicesLessonQuestionCrossRef);
+        final TableInfo _existingLessonQuestionCrossRef = TableInfo.read(db, "lesson_question_cross_ref");
+        if (!_infoLessonQuestionCrossRef.equals(_existingLessonQuestionCrossRef)) {
+          return new RoomOpenHelper.ValidationResult(false, "lesson_question_cross_ref(com.example.insight.data.local.entities.LessonQuestionCrossRef).\n"
+                  + " Expected:\n" + _infoLessonQuestionCrossRef + "\n"
+                  + " Found:\n" + _existingLessonQuestionCrossRef);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "6753c75fe26cbdee62568a812f4fddad", "21048bb2d373a556d0b21e8b0c7577f2");
+    }, "3915de7de54cacdccb59b66174859c08", "73ef1fdd20a19fb3996b3b198796dc7e");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -201,7 +238,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_node_table","knowledge_edge_table","diagnostic_report_table","student_table");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_node_table","knowledge_edge_table","diagnostic_report_table","student_table","lesson_plan_table","lesson_question_cross_ref");
   }
 
   @Override
@@ -215,6 +252,8 @@ public final class AppDatabase_Impl extends AppDatabase {
       _db.execSQL("DELETE FROM `knowledge_edge_table`");
       _db.execSQL("DELETE FROM `diagnostic_report_table`");
       _db.execSQL("DELETE FROM `student_table`");
+      _db.execSQL("DELETE FROM `lesson_plan_table`");
+      _db.execSQL("DELETE FROM `lesson_question_cross_ref`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -233,6 +272,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(KnowledgeDao.class, KnowledgeDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(DiagnosticDao.class, DiagnosticDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(StudentDao.class, StudentDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(LessonPlanDao.class, LessonPlanDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -303,6 +343,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _studentDao = new StudentDao_Impl(this);
         }
         return _studentDao;
+      }
+    }
+  }
+
+  @Override
+  public LessonPlanDao lessonPlanDao() {
+    if (_lessonPlanDao != null) {
+      return _lessonPlanDao;
+    } else {
+      synchronized(this) {
+        if(_lessonPlanDao == null) {
+          _lessonPlanDao = new LessonPlanDao_Impl(this);
+        }
+        return _lessonPlanDao;
       }
     }
   }
