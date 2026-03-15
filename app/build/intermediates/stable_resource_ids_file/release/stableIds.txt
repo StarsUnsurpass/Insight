@@ -986,6 +986,7 @@ com.example.insight:anim/btn_checkbox_to_checked_box_outer_merged_animation = 0x
 com.example.insight:style/RtlOverlay.Widget.AppCompat.PopupMenuItem.Text = 0x7f0d00b5
 com.example.insight:attr/popUpToSaveState = 0x7f0300d8
 com.example.insight:attr/subtitleTextStyle = 0x7f030102
+com.example.insight:xml/file_paths = 0x7f0f0000
 com.example.insight:id/homeAsUp = 0x7f080068
 com.example.insight:id/accessibility_custom_action_13 = 0x7f08000c
 com.example.insight:attr/subtitle = 0x7f0300ff

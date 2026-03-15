@@ -27,6 +27,6 @@
       applicationId="com.example.insight"
       generatedSourceFolders="build\generated\source\kapt\release;build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="E:\DevTools\gradle-8.6\caches\transforms-3\e25f920cd28dbf067d5410ea71cbe41a\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="E:\DevTools\gradle-8.6\caches\transforms-3\ab0991c5a67c8c38b3b09ed045a79404\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>

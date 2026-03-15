@@ -5,6 +5,7 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -30,17 +31,31 @@ import com.example.insight.ui.state.ReportConfig
 import com.example.insight.ui.state.ReportFont
 import com.example.insight.ui.state.ChartStyle
 import com.example.insight.ui.state.UserPreferences
+import com.example.insight.ui.theme.SageGreen
 import com.example.insight.util.PdfExportHelper
+
+import com.example.insight.ui.util.MarkdownText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportExportScreen(
     preferences: UserPreferences,
+    aiOutput: String,
+    isStreaming: Boolean,
+    onGenerateAiReport: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
     var config by remember { mutableStateOf(ReportConfig(reportTitle = "${preferences.className} 学情周报")) }
     var isGenerating by remember { mutableStateOf(false) }
+    val listState = rememberLazyListState()
+
+    // Auto-scroll when AI report is generating
+    LaunchedEffect(aiOutput) {
+        if (isStreaming && aiOutput.isNotBlank()) {
+            listState.animateScrollToItem(listState.layoutInfo.totalItemsCount - 1)
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -162,6 +177,56 @@ fun ReportExportScreen(
                                 checked = config.includeStudentList,
                                 onCheckedChange = { config = config.copy(includeStudentList = it) }
                             )
+                        }
+                    }
+
+                    item {
+                        Divider(modifier = Modifier.padding(vertical = 8.dp), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text("DeepSeek 智能学情分析", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                                Text("基于本周全班数据自动生成洞察报告", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                            }
+                            Button(
+                                onClick = onGenerateAiReport,
+                                enabled = !isStreaming,
+                                colors = ButtonDefaults.buttonColors(containerColor = SageGreen),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                if (isStreaming) {
+                                    CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White, strokeWidth = 2.dp)
+                                } else {
+                                    Icon(Icons.Default.AutoAwesome, null, modifier = Modifier.size(16.dp))
+                                    Spacer(Modifier.width(8.dp))
+                                    Text("生成报告", style = MaterialTheme.typography.labelMedium)
+                                }
+                            }
+                        }
+                    }
+
+                    if (aiOutput.isNotBlank() || isStreaming) {
+                        item {
+                            Card(
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = CardDefaults.cardColors(containerColor = SageGreen.copy(alpha = 0.1f)),
+                                shape = RoundedCornerShape(16.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(16.dp)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text("AI 洞察预览", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, color = SageGreen)
+                                        if (isStreaming) {
+                                            @Suppress("DEPRECATION")
+                                            Spacer(Modifier.width(8.dp))
+                                            LinearProgressIndicator(modifier = Modifier.weight(1f).height(2.dp), color = SageGreen)
+                                        }
+                                    }
+                                    Spacer(Modifier.height(12.dp))
+                                    MarkdownText(
+                                        markdown = if (aiOutput.isNotBlank()) aiOutput else "DeepSeek 正在分析海量学情数据...",
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                }
+                            }
                         }
                     }
                 }

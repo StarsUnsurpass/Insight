@@ -1,13 +1,16 @@
 package com.example.insight.ui.navigation;
 
-import androidx.compose.runtime.*;
+import androidx.compose.runtime.Composable;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.ScreenState;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\b\n\u0000\n\u0002\u0010\u0002\n\u0000\u001a\b\u0010\u0000\u001a\u00020\u0001H\u0007\u00a8\u0006\u0002"}, d2 = {"InsightNavHost", "", "app_release"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\u000e\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\u001a\u0010\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u0003H\u0007\u00a8\u0006\u0004"}, d2 = {"InsightNavHost", "", "viewModel", "Lcom/example/insight/ui/state/InsightViewModel;", "app_release"})
 public final class InsightNavHostKt {
     
     @androidx.compose.runtime.Composable()
-    public static final void InsightNavHost() {
+    public static final void InsightNavHost(@org.jetbrains.annotations.NotNull()
+    com.example.insight.ui.state.InsightViewModel viewModel) {
     }
 }

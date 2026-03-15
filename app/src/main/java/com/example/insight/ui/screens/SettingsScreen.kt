@@ -34,12 +34,14 @@ fun SettingsScreen(
     onRoleChange: (UserRole) -> Unit,
     onDarkModeToggle: (Boolean) -> Unit,
     onThemeStyleChange: (ThemeStyle) -> Unit,
-    onHapticToggle: (Boolean) -> Unit
+    onHapticToggle: (Boolean) -> Unit,
+    onDeepSeekApiKeyChange: (String) -> Unit
 ) {
     var showNameDialog by remember { mutableStateOf(false) }
     var showClassDialog by remember { mutableStateOf(false) }
     var showRoleDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showApiKeyDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -134,7 +136,32 @@ fun SettingsScreen(
                     onCheckedChange = onHapticToggle
                 )
             }
+
+            item {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("AI 引擎配置", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+            }
+
+            item {
+                SettingItem(
+                    icon = Icons.Default.AutoAwesome,
+                    title = "DeepSeek API Key",
+                    subtitle = if (preferences.deepSeekApiKey.isBlank()) "未配置" else "已配置 (sk-***)",
+                    onClick = { showApiKeyDialog = true }
+                )
+            }
         }
+    }
+
+    if (showApiKeyDialog) {
+        ApiKeyEditDialog(
+            initialKey = preferences.deepSeekApiKey,
+            onConfirm = {
+                onDeepSeekApiKeyChange(it)
+                showApiKeyDialog = false
+            },
+            onDismiss = { showApiKeyDialog = false }
+        )
     }
 
     if (showNameDialog) {
@@ -180,6 +207,39 @@ fun SettingsScreen(
             onDismiss = { showRoleDialog = false }
         )
     }
+}
+
+@Composable
+fun ApiKeyEditDialog(
+    initialKey: String,
+    onConfirm: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var text by remember { mutableStateOf(initialKey) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("配置 DeepSeek API Key") },
+        text = {
+            Column {
+                Text("请输入你的 DeepSeek API Key。你可以从 DeepSeek 官网获取。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    placeholder = { Text("sk-...") }
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = { onConfirm(text) }) { Text("确认", color = SageGreen) }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) }
+        }
+    )
 }
 
 @Composable

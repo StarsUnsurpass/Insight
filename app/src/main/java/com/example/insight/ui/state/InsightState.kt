@@ -3,7 +3,7 @@ package com.example.insight.ui.state
 sealed class ScreenState {
     object Scanning : ScreenState()
     data class Analyzing(val capturedText: String) : ScreenState()
-    data class Solution(val content: String, val concepts: List<String>) : ScreenState()
+    data class Solution(val content: String, val concepts: List<String>, val capturedText: String = "") : ScreenState()
     object Graph : ScreenState()
 }
 
@@ -43,7 +43,8 @@ data class UserPreferences(
     val role: UserRole = UserRole.Teacher,
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
-    val hapticEnabled: Boolean = true
+    val hapticEnabled: Boolean = true,
+    val deepSeekApiKey: String = "sk-83c0282197994bbd8fa34948f7872ebf"
 )
 
 data class InsightUiState(

@@ -54,8 +54,8 @@ fun InsightNavHost(viewModel: InsightViewModel) {
         composable(Route.Scanner.path) {
             CameraCaptureScreen(
                 onBack = { navController.popBackStack() },
-                onImageCaptured = { _ ->
-                    viewModel.onTextCaptured("Mock captured text")
+                onImageCaptured = { bitmap ->
+                    viewModel.onImageCaptured(bitmap)
                     navController.navigate(Route.Solution.path)
                 },
                 onError = { /* Handle error */ }
@@ -64,17 +64,22 @@ fun InsightNavHost(viewModel: InsightViewModel) {
 
         composable(Route.Solution.path) {
             val state = uiState.screen
+            val aiOutput by viewModel.aiOutput.collectAsState()
             if (state is ScreenState.Solution) {
                 SolutionScreen(
+                    capturedText = state.capturedText,
                     content = state.content,
                     concepts = state.concepts,
+                    aiOutput = aiOutput,
+                    isStreaming = uiState.isStreaming,
                     onBack = { 
                         viewModel.reset()
                         navController.popBackStack()
                     },
                     onShowGraph = {
                         navController.navigate(Route.Starfield.path)
-                    }
+                    },
+                    onGenerateSimilar = { viewModel.generateSimilarQuestions(it) }
                 )
             }
         }
@@ -94,13 +99,18 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onRoleChange = { viewModel.updateUserRole(it) },
                 onDarkModeToggle = { viewModel.updateDarkMode(it) },
                 onThemeStyleChange = { viewModel.updateThemeStyle(it) },
-                onHapticToggle = { viewModel.updateHapticFeedback(it) }
+                onHapticToggle = { viewModel.updateHapticFeedback(it) },
+                onDeepSeekApiKeyChange = { viewModel.updateDeepSeekApiKey(it) }
             )
         }
 
         composable(Route.Export.path) {
+            val aiOutput by viewModel.aiOutput.collectAsState()
             ReportExportScreen(
                 preferences = uiState.preferences,
+                aiOutput = aiOutput,
+                isStreaming = uiState.isStreaming,
+                onGenerateAiReport = { viewModel.generateWeeklyReport() },
                 onBack = { navController.popBackStack() }
             )
         }

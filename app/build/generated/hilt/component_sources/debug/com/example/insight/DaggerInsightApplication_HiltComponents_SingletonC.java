@@ -12,14 +12,21 @@ import com.example.insight.data.local.AppDatabase;
 import com.example.insight.data.local.dao.DiagnosticDao;
 import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.ScanDao;
+import com.example.insight.data.remote.DeepSeekApiService;
+import com.example.insight.data.repository.DeepSeekRepository;
 import com.example.insight.data.repository.InsightRepository;
 import com.example.insight.di.AppModule_ProvideAppDatabaseFactory;
 import com.example.insight.di.AppModule_ProvideDiagnosticDaoFactory;
 import com.example.insight.di.AppModule_ProvideKnowledgeDaoFactory;
 import com.example.insight.di.AppModule_ProvidePreferenceManagerFactory;
 import com.example.insight.di.AppModule_ProvideScanDaoFactory;
+import com.example.insight.di.AppModule_ProvideTextRecognizerFactory;
+import com.example.insight.di.NetworkModule_ProvideDeepSeekApiServiceFactory;
+import com.example.insight.di.NetworkModule_ProvideOkHttpClientFactory;
+import com.example.insight.di.NetworkModule_ProvideRetrofitFactory;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.InsightViewModel_HiltModules_KeyModule_ProvideFactory;
+import com.google.mlkit.vision.text.TextRecognizer;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
 import dagger.hilt.android.internal.builders.ActivityComponentBuilder;
@@ -42,6 +49,8 @@ import dagger.internal.Provider;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 @DaggerGenerated
 @SuppressWarnings({
@@ -446,7 +455,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.example.insight.ui.state.InsightViewModel 
-          return (T) new InsightViewModel(singletonCImpl.insightRepositoryProvider.get());
+          return (T) new InsightViewModel(singletonCImpl.insightRepositoryProvider.get(), singletonCImpl.deepSeekRepositoryProvider.get(), singletonCImpl.provideTextRecognizerProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -534,6 +543,16 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     private Provider<InsightRepository> insightRepositoryProvider;
 
+    private Provider<OkHttpClient> provideOkHttpClientProvider;
+
+    private Provider<Retrofit> provideRetrofitProvider;
+
+    private Provider<DeepSeekApiService> provideDeepSeekApiServiceProvider;
+
+    private Provider<DeepSeekRepository> deepSeekRepositoryProvider;
+
+    private Provider<TextRecognizer> provideTextRecognizerProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -557,6 +576,11 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       this.providePreferenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<PreferenceManager>(singletonCImpl, 1));
       this.provideAppDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<AppDatabase>(singletonCImpl, 2));
       this.insightRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<InsightRepository>(singletonCImpl, 0));
+      this.provideOkHttpClientProvider = DoubleCheck.provider(new SwitchingProvider<OkHttpClient>(singletonCImpl, 6));
+      this.provideRetrofitProvider = DoubleCheck.provider(new SwitchingProvider<Retrofit>(singletonCImpl, 5));
+      this.provideDeepSeekApiServiceProvider = DoubleCheck.provider(new SwitchingProvider<DeepSeekApiService>(singletonCImpl, 4));
+      this.deepSeekRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<DeepSeekRepository>(singletonCImpl, 3));
+      this.provideTextRecognizerProvider = DoubleCheck.provider(new SwitchingProvider<TextRecognizer>(singletonCImpl, 7));
     }
 
     @Override
@@ -600,6 +624,21 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
           case 2: // com.example.insight.data.local.AppDatabase 
           return (T) AppModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));
+
+          case 3: // com.example.insight.data.repository.DeepSeekRepository 
+          return (T) new DeepSeekRepository(singletonCImpl.provideDeepSeekApiServiceProvider.get(), singletonCImpl.scanDao(), singletonCImpl.knowledgeDao(), singletonCImpl.diagnosticDao());
+
+          case 4: // com.example.insight.data.remote.DeepSeekApiService 
+          return (T) NetworkModule_ProvideDeepSeekApiServiceFactory.provideDeepSeekApiService(singletonCImpl.provideRetrofitProvider.get());
+
+          case 5: // retrofit2.Retrofit 
+          return (T) NetworkModule_ProvideRetrofitFactory.provideRetrofit(singletonCImpl.provideOkHttpClientProvider.get());
+
+          case 6: // okhttp3.OkHttpClient 
+          return (T) NetworkModule_ProvideOkHttpClientFactory.provideOkHttpClient();
+
+          case 7: // com.google.mlkit.vision.text.TextRecognizer 
+          return (T) AppModule_ProvideTextRecognizerFactory.provideTextRecognizer();
 
           default: throw new AssertionError(id);
         }

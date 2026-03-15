@@ -84,6 +84,9 @@ MERGED from [androidx.sqlite:sqlite:2.4.0] E:\DevTools\gradle-8.6\caches\transfo
 MERGED from [androidx.datastore:datastore:1.0.0] E:\DevTools\gradle-8.6\caches\transforms-3\c562b6aabefb46e6e9bb187d046ef119\transformed\jetified-datastore-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] E:\DevTools\gradle-8.6\caches\transforms-3\5f6e5535cd2fa104bf2ec3f7f8eeb045\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.6.1] E:\DevTools\gradle-8.6\caches\transforms-3\c51ae72188454dccadbaaeed021a2041\transformed\jetified-runtime-release\AndroidManifest.xml:2:1-7:12
+MERGED from [io.noties.markwon:ext-tables:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\7273430e7f649e1bb1cf5bd47aa62f4a\transformed\jetified-ext-tables-4.6.2\AndroidManifest.xml:2:1-11:12
+MERGED from [io.noties.markwon:html:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\b3c79612638af0564868085c258f6d1e\transformed\jetified-html-4.6.2\AndroidManifest.xml:2:1-11:12
+MERGED from [io.noties.markwon:core:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\e10b840a9d46829e5da5cf8555481ef8\transformed\jetified-core-4.6.2\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] E:\DevTools\gradle-8.6\caches\transforms-3\a6d42f343f08a329c2661b0577ac3d62\transformed\exifinterface-1.3.2\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\transforms-3\35fb012b8cdf724638d5d6597b930a4b\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\transforms-3\16ebfe706e3a17b5d3c2429e100a5035\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:15:1-41:12
@@ -390,6 +393,12 @@ MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] E:\DevTool
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] E:\DevTools\gradle-8.6\caches\transforms-3\5f6e5535cd2fa104bf2ec3f7f8eeb045\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.1] E:\DevTools\gradle-8.6\caches\transforms-3\c51ae72188454dccadbaaeed021a2041\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.1] E:\DevTools\gradle-8.6\caches\transforms-3\c51ae72188454dccadbaaeed021a2041\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [io.noties.markwon:ext-tables:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\7273430e7f649e1bb1cf5bd47aa62f4a\transformed\jetified-ext-tables-4.6.2\AndroidManifest.xml:7:5-9:41
+MERGED from [io.noties.markwon:ext-tables:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\7273430e7f649e1bb1cf5bd47aa62f4a\transformed\jetified-ext-tables-4.6.2\AndroidManifest.xml:7:5-9:41
+MERGED from [io.noties.markwon:html:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\b3c79612638af0564868085c258f6d1e\transformed\jetified-html-4.6.2\AndroidManifest.xml:7:5-9:41
+MERGED from [io.noties.markwon:html:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\b3c79612638af0564868085c258f6d1e\transformed\jetified-html-4.6.2\AndroidManifest.xml:7:5-9:41
+MERGED from [io.noties.markwon:core:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\e10b840a9d46829e5da5cf8555481ef8\transformed\jetified-core-4.6.2\AndroidManifest.xml:7:5-9:41
+MERGED from [io.noties.markwon:core:4.6.2] E:\DevTools\gradle-8.6\caches\transforms-3\e10b840a9d46829e5da5cf8555481ef8\transformed\jetified-core-4.6.2\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] E:\DevTools\gradle-8.6\caches\transforms-3\a6d42f343f08a329c2661b0577ac3d62\transformed\exifinterface-1.3.2\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] E:\DevTools\gradle-8.6\caches\transforms-3\a6d42f343f08a329c2661b0577ac3d62\transformed\exifinterface-1.3.2\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\transforms-3\35fb012b8cdf724638d5d6597b930a4b\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:19:5-21:41

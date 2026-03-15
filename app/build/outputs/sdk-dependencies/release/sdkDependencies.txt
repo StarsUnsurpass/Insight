@@ -1299,6 +1299,96 @@ library {
     sha256: "\255@\304\255\256\204\200v\376\364\033tt\231\241\005\017ERS\234\017B\267Ge\344:w\336\256\332"
   }
 }
+library {
+  maven_library {
+    groupId: "androidx.room"
+    artifactId: "room-runtime"
+    version: "2.6.1"
+  }
+  digests {
+    sha256: "ibO\327\255\326\316[\374\301#b\315BsA\322\221\016\'~\325\246\374\304a2\244\211\221\024\320"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.room"
+    artifactId: "room-common"
+    version: "2.6.1"
+  }
+  digests {
+    sha256: "\2312m>\354\244\246Fq\274\210\002\361\344_Nk4\216\214\177\253\2420\303\205M1h\t\377\317"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.room"
+    artifactId: "room-ktx"
+    version: "2.6.1"
+  }
+  digests {
+    sha256: "\332L\f\272~\374\257\242\237\276\253\035\264\031\204#\217%\301\2436\022\301\326\rc\271\225\226\215p\312"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.sqlite"
+    artifactId: "sqlite"
+    version: "2.4.0"
+  }
+  digests {
+    sha256: "\273\177\241\023\021/~HWIn\".0Q\327:\221\n\335t\277@v\036\033\332\345[\002\026\257"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.sqlite"
+    artifactId: "sqlite-framework"
+    version: "2.4.0"
+  }
+  digests {
+    sha256: "\312nP3\"\262\346\003t\302\263l\225\305\v\026p\235\223\210\3766\350\017\262=\341\373\367\246\353\225"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.datastore"
+    artifactId: "datastore-preferences"
+    version: "1.0.0"
+  }
+  digests {
+    sha256: "o\232\307 \202\272\333wdG\315\325y\301l%\301\201\'\030\\k\251\362\317\253\222FG>-\261"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.datastore"
+    artifactId: "datastore"
+    version: "1.0.0"
+  }
+  digests {
+    sha256: "(\376\242\2156[J\357M^\2072\376Q\3623\345\200\322\004,\324\247\nk):Q\215\256\307\003"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.datastore"
+    artifactId: "datastore-core"
+    version: "1.0.0"
+  }
+  digests {
+    sha256: "\310\020PUB\000\025\223\aQ\2315[\031\331\213\205^\3346\331W[\327d\030\003!\342\n\222\274"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.datastore"
+    artifactId: "datastore-preferences-core"
+    version: "1.0.0"
+  }
+  digests {
+    sha256: "\255T\3363J\320\364\245:[\244\030v\371\026\2041\232\214\3639c\025\267g\265\021\002\244\023\213\321"
+  }
+}
 library_dependencies {
   library_dep_index: 1
   library_dep_index: 2
@@ -2496,6 +2586,69 @@ library_dependencies {
   library_dep_index: 132
   library_dep_index: 133
 }
+library_dependencies {
+  library_index: 137
+  library_dep_index: 9
+  library_dep_index: 18
+  library_dep_index: 138
+  library_dep_index: 140
+  library_dep_index: 141
+  library_dep_index: 138
+  library_dep_index: 139
+}
+library_dependencies {
+  library_index: 138
+  library_dep_index: 6
+  library_dep_index: 2
+  library_dep_index: 139
+  library_dep_index: 137
+}
+library_dependencies {
+  library_index: 139
+  library_dep_index: 138
+  library_dep_index: 137
+  library_dep_index: 0
+  library_dep_index: 20
+  library_dep_index: 138
+  library_dep_index: 137
+}
+library_dependencies {
+  library_index: 140
+  library_dep_index: 6
+  library_dep_index: 0
+  library_dep_index: 141
+}
+library_dependencies {
+  library_index: 141
+  library_dep_index: 6
+  library_dep_index: 140
+  library_dep_index: 0
+  library_dep_index: 140
+}
+library_dependencies {
+  library_index: 142
+  library_dep_index: 0
+  library_dep_index: 143
+  library_dep_index: 145
+}
+library_dependencies {
+  library_index: 143
+  library_dep_index: 0
+  library_dep_index: 21
+  library_dep_index: 6
+  library_dep_index: 144
+}
+library_dependencies {
+  library_index: 144
+  library_dep_index: 0
+  library_dep_index: 21
+  library_dep_index: 6
+}
+library_dependencies {
+  library_index: 145
+  library_dep_index: 0
+  library_dep_index: 144
+}
 module_dependencies {
   module_name: "base"
   dependency_index: 0
@@ -2519,6 +2672,9 @@ module_dependencies {
   dependency_index: 108
   dependency_index: 126
   dependency_index: 130
+  dependency_index: 137
+  dependency_index: 139
+  dependency_index: 142
   dependency_index: 135
 }
 repositories {

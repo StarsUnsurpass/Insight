@@ -1,6 +1,7 @@
 package com.example.insight.data.local.dao;
 
 import android.database.Cursor;
+import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
@@ -216,6 +217,55 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Object getAllNodes(final Continuation<? super List<KnowledgeNodeEntity>> $completion) {
+    final String _sql = "SELECT * FROM knowledge_node_table";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<KnowledgeNodeEntity>>() {
+      @Override
+      @NonNull
+      public List<KnowledgeNodeEntity> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
+          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+          final int _cursorIndexOfMasteryLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "masteryLevel");
+          final int _cursorIndexOfCanvasX = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasX");
+          final int _cursorIndexOfCanvasY = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasY");
+          final List<KnowledgeNodeEntity> _result = new ArrayList<KnowledgeNodeEntity>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final KnowledgeNodeEntity _item;
+            final String _tmpNodeId;
+            if (_cursor.isNull(_cursorIndexOfNodeId)) {
+              _tmpNodeId = null;
+            } else {
+              _tmpNodeId = _cursor.getString(_cursorIndexOfNodeId);
+            }
+            final String _tmpTitle;
+            if (_cursor.isNull(_cursorIndexOfTitle)) {
+              _tmpTitle = null;
+            } else {
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+            }
+            final float _tmpMasteryLevel;
+            _tmpMasteryLevel = _cursor.getFloat(_cursorIndexOfMasteryLevel);
+            final float _tmpCanvasX;
+            _tmpCanvasX = _cursor.getFloat(_cursorIndexOfCanvasX);
+            final float _tmpCanvasY;
+            _tmpCanvasY = _cursor.getFloat(_cursorIndexOfCanvasY);
+            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpMasteryLevel,_tmpCanvasX,_tmpCanvasY);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @Override

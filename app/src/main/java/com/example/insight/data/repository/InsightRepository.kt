@@ -24,6 +24,7 @@ class InsightRepository @Inject constructor(
     suspend fun updateDarkMode(enabled: Boolean) = preferenceManager.updateDarkMode(enabled)
     suspend fun updateThemeStyle(style: ThemeStyle) = preferenceManager.updateThemeStyle(style)
     suspend fun updateHapticFeedback(enabled: Boolean) = preferenceManager.updateHapticFeedback(enabled)
+    suspend fun updateDeepSeekApiKey(apiKey: String) = preferenceManager.updateDeepSeekApiKey(apiKey)
 
     // Scans
     fun getAllScans(): Flow<List<ScanRecordEntity>> = scanDao.getAllScansFlow()

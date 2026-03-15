@@ -23,19 +23,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
+import com.example.insight.ui.util.MarkdownText
 import com.example.insight.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun SolutionScreen(
+    capturedText: String,
     content: String,
     concepts: List<String>,
+    aiOutput: String,
+    isStreaming: Boolean,
     onBack: () -> Unit,
-    onShowGraph: () -> Unit
+    onShowGraph: () -> Unit,
+    onGenerateSimilar: (String) -> Unit
 ) {
     val scrollState = rememberLazyListState()
     var isOcrVisible by remember { mutableStateOf(false) }
     val primaryColor = MaterialTheme.colorScheme.primary
+
+    // Auto-scroll when AI is streaming
+    LaunchedEffect(aiOutput) {
+        if (isStreaming && aiOutput.isNotBlank()) {
+            scrollState.animateScrollToItem(scrollState.layoutInfo.totalItemsCount - 1)
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize().background(primaryColor)) {
         // 1. Background Layer (Blurred context)
@@ -76,7 +88,7 @@ fun SolutionScreen(
                                 Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
                             }
                             Text(
-                                "深度解析",
+                                "DeepSeek 智能解析",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -88,78 +100,86 @@ fun SolutionScreen(
                     }
                 }
 
-                // Module 1: Original Problem & OCR Toggle
+                // Module 1: Original Problem (Captured Text)
                 item {
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(160.dp)
+                                .heightIn(min = 80.dp)
                                 .clip(RoundedCornerShape(16.dp))
                                 .background(MaterialTheme.colorScheme.surfaceVariant)
                                 .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f), RoundedCornerShape(16.dp))
                         ) {
-                            if (!isOcrVisible) {
-                                // Placeholder for original image
-                                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    Icon(imageVector = Icons.Outlined.Image, contentDescription = "Original", modifier = Modifier.size(48.dp), tint = SageGreen.copy(alpha = 0.5f))
-                                    Text("原题重现", style = MaterialTheme.typography.labelSmall, modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 12.dp), color = SageGreen)
-                                }
-                            } else {
-                                // OCR Text View
-                                Text(
-                                    text = "Which of the following best describes the author's attitude towards the new policy?",
-                                    modifier = Modifier.padding(20.dp),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                            }
-                            
-                            // OCR Toggle
-                            TextButton(
-                                onClick = { isOcrVisible = !isOcrVisible },
-                                modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
-                                colors = ButtonDefaults.textButtonColors(contentColor = primaryColor)
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = if (isOcrVisible) Icons.Default.Image else Icons.Default.TextFields, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    @Suppress("DEPRECATION")
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(if (isOcrVisible) "查看原图" else "查看文本", style = MaterialTheme.typography.labelSmall)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Module 2: Core Result (Standard Answer)
-                item {
-                    Card(
-                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
-                        colors = CardDefaults.cardColors(containerColor = primaryColor),
-                        shape = RoundedCornerShape(20.dp)
-                    ) {
-                        Column(modifier = Modifier.padding(20.dp)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, tint = SageGreen, modifier = Modifier.size(20.dp))
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text("标准答案 / Standard Answer", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f))
-                            }
-                            Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                "Option C: The policy is viewed as a necessary but ambitious step.",
-                                style = MaterialTheme.typography.titleLarge,
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                fontWeight = FontWeight.Bold
+                                text = capturedText,
+                                modifier = Modifier.padding(16.dp),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                         }
                     }
                 }
 
-                // Module 3: Knowledge Tags
+                // Module 2: AI Output Flow
                 item {
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
-                        Text("考点标签", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = null, tint = SageGreen, modifier = Modifier.size(20.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("解析结果", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+                            if (isStreaming) {
+                                Spacer(modifier = Modifier.width(8.dp))
+                                CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 2.dp)
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+                                .padding(16.dp)
+                        ) {
+                            MarkdownText(
+                                markdown = if (aiOutput.isNotBlank()) aiOutput else "正在深度思考中...",
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
+
+                // Module 3: AI Action Buttons (Prompt Chips)
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp, vertical = 12.dp)
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        ActionChip(
+                            icon = Icons.Default.Add,
+                            label = "一键生成相似题",
+                            onClick = { onGenerateSimilar(capturedText) }
+                        )
+                        ActionChip(
+                            icon = Icons.Default.Translate,
+                            label = "翻译成大白话",
+                            onClick = { /* Simple explanation */ }
+                        )
+                        ActionChip(
+                            icon = Icons.Default.Quiz,
+                            label = "生成随堂测验",
+                            onClick = { /* Quiz */ }
+                        )
+                    }
+                }
+
+                // Module 4: Knowledge Tags
+                item {
+                    Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
+                        Text("关联知识点", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(12.dp))
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -183,62 +203,27 @@ fun SolutionScreen(
                     }
                 }
 
-                // Module 4: Analysis Flow
+                // Module 4: Knowledge Tags
                 item {
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
-                        AnalysisStepCard(
-                            title = "破题思路",
-                            content = content,
-                            icon = Icons.Outlined.Lightbulb
-                        )
+                        Text("关联知识点", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(12.dp))
-                        AnalysisStepCard(
-                            title = "干扰项排除",
-                            content = "A选项中的 'skeptical' 与原文中的 'essential' 矛盾；B选项过度解读了作者的担忧。",
-                            icon = Icons.Outlined.GppBad
-                        )
-                    }
-                }
-
-                // Module 5: Extension (Related Knowledge)
-                item {
-                    Column(modifier = Modifier.padding(top = 12.dp)) {
-                        Text(
-                            "知识延展",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = SageGreen,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(horizontal = 20.dp)
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 20.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            items(3) { index ->
-                                Card(
-                                    modifier = Modifier.width(240.dp),
-                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                                    shape = RoundedCornerShape(16.dp)
+                            concepts.forEach { concept ->
+                                Surface(
+                                    color = MaterialTheme.colorScheme.surfaceVariant,
+                                    shape = RoundedCornerShape(12.dp),
+                                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
                                 ) {
-                                    Column(modifier = Modifier.padding(16.dp)) {
-                                        Text(
-                                            if (index == 0) "复习：一般过去时" else "类似真题：2023 模拟 B 篇",
-                                            style = MaterialTheme.typography.titleSmall,
-                                            fontWeight = FontWeight.Bold,
-                                            color = primaryColor
-                                        )
-                                        Spacer(modifier = Modifier.height(8.dp))
-                                        Text(
-                                            "在掌握此考点前，建议先巩固基础概念。",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                                        )
-                                        Spacer(modifier = Modifier.height(12.dp))
-                                        TextButton(onClick = { /* Jump */ }, contentPadding = PaddingValues(0.dp)) {
-                                            Text("点击跳转 ->", style = MaterialTheme.typography.labelSmall, color = SageGreen)
-                                        }
-                                    }
+                                    Text(
+                                        text = concept,
+                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = primaryColor
+                                    )
                                 }
                             }
                         }
@@ -268,21 +253,20 @@ fun SolutionScreen(
 }
 
 @Composable
-fun AnalysisStepCard(title: String, content: String, icon: ImageVector) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant)
-            .padding(16.dp)
+fun ActionChip(icon: ImageVector, label: String, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
     ) {
-        Icon(imageVector = icon, contentDescription = null, tint = SageGreen, modifier = Modifier.size(24.dp))
-        Spacer(modifier = Modifier.width(12.dp))
-        Column {
-            Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = primaryColor)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(content, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface, lineHeight = 22.sp)
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
         }
     }
 }

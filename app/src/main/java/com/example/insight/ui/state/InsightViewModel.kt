@@ -3,6 +3,8 @@ package com.example.insight.ui.state
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.insight.data.repository.InsightRepository
+import com.example.insight.data.repository.DeepSeekRepository
+import com.example.insight.data.remote.DeepSeekMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,13 +14,22 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognizer
+import android.graphics.Bitmap
+
 @HiltViewModel
 class InsightViewModel @Inject constructor(
-    private val repository: InsightRepository
+    private val repository: InsightRepository,
+    private val deepSeekRepository: DeepSeekRepository,
+    private val textRecognizer: TextRecognizer
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(InsightUiState())
     val uiState: StateFlow<InsightUiState> = _uiState.asStateFlow()
+
+    private val _aiOutput = MutableStateFlow("")
+    val aiOutput: StateFlow<String> = _aiOutput.asStateFlow()
 
     init {
         // Collect preferences from DataStore
@@ -29,26 +40,107 @@ class InsightViewModel @Inject constructor(
         }
     }
 
+    fun onImageCaptured(bitmap: Bitmap) {
+        val image = InputImage.fromBitmap(bitmap, 0)
+        _uiState.update { it.copy(screen = ScreenState.Analyzing("正在识别文字...")) }
+        
+        textRecognizer.process(image)
+            .addOnSuccessListener { visionText ->
+                val text = visionText.text
+                if (text.isNotBlank()) {
+                    onTextCaptured(text)
+                } else {
+                    _uiState.update { it.copy(screen = ScreenState.Scanning) }
+                }
+            }
+            .addOnFailureListener {
+                _uiState.update { it.copy(screen = ScreenState.Scanning) }
+            }
+    }
+
     fun onTextCaptured(text: String) {
-        _uiState.update { it.copy(screen = ScreenState.Analyzing(text)) }
+        _uiState.update { it.copy(screen = ScreenState.Solution(content = "", concepts = emptyList(), capturedText = text)) }
         startAnalysis(text)
     }
 
     private fun startAnalysis(text: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isStreaming = true) }
-            android.util.Log.d("InsightVM", "Analyzing: $text")
-            delay(2000)
-            val mockSolution = "基于题目解析：这是一个经典的虚拟语气结构。在本句中，'If' 引导的条件句使用了过去完成时，表示对过去的虚拟..."
-            val mockConcepts = listOf("虚拟语气", "混合时态", "If条件句")
+            _aiOutput.value = ""
             
-            _uiState.update { 
-                it.copy(
-                    screen = ScreenState.Solution(mockSolution, mockConcepts),
-                    isStreaming = false
-                ) 
+            val apiKey = uiState.value.preferences.deepSeekApiKey
+            if (apiKey.isBlank()) {
+                _aiOutput.value = "请先在设置中配置 DeepSeek API Key"
+                _uiState.update { it.copy(isStreaming = false) }
+                return@launch
+            }
+
+            try {
+                deepSeekRepository.streamChat(
+                    apiKey,
+                    listOf(
+                        DeepSeekMessage("system", "你是一位资深的英语老师。请详细解析以下内容，指出考点和解题思路。使用 Markdown 格式。"),
+                        DeepSeekMessage("user", text)
+                    )
+                ).collect { chunk ->
+                    _aiOutput.value += chunk
+                }
+            } catch (e: Exception) {
+                _aiOutput.value = "分析出错: ${e.message}"
+            } finally {
+                _uiState.update { it.copy(isStreaming = false) }
             }
         }
+    }
+
+    fun generateWeeklyReport() {
+        viewModelScope.launch {
+            val apiKey = uiState.value.preferences.deepSeekApiKey
+            if (apiKey.isBlank()) {
+                _aiOutput.value = "请先在设置中配置 DeepSeek API Key"
+                return@launch
+            }
+
+            _uiState.update { it.copy(isStreaming = true) }
+            _aiOutput.value = ""
+            
+            try {
+                deepSeekRepository.generateWeeklyReport(apiKey).collect { chunk ->
+                    _aiOutput.value += chunk
+                }
+            } catch (e: Exception) {
+                _aiOutput.value = "生成报告出错: ${e.message}"
+            } finally {
+                _uiState.update { it.copy(isStreaming = false) }
+            }
+        }
+    }
+
+    fun generateSimilarQuestions(text: String) {
+        viewModelScope.launch {
+            val apiKey = uiState.value.preferences.deepSeekApiKey
+            if (apiKey.isBlank()) {
+                _aiOutput.value = "请先在设置中配置 DeepSeek API Key"
+                return@launch
+            }
+
+            _uiState.update { it.copy(isStreaming = true) }
+            _aiOutput.value = ""
+            
+            try {
+                deepSeekRepository.getSimilarQuestions(apiKey, text).collect { chunk ->
+                    _aiOutput.value += chunk
+                }
+            } catch (e: Exception) {
+                _aiOutput.value = "生成相似题出错: ${e.message}"
+            } finally {
+                _uiState.update { it.copy(isStreaming = false) }
+            }
+        }
+    }
+
+    fun updateDeepSeekApiKey(key: String) {
+        viewModelScope.launch { repository.updateDeepSeekApiKey(key) }
     }
 
     fun updateUsername(name: String) {

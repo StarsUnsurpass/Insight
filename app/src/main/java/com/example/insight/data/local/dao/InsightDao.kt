@@ -12,6 +12,9 @@ interface ScanDao {
     @Query("SELECT * FROM scan_record_table ORDER BY createdAt DESC")
     fun getAllScansFlow(): Flow<List<ScanRecordEntity>>
 
+    @Query("SELECT * FROM scan_record_table")
+    suspend fun getAllScans(): List<ScanRecordEntity>
+
     @Query("SELECT COUNT(*) FROM scan_record_table")
     fun getScanCountFlow(): Flow<Int>
 
@@ -29,6 +32,9 @@ interface KnowledgeDao {
 
     @Query("SELECT * FROM knowledge_node_table")
     fun getAllNodesFlow(): Flow<List<KnowledgeNodeEntity>>
+
+    @Query("SELECT * FROM knowledge_node_table")
+    suspend fun getAllNodes(): List<KnowledgeNodeEntity>
 
     @Query("SELECT * FROM knowledge_edge_table")
     fun getAllEdgesFlow(): Flow<List<KnowledgeEdgeEntity>>

@@ -88,7 +88,13 @@ dependencies {
 
     // Net
     implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.okhttp.sse)
+
+    // Markdown
+    implementation("io.noties.markwon:core:4.6.2")
+    implementation("io.noties.markwon:ext-tables:4.6.2")
+    implementation("io.noties.markwon:html:4.6.2")
 
     // Camera & ML
     implementation(libs.androidx.camera.core)

@@ -1,6 +1,7 @@
 package com.example.insight;
 
 import com.example.insight.di.AppModule;
+import com.example.insight.di.NetworkModule;
 import com.example.insight.ui.state.InsightViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -121,7 +122,8 @@ public final class InsightApplication_HiltComponents {
           ApplicationContextModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           ActivityRetainedCBuilderModule.class,
-          ServiceCBuilderModule.class
+          ServiceCBuilderModule.class,
+          NetworkModule.class
       }
   )
   @Singleton

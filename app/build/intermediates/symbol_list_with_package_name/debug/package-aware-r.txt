@@ -823,6 +823,9 @@ id line1
 id line3
 id listMode
 id list_item
+id markwon_drawables_scheduler
+id markwon_drawables_scheduler_last_text_hashcode
+id markwon_tables_scheduler
 id message
 id middle
 id multiply
