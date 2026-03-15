@@ -16,6 +16,7 @@ import com.example.insight.ui.screens.ReportExportScreen
 import com.example.insight.ui.screens.SettingsScreen
 import com.example.insight.ui.screens.SolutionScreen
 import com.example.insight.ui.screens.StudentDetailScreen
+import com.example.insight.ui.screens.StudentListScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
 
@@ -26,6 +27,7 @@ sealed class Route(val path: String) {
     object Starfield : Route("starfield")
     object Settings : Route("settings")
     object Export : Route("export")
+    object StudentList : Route("student_list")
     object StudentDetail : Route("student_detail")
 }
 
@@ -52,6 +54,9 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToStudentDetail = {
                     navController.navigate(Route.StudentDetail.path)
+                },
+                onNavigateToStudentList = {
+                    navController.navigate(Route.StudentList.path)
                 }
             )
         }
@@ -121,6 +126,19 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 isStreaming = uiState.isStreaming,
                 onGenerateAiReport = { viewModel.generateWeeklyReport() },
                 onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Route.StudentList.path) {
+            StudentListScreen(
+                students = uiState.students,
+                onBack = { navController.popBackStack() },
+                onStudentClick = { 
+                    viewModel.selectStudent(it)
+                    navController.navigate(Route.StudentDetail.path)
+                },
+                onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
+                onImportStudents = { viewModel.importStudents(it) }
             )
         }
 

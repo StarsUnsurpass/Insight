@@ -13,6 +13,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -72,7 +75,8 @@ fun MainScreen(
     onNavigateToScanner: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
-    onNavigateToStudentDetail: (String) -> Unit
+    onNavigateToStudentDetail: (String) -> Unit,
+    onNavigateToStudentList: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -135,6 +139,7 @@ fun MainScreen(
                                 },
                                 onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
                                 onImportStudents = { viewModel.importStudents(it) },
+                                onManageStudents = onNavigateToStudentList,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport
                             )
@@ -364,29 +369,16 @@ fun HomeTab(preferences: UserPreferences) {
 
 @Composable
 fun ProfileTab(
-    preferences: UserPreferences, 
+    preferences: UserPreferences,
     students: List<com.example.insight.data.local.entities.StudentEntity>,
     onStudentClick: (String) -> Unit,
     onAddStudent: (String, Int, Int, String, Float) -> Unit,
     onImportStudents: (List<com.example.insight.data.local.entities.StudentEntity>) -> Unit,
+    onManageStudents: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    var isManagingStudents by rememberSaveable { mutableStateOf(false) }
-
-    if (isManagingStudents && preferences.role == UserRole.Teacher) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            StudentListScreen(
-                students = students,
-                onBack = { isManagingStudents = false },
-                onStudentClick = onStudentClick,
-                onAddStudent = onAddStudent,
-                onImportStudents = onImportStudents
-            )
-        }
-        return
-    }
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         item {
@@ -423,7 +415,7 @@ fun ProfileTab(
                 Text("教务管理", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(12.dp))
                 Card(
-                    modifier = Modifier.fillMaxWidth().clickable { isManagingStudents = true },
+                    modifier = Modifier.fillMaxWidth().clickable { onManageStudents() },
                     shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
                     border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
@@ -437,7 +429,7 @@ fun ProfileTab(
                             Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                             Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                         }
-                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = primaryColor)
+                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor)
                     }
                 }
             }
@@ -542,7 +534,7 @@ fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) 
     Row(modifier = Modifier.fillMaxWidth().clickable(enabled = onClick != null) { onClick?.invoke() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
         Spacer(modifier = Modifier.width(16.dp)); Text(title, style = MaterialTheme.typography.bodyMedium); Spacer(modifier = Modifier.weight(1f))
-        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
+        Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
     }
 }
 
