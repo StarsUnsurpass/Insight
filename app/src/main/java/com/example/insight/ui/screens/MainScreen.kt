@@ -132,13 +132,6 @@ fun MainScreen(
                             InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
-                                students = uiState.students,
-                                onStudentClick = { 
-                                    viewModel.selectStudent(it)
-                                    onNavigateToStudentDetail(it) 
-                                },
-                                onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
-                                onImportStudents = { viewModel.importStudents(it) },
                                 onManageStudents = onNavigateToStudentList,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport
@@ -370,10 +363,6 @@ fun HomeTab(preferences: UserPreferences) {
 @Composable
 fun ProfileTab(
     preferences: UserPreferences,
-    students: List<com.example.insight.data.local.entities.StudentEntity>,
-    onStudentClick: (String) -> Unit,
-    onAddStudent: (String, Int, Int, String, Float) -> Unit,
-    onImportStudents: (List<com.example.insight.data.local.entities.StudentEntity>) -> Unit,
     onManageStudents: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit
@@ -524,9 +513,16 @@ fun MapTab(preferences: UserPreferences) {
 @Composable
 fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    Card(modifier = modifier, shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.1f))) {
+    Card(
+        modifier = modifier, 
+        shape = RoundedCornerShape(24.dp), 
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+    ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = primaryColor); Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
+            Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+            Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
         }
     }
 }
