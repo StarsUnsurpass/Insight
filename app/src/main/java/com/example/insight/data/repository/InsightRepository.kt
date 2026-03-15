@@ -13,7 +13,8 @@ class InsightRepository @Inject constructor(
     private val preferenceManager: PreferenceManager,
     private val scanDao: ScanDao,
     private val knowledgeDao: KnowledgeDao,
-    private val diagnosticDao: DiagnosticDao
+    private val diagnosticDao: DiagnosticDao,
+    private val studentDao: StudentDao
 ) {
     // Preferences
     val userPreferencesFlow: Flow<UserPreferences> = preferenceManager.userPreferencesFlow
@@ -28,6 +29,7 @@ class InsightRepository @Inject constructor(
 
     // Scans
     fun getAllScans(): Flow<List<ScanRecordEntity>> = scanDao.getAllScansFlow()
+    fun getScansByStudent(studentId: String): Flow<List<ScanRecordEntity>> = scanDao.getScansByStudentFlow(studentId)
     suspend fun saveScanResult(record: ScanRecordEntity) = scanDao.insertScanRecord(record)
     fun getScanCount(): Flow<Int> = scanDao.getScanCountFlow()
     fun getMasteredCount(): Flow<Int> = scanDao.getMasteredCountFlow()
@@ -43,5 +45,15 @@ class InsightRepository @Inject constructor(
 
     // Diagnostic Reports
     fun getLatestReport(): Flow<DiagnosticReportEntity?> = diagnosticDao.getLatestReportFlow()
+    fun getLatestReportForStudent(studentId: String): Flow<DiagnosticReportEntity?> = diagnosticDao.getLatestReportForStudentFlow(studentId)
     suspend fun saveReport(report: DiagnosticReportEntity) = diagnosticDao.insertReport(report)
+
+    // Students
+    fun getAllStudents(): Flow<List<StudentEntity>> = studentDao.getAllStudentsFlow()
+    fun searchStudents(query: String): Flow<List<StudentEntity>> = studentDao.searchStudentsFlow(query)
+    suspend fun getStudentById(id: String): StudentEntity? = studentDao.getStudentById(id)
+    suspend fun saveStudent(student: StudentEntity) = studentDao.insertStudent(student)
+    suspend fun saveStudents(students: List<StudentEntity>) = studentDao.insertStudents(students)
+    suspend fun updateStudent(student: StudentEntity) = studentDao.updateStudent(student)
+    suspend fun deleteStudent(student: StudentEntity) = studentDao.deleteStudent(student)
 }

@@ -5,6 +5,8 @@ sealed class ScreenState {
     data class Analyzing(val capturedText: String) : ScreenState()
     data class Solution(val content: String, val concepts: List<String>, val capturedText: String = "") : ScreenState()
     object Graph : ScreenState()
+    object StudentList : ScreenState()
+    data class StudentDetail(val studentId: String) : ScreenState()
 }
 
 enum class ThemeStyle {
@@ -50,5 +52,9 @@ data class UserPreferences(
 data class InsightUiState(
     val screen: ScreenState = ScreenState.Scanning,
     val isStreaming: Boolean = false,
-    val preferences: UserPreferences = UserPreferences()
+    val preferences: UserPreferences = UserPreferences(),
+    val students: List<com.example.insight.data.local.entities.StudentEntity> = emptyList(),
+    val selectedStudent: com.example.insight.data.local.entities.StudentEntity? = null,
+    val studentScans: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList(),
+    val studentReport: com.example.insight.data.local.entities.DiagnosticReportEntity? = null
 )

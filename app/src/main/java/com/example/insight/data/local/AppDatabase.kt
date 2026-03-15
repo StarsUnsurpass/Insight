@@ -10,13 +10,15 @@ import com.example.insight.data.local.entities.*
         ScanRecordEntity::class,
         KnowledgeNodeEntity::class,
         KnowledgeEdgeEntity::class,
-        DiagnosticReportEntity::class
+        DiagnosticReportEntity::class,
+        StudentEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun scanDao(): ScanDao
     abstract fun knowledgeDao(): KnowledgeDao
     abstract fun diagnosticDao(): DiagnosticDao
+    abstract fun studentDao(): StudentDao
 }

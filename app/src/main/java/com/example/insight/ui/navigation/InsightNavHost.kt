@@ -15,6 +15,7 @@ import com.example.insight.ui.screens.MainScreen
 import com.example.insight.ui.screens.ReportExportScreen
 import com.example.insight.ui.screens.SettingsScreen
 import com.example.insight.ui.screens.SolutionScreen
+import com.example.insight.ui.screens.StudentDetailScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
 
@@ -25,6 +26,7 @@ sealed class Route(val path: String) {
     object Starfield : Route("starfield")
     object Settings : Route("settings")
     object Export : Route("export")
+    object StudentDetail : Route("student_detail")
 }
 
 @Composable
@@ -47,6 +49,9 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToExport = {
                     navController.navigate(Route.Export.path)
+                },
+                onNavigateToStudentDetail = {
+                    navController.navigate(Route.StudentDetail.path)
                 }
             )
         }
@@ -65,6 +70,7 @@ fun InsightNavHost(viewModel: InsightViewModel) {
         composable(Route.Solution.path) {
             val state = uiState.screen
             val aiOutput by viewModel.aiOutput.collectAsState()
+            val currentStudentId by viewModel.currentScanStudentId.collectAsState()
             if (state is ScreenState.Solution) {
                 SolutionScreen(
                     capturedText = state.capturedText,
@@ -72,6 +78,8 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                     concepts = state.concepts,
                     aiOutput = aiOutput,
                     isStreaming = uiState.isStreaming,
+                    students = uiState.students,
+                    selectedStudentId = currentStudentId,
                     onBack = { 
                         viewModel.reset()
                         navController.popBackStack()
@@ -79,7 +87,8 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                     onShowGraph = {
                         navController.navigate(Route.Starfield.path)
                     },
-                    onGenerateSimilar = { viewModel.generateSimilarQuestions(it) }
+                    onGenerateSimilar = { viewModel.generateSimilarQuestions(it) },
+                    onStudentSelected = { viewModel.setCurrentScanStudent(it) }
                 )
             }
         }
@@ -112,6 +121,19 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 isStreaming = uiState.isStreaming,
                 onGenerateAiReport = { viewModel.generateWeeklyReport() },
                 onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Route.StudentDetail.path) {
+            val aiOutput by viewModel.aiOutput.collectAsState()
+            StudentDetailScreen(
+                student = uiState.selectedStudent,
+                scans = uiState.studentScans,
+                report = uiState.studentReport,
+                aiOutput = aiOutput,
+                isStreaming = uiState.isStreaming,
+                onBack = { navController.popBackStack() },
+                onAnalyze = { viewModel.analyzeStudent(uiState.selectedStudent?.studentId ?: "") }
             )
         }
     }

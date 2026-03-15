@@ -5,6 +5,7 @@ import com.example.insight.data.datastore.PreferenceManager;
 import com.example.insight.data.local.dao.DiagnosticDao;
 import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.ScanDao;
+import com.example.insight.data.local.dao.StudentDao;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -29,28 +30,32 @@ public final class InsightRepository_Factory implements Factory<InsightRepositor
 
   private final Provider<DiagnosticDao> diagnosticDaoProvider;
 
+  private final Provider<StudentDao> studentDaoProvider;
+
   public InsightRepository_Factory(Provider<PreferenceManager> preferenceManagerProvider,
       Provider<ScanDao> scanDaoProvider, Provider<KnowledgeDao> knowledgeDaoProvider,
-      Provider<DiagnosticDao> diagnosticDaoProvider) {
+      Provider<DiagnosticDao> diagnosticDaoProvider, Provider<StudentDao> studentDaoProvider) {
     this.preferenceManagerProvider = preferenceManagerProvider;
     this.scanDaoProvider = scanDaoProvider;
     this.knowledgeDaoProvider = knowledgeDaoProvider;
     this.diagnosticDaoProvider = diagnosticDaoProvider;
+    this.studentDaoProvider = studentDaoProvider;
   }
 
   @Override
   public InsightRepository get() {
-    return newInstance(preferenceManagerProvider.get(), scanDaoProvider.get(), knowledgeDaoProvider.get(), diagnosticDaoProvider.get());
+    return newInstance(preferenceManagerProvider.get(), scanDaoProvider.get(), knowledgeDaoProvider.get(), diagnosticDaoProvider.get(), studentDaoProvider.get());
   }
 
   public static InsightRepository_Factory create(
       Provider<PreferenceManager> preferenceManagerProvider, Provider<ScanDao> scanDaoProvider,
-      Provider<KnowledgeDao> knowledgeDaoProvider, Provider<DiagnosticDao> diagnosticDaoProvider) {
-    return new InsightRepository_Factory(preferenceManagerProvider, scanDaoProvider, knowledgeDaoProvider, diagnosticDaoProvider);
+      Provider<KnowledgeDao> knowledgeDaoProvider, Provider<DiagnosticDao> diagnosticDaoProvider,
+      Provider<StudentDao> studentDaoProvider) {
+    return new InsightRepository_Factory(preferenceManagerProvider, scanDaoProvider, knowledgeDaoProvider, diagnosticDaoProvider, studentDaoProvider);
   }
 
   public static InsightRepository newInstance(PreferenceManager preferenceManager, ScanDao scanDao,
-      KnowledgeDao knowledgeDao, DiagnosticDao diagnosticDao) {
-    return new InsightRepository(preferenceManager, scanDao, knowledgeDao, diagnosticDao);
+      KnowledgeDao knowledgeDao, DiagnosticDao diagnosticDao, StudentDao studentDao) {
+    return new InsightRepository(preferenceManager, scanDao, knowledgeDao, diagnosticDao, studentDao);
   }
 }

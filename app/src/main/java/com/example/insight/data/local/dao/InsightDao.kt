@@ -12,6 +12,9 @@ interface ScanDao {
     @Query("SELECT * FROM scan_record_table ORDER BY createdAt DESC")
     fun getAllScansFlow(): Flow<List<ScanRecordEntity>>
 
+    @Query("SELECT * FROM scan_record_table WHERE studentId = :studentId ORDER BY createdAt DESC")
+    fun getScansByStudentFlow(studentId: String): Flow<List<ScanRecordEntity>>
+
     @Query("SELECT * FROM scan_record_table")
     suspend fun getAllScans(): List<ScanRecordEntity>
 
@@ -50,4 +53,31 @@ interface DiagnosticDao {
 
     @Query("SELECT * FROM diagnostic_report_table ORDER BY createdAt DESC LIMIT 1")
     fun getLatestReportFlow(): Flow<DiagnosticReportEntity?>
+
+    @Query("SELECT * FROM diagnostic_report_table WHERE studentId = :studentId ORDER BY createdAt DESC LIMIT 1")
+    fun getLatestReportForStudentFlow(studentId: String): Flow<DiagnosticReportEntity?>
+}
+
+@Dao
+interface StudentDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStudent(student: StudentEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStudents(students: List<StudentEntity>)
+
+    @Update
+    suspend fun updateStudent(student: StudentEntity)
+
+    @Delete
+    suspend fun deleteStudent(student: StudentEntity)
+
+    @Query("SELECT * FROM student_table ORDER BY name ASC")
+    fun getAllStudentsFlow(): Flow<List<StudentEntity>>
+
+    @Query("SELECT * FROM student_table WHERE studentId = :id")
+    suspend fun getStudentById(id: String): StudentEntity?
+
+    @Query("SELECT * FROM student_table WHERE name LIKE '%' || :query || '%'")
+    fun searchStudentsFlow(query: String): Flow<List<StudentEntity>>
 }

@@ -11,6 +11,7 @@ data class ScanRecordEntity(
     val ocrText: String,
     val llmAnalysisJson: String,
     val coreKnowledgeId: String,
+    val studentId: String = "", // Foreign key to student_table
     val isMastered: Boolean = false,
     val createdAt: Long = System.currentTimeMillis()
 )

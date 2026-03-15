@@ -12,6 +12,7 @@ import com.example.insight.data.local.AppDatabase;
 import com.example.insight.data.local.dao.DiagnosticDao;
 import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.ScanDao;
+import com.example.insight.data.local.dao.StudentDao;
 import com.example.insight.data.remote.DeepSeekApiService;
 import com.example.insight.data.repository.DeepSeekRepository;
 import com.example.insight.data.repository.InsightRepository;
@@ -20,6 +21,7 @@ import com.example.insight.di.AppModule_ProvideDiagnosticDaoFactory;
 import com.example.insight.di.AppModule_ProvideKnowledgeDaoFactory;
 import com.example.insight.di.AppModule_ProvidePreferenceManagerFactory;
 import com.example.insight.di.AppModule_ProvideScanDaoFactory;
+import com.example.insight.di.AppModule_ProvideStudentDaoFactory;
 import com.example.insight.di.AppModule_ProvideTextRecognizerFactory;
 import com.example.insight.di.NetworkModule_ProvideDeepSeekApiServiceFactory;
 import com.example.insight.di.NetworkModule_ProvideOkHttpClientFactory;
@@ -571,6 +573,10 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       return AppModule_ProvideDiagnosticDaoFactory.provideDiagnosticDao(provideAppDatabaseProvider.get());
     }
 
+    private StudentDao studentDao() {
+      return AppModule_ProvideStudentDaoFactory.provideStudentDao(provideAppDatabaseProvider.get());
+    }
+
     @SuppressWarnings("unchecked")
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.providePreferenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<PreferenceManager>(singletonCImpl, 1));
@@ -617,7 +623,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.example.insight.data.repository.InsightRepository 
-          return (T) new InsightRepository(singletonCImpl.providePreferenceManagerProvider.get(), singletonCImpl.scanDao(), singletonCImpl.knowledgeDao(), singletonCImpl.diagnosticDao());
+          return (T) new InsightRepository(singletonCImpl.providePreferenceManagerProvider.get(), singletonCImpl.scanDao(), singletonCImpl.knowledgeDao(), singletonCImpl.diagnosticDao(), singletonCImpl.studentDao());
 
           case 1: // com.example.insight.data.datastore.PreferenceManager 
           return (T) AppModule_ProvidePreferenceManagerFactory.providePreferenceManager(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule));

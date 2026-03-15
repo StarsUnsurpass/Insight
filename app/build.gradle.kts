@@ -116,4 +116,7 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Excel
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
+import com.example.insight.data.local.entities.StudentEntity
 import com.example.insight.ui.util.MarkdownText
 import com.example.insight.ui.theme.*
 
@@ -34,13 +35,18 @@ fun SolutionScreen(
     concepts: List<String>,
     aiOutput: String,
     isStreaming: Boolean,
+    students: List<StudentEntity>,
+    selectedStudentId: String?,
     onBack: () -> Unit,
     onShowGraph: () -> Unit,
-    onGenerateSimilar: (String) -> Unit
+    onGenerateSimilar: (String) -> Unit,
+    onStudentSelected: (String) -> Unit
 ) {
     val scrollState = rememberLazyListState()
     var isOcrVisible by remember { mutableStateOf(false) }
+    var showStudentPicker by remember { mutableStateOf(false) }
     val primaryColor = MaterialTheme.colorScheme.primary
+    val selectedStudent = students.find { it.studentId == selectedStudentId }
 
     // Auto-scroll when AI is streaming
     LaunchedEffect(aiOutput) {
@@ -103,6 +109,14 @@ fun SolutionScreen(
                 // Module 1: Original Problem (Captured Text)
                 item {
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("归属学生", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+                            Spacer(modifier = Modifier.weight(1f))
+                            TextButton(onClick = { showStudentPicker = true }) {
+                                Text(selectedStudent?.name ?: "点击选择学生", style = MaterialTheme.typography.labelMedium, color = primaryColor)
+                                Icon(Icons.Default.ArrowDropDown, null, modifier = Modifier.size(16.dp))
+                            }
+                        }
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -246,6 +260,31 @@ fun SolutionScreen(
                         Spacer(modifier = Modifier.width(12.dp))
                         Text("进入能力映射星图", fontWeight = FontWeight.Bold)
                     }
+                }
+            }
+        }
+    }
+
+    if (showStudentPicker) {
+        ModalBottomSheet(onDismissRequest = { showStudentPicker = false }) {
+            LazyColumn(modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)) {
+                item {
+                    Text("选择归属学生", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold)
+                }
+                items(students) { student ->
+                    ListItem(
+                        headlineContent = { Text(student.name) },
+                        supportingContent = { Text(student.className) },
+                        leadingContent = {
+                            Box(modifier = Modifier.size(32.dp).clip(CircleShape).background(SageGreen.copy(alpha = 0.2f)), contentAlignment = Alignment.Center) {
+                                Text(student.name.take(1), style = MaterialTheme.typography.labelSmall, color = SageGreen)
+                            }
+                        },
+                        modifier = Modifier.clickable {
+                            onStudentSelected(student.studentId)
+                            showStudentPicker = false
+                        }
+                    )
                 }
             }
         }

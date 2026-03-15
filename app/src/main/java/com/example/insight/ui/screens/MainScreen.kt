@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
@@ -70,8 +71,8 @@ enum class InsightTab(
 ) {
     Home("首页", Icons.Filled.Home, Icons.Outlined.Home, 0, -2f),
     Map("图谱", Icons.Filled.AccountTree, Icons.Outlined.AccountTree, 1, -1f),
-    Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 3, 1f), 
-    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 4, 2f)
+    Analysis("学情", Icons.Filled.Analytics, Icons.Outlined.Analytics, 2, 1f), 
+    Profile("我的", Icons.Filled.Person, Icons.Outlined.Person, 3, 2f)
 }
 
 @Composable
@@ -79,7 +80,8 @@ fun MainScreen(
     viewModel: InsightViewModel,
     onNavigateToScanner: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToExport: () -> Unit
+    onNavigateToExport: () -> Unit,
+    onNavigateToStudentDetail: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -130,7 +132,16 @@ fun MainScreen(
                         label = "tab_transition"
                     ) { targetTab ->
                         when (targetTab) {
-                            InsightTab.Home -> HomeTab(preferences)
+                            InsightTab.Home -> HomeTab(
+                                preferences = preferences,
+                                students = uiState.students,
+                                onStudentClick = { 
+                                    viewModel.selectStudent(it)
+                                    onNavigateToStudentDetail(it) 
+                                },
+                                onAddStudent = { n, g, a, c, s -> viewModel.addStudent(n, g, a, c, s) },
+                                onImportStudents = { viewModel.importStudents(it) }
+                            )
                             InsightTab.Map -> MapTab(preferences)
                             InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
@@ -307,10 +318,38 @@ fun BoxScope.TabIconFluid(
 }
 
 @Composable
-fun HomeTab(preferences: UserPreferences) {
+fun HomeTab(
+    preferences: UserPreferences,
+    students: List<com.example.insight.data.local.entities.StudentEntity>,
+    onStudentClick: (String) -> Unit,
+    onAddStudent: (String, Int, Int, String, Float) -> Unit,
+    onImportStudents: (List<com.example.insight.data.local.entities.StudentEntity>) -> Unit
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
+    var isManagingStudents by rememberSaveable { mutableStateOf(false) }
     val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
+
+    if (isManagingStudents && preferences.role == UserRole.Teacher) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            StudentListScreen(
+                students = students,
+                onStudentClick = onStudentClick,
+                onAddStudent = onAddStudent,
+                onImportStudents = onImportStudents
+            )
+            // Back button to return to Dashboard
+            SmallFloatingActionButton(
+                onClick = { isManagingStudents = false },
+                modifier = Modifier.padding(16.dp).align(Alignment.BottomStart),
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = primaryColor
+            ) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
+            }
+        }
+        return
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -382,7 +421,6 @@ fun HomeTab(preferences: UserPreferences) {
                 keyboardActions = androidx.compose.foundation.text.KeyboardActions(
                     onSearch = { 
                         focusManager.clearFocus()
-                        // Logic for actual search execution
                     }
                 ),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -392,6 +430,48 @@ fun HomeTab(preferences: UserPreferences) {
                     focusedContainerColor = MaterialTheme.colorScheme.surface
                 )
             )
+        }
+
+        // --- Teacher Only: Class Management Section ---
+        if (preferences.role == UserRole.Teacher) {
+            item {
+                Text(
+                    "教务管理",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = primaryColor,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { isManagingStudents = true },
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
+                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(20.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .background(primaryColor, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(Icons.Default.Group, null, tint = Color.White, modifier = Modifier.size(24.dp))
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text("管理学生信息、导入名单及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                        }
+                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = primaryColor)
+                    }
+                }
+            }
         }
 
         // --- Conditional Content: Search vs Dashboard ---

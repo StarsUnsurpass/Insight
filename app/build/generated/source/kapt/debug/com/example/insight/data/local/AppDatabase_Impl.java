@@ -17,6 +17,8 @@ import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.KnowledgeDao_Impl;
 import com.example.insight.data.local.dao.ScanDao;
 import com.example.insight.data.local.dao.ScanDao_Impl;
+import com.example.insight.data.local.dao.StudentDao;
+import com.example.insight.data.local.dao.StudentDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -36,18 +38,21 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile DiagnosticDao _diagnosticDao;
 
+  private volatile StudentDao _studentDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS `scan_record_table` (`id` TEXT NOT NULL, `originalImagePath` TEXT NOT NULL, `ocrText` TEXT NOT NULL, `llmAnalysisJson` TEXT NOT NULL, `coreKnowledgeId` TEXT NOT NULL, `isMastered` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `scan_record_table` (`id` TEXT NOT NULL, `originalImagePath` TEXT NOT NULL, `ocrText` TEXT NOT NULL, `llmAnalysisJson` TEXT NOT NULL, `coreKnowledgeId` TEXT NOT NULL, `studentId` TEXT NOT NULL, `isMastered` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_node_table` (`nodeId` TEXT NOT NULL, `title` TEXT NOT NULL, `masteryLevel` REAL NOT NULL, `canvasX` REAL NOT NULL, `canvasY` REAL NOT NULL, PRIMARY KEY(`nodeId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_edge_table` (`edgeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fromNodeId` TEXT NOT NULL, `toNodeId` TEXT NOT NULL)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `diagnostic_report_table` (`reportId` TEXT NOT NULL, `aiInsightText` TEXT NOT NULL, `radarVocabulary` REAL NOT NULL, `radarGrammar` REAL NOT NULL, `radarContext` REAL NOT NULL, `radarLogic` REAL NOT NULL, `radarCulture` REAL NOT NULL, `errorCauseJson` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`reportId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `diagnostic_report_table` (`reportId` TEXT NOT NULL, `aiInsightText` TEXT NOT NULL, `radarVocabulary` REAL NOT NULL, `radarGrammar` REAL NOT NULL, `radarContext` REAL NOT NULL, `radarLogic` REAL NOT NULL, `radarCulture` REAL NOT NULL, `studentId` TEXT NOT NULL, `errorCauseJson` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`reportId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `student_table` (`studentId` TEXT NOT NULL, `name` TEXT NOT NULL, `gender` INTEGER NOT NULL, `age` INTEGER NOT NULL, `className` TEXT NOT NULL, `latestScore` REAL NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`studentId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '96200e9a9e1966da858ce4998cfd5c04')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6753c75fe26cbdee62568a812f4fddad')");
       }
 
       @Override
@@ -56,6 +61,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `knowledge_node_table`");
         db.execSQL("DROP TABLE IF EXISTS `knowledge_edge_table`");
         db.execSQL("DROP TABLE IF EXISTS `diagnostic_report_table`");
+        db.execSQL("DROP TABLE IF EXISTS `student_table`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -99,12 +105,13 @@ public final class AppDatabase_Impl extends AppDatabase {
       @NonNull
       public RoomOpenHelper.ValidationResult onValidateSchema(
           @NonNull final SupportSQLiteDatabase db) {
-        final HashMap<String, TableInfo.Column> _columnsScanRecordTable = new HashMap<String, TableInfo.Column>(7);
+        final HashMap<String, TableInfo.Column> _columnsScanRecordTable = new HashMap<String, TableInfo.Column>(8);
         _columnsScanRecordTable.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("originalImagePath", new TableInfo.Column("originalImagePath", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("ocrText", new TableInfo.Column("ocrText", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("llmAnalysisJson", new TableInfo.Column("llmAnalysisJson", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("coreKnowledgeId", new TableInfo.Column("coreKnowledgeId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsScanRecordTable.put("studentId", new TableInfo.Column("studentId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("isMastered", new TableInfo.Column("isMastered", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsScanRecordTable.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysScanRecordTable = new HashSet<TableInfo.ForeignKey>(0);
@@ -144,7 +151,7 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoKnowledgeEdgeTable + "\n"
                   + " Found:\n" + _existingKnowledgeEdgeTable);
         }
-        final HashMap<String, TableInfo.Column> _columnsDiagnosticReportTable = new HashMap<String, TableInfo.Column>(9);
+        final HashMap<String, TableInfo.Column> _columnsDiagnosticReportTable = new HashMap<String, TableInfo.Column>(10);
         _columnsDiagnosticReportTable.put("reportId", new TableInfo.Column("reportId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("aiInsightText", new TableInfo.Column("aiInsightText", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("radarVocabulary", new TableInfo.Column("radarVocabulary", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -152,6 +159,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         _columnsDiagnosticReportTable.put("radarContext", new TableInfo.Column("radarContext", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("radarLogic", new TableInfo.Column("radarLogic", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("radarCulture", new TableInfo.Column("radarCulture", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiagnosticReportTable.put("studentId", new TableInfo.Column("studentId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("errorCauseJson", new TableInfo.Column("errorCauseJson", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsDiagnosticReportTable.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysDiagnosticReportTable = new HashSet<TableInfo.ForeignKey>(0);
@@ -163,9 +171,26 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoDiagnosticReportTable + "\n"
                   + " Found:\n" + _existingDiagnosticReportTable);
         }
+        final HashMap<String, TableInfo.Column> _columnsStudentTable = new HashMap<String, TableInfo.Column>(7);
+        _columnsStudentTable.put("studentId", new TableInfo.Column("studentId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("gender", new TableInfo.Column("gender", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("age", new TableInfo.Column("age", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("className", new TableInfo.Column("className", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("latestScore", new TableInfo.Column("latestScore", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentTable.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysStudentTable = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesStudentTable = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoStudentTable = new TableInfo("student_table", _columnsStudentTable, _foreignKeysStudentTable, _indicesStudentTable);
+        final TableInfo _existingStudentTable = TableInfo.read(db, "student_table");
+        if (!_infoStudentTable.equals(_existingStudentTable)) {
+          return new RoomOpenHelper.ValidationResult(false, "student_table(com.example.insight.data.local.entities.StudentEntity).\n"
+                  + " Expected:\n" + _infoStudentTable + "\n"
+                  + " Found:\n" + _existingStudentTable);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "96200e9a9e1966da858ce4998cfd5c04", "051b55760beb93894ae4718bed385223");
+    }, "6753c75fe26cbdee62568a812f4fddad", "21048bb2d373a556d0b21e8b0c7577f2");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -176,7 +201,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_node_table","knowledge_edge_table","diagnostic_report_table");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_node_table","knowledge_edge_table","diagnostic_report_table","student_table");
   }
 
   @Override
@@ -189,6 +214,7 @@ public final class AppDatabase_Impl extends AppDatabase {
       _db.execSQL("DELETE FROM `knowledge_node_table`");
       _db.execSQL("DELETE FROM `knowledge_edge_table`");
       _db.execSQL("DELETE FROM `diagnostic_report_table`");
+      _db.execSQL("DELETE FROM `student_table`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -206,6 +232,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(ScanDao.class, ScanDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(KnowledgeDao.class, KnowledgeDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(DiagnosticDao.class, DiagnosticDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(StudentDao.class, StudentDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -262,6 +289,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _diagnosticDao = new DiagnosticDao_Impl(this);
         }
         return _diagnosticDao;
+      }
+    }
+  }
+
+  @Override
+  public StudentDao studentDao() {
+    if (_studentDao != null) {
+      return _studentDao;
+    } else {
+      synchronized(this) {
+        if(_studentDao == null) {
+          _studentDao = new StudentDao_Impl(this);
+        }
+        return _studentDao;
       }
     }
   }

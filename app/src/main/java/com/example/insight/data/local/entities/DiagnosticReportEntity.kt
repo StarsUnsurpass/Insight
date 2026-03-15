@@ -12,6 +12,7 @@ data class DiagnosticReportEntity(
     val radarContext: Float,
     val radarLogic: Float,
     val radarCulture: Float,
+    val studentId: String = "", // Foreign key to student_table
     val errorCauseJson: String,
     val createdAt: Long = System.currentTimeMillis()
 )

@@ -36,7 +36,7 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `diagnostic_report_table` (`reportId`,`aiInsightText`,`radarVocabulary`,`radarGrammar`,`radarContext`,`radarLogic`,`radarCulture`,`errorCauseJson`,`createdAt`) VALUES (?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `diagnostic_report_table` (`reportId`,`aiInsightText`,`radarVocabulary`,`radarGrammar`,`radarContext`,`radarLogic`,`radarCulture`,`studentId`,`errorCauseJson`,`createdAt`) VALUES (?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -57,12 +57,17 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
         statement.bindDouble(5, entity.getRadarContext());
         statement.bindDouble(6, entity.getRadarLogic());
         statement.bindDouble(7, entity.getRadarCulture());
-        if (entity.getErrorCauseJson() == null) {
+        if (entity.getStudentId() == null) {
           statement.bindNull(8);
         } else {
-          statement.bindString(8, entity.getErrorCauseJson());
+          statement.bindString(8, entity.getStudentId());
         }
-        statement.bindLong(9, entity.getCreatedAt());
+        if (entity.getErrorCauseJson() == null) {
+          statement.bindNull(9);
+        } else {
+          statement.bindString(9, entity.getErrorCauseJson());
+        }
+        statement.bindLong(10, entity.getCreatedAt());
       }
     };
   }
@@ -103,6 +108,7 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
           final int _cursorIndexOfRadarContext = CursorUtil.getColumnIndexOrThrow(_cursor, "radarContext");
           final int _cursorIndexOfRadarLogic = CursorUtil.getColumnIndexOrThrow(_cursor, "radarLogic");
           final int _cursorIndexOfRadarCulture = CursorUtil.getColumnIndexOrThrow(_cursor, "radarCulture");
+          final int _cursorIndexOfStudentId = CursorUtil.getColumnIndexOrThrow(_cursor, "studentId");
           final int _cursorIndexOfErrorCauseJson = CursorUtil.getColumnIndexOrThrow(_cursor, "errorCauseJson");
           final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
           final DiagnosticReportEntity _result;
@@ -129,6 +135,12 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
             _tmpRadarLogic = _cursor.getFloat(_cursorIndexOfRadarLogic);
             final float _tmpRadarCulture;
             _tmpRadarCulture = _cursor.getFloat(_cursorIndexOfRadarCulture);
+            final String _tmpStudentId;
+            if (_cursor.isNull(_cursorIndexOfStudentId)) {
+              _tmpStudentId = null;
+            } else {
+              _tmpStudentId = _cursor.getString(_cursorIndexOfStudentId);
+            }
             final String _tmpErrorCauseJson;
             if (_cursor.isNull(_cursorIndexOfErrorCauseJson)) {
               _tmpErrorCauseJson = null;
@@ -137,7 +149,88 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
             }
             final long _tmpCreatedAt;
             _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
-            _result = new DiagnosticReportEntity(_tmpReportId,_tmpAiInsightText,_tmpRadarVocabulary,_tmpRadarGrammar,_tmpRadarContext,_tmpRadarLogic,_tmpRadarCulture,_tmpErrorCauseJson,_tmpCreatedAt);
+            _result = new DiagnosticReportEntity(_tmpReportId,_tmpAiInsightText,_tmpRadarVocabulary,_tmpRadarGrammar,_tmpRadarContext,_tmpRadarLogic,_tmpRadarCulture,_tmpStudentId,_tmpErrorCauseJson,_tmpCreatedAt);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Flow<DiagnosticReportEntity> getLatestReportForStudentFlow(final String studentId) {
+    final String _sql = "SELECT * FROM diagnostic_report_table WHERE studentId = ? ORDER BY createdAt DESC LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (studentId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, studentId);
+    }
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"diagnostic_report_table"}, new Callable<DiagnosticReportEntity>() {
+      @Override
+      @Nullable
+      public DiagnosticReportEntity call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfReportId = CursorUtil.getColumnIndexOrThrow(_cursor, "reportId");
+          final int _cursorIndexOfAiInsightText = CursorUtil.getColumnIndexOrThrow(_cursor, "aiInsightText");
+          final int _cursorIndexOfRadarVocabulary = CursorUtil.getColumnIndexOrThrow(_cursor, "radarVocabulary");
+          final int _cursorIndexOfRadarGrammar = CursorUtil.getColumnIndexOrThrow(_cursor, "radarGrammar");
+          final int _cursorIndexOfRadarContext = CursorUtil.getColumnIndexOrThrow(_cursor, "radarContext");
+          final int _cursorIndexOfRadarLogic = CursorUtil.getColumnIndexOrThrow(_cursor, "radarLogic");
+          final int _cursorIndexOfRadarCulture = CursorUtil.getColumnIndexOrThrow(_cursor, "radarCulture");
+          final int _cursorIndexOfStudentId = CursorUtil.getColumnIndexOrThrow(_cursor, "studentId");
+          final int _cursorIndexOfErrorCauseJson = CursorUtil.getColumnIndexOrThrow(_cursor, "errorCauseJson");
+          final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+          final DiagnosticReportEntity _result;
+          if (_cursor.moveToFirst()) {
+            final String _tmpReportId;
+            if (_cursor.isNull(_cursorIndexOfReportId)) {
+              _tmpReportId = null;
+            } else {
+              _tmpReportId = _cursor.getString(_cursorIndexOfReportId);
+            }
+            final String _tmpAiInsightText;
+            if (_cursor.isNull(_cursorIndexOfAiInsightText)) {
+              _tmpAiInsightText = null;
+            } else {
+              _tmpAiInsightText = _cursor.getString(_cursorIndexOfAiInsightText);
+            }
+            final float _tmpRadarVocabulary;
+            _tmpRadarVocabulary = _cursor.getFloat(_cursorIndexOfRadarVocabulary);
+            final float _tmpRadarGrammar;
+            _tmpRadarGrammar = _cursor.getFloat(_cursorIndexOfRadarGrammar);
+            final float _tmpRadarContext;
+            _tmpRadarContext = _cursor.getFloat(_cursorIndexOfRadarContext);
+            final float _tmpRadarLogic;
+            _tmpRadarLogic = _cursor.getFloat(_cursorIndexOfRadarLogic);
+            final float _tmpRadarCulture;
+            _tmpRadarCulture = _cursor.getFloat(_cursorIndexOfRadarCulture);
+            final String _tmpStudentId;
+            if (_cursor.isNull(_cursorIndexOfStudentId)) {
+              _tmpStudentId = null;
+            } else {
+              _tmpStudentId = _cursor.getString(_cursorIndexOfStudentId);
+            }
+            final String _tmpErrorCauseJson;
+            if (_cursor.isNull(_cursorIndexOfErrorCauseJson)) {
+              _tmpErrorCauseJson = null;
+            } else {
+              _tmpErrorCauseJson = _cursor.getString(_cursorIndexOfErrorCauseJson);
+            }
+            final long _tmpCreatedAt;
+            _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+            _result = new DiagnosticReportEntity(_tmpReportId,_tmpAiInsightText,_tmpRadarVocabulary,_tmpRadarGrammar,_tmpRadarContext,_tmpRadarLogic,_tmpRadarCulture,_tmpStudentId,_tmpErrorCauseJson,_tmpCreatedAt);
           } else {
             _result = null;
           }

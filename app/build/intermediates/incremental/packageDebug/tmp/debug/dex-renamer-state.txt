@@ -1,10 +1,13 @@
-#Sun Mar 15 15:36:58 CST 2026
+#Sun Mar 15 16:05:11 CST 2026
 base.0=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
 base.11=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 base.12=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 base.13=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
+base.14=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
+base.15=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes5.dex
+base.16=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes6.dex
 base.2=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
 base.3=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
 base.4=E\:\\Code\\IDE\\AndroidStudio\\Insight\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
@@ -19,6 +22,9 @@ path.10=9/classes.dex
 path.11=classes2.dex
 path.12=classes3.dex
 path.13=11/classes.dex
+path.14=classes4.dex
+path.15=classes5.dex
+path.16=classes6.dex
 path.2=10/classes.dex
 path.3=14/classes.dex
 path.4=15/classes.dex
@@ -33,6 +39,9 @@ renamed.10=classes11.dex
 renamed.11=classes12.dex
 renamed.12=classes13.dex
 renamed.13=classes14.dex
+renamed.14=classes15.dex
+renamed.15=classes16.dex
+renamed.16=classes17.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex
