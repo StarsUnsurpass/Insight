@@ -417,19 +417,20 @@ fun ProfileTab(
                 Card(
                     modifier = Modifier.fillMaxWidth().clickable { onManageStudents() },
                     shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
-                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
                 ) {
                     Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Box(modifier = Modifier.size(48.dp).background(primaryColor, CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.Group, null, tint = Color.White, modifier = Modifier.size(24.dp))
+                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(Icons.Default.Group, null, tint = primaryColor, modifier = Modifier.size(24.dp))
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                             Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                         }
-                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor)
+                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }
                 }
             }
@@ -441,8 +442,9 @@ fun ProfileTab(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = primaryColor.copy(alpha = 0.05f)),
-                border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
