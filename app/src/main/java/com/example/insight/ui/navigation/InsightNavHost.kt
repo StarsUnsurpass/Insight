@@ -145,7 +145,7 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 aiOutput = aiOutput,
                 isStreaming = uiState.isStreaming,
                 onBack = { navController.popBackStack() },
-                onAnalyze = { viewModel.analyzeStudent(uiState.selectedStudent?.studentId ?: "") }
+                onAnalyze = { viewModel.analyzeStudent() }
             )
         }
 
@@ -171,9 +171,11 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 plan = uiState.selectedPlan,
                 aiOutput = aiOutput,
                 isStreaming = uiState.isStreaming,
+                allKnowledgeNodes = uiState.knowledgeNodes,
+                allQuestions = uiState.allScans,
                 onBack = { navController.popBackStack() },
-                onSave = { t, c, cl ->
-                    viewModel.savePlan(t, c, cl)
+                onSave = { title, content, className, nodeId, type, points, diffs, blocks ->
+                    viewModel.savePlan(title, content, className, nodeId, type, points, diffs, blocks)
                     navController.popBackStack()
                 },
                 onGenerateAi = { viewModel.generateAiLessonPlan(it) }

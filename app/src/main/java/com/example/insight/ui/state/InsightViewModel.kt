@@ -58,6 +58,20 @@ class InsightViewModel @Inject constructor(
                 _uiState.update { it.copy(lessonPlans = plans) }
             }
         }
+
+        // Collect knowledge nodes
+        viewModelScope.launch {
+            repository.getAllNodes().collect { nodes ->
+                _uiState.update { it.copy(knowledgeNodes = nodes) }
+            }
+        }
+
+        // Collect all scans
+        viewModelScope.launch {
+            repository.getAllScans().collect { scans ->
+                _uiState.update { it.copy(allScans = scans) }
+            }
+        }
     }
 
     // Lesson Plan Management
@@ -75,19 +89,36 @@ class InsightViewModel @Inject constructor(
         }
     }
 
-    fun savePlan(title: String, content: String, className: String, nodeId: String? = null) {
+    fun savePlan(
+        title: String,
+        content: String,
+        className: String,
+        nodeId: String? = null,
+        lessonType: String = "常规课",
+        keyPoints: String = "",
+        difficulties: String = "",
+        blocksJson: String = "[]"
+    ) {
         viewModelScope.launch {
             val plan = uiState.value.selectedPlan?.copy(
                 title = title,
                 contentMarkdown = content,
                 targetClassName = className,
                 relatedKnowledgeNodeId = nodeId,
+                lessonType = lessonType,
+                keyPoints = keyPoints,
+                difficulties = difficulties,
+                blocksJson = blocksJson,
                 updatedAt = System.currentTimeMillis()
             ) ?: LessonPlanEntity(
                 title = title,
                 contentMarkdown = content,
                 targetClassName = className,
-                relatedKnowledgeNodeId = nodeId
+                relatedKnowledgeNodeId = nodeId,
+                lessonType = lessonType,
+                keyPoints = keyPoints,
+                difficulties = difficulties,
+                blocksJson = blocksJson
             )
             repository.savePlan(plan)
         }
@@ -277,7 +308,7 @@ class InsightViewModel @Inject constructor(
         }
     }
 
-    fun analyzeStudent(studentId: String) {
+    fun analyzeStudent() {
         viewModelScope.launch {
             val student = uiState.value.selectedStudent ?: return@launch
             val scans = uiState.value.studentScans

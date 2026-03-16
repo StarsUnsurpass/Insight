@@ -8,7 +8,11 @@ import java.util.UUID
 data class LessonPlanEntity(
     @PrimaryKey val planId: String = UUID.randomUUID().toString(),
     val title: String,
-    val contentMarkdown: String,
+    val lessonType: String = "常规课",
+    val keyPoints: String = "",
+    val difficulties: String = "",
+    val contentMarkdown: String = "",
+    val blocksJson: String = "[]",
     val targetClassName: String,
     val relatedKnowledgeNodeId: String? = null,
     val createdAt: Long = System.currentTimeMillis(),

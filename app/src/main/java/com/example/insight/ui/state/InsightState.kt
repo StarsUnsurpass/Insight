@@ -61,5 +61,7 @@ data class InsightUiState(
     val studentReport: com.example.insight.data.local.entities.DiagnosticReportEntity? = null,
     val lessonPlans: List<com.example.insight.data.local.entities.LessonPlanEntity> = emptyList(),
     val selectedPlan: com.example.insight.data.local.entities.LessonPlanEntity? = null,
-    val planQuestions: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList()
+    val planQuestions: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList(),
+    val knowledgeNodes: List<com.example.insight.data.local.entities.KnowledgeNodeEntity> = emptyList(),
+    val allScans: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList()
 )
