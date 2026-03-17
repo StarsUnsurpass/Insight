@@ -1,6 +1,6 @@
 package com.example.insight.ui.state;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000.\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\t\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\b6\u0018\u00002\u00020\u0001:\b\u0003\u0004\u0005\u0006\u0007\b\t\nB\u0007\b\u0004\u00a2\u0006\u0002\u0010\u0002\u0082\u0001\b\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u00a8\u0006\u0013"}, d2 = {"Lcom/example/insight/ui/state/ScreenState;", "", "()V", "Analyzing", "Graph", "LessonPlanEditor", "LessonPlanList", "Scanning", "Solution", "StudentDetail", "StudentList", "Lcom/example/insight/ui/state/ScreenState$Analyzing;", "Lcom/example/insight/ui/state/ScreenState$Graph;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanEditor;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanList;", "Lcom/example/insight/ui/state/ScreenState$Scanning;", "Lcom/example/insight/ui/state/ScreenState$Solution;", "Lcom/example/insight/ui/state/ScreenState$StudentDetail;", "Lcom/example/insight/ui/state/ScreenState$StudentList;", "app_debug"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u00002\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\n\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\b6\u0018\u00002\u00020\u0001:\t\u0003\u0004\u0005\u0006\u0007\b\t\n\u000bB\u0007\b\u0004\u00a2\u0006\u0002\u0010\u0002\u0082\u0001\t\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u00a8\u0006\u0015"}, d2 = {"Lcom/example/insight/ui/state/ScreenState;", "", "()V", "Analyzing", "Graph", "LessonPlanEditor", "LessonPlanList", "MindMap", "Scanning", "Solution", "StudentDetail", "StudentList", "Lcom/example/insight/ui/state/ScreenState$Analyzing;", "Lcom/example/insight/ui/state/ScreenState$Graph;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanEditor;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanList;", "Lcom/example/insight/ui/state/ScreenState$MindMap;", "Lcom/example/insight/ui/state/ScreenState$Scanning;", "Lcom/example/insight/ui/state/ScreenState$Solution;", "Lcom/example/insight/ui/state/ScreenState$StudentDetail;", "Lcom/example/insight/ui/state/ScreenState$StudentList;", "app_debug"})
 public abstract class ScreenState {
     
     private ScreenState() {
@@ -108,6 +108,15 @@ public abstract class ScreenState {
         public static final com.example.insight.ui.state.ScreenState.LessonPlanList INSTANCE = null;
         
         private LessonPlanList() {
+        }
+    }
+    
+    @kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u00c6\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002\u00a8\u0006\u0003"}, d2 = {"Lcom/example/insight/ui/state/ScreenState$MindMap;", "Lcom/example/insight/ui/state/ScreenState;", "()V", "app_debug"})
+    public static final class MindMap extends com.example.insight.ui.state.ScreenState {
+        @org.jetbrains.annotations.NotNull()
+        public static final com.example.insight.ui.state.ScreenState.MindMap INSTANCE = null;
+        
+        private MindMap() {
         }
     }
     

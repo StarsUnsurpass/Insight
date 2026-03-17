@@ -47,7 +47,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(3) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(4) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `scan_record_table` (`id` TEXT NOT NULL, `originalImagePath` TEXT NOT NULL, `ocrText` TEXT NOT NULL, `llmAnalysisJson` TEXT NOT NULL, `coreKnowledgeId` TEXT NOT NULL, `studentId` TEXT NOT NULL, `isMastered` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
@@ -55,10 +55,10 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_edge_table` (`edgeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fromNodeId` TEXT NOT NULL, `toNodeId` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `diagnostic_report_table` (`reportId` TEXT NOT NULL, `aiInsightText` TEXT NOT NULL, `radarVocabulary` REAL NOT NULL, `radarGrammar` REAL NOT NULL, `radarContext` REAL NOT NULL, `radarLogic` REAL NOT NULL, `radarCulture` REAL NOT NULL, `studentId` TEXT NOT NULL, `errorCauseJson` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`reportId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `student_table` (`studentId` TEXT NOT NULL, `name` TEXT NOT NULL, `gender` INTEGER NOT NULL, `age` INTEGER NOT NULL, `className` TEXT NOT NULL, `latestScore` REAL NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`studentId`))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_plan_table` (`planId` TEXT NOT NULL, `title` TEXT NOT NULL, `contentMarkdown` TEXT NOT NULL, `targetClassName` TEXT NOT NULL, `relatedKnowledgeNodeId` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`planId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_plan_table` (`planId` TEXT NOT NULL, `title` TEXT NOT NULL, `lessonType` TEXT NOT NULL, `keyPoints` TEXT NOT NULL, `difficulties` TEXT NOT NULL, `contentMarkdown` TEXT NOT NULL, `blocksJson` TEXT NOT NULL, `targetClassName` TEXT NOT NULL, `relatedKnowledgeNodeId` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`planId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_question_cross_ref` (`planId` TEXT NOT NULL, `questionId` TEXT NOT NULL, PRIMARY KEY(`planId`, `questionId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3915de7de54cacdccb59b66174859c08')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7968dc6ef4efce1c99b8e760820a024e')");
       }
 
       @Override
@@ -196,10 +196,14 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoStudentTable + "\n"
                   + " Found:\n" + _existingStudentTable);
         }
-        final HashMap<String, TableInfo.Column> _columnsLessonPlanTable = new HashMap<String, TableInfo.Column>(7);
+        final HashMap<String, TableInfo.Column> _columnsLessonPlanTable = new HashMap<String, TableInfo.Column>(11);
         _columnsLessonPlanTable.put("planId", new TableInfo.Column("planId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLessonPlanTable.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("lessonType", new TableInfo.Column("lessonType", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("keyPoints", new TableInfo.Column("keyPoints", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("difficulties", new TableInfo.Column("difficulties", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLessonPlanTable.put("contentMarkdown", new TableInfo.Column("contentMarkdown", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLessonPlanTable.put("blocksJson", new TableInfo.Column("blocksJson", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLessonPlanTable.put("targetClassName", new TableInfo.Column("targetClassName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLessonPlanTable.put("relatedKnowledgeNodeId", new TableInfo.Column("relatedKnowledgeNodeId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLessonPlanTable.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -227,7 +231,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "3915de7de54cacdccb59b66174859c08", "73ef1fdd20a19fb3996b3b198796dc7e");
+    }, "7968dc6ef4efce1c99b8e760820a024e", "2e137c9a5cf374abac62c7994b8d0de5");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

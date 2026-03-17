@@ -76,7 +76,8 @@ fun MainScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
     onNavigateToStudentList: () -> Unit,
-    onNavigateToLessonPlans: () -> Unit
+    onNavigateToLessonPlans: () -> Unit,
+    onNavigateToMindMap: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -134,6 +135,7 @@ fun MainScreen(
                                 preferences = preferences,
                                 onManageStudents = onNavigateToStudentList,
                                 onManageLessonPlans = onNavigateToLessonPlans,
+                                onNavigateToMindMap = onNavigateToMindMap,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport
                             )
@@ -366,6 +368,7 @@ fun ProfileTab(
     preferences: UserPreferences,
     onManageStudents: () -> Unit,
     onManageLessonPlans: () -> Unit,
+    onNavigateToMindMap: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit
 ) {
@@ -448,6 +451,30 @@ fun ProfileTab(
                         }
                         Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }
+                }
+            }
+        }
+
+        item {
+            Text("AI 实验室", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(12.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth().clickable { onNavigateToMindMap() },
+                shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+            ) {
+                Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                        Icon(Icons.Default.AccountTree, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("AI 智能思维导图", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("AI 驱动的内容创建与可视化思维导图", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                    }
+                    Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                 }
             }
         }

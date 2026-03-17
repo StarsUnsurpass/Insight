@@ -23,6 +23,7 @@ sealed class Route(val path: String) {
     object StudentDetail : Route("student_detail")
     object LessonPlanList : Route("lesson_plan_list")
     object LessonPlanEditor : Route("lesson_plan_editor")
+    object MindMap : Route("mindmap")
 }
 
 @Composable
@@ -51,7 +52,17 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToLessonPlans = {
                     navController.navigate(Route.LessonPlanList.path)
+                },
+                onNavigateToMindMap = {
+                    navController.navigate(Route.MindMap.path)
                 }
+            )
+        }
+
+        composable(Route.MindMap.path) {
+            MindMapScreen(
+                preferences = uiState.preferences,
+                onBack = { navController.popBackStack() }
             )
         }
 
