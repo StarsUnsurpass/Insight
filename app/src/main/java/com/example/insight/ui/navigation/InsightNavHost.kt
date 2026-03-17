@@ -60,8 +60,10 @@ fun InsightNavHost(viewModel: InsightViewModel) {
         }
 
         composable(Route.MindMap.path) {
+            val mindMapViewModel: MindMapViewModel = hiltViewModel()
             MindMapScreen(
                 preferences = uiState.preferences,
+                viewModel = mindMapViewModel,
                 onBack = { navController.popBackStack() }
             )
         }

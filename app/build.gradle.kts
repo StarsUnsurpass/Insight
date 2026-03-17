@@ -12,6 +12,14 @@ kapt {
         arg("dagger.hilt.android.internal.disableAndroidSuperclassValidation", "false")
         arg("dagger.hilt.android.internal.projectType", "APP")
         arg("dagger.hilt.internal.useAggregatingRootProcessor", "false")
+        // Fix for 'kapt.kotlin.generated' option unrecognized
+        arg("kapt.kotlin.generated", "true")
+    }
+    // Suppress warnings about unrecognized options
+    javacOptions {
+        option("-Xmaxerrs", 500)
+        option("-Xlint:none")
+        option("-nowarn")
     }
 }
 
