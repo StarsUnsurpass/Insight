@@ -8,5 +8,8 @@ data class MindMapNode(
     @SerializedName("title") var title: String,
     @SerializedName("nodeType") val nodeType: String = "branch", // "root", "branch", "leaf"
     @SerializedName("tags") val tags: List<String> = emptyList(),
-    @SerializedName("children") var children: List<MindMapNode> = emptyList()
+    @SerializedName("children") var children: List<MindMapNode> = emptyList(),
+    
+    // UI 状态，不参与序列化
+    var isExpanded: Boolean = true
 )

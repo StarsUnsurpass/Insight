@@ -32,6 +32,23 @@ enum class ChartStyle {
     RADAR, BAR, PIE
 }
 
+enum class PaperType {
+    NONE, LINED, GRID, OLD_PAPER
+}
+
+data class HandwritingConfig(
+    val fontName: String = "handwriting_default.ttf",
+    val paperType: PaperType = PaperType.LINED,
+    val fontSize: Int = 18,
+    val sizeJitter: Float = 0.05f,
+    val rotationJitter: Float = 2.0f,
+    val positionJitter: Float = 1.5f,
+    val spacingJitter: Float = 1.0f,
+    val inkBlur: Float = 0.4f,
+    val paperColor: String = "#FFF9C4", // Warm paper color
+    val lineOpacity: Float = 0.3f
+)
+
 data class ReportConfig(
     val reportTitle: String = "学情分析周报",
     val themeColor: Int = 0xFF8BA18E.toInt(),
@@ -39,7 +56,9 @@ data class ReportConfig(
     val chartStyle: ChartStyle = ChartStyle.RADAR,
     val includeRadarChart: Boolean = true,
     val includeStudentList: Boolean = true,
-    val detailLevel: DetailLevel = DetailLevel.STANDARD
+    val detailLevel: DetailLevel = DetailLevel.STANDARD,
+    val isHandwritingMode: Boolean = false,
+    val handwritingConfig: HandwritingConfig = HandwritingConfig()
 )
 
 data class UserPreferences(

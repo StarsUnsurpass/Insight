@@ -54,6 +54,7 @@ class MindMapViewModel @Inject constructor(private val repository: DeepSeekRepos
     fun generateMindMap(topic: String, apiKey: String) {
         viewModelScope.launch {
             _isGenerating.value = true
+            _rootNode.value = null // 清空旧的
             try {
                 val fullPrompt = "用户给定的教学主题是：[${topic}]\n请立即输出 JSON："
                 val messages = listOf(
@@ -64,9 +65,9 @@ class MindMapViewModel @Inject constructor(private val repository: DeepSeekRepos
                 val contentBuilder = StringBuilder()
                 repository.streamChat(apiKey, messages).collect { chunk ->
                     contentBuilder.append(chunk)
+                    // 尝试在每一步解析，实现流式更新 UI
+                    tryParseAndSetNode(contentBuilder.toString())
                 }
-                
-                parseAndSetNode(contentBuilder.toString())
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -75,16 +76,24 @@ class MindMapViewModel @Inject constructor(private val repository: DeepSeekRepos
         }
     }
 
-    private fun parseAndSetNode(rawJson: String) {
+    private fun tryParseAndSetNode(rawJson: String) {
         try {
+            // 简单清洗逻辑，处理大模型不听话的情况
             val cleanJson = rawJson
                 .replace("```json", "")
                 .replace("```", "")
                 .trim()
+            
+            // 尝试闭合不完整的 JSON（如果流没结束，Gson 会报错，我们捕捉它）
+            // 注意：Gson 不支持解析不完整 JSON。如果需要极高频率更新，
+            // 通常需要更复杂的解析器，这里我们利用 try-catch，
+            // 只有当一段完整的 JSON 块到达时才更新。
             val node = gson.fromJson(cleanJson, MindMapNode::class.java)
-            _rootNode.value = node
+            if (node != null) {
+                _rootNode.value = node
+            }
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 解析失败（数据不完整），保持旧状态，等待下一块数据
         }
     }
 }
