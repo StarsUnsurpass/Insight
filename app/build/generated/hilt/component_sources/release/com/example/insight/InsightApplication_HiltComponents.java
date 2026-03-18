@@ -2,6 +2,7 @@ package com.example.insight;
 
 import com.example.insight.di.AppModule;
 import com.example.insight.di.NetworkModule;
+import com.example.insight.ui.screens.MindMapViewModel_HiltModules;
 import com.example.insight.ui.state.InsightViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -150,7 +151,8 @@ public final class InsightApplication_HiltComponents {
           HiltWrapper_SavedStateHandleModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
-          InsightViewModel_HiltModules.KeyModule.class
+          InsightViewModel_HiltModules.KeyModule.class,
+          MindMapViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -187,7 +189,8 @@ public final class InsightApplication_HiltComponents {
   @Subcomponent(
       modules = {
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
-          InsightViewModel_HiltModules.BindsModule.class
+          InsightViewModel_HiltModules.BindsModule.class,
+          MindMapViewModel_HiltModules.BindsModule.class
       }
   )
   @ViewModelScoped

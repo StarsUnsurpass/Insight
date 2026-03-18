@@ -28,6 +28,8 @@ import com.example.insight.di.AppModule_ProvideTextRecognizerFactory;
 import com.example.insight.di.NetworkModule_ProvideDeepSeekApiServiceFactory;
 import com.example.insight.di.NetworkModule_ProvideOkHttpClientFactory;
 import com.example.insight.di.NetworkModule_ProvideRetrofitFactory;
+import com.example.insight.ui.screens.MindMapViewModel;
+import com.example.insight.ui.screens.MindMapViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.example.insight.ui.state.InsightViewModel;
 import com.example.insight.ui.state.InsightViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.google.mlkit.vision.text.TextRecognizer;
@@ -48,8 +50,10 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideApplicationFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
 import dagger.internal.Provider;
+import dagger.internal.SetBuilder;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -383,7 +387,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     @Override
     public Set<String> getViewModelKeys() {
-      return Collections.<String>singleton(InsightViewModel_HiltModules_KeyModule_ProvideFactory.provide());
+      return SetBuilder.<String>newSetBuilder(2).add(InsightViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(MindMapViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -411,6 +415,8 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     private Provider<InsightViewModel> insightViewModelProvider;
 
+    private Provider<MindMapViewModel> mindMapViewModelProvider;
+
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
         ViewModelLifecycle viewModelLifecycleParam) {
@@ -425,11 +431,12 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
     private void initialize(final SavedStateHandle savedStateHandleParam,
         final ViewModelLifecycle viewModelLifecycleParam) {
       this.insightViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
+      this.mindMapViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
     }
 
     @Override
     public Map<String, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<String, javax.inject.Provider<ViewModel>>singletonMap("com.example.insight.ui.state.InsightViewModel", ((Provider) insightViewModelProvider));
+      return MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(2).put("com.example.insight.ui.state.InsightViewModel", ((Provider) insightViewModelProvider)).put("com.example.insight.ui.screens.MindMapViewModel", ((Provider) mindMapViewModelProvider)).build();
     }
 
     @Override
@@ -460,6 +467,9 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
         switch (id) {
           case 0: // com.example.insight.ui.state.InsightViewModel 
           return (T) new InsightViewModel(singletonCImpl.insightRepositoryProvider.get(), singletonCImpl.deepSeekRepositoryProvider.get(), singletonCImpl.provideTextRecognizerProvider.get());
+
+          case 1: // com.example.insight.ui.screens.MindMapViewModel 
+          return (T) new MindMapViewModel(singletonCImpl.deepSeekRepositoryProvider.get());
 
           default: throw new AssertionError(id);
         }
