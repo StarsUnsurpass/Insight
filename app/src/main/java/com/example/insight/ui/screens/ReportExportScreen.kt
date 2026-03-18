@@ -44,7 +44,6 @@ fun ReportExportScreen(
     val context = LocalContext.current
     var config by remember { mutableStateOf(ReportConfig(reportTitle = "${preferences.className} 学情周报")) }
     var isGenerating by remember { mutableStateOf(false) }
-    val listState = rememberLazyListState()
 
     // ... (rest of the functions remain same until LazyColumn)
 
@@ -60,7 +59,7 @@ fun ReportExportScreen(
                 actions = {
                     TextButton(onClick = {
                         isGenerating = true
-                        PdfExportHelper.exportReport(context, config, preferences, aiOutput) { file ->
+                        PdfExportHelper.exportReport(context, config, preferences, aiOutput) { _ ->
                             isGenerating = false
                             // file is null here because printManager.print handles the dialog
                         }
@@ -194,7 +193,7 @@ fun ReportExportScreen(
                     }
 
                     item {
-                        Divider(modifier = Modifier.padding(vertical = 8.dp), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text("DeepSeek 智能学情分析", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)

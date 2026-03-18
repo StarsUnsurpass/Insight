@@ -29,7 +29,7 @@ object PdfExportHelper {
         webView.settings.javaScriptEnabled = true
 
         if (config.isHandwritingMode) {
-            setupHandwritingWebView(context, webView, config, preferences, content, onComplete)
+            setupHandwritingWebView(context, webView, config, content, onComplete)
         } else {
             setupStandardWebView(context, webView, config, preferences, content, onComplete)
         }
@@ -39,7 +39,6 @@ object PdfExportHelper {
         context: Context,
         webView: WebView,
         config: ReportConfig,
-        preferences: UserPreferences,
         content: String,
         onComplete: (File?) -> Unit
     ) {
