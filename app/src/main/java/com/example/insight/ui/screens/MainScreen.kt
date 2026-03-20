@@ -55,6 +55,9 @@ import com.example.insight.ui.theme.*
 import kotlin.math.hypot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.lazy.LazyRow
+import com.example.insight.data.model.sampleCoursewares
+import com.example.insight.data.model.Courseware
 
 enum class InsightTab(
     val title: String,
@@ -77,7 +80,8 @@ fun MainScreen(
     onNavigateToExport: () -> Unit,
     onNavigateToStudentList: () -> Unit,
     onNavigateToLessonPlans: () -> Unit,
-    onNavigateToMindMap: () -> Unit
+    onNavigateToMindMap: () -> Unit,
+    onNavigateToCourseware: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -137,7 +141,8 @@ fun MainScreen(
                                 onManageLessonPlans = onNavigateToLessonPlans,
                                 onNavigateToMindMap = onNavigateToMindMap,
                                 onNavigateToSettings = onNavigateToSettings,
-                                onNavigateToExport = onNavigateToExport
+                                onNavigateToExport = onNavigateToExport,
+                                onNavigateToCourseware = onNavigateToCourseware
                             )
                         }
                     }
@@ -370,7 +375,8 @@ fun ProfileTab(
     onManageLessonPlans: () -> Unit,
     onNavigateToMindMap: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToExport: () -> Unit
+    onNavigateToExport: () -> Unit,
+    onNavigateToCourseware: (String) -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
 
@@ -475,6 +481,25 @@ fun ProfileTab(
                         Text("AI 驱动的内容创建与可视化思维导图", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                     }
                     Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
+                }
+            }
+        }
+
+        // --- Featured Courseware Library ---
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Lightbulb, null, tint = primaryColor, modifier = Modifier.size(18.dp))
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("精品教学课件库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(horizontal = 4.dp)
+            ) {
+                items(sampleCoursewares) { courseware ->
+                    CoursewareCard(courseware = courseware, onClick = { onNavigateToCourseware(courseware.id) })
                 }
             }
         }
@@ -615,6 +640,68 @@ fun ExportProgressDialog(role: UserRole) {
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(text = if (role == UserRole.Teacher) "正在分析班级数据..." else "正在整理错题集...", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 Text(text = "生成 PDF 报告中，请稍候", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+            }
+        }
+    }
+}
+
+@Composable
+fun CoursewareCard(courseware: Courseware, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .width(280.dp)
+            .height(160.dp)
+            .clickable { onClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // 背景装饰
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                drawCircle(
+                    color = courseware.themeColor.copy(alpha = 0.1f),
+                    radius = size.width / 2,
+                    center = Offset(size.width, 0f)
+                )
+            }
+            
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Surface(
+                    color = courseware.themeColor.copy(alpha = 0.12f),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = courseware.category,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = courseware.themeColor,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                
+                Column {
+                    Text(
+                        text = courseware.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF1A1C1E),
+                        maxLines = 1
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = courseware.description,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.Gray,
+                        maxLines = 2
+                    )
+                }
             }
         }
     }

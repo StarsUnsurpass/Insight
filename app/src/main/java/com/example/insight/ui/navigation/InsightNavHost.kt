@@ -24,6 +24,9 @@ sealed class Route(val path: String) {
     object LessonPlanList : Route("lesson_plan_list")
     object LessonPlanEditor : Route("lesson_plan_editor")
     object MindMap : Route("mindmap")
+    object CoursewarePlayer : Route("courseware_player/{coursewareId}") {
+        fun createRoute(id: String) = "courseware_player/$id"
+    }
 }
 
 @Composable
@@ -55,7 +58,25 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToMindMap = {
                     navController.navigate(Route.MindMap.path)
+                },
+                onNavigateToCourseware = { id ->
+                    navController.navigate(Route.CoursewarePlayer.createRoute(id))
                 }
+            )
+        }
+
+        composable(
+            route = Route.CoursewarePlayer.path,
+            arguments = listOf(
+                androidx.navigation.navArgument("coursewareId") {
+                    type = androidx.navigation.NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val coursewareId = backStackEntry.arguments?.getString("coursewareId") ?: ""
+            CoursewarePlayerScreen(
+                coursewareId = coursewareId,
+                onBack = { navController.popBackStack() }
             )
         }
 
