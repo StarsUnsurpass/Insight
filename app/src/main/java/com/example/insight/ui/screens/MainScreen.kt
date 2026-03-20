@@ -142,6 +142,8 @@ fun MainScreen(
                             InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
+                                studentCount = uiState.students.size,
+                                lessonPlanCount = uiState.lessonPlans.size,
                                 onManageStudents = onNavigateToStudentList,
                                 onManageLessonPlans = onNavigateToLessonPlans,
                                 onNavigateToMindMap = onNavigateToMindMap,
@@ -378,6 +380,8 @@ fun HomeTab(preferences: UserPreferences) {
 @Composable
 fun ProfileTab(
     preferences: UserPreferences,
+    studentCount: Int,
+    lessonPlanCount: Int,
     onManageStudents: () -> Unit,
     onManageLessonPlans: () -> Unit,
     onNavigateToMindMap: () -> Unit,
@@ -413,8 +417,18 @@ fun ProfileTab(
 
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "我的教案", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
-                StatCard(if (preferences.role == UserRole.Student) "攻克考点" else "批改人次", if (preferences.role == UserRole.Student) "42" else "356", Modifier.weight(1f))
+                StatCard(
+                    label = if (preferences.role == UserRole.Student) "累计扫描" else "我的教案", 
+                    value = if (preferences.role == UserRole.Student) "128" else lessonPlanCount.toString(), 
+                    modifier = Modifier.weight(1f),
+                    onClick = { if (preferences.role == UserRole.Teacher) onManageLessonPlans() }
+                )
+                StatCard(
+                    label = if (preferences.role == UserRole.Student) "攻克考点" else "班级人数", 
+                    value = if (preferences.role == UserRole.Student) "42" else studentCount.toString(), 
+                    modifier = Modifier.weight(1f),
+                    onClick = { if (preferences.role == UserRole.Teacher) onManageStudents() }
+                )
             }
         }
 
@@ -683,10 +697,10 @@ fun MapTab(preferences: UserPreferences) {
 }
 
 @Composable
-fun StatCard(label: String, value: String, modifier: Modifier = Modifier) {
+fun StatCard(label: String, value: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     val primaryColor = MaterialTheme.colorScheme.primary
     Card(
-        modifier = modifier, 
+        modifier = modifier.clickable { onClick() }, 
         shape = RoundedCornerShape(24.dp), 
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
