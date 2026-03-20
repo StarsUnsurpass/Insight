@@ -44,6 +44,7 @@ fun ReportExportScreen(
     val context = LocalContext.current
     var config by remember { mutableStateOf(ReportConfig(reportTitle = "${preferences.className} 学情周报")) }
     var isGenerating by remember { mutableStateOf(false) }
+    var hwSettings by remember { mutableStateOf(HandwritingSettings()) }
 
     // ... (rest of the functions remain same until LazyColumn)
 
@@ -87,7 +88,9 @@ fun ReportExportScreen(
                 if (config.isHandwritingMode) {
                     HandwritingSimulationMode(
                         title = config.reportTitle,
-                        content = if (aiOutput.isNotBlank()) aiOutput else "DeepSeek 正在分析海量学情数据..."
+                        content = if (aiOutput.isNotBlank()) aiOutput else "DeepSeek 正在分析海量学情数据...",
+                        settings = hwSettings,
+                        onSettingsChange = { hwSettings = it }
                     )
                 } else {
                     Surface(
@@ -141,11 +144,9 @@ fun ReportExportScreen(
 
                     if (config.isHandwritingMode) {
                         item {
-                            Text(
-                                "已开启手写模拟。请点击上方预览区右下角的悬浮按钮，进行详尽的纸张、字体和排版定制。",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = SageGreen,
-                                modifier = Modifier.padding(vertical = 8.dp)
+                            HandwritingConfigPanel(
+                                settings = hwSettings,
+                                onSettingsChange = { hwSettings = it }
                             )
                         }
                     } else {

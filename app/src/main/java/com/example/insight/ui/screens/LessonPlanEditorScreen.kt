@@ -42,21 +42,37 @@ enum class PaperStyle(val title: String) {
 }
 
 enum class HandwritingFont(val title: String, val fontFamilyName: String) {
-    Normal("常规", "sans-serif"),
+    Normal("常规系统", "sans-serif"),
     Serif("宋体模拟", "serif"),
     Cursive("草书手写", "cursive"),
     Monospace("行楷模拟", "monospace")
 }
 
 data class HandwritingSettings(
-    val paperStyle: PaperStyle = PaperStyle.WhiteLined,
     val fontStyle: HandwritingFont = HandwritingFont.Normal,
-    val textColor: Color = Color.Black,
+    val paperStyle: PaperStyle = PaperStyle.WhiteLined,
+    
+    val showLines: Boolean = true,
+    val marginTop: Float = 50f,
+    val marginLeft: Float = 30f,
+    val marginRight: Float = 30f,
+    val marginBottom: Float = 50f,
+
     val fontSize: Float = 16f,
-    val lineSpacing: Float = 1.8f,
+    val textColor: Color = Color.Black,
+    val textAlignment: Int = android.view.Gravity.START,
+    val textEffect: Int = 0,
+    val resolution: Int = 2,
+
+    val lightingEffect: Boolean = false,
+    val crumpleEffect: Boolean = false,
+    val otherEffect: Boolean = false,
+
+    val verticalPosition: Float = 0f,
+    val wordSpacing: Float = 0f,
     val letterSpacing: Float = 0.05f,
-    val marginX: Float = 24f,
-    val marginY: Float = 32f
+    
+    val lineSpacing: Float = 1.8f
 )
 
 data class LessonBlock(
@@ -252,6 +268,7 @@ fun LessonPlanEditorScreen(
 @Composable
 fun PreviewMode(padding: PaddingValues, title: String, targetClass: String, content: String) {
     var selectedTabIndex by remember { mutableStateOf(0) }
+    var hwSettings by remember { mutableStateOf(HandwritingSettings()) }
     
     Column(modifier = Modifier.padding(padding).fillMaxSize()) {
         TabRow(
@@ -273,15 +290,24 @@ fun PreviewMode(padding: PaddingValues, title: String, targetClass: String, cont
                 }
             }
         } else {
-            HandwritingSimulationMode(title, content)
+            HandwritingSimulationMode(
+                title = title,
+                content = content,
+                settings = hwSettings,
+                onSettingsChange = { hwSettings = it }
+            )
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HandwritingSimulationMode(title: String, content: String) {
-    var settings by remember { mutableStateOf(HandwritingSettings()) }
+fun HandwritingSimulationMode(
+    title: String, 
+    content: String, 
+    settings: HandwritingSettings, 
+    onSettingsChange: (HandwritingSettings) -> Unit
+) {
     var showConfigSheet by remember { mutableStateOf(false) }
     
     Box(modifier = Modifier.fillMaxSize()) {
@@ -302,38 +328,63 @@ fun HandwritingSimulationMode(title: String, content: String) {
             ) {
                 androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
                     val lineGapPx = 32.dp.toPx() * settings.lineSpacing
-                    when(settings.paperStyle) {
-                        PaperStyle.WhiteLined, PaperStyle.EnglishRuled -> {
-                            var y = settings.marginY.dp.toPx() + lineGapPx
-                            while (y < size.height) {
-                                drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y), androidx.compose.ui.geometry.Offset(size.width, y), 2f)
-                                if (settings.paperStyle == PaperStyle.EnglishRuled) {
-                                    val dashEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
-                                    drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y + lineGapPx/3), androidx.compose.ui.geometry.Offset(size.width, y + lineGapPx/3), 1f, pathEffect = dashEffect)
-                                    drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y + lineGapPx*2/3), androidx.compose.ui.geometry.Offset(size.width, y + lineGapPx*2/3), 1f, pathEffect = dashEffect)
+                    if (settings.showLines) {
+                        when(settings.paperStyle) {
+                            PaperStyle.WhiteLined, PaperStyle.EnglishRuled -> {
+                                var y = settings.marginTop.dp.toPx() + lineGapPx
+                                while (y < size.height) {
+                                    drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y), androidx.compose.ui.geometry.Offset(size.width, y), 2f)
+                                    if (settings.paperStyle == PaperStyle.EnglishRuled) {
+                                        val dashEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
+                                        drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y + lineGapPx/3), androidx.compose.ui.geometry.Offset(size.width, y + lineGapPx/3), 1f, pathEffect = dashEffect)
+                                        drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y + lineGapPx*2/3), androidx.compose.ui.geometry.Offset(size.width, y + lineGapPx*2/3), 1f, pathEffect = dashEffect)
+                                        y += lineGapPx
+                                    }
                                     y += lineGapPx
                                 }
-                                y += lineGapPx
                             }
+                            PaperStyle.Grid -> {
+                                var y = settings.marginTop.dp.toPx()
+                                while (y < size.height) {
+                                    drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y), androidx.compose.ui.geometry.Offset(size.width, y), 2f)
+                                    y += lineGapPx
+                                }
+                                var x = settings.marginLeft.dp.toPx()
+                                while (x < size.width) {
+                                    drawLine(lineColor, androidx.compose.ui.geometry.Offset(x, 0f), androidx.compose.ui.geometry.Offset(x, size.height), 2f)
+                                    x += lineGapPx
+                                }
+                            }
+                            else -> {}
                         }
-                        PaperStyle.Grid -> {
-                            var y = settings.marginY.dp.toPx()
-                            while (y < size.height) {
-                                drawLine(lineColor, androidx.compose.ui.geometry.Offset(0f, y), androidx.compose.ui.geometry.Offset(size.width, y), 2f)
-                                y += lineGapPx
-                            }
-                            var x = settings.marginX.dp.toPx()
-                            while (x < size.width) {
-                                drawLine(lineColor, androidx.compose.ui.geometry.Offset(x, 0f), androidx.compose.ui.geometry.Offset(x, size.height), 2f)
-                                x += lineGapPx
-                            }
+                    }
+                    if (settings.crumpleEffect) {
+                        val crumplePath = androidx.compose.ui.graphics.Path()
+                        for (i in 0..10) {
+                            crumplePath.moveTo((size.width * Math.random()).toFloat(), (size.height * Math.random()).toFloat())
+                            crumplePath.lineTo((size.width * Math.random()).toFloat(), (size.height * Math.random()).toFloat())
+                            crumplePath.lineTo((size.width * Math.random()).toFloat(), (size.height * Math.random()).toFloat())
                         }
-                        else -> {}
+                        drawPath(crumplePath, Color(0x30000000), style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2f))
+                    }
+                    if (settings.otherEffect) {
+                        drawRect(androidx.compose.ui.graphics.Brush.radialGradient(
+                            colors = listOf(Color.Transparent, Color(0x40000000)),
+                            center = androidx.compose.ui.geometry.Offset(size.width / 2, size.height / 2),
+                            radius = size.height * 0.8f
+                        ))
+                    }
+                    if (settings.lightingEffect) {
+                        drawRect(androidx.compose.ui.graphics.Brush.linearGradient(
+                            colors = listOf(Color(0x40FFFFFF), Color.Transparent, Color(0x10000000)),
+                            start = androidx.compose.ui.geometry.Offset(0f, 0f),
+                            end = androidx.compose.ui.geometry.Offset(size.width, size.height)
+                        ))
                     }
                 }
                 
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize().padding(horizontal = settings.marginX.dp, vertical = settings.marginY.dp)
+                    modifier = Modifier.fillMaxSize().padding(start = settings.marginLeft.dp, end = settings.marginRight.dp, top = settings.marginTop.dp, bottom = settings.marginBottom.dp)
                 ) {
                     item {
                         MarkdownText(
@@ -343,7 +394,10 @@ fun HandwritingSimulationMode(title: String, content: String) {
                             textSize = settings.fontSize,
                             lineSpacingMultiplier = settings.lineSpacing,
                             letterSpacing = settings.letterSpacing,
-                            typeface = android.graphics.Typeface.create(settings.fontStyle.fontFamilyName, android.graphics.Typeface.NORMAL)
+                            wordSpacing = settings.wordSpacing,
+                            typeface = android.graphics.Typeface.create(settings.fontStyle.fontFamilyName, android.graphics.Typeface.NORMAL),
+                            textAlign = settings.textAlignment,
+                            textEffect = settings.textEffect
                         )
                     }
                 }
@@ -361,7 +415,7 @@ fun HandwritingSimulationMode(title: String, content: String) {
     
     if (showConfigSheet) {
         ModalBottomSheet(onDismissRequest = { showConfigSheet = false }) {
-            HandwritingConfigPanel(settings, onSettingsChange = { settings = it })
+            HandwritingConfigPanel(settings, onSettingsChange = onSettingsChange)
         }
     }
 }
@@ -369,60 +423,138 @@ fun HandwritingSimulationMode(title: String, content: String) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HandwritingConfigPanel(settings: HandwritingSettings, onSettingsChange: (HandwritingSettings) -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp).padding(bottom = 32.dp)) {
-        Text("纸张样式设定", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = SageGreen)
-        androidx.compose.foundation.lazy.LazyRow(modifier = Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            val papers = PaperStyle.values()
-            items(papers.size) { index ->
-                val style = papers[index]
-                FilterChip(
-                    selected = settings.paperStyle == style,
-                    onClick = { onSettingsChange(settings.copy(paperStyle = style)) },
-                    label = { Text(style.title) }
-                )
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 32.dp)) {
+        Column {
+            Text("1. 手写选项", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = SageGreen, modifier = Modifier.padding(top = 16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 4.dp)) {
+                Text("手写字体:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    val fonts = HandwritingFont.values()
+                    items(fonts.size) { index ->
+                        val font = fonts[index]
+                        FilterChip(
+                            selected = settings.fontStyle == font,
+                            onClick = { onSettingsChange(settings.copy(fontStyle = font)) },
+                            label = { Text(font.title) }
+                        )
+                    }
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 4.dp)) {
+                Text("纸张类型:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    val papers = PaperStyle.values()
+                    items(papers.size) { index ->
+                        val style = papers[index]
+                        FilterChip(
+                            selected = settings.paperStyle == style,
+                            onClick = { onSettingsChange(settings.copy(paperStyle = style)) },
+                            label = { Text(style.title) }
+                        )
+                    }
+                }
             }
         }
         
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("手写字体配置", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-        androidx.compose.foundation.lazy.LazyRow(modifier = Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            val fonts = HandwritingFont.values()
-            items(fonts.size) { index ->
-                val font = fonts[index]
-                FilterChip(
-                    selected = settings.fontStyle == font,
-                    onClick = { onSettingsChange(settings.copy(fontStyle = font)) },
-                    label = { Text(font.title) }
-                )
+        Column {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("2. 边距和线条选项", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("线条 (隐藏/显示)")
+                Switch(checked = settings.showLines, onCheckedChange = { onSettingsChange(settings.copy(showLines = it)) })
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("顶部边距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.marginTop, onValueChange = { onSettingsChange(settings.copy(marginTop = it)) }, valueRange = 0f..180f, modifier = Modifier.weight(1f))
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("左边边距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.marginLeft, onValueChange = { onSettingsChange(settings.copy(marginLeft = it)) }, valueRange = 0f..180f, modifier = Modifier.weight(1f))
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("右边边距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.marginRight, onValueChange = { onSettingsChange(settings.copy(marginRight = it)) }, valueRange = 0f..180f, modifier = Modifier.weight(1f))
+            }
+        }
+
+        Column {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("3. 页面和文字选项", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("字体大小:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.fontSize, onValueChange = { onSettingsChange(settings.copy(fontSize = it)) }, valueRange = 12f..32f, modifier = Modifier.weight(1f))
+            }
+            Row(modifier = Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Text("字体颜色:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                val colors = listOf(Color.Black to "纯黑", Color(0xFF00008B) to "深蓝", Color(0xFF8B0000) to "暗红", Color(0xFF006400) to "孔雀绿")
+                colors.forEach { (c, _) ->
+                    Box(
+                        modifier = Modifier.size(24.dp).clip(CircleShape).background(c)
+                            .clickable { onSettingsChange(settings.copy(textColor = c)) }
+                            .border(2.dp, if (settings.textColor == c) SageGreen else Color.Transparent, CircleShape)
+                    )
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("文字对齐:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    item { FilterChip(selected = settings.textAlignment == android.view.Gravity.START, onClick = { onSettingsChange(settings.copy(textAlignment = android.view.Gravity.START)) }, label = { Text("居左") }) }
+                    item { FilterChip(selected = settings.textAlignment == android.view.Gravity.CENTER, onClick = { onSettingsChange(settings.copy(textAlignment = android.view.Gravity.CENTER)) }, label = { Text("居中") }) }
+                    item { FilterChip(selected = settings.textAlignment == android.view.Gravity.END, onClick = { onSettingsChange(settings.copy(textAlignment = android.view.Gravity.END)) }, label = { Text("居右") }) }
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("效果:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    item { FilterChip(selected = settings.textEffect == 0, onClick = { onSettingsChange(settings.copy(textEffect = 0)) }, label = { Text("无效果") }) }
+                    item { FilterChip(selected = settings.textEffect == 1, onClick = { onSettingsChange(settings.copy(textEffect = 1)) }, label = { Text("阴影") }) }
+                    item { FilterChip(selected = settings.textEffect == 2, onClick = { onSettingsChange(settings.copy(textEffect = 2)) }, label = { Text("扫描") }) }
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("分辨率:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    item { FilterChip(selected = settings.resolution == 0, onClick = { onSettingsChange(settings.copy(resolution = 0)) }, label = { Text("极低") }) }
+                    item { FilterChip(selected = settings.resolution == 1, onClick = { onSettingsChange(settings.copy(resolution = 1)) }, label = { Text("低清") }) }
+                    item { FilterChip(selected = settings.resolution == 2, onClick = { onSettingsChange(settings.copy(resolution = 2)) }, label = { Text("正常") }) }
+                    item { FilterChip(selected = settings.resolution == 3, onClick = { onSettingsChange(settings.copy(resolution = 3)) }, label = { Text("高清") }) }
+                    item { FilterChip(selected = settings.resolution == 4, onClick = { onSettingsChange(settings.copy(resolution = 4)) }, label = { Text("超清") }) }
+                }
             }
         }
         
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("笔记颜色", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-        Row(modifier = Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            val colors = listOf(Color.Black to "纯黑", Color(0xFF00008B) to "深蓝", Color(0xFF8B0000) to "暗红")
-            colors.forEach { (c, _) ->
-                Box(
-                    modifier = Modifier.size(36.dp).clip(CircleShape).background(c)
-                        .clickable { onSettingsChange(settings.copy(textColor = c)) }
-                        .border(2.dp, if (settings.textColor == c) SageGreen else Color.Transparent, CircleShape)
-                )
+        Column {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("4. 特殊效果", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("光影 (环境光干扰)")
+                Switch(checked = settings.lightingEffect, onCheckedChange = { onSettingsChange(settings.copy(lightingEffect = it)) })
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("褶皱 (真实受潮或揉搓)")
+                Switch(checked = settings.crumpleEffect, onCheckedChange = { onSettingsChange(settings.copy(crumpleEffect = it)) })
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("其他 (复印暗角微调)")
+                Switch(checked = settings.otherEffect, onCheckedChange = { onSettingsChange(settings.copy(otherEffect = it)) })
             }
         }
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("排版细节", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("字体大小:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
-            Slider(value = settings.fontSize, onValueChange = { onSettingsChange(settings.copy(fontSize = it)) }, valueRange = 12f..32f, modifier = Modifier.weight(1f))
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("行间距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
-            Slider(value = settings.lineSpacing, onValueChange = { onSettingsChange(settings.copy(lineSpacing = it)) }, valueRange = 1f..3f, modifier = Modifier.weight(1f))
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("页边距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
-            Slider(value = settings.marginX, onValueChange = { onSettingsChange(settings.copy(marginX = it, marginY = it * 1.5f)) }, valueRange = 8f..64f, modifier = Modifier.weight(1f))
+
+        Column {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("5. 间距选项", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("垂直位置:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.lineSpacing, onValueChange = { onSettingsChange(settings.copy(lineSpacing = it)) }, valueRange = 1f..3f, modifier = Modifier.weight(1f))
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("字间距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.wordSpacing, onValueChange = { onSettingsChange(settings.copy(wordSpacing = it)) }, valueRange = 0f..0.5f, modifier = Modifier.weight(1f))
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("字符间距:", modifier = Modifier.width(80.dp), style = MaterialTheme.typography.bodySmall)
+                Slider(value = settings.letterSpacing, onValueChange = { onSettingsChange(settings.copy(letterSpacing = it)) }, valueRange = 0f..0.3f, modifier = Modifier.weight(1f))
+            }
         }
     }
 }
