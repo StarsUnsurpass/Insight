@@ -84,15 +84,22 @@ fun ReportExportScreen(
                     .padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Surface(
-                    modifier = Modifier
-                        .aspectRatio(1f / 1.414f)
-                        .fillMaxHeight()
-                        .shadow(8.dp, RoundedCornerShape(4.dp)),
-                    color = if (config.isHandwritingMode) Color(android.graphics.Color.parseColor(config.handwritingConfig.paperColor)) else Color.White,
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    ReportA4Preview(config, preferences)
+                if (config.isHandwritingMode) {
+                    HandwritingSimulationMode(
+                        title = config.reportTitle,
+                        content = if (aiOutput.isNotBlank()) aiOutput else "DeepSeek 正在分析海量学情数据..."
+                    )
+                } else {
+                    Surface(
+                        modifier = Modifier
+                            .aspectRatio(1f / 1.414f)
+                            .fillMaxHeight()
+                            .shadow(8.dp, RoundedCornerShape(4.dp)),
+                        color = Color.White,
+                        shape = RoundedCornerShape(4.dp)
+                    ) {
+                        ReportA4Preview(config, preferences)
+                    }
                 }
             }
 
@@ -134,9 +141,11 @@ fun ReportExportScreen(
 
                     if (config.isHandwritingMode) {
                         item {
-                            HandwritingSettingsPanel(
-                                config = config.handwritingConfig,
-                                onConfigChange = { config = config.copy(handwritingConfig = it) }
+                            Text(
+                                "已开启手写模拟。请点击上方预览区右下角的悬浮按钮，进行详尽的纸张、字体和排版定制。",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = SageGreen,
+                                modifier = Modifier.padding(vertical = 8.dp)
                             )
                         }
                     } else {
@@ -251,88 +260,9 @@ fun ReportExportScreen(
     }
 }
 
-@Composable
-fun HandwritingSettingsPanel(
-    config: HandwritingConfig,
-    onConfigChange: (HandwritingConfig) -> Unit
-) {
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("手写细节调节", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
-        
-        HandwritingSlider(
-            label = "字号随机抖动",
-            value = config.sizeJitter,
-            onValueChange = { onConfigChange(config.copy(sizeJitter = it)) },
-            valueRange = 0f..0.2f
-        )
 
-        HandwritingSlider(
-            label = "倾斜随机角度",
-            value = config.rotationJitter,
-            onValueChange = { onConfigChange(config.copy(rotationJitter = it)) },
-            valueRange = 0f..10f
-        )
 
-        HandwritingSlider(
-            label = "笔画粗细(晕染)",
-            value = config.inkBlur,
-            onValueChange = { onConfigChange(config.copy(inkBlur = it)) },
-            valueRange = 0f..2f
-        )
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PaperTypeChip(
-                label = "横线纸", 
-                selected = config.paperType == PaperType.LINED,
-                onClick = { onConfigChange(config.copy(paperType = PaperType.LINED)) }
-            )
-            PaperTypeChip(
-                label = "网格纸", 
-                selected = config.paperType == PaperType.GRID,
-                onClick = { onConfigChange(config.copy(paperType = PaperType.GRID)) }
-            )
-            PaperTypeChip(
-                label = "白纸", 
-                selected = config.paperType == PaperType.NONE,
-                onClick = { onConfigChange(config.copy(paperType = PaperType.NONE)) }
-            )
-        }
-    }
-}
-
-@Composable
-fun HandwritingSlider(
-    label: String,
-    value: Float,
-    onValueChange: (Float) -> Unit,
-    valueRange: ClosedFloatingPointRange<Float>
-) {
-    Column {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(label, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
-            Text(String.format("%.2f", value), style = MaterialTheme.typography.labelSmall, color = SageGreen)
-        }
-        Slider(
-            value = value,
-            onValueChange = onValueChange,
-            valueRange = valueRange,
-            colors = SliderDefaults.colors(thumbColor = SageGreen, activeTrackColor = SageGreen)
-        )
-    }
-}
-
-@Composable
-fun PaperTypeChip(label: String, selected: Boolean, onClick: () -> Unit) {
-    FilterChip(
-        selected = selected,
-        onClick = onClick,
-        label = { Text(label) },
-        colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = SageGreen.copy(alpha = 0.2f),
-            selectedLabelColor = SageGreen
-        )
-    )
-}
 
 @Composable
 fun <T> StyleSelector(
