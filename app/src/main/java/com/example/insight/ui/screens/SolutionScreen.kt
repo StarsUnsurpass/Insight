@@ -31,7 +31,6 @@ import com.example.insight.ui.theme.*
 @Composable
 fun SolutionScreen(
     capturedText: String,
-    content: String,
     concepts: List<String>,
     aiOutput: String,
     isStreaming: Boolean,
@@ -43,7 +42,6 @@ fun SolutionScreen(
     onStudentSelected: (String) -> Unit
 ) {
     val scrollState = rememberLazyListState()
-    var isOcrVisible by remember { mutableStateOf(false) }
     var showStudentPicker by remember { mutableStateOf(false) }
     val primaryColor = MaterialTheme.colorScheme.primary
     val selectedStudent = students.find { it.studentId == selectedStudentId }

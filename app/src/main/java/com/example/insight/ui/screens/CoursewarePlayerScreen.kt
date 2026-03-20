@@ -47,7 +47,6 @@ fun CoursewarePlayerScreen(
     }
     
     val pagerState = rememberPagerState(pageCount = { courseware.slides.size })
-    val scope = rememberCoroutineScope()
     
     Scaffold(
         topBar = {

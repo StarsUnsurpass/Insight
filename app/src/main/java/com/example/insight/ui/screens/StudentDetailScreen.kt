@@ -30,7 +30,6 @@ import com.example.insight.ui.util.MarkdownText
 fun StudentDetailScreen(
     student: StudentEntity?,
     scans: List<ScanRecordEntity>,
-    report: DiagnosticReportEntity?,
     aiOutput: String,
     isStreaming: Boolean,
     onBack: () -> Unit,

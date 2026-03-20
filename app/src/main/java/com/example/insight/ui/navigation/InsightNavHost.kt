@@ -107,7 +107,6 @@ fun InsightNavHost(viewModel: InsightViewModel) {
             if (state is ScreenState.Solution) {
                 SolutionScreen(
                     capturedText = state.capturedText,
-                    content = state.content,
                     concepts = state.concepts,
                     aiOutput = aiOutput,
                     isStreaming = uiState.isStreaming,
@@ -175,7 +174,6 @@ fun InsightNavHost(viewModel: InsightViewModel) {
             StudentDetailScreen(
                 student = uiState.selectedStudent,
                 scans = uiState.studentScans,
-                report = uiState.studentReport,
                 aiOutput = aiOutput,
                 isStreaming = uiState.isStreaming,
                 onBack = { navController.popBackStack() },
