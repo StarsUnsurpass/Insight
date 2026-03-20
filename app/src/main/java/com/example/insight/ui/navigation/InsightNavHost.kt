@@ -27,6 +27,12 @@ sealed class Route(val path: String) {
     object CoursewarePlayer : Route("courseware_player/{coursewareId}") {
         fun createRoute(id: String) = "courseware_player/$id"
     }
+    object CoursewareEditor : Route("courseware_editor?coursewareId={coursewareId}") {
+        fun createRoute(id: String?) = if (id != null) "courseware_editor?coursewareId=$id" else "courseware_editor"
+    }
+    object LessonPlanSampleDetail : Route("lesson_plan_sample/{sampleId}") {
+        fun createRoute(id: String) = "lesson_plan_sample/$id"
+    }
 }
 
 @Composable
@@ -61,6 +67,51 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToCourseware = { id ->
                     navController.navigate(Route.CoursewarePlayer.createRoute(id))
+                },
+                onNavigateToCoursewareEditor = { id ->
+                    navController.navigate(Route.CoursewareEditor.createRoute(id))
+                },
+                onNavigateToLessonPlanSample = { id ->
+                    navController.navigate(Route.LessonPlanSampleDetail.createRoute(id))
+                }
+            )
+        }
+
+        composable(
+            route = Route.LessonPlanSampleDetail.path,
+            arguments = listOf(
+                androidx.navigation.navArgument("sampleId") {
+                    type = androidx.navigation.NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val sampleId = backStackEntry.arguments?.getString("sampleId") ?: ""
+            LessonPlanDetailScreen(
+                sampleId = sampleId,
+                onBack = { navController.popBackStack() },
+                onClone = { sample ->
+                    // For demo, we just go to editor
+                    navController.navigate(Route.LessonPlanEditor.path)
+                }
+            )
+        }
+
+        composable(
+            route = Route.CoursewareEditor.path,
+            arguments = listOf(
+                androidx.navigation.navArgument("coursewareId") {
+                    type = androidx.navigation.NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) { backStackEntry ->
+            val coursewareId = backStackEntry.arguments?.getString("coursewareId")
+            CoursewareEditorScreen(
+                coursewareId = coursewareId,
+                onBack = { navController.popBackStack() },
+                onSave = { 
+                    navController.popBackStack()
                 }
             )
         }

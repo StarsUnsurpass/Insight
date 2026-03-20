@@ -41,6 +41,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -58,6 +59,8 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyRow
 import com.example.insight.data.model.sampleCoursewares
 import com.example.insight.data.model.Courseware
+import com.example.insight.data.model.sampleLessonPlans
+import com.example.insight.data.model.LessonPlanSample
 
 enum class InsightTab(
     val title: String,
@@ -81,7 +84,9 @@ fun MainScreen(
     onNavigateToStudentList: () -> Unit,
     onNavigateToLessonPlans: () -> Unit,
     onNavigateToMindMap: () -> Unit,
-    onNavigateToCourseware: (String) -> Unit
+    onNavigateToCourseware: (String) -> Unit,
+    onNavigateToCoursewareEditor: (String?) -> Unit,
+    onNavigateToLessonPlanSample: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -142,7 +147,9 @@ fun MainScreen(
                                 onNavigateToMindMap = onNavigateToMindMap,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport,
-                                onNavigateToCourseware = onNavigateToCourseware
+                                onNavigateToCourseware = onNavigateToCourseware,
+                                onNavigateToCoursewareEditor = onNavigateToCoursewareEditor,
+                                onNavigateToLessonPlanSample = onNavigateToLessonPlanSample
                             )
                         }
                     }
@@ -376,7 +383,9 @@ fun ProfileTab(
     onNavigateToMindMap: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
-    onNavigateToCourseware: (String) -> Unit
+    onNavigateToCourseware: (String) -> Unit,
+    onNavigateToCoursewareEditor: (String?) -> Unit,
+    onNavigateToLessonPlanSample: (String) -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
 
@@ -389,7 +398,6 @@ fun ProfileTab(
                         UserRole.Teacher -> Icons.Default.CastForEducation
                     }, contentDescription = null, modifier = Modifier.size(32.dp), tint = primaryColor)
                 }
-                @Suppress("DEPRECATION")
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -405,7 +413,7 @@ fun ProfileTab(
 
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "教学课件", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
+                StatCard(if (preferences.role == UserRole.Student) "累计扫描" else "我的教案", if (preferences.role == UserRole.Student) "128" else "12", Modifier.weight(1f))
                 StatCard(if (preferences.role == UserRole.Student) "攻克考点" else "批改人次", if (preferences.role == UserRole.Student) "42" else "356", Modifier.weight(1f))
             }
         }
@@ -485,12 +493,44 @@ fun ProfileTab(
             }
         }
 
+        // --- Featured Lesson Plan Library ---
+        item {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.AutoStories, null, tint = primaryColor, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("精品教案库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+                }
+                IconButton(onClick = { onManageLessonPlans() }) {
+                    Icon(Icons.Default.ChevronRight, null, tint = primaryColor)
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(horizontal = 4.dp)
+            ) {
+                items(sampleLessonPlans) { plan ->
+                    LessonPlanSampleCard(
+                        plan = plan, 
+                        onClick = { onNavigateToLessonPlanSample(plan.id) }
+                    )
+                }
+            }
+        }
+
         // --- Featured Courseware Library ---
         item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.Lightbulb, null, tint = primaryColor, modifier = Modifier.size(18.dp))
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("精品教学课件库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Lightbulb, null, tint = primaryColor, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("精品教学课件库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+                }
+                IconButton(onClick = { onNavigateToCoursewareEditor(null) }) {
+                    Icon(Icons.Default.AddCircleOutline, null, tint = primaryColor)
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             
@@ -499,7 +539,11 @@ fun ProfileTab(
                 contentPadding = PaddingValues(horizontal = 4.dp)
             ) {
                 items(sampleCoursewares) { courseware ->
-                    CoursewareCard(courseware = courseware, onClick = { onNavigateToCourseware(courseware.id) })
+                    CoursewareCard(
+                        courseware = courseware, 
+                        onClick = { onNavigateToCourseware(courseware.id) },
+                        onEdit = { onNavigateToCoursewareEditor(courseware.id) }
+                    )
                 }
             }
         }
@@ -521,6 +565,55 @@ fun ProfileTab(
                     SettingRow(Icons.Default.CloudUpload, "同步云端数据")
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .width(240.dp)
+            .height(140.dp)
+            .clickable { onClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        border = BorderStroke(1.dp, plan.themeColor.copy(alpha = 0.1f))
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Surface(
+                color = plan.themeColor.copy(alpha = 0.1f),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = plan.category,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = plan.themeColor,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            
+            Text(
+                text = plan.title,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif,
+                maxLines = 2,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+            )
+            
+            Text(
+                text = plan.targetClass,
+                style = MaterialTheme.typography.labelSmall,
+                color = Color.Gray
+            )
         }
     }
 }
@@ -646,7 +739,7 @@ fun ExportProgressDialog(role: UserRole) {
 }
 
 @Composable
-fun CoursewareCard(courseware: Courseware, onClick: () -> Unit) {
+fun CoursewareCard(courseware: Courseware, onClick: () -> Unit, onEdit: () -> Unit) {
     Card(
         modifier = Modifier
             .width(280.dp)
@@ -673,17 +766,23 @@ fun CoursewareCard(courseware: Courseware, onClick: () -> Unit) {
                     .padding(20.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Surface(
-                    color = courseware.themeColor.copy(alpha = 0.12f),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Text(
-                        text = courseware.category,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = courseware.themeColor,
-                        fontWeight = FontWeight.Bold
-                    )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Surface(
+                        color = courseware.themeColor.copy(alpha = 0.12f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Text(
+                            text = courseware.category,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = courseware.themeColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    
+                    IconButton(onClick = { onEdit() }, modifier = Modifier.size(24.dp)) {
+                        Icon(Icons.Default.Edit, null, tint = Color.Gray.copy(alpha = 0.5f), modifier = Modifier.size(16.dp))
+                    }
                 }
                 
                 Column {

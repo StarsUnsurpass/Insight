@@ -8,7 +8,10 @@ data class Courseware(
     val description: String,
     val category: String,
     val themeColor: Color,
-    val slides: List<Slide>
+    val slides: List<Slide>,
+    val style: CoursewareStyle = CoursewareStyle.MODERN,
+    val author: String = "Admin",
+    val lastModified: Long = System.currentTimeMillis()
 )
 
 data class Slide(
@@ -19,8 +22,42 @@ data class Slide(
     val visualHint: String = "",
     val interactionType: InteractionType = InteractionType.NONE,
     val options: List<String> = emptyList(),
-    val correctAnswer: String = ""
+    val correctAnswer: String = "",
+    val layoutType: SlideLayoutType = SlideLayoutType.CENTERED,
+    val animationType: SlideAnimationType = SlideAnimationType.FADE,
+    val backgroundType: SlideBackgroundType = SlideBackgroundType.SOLID
 )
+
+enum class CoursewareStyle {
+    MODERN,      // 现代极简
+    DETECTIVE,   // 悬疑侦探
+    PAPER,       // 复古纸张
+    TECH,        // 科技感
+    WATERCOLOR,  // 清新水彩
+    GAME         // 趣味游戏
+}
+
+enum class SlideLayoutType {
+    CENTERED,    // 居中布局
+    SPLIT_LR,    // 左右分割
+    SPLIT_TB,    // 上下分割
+    GRID,        // 九宫格/四宫格
+    TIMELINE     // 时间轴布局
+}
+
+enum class SlideAnimationType {
+    FADE,
+    SLIDE,
+    ZOOM,
+    BOUNCE
+}
+
+enum class SlideBackgroundType {
+    SOLID,
+    GRADIENT,
+    MESH,
+    IMAGE_OVERLAY
+}
 
 enum class InteractionType {
     NONE,
@@ -28,7 +65,9 @@ enum class InteractionType {
     FLIP_CARD,
     FILL_IN_BLANK,
     MULTIPLE_CHOICE,
-    DRAG_AND_DROP
+    DRAG_AND_DROP,
+    VOICE_INPUT,     // 新增：语音输入
+    SKETCH_BOARD     // 新增：绘图/涂鸦
 }
 
 val sampleCoursewares = listOf(
@@ -38,26 +77,30 @@ val sampleCoursewares = listOf(
         description = "探秘时态的魔法，解决初中生最头疼的时态混淆问题。",
         category = "语法突破",
         themeColor = Color(0xFF6200EE),
+        style = CoursewareStyle.PAPER,
         slides = listOf(
             Slide(
                 id = "s1",
                 title = "Have you ever traveled through time?",
                 content = "探秘时态的魔法。",
-                visualHint = "一条跨越屏幕的巨大时间轴，左边是黑白的过去，右边是彩色的现在。"
+                visualHint = "一条跨越屏幕的巨大时间轴，左边是黑白的过去，右边是彩色的现在。",
+                layoutType = SlideLayoutType.TIMELINE
             ),
             Slide(
                 id = "s2",
                 title = "核心概念降维",
                 content = "一般过去时 = 关在盒子里的过去（与现在无关）",
                 subContent = "现在完成时 = 延伸到现在的桥梁（对现在有影响）",
-                visualHint = "左右分栏布局。"
+                visualHint = "左右分栏布局。",
+                layoutType = SlideLayoutType.SPLIT_LR
             ),
             Slide(
                 id = "s3",
                 title = "标志词捕鼠器",
                 content = "点击翻转出它所属的时态和例句。",
                 interactionType = InteractionType.FLIP_CARD,
-                options = listOf("yesterday", "just", "already", "last year")
+                options = listOf("yesterday", "just", "already", "last year"),
+                layoutType = SlideLayoutType.GRID
             ),
             Slide(
                 id = "s4",
@@ -74,19 +117,22 @@ val sampleCoursewares = listOf(
         description = "侦探悬疑剧本杀，语法与阅读深度结合。",
         category = "阅读精讲",
         themeColor = Color(0xFF03DAC5),
+        style = CoursewareStyle.DETECTIVE,
         slides = listOf(
             Slide(
                 id = "s1",
                 title = "The Mysterious Disappearance",
                 content = "案发时间：昨晚 8:00。",
-                visualHint = "悬疑风格暗色调插图，图中人物被绑架，周围散落着怀表、咖啡杯等线索。"
+                visualHint = "悬疑风格暗色调插图，图中人物被绑架，周围散落着怀表、咖啡杯等线索。",
+                backgroundType = SlideBackgroundType.IMAGE_OVERLAY
             ),
             Slide(
                 id = "s2",
                 title = "嫌疑人供词",
                 content = "Mr. Green: 'I was watching TV at 8:00 PM.'\nMrs. White: 'I was reading a book when the lights went out.'",
                 subContent = "核心句型：was/were + doing (表示过去某一时刻正在发生的动作)。",
-                visualHint = "三个嫌疑人的头像和对话气泡。"
+                visualHint = "三个嫌疑人的头像和对话气泡。",
+                layoutType = SlideLayoutType.SPLIT_LR
             ),
             Slide(
                 id = "s3",
@@ -110,6 +156,7 @@ val sampleCoursewares = listOf(
         description = "生活化的美食文化，攻克枯燥词法。",
         category = "趣味拓展",
         themeColor = Color(0xFFFF9800),
+        style = CoursewareStyle.WATERCOLOR,
         slides = listOf(
             Slide(
                 id = "s1",
@@ -140,6 +187,7 @@ val sampleCoursewares = listOf(
         description = "告别 How are you, I'm fine，解锁地道口语表达。",
         category = "口语交际",
         themeColor = Color(0xFFE91E63),
+        style = CoursewareStyle.MODERN,
         slides = listOf(
             Slide(
                 id = "s1",
@@ -177,6 +225,7 @@ val sampleCoursewares = listOf(
         description = "掌握英文信函的基本格式，学习如何描述旅行体验。",
         category = "写作提分",
         themeColor = Color(0xFF2196F3),
+        style = CoursewareStyle.PAPER,
         slides = listOf(
             Slide(
                 id = "s1",
@@ -212,6 +261,7 @@ val sampleCoursewares = listOf(
         description = "对比中外传统节日，提升跨文化意识与词汇量。",
         category = "文化透视",
         themeColor = Color(0xFF9C27B0),
+        style = CoursewareStyle.MODERN,
         slides = listOf(
             Slide(
                 id = "s1",
@@ -246,6 +296,7 @@ val sampleCoursewares = listOf(
         description = "攻克初中语法重难点，让你的句子长而优美。",
         category = "语法突破",
         themeColor = Color(0xFF4CAF50),
+        style = CoursewareStyle.TECH,
         slides = listOf(
             Slide(
                 id = "s1",
@@ -283,6 +334,7 @@ val sampleCoursewares = listOf(
         description = "让你的英语听起来不再生硬，掌握母语者的发音韵律。",
         category = "听力口语",
         themeColor = Color(0xFF00BCD4),
+        style = CoursewareStyle.GAME,
         slides = listOf(
             Slide(
                 id = "s1",
