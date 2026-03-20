@@ -415,7 +415,11 @@ fun HandwritingSimulationMode(
     
     if (showConfigSheet) {
         ModalBottomSheet(onDismissRequest = { showConfigSheet = false }) {
-            HandwritingConfigPanel(settings, onSettingsChange = onSettingsChange)
+            androidx.compose.foundation.layout.Column(
+                modifier = androidx.compose.ui.Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())
+            ) {
+                HandwritingConfigPanel(settings, onSettingsChange = onSettingsChange)
+            }
         }
     }
 }
