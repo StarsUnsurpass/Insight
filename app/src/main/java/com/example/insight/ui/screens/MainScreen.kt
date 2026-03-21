@@ -418,7 +418,41 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                 }
             }
         } else {
-            items(KnowledgeProvider.allPoints.size) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
+            val searchResults = KnowledgeProvider.allPoints.filter { point ->
+                val q = searchQuery.lowercase()
+                point.title.lowercase().contains(q) ||
+                point.description.lowercase().contains(q) ||
+                point.syllabusDetails.any { it.lowercase().contains(q) } ||
+                point.teachingNotes.any { note -> 
+                    note.title.lowercase().contains(q) || 
+                    note.content.lowercase().contains(q) 
+                } ||
+                point.textbookParagraphs.any { it.content.lowercase().contains(q) } ||
+                point.exampleSentences.any { 
+                    it.english.lowercase().contains(q) || 
+                    it.chinese.lowercase().contains(q) 
+                } ||
+                point.exampleProblems.any { 
+                    it.question.lowercase().contains(q) || 
+                    it.explanation.lowercase().contains(q)
+                } ||
+                point.pastExamQuestions.any {
+                    it.question.lowercase().contains(q) ||
+                    it.explanation.lowercase().contains(q)
+                }
+            }
+
+            if (searchResults.isEmpty()) {
+                item {
+                    Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
+                        Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                    }
+                }
+            } else {
+                items(searchResults) { point ->
+                    SearchResultItemData(point, searchQuery) { onNavigateToKnowledgeDetail(point.id) }
+                }
+            }
         }
     }
 }
@@ -725,6 +759,74 @@ fun SearchResultItem(index: Int, onClick: () -> Unit) {
             Text(text = resultText, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
         }
     }
+}
+
+@Composable
+fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, query: String, onClick: () -> Unit) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val snippet = getSnippet(point, query)
+    
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Search, contentDescription = null, tint = primaryColor)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(point.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = snippet,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 3,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+fun getSnippet(point: com.example.insight.data.model.KnowledgePoint, query: String): String {
+    val q = query.lowercase()
+    if (point.title.lowercase().contains(q)) return point.description.replace(Regex("[#*`\\n]"), " ").replace(Regex("\\s+"), " ").take(100) + "..."
+    if (point.description.lowercase().contains(q)) return extractSnippet(point.description, q)
+    
+    val syllabusMatch = point.syllabusDetails.find { it.lowercase().contains(q) }
+    if (syllabusMatch != null) return "[考纲要求] " + extractSnippet(syllabusMatch, q)
+    
+    val noteMatch = point.teachingNotes.find { it.content.lowercase().contains(q) || it.title.lowercase().contains(q) }
+    if (noteMatch != null) return "[教学笔记 - ${noteMatch.title}] " + extractSnippet(noteMatch.content, q)
+    
+    val textMatch = point.textbookParagraphs.find { it.content.lowercase().contains(q) }
+    if (textMatch != null) return "[教材原句] " + extractSnippet(textMatch.content, q)
+    
+    val sentenceMatch = point.exampleSentences.find { it.english.lowercase().contains(q) || it.chinese.lowercase().contains(q) }
+    if (sentenceMatch != null) return "[例句] " + sentenceMatch.english + " " + sentenceMatch.chinese
+    
+    val probMatch = point.exampleProblems.find { it.question.lowercase().contains(q) || it.explanation.lowercase().contains(q) }
+    if (probMatch != null) return "[典型例题] " + extractSnippet(probMatch.question + " " + probMatch.explanation, q)
+    
+    val examMatch = point.pastExamQuestions.find { it.question.lowercase().contains(q) || it.explanation.lowercase().contains(q) }
+    if (examMatch != null) return "[真题] " + extractSnippet(examMatch.question + " " + examMatch.explanation, q)
+    
+    return point.description.replace(Regex("[#*`\\n]"), " ").replace(Regex("\\s+"), " ").take(100) + "..."
+}
+
+fun extractSnippet(text: String, query: String): String {
+    val cleanText = text.replace(Regex("[#*`\\n]"), " ").replace(Regex("\\s+"), " ").trim()
+    val index = cleanText.lowercase().indexOf(query.lowercase())
+    if (index == -1) return cleanText.take(100)
+    
+    val start = kotlin.math.max(0, index - 30)
+    val end = kotlin.math.min(cleanText.length, index + query.length + 50)
+    var snippet = cleanText.substring(start, end)
+    if (start > 0) snippet = "...$snippet"
+    if (end < cleanText.length) snippet = "$snippet..."
+    return snippet
 }
 
 @Composable

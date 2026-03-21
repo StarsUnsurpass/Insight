@@ -220,7 +220,11 @@ fun KnowledgeDetailScreen(
                                         Text(note.title, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.titleSmall)
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
-                                    Text(note.content, style = MaterialTheme.typography.bodyMedium, lineHeight = 24.sp)
+                                    val formattedContent = note.content
+                                        .replace("；", "；\n")
+                                        .replace(Regex("([^\\n])\\s*(?=\\d+\\.)"), "$1\n")
+                                        .trim()
+                                    Text(formattedContent, style = MaterialTheme.typography.bodyMedium, lineHeight = 24.sp)
                                 }
                             }
                         }
@@ -266,7 +270,11 @@ fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
         },
         update = { view ->
             // Markwon needs the text to be correctly escaped for actual newlines
-            val cleanMarkdown = markdown.replace("\\n", "\n")
+            var cleanMarkdown = markdown.replace("\\n", "\n")
+            
+            // Format inline numbered lists (e.g. "1. xxx 2. yyy") to separate paragraphs
+            cleanMarkdown = cleanMarkdown.replace(Regex("([^\\n])\\s*(?=\\d+\\.(?!\\d))"), "$1\n\n")
+            
             markwon.setMarkdown(view, cleanMarkdown)
         },
         modifier = modifier
