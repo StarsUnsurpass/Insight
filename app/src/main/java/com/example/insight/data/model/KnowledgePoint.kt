@@ -1,16 +1,15 @@
 package com.example.insight.data.model
 
-data class KnowledgePoint(
-    val id: String,
-    val title: String,
-    val description: String,
-    val relatedPoints: List<String>,
-    val exampleProblems: List<ExampleProblem>,
-    val textbookParagraphs: List<TextbookParagraph>,
-    val exampleSentences: List<ExampleSentence>
+data class ExampleProblem(
+    val question: String,
+    val options: List<String>,
+    val answer: String,
+    val explanation: String
 )
 
-data class ExampleProblem(
+data class PastExamQuestion(
+    val year: String,
+    val location: String,
     val question: String,
     val options: List<String>,
     val answer: String,
@@ -27,6 +26,17 @@ data class ExampleSentence(
     val chinese: String
 )
 
+data class KnowledgePoint(
+    val id: String,
+    val title: String,
+    val description: String,
+    val relatedPoints: List<String>,
+    val exampleProblems: List<ExampleProblem>,
+    val pastExamQuestions: List<PastExamQuestion> = emptyList(),
+    val textbookParagraphs: List<TextbookParagraph>,
+    val exampleSentences: List<ExampleSentence>
+)
+
 object KnowledgeProvider {
     val allPoints = listOf(
         KnowledgePoint(
@@ -37,6 +47,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("How many ______ are there in the basket?", listOf("A. apple", "B. apples", "C. milk", "D. water"), "B", "how many 修饰可数名词复数。"),
                 ExampleProblem("The ______ of the twin brothers are both teachers.", listOf("A. father", "B. mother", "C. parents", "D. parent"), "C", "双胞胎兄弟的父母，主语是复数，且谓语是 are。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "北京中考",
+                    question = "My father bought three ______ yesterday. We will make beef and potato soup tonight.",
+                    options = listOf("A. tomatoes", "B. tomato", "C. potato", "D. potatoes"),
+                    answer = "A",
+                    explanation = "three 后接可数名词复数。根据语境，西红柿和土豆都可以做汤，但 three 后面必须是复数形式。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "江苏苏州中考",
+                    question = "The ______ of the research is to find out more about how we can protect the environment.",
+                    options = listOf("A. standard", "B. purpose", "C. method", "D. result"),
+                    answer = "B",
+                    explanation = "考查名词辨析。standard 标准；purpose 目的；method 方法；result 结果。这项研究的目的是找出更多关于我们如何保护环境的信息。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("I have a lot of homework to do today.", "—— 摘自《人教版初二上》")),
             exampleSentences = listOf(ExampleSentence("Information is very important.", "信息非常重要。"), ExampleSentence("This is my sister's room.", "这是我妹妹的房间。"))
@@ -49,6 +77,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("Is this your pen? — No, it's not ______. It's hers.", listOf("A. my", "B. mine", "C. me", "D. I"), "B", "这里指代“我的钢笔”，需用名词性物主代词。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "天津中考",
+                    question = "My grandmother is 80 years old, but she still looks after ______ well.",
+                    options = listOf("A. she", "B. her", "C. herself", "D. hers"),
+                    answer = "C",
+                    explanation = "考查反身代词。look after herself 照顾她自己。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "上海中考",
+                    question = "If you have any questions, you can ask ______ for help.",
+                    options = listOf("A. someone", "B. anyone", "C. everyone", "D. no one"),
+                    answer = "B",
+                    explanation = "考查不定代词。anyone 任何人。如果你有任何问题，你可以向任何人寻求帮助。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("Everyone is having a good time.", "—— 摘自《人教版初一上》")),
             exampleSentences = listOf(ExampleSentence("I can do it by myself.", "我自己能行。"), ExampleSentence("There is something wrong with my phone.", "我的手机出问题了。"))
         ),
@@ -59,6 +105,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("an 用法特例 (hour, honest)", "the 序数词/最高级", "球类/乐器冠词差异", "习惯搭配"),
             exampleProblems = listOf(
                 ExampleProblem("He is ______ honest boy.", listOf("A. a", "B. an", "C. the", "D. /"), "B", "honest [ˈɒnɪst] 以元音音素开头，用 an。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "河北中考",
+                    question = "They usually have ______ breakfast at 7:00 a.m. in the morning.",
+                    options = listOf("A. a", "B. an", "C. the", "D. /"),
+                    answer = "D",
+                    explanation = "考查零冠词。三餐饭前一般不加冠词。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "四川成都中考",
+                    question = "Li Lei is ______ honest boy. He never tells lies.",
+                    options = listOf("A. a", "B. an", "C. the", "D. /"),
+                    answer = "B",
+                    explanation = "考查冠词。honest 是以元音音素 [ɒ] 开头的单词，所以不定冠词用 an。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("The sun rises in the east.", "—— 摘自《科普版英语》")),
             exampleSentences = listOf(ExampleSentence("I play the piano every day.", "我每天弹钢琴。"), ExampleSentence("She goes to school by bus.", "她乘公交车上学。"))
@@ -71,6 +135,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("Today is my father's ______ birthday.", listOf("A. forty", "B. fortieth", "C. the forty", "D. the fortieth"), "B", "序数词表示第几个，且形容词性物主代词后不加 the。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "河南中考",
+                    question = "Our school library has more than ______ books.",
+                    options = listOf("A. two thousands", "B. two thousand", "C. thousand of", "D. thousands of"),
+                    answer = "B",
+                    explanation = "考查具体数词表达。具体数字 + thousand（不加 s）。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "山东青岛中考",
+                    question = "This is the ______ time for him to visit the Great Wall.",
+                    options = listOf("A. three", "B. third", "C. thirsty", "D. thirteenth"),
+                    answer = "B",
+                    explanation = "考查序数词。the third time 第三次。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("Two thirds of the students are girls.", "—— 摘自《外研版初三上》")),
             exampleSentences = listOf(ExampleSentence("He lives on the fifth floor.", "他住在五楼。"), ExampleSentence("There are millions of stars in the sky.", "天空中有数百万颗星星。"))
         ),
@@ -81,6 +163,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("比较级不规则变化", "越...越...结构", "the + 序数词 + 最高级", "形容词顺序"),
             exampleProblems = listOf(
                 ExampleProblem("The weather is getting ______.", listOf("A. warm and warm", "B. warmer and warmer", "C. warmest", "D. more warm"), "B", "“比较级 + and + 比较级”表示“越来越...”。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "湖北武汉中考",
+                    question = "The higher we climb, ______ the view is.",
+                    options = listOf("A. more beautiful", "B. the most beautiful", "C. the more beautiful", "D. beautiful"),
+                    answer = "C",
+                    explanation = "考查 the + 比较级，the + 比较级。表示越...越..."
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "福建中考",
+                    question = "The soup tastes ______ enough. I'd like more salt.",
+                    options = listOf("A. salty", "B. delicious", "C. sweet", "D. fresh"),
+                    answer = "B",
+                    explanation = "考查形容词词义辨析。根据“我想要更多盐”可知，汤不够咸/不够美味。但在英语习惯中，此题考查 tastes + adj。salty 咸的；sweet 甜的；fresh 新鲜的；delicious 美味的。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("Music is more interesting than art.", "—— 摘自《人教版初一上》")),
             exampleSentences = listOf(ExampleSentence("I am as tall as my brother.", "我和我哥哥一样高。"), ExampleSentence("The news sounds exciting.", "这个消息听起来很令人兴奋。"))
@@ -93,6 +193,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("I usually go to bed ______ ten o'clock.", listOf("A. in", "B. on", "C. at", "D. for"), "C", "具体时刻前用 at。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "浙江杭州中考",
+                    question = "We will have a sports meeting ______ June 5th.",
+                    options = listOf("A. at", "B. in", "C. on", "D. by"),
+                    answer = "C",
+                    explanation = "考查时间介词。在具体的某一天用 on。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "广东中考",
+                    question = "The library is ______ the park and the museum.",
+                    options = listOf("A. between", "B. among", "C. next", "D. across"),
+                    answer = "A",
+                    explanation = "考查方位介词。between...and... 在两者之间。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("We have breakfast at 7:30 in the morning.", "—— 摘自《人教版初一上》")),
             exampleSentences = listOf(ExampleSentence("I'll be back in two days.", "我两天后回来。"), ExampleSentence("Everyone is here except Tom.", "除了汤姆大家都到了。"))
         ),
@@ -103,6 +221,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("but 与 although 不连用", "so 与 because 不连用", "neither...nor 谓语就近原则", "or 在否定句中的用法"),
             exampleProblems = listOf(
                 ExampleProblem("______ he is young, ______ he knows a lot.", listOf("A. Though; but", "B. Because; so", "C. Though; /", "D. Although; but"), "C", "though/although 不能与 but 连用。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "山西中考",
+                    question = "I don't like coffee ______ tea, I only like water.",
+                    options = listOf("A. and", "B. but", "C. or", "D. with"),
+                    answer = "C",
+                    explanation = "考查并列连词。在否定句中，表示两者都不，用 or 连接并列成分。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "陕中考",
+                    question = "______ my mother ______ my father can drive, so we have to go by taxi.",
+                    options = listOf("A. Not only; but also", "B. Both; and", "C. Neither; nor", "D. Either; or"),
+                    answer = "C",
+                    explanation = "考查关联连词。根据后面“必须打车”可知，父母都不会开车，故用 neither...nor。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("Work hard, and you will succeed.", "—— 摘自《科普版英语》")),
             exampleSentences = listOf(ExampleSentence("I'll wait until you come.", "我会一直等到你来。"), ExampleSentence("Study hard, or you'll fail.", "好好学习，否则你会挂科。"))
@@ -115,6 +251,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("I ______ my homework yet.", listOf("A. finished", "B. haven't finished", "C. am finishing", "D. will finish"), "B", "yet 用于否定或疑问句，常与现在完成时连用。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "安徽中考",
+                    question = "— Where is your sister? — She ______ the flowers in the garden.",
+                    options = listOf("A. water", "B. watered", "C. is watering", "D. was watering"),
+                    answer = "C",
+                    explanation = "考查现在进行时。根据问句可知正在发生，用现在进行时。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "湖南长沙中考",
+                    question = "I ______ this book for two weeks. I have to return it now.",
+                    options = listOf("A. have lent", "B. have kept", "C. lent", "D. kept"),
+                    answer = "B",
+                    explanation = "考查现在完成时延续性动词。for two weeks 是时间段，谓语动词需用延续性动词。keep 的延续性形式是 keep，lend 是瞬间动词。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("I have been to the Great Wall twice.", "—— 摘自《人教版初二下》")),
             exampleSentences = listOf(ExampleSentence("I was reading at 8 last night.", "昨晚八点我正在读书。"), ExampleSentence("He will come back tomorrow.", "他明天回来。"))
         ),
@@ -125,6 +279,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("主动变被动步骤", "by 短语的省略", "不使用被动语态的情况", "make/hear 等词变被动补 to"),
             exampleProblems = listOf(
                 ExampleProblem("The flowers ______ every day.", listOf("A. water", "B. are watered", "C. watered", "D. are watering"), "B", "花每天被浇，用一般现在时被动语态。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "四川达州中考",
+                    question = "Waste paper ______ in the bin, and then it can be recycled.",
+                    options = listOf("A. should put", "B. should be put", "C. must put", "D. must be put"),
+                    answer = "B",
+                    explanation = "考查含有情态动词的被动语态。废纸应该被放进垃圾桶，用 should be done。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "云南中考",
+                    question = "Cotton ______ in many parts of the world.",
+                    options = listOf("A. grows", "B. is grown", "C. grown", "D. is growing"),
+                    answer = "B",
+                    explanation = "考查一般现在时的被动语态。棉花是被种植的，用 be + p.p.。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("Paper was invented by the Chinese.", "—— 摘自《人教版初三》")),
             exampleSentences = listOf(ExampleSentence("English is spoken world-wide.", "英语在全球范围内被使用。"), ExampleSentence("Children should be looked after well.", "孩子们应该被好好照看。"))
@@ -137,6 +309,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("May I go now? — No, you ______.", listOf("A. needn't", "B. mustn't", "C. can't", "D. shouldn't"), "B/C", "否定回答“不可以”用 mustn't 或 can't。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "广东中考",
+                    question = "— Can I cross the road now? — No, you ______. The light is red.",
+                    options = listOf("A. needn't", "B. shouldn't", "C. can't", "D. mustn't"),
+                    answer = "C",
+                    explanation = "考查情态动词。表示“不能”，用 can't。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "湖北黄冈中考",
+                    question = "This dictionary ______ belong to Mary. Her name is on the cover.",
+                    options = listOf("A. can", "B. may", "C. must", "D. might"),
+                    answer = "C",
+                    explanation = "考查肯定推测。根据后面“名字在封面上”可知是非常肯定的推测，用 must。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("You should listen to the teacher.", "—— 摘自《人教版初一》")),
             exampleSentences = listOf(ExampleSentence("I must go now.", "我必须走了。"), ExampleSentence("It might rain tonight.", "今晚可能会下雨。"))
         ),
@@ -147,6 +337,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("want/decide to do", "enjoy/finish doing", "stop to do vs doing", "感官动词用法"),
             exampleProblems = listOf(
                 ExampleProblem("Remember ______ the light when you leave.", listOf("A. turn off", "B. to turn off", "C. turning off", "D. turned off"), "B", "remember to do 记得去做；doing 记得做过。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "江苏南京中考",
+                    question = "My mother often encourages me ______ more books.",
+                    options = listOf("A. read", "B. reading", "C. to read", "D. to reading"),
+                    answer = "C",
+                    explanation = "考查 encourage sb to do sth 结构。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "四川内江中考",
+                    question = "I forgot ______ the window, and the rain came in.",
+                    options = listOf("A. to close", "B. closing", "C. closed", "D. close"),
+                    answer = "A",
+                    explanation = "考查 forget to do sth 忘记去做某事（还没做）；forget doing 忘记做过某事。根据后面“雨进来了”可知是忘记关窗了（没关）。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("I want to be an engineer.", "—— 摘自《外研版》")),
             exampleSentences = listOf(ExampleSentence("Thank you for helping me.", "谢谢你帮我。"), ExampleSentence("It's time to have lunch.", "该吃午饭了。"))
@@ -159,6 +367,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("Neither I nor he ______ Chinese.", listOf("A. am", "B. is", "C. are", "D. be"), "B", "neither...nor 遵循就近原则，离谓语近的是 he。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "山东临沂中考",
+                    question = "Not only the students but also the teacher ______ excited about the news.",
+                    options = listOf("A. are", "B. is", "C. was", "D. were"),
+                    answer = "B",
+                    explanation = "考查就近原则。not only...but also 连接主语，谓语动词与靠近它的 teacher 保持一致。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "吉林中考",
+                    question = "Either you or Lily ______ going to clean the classroom.",
+                    options = listOf("A. am", "B. is", "C. are", "D. be"),
+                    answer = "B",
+                    explanation = "考查就近原则。either...or 连接主语，谓语动词与靠近它的 Lily 保持一致。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("Twenty years is a long time.", "—— 摘自《科普版》")),
             exampleSentences = listOf(ExampleSentence("There is a pen and two books.", "那儿有一支笔和两本书。"), ExampleSentence("Reading is very important.", "阅读非常重要。"))
         ),
@@ -169,6 +395,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("S+V+O 句型", "There be 句型", "祈使句 + and/or + 简单句", "反义疑问句基础"),
             exampleProblems = listOf(
                 ExampleProblem("Stop talking, ______ you'll be punished.", listOf("A. and", "B. but", "C. or", "D. so"), "C", "“祈使句, or + 句子”表示“否则...”。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "福建中考",
+                    question = "Work hard, ______ you will achieve your dream.",
+                    options = listOf("A. but", "B. or", "C. and", "D. so"),
+                    answer = "C",
+                    explanation = "考查“祈使句 + and + 句子”结构。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "辽宁大连中考",
+                    question = "Don't be afraid to fail, ______ you will never learn anything.",
+                    options = listOf("A. and", "B. but", "C. so", "D. or"),
+                    answer = "D",
+                    explanation = "考查“祈使句 + or + 句子”结构，表示“否则”。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("Open your books and read after me.", "—— 摘自《人教版初一》")),
             exampleSentences = listOf(ExampleSentence("I like apples but he likes pears.", "我喜欢苹果但他喜欢梨。"), ExampleSentence("What a beautiful girl!", "多漂亮的女孩啊！"))
@@ -181,6 +425,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("I don't know ______ next week.", listOf("A. when will he come", "B. when he will come", "C. where will he go", "D. where he go"), "B", "宾语从句使用陈述句语序。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "甘肃武威中考",
+                    question = "Could you tell me ______?",
+                    options = listOf("A. where is the post office", "B. where the post office is", "C. how can I get to the post office", "D. how I got to the post office"),
+                    answer = "B",
+                    explanation = "考查宾语从句的语序。从句需用陈述句语序。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "贵州贵阳中考",
+                    question = "I wonder ______ you would like to go with me.",
+                    options = listOf("A. that", "B. if", "C. what", "D. who"),
+                    answer = "B",
+                    explanation = "考查宾语从句引导词。表示“是否”，用 if 或 whether。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("I wonder if it will rain.", "—— 摘自《外研版》")),
             exampleSentences = listOf(ExampleSentence("She asked me where I lived.", "她问我住哪儿。"), ExampleSentence("I think that he is right.", "我觉得他是对的。"))
         ),
@@ -191,6 +453,24 @@ object KnowledgeProvider {
             relatedPoints = listOf("that vs which 特例", "who vs whom", "whose 表示所属", "先行词辨析"),
             exampleProblems = listOf(
                 ExampleProblem("The book ______ I bought is very good.", listOf("A. who", "B. whom", "C. which", "D. whose"), "C", "先行词是 book (物)，在从句中作宾语，用 which/that。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "青海中考",
+                    question = "He is the teacher ______ taught us English last year.",
+                    options = listOf("A. which", "B. who", "C. whose", "D. what"),
+                    answer = "B",
+                    explanation = "考查定语从句。先行词是 teacher (人)，在从句中作主语，用 who。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "黑龙江中考",
+                    question = "The boy ______ you saw just now is my cousin.",
+                    options = listOf("A. who", "B. which", "C. whose", "D. what"),
+                    answer = "A",
+                    explanation = "考查定语从句。先行词是 boy (人)，在从句中作宾语，用 who/whom/that。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("The girl who is singing is Lily.", "—— 摘自《人教版初二》")),
             exampleSentences = listOf(ExampleSentence("This is the factory where he works.", "这是他工作的工厂。"), ExampleSentence("I like people who are kind.", "我喜欢善良的人。"))
@@ -203,6 +483,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("I'll call you as soon as I ______ home.", listOf("A. get", "B. will get", "C. gets", "D. got"), "A", "as soon as 引导时间状语从句，主将从现。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "广西中考",
+                    question = "If it ______ sunny tomorrow, we will have a picnic.",
+                    options = listOf("A. is", "B. are", "C. will be", "D. was"),
+                    answer = "A",
+                    explanation = "考查主将从现原则。if 引导条件状语从句，主句将来时，从句用一般现在时。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "西藏中考",
+                    question = "We didn't go out ______ it rained heavily.",
+                    options = listOf("A. because", "B. so", "C. although", "D. if"),
+                    answer = "A",
+                    explanation = "考查原因状语从句。表示因为，用 because。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("If it rains, we won't go out.", "—— 摘自《人教版初二》")),
             exampleSentences = listOf(ExampleSentence("He was so tired that he fell asleep.", "他太累了以至于睡着了。"), ExampleSentence("I study hard so that I can succeed.", "我努力学习为了成功。"))
         ),
@@ -214,6 +512,24 @@ object KnowledgeProvider {
             exampleProblems = listOf(
                 ExampleProblem("______ cold weather it is!", listOf("A. What", "B. What a", "C. How", "D. How a"), "A", "weather 是不可数名词，用 What 修饰。")
             ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "内蒙古中考",
+                    question = "______ wonderful music they are playing!",
+                    options = listOf("A. What", "B. What a", "C. How", "D. How a"),
+                    answer = "A",
+                    explanation = "考查感叹句。music 是不可数名词，用 What 修饰。"
+                ),
+                PastExamQuestion(
+                    year = "2022",
+                    location = "新疆中考",
+                    question = "You have never been to Beijing, ______ you?",
+                    options = listOf("A. have", "B. haven't", "C. do", "D. don't"),
+                    answer = "A",
+                    explanation = "考查反义疑问句。陈述部分有 never 表示否定，疑问部分用肯定式。"
+                )
+            ),
             textbookParagraphs = listOf(TextbookParagraph("What a great day it is!", "—— 摘自《外研版》")),
             exampleSentences = listOf(ExampleSentence("You are a student, aren't you?", "你是学生，对吧？"), ExampleSentence("How fast he runs!", "他跑得真快！"))
         ),
@@ -224,6 +540,16 @@ object KnowledgeProvider {
             relatedPoints = listOf("said to -> told", "this -> that", "now -> then", "tomorrow -> the next day"),
             exampleProblems = listOf(
                 ExampleProblem("He said, 'I am a teacher.' -> He said that ______ a teacher.", listOf("A. I am", "B. he is", "C. I was", "D. he was"), "D", "变间接引语需改人称且时态退后。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion(
+                    year = "2023",
+                    location = "海南中考",
+                    question = "The teacher said that the sun ______ in the east.",
+                    options = listOf("A. rises", "B. rose", "C. is rising", "D. was rising"),
+                    answer = "A",
+                    explanation = "考查间接引语时态特例。虽然主句是过去时，但从句是客观真理，时态保持一般现在时。"
+                )
             ),
             textbookParagraphs = listOf(TextbookParagraph("He asked me where I was going.", "—— 摘自《科普版》")),
             exampleSentences = listOf(ExampleSentence("She told me she liked music.", "她告诉我她喜欢音乐。"), ExampleSentence("He said that the earth goes round the sun.", "他说地球绕着太阳转。"))

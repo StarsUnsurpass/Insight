@@ -82,6 +82,17 @@ fun KnowledgeDetailScreen(
                 }
             }
 
+            if (point.pastExamQuestions.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "近十年中考真题", icon = Icons.Default.Star)
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        point.pastExamQuestions.forEach { question ->
+                            PastExamQuestionItem(question)
+                        }
+                    }
+                }
+            }
+
             if (point.exampleProblems.isNotEmpty()) {
                 item {
                     SectionHeader(title = "核心例题", icon = Icons.Default.Assignment)
@@ -177,6 +188,82 @@ fun DetailCard(content: @Composable ColumnScope.() -> Unit) {
 }
 
 @Composable
+fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
+    var showExplanation by remember { mutableStateOf(false) }
+    
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
+        ),
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Surface(
+                    color = MaterialTheme.colorScheme.secondary,
+                    shape = RoundedCornerShape(4.dp)
+                ) {
+                    Text(
+                        text = "真题",
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSecondary,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "${examQuestion.year} · ${examQuestion.location}",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.secondary,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(text = examQuestion.question, fontWeight = FontWeight.SemiBold, lineHeight = 22.sp)
+            Spacer(modifier = Modifier.height(12.dp))
+            examQuestion.options.forEach { option ->
+                Text(text = option, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(vertical = 2.dp))
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = if (showExplanation) "正确答案: ${examQuestion.answer}" else "查看解析",
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.clickable { showExplanation = !showExplanation }
+                )
+                IconButton(onClick = { showExplanation = !showExplanation }, modifier = Modifier.size(24.dp)) {
+                    Icon(
+                        imageVector = if (showExplanation) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+            if (showExplanation) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Divider(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "【解析】${examQuestion.explanation}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    lineHeight = 20.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun ExampleProblemItem(
     question: String,
     options: List<String>,
@@ -196,7 +283,7 @@ fun ExampleProblemItem(
             Text(text = question, fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(12.dp))
             options.forEach { option ->
-                Text(text = option, style = MaterialTheme.typography.bodySmall)
+                Text(text = option, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(vertical = 2.dp))
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
