@@ -111,6 +111,108 @@ object KnowledgeProvider {
                 ExampleSentence("I saw him crossing the street.", "我看见他正在穿过马路。"),
                 ExampleSentence("The sleeping baby looks so cute.", "那个正在睡觉的小婴儿看起来好可爱。")
             )
+        ),
+        "3" to KnowledgePoint(
+            id = "3",
+            title = "宾语从句",
+            description = "宾语从句（Object Clause）在复合句中作主语、动词或介词的宾语。引导宾语从句的词包括连词 that（常省略），if/whether，以及连接代词（who, whom, whose, which, what）和连接副词（when, where, why, how）。",
+            relatedPoints = listOf("宾语从句的时态一致", "宾语从句的语序", "if 与 whether 的区别", "that 的省略"),
+            exampleProblems = listOf(
+                ExampleProblem(
+                    question = "Could you tell me ______?",
+                    options = listOf("A. where does he live", "B. where he lives", "C. he lives where", "D. where is he living"),
+                    answer = "B",
+                    explanation = "宾语从句必须使用陈述语序，即“主语 + 谓语”的形式。"
+                ),
+                ExampleProblem(
+                    question = "I don't know ______ he will come or not.",
+                    options = listOf("A. if", "B. whether", "C. that", "D. when"),
+                    answer = "B",
+                    explanation = "当从句末尾有 or not 时，通常只能用 whether 引导宾语从句。"
+                )
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph(
+                    content = "I wonder if you can help me with my English.",
+                    source = "—— 摘自《人教版初二下册》Unit 3"
+                )
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("He said that he would be back soon.", "他说他很快就会回来。"),
+                ExampleSentence("Do you know where the post office is?", "你知道邮局在哪儿吗？")
+            )
+        ),
+        "4" to KnowledgePoint(
+            id = "4",
+            title = "被动语态",
+            description = "被动语态（Passive Voice）表示主语是动作的承受者。其基本结构为“be + 动词的过去分词(done)”。时态的变化体现在 be 动词的形式上。",
+            relatedPoints = listOf("一般现在时的被动语态", "一般过去时的被动语态", "情态动词的被动语态", "主动变被动"),
+            exampleProblems = listOf(
+                ExampleProblem(
+                    question = "English ______ by many people in the world.",
+                    options = listOf("A. speaks", "B. is spoken", "C. spoken", "D. is speaking"),
+                    answer = "B",
+                    explanation = "English 是动作 speak 的承受者，且表示一般事实，应用一般现在时的被动语态。"
+                )
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph(
+                    content = "Paper was first created by the Chinese about 2,000 years ago.",
+                    source = "—— 摘自《人教版九年级英语》Unit 6"
+                )
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("The window was broken by Tom.", "窗户是被汤姆打破的。"),
+                ExampleSentence("A new library will be built in our school next year.", "明年我们学校将建一座新图书馆。")
+            )
+        ),
+        "5" to KnowledgePoint(
+            id = "5",
+            title = "情态动词",
+            description = "情态动词（Modal Verbs）表示说话人的语气或情态。常见的情态动词有 can, could, may, might, must, shall, should, will, would, need 等。它们本身有一定的词义，但不能独立作谓语，必须与动词原形一起构成谓语。",
+            relatedPoints = listOf("must 与 have to 的区别", "can 与 be able to 的区别", "may 表示推测", "should 表示建议"),
+            exampleProblems = listOf(
+                ExampleProblem(
+                    question = "Must I finish my homework now? — No, you ______.",
+                    options = listOf("A. mustn't", "B. can't", "C. needn't", "D. shouldn't"),
+                    answer = "C",
+                    explanation = "对于 must 开头的疑问句，否定回答通常用 needn't 或 don't have to，表示“不必”。"
+                )
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph(
+                    content = "You should brush your teeth twice a day.",
+                    source = "—— 摘自《人教版初一英语》Unit 2"
+                )
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("Can you play the guitar?", "你会弹吉他吗？"),
+                ExampleSentence("You must be careful when you cross the road.", "过马路时你必须小心。")
+            )
+        ),
+        "6" to KnowledgePoint(
+            id = "6",
+            title = "形容词比较级与最高级",
+            description = "形容词和副词有三个等级：原级、比较级和最高级。比较级用于两者之间的比较，通常后接 than；最高级用于三者或三者以上之间的比较，通常前加 the，后接表示范围的短语。",
+            relatedPoints = listOf("比较级的规则变化", "比较级的不规则变化", "as...as... 结构", "the + 比较级, the + 比较级"),
+            exampleProblems = listOf(
+                ExampleProblem(
+                    question = "He is ______ than any other student in his class.",
+                    options = listOf("A. tall", "B. taller", "C. tallest", "D. the tallest"),
+                    answer = "B",
+                    explanation = "than 是比较级的标志词，故用 taller。"
+                )
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph(
+                    content = "The Yellow River is the second longest river in China.",
+                    source = "—— 摘自《人教版八年级英语》Unit 7"
+                )
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("Beijing is much larger than my hometown.", "北京比我的家乡大得多。"),
+                ExampleSentence("This is the most interesting book I've ever read.", "这是我读过的最有趣的一本书。")
+            )
         )
     )
 

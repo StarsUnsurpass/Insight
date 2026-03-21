@@ -371,9 +371,9 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                     TextButton(onClick = { }) { Text("全部", color = primaryColor) }
                 }
             }
-            items(5) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
+            items(7) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
         } else {
-            items(3) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
+            items(5) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
         }
     }
 }
@@ -635,7 +635,13 @@ fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
 
 @Composable
 fun SearchResultItem(index: Int, onClick: () -> Unit) {
-    val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
+    val results = listOf(
+        "如何在句子中识别【定语从句】",
+        "宾语从句的语序要求详解",
+        "被动语态在写作中的高级应用",
+        "中考英语情态动词易错点汇总",
+        "形容词比较级最高级规则变化表"
+    )
     val resultText = results[index % results.size]
     Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
         Row(modifier = Modifier.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -648,7 +654,7 @@ fun SearchResultItem(index: Int, onClick: () -> Unit) {
 
 @Composable
 fun HistoryCard(index: Int, onClick: () -> Unit) {
-    val labels = listOf("定语从句", "虚拟语气", "分词结构", "阅读理解", "长难句")
+    val labels = listOf("定语从句", "虚拟语气", "现在分词", "宾语从句", "被动语态", "情态动词", "比较级最高级")
     val status = listOf("已掌握", "练习中", "待复习")
     val primaryColor = MaterialTheme.colorScheme.primary
     Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
