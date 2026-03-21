@@ -366,15 +366,51 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
         }
 
         if (searchQuery.isEmpty()) {
-            item {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(if (preferences.role == UserRole.Student) "最近扫描" else "中考英语考点通", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                    TextButton(onClick = { }) { Text("全部", color = primaryColor) }
+            val sections = listOf("板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系")
+            
+            sections.forEach { sectionName ->
+                item {
+                    Text(
+                        text = sectionName,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = primaryColor,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                    )
+                }
+                
+                val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                items(sectionPoints.size) { index ->
+                    val point = sectionPoints[index]
+                    HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
                 }
             }
-            items(KnowledgeProvider.allPoints.size) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
         } else {
             items(KnowledgeProvider.allPoints.size) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
+        }
+    }
+}
+
+@Composable
+fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, onClick: () -> Unit) {
+    val status = listOf("已掌握", "练习中", "待复习")
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val index = point.id.toIntOrNull() ?: 0
+    
+    Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
+        Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
+                Icon(Icons.Outlined.Description, null, tint = primaryColor.copy(alpha = 0.5f))
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                Text(point.description, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1)
+                Spacer(modifier = Modifier.height(8.dp))
+                Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
+                    Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> MaterialTheme.colorScheme.secondary; else -> Color.Red })
+                }
+            }
         }
     }
 }

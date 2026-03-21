@@ -157,7 +157,20 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            // 7. 名人名言
+            // 7. 授课与学情备忘 (新增)
+            if (point.teachingNotes.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "授课与学情备忘", icon = Icons.Default.Lightbulb)
+                    DetailCard {
+                        point.teachingNotes.forEach { note ->
+                            Text(text = note.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
+                            Text(text = note.content, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 4.dp, bottom = 12.dp), lineHeight = 22.sp)
+                        }
+                    }
+                }
+            }
+
+            // 8. 名人名言
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(
