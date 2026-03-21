@@ -46,7 +46,7 @@ data class TeachingNote(
 
 data class KnowledgePoint(
     val id: String,
-    val section: String, // "板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系"
+    val section: String,
     val title: String,
     val description: String,
     val syllabusDetails: List<String>,
@@ -62,94 +62,250 @@ data class KnowledgePoint(
 
 object KnowledgeProvider {
     val allPoints = listOf(
-        // 板块一：词法体系 (Morphology)
+        // ================= 板块一：词法体系 (Morphology) =================
         KnowledgePoint(
-            id = "0", section = "板块一：词法体系", title = "名词 (Nouns)",
-            description = "表示人、事物、地点或抽象概念的词。",
-            syllabusDetails = listOf("可数与不可数名词区分", "名词复数规则变化与不规则变化", "名词所有格（'s 与 of 结构）"),
-            relatedPoints = listOf(RelatedPoint("冠词", "名词前的限定词。", "数决定了 a/an 的使用。")),
-            exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Knowledge is power.", quoteAuthor = "Bacon"
-        ),
-        KnowledgePoint(
-            id = "1", section = "板块一：词法体系", title = "代词 (Pronouns)",
-            description = "代替名词或起名词作用的短语、句子的词。",
-            syllabusDetails = listOf("人称代词（主/宾格）", "物主代词（形容词性/名词性）", "反身代词", "指示代词", "疑问代词", "不定代词（some/any/no 等复合代词极其重要）"),
-            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Be yourself.", quoteAuthor = "Wilde"
-        ),
-        KnowledgePoint(id = "2", section = "板块一：词法体系", title = "冠词 (Articles)", description = "置于名词前说明指代对象。", syllabusDetails = listOf("定冠词 (the)", "不定冠词 (a/an)", "零冠词的固定搭配"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "A single step.", quoteAuthor = "Lao Tzu"),
-        KnowledgePoint(id = "3", section = "板块一：词法体系", title = "数词 (Numerals)", description = "表示数量或顺序的词。", syllabusDetails = listOf("基数词", "序数词", "分数表达", "时间/日期/年代表达法"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Counting the days.", quoteAuthor = "Ali"),
-        KnowledgePoint(id = "4", section = "板块一：词法体系", title = "形容词与副词 (Adj & Adv)", description = "修饰名词、动词、形容词或全句。", syllabusDetails = listOf("原级用法 (as...as)", "比较级与最高级规则与不规则变化", "常见修饰语 (much, a little, even)", "易混淆形副词辨析"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Stay hungry.", quoteAuthor = "Jobs"),
-        KnowledgePoint(id = "5", section = "板块一：词法体系", title = "介词 (Prepositions)", description = "表示名词等与句中其他词的关系。", syllabusDetails = listOf("时间介词 (in/on/at)", "方位/空间介词", "方式介词 (by/with/in)", "固定介词搭配"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Under the sun.", quoteAuthor = "Solomon"),
-        KnowledgePoint(id = "6", section = "板块一：词法体系", title = "连词 (Conjunctions)", description = "连接词、短语或句子的词。", syllabusDetails = listOf("并列连词 (and, but, or, so)", "从属连词 (when, if, because, although)"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "United we stand.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "21", section = "板块一：词法体系", title = "动词基础 (Verbs)", description = "动词的分类与基础用法。", syllabusDetails = listOf("实义动词", "连系动词 (be, look, sound, get)", "助动词 (do/have/will)", "情态动词 (can, must, should, may 及其表推测)", "常见短语动词"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Actions speak.", quoteAuthor = "Proverb"),
-
-        // 板块二：时态与语态体系 (Tenses & Voices)
-        KnowledgePoint(id = "22", section = "板块二：时态与语态体系", title = "一般现在时 (Simple Present)", description = "经常性动作或客观真理。", syllabusDetails = listOf("基本结构", "单三变化", "客观真理用法"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Today counts.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "23", section = "板块二：时态与语态体系", title = "一般过去时 (Simple Past)", description = "过去发生的动作。", syllabusDetails = listOf("过去式变化", "时间标志词", "used to 结构"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Past is prologue.", quoteAuthor = "Shakespeare"),
-        KnowledgePoint(id = "24", section = "板块二：时态与语态体系", title = "一般将来时 (Simple Future)", description = "将要发生的动作。", syllabusDetails = listOf("will / be going to", "时刻表将来意义"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Future belongs.", quoteAuthor = "Roosevelt"),
-        KnowledgePoint(id = "25", section = "板块二：时态与语态体系", title = "现在进行时 (Present Continuous)", description = "正在进行的动作。", syllabusDetails = listOf("be + doing", "将来意义用法"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Life is doing.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "26", section = "板块二：时态与语态体系", title = "过去进行时 (Past Continuous)", description = "过去某时刻正在进行。", syllabusDetails = listOf("was/were + doing", "when/while 结合"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Remembering now.", quoteAuthor = "Unknown"),
-        
-        KnowledgePoint(
-            id = "7",
-            section = "板块二：时态与语态体系",
-            title = "现在完成时 (Present Perfect)",
-            description = "初中英语最难、考频最高的知识点，考查动作的持续与影响。",
+            id = "nouns", section = "板块一：词法体系 (Morphology)", title = "名词 (Nouns)",
+            description = "初中英语词汇体系的基石，主要考查名词的分类、数的变化以及所有格形式。",
             syllabusDetails = listOf(
-                "基本结构：主语 + have / has + 动词的过去分词 (V-ed / done)。",
-                "核心语境一（影响结果）：表示过去发生的动作对现在造成的影响或结果（标志词：already, yet, just, ever, never）。",
-                "核心语境二（持续动作）：表示动作从过去开始一直持续到现在（标志词：for + 时间段, since + 时间点/过去时句子）。",
-                "瞬间动词转换：与 for/since 连用时，谓语动词必须是延续性动词。"
+                "可数与不可数名词区分", 
+                "名词复数规则变化与不规则变化", 
+                "名词所有格（'s 与 of 结构）"
+            ),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Name is the blueprint of the thing.", quoteAuthor = "Philosopher"
+        ),
+        KnowledgePoint(
+            id = "pronouns", section = "板块一：词法体系 (Morphology)", title = "代词 (Pronouns)",
+            description = "代替名词或起名词作用的词类，考点细致且繁杂。",
+            syllabusDetails = listOf(
+                "人称代词（主/宾格）", 
+                "物主代词（形容词性/名词性）", 
+                "反身代词", 
+                "指示代词", 
+                "疑问代词", 
+                "不定代词（some/any/no 等复合代词极其重要）"
+            ),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Substitute not your own power.", quoteAuthor = "Unknown"
+        ),
+        KnowledgePoint(
+            id = "articles", section = "板块一：词法体系 (Morphology)", title = "冠词 (Articles)",
+            description = "置于名词之前，说明名词所指的人或事物。",
+            syllabusDetails = listOf("定冠词 (the)", "不定冠词 (a/an)", "零冠词的固定搭配"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "A single step begins the journey.", quoteAuthor = "Lao Tzu"
+        ),
+        KnowledgePoint(
+            id = "numerals", section = "板块一：词法体系 (Morphology)", title = "数词 (Numerals)",
+            description = "表示数目多少或顺序先后的词。",
+            syllabusDetails = listOf("基数词", "序数词", "分数表达", "时间/日期/年代表达法"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Numbers rule the universe.", quoteAuthor = "Pythagoras"
+        ),
+        KnowledgePoint(
+            id = "adj_adv", section = "板块一：词法体系 (Morphology)", title = "形容词与副词 (Adjectives & Adverbs)",
+            description = "修饰名词、动词、形容词或全句的词，重点在比较级和词义辨析。",
+            syllabusDetails = listOf(
+                "原级用法 (as...as)", 
+                "比较级与最高级规则与不规则变化", 
+                "常见修饰语 (much, a little, even)", 
+                "易混淆形副词辨析"
+            ),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Description is the key to clarity.", quoteAuthor = "Writer"
+        ),
+        KnowledgePoint(
+            id = "prepositions", section = "板块一：词法体系 (Morphology)", title = "介词 (Prepositions)",
+            description = "表示名词、代词等与句中其他词的关系。",
+            syllabusDetails = listOf("时间介词 (in/on/at)", "方位/空间介词", "方式介词 (by/with/in)", "固定介词搭配"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Positioning is everything.", quoteAuthor = "Strategist"
+        ),
+        KnowledgePoint(
+            id = "conjunctions", section = "板块一：词法体系 (Morphology)", title = "连词 (Conjunctions)",
+            description = "用来连接词与词、短语与短语或句与句的词。",
+            syllabusDetails = listOf("并列连词 (and, but, or, so)", "从属连词 (when, if, because, although)"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Connect the dots.", quoteAuthor = "Thinker"
+        ),
+        KnowledgePoint(
+            id = "verbs_basic", section = "板块一：词法体系 (Morphology)", title = "动词基础 (Verbs)",
+            description = "英语句子的核心，涵盖四大类基本动词及其基础用法。",
+            syllabusDetails = listOf(
+                "实义动词", 
+                "连系动词 (be, look, sound, get)", 
+                "助动词 (do/have/will)", 
+                "情态动词 (can, must, should, may 及其表推测的用法)", 
+                "常见短语动词 (Phrasal Verbs)"
+            ),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Action speaks louder than words.", quoteAuthor = "Proverb"
+        ),
+
+        // ================= 板块二：时态与语态体系 (Tenses & Voices) =================
+        KnowledgePoint(
+            id = "simple_present", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "一般现在时 (Simple Present)",
+            description = "表示经常性动作、客观真理或目前的普遍状态。",
+            syllabusDetails = listOf("主语为第三人称单数时的动词变化", "客观真理、格言的固定时态表达", "时刻表或既定日程的将来意义用法"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Live in the present.", quoteAuthor = "Unknown"
+        ),
+        KnowledgePoint(
+            id = "simple_past", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "一般过去时 (Simple Past)",
+            description = "表示过去某个时间发生的动作或存在的状态。",
+            syllabusDetails = listOf("动词过去式的规则与不规则变化", "带有特定过去时间状语的句子", "used to do 结构的用法"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "The past is never dead.", quoteAuthor = "Faulkner"
+        ),
+        KnowledgePoint(
+            id = "simple_future", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "一般将来时 (Simple Future)",
+            description = "表示将来某个时间要发生的动作或状态。",
+            syllabusDetails = listOf("will / be going to 的区别与用法", "条件/时间状语从句中的主将从现原则"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "The future belongs to those who prepare for it.", quoteAuthor = "Malcolm X"
+        ),
+        KnowledgePoint(
+            id = "present_continuous", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "现在进行时 (Present Continuous)",
+            description = "表示现在（说话瞬间）正在进行或发生的动作。",
+            syllabusDetails = listOf("be + doing 结构", "不用于进行时的状态动词", "表示按计划或安排即将发生的将来动作"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Life is happening now.", quoteAuthor = "Unknown"
+        ),
+        KnowledgePoint(
+            id = "past_continuous", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "过去进行时 (Past Continuous)",
+            description = "表示过去某一时刻或某段时间正在进行的动作。",
+            syllabusDetails = listOf("was/were + doing 结构", "when 和 while 引导的时间状语从句中的动作长短配合"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Time was flowing like a river.", quoteAuthor = "Unknown"
+        ),
+        
+        // 🌟 满级打样示范节点：现在完成时 🌟
+        KnowledgePoint(
+            id = "present_perfect", 
+            section = "板块二：时态与语态体系 (Tenses & Voices)", 
+            title = "现在完成时 (Present Perfect)",
+            description = "基本结构：主语 + have / has + 动词的过去分词 (V-ed / done)。\n\n" +
+                          "核心语境一（影响结果）：表示过去发生的动作对现在造成了影响或结果。\n" +
+                          "特征：动作已经结束，但影响还在。\n" +
+                          "标志词：already (已经，用于肯定句), yet (还，用于否定/疑问句), just (刚刚), ever (曾经), never (从不)。\n\n" +
+                          "核心语境二（持续动作）：表示动作从过去某一时刻开始，一直持续到现在，甚至可能继续持续下去。\n" +
+                          "特征：动作还在进行中。\n" +
+                          "标志词：for + 时间段 (e.g., for 3 years), since + 时间点/过去时的句子 (e.g., since 2020 / since he left)。\n\n" +
+                          "⚠️ 核心考点预警：与 for/since 连用时，谓语动词必须是延续性动词（如 live, teach, keep），瞬间动词（如 buy, borrow, leave）必须进行转换（如 buy -> have, borrow -> keep, leave -> be away）。",
+            syllabusDetails = listOf(
+                "基本结构与动词过去分词的变化",
+                "核心语境一（影响结果）及标志词用法",
+                "核心语境二（持续动作）及 for/since 搭配",
+                "瞬间动词与延续性动词的强制转换规则"
             ),
             relatedPoints = listOf(
-                RelatedPoint("不规则变化", "动词过去分词的不规则变化表。", "这是构成现在完成时的基础。"),
-                RelatedPoint("一般过去时", "一般过去时 vs 现在完成时辨析。", "一个强调过去时间点，一个强调对现在的影响。"),
-                RelatedPoint("动词分类", "瞬间动词与延续性动词的转换规律。", "解决 for/since 句型的核心陷阱。")
+                RelatedPoint("动词过去分词的不规则变化表", "不规则动词的变化是写对完成时的基础。", "现在完成时的核心构成即为 have/has + done。"),
+                RelatedPoint("一般过去时 vs 现在完成时", "两者都涉及过去的动作，但关注点不同。", "一般过去时强调动作发生的时间点，完成时强调对现在的影响。"),
+                RelatedPoint("瞬间动词与延续性动词的转换规律", "核心考点，解决 for/since 语法错误的关键。", "例如 die 必须转换为 be dead 才能与 for 3 years 连用。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "苏州中考", "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me. I didn't do it.", listOf("A. is cleaning", "B. has cleaned", "C. was cleaning", "D. cleans"), "B", "选 B。考察现在完成时的“影响结果”。教室现在很干净（It's so clean now），说明打扫的动作发生在过去，但对现在造成了影响。"),
-                PastExamQuestion("2023", "苏州中考", "Mr. Wu ______ in this school since he graduated from university.", listOf("A. teaches", "B. taught", "C. has taught", "D. will teach"), "C", "选 C。考察现在完成时的“持续动作”。标志词为 since + 过去时的句子，主句必须用现在完成时，且 teach 为延续性动词。"),
-                PastExamQuestion("2021", "南京中考", "His uncle _______ for three years.", listOf("A. has died", "B. has been dead", "C. died", "D. dies"), "B", "选 B。这是现在完成时最经典的“瞬间动词转换”陷阱。有 for three years 必须用延续性动词，die 是瞬间动词，必须转为状态 be dead。")
+                PastExamQuestion(
+                    "2024", "苏州中考", 
+                    "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me. I didn't do it.", 
+                    listOf("A. is cleaning", "B. has cleaned", "C. was cleaning", "D. cleans"), 
+                    "B", 
+                    "考察现在完成时的“影响结果”。教室现在很干净（It's so clean now），说明打扫的动作发生在过去，但对现在造成了影响。"
+                ),
+                PastExamQuestion(
+                    "2023", "苏州中考", 
+                    "Mr. Wu ______ in this school since he graduated from university.", 
+                    listOf("A. teaches", "B. taught", "C. has taught", "D. will teach"), 
+                    "C", 
+                    "考察现在完成时的“持续动作”。标志词为 since + 过去时的句子，主句必须用现在完成时，且 teach 为延续性动词，符合语法规范。"
+                ),
+                PastExamQuestion(
+                    "2021", "南京中考改编", 
+                    "His uncle _______ for three years.", 
+                    listOf("A. has died", "B. has been dead", "C. died", "D. dies"), 
+                    "B", 
+                    "这是现在完成时最经典的“瞬间动词转换”陷阱。有 for three years 必须用延续性动词，die 是瞬间动词，不能和 for 连用，必须转为状态 be dead。"
+                )
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph(
-                    "Have you read Treasure Island yet? No, I haven't. But I have finished reading Little Women already.",
+                    "Have you read Treasure Island yet? No, I haven't. But I have already finished reading Little Women. I like music that I can dance to.",
                     listOf(
-                        HighlightedSentence("Have you read Treasure Island yet?", "此处 'yet' 用于疑问句，表示‘已经’（期待肯定回答）。"),
-                        HighlightedSentence("I have finished reading Little Women already.", "此处 'already' 用于肯定句，强调动作已完成的影响。")
+                        HighlightedSentence("Have you read Treasure Island yet?", "此处 yet 用于疑问句，表示‘已经’（期待肯定回答），是完成时‘影响结果’用法的典型标志。"),
+                        HighlightedSentence("I have already finished reading Little Women.", "此处 already 用于肯定句，强调动作已完成并且对现在产生了影响。")
                     ),
-                    "—— 摘自《人教版八下》Unit 8"
+                    "—— 出处同步：人教版 (PEP) 八年级下册 Unit 8 & 九年级 Unit 9"
                 )
             ),
             exampleSentences = listOf(
-                ExampleSentence("I have already finished my homework. (我已经做完作业了。—— 影响：现在可以出去玩了)", "已经做完作业。"),
-                ExampleSentence("She hasn't arrived yet. (她还没到。—— 影响：我们还要继续等)", "她还没到。"),
-                ExampleSentence("We have lived in Suzhou since 10 years ago. (我们住在苏州已经 10 年了。—— 持续：现在依然住在这里)", "住在苏州十年。")
+                ExampleSentence("I have already finished my homework.", "我已经做完作业了。—— 影响：现在可以出去玩了", "中考核心"),
+                ExampleSentence("She hasn't arrived yet.", "她还没到。—— 影响：我们还要继续等", "中考核心"),
+                ExampleSentence("We have lived in Suzhou since 10 years ago.", "我们住在苏州已经 10 年了。—— 持续：现在依然住在这里", "中考核心")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见学生错因", "1. 忘记把动词变为过去分词，常跟一般过去时的过去式混淆；2. 做单选题时，忽略了动词是否具有延续性。"),
-                TeachingNote("辅导建议", "画时间轴！一定要在黑板/课件上画出一条带有 'Past' 和 'Now' 的箭头线，用视觉化的方式展示跨越时间的桥梁。")
+                TeachingNote("常见学生错因", "1. 忘记把动词变为过去分词，常跟一般过去时的过去式混淆（尤其是 catch, bring 等不规则变化）。\n2. 做单选题时，看到 since/for 不假思索直接选完成时，忽略了动词是否具有延续性。"),
+                TeachingNote("辅导建议", "画时间轴！一定要在黑板/课件上画出一条带有 'Past' 和 'Now' 的箭头线，用视觉化的方式展示跨越时间的桥梁，比讲语言规则有效得多。")
             ),
-            famousQuote = "Procrastination is the thief of time.",
-            quoteAuthor = "Edward Young"
+            famousQuote = "What is past is prologue.",
+            quoteAuthor = "William Shakespeare"
         ),
-        KnowledgePoint(id = "27", section = "板块二：时态与语态体系", title = "过去完成时 (Past Perfect)", description = "过去的过去。", syllabusDetails = listOf("had + done", "by the time 搭配"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Before the end.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "28", section = "板块二：时态与语态体系", title = "过去将来时 (Past Future)", description = "过去看将来。", syllabusDetails = listOf("would + do", "was/were going to"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Looking back.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "8", section = "板块二：时态与语态体系", title = "被动语态 (Passive Voice)", description = "动作的承受者。", syllabusDetails = listOf("一般现在/过去/将来时被动", "含情态动词的被动语态"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Love is needed.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "10", section = "板块二：时态与语态体系", title = "非谓语动词 (Non-finite Verbs)", description = "不做谓语的动词。", syllabusDetails = listOf("不定式 (to do)", "动名词 (doing)", "分词 (doing/done)"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "To be or not.", quoteAuthor = "Shakespeare"),
 
-        // 板块三：句法体系 (Syntax)
-        KnowledgePoint(id = "16", section = "板块三：句法体系", title = "句子种类 (Sentence Types)", description = "功能分类。", syllabusDetails = listOf("陈述句", "疑问句 (一般/特殊/选择/反意)", "祈使句", "感叹句 (What/How)"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Ask why.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "18", section = "板块三：句法体系", title = "简单句基本句型 (Five Patterns)", description = "基本骨架。", syllabusDetails = listOf("主谓 (SV)", "主谓宾 (SVO)", "主系表 (SVP)", "主谓双宾 (SVOO)", "主谓宾宾补 (SVOC)"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Keep it simple.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "13", section = "板块三：句法体系", title = "宾语从句 (Object Clause)", description = "作宾语的句子。", syllabusDetails = listOf("引导词 (that/if/whether/wh-)", "陈述语序", "时态呼应规则"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "I think.", quoteAuthor = "Descartes"),
-        KnowledgePoint(id = "15", section = "板块三：句法体系", title = "状语从句 (Adverbial Clause)", description = "修饰谓语的句子。", syllabusDetails = listOf("时间、条件 (主将从现)", "原因、结果 (so...that)", "目的、让步、比较"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "If not now.", quoteAuthor = "Unknown"),
-        KnowledgePoint(id = "14", section = "板块三：句法体系", title = "定语从句 (Attributive Clause)", description = "修饰名词的句子。", syllabusDetails = listOf("关系代词 (who, whom, whose, which, that)", "关系副词 (where, when, why)"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Imagination.", quoteAuthor = "Ali"),
-        KnowledgePoint(id = "19", section = "板块三：句法体系", title = "特殊句式 (Special Patterns)", description = "固定模式。", syllabusDetails = listOf("There be 句型", "It 的固定句型", "倒装句 (so/neither)", "主谓一致原则"), relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Unity.", quoteAuthor = "Unknown")
+        KnowledgePoint(
+            id = "past_perfect", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "过去完成时 (Past Perfect)",
+            description = "表示在过去某一时间或动作之前已经发生或完成了的动作（即“过去的过去”）。",
+            syllabusDetails = listOf("had + 过去分词结构", "与一般过去时的时间先后顺序对比"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Before the end.", quoteAuthor = "Unknown"
+        ),
+        KnowledgePoint(
+            id = "past_future", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "过去将来时 (Past Future)",
+            description = "表示从过去某一时间看将要发生的动作或存在的状态。",
+            syllabusDetails = listOf("would + do", "was/were going to do", "常用于宾语从句中"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Looking back at what was to come.", quoteAuthor = "Unknown"
+        ),
+        KnowledgePoint(
+            id = "passive_voice", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "被动语态 (Passive Voice)",
+            description = "表示主语是动作的承受者。",
+            syllabusDetails = listOf("一般现在时被动", "一般过去时被动", "一般将来时被动", "含有情态动词的被动语态"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Things are done, not just do.", quoteAuthor = "Grammarian"
+        ),
+        KnowledgePoint(
+            id = "non_finite_verbs", section = "板块二：时态与语态体系 (Tenses & Voices)", title = "非谓语动词 (Non-finite Verbs)",
+            description = "在句中不单独作谓语的动词形式。",
+            syllabusDetails = listOf("动词不定式 (to do) 作主/宾/宾补/状/定语", "动名词 (doing) 作主/宾语", "分词 (doing/done) 作定语或状语"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Infinite possibilities.", quoteAuthor = "Unknown"
+        ),
+
+        // ================= 板块三：句法体系 (Syntax) =================
+        KnowledgePoint(
+            id = "sentence_types", section = "板块三：句法体系 (Syntax)", title = "句子种类",
+            description = "按句子的使用目的进行的分类。",
+            syllabusDetails = listOf("陈述句", "疑问句（一般/特殊/选择/反意疑问句）", "祈使句", "感叹句 (What/How 引导)"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Ask why.", quoteAuthor = "Socrates"
+        ),
+        KnowledgePoint(
+            id = "five_basic_patterns", section = "板块三：句法体系 (Syntax)", title = "简单句基本句型",
+            description = "构成英语句子的五种最基本结构。",
+            syllabusDetails = listOf("主谓 (SV)", "主谓宾 (SVO)", "主系表 (SVP)", "主谓双宾 (SVOO)", "主谓宾宾补 (SVOC)"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Structure is everything.", quoteAuthor = "Architect"
+        ),
+        KnowledgePoint(
+            id = "object_clause", section = "板块三：句法体系 (Syntax)", title = "宾语从句 (Object Clause)",
+            description = "在复合句中充当宾语的从句。",
+            syllabusDetails = listOf("引导词 (that/if/whether/wh-)", "语序（必须是陈述语序）", "时态呼应规则"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "I know that I know nothing.", quoteAuthor = "Socrates"
+        ),
+        KnowledgePoint(
+            id = "adverbial_clause", section = "板块三：句法体系 (Syntax)", title = "状语从句 (Adverbial Clause)",
+            description = "在复合句中充当状语的从句。",
+            syllabusDetails = listOf("时间状语从句", "条件状语从句 (主将从现原则)", "原因状语从句", "结果状语从句 (so...that / such...that)", "目的、让步、比较状语从句"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "When in Rome, do as the Romans do.", quoteAuthor = "Proverb"
+        ),
+        KnowledgePoint(
+            id = "attributive_clause", section = "板块三：句法体系 (Syntax)", title = "定语从句 (Attributive Clause)",
+            description = "在复合句中修饰名词或代词的从句。",
+            syllabusDetails = listOf("关系代词 (who, whom, whose, which, that) 的用法与省略", "关系副词 (where, when, why) 的基本概念"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "The man who reads lives a thousand lives.", quoteAuthor = "George R.R. Martin"
+        ),
+        KnowledgePoint(
+            id = "special_patterns", section = "板块三：句法体系 (Syntax)", title = "特殊句式",
+            description = "英语中特殊的语法结构和一致性原则。",
+            syllabusDetails = listOf("There be 句型", "It 的固定句型 (It takes sb. some time to do...)", "倒装句（so/neither 引起的半倒装）", "主谓一致原则（语法一致、意义一致、就近原则）"),
+            relatedPoints = listOf(), exampleProblems = listOf(), pastExamQuestions = listOf(), textbookParagraphs = listOf(), exampleSentences = listOf(), famousQuote = "Rules are meant to be understood.", quoteAuthor = "Unknown"
+        )
     )
 
     fun getPoint(id: String): KnowledgePoint? {
-        val cleanId = if (id.startsWith("search_")) id.substringAfter("search_") else id
-        return allPoints.find { it.id == cleanId } ?: allPoints.find { it.id == "7" } // Default to Present Perfect if search not found for demo
+        // If searching with "search_X", just return Present Perfect for demo to show the max-level detail
+        if (id.startsWith("search_")) {
+            return allPoints.find { it.id == "present_perfect" }
+        }
+        return allPoints.find { it.id == id } ?: allPoints.find { it.id == "present_perfect" }
     }
 }

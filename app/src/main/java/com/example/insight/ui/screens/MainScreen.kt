@@ -323,7 +323,7 @@ fun BoxScope.TabIconFluid(
 fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
-    val expandedSections = remember { mutableStateListOf("板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系") }
+    val expandedSections = remember { mutableStateListOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)") }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -365,7 +365,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
         }
 
         if (searchQuery.isEmpty()) {
-            val sections = listOf("板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系")
+            val sections = listOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)")
             
             sections.forEach { sectionName ->
                 val isExpanded = expandedSections.contains(sectionName)
@@ -395,11 +395,25 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                     }
                 }
                 
-                if (isExpanded) {
+                item {
                     val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
-                    items(sectionPoints.size) { index ->
-                        val point = sectionPoints[index]
-                        HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
+                    AnimatedVisibility(
+                        visible = isExpanded,
+                        enter = expandVertically(
+                            animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing)
+                        ) + fadeIn(animationSpec = tween(durationMillis = 300)),
+                        exit = shrinkVertically(
+                            animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                        ) + fadeOut(animationSpec = tween(durationMillis = 200))
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        ) {
+                            sectionPoints.forEach { point ->
+                                HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
+                            }
+                        }
                     }
                 }
             }

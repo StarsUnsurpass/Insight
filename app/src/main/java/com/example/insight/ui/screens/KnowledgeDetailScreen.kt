@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -42,7 +43,7 @@ fun KnowledgeDetailScreen(
                 title = { Text(point.title, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -61,7 +62,7 @@ fun KnowledgeDetailScreen(
         ) {
             // 1. 知识点概览
             item {
-                SectionHeader(title = "考纲要求", icon = Icons.Default.Assignment)
+                SectionHeader(title = "考纲要求", icon = Icons.AutoMirrored.Filled.Assignment)
                 DetailCard {
                     Text(
                         text = point.description,
