@@ -162,7 +162,7 @@ fun KnowledgeDetailScreen(
                                 ) {
                                     Text("👉 ", fontSize = 16.sp)
                                     Text(
-                                        text = "${rp.title}：[${rp.description}] (点击跳转)", 
+                                        text = "${rp.title}", 
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = MaterialTheme.colorScheme.primary,
                                         fontWeight = FontWeight.Medium,

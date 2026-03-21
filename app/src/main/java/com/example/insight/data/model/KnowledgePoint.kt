@@ -325,13 +325,6 @@ object KnowledgeProvider {
 
     fun getPoint(id: String): KnowledgePoint? {
         val cleanId = if (id.startsWith("search_")) id.substringAfter("search_") else id
-        val point = allPoints.find { it.id == cleanId }
-        
-        // Demo mode: If the requested point has no detailed content, show the Present Perfect template
-        if (point != null && point.pastExamQuestions.isEmpty() && point.textbookParagraphs.isEmpty()) {
-            return allPoints.find { it.id == "present_perfect" }
-        }
-        
-        return point ?: allPoints.find { it.id == "present_perfect" }
+        return allPoints.find { it.id == cleanId } ?: allPoints[0]
     }
 }
