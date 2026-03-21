@@ -235,7 +235,7 @@ fun KnowledgeDetailScreen(
             // 🌟 名人名言
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                FamousQuoteCard(point.famousQuote, point.quoteAuthor)
+                FamousQuoteCard(point.famousQuote, point.quoteAuthor, point.quoteTranslation)
             }
         }
     }
@@ -370,26 +370,42 @@ fun ExampleSentenceCard(sentence: ExampleSentence) {
 }
 
 @Composable
-fun FamousQuoteCard(quote: String, author: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(16.dp))
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(Icons.Default.FormatQuote, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), modifier = Modifier.size(48.dp))
-        Text(
-            text = quote,
-            style = MaterialTheme.typography.titleMedium,
-            fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Bold,
-            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-            lineHeight = 28.sp
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(text = "— $author", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+fun FamousQuoteCard(quote: String, author: String, translation: String) {
+    if (quote.isNotEmpty()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(16.dp))
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(Icons.Default.FormatQuote, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), modifier = Modifier.size(48.dp))
+            Text(
+                text = quote,
+                style = MaterialTheme.typography.titleMedium,
+                fontStyle = FontStyle.Italic,
+                fontWeight = FontWeight.Bold,
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                lineHeight = 28.sp
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(text = "— $author", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            
+            if (translation.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = translation,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.secondary,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+            }
+        }
     }
 }
 

@@ -331,19 +331,56 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Column(modifier = Modifier.padding(vertical = 12.dp)) {
+            val calendar = java.util.Calendar.getInstance()
+            val dayOfYear = calendar.get(java.util.Calendar.DAY_OF_YEAR)
+            
+            val dailyQuotes = listOf(
+                "Education is the most powerful weapon which you can use to change the world.",
+                "The roots of education are bitter, but the fruit is sweet.",
+                "A teacher affects eternity; he can never tell where his influence stops.",
+                "I hear and I forget. I see and I remember. I do and I understand."
+            )
+            
+            val todayQuote = dailyQuotes[dayOfYear % dailyQuotes.size]
+            
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = if (preferences.role == UserRole.Student) "早上好，${preferences.username} 同学 📚" else "您好，${preferences.username} 老师 🎓",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
+                    text = "您好, ${preferences.username}",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Black,
                     color = MaterialTheme.colorScheme.onBackground
                 )
-                Text(
-                    text = if (preferences.role == UserRole.Student) "今天也要保持思考哦。" else "准备好开始今天的教学了吗？",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
-                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Surface(
+                    color = primaryColor.copy(alpha = 0.1f),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = if (preferences.role == UserRole.Teacher) "老师" else "同学",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = primaryColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = if (preferences.role == UserRole.Teacher) Icons.Default.School else Icons.Default.MenuBook,
+                            contentDescription = null,
+                            tint = primaryColor,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
             }
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = todayQuote,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
 
         item {
@@ -762,6 +799,49 @@ fun SearchResultItem(index: Int, onClick: () -> Unit) {
 }
 
 @Composable
+fun HighlightedText(
+    text: String,
+    keyword: String,
+    style: androidx.compose.ui.text.TextStyle,
+    color: androidx.compose.ui.graphics.Color,
+    highlightColor: androidx.compose.ui.graphics.Color,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: androidx.compose.ui.text.style.TextOverflow = androidx.compose.ui.text.style.TextOverflow.Clip
+) {
+    if (keyword.isEmpty() || !text.lowercase().contains(keyword.lowercase())) {
+        Text(text = text, style = style, color = color, maxLines = maxLines, overflow = overflow)
+        return
+    }
+
+    val builder = androidx.compose.ui.text.AnnotatedString.Builder(text)
+    var startIndex = 0
+    val lowerText = text.lowercase()
+    val lowerKeyword = keyword.lowercase()
+    
+    while (startIndex < text.length) {
+        val index = lowerText.indexOf(lowerKeyword, startIndex)
+        if (index == -1) break
+        builder.addStyle(
+            style = androidx.compose.ui.text.SpanStyle(
+                background = highlightColor.copy(alpha = 0.3f), 
+                color = highlightColor
+            ),
+            start = index,
+            end = index + keyword.length
+        )
+        startIndex = index + keyword.length
+    }
+
+    Text(
+        text = builder.toAnnotatedString(),
+        style = style,
+        color = color,
+        maxLines = maxLines,
+        overflow = overflow
+    )
+}
+
+@Composable
 fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, query: String, onClick: () -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val snippet = getSnippet(point, query)
@@ -776,13 +856,21 @@ fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, q
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.Search, contentDescription = null, tint = primaryColor)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(point.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                HighlightedText(
+                    text = point.title, 
+                    keyword = query, 
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), 
+                    color = MaterialTheme.colorScheme.onSurface,
+                    highlightColor = primaryColor
+                )
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            HighlightedText(
                 text = snippet,
+                keyword = query,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                highlightColor = primaryColor,
                 maxLines = 3,
                 overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )

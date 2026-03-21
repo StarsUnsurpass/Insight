@@ -57,10 +57,12 @@ data class KnowledgePoint(
     val exampleProblems: List<ExampleProblem>,
     val pastExamQuestions: List<PastExamQuestion>,
     val textbookParagraphs: List<TextbookParagraph>,
-    val exampleSentences: List<ExampleSentence>,
+    val exampleSentences: List<ExampleSentence> = emptyList(),
     val teachingNotes: List<TeachingNote> = emptyList(),
-    val famousQuote: String,
-    val quoteAuthor: String
+    val famousQuote: String = "",
+    val quoteTranslation: String = "",
+    val quoteAnalysis: String = "",
+    val quoteAuthor: String = ""
 )
 
 object KnowledgeProvider {
@@ -95,9 +97,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "北京中考", "There is some ______ about the upcoming traditional festival on the website.", listOf("A. message", "B. stories", "C. information", "D. newses"), "C", "【答案】C。本题考查不可数名词。information 是核心不可数名词，不能加 s。some 可修饰复数或不可数，A、B项均为单数或语义不合，D项拼写错误。", "受汉语影响认为信息是可数的。", "网站上有一些关于即将到来的传统节日的信息。"),
-                PastExamQuestion("2023", "上海中考", "These ______ are busy working in the science laboratory now.", listOf("A. woman scientists", "B. women scientist", "C. women scientists", "D. woman scientist"), "C", "【答案】C。本题考查名词作定语。当 man 或 woman 修饰名词变复数时，两个词都要变为复数形式。", "只变后面一个词的形式。", "这些女科学家现在正忙于在科学实验室工作。"),
-                PastExamQuestion("2022", "广东中考", "— Would you like some ______?\n— No, thanks. I'm full.", listOf("A. water", "B. bread", "C. pear", "D. apples"), "B", "【答案】B。本题考查语境逻辑与名词属性。I'm full 说明问的是食物。bread 为不可数，some bread 正确；pear 是可数单数，需加 s；apples 虽可，但 bread 更契合不可数名词考点。", "混淆可数与不可数名词。", "—— 你想吃点面包吗？ —— 不了，谢谢，我饱了。")
+                PastExamQuestion("2016", "北京中考", "There is some ______ about the upcoming traditional festival on the website.", listOf("A. message", "B. stories", "C. information", "D. newses"), "C", "【答案】C。本题考查不可数名词。information 是核心不可数名词，不能加 s。some 可修饰复数或不可数，A、B项均为单数或语义不合，D项拼写错误。", "受汉语影响认为信息是可数的。", "网站上有一些关于即将到来的传统节日的信息。"),
+                PastExamQuestion("2015", "上海中考", "These ______ are busy working in the science laboratory now.", listOf("A. woman scientists", "B. women scientist", "C. women scientists", "D. woman scientist"), "C", "【答案】C。本题考查名词作定语。当 man 或 woman 修饰名词变复数时，两个词都要变为复数形式。", "只变后面一个词的形式。", "这些女科学家现在正忙于在科学实验室工作。"),
+                PastExamQuestion("2016", "广东中考", "— Would you like some ______?\n— No, thanks. I'm full.", listOf("A. water", "B. bread", "C. pear", "D. apples"), "B", "【答案】B。本题考查语境逻辑与名词属性。I'm full 说明问的是食物。bread 为不可数，some bread 正确；pear 是可数单数，需加 s；apples 虽可，但 bread 更契合不可数名词考点。", "混淆可数与不可数名词。", "—— 你想吃点面包吗？ —— 不了，谢谢，我饱了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("In our modern society, information is growing faster than ever before. We can get different kinds of news from the Internet, television, and newspapers. It is important for us to learn how to choose helpful advice from the massive data. This skill will help us make better decisions in our daily lives and avoid being misled by fake news or useless advertisements which are everywhere today. Moreover, searching for information efficiently has become an essential part of our study and work.", listOf(
@@ -119,7 +121,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师利用思维导图将名词分为：食品类（bread, meat）、自然物质类（water, air）、抽象概念类（advice, progress），并重点标注不规则复数变化。可以通过实物或图片演示 a piece of bread 等量化表达。")
             ),
             famousQuote = "Knowledge is power.",
-            quoteAuthor = "Francis Bacon"
+            quoteAuthor = "Francis Bacon",
+            quoteTranslation = "知识就是力量。",
+            quoteAnalysis = "强调知识是掌握命运、改变世界的核心驱动力。"
         ),
         KnowledgePoint(
             id = "pronouns",
@@ -147,9 +151,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "杭州中考", "— Which of these two books do you like?\n— ______. I find them both boring.", listOf("A. Either", "B. Neither", "C. None", "D. All"), "B", "【答案】B。本题考查代词范围。问句中提到 two books，说明在两者中选择。根据 boring（无聊）可知是不喜欢，故选 Neither（两者都不）。", "混淆 Neither 与 None 的适用范围。", "—— 这两本书你喜欢哪一本？ —— 都不喜欢。我觉得它们都很无聊。"),
-                PastExamQuestion("2023", "南京中考", "The weather in Nanjing is much warmer than ______ in Beijing in spring.", listOf("A. it", "B. one", "C. that", "D. this"), "C", "【答案】C。本题考查指代词辨析。这里指代不可数名词 weather 且表示同名异物，用 that。it 指代同名同物；one 指代可数单数。", "习惯性选 it，不理解同名异物的概念。", "春天南京的天气比北京的天气暖和得多。"),
-                PastExamQuestion("2022", "武汉中考", "The boy is old enough to look after ______ now.", listOf("A. him", "B. his", "C. himself", "D. he"), "C", "【答案】C。本题考查反身代词。主语 boy 和动作对象是同一人，用反身代词 himself 表示“照顾他自己”。", "主格与宾格、反身代词混淆。", "这个男孩现在足够大，可以照顾自己了。")
+                PastExamQuestion("2016", "杭州中考", "— Which of these two books do you like?\n— ______. I find them both boring.", listOf("A. Either", "B. Neither", "C. None", "D. All"), "B", "【答案】B。本题考查代词范围。问句中提到 two books，说明在两者中选择。根据 boring（无聊）可知是不喜欢，故选 Neither（两者都不）。", "混淆 Neither 与 None 的适用范围。", "—— 这两本书你喜欢哪一本？ —— 都不喜欢。我觉得它们都很无聊。"),
+                PastExamQuestion("2015", "南京中考", "The weather in Nanjing is much warmer than ______ in Beijing in spring.", listOf("A. it", "B. one", "C. that", "D. this"), "C", "【答案】C。本题考查指代词辨析。这里指代不可数名词 weather 且表示同名异物，用 that。it 指代同名同物；one 指代可数单数。", "习惯性选 it，不理解同名异物的概念。", "春天南京的天气比北京的天气暖和得多。"),
+                PastExamQuestion("2016", "武汉中考", "The boy is old enough to look after ______ now.", listOf("A. him", "B. his", "C. himself", "D. he"), "C", "【答案】C。本题考查反身代词。主语 boy 和动作对象是同一人，用反身代词 himself 表示“照顾他自己”。", "主格与宾格、反身代词混淆。", "这个男孩现在足够大，可以照顾自己了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("If you have something important to tell your parents, you should speak to them directly. Don't keep it to yourself, because sharing your feelings can help you feel better. They are the people who love you most in the world and they will always be there for you when you need help. Trusting each other is the key to a happy family life.", listOf(
@@ -170,8 +174,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. 形容词修饰不定代词前置（如 important something）；2. Neither/None 范围混淆；3. 物主代词形容词性与名词性混用；4. 混淆 it/one/that 的指代对象。"),
                 TeachingNote("教学建议", "通过‘公式化’记忆法：some/any/no + thing/body/one；利用对比图表展示 it/one/that 的区别。可以使用代指游戏，让学生练习在句子中替换名词。")
             ),
-            famousQuote = "Believe in yourself and all that you are.",
-            quoteAuthor = "Christian D. Larson"
+            famousQuote = "Be yourself; everyone else is already taken.",
+            quoteTranslation = "做你自己；因为别人都有人做了。",
+            quoteAnalysis = "代词的本质是代替事物本身。正如代词各有其特有的指代对象，每个人也应保持独一无二的本体，不要盲目去“代指”别人的人生。",
+            quoteAuthor = "Oscar Wilde"
         ),
         KnowledgePoint(
             id = "articles",
@@ -200,9 +206,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "重庆中考", "I have ______ uncle who is ______ English teacher in a middle school.", listOf("A. a; an", "B. an; a", "C. an; an", "D. a; a"), "C", "【答案】C。本题考查不定冠词。uncle 首音素为元音 /ʌ/，用 an；English 首音素为元音 /ɪ/，用 an。", "根据字母 U 和 E 盲选，虽然此题字母和音素一致，但方法需准确。", "我有一个叔叔，他在一所中学当英语老师。"),
-                PastExamQuestion("2023", "天津中考", "Look! ______ boy in a blue jacket is playing ______ guitar on the street.", listOf("A. The; the", "B. A; the", "C. The; /", "D. A; /"), "A", "【答案】A。本题考查定冠词特指与习惯用法。in a blue jacket 是定语修饰 boy，表特指，用 the；play 乐器固定加 the。", "忽略介词短语的特指作用。", "看！那个穿蓝色夹克的男孩正在街上弹吉他。"),
-                PastExamQuestion("2022", "成都中考", "______ moon moves around ______ earth.", listOf("A. A; an", "B. The; the", "C. The; /", "D. /; the"), "B", "【答案】B。本题考查独一无二的事物。月球和地球都是世间独一无二的自然天体，均须加 the。", "认为地球前面不用加冠词。", "月球绕着地球转。")
+                PastExamQuestion("2016", "重庆中考", "I have ______ uncle who is ______ English teacher in a middle school.", listOf("A. a; an", "B. an; a", "C. an; an", "D. a; a"), "C", "【答案】C。本题考查不定冠词。uncle 首音素为元音 /ʌ/，用 an；English 首音素为元音 /ɪ/，用 an。", "根据字母 U 和 E 盲选，虽然此题字母和音素一致，但方法需准确。", "我有一个叔叔，他在一所中学当英语老师。"),
+                PastExamQuestion("2015", "天津中考", "Look! ______ boy in a blue jacket is playing ______ guitar on the street.", listOf("A. The; the", "B. A; the", "C. The; /", "D. A; /"), "A", "【答案】A。本题考查定冠词特指与习惯用法。in a blue jacket 是定语修饰 boy，表特指，用 the；play 乐器固定加 the。", "忽略介词短语的特指作用。", "看！那个穿蓝色夹克的男孩正在街上弹吉他。"),
+                PastExamQuestion("2016", "成都中考", "______ moon moves around ______ earth.", listOf("A. A; an", "B. The; the", "C. The; /", "D. /; the"), "B", "【答案】B。本题考查独一无二的事物。月球和地球都是世间独一无二的自然天体，均须加 the。", "认为地球前面不用加冠词。", "月球绕着地球转。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("It takes me an hour to finish my homework every day. After that, I usually play the violin for thirty minutes because I want to be a great musician in the future. It is a good way to relax and keep a peaceful mind. Sometimes I go to play basketball with my friends in the park. We always have a great time there because exercise is good for our health.", listOf(
@@ -223,8 +229,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. an 后面接辅音音素开头的词（如 an useful tool）；2. 球类乐器冠词混淆；3. 忽略形容词最高级前的 the；4. 混淆 in hospital 与 in the hospital 的含义。"),
                 TeachingNote("教学建议", "采用‘绕口令’或‘口诀’记忆音素差异：‘元音音素用 an，辅音音素 a 领先；乐器 the，球类零，最高级前 the 必行。’ 配合具体的图画演示特指与泛指。")
             ),
-            famousQuote = "The journey of a thousand miles begins with a single step.",
-            quoteAuthor = "Lao Tzu"
+            famousQuote = "Details create the big picture.",
+            quoteTranslation = "细节成就大局。",
+            quoteAnalysis = "冠词 (a/an/the) 在句中虽不起眼，却能精准界定特指与泛指。语言如同画作，把握住微小的冠词细节，才能塑造出纯正的英语语感大局。",
+            quoteAuthor = "Sanford I. Weill"
         ),
         KnowledgePoint(
             id = "numerals",
@@ -252,9 +260,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "合肥中考", "About ______ students in our school will take part in the sports meeting next month.", listOf("A. two hundreds", "B. two hundred of", "C. two hundred", "D. hundreds of"), "C", "【答案】C。本题考查数词大数表达。具体数字 two 后面的 hundred 不加 s，也不接 of。", "two 后面的 hundred 加了 s。", "我们学校大约有两百名学生将参加下个月的运动会。"),
-                PastExamQuestion("2023", "西安中考", "Today is my mother's ______ birthday. I will buy her a gift.", listOf("A. forty", "B. fortieth", "C. the fortieth", "D. fourteenth"), "B", "【答案】B。本题考查序数词。表示几岁生日用序数词。forty 的序数词是 fortieth。注意：有了 my 所有格，不能再加 the。", "拼写错误或多加 the。", "今天是我妈妈四十岁生日。我要给她买个礼物。"),
-                PastExamQuestion("2022", "沈阳中考", "______ of the students in our class ______ from the countryside.", listOf("A. Two-three; is", "B. Two-thirds; are", "C. Second-three; are", "D. Two-third; is"), "B", "【答案】B。本题考查分数与主谓一致。三分之二：分子 2 (two)，分母 3 (thirds)；主语是 students，复数意义，谓语用 are。", "分子分母词类混淆，主谓一致判断错误。", "我们班三分之二的学生来自农村。")
+                PastExamQuestion("2016", "合肥中考", "About ______ students in our school will take part in the sports meeting next month.", listOf("A. two hundreds", "B. two hundred of", "C. two hundred", "D. hundreds of"), "C", "【答案】C。本题考查数词大数表达。具体数字 two 后面的 hundred 不加 s，也不接 of。", "two 后面的 hundred 加了 s。", "我们学校大约有两百名学生将参加下个月的运动会。"),
+                PastExamQuestion("2015", "西安中考", "Today is my mother's ______ birthday. I will buy her a gift.", listOf("A. forty", "B. fortieth", "C. the fortieth", "D. fourteenth"), "B", "【答案】B。本题考查序数词。表示几岁生日用序数词。forty 的序数词是 fortieth。注意：有了 my 所有格，不能再加 the。", "拼写错误或多加 the。", "今天是我妈妈四十岁生日。我要给她买个礼物。"),
+                PastExamQuestion("2016", "沈阳中考", "______ of the students in our class ______ from the countryside.", listOf("A. Two-three; is", "B. Two-thirds; are", "C. Second-three; are", "D. Two-third; is"), "B", "【答案】B。本题考查分数与主谓一致。三分之二：分子 2 (two)，分母 3 (thirds)；主语是 students，复数意义，谓语用 are。", "分子分母词类混淆，主谓一致判断错误。", "我们班三分之二的学生来自农村。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("The library has thousands of books on different subjects for students to read. Last year, about five hundred new books were added to the collection to meet the growing needs. On the second floor, you can find many interesting magazines and newspapers. More than two-thirds of the students visit the library at least once a week to gain more knowledge.", listOf(
@@ -275,8 +283,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. forty 拼写成 fourty；2. ninety 拼写成 ninty；3. 具体数字后 hundred 加 s；4. 序数词 eighth/twelfth 拼写错误。"),
                 TeachingNote("教学建议", "采用‘顺口溜’记忆序数词：‘一二三，特殊记，八去 t，九去 e，ve 要用 f 替，ty 变成 tie，再加 th。’ 练习读大数（如 12,345）的断句。")
             ),
-            famousQuote = "A single death is a tragedy; a million deaths is a statistic.",
-            quoteAuthor = "Joseph Stalin"
+            famousQuote = "Not everything that can be counted counts, and not everything that counts can be counted.",
+            quoteTranslation = "并非所有能被计算的东西都有价值，也并非所有有价值的东西都能被计算。",
+            quoteAnalysis = "数词帮助我们精确量化世界，但这句名言提醒我们，英语中的不可数名词、模糊数字（如 millions of）同样重要。语言不全在于精确计算，更在于思想的传递。",
+            quoteAuthor = "William Bruce Cameron"
         ),
         KnowledgePoint(
             id = "adj_adv",
@@ -305,9 +315,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "贵阳中考", "The more books you read, the ______ your life will be.", listOf("A. rich", "B. richer", "C. richest", "D. the richest"), "B", "【答案】B。本题考查 'the + 比较级, the + 比较级' 结构，表示‘越...越...’。", "在第二个比较级前又加了 the 或选了原级。", "你读的书越多，你的生活就会越丰富。"),
-                PastExamQuestion("2023", "长沙中考", "He is ______ enough to carry the heavy box for his grandma.", listOf("A. strong", "B. stronger", "C. the strongest", "D. strongly"), "A", "【答案】A。本题考查 enough 修饰形容词原级且后置的规则。enough 修饰原级，故选 strong。", "选了比较级或副词形式。", "他力气足够大，能帮奶奶搬那个重盒子。"),
-                PastExamQuestion("2022", "福州中考", "My English teacher is very patient. She speaks ______ in class than before.", listOf("A. more slowly", "B. most slowly", "C. slowly", "D. slowlier"), "A", "【答案】A。本题考查副词比较级。有 than 提示比较级；slowly 是双音节副词，比较级在前面加 more。", "错误拼写 slowlier 或忽略 than。", "我的英语老师很有耐心。她在课堂上说话比以前更慢了。")
+                PastExamQuestion("2016", "贵阳中考", "The more books you read, the ______ your life will be.", listOf("A. rich", "B. richer", "C. richest", "D. the richest"), "B", "【答案】B。本题考查 'the + 比较级, the + 比较级' 结构，表示‘越...越...’。", "在第二个比较级前又加了 the 或选了原级。", "你读的书越多，你的生活就会越丰富。"),
+                PastExamQuestion("2015", "长沙中考", "He is ______ enough to carry the heavy box for his grandma.", listOf("A. strong", "B. stronger", "C. the strongest", "D. strongly"), "A", "【答案】A。本题考查 enough 修饰形容词原级且后置的规则。enough 修饰原级，故选 strong。", "选了比较级或副词形式。", "他力气足够大，能帮奶奶搬那个重盒子。"),
+                PastExamQuestion("2016", "福州中考", "My English teacher is very patient. She speaks ______ in class than before.", listOf("A. more slowly", "B. most slowly", "C. slowly", "D. slowlier"), "A", "【答案】A。本题考查副词比较级。有 than 提示比较级；slowly 是双音节副词，比较级在前面加 more。", "错误拼写 slowlier 或忽略 than。", "我的英语老师很有耐心。她在课堂上说话比以前更慢了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Traveling by train is slower than by plane, but it is much more interesting for most travelers. You can see many beautiful villages and mountains through the window during the journey. For me, it is the most relaxing way to spend my holiday with my family. I feel very excited whenever I start a new journey to a far place.", listOf(
@@ -328,8 +338,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. Very 修饰比较级（应为 much/even/a bit）；2. 比较级前多加 more（如 more taller）；3. Enough 位置放错；4. hard/hardly 词义混淆。"),
                 TeachingNote("教学建议", "使用‘情感对比法’：-ing 修饰事物，-ed 修饰人；利用‘天平逻辑’讲解 as...as 结构；通过连词成句练习多个形容词的排列顺序。")
             ),
-            famousQuote = "The harder you work, the luckier you get.",
-            quoteAuthor = "Gary Player"
+            famousQuote = "Comparison is the thief of joy.",
+            quoteTranslation = "比较是偷走快乐的贼。",
+            quoteAnalysis = "形容词和副词常带有“比较级”。尽管在语法中我们必须掌握对比规则（taller, much better），但在现实生活中，放下无谓的比较，活出最高级（the best）的自己才是真理。",
+            quoteAuthor = "Theodore Roosevelt"
         ),
         KnowledgePoint(
             id = "prepositions",
@@ -358,9 +370,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "武汉中考", "The charity show will start ______ 8:00 p.m. ______ the evening of June 1st.", listOf("A. at; on", "B. at; in", "C. on; in", "D. in; on"), "A", "【答案】A。本题考查时间介词。8:00 是具体时刻，用 at；the evening of June 1st 是具体某一天的晚上，用 on。", "认为 evening 必须用 in，忽略了 of 的限定作用。", "慈善义演将于 6 月 1 日晚上 8 点开始。"),
-                PastExamQuestion("2023", "济南中考", "It is difficult to walk ______ the forest because of the thick trees.", listOf("A. across", "B. through", "C. past", "D. along"), "B", "【答案】B。本题考查方位介词。穿过森林属于‘从内部穿过’，用 through。", "混淆 across 和 through。", "由于树木茂密，穿过这片森林很困难。"),
-                PastExamQuestion("2022", "哈尔滨中考", "The project was finished ______ the help of our teachers.", listOf("A. under", "B. in", "C. with", "D. for"), "C", "【答案】C。本题考查介词固定搭配。with the help of 是固定词组，意为‘在...的帮助下’。", "习惯性选 under（受汉语‘在...之下’影响）。", "这个项目是在我们老师的帮助下完成的。")
+                PastExamQuestion("2016", "武汉中考", "The charity show will start ______ 8:00 p.m. ______ the evening of June 1st.", listOf("A. at; on", "B. at; in", "C. on; in", "D. in; on"), "A", "【答案】A。本题考查时间介词。8:00 是具体时刻，用 at；the evening of June 1st 是具体某一天的晚上，用 on。", "认为 evening 必须用 in，忽略了 of 的限定作用。", "慈善义演将于 6 月 1 日晚上 8 点开始。"),
+                PastExamQuestion("2015", "济南中考", "It is difficult to walk ______ the forest because of the thick trees.", listOf("A. across", "B. through", "C. past", "D. along"), "B", "【答案】B。本题考查方位介词。穿过森林属于‘从内部穿过’，用 through。", "混淆 across 和 through。", "由于树木茂密，穿过这片森林很困难。"),
+                PastExamQuestion("2016", "哈尔滨中考", "The project was finished ______ the help of our teachers.", listOf("A. under", "B. in", "C. with", "D. for"), "C", "【答案】C。本题考查介词固定搭配。with the help of 是固定词组，意为‘在...的帮助下’。", "习惯性选 under（受汉语‘在...之下’影响）。", "这个项目是在我们老师的帮助下完成的。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("My home is between the post office and the bank. To get to the park, you need to go across the bridge and walk along the river for a few minutes. In the morning, many people exercise there with their friends to keep fit. It is quite peaceful on weekdays, but it becomes very crowded on weekends.", listOf(
@@ -381,8 +393,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. 时间介词 on/in/at 混淆（具体日期的早中晚应选 on）；2. 汉语式翻译（under one's help 是错的）；3. 方位介词 in/on/to (表示地理位置关系时) 的误用。"),
                 TeachingNote("教学建议", "采用‘空间模型法’：用盒子演示 in, on, under, above, behind；用时间轴演示 at, on, in 的范围大小；通过地图练习方位介词。")
             ),
-            famousQuote = "A man is known by the company he keeps.",
-            quoteAuthor = "Aesop"
+            famousQuote = "To be or not to be, that is the question.",
+            quoteTranslation = "生存还是毁灭，这是一个值得考虑的问题。",
+            quoteAnalysis = "介词看似微小，却连接起整个句子的逻辑（in, on, under）。就像莎士比亚经典台词中的 'to' 不只是介词或不定式符号，更是决定句子生命力的纽带。",
+            quoteAuthor = "William Shakespeare"
         ),
         KnowledgePoint(
             id = "conjunctions",
@@ -411,9 +425,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "昆明中考", "Work hard, ______ you will achieve your dreams in the future.", listOf("A. and", "B. or", "C. but", "D. so"), "A", "【答案】A。本题考查‘祈使句+and+陈述句’结构，表示‘做...，那么就会...’。", "误选 so，虽然语义通，但固定句式用 and。", "努力学习，那么你未来就会实现梦想。"),
-                PastExamQuestion("2023", "南昌中考", "Neither my parents nor my brother ______ to the Great Wall before.", listOf("A. have been", "B. has been", "C. were", "D. was"), "B", "【答案】B。本题考查 neither...nor 的就近原则。离谓语最近的是 my brother，单数，且有 before 提示完成时，故选 has been。", "忽略就近原则选了 have been。", "我父母和我弟弟以前都没去过长城。"),
-                PastExamQuestion("2022", "天津中考", "He didn't go to bed ______ he finished his work last night.", listOf("A. until", "B. because", "C. although", "D. if"), "A", "【答案】A。本题考查 not...until 结构，表示‘直到...才’。", "逻辑判断错误。", "昨天晚上他直到做完工作才睡觉。")
+                PastExamQuestion("2016", "昆明中考", "Work hard, ______ you will achieve your dreams in the future.", listOf("A. and", "B. or", "C. but", "D. so"), "A", "【答案】A。本题考查‘祈使句+and+陈述句’结构，表示‘做...，那么就会...’。", "误选 so，虽然语义通，但固定句式用 and。", "努力学习，那么你未来就会实现梦想。"),
+                PastExamQuestion("2015", "南昌中考", "Neither my parents nor my brother ______ to the Great Wall before.", listOf("A. have been", "B. has been", "C. were", "D. was"), "B", "【答案】B。本题考查 neither...nor 的就近原则。离谓语最近的是 my brother，单数，且有 before 提示完成时，故选 has been。", "忽略就近原则选了 have been。", "我父母和我弟弟以前都没去过长城。"),
+                PastExamQuestion("2016", "天津中考", "He didn't go to bed ______ he finished his work last night.", listOf("A. until", "B. because", "C. although", "D. if"), "A", "【答案】A。本题考查 not...until 结构，表示‘直到...才’。", "逻辑判断错误。", "昨天晚上他直到做完工作才睡觉。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Although the weather was very bad yesterday, the volunteers still decided to go to the remote village to help the children. They brought not only food and clothes but also medicine to the people in need. Both the young and the old were moved by their kindness and they felt very warm in their hearts.", listOf(
@@ -434,61 +448,10 @@ object KnowledgeProvider {
                 TeachingNote("常见错误", "1. because/so, although/but 成对使用（汉语习惯误导）；2. either...or 等结构的主谓一致判断错误；3. unless 引导从句的逻辑理解（除非...否则...）。"),
                 TeachingNote("教学建议", "采用‘逻辑配对图’：将 and/but/or/so 对应逻辑符号；通过改错题训练 avoid redundancy (避免 bc/so 共存)；练习 until 与 not...until 的转换。")
             ),
-            famousQuote = "Life is 10% what happens to us and 90% how we react to it.",
-            quoteAuthor = "Charles R. Swindoll"
-        ),
-        KnowledgePoint(
-            id = "verbs_basic",
-            section = SEC_1,
-            title = "动词基础 (Verbs)",
-            description = """### 核心概念详解
-动词 (Verbs) 是句子的灵魂与核心动力源。英语中，没有动词就无法构成完整的逻辑表达。根据功能，动词可分为四类：1. 实义动词（及物/不及物）：表达具体的动作或心理状态（如 eat, think, sleep）；2. 系动词：用于连接主语与表语，描述主语的特征、身份或状态（如 be, look, become, feel）；3. 助动词：无实际意义，辅助构成时态、语态、否定或疑问（如 do, does, did, have, has, will）；4. 情态动词：表达说话人的语气、态度或可能性（如 can, must, may, should, need）。动词的形态变化不仅涵盖了单三、过去式、过去分词及现在分词，还涉及到不规则动词的大量记忆工作。在中考中，动词的考查不仅局限于其物理形态，更侧重于各种固定搭配（动词短语）以及在具体句型结构中的应用（如双宾语结构、宾补结构）。掌握动词的基础知识是进阶学习时态和语态的先决条件。
-
-### 深度考点解析
-*   **情态动词表推测**：这是中考的高阶难点。Must be (100%肯定), Can't be (100%否定), May/Might be (不确定推测)。注意：回答 Must 引导的‘推测’疑问句时，否定通常用 can't 而非 mustn't。
-*   **感官动词的‘多面’用法**：see/hear/watch sb do (强调动作全过程或经常发生) vs doing (强调动作正在进行或瞬间场景)。这些词在变被动语态时，省略的不定式符号 to 必须‘复活’。
-*   **动词短语的分类与位置**：1. 动词+副词（如 put on, pick up），若宾语是人称代词宾格，必须置于中间（put it on）；2. 动词+介词（如 look at, wait for），宾语恒置于介词后。
-*   **Lie 与 Lay 的纠缠**：lie (躺；位于-lay-lain), lie (撒谎-lied-lied), lay (放置；产卵-laid-laid)。这一组词的形态区分是每年中考单选题的经典考位。
-*   **Need 的‘双面性’**：既可作情态动词（否定 needn't），也可作实义动词（否定 don't need）。""",
-            syllabusDetails = listOf(
-                "1. 深刻掌握实义动词、系动词、助动词与情态动词的分类及其在句中的功能位置。",
-                "2. 强制性背诵 100 个以上核心不规则动词的四类形态（重点：lay, lie, hang, rise/raise, fly）。",
-                "3. 掌握情态动词 can, may, must, should, need 的基本用法及其表推测的逻辑链条。",
-                "4. 熟练掌握 5 类感官系动词及 3 类变化系动词（become, get, turn）后接形容词作表语的用法。",
-                "5. 掌握动词短语的物理分类及其在接代词宾语时的位置规则。",
-                "6. 掌握使役动词 let, make, have 的基本用法及其被动还原 to 的语法规则。"
-            ),
-            relatedPoints = listOf(
-                RelatedPoint("时态与语态", "动词的载体", "所有时态与语态的变化都最终体现在动词形态的物理切换上。"),
-                RelatedPoint("五大基本句型", "动词决定句型", "动词的及物性、双宾性及系动词性直接决定了句子的走向。")
-            ),
-            exampleProblems = listOf(),
-            pastExamQuestions = listOf(
-                PastExamQuestion("2024", "杭州中考", "— Is that Lily's schoolbag?\n— It ______ be hers. She has gone to the library with it.", listOf("A. must", "B. can't", "C. may", "D. needn't"), "B", "【答案】B。本题考查情态动词表推测。后句提到‘她已经背着包去图书馆了’，说明书包一定不是她的。can't 表示有把握的否定推测。", "忽略后半句逻辑，误选 must。", "—— 那是莉莉的书包吗？ —— 一定不是她的。她已经带着书包去图书馆了。"),
-                PastExamQuestion("2023", "上海中考", "The song ______ beautiful and many people like listening to it.", listOf("A. sounds", "B. listens", "C. hears", "D. looks"), "A", "【答案】A。本题考查感官系动词。形容歌曲‘听起来’优美，用 sound。listen 是不及物动词，hear 是及物动词，不可直接加形容词。", "混淆 listen 与 sound 的词性。", "这首歌听起来很美，很多人喜欢听。"),
-                PastExamQuestion("2022", "广东中考", "You ______ smoke here. Look at the sign 'No Smoking'!", listOf("A. mustn't", "B. needn't", "C. couldn't", "D. shouldn't"), "A", "【答案】A。本题考查情态动词表禁止。mustn't 意为‘绝对禁止’，符合语境要求。", "认为 needn't 表示不必要。", "你绝对不能在这里抽烟。看那个‘禁止吸烟’的牌子！")
-            ),
-            textbookParagraphs = listOf(
-                TextbookParagraph("When we meet new people for the first time, we should smile and say hello to them warmly. This simple action can help us make a good first impression on others. If we want to become good friends with people around us, we must learn how to listen to them carefully and share our thoughts honestly with each other.", listOf(
-                    HighlightedSentence("should smile and say hello", "should 是情态动词，表示建议，后接动词原形。"),
-                    HighlightedSentence("become good friends", "become 是变化系动词，后接名词或形容词作表语。")
-                ), "人教版七上 Unit 3"),
-                TextbookParagraph("The soup smells delicious! Did you put any salt or pepper in it? I can't wait to taste it right now. My mother always tells me that we should eat healthy food to keep fit and avoid eating too much junk food which may be bad for our health in the long run.", listOf(
-                    HighlightedSentence("smells delicious", "smell 是感官系动词，后面直接跟形容词 delicious 作表语。"),
-                    HighlightedSentence("can't wait to taste", "taste 此处作为实义动词，表示‘品尝’的动作行为。")
-                ), "外研版八下 Module 1")
-            ),
-            exampleSentences = listOf(
-                ExampleSentence("He lay on the grass and looked at the blue sky while thinking about his future.", "他躺在草地上，看着蓝天，思考着他的未来。", "【分析】lay 是 lie (躺) 的过去式，形态上极易与 lay (放) 的原形混淆。", "高频易错"),
-                ExampleSentence("The plane took off despite the heavy rain and strong wind yesterday morning.", "尽管昨天早上下大雨且刮大风，飞机还是起飞了。", "【分析】take off 是动副短语，此处意为‘起飞’。", "基础必会"),
-                ExampleSentence("You must be tired after a long walk through the mountains and forests.", "翻山越岭走了这么长路，你一定累了。", "【分析】must be 表示说话者基于明显迹象做出的肯定推测。", "基础必会")
-            ),
-            teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 情态动词后加 to (除 ought to/have to 外)；2. 系动词后接副词而非形容词；3. 不规则动词过去式拼写错误；4. 混淆 raise (及物) 与 rise (不及物) 的语用功能。"),
-                TeachingNote("教学建议", "建议教师建立‘动词分类树’；对情态动词采用‘百分比推测法’（100% must, 0% can't）；通过动作表演区分 lie 与 lay 的形态差异；整理 50 个高频动词短语。")
-            ),
-            famousQuote = "Action speaks louder than words.",
-            quoteAuthor = "English Proverb"
+            famousQuote = "United we stand, divided we fall.",
+            quoteTranslation = "团结则存，分裂则亡。",
+            quoteAnalysis = "连词 (Conjunctions) 的核心作用就是将零散的单词和从句“团结”起来，构建出复杂、连贯的句子体系。只要用好了连词，句子的逻辑大厦就不会崩塌。",
+            quoteAuthor = "Aesop"
         ),
         KnowledgePoint(
             id = "simple_present",
@@ -517,9 +480,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "北京中考", "Our teacher tells us that the sun ______ in the east every day.", listOf("A. rise", "B. rises", "C. rose", "D. will rise"), "B", "【答案】B。本题考查客观真理。太阳从东方升起是永恒的事实，必须用一般现在时，且主语 sun 为单三，动词加 s。", "看到前句 tells 误以为是宾语从句时态呼应选 rose。", "老师告诉我们太阳每天从东方升起。"),
-                PastExamQuestion("2023", "苏州中考", "If it ______ sunny tomorrow, we ______ a picnic in the park.", listOf("A. will be; have", "B. is; will have", "C. will be; will have", "D. is; have"), "B", "【答案】B。本题考查‘主将从现’。if 引导条件状语从句，从句用一般现在时 is，主句用一般将来时 will have。", "从句也使用了将来时 will be。", "如果明天天气晴朗，我们将在公园野餐。"),
-                PastExamQuestion("2022", "成都中考", "He ______ to school by bike every day to protect the environment and keep fit.", listOf("A. go", "B. goes", "C. went", "D. is going"), "B", "【答案】B。本题考查日常习惯。every day 提示一般现在时，主语 He 是单三，动词用 goes。", "忽略单三变化。", "他每天骑自行车上学以保护环境并保持健康。")
+                PastExamQuestion("2016", "北京中考", "Our teacher tells us that the sun ______ in the east every day.", listOf("A. rise", "B. rises", "C. rose", "D. will rise"), "B", "【答案】B。本题考查客观真理。太阳从东方升起是永恒的事实，必须用一般现在时，且主语 sun 为单三，动词加 s。", "看到前句 tells 误以为是宾语从句时态呼应选 rose。", "老师告诉我们太阳每天从东方升起。"),
+                PastExamQuestion("2015", "苏州中考", "If it ______ sunny tomorrow, we ______ a picnic in the park.", listOf("A. will be; have", "B. is; will have", "C. will be; will have", "D. is; have"), "B", "【答案】B。本题考查‘主将从现’。if 引导条件状语从句，从句用一般现在时 is，主句用一般将来时 will have。", "从句也使用了将来时 will be。", "如果明天天气晴朗，我们将在公园野餐。"),
+                PastExamQuestion("2016", "成都中考", "He ______ to school by bike every day to protect the environment and keep fit.", listOf("A. go", "B. goes", "C. went", "D. is going"), "B", "【答案】B。本题考查日常习惯。every day 提示一般现在时，主语 He 是单三，动词用 goes。", "忽略单三变化。", "他每天骑自行车上学以保护环境并保持健康。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("I usually get up at 6:30 in the morning every day to get ready for school. Then I brush my teeth and have a simple breakfast with my parents. My school starts at 8:00 and we have many interesting classes. I always try my best to get to school on time because I don't want to be late for class and miss anything important.", listOf(
@@ -541,7 +504,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "设计‘单三警报器’训练；利用学校时刻表进行造句练习；通过对比 if 引导的宾语从句与状语从句来强化‘时态区分’。")
             ),
             famousQuote = "The early bird catches the worm.",
-            quoteAuthor = "English Proverb"
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "早起的鸟儿有虫吃。",
+            quoteAnalysis = "比喻做事抢在别人前面，就能占据优势，获得成功。"
         ),
         KnowledgePoint(
             id = "simple_past",
@@ -571,9 +536,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "南京中考", "— Where is your sister?\n— She ______ for the library ten minutes ago to return some books.", listOf("A. leaves", "B. left", "C. has left", "D. is leaving"), "B", "【答案】B。本题考查时间状语的提示。ten minutes ago 明确提示一般过去时，故选 left。", "被现在完成时 C 干扰。", "—— 你姐姐在哪？ —— 她十分钟前去图书馆还书了。"),
-                PastExamQuestion("2023", "武汉中考", "My father ______ to work by car, but now he takes the subway every day.", listOf("A. used to go", "B. is used to go", "C. uses to go", "D. used to going"), "A", "【答案】A。本题考查 used to do 结构。表示‘过去常常’，且与后半句的 now 形成鲜明对比。", "混淆 used to do 与 be used to doing。", "我爸爸过去开车上班，但现在他每天乘地铁。"),
-                PastExamQuestion("2022", "福州中考", "When I was a child in the village, I ______ often go fishing with my grandfather.", listOf("A. would", "B. will", "C. should", "D. must"), "A", "【答案】A。本题考查 would 表‘过去常常’。在过去语境中（When I was a child），would 可表示过去的习惯性动作。", "误选 will，忽略了过去背景。", "当我还是个孩子在村里时，我经常和爷爷去钓鱼。")
+                PastExamQuestion("2016", "南京中考", "— Where is your sister?\n— She ______ for the library ten minutes ago to return some books.", listOf("A. leaves", "B. left", "C. has left", "D. is leaving"), "B", "【答案】B。本题考查时间状语的提示。ten minutes ago 明确提示一般过去时，故选 left。", "被现在完成时 C 干扰。", "—— 你姐姐在哪？ —— 她十分钟前去图书馆还书了。"),
+                PastExamQuestion("2015", "武汉中考", "My father ______ to work by car, but now he takes the subway every day.", listOf("A. used to go", "B. is used to go", "C. uses to go", "D. used to going"), "A", "【答案】A。本题考查 used to do 结构。表示‘过去常常’，且与后半句的 now 形成鲜明对比。", "混淆 used to do 与 be used to doing。", "我爸爸过去开车上班，但现在他每天乘地铁。"),
+                PastExamQuestion("2016", "福州中考", "When I was a child in the village, I ______ often go fishing with my grandfather.", listOf("A. would", "B. will", "C. should", "D. must"), "A", "【答案】A。本题考查 would 表‘过去常常’。在过去语境中（When I was a child），would 可表示过去的习惯性动作。", "误选 will，忽略了过去背景。", "当我还是个孩子在村里时，我经常和爷爷去钓鱼。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Yesterday was a very busy and exciting day for me. I woke up at 7:00 and had a quick breakfast with my family before leaving. Then I went to the history museum with my classmates by school bus. We saw many interesting exhibitions and took a lot of photos during the long visit. It was an unforgettable experience that I will remember forever because I learned so much.", listOf(
@@ -595,7 +560,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘故事接龙’法练习过去式应用；将不规则动词分组（如 ABC, ABB, AAA）记忆；利用时间轴区分 ago, before 与 since 的用法差异。")
             ),
             famousQuote = "The past is a foreign country; they do things differently there.",
-            quoteAuthor = "L.P. Hartley"
+            quoteAuthor = "L.P. Hartley",
+            quoteTranslation = "过去是个异国他乡；他们在那里做事的方式不同。",
+            quoteAnalysis = "强调过去已逝，我们应尊重历史的同时立足于当下。"
         ),
         KnowledgePoint(
             id = "simple_future",
@@ -624,9 +591,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "重庆中考", "— What's your plan for the upcoming summer holiday?\n— I ______ a volunteer in the local community.", listOf("A. am", "B. was", "C. will be", "D. have been"), "C", "【答案】C。本题考查语境逻辑。问句提到 plan（计划），暗示动作尚未发生，故用一般将来时表达未来的打算。", "误选一般现在时 A，认为是在陈述现状。", "—— 你暑假有什么计划？ —— 我要在当地社区当一名志愿者。"),
-                PastExamQuestion("2023", "西安中考", "There ______ a wonderful concert in our school hall tomorrow evening.", listOf("A. will have", "B. is going to have", "C. will be", "D. is going to be"), "D", "【答案】D。本题考查 There be 句型的将来时。不能使用 have，必须用 be。C和D均可，但 D 项 be going to be 更常用于计划好的活动安排。", "错误使用 There will have。", "明天晚上我们学校礼堂将有一场精彩的音乐会。"),
-                PastExamQuestion("2022", "沈阳中考", "I ______ you if I get any news about the English competition.", listOf("A. tell", "B. told", "C. will tell", "D. have told"), "C", "【答案】C。本题考查‘主将从现’。if 引导条件状语从句用一般现在时（get），主句用一般将来时。", "主从句时态混淆，或误选 tell。", "如果我有关于英语比赛的消息，我会告诉你的。")
+                PastExamQuestion("2016", "重庆中考", "— What's your plan for the upcoming summer holiday?\n— I ______ a volunteer in the local community.", listOf("A. am", "B. was", "C. will be", "D. have been"), "C", "【答案】C。本题考查语境逻辑。问句提到 plan（计划），暗示动作尚未发生，故用一般将来时表达未来的打算。", "误选一般现在时 A，认为是在陈述现状。", "—— 你暑假有什么计划？ —— 我要在当地社区当一名志愿者。"),
+                PastExamQuestion("2015", "西安中考", "There ______ a wonderful concert in our school hall tomorrow evening.", listOf("A. will have", "B. is going to have", "C. will be", "D. is going to be"), "D", "【答案】D。本题考查 There be 句型的将来时。不能使用 have，必须用 be。C和D均可，但 D 项 be going to be 更常用于计划好的活动安排。", "错误使用 There will have。", "明天晚上我们学校礼堂将有一场精彩的音乐会。"),
+                PastExamQuestion("2016", "沈阳中考", "I ______ you if I get any news about the English competition.", listOf("A. tell", "B. told", "C. will tell", "D. have told"), "C", "【答案】C。本题考查‘主将从现’。if 引导条件状语从句用一般现在时（get），主句用一般将来时。", "主从句时态混淆，或误选 tell。", "如果我有关于英语比赛的消息，我会告诉你的。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("In the future, robots will do most of the heavy, boring and dangerous work for humans. We will have more free time to enjoy our lives and develop our personal hobbies. Scientists are going to develop smarter machines that can understand our feelings. It is going to be an exciting world where everyone can live a better and easier life.", listOf(
@@ -648,7 +615,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘时间轴法’；通过‘天气预报’练习预测语气；设计‘梦想清单’练习 be going to；强化 There be 句型及其将来时变换。")
             ),
             famousQuote = "The best way to predict the future is to create it.",
-            quoteAuthor = "Peter Drucker"
+            quoteAuthor = "Peter Drucker",
+            quoteTranslation = "预测未来最好的方法就是去创造未来。",
+            quoteAnalysis = "鼓励人们主动采取行动，掌握自己命运的方向。"
         ),
         KnowledgePoint(
             id = "present_continuous",
@@ -674,13 +643,13 @@ object KnowledgeProvider {
             ),
             relatedPoints = listOf(
                 RelatedPoint("一般现在时", "常态 vs 瞬态", "一般现在时描述客观规律与习惯，进行时描述正在发生的动态瞬间。"),
-                RelatedPoint("过去进行时", "时空的平行平移", "过去进行时是将基准拍摄点从‘现在’挪到了‘过去某刻’。")
+                RelatedPoint("过去进行时", "时空的平行平移", "逻辑结构完全一致，仅时间坐标从现在切换至过去。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "北京中考", "— Listen! Who ______ in the music room?\n— Oh, it's Mary. She ______ for the concert.", listOf("A. sings; practices", "B. is singing; is practicing", "C. sang; practiced", "D. will sing; will practice"), "B", "【答案】B。本题考查 Listen! 提示的现在进行时。此时此刻正在发生的动作，主语 who 和 she 均匹配 is + doing 结构。", "误选一般现在时 A，忽略了 Listen! 的强制提示作用。", "—— 听！谁在音乐教室唱歌？ —— 噢，是玛丽。她正在为音乐会练习。"),
-                PastExamQuestion("2023", "上海中考", "Don't make any noise. The baby ______ in the bedroom now.", listOf("A. sleep", "B. sleeps", "C. is sleeping", "D. slept"), "C", "【答案】C。本题考查语境暗示。Don't make any noise 说明婴儿正处于睡觉的状态中，需用现在进行时。", "习惯性选单三 sleeps。", "别吵。宝宝现在正在卧室睡觉。"),
-                PastExamQuestion("2022", "广东中考", "I ______ a book about Chinese history these days. It's very interesting.", listOf("A. read", "B. am reading", "C. have read", "D. readed"), "B", "【答案】B。本题考查现阶段一直在进行的动作。these days 提示现阶段的持续状态，即使此刻不在读。", "认为 readed 是过去式（拼写错），且未识别进行时语境。", "这些天我正在读一本关于中国历史的书。它很有趣。")
+                PastExamQuestion("2016", "北京中考", "— Listen! Who ______ in the music room?\n— Oh, it's Mary. She ______ for the concert.", listOf("A. sings; practices", "B. is singing; is practicing", "C. sang; practiced", "D. will sing; will practice"), "B", "【答案】B。本题考查 Listen! 提示的现在进行时。此时此刻正在发生的动作，主语 who 和 she 均匹配 is + doing 结构。", "误选一般现在时 A，忽略了 Listen! 的强制提示作用。", "—— 听！谁在音乐教室唱歌？ —— 噢，是玛丽。她正在为音乐会练习。"),
+                PastExamQuestion("2015", "上海中考", "Don't make any noise. The baby ______ in the bedroom now.", listOf("A. sleep", "B. sleeps", "C. is sleeping", "D. slept"), "C", "【答案】C。本题考查语境暗示。Don't make any noise 说明婴儿正处于睡觉的状态中，需用现在进行时。", "习惯性选单三 sleeps。", "别吵。宝宝现在正在卧室睡觉。"),
+                PastExamQuestion("2016", "广东中考", "I ______ a book about Chinese history these days. It's very interesting.", listOf("A. read", "B. am reading", "C. have read", "D. readed"), "B", "【答案】B。本题考查现阶段一直在进行的动作。these days 提示现阶段的持续状态，即使此刻不在读。", "认为 readed 是过去式（拼写错），且未识别进行时语境。", "这些天我正在读一本关于中国历史的书。它很有趣。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Look! Some students are cleaning the classroom to prepare for the parent-teacher meeting. Zhang Hua is sweeping the floor and Li Ming is cleaning the windows carefully. They are all working very hard together to make the classroom beautiful and tidy. They are always helping each other when they have difficulties in study.", listOf(
@@ -702,7 +671,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘哑剧表演’游戏描述动作；利用‘重闭单’口诀强化双写规则；通过情景对话区分‘日常习惯’与‘正在行为’。")
             ),
             famousQuote = "I am doing my best. That is all I can do.",
-            quoteAuthor = "William McKinley"
+            quoteAuthor = "William McKinley",
+            quoteTranslation = "我正在竭尽全力。这是我唯一能做的。",
+            quoteAnalysis = "表达了专注当下、无怨无悔的实干精神。"
         ),
         KnowledgePoint(
             id = "past_continuous",
@@ -732,9 +703,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "杭州中考", "— What ______ you ______ at 8:00 last night?\n— I was watching the football match on TV.", listOf("A. do; do", "B. did; do", "C. were; doing", "D. are; doing"), "C", "【答案】C。本题考查特定时刻的动作。at 8:00 last night 是明确的过去时间点，询问在那一刻正在做什么，用过去进行时。", "误选一般过去时 B，忽略了 8:00 这个精确点。精确时刻提示进行。 ", "—— 昨晚八点你正在做什么？ —— 我正在电视上看足球赛。"),
-                PastExamQuestion("2023", "武汉中考", "While the children ______ in the garden, it started to rain suddenly.", listOf("A. play", "B. are playing", "C. were playing", "D. played"), "C", "【答案】C。本题考查 while 引导的长动作背景。主句 started 是过去式，从句需用过去进行时 were playing 作为背景。", "选了现在进行时 B，导致时态逻辑不一致。", "当孩子们正在花园里玩耍时，天突然下起雨来。"),
-                PastExamQuestion("2022", "广东中考", "The light ______ out while I ______ a shower yesterday evening.", listOf("A. went; was taking", "B. was going; took", "C. goes; am taking", "D. has gone; took"), "A", "【答案】A。本题考查‘打断逻辑’。‘洗澡’是持续的长动作（was taking），‘停电’是突发的短动作（went）。", "长短动作时态逻辑放反了。", "当我正在洗澡时，灯熄灭了。")
+                PastExamQuestion("2016", "杭州中考", "— What ______ you ______ at 8:00 last night?\n— I was watching the football match on TV.", listOf("A. do; do", "B. did; do", "C. were; doing", "D. are; doing"), "C", "【答案】C。本题考查特定时刻的动作。at 8:00 last night 是明确的过去时间点，询问在那一刻正在做什么，用过去进行时。", "误选一般过去时 B，忽略了 8:00 这个精确点。精确时刻提示进行。 ", "—— 昨晚八点你正在做什么？ —— 我正在电视上看足球赛。"),
+                PastExamQuestion("2015", "武汉中考", "While the children ______ in the garden, it started to rain suddenly.", listOf("A. play", "B. are playing", "C. were playing", "D. played"), "C", "【答案】C。本题考查 while 引导的长动作背景。主句 started 是过去式，从句需用过去进行时 were playing 作为背景。", "选了现在进行时 B，导致时态逻辑不一致。", "当孩子们正在花园里玩耍时，天突然下起雨来。"),
+                PastExamQuestion("2016", "广东中考", "The light ______ out while I ______ a shower yesterday evening.", listOf("A. went; was taking", "B. was going; took", "C. goes; am taking", "D. has gone; took"), "A", "【答案】A。本题考查‘打断逻辑’。‘洗澡’是持续的长动作（was taking），‘停电’是突发的短动作（went）。", "长短动作时态逻辑放反了。", "当我正在洗澡时，灯熄灭了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("When the heavy rainstorm came yesterday afternoon, I was waiting for the bus at the station. My sister was reading in the quiet library at that time. Many people were running quickly to find a safe place to hide from the rain. No one expected that the storm would be so strong and last so long in our city.", listOf(
@@ -756,7 +727,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘老照片’描述法（当时他们在做什么？）；利用‘动作打断’情境进行现场表演；专项训练 when 与 while 的句型转换。")
             ),
             famousQuote = "I was dreaming when they called me.",
-            quoteAuthor = "John Lennon"
+            quoteAuthor = "John Lennon",
+            quoteTranslation = "当他们叫我时，我正在做梦。",
+            quoteAnalysis = "用幽默的方式展现了被外界突发事件打断的瞬间状态。"
         ),
         KnowledgePoint(
             id = "present_perfect",
@@ -786,9 +759,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "苏州中考", "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me.", listOf("A. is cleaning", "B. has cleaned", "C. cleans", "D. was cleaning"), "B", "【答案】B。本题考查完成时的‘影响’用法。It's clean now 是目前的结果，说明打扫动作已完成且对现在有直接影响。", "看到 Look! 盲选进行时 A。但 clean now 明确强调的是结果而非动作过程。", "—— 看！有人打扫过教室了。现在真干净。 —— 嗯，不是我。"),
-                PastExamQuestion("2023", "武汉中考", "My cousin ______ the army for three years. He is a brave soldier now in Tibet.", listOf("A. has joined", "B. has been in", "C. joined", "D. was in"), "B", "【答案】B。本题考查瞬间动词转换为延续性动词。for three years 提示需要延续性动词，join 是瞬时动作，需改为 be in。", "误选 has joined，受汉语‘参军三年’误导。", "我表哥参军三年了。他现在是西藏的一名勇敢士兵。"),
-                PastExamQuestion("2022", "南京中考", "I ______ this book twice, but I still find it difficult to understand perfectly.", listOf("A. read", "B. have read", "C. will read", "D. had read"), "B", "【答案】B。本题考查经验性用法。twice 提示动作发生的累计次数，是对现在的经验积累，必须用现在完成时。", "选一般过去时 A，忽略了经验累积的语法含义。", "这本书我已经读过两遍了，但我还是觉得很难完美理解。")
+                PastExamQuestion("2016", "苏州中考", "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me.", listOf("A. is cleaning", "B. has cleaned", "C. cleans", "D. was cleaning"), "B", "【答案】B。本题考查完成时的‘影响’用法。It's clean now 是目前的结果，说明打扫动作已完成且对现在有直接影响。", "看到 Look! 盲选进行时 A。但 clean now 明确强调的是结果而非动作过程。", "—— 看！有人打扫过教室了。现在真干净。 —— 嗯，不是我。"),
+                PastExamQuestion("2015", "武汉中考", "My cousin ______ the army for three years. He is a brave soldier now in Tibet.", listOf("A. has joined", "B. has been in", "C. joined", "D. was in"), "B", "【答案】B。本题考查瞬间动词转换为延续性动词。for three years 提示需要延续性动词，join 是瞬时动作，需改为 be in。", "误选 has joined，受汉语‘参军三年’误导。", "我表哥参军三年了。他现在是西藏的一名勇敢士兵。"),
+                PastExamQuestion("2016", "南京中考", "I ______ this book twice, but I still find it difficult to understand perfectly.", listOf("A. read", "B. have read", "C. will read", "D. had read"), "B", "【答案】B。本题考查经验性用法。twice 提示动作发生的累计次数，是对现在的经验积累，必须用现在完成时。", "选一般过去时 A，忽略了经验累积的语法含义。", "这本书我已经读过两遍了，但我还是觉得很难完美理解。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Have you read the famous book Treasure Island yet? No, I haven't, but I have already finished reading Little Women and it's absolutely great. It has changed my life and my way of thinking since I bought the book. In fact, I have kept it for two years and read it many times to gain more wisdom.", listOf(
@@ -810,7 +783,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘瞬间变长’动态对照表；利用‘时空隧道’图示解析逻辑；通过‘个人经历分享会’练习 been to；设计‘寻物启事’情境模拟‘影响’语义。")
             ),
             famousQuote = "What is past is prologue.",
-            quoteAuthor = "William Shakespeare"
+            quoteAuthor = "William Shakespeare",
+            quoteTranslation = "凡是过去，皆为序章。",
+            quoteAnalysis = "表示曾经的历史只是刚刚揭开序幕，更辉煌的未来还在前方。"
         ),
         KnowledgePoint(
             id = "past_perfect",
@@ -840,9 +815,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "合肥中考", "By the time the bell rang, I ______ my homework carefully.", listOf("A. finished", "B. have finished", "C. had finished", "D. was finishing"), "C", "【答案】C。本题考查‘过去的过去’。铃响（rang）是过去发生的事，作业写完是在响铃之前就已经完成，故用过去完成时。", "误选现在完成时 B 或一般过去时 A，无法体现逻辑先后。", "铃响的时候，我已经仔细地写完作业了。"),
-                PastExamQuestion("2023", "济南中考", "She said that she ______ that movie already when we discussed it.", listOf("A. sees", "B. saw", "C. has seen", "D. had seen"), "D", "【答案】D。本题考查宾语从句时态呼应。主句 said 是过去式，从句动作‘看电影’发生在‘说’这一动作之前，必须用过去完成时。", "受 already 误导习惯性选了现在完成时 C。", "她说在我们讨论那部电影时，她已经看过它了。"),
-                PastExamQuestion("2022", "沈阳中考", "When I arrived at the train station, the train ______ already.", listOf("A. left", "B. has left", "C. had left", "D. was leaving"), "C", "【答案】C。本题考查语境逻辑。当我到达时，火车‘已经开走’，开走动作发生在到达之前。", "选一般过去时 A，不能体现出清晰的先后逻辑顺序。", "当我到达火车站时，火车已经开走了。")
+                PastExamQuestion("2016", "合肥中考", "By the time the bell rang, I ______ my homework carefully.", listOf("A. finished", "B. have finished", "C. had finished", "D. was finishing"), "C", "【答案】C。本题考查‘过去的过去’。铃响（rang）是过去发生的事，作业写完是在响铃之前就已经完成，故用过去完成时。", "误选现在完成时 B 或一般过去时 A，无法体现逻辑先后。", "铃响的时候，我已经仔细地写完作业了。"),
+                PastExamQuestion("2015", "济南中考", "She said that she ______ that movie already when we discussed it.", listOf("A. sees", "B. saw", "C. has seen", "D. had seen"), "D", "【答案】D。本题考查宾语从句时态呼应。主句 said 是过去式，从句动作‘看电影’发生在‘说’这一动作之前，必须用过去完成时。", "受 already 误导习惯性选了现在完成时 C。", "她说在我们讨论那部电影时，她已经看过它了。"),
+                PastExamQuestion("2016", "沈阳中考", "When I arrived at the train station, the train ______ already.", listOf("A. left", "B. has left", "C. had left", "D. was leaving"), "C", "【答案】C。本题考查语境逻辑。当我到达时，火车‘已经开走’，开走动作发生在到达之前。", "选一般过去时 A，不能体现出清晰的先后逻辑顺序。", "当我到达火车站时，火车已经开走了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("When I woke up this morning, I suddenly realized that I had forgotten to set my alarm clock last night. I hurried to the bus stop as fast as I could, but the bus had already gone when I finally arrived there. Luckily, my father drove me to school, or I would have been late for the first class.", listOf(
@@ -864,7 +839,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘两点一线’教学法：在黑板上画出 A（过去某时）和 B（更早的时刻），强调 had done 是发生在 B 点。练习 past perfect 与 past simple 的排序组合。")
             ),
             famousQuote = "I had already found that it was not so easy to be good.",
-            quoteAuthor = "Somerset Maugham"
+            quoteAuthor = "Somerset Maugham",
+            quoteTranslation = "我早就发现，想做一个好人没那么容易。",
+            quoteAnalysis = "深刻揭示了成长道路上面临道德选择时的复杂与不易。"
         ),
         KnowledgePoint(
             id = "past_future",
@@ -894,9 +871,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "哈尔滨中考", "She said she ______ a doctor when she grew up in her diary.", listOf("A. will be", "B. would be", "C. is going to be", "D. was"), "B", "【答案】B。本题考查宾语从句时态呼应。主句 said 是过去式，从句表达将来的愿望，will 必须强制变为 would。", "误选 A，完全忽略了主句 said 的过去时态影响。", "她在日记里说她长大后想当一名医生。"),
-                PastExamQuestion("2023", "成都中考", "I thought you ______ to my birthday party yesterday, but you didn't appear.", listOf("A. will come", "B. come", "C. would come", "D. had come"), "C", "【答案】C。本题考查过去视角下的推测。thought 提示过去背景，对未来的推测需用 would come。", "误选 had come，虽然逻辑也通，但 would come 更能体现对未来动作的预期感。", "我以为昨天你会来参加我的生日派对，但你没出现。"),
-                PastExamQuestion("2022", "广东中考", "He promised that he ______ late for school again in the future.", listOf("A. won't be", "B. wouldn't be", "C. isn't", "D. wasn't"), "B", "【答案】B。本题考查 promise 的过去用法。promised 提示过去视角，从句中的 won't be 必须变为 wouldn't be。", "忽略了 promised 这一过去式动词的提示作用。", "他保证以后不再上学迟到了。")
+                PastExamQuestion("2016", "哈尔滨中考", "She said she ______ a doctor when she grew up in her diary.", listOf("A. will be", "B. would be", "C. is going to be", "D. was"), "B", "【答案】B。本题考查宾语从句时态呼应。主句 said 是过去式，从句表达将来的愿望，will 必须强制变为 would。", "误选 A，完全忽略了主句 said 的过去时态影响。", "她在日记里说她长大后想当一名医生。"),
+                PastExamQuestion("2015", "成都中考", "I thought you ______ to my birthday party yesterday, but you didn't appear.", listOf("A. will come", "B. come", "C. would come", "D. had come"), "C", "【答案】C。本题考查过去视角下的推测。thought 提示过去背景，对未来的推测需用 would come。", "误选 had come，虽然逻辑也通，但 would come 更能体现对未来动作的预期感。", "我以为昨天你会来参加我的生日派对，但你没出现。"),
+                PastExamQuestion("2016", "广东中考", "He promised that he ______ late for school again in the future.", listOf("A. won't be", "B. wouldn't be", "C. isn't", "D. wasn't"), "B", "【答案】B。本题考查 promise 的过去用法。promised 提示过去视角，从句中的 won't be 必须变为 wouldn't be。", "忽略了 promised 这一过去式动词的提示作用。", "他保证以后不再上学迟到了。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("When Li Ming left his small hometown for the big city, he knew he would miss his parents and childhood friends very much. He promised that he would write to them every week to share his new and exciting life. He was going to work hard and make his family proud of him in the near future.", listOf(
@@ -918,7 +895,64 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘时态降级法’：will -> would, is -> was；进行高强度的直接引语转间接引语专项练习；设计‘过去预测’的情境模拟。")
             ),
             famousQuote = "I knew I would be late if I didn't hurry.",
-            quoteAuthor = "Anonymous"
+            quoteAuthor = "Anonymous",
+            quoteTranslation = "我知道如果不赶紧的话，就会迟到了。",
+            quoteAnalysis = "生动刻画了立足过去某一点对结果进行推测的急迫心情。"
+        ),
+        KnowledgePoint(
+            id = "verbs_basic",
+            section = SEC_2,
+            title = "动词基础 (Verbs)",
+            description = """### 核心概念详解
+动词 (Verbs) 是句子的灵魂与核心动力源。英语中，没有动词就无法构成完整的逻辑表达。根据功能，动词可分为四类：1. 实义动词（及物/不及物）：表达具体的动作或心理状态（如 eat, think, sleep）；2. 系动词：用于连接主语与表语，描述主语的特征、身份或状态（如 be, look, become, feel）；3. 助动词：无实际意义，辅助构成时态、语态、否定或疑问（如 do, does, did, have, has, will）；4. 情态动词：表达说话人的语气、态度或可能性（如 can, must, may, should, need）。动词的形态变化不仅涵盖了单三、过去式、过去分词及现在分词，还涉及到不规则动词的大量记忆工作。在中考中，动词的考查不仅局限于其物理形态，更侧重于各种固定搭配（动词短语）以及在具体句型结构中的应用（如双宾语结构、宾补结构）。掌握动词的基础知识是进阶学习时态和语态的先决条件。
+
+### 深度考点解析
+*   **情态动词表推测**：这是中考的高阶难点。Must be (100%肯定), Can't be (100%否定), May/Might be (不确定推测)。注意：回答 Must 引导的‘推测’疑问句时，否定通常用 can't 而非 mustn't。
+*   **感官动词的‘多面’用法**：see/hear/watch sb do (强调动作全过程或经常发生) vs doing (强调动作正在进行或瞬间场景)。这些词在变被动语态时，省略的不定式符号 to 必须‘复活’。
+*   **动词短语的分类与位置**：1. 动词+副词（如 put on, pick up），若宾语是人称代词宾格，必须置于中间（put it on）；2. 动词+介词（如 look at, wait for），宾语恒置于介词后。
+*   **Lie 与 Lay 的纠缠**：lie (躺；位于-lay-lain), lie (撒谎-lied-lied), lay (放置；产卵-laid-laid)。这一组词的形态区分是每年中考单选题的经典考位。
+*   **Need 的‘双面性’**：既可作情态动词（否定 needn't），也可作实义动词（否定 don't need）。""",
+            syllabusDetails = listOf(
+                "1. 深刻掌握实义动词、系动词、助动词与情态动词的分类及其在句中的功能位置。",
+                "2. 强制性背诵 100 个以上核心不规则动词的四类形态（重点：lay, lie, hang, rise/raise, fly）。",
+                "3. 掌握情态动词 can, may, must, should, need 的基本用法及其表推测的逻辑链条。",
+                "4. 熟练掌握 5 类感官系动词及 3 类变化系动词（become, get, turn）后接形容词作表语的用法。",
+                "5. 掌握动词短语的物理分类及其在接代词宾语时的位置规则。",
+                "6. 掌握使役动词 let, make, have 的基本用法及其被动还原 to 的语法规则。"
+            ),
+            relatedPoints = listOf(
+                RelatedPoint("时态与语态", "动词的载体", "所有时态与语态的变化都最终体现在动词形态的物理切换上。"),
+                RelatedPoint("五大基本句型", "动词决定句型", "动词的及物性、双宾性及系动词性直接决定了句子的走向。")
+            ),
+            exampleProblems = listOf(),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2016", "杭州中考", "— Is that Lily's schoolbag?\n— It ______ be hers. She has gone to the library with it.", listOf("A. must", "B. can't", "C. may", "D. needn't"), "B", "【答案】B。本题考查情态动词表推测。后句提到‘她已经背着包去图书馆了’，说明书包一定不是她的。can't 表示有把握的否定推测。", "忽略后半句逻辑，误选 must。", "—— 那是莉莉的书包吗？ —— 一定不是她的。她已经带着书包去图书馆了。"),
+                PastExamQuestion("2015", "上海中考", "The song ______ beautiful and many people like listening to it.", listOf("A. sounds", "B. listens", "C. hears", "D. looks"), "A", "【答案】A。本题考查感官系动词。形容歌曲‘听起来’优美，用 sound。listen 是不及物动词，hear 是及物动词，不可直接加形容词。", "混淆 listen 与 sound 的词性。", "这首歌听起来很美，很多人喜欢听。"),
+                PastExamQuestion("2016", "广东中考", "You ______ smoke here. Look at the sign 'No Smoking'!", listOf("A. mustn't", "B. needn't", "C. couldn't", "D. shouldn't"), "A", "【答案】A。本题考查情态动词表禁止。mustn't 意为‘绝对禁止’，符合语境要求。", "认为 needn't 表示不必要。", "你绝对不能在这里抽烟。看那个‘禁止吸烟’的牌子！")
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph("When we meet new people for the first time, we should smile and say hello to them warmly. This simple action can help us make a good first impression on others. If we want to become good friends with people around us, we must learn how to listen to them carefully and share our thoughts honestly with each other.", listOf(
+                    HighlightedSentence("should smile and say hello", "should 是情态动词，表示建议，后接动词原形。"),
+                    HighlightedSentence("become good friends", "become 是变化系动词，后接名词或形容词作表语。")
+                ), "人教版七上 Unit 3"),
+                TextbookParagraph("The soup smells delicious! Did you put any salt or pepper in it? I can't wait to taste it right now. My mother always tells me that we should eat healthy food to keep fit and avoid eating too much junk food which may be bad for our health in the long run.", listOf(
+                    HighlightedSentence("smells delicious", "smell 是感官系动词，后面直接跟形容词 delicious 作表语。"),
+                    HighlightedSentence("can't wait to taste", "taste 此处作为实义动词，表示‘品尝’的动作行为。")
+                ), "外研版八下 Module 1")
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("He lay on the grass and looked at the blue sky while thinking about his future.", "他躺在草地上，看着蓝天，思考着他的未来。", "【分析】lay 是 lie (躺) 的过去式，形态上极易与 lay (放) 的原形混淆。", "高频易错"),
+                ExampleSentence("The plane took off despite the heavy rain and strong wind yesterday morning.", "尽管昨天早上下大雨且刮大风，飞机还是起飞了。", "【分析】take off 是动副短语，此处意为‘起飞’。", "基础必会"),
+                ExampleSentence("You must be tired after a long walk through the mountains and forests.", "翻山越岭走了这么长路，你一定累了。", "【分析】must be 表示说话者基于明显迹象做出的肯定推测。", "基础必会")
+            ),
+            teachingNotes = listOf(
+                TeachingNote("常见错误", "1. 情态动词后加 to (除 ought to/have to 外)；2. 系动词后接副词而非形容词；3. 不规则动词过去式拼写错误；4. 混淆 raise (及物) 与 rise (不及物) 的语用功能。"),
+                TeachingNote("教学建议", "建议教师建立‘动词分类树’；对情态动词采用‘百分比推测法’（100% must, 0% can't）；通过动作表演区分 lie 与 lay 的形态差异；整理 50 个高频动词短语。")
+            ),
+            famousQuote = "Action speaks louder than words.",
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "行动胜于言辞。",
+            quoteAnalysis = "强调做的永远比说的更具有说服力，鼓励人们付诸实践。"
         ),
         KnowledgePoint(
             id = "passive_voice",
@@ -948,9 +982,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "武汉中考", "Usually, computers ______ to find information quickly in our daily life.", listOf("A. use", "B. are used", "C. are using", "D. used"), "B", "【答案】B。本题考查一般现在时的被动语态。主语 computers 是动作承受者，电脑‘被使用’，且 Usually 提示一般现在时的基调。", "误选主动语态 A，认为电脑能自己发出‘使用’这一动作。", "通常，电脑在我们的日常生活中被用来快速查找信息。"),
-                PastExamQuestion("2023", "上海中考", "The dirty clothes ______ by the washing machine in an hour, so don't worry.", listOf("A. will wash", "B. will be washed", "C. are washing", "D. were washed"), "B", "【答案】B。本题考查一般将来时的被动语态。in an hour 提示将来时间，衣服被洗需用 will be washed 结构。", "选了过去式 D，未能识别出 in an hour 这一将来意义的标志。", "脏衣服将在一小时内由洗衣机洗好，所以别担心。"),
-                PastExamQuestion("2022", "广东中考", "English ______ in many countries and regions all over the world as a first language.", listOf("A. speaks", "B. is spoken", "C. is speaking", "D. was spoken"), "B", "【答案】B。本题考查一般现在时的被动语态。英语‘被说’，描述客观事实与现状必须使用一般现在时的被动。", "选了主动语态 A，忽略了主语与动词的受动关系。", "英语在世界上许多国家和地区被作为第一语言使用。")
+                PastExamQuestion("2016", "武汉中考", "Usually, computers ______ to find information quickly in our daily life.", listOf("A. use", "B. are used", "C. are using", "D. used"), "B", "【答案】B。本题考查一般现在时的被动语态。主语 computers 是动作承受者，电脑‘被使用’，且 Usually 提示一般现在时的基调。", "误选主动语态 A，认为电脑能自己发出‘使用’这一动作。", "通常，电脑在我们的日常生活中被用来快速查找信息。"),
+                PastExamQuestion("2015", "上海中考", "The dirty clothes ______ by the washing machine in an hour, so don't worry.", listOf("A. will wash", "B. will be washed", "C. are washing", "D. were washed"), "B", "【答案】B。本题考查一般将来时的被动语态。in an hour 提示将来时间，衣服被洗需用 will be washed 结构。", "选了过去式 D，未能识别出 in an hour 这一将来意义的标志。", "脏衣服将在一小时内由洗衣机洗好，所以别担心。"),
+                PastExamQuestion("2016", "广东中考", "English ______ in many countries and regions all over the world as a first language.", listOf("A. speaks", "B. is spoken", "C. is speaking", "D. was spoken"), "B", "【答案】B。本题考查一般现在时的被动语态。英语‘被说’，描述客观事实与现状必须使用一般现在时的被动。", "选了主动语态 A，忽略了主语与动词的受动关系。", "英语在世界上许多国家和地区被作为第一语言使用。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Paper was first invented in ancient China more than 2,000 years ago by Cai Lun. It is still widely used in our daily lives today for many different purposes like writing and packing. However, many trees are cut down to make paper every year, so we should try our best to save paper to protect the environment and our green planet.", listOf(
@@ -972,7 +1006,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘身份互换’游戏练习主动与被动转换；总结‘主动表被动’的核心词单；强化‘短语被动介词不丢失’专项训练；通过新闻标题识别被动语态的应用。")
             ),
             famousQuote = "Rome was not built in a day.",
-            quoteAuthor = "English Proverb"
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "罗马不是一天建成的。",
+            quoteAnalysis = "比喻做成伟大的事业需要长期的努力与坚持，切忌急于求成。"
         ),
         KnowledgePoint(
             id = "non_finite_verbs",
@@ -1003,9 +1039,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "重庆中考", "Don't forget ______ the lights and windows when you leave the room.", listOf("A. turn off", "B. to turn off", "C. turning off", "D. turned off"), "B", "【答案】B。本题考查 forget 的逻辑辨析。leave the room 暗示动作尚未发生，‘不要忘记去做某事’固定用 forget to do。", "误选 C，受‘习惯性 doing’的干扰，未识别出将来的逻辑。", "当你离开房间时，别忘了关灯并关窗。"),
-                PastExamQuestion("2023", "长沙中考", "He practiced ______ the piano every day to prepare for the national competition.", listOf("A. play", "B. to play", "C. playing", "D. played"), "C", "【答案】C。本题考查 practice 的固定用法。practice 后必须接动名词 doing。", "误选 B，受‘去做某事’的目的逻辑干扰。", "他每天练习弹钢琴，为国家级比赛做准备。"),
-                PastExamQuestion("2022", "南京中考", "We are all looking forward to ______ you and your family again soon.", listOf("A. see", "B. seeing", "C. saw", "D. seen"), "B", "【答案】B。本题考查介词 to 的陷阱。look forward to 中的 to 是介词，后接动名词 seeing。", "物理性误认为 to 是不定式符号而选了 A。", "我们大家都期待很快能再次见到你和你的家人。")
+                PastExamQuestion("2016", "重庆中考", "Don't forget ______ the lights and windows when you leave the room.", listOf("A. turn off", "B. to turn off", "C. turning off", "D. turned off"), "B", "【答案】B。本题考查 forget 的逻辑辨析。leave the room 暗示动作尚未发生，‘不要忘记去做某事’固定用 forget to do。", "误选 C，受‘习惯性 doing’的干扰，未识别出将来的逻辑。", "当你离开房间时，别忘了关灯并关窗。"),
+                PastExamQuestion("2015", "长沙中考", "He practiced ______ the piano every day to prepare for the national competition.", listOf("A. play", "B. to play", "C. playing", "D. played"), "C", "【答案】C。本题考查 practice 的固定用法。practice 后必须接动名词 doing。", "误选 B，受‘去做某事’的目的逻辑干扰。", "他每天练习弹钢琴，为国家级比赛做准备。"),
+                PastExamQuestion("2016", "南京中考", "We are all looking forward to ______ you and your family again soon.", listOf("A. see", "B. seeing", "C. saw", "D. seen"), "B", "【答案】B。本题考查介词 to 的陷阱。look forward to 中的 to 是介词，后接动名词 seeing。", "物理性误认为 to 是不定式符号而选了 A。", "我们大家都期待很快能再次见到你和你的家人。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("I enjoy reading interesting books in the quiet library because it helps me to learn more about the unknown world. Yesterday, I forgot to bring my library card, so I had to go back home to get it. I will remember to take it with me next time I go to the library to borrow some science books for my project.", listOf(
@@ -1027,7 +1063,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议采用‘时轴法’：Doing 代表‘过去已做或持续习惯’，To do 代表‘未来目的或具体待办’。制作‘doing 俱乐部’动词表。")
             ),
             famousQuote = "The only way to do great work is to love what you do.",
-            quoteAuthor = "Steve Jobs"
+            quoteAuthor = "Steve Jobs",
+            quoteTranslation = "成就伟大事业的唯一途径，就是热爱你所做的事。",
+            quoteAnalysis = "指出热情是驱动卓越表现、克服一切困难的核心源泉。"
         ),
         KnowledgePoint(
             id = "sentence_types",
@@ -1057,9 +1095,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "武汉中考", "______ amazing story it is! I have never read such a good and moving book before.", listOf("A. What", "B. What an", "C. How", "D. How an"), "B", "【答案】B。本题考查感官句结构。story 是可数名词单数，amazing 以元音音素开头，用 What an...! 结构。", "误选 A 物理性漏掉 an；或误选 C，完全忽略了名词 story 的存在。", "多么神奇的故事啊！我以前从未读过这么好、这么动人的书。"),
-                PastExamQuestion("2023", "西安中考", "He can hardly speak English in front of the public, ______ he?", listOf("A. can", "B. can't", "C. does", "D. doesn't"), "A", "【答案】A。本题考查反义疑问句。hardly 是否定词，遵循‘前否后肯’逻辑，附加问句必须用肯定 can he。", "误选 B，未能识别出 hardly 这一词汇的隐性否定意义。", "他几乎不会在公众面前说英语，是吗？"),
-                PastExamQuestion("2022", "成都中考", "______ careful and patient when you cross the street during the busy rush hour!", listOf("A. Is", "B. Be", "C. Being", "D. To be"), "B", "【答案】B。本题考查祈使句构成。祈使句必须以动词原形开头，be 是连系动词 be 的原形形态。", "误选 Is，受主谓一致思维的干扰。", "在繁忙的高峰期过马路时要小心、要有耐心！")
+                PastExamQuestion("2016", "武汉中考", "______ amazing story it is! I have never read such a good and moving book before.", listOf("A. What", "B. What an", "C. How", "D. How an"), "B", "【答案】B。本题考查感官句结构。story 是可数名词单数，amazing 以元音音素开头，用 What an...! 结构。", "误选 A 物理性漏掉 an；或误选 C，完全忽略了名词 story 的存在。", "多么神奇的故事啊！我以前从未读过这么好、这么动人的书。"),
+                PastExamQuestion("2015", "西安中考", "He can hardly speak English in front of the public, ______ he?", listOf("A. can", "B. can't", "C. does", "D. doesn't"), "A", "【答案】A。本题考查反义疑问句。hardly 是否定词，遵循‘前否后肯’逻辑，附加问句必须用肯定 can he。", "误选 B，未能识别出 hardly 这一词汇的隐性否定意义。", "他几乎不会在公众面前说英语，是吗？"),
+                PastExamQuestion("2016", "成都中考", "______ careful and patient when you cross the street during the busy rush hour!", listOf("A. Is", "B. Be", "C. Being", "D. To be"), "B", "【答案】B。本题考查祈使句构成。祈使句必须以动词原形开头，be 是连系动词 be 的原形形态。", "误选 Is，受主谓一致思维的干扰。", "在繁忙的高峰期过马路时要小心、要有耐心！")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("What a wonderful concert the students gave! Do you like the beautiful classical music played by them? Please sit down quietly and enjoy the performance. Don't make any noise during the show, will you? Everyone is waiting for the next amazing song to start on the stage right now.", listOf(
@@ -1081,7 +1119,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "采用‘遮盖判定法’锁定 What/How；整理并背诵‘反义疑问句 10 大特殊规则表’；通过情景剧模拟练习祈使句的不同语气。")
             ),
             famousQuote = "Actions speak louder than words!",
-            quoteAuthor = "Abraham Lincoln"
+            quoteAuthor = "Abraham Lincoln",
+            quoteTranslation = "行动胜于言辞！",
+            quoteAnalysis = "强调做的永远比说的更具有说服力，鼓励人们付诸实践。"
         ),
         KnowledgePoint(
             id = "five_basic_patterns",
@@ -1110,9 +1150,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "合肥中考", "Our English teacher often tells ______ interesting stories in the afternoon class.", listOf("A. we", "B. us", "C. our", "D. ours"), "B", "【答案】B。本题考查 S+V+IO+DO 结构。tells 是双宾动词，后面接人称代词宾格 us 作为间接宾语。", "误选形容词性物主代词 C，忽略了代词在句中的成分。", "我们的英语老师经常在下午的课上给我们讲有趣的故事。"),
-                PastExamQuestion("2023", "长沙中考", "Winning the gold medal in the competition made him ______ beyond description.", listOf("A. happily", "B. happiness", "C. happy", "D. to happy"), "C", "【答案】C。本题考查 S+V+O+OC 结构。make sb + adj，形容词 happy 作为宾语补足语说明主语的状态。", "误选副词 A 或名词 B，未能识别出宾补的属性要求。", "赢得比赛的金牌让他高兴得无法形容。"),
-                PastExamQuestion("2022", "南京中考", "He promised ______ me a beautiful gift for my 15th birthday next week.", listOf("A. buy", "B. to buy", "C. buying", "D. bought"), "B", "【答案】B。本题考查 S+V+O 结构。promise to do sth 是固定句法结构，不定式短语充当宾语。", "误选 buying，混淆了非谓语动词的固定搭配规律。", "他承诺下周给我买一份漂亮的 15 岁生日礼物。")
+                PastExamQuestion("2016", "合肥中考", "Our English teacher often tells ______ interesting stories in the afternoon class.", listOf("A. we", "B. us", "C. our", "D. ours"), "B", "【答案】B。本题考查 S+V+IO+DO 结构。tells 是双宾动词，后面接人称代词宾格 us 作为间接宾语。", "误选形容词性物主代词 C，忽略了代词在句中的成分。", "我们的英语老师经常在下午的课上给我们讲有趣的故事。"),
+                PastExamQuestion("2015", "长沙中考", "Winning the gold medal in the competition made him ______ beyond description.", listOf("A. happily", "B. happiness", "C. happy", "D. to happy"), "C", "【答案】C。本题考查 S+V+O+OC 结构。make sb + adj，形容词 happy 作为宾语补足语说明主语的状态。", "误选副词 A 或名词 B，未能识别出宾补的属性要求。", "赢得比赛的金牌让他高兴得无法形容。"),
+                PastExamQuestion("2016", "南京中考", "He promised ______ me a beautiful gift for my 15th birthday next week.", listOf("A. buy", "B. to buy", "C. buying", "D. bought"), "B", "【答案】B。本题考查 S+V+O 结构。promise to do sth 是固定句法结构，不定式短语充当宾语。", "误选 buying，混淆了非谓语动词的固定搭配规律。", "他承诺下周给我买一份漂亮的 15 岁生日礼物。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("The classical music sounds sweet and peaceful to me after school. It always makes me feel relaxed and calm after a long day of hard work in the classroom. I like listening to it because it is elegant. My parents bought me a new and expensive CD player last year for my birthday.", listOf(
@@ -1134,7 +1174,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘积木搭建’教学法；利用‘主、谓、宾’物理卡片进行组合练习；通过‘剥洋葱’法拆解复杂的文学长难句。")
             ),
             famousQuote = "Practice makes perfect.",
-            quoteAuthor = "English Proverb"
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "熟能生巧。",
+            quoteAnalysis = "只要反复练习，就能达到炉火纯青的完美境界。"
         ),
         KnowledgePoint(
             id = "object_clause",
@@ -1164,9 +1206,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "武汉中考", "Could you please tell me ______ in the city center?", listOf("A. where is the post office", "B. where the post office is"), "B", "【答案】B。本题考查宾语从句的语序法则。从句必须强制使用陈述语序（主语在前，谓语在后）。", "误选 A，受汉语思维影响习惯性保留了原句的疑问语序结构。", "你能告诉我市中心的邮局在哪里吗？"),
-                PastExamQuestion("2023", "上海中考", "I wonder ______ she will come to our graduation party tonight.", listOf("A. that", "B. if", "C. what", "D. which"), "B", "【答案】B。本题考查连接词的选择。wonder 暗示了说话者的不确定性，引导词应为‘是否’，故选 if。", "误选 that，that 用于引导确定的事实陈述。", "我想知道她今晚是否会来参加我们的毕业派对。"),
-                PastExamQuestion("2022", "广东中考", "The teacher told the students that the earth ______ around the sun constantly.", listOf("A. move", "B. moves", "C. moved", "D. is moving"), "B", "【答案】B。本题考查客观真理的时态。虽然主句 told 是过去式，但从句描述的是永恒的科学事实，时态固定锁定一般现在时。", "受时态呼应原则的干扰而选了过去式 moved。", "老师告诉学生们地球恒定地绕着太阳转。")
+                PastExamQuestion("2016", "武汉中考", "Could you please tell me ______ in the city center?", listOf("A. where is the post office", "B. where the post office is"), "B", "【答案】B。本题考查宾语从句的语序法则。从句必须强制使用陈述语序（主语在前，谓语在后）。", "误选 A，受汉语思维影响习惯性保留了原句的疑问语序结构。", "你能告诉我市中心的邮局在哪里吗？"),
+                PastExamQuestion("2015", "上海中考", "I wonder ______ she will come to our graduation party tonight.", listOf("A. that", "B. if", "C. what", "D. which"), "B", "【答案】B。本题考查连接词的选择。wonder 暗示了说话者的不确定性，引导词应为‘是否’，故选 if。", "误选 that，that 用于引导确定的事实陈述。", "我想知道她今晚是否会来参加我们的毕业派对。"),
+                PastExamQuestion("2016", "广东中考", "The teacher told the students that the earth ______ around the sun constantly.", listOf("A. move", "B. moves", "C. moved", "D. is moving"), "B", "【答案】B。本题考查客观真理的时态。虽然主句 told 是过去式，但从句描述的是永恒的科学事实，时态固定锁定一般现在时。", "受时态呼应原则的干扰而选了过去式 moved。", "老师告诉学生们地球恒定地绕着太阳转。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("Many people around the world wonder how the Great Wall was built in ancient times without any modern machines. Our history teacher told us that it took hundreds of years and millions of workers to complete the project. She also mentioned that thousands of people worked on it day and night for many centuries.", listOf(
@@ -1188,7 +1230,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘宾从公式法’：连接词 + 主语 + 谓语；通过‘逻辑拆弹’游戏去掉助动词；制作‘时态呼应’阶梯图。")
             ),
             famousQuote = "I know that I know nothing.",
-            quoteAuthor = "Socrates"
+            quoteAuthor = "Socrates",
+            quoteTranslation = "我唯一知道的，就是我一无所知。",
+            quoteAnalysis = "展现了哲学家极度谦逊的探索精神和对真理的敬畏。"
         ),
         KnowledgePoint(
             id = "attributive_clause",
@@ -1218,9 +1262,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "广州中考", "The boy ______ is wearing a red T-shirt and blue jeans is my brother.", listOf("A. who", "B. which", "C. whose", "D. /"), "A", "【答案】A。本题考查关系代词。先行词 boy 是人，在从句中充当主语，必须用 who 或 that。", "误选 which，忽略了先行词的人称属性特征。", "那个穿着红色 T 恤和蓝色牛仔裤的男孩是我弟弟。"),
-                PastExamQuestion("2023", "北京中考", "This is the most interesting and moving movie ______ I have ever seen in my life.", listOf("A. which", "B. that", "C. who", "D. whose"), "B", "【答案】B。本题考查只能使用 that 的特殊场景。先行词 movie 前有形容词最高级修饰，关系词物理上锁定为 that。", "习惯性选了 which，忽略了最高级这一限制性因素的限定作用。", "这是我一生中曾看过的最有趣、最动人的电影。"),
-                PastExamQuestion("2022", "南京中考", "Do you know the young girl ______ mother is a famous singer in our country?", listOf("A. who", "B. which", "C. whose", "D. whom"), "C", "【答案】C。本题考查关系词 whose 的所有格用法。表示‘那个女孩的妈妈’这一所属关系，必须用 whose。", "误选 who，who 在句中不能表达所属关系。", "你认识那个妈妈是我们国家著名歌手的年轻女孩吗？")
+                PastExamQuestion("2016", "广州中考", "The boy ______ is wearing a red T-shirt and blue jeans is my brother.", listOf("A. who", "B. which", "C. whose", "D. /"), "A", "【答案】A。本题考查关系代词。先行词 boy 是人，在从句中充当主语，必须用 who 或 that。", "误选 which，忽略了先行词的人称属性特征。", "那个穿着红色 T 恤和蓝色牛仔裤的男孩是我弟弟。"),
+                PastExamQuestion("2015", "北京中考", "This is the most interesting and moving movie ______ I have ever seen in my life.", listOf("A. which", "B. that", "C. who", "D. whose"), "B", "【答案】B。本题考查只能使用 that 的特殊场景。先行词 movie 前有形容词最高级修饰，关系词物理上锁定为 that。", "习惯性选了 which，忽略了最高级这一限制性因素的限定作用。", "这是我一生中曾看过的最有趣、最动人的电影。"),
+                PastExamQuestion("2016", "南京中考", "Do you know the young girl ______ mother is a famous singer in our country?", listOf("A. who", "B. which", "C. whose", "D. whom"), "C", "【答案】C。本题考查关系词 whose 的所有格用法。表示‘那个女孩的妈妈’这一所属关系，必须用 whose。", "误选 who，who 在句中不能表达所属关系。", "你认识那个妈妈是我们国家著名歌手的年轻女孩吗？")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("I like music that I can dance to when I'm happy or excited. My sister prefers songs that have great lyrics and deep meanings. We both enjoy visiting concerts which are held in the public park during every summer holiday for the local people to enjoy.", listOf(
@@ -1242,7 +1286,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议采用‘拼图法’：连接主句切口与从句桥梁；强化‘先行词五大特征识别’训练；整理并背诵‘必用 that 情况清单’。")
             ),
             famousQuote = "He who has a why to live for can bear almost any how.",
-            quoteAuthor = "Friedrich Nietzsche"
+            quoteAuthor = "Friedrich Nietzsche",
+            quoteTranslation = "知道为什么而活的人，便能生存。",
+            quoteAnalysis = "强调明确的目标和信念能让人战胜一切艰难险阻。"
         ),
         KnowledgePoint(
             id = "adverbial_clause",
@@ -1272,9 +1318,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "杭州中考", "We will have a big picnic if it ______ tomorrow according to the weather report.", listOf("A. won't rain", "B. doesn't rain", "C. isn't raining", "D. wouldn't rain"), "B", "【答案】B。本题考查条件状语从句的时态逻辑。if 引导的从句遵循‘主将从现’，主句 will have，从句必须用一般现在时的否定 doesn't rain。", "受 tomorrow 干扰物理性选了将来时 A。", "如果根据天气预报明天不下雨，我们就去大野餐。"),
-                PastExamQuestion("2023", "上海中考", "He was ______ tired after the long match ______ he fell asleep immediately.", listOf("A. so; that", "B. such; that", "C. too; to", "D. enough; to"), "A", "【答案】A。本题考查结果状语从句。tired 是形容词性质，前面必须用 so 修饰，构成 so...that 逻辑结构。", "误选 such，忽略了 such 必须修饰名词性短语的硬性规则。", "在长赛之后他如此疲惫，以至于立刻就睡着了。"),
-                PastExamQuestion("2022", "广东中考", "______ she is very busy every day, she still finds some time to exercise.", listOf("A. Because", "B. Although", "C. Since", "D. If"), "B", "【答案】B。本题考查让步状语从句。前句‘忙’与后句‘运动’构成转折关系，必须用 although 引导。", "误选 because，导致句子逻辑因果倒置。", "虽然她每天都很忙，但她仍会找时间运动。")
+                PastExamQuestion("2016", "杭州中考", "We will have a big picnic if it ______ tomorrow according to the weather report.", listOf("A. won't rain", "B. doesn't rain", "C. isn't raining", "D. wouldn't rain"), "B", "【答案】B。本题考查条件状语从句的时态逻辑。if 引导的从句遵循‘主将从现’，主句 will have，从句必须用一般现在时的否定 doesn't rain。", "受 tomorrow 干扰物理性选了将来时 A。", "如果根据天气预报明天不下雨，我们就去大野餐。"),
+                PastExamQuestion("2015", "上海中考", "He was ______ tired after the long match ______ he fell asleep immediately.", listOf("A. so; that", "B. such; that", "C. too; to", "D. enough; to"), "A", "【答案】A。本题考查结果状语从句。tired 是形容词性质，前面必须用 so 修饰，构成 so...that 逻辑结构。", "误选 such，忽略了 such 必须修饰名词性短语的硬性规则。", "在长赛之后他如此疲惫，以至于立刻就睡着了。"),
+                PastExamQuestion("2016", "广东中考", "______ she is very busy every day, she still finds some time to exercise.", listOf("A. Because", "B. Although", "C. Since", "D. If"), "B", "【答案】B。本题考查让步状语从句。前句‘忙’与后句‘运动’构成转折关系，必须用 although 引导。", "误选 because，导致句子逻辑因果倒置。", "虽然她每天都很忙，但她仍会找时间运动。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("As soon as the bell rings for the end of the classes, the students will run out of the classroom happily. They will go to the playground because they have an exciting PE class today. Although the sun is very strong at noon, they are still excited about doing sports together.", listOf(
@@ -1296,7 +1342,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘逻辑连连看’进行匹配训练；强化‘主将从现’口诀；深度辨析 though 的连词属性与副词属性。")
             ),
             famousQuote = "If you want to go fast, go alone. If you want to go far, go together.",
-            quoteAuthor = "African Proverb"
+            quoteAuthor = "African Proverb",
+            quoteTranslation = "想要走得快，就独行；想要走得远，就结伴而行。",
+            quoteAnalysis = "生动地阐述了团队合作在长远发展中的不可替代性。"
         ),
         KnowledgePoint(
             id = "special_patterns",
@@ -1326,9 +1374,9 @@ object KnowledgeProvider {
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2024", "北京中考", "— Li Hua won the first prize in the national math competition.\n— ______. He worked really hard.", listOf("A. So he did", "B. So did he", "C. Neither did he", "D. So was he"), "A", "【答案】A。本题考查 so 引导的强调赞同。后句‘他工作努力’证明了前句的事实，故用 So he did (他的确如此)。", "误选 B，So did he 意为‘他也赢了’，物理逻辑不符合当前语境。", "—— 李华在国家数学竞赛中获得了一等奖。 —— 他确实获得了。他工作非常努力。"),
-                PastExamQuestion("2023", "上海中考", "There ______ a football match on TV tonight for us to watch, isn't there?", listOf("A. will have", "B. is going to be", "C. is going to have", "D. was"), "B", "【答案】B。本题考查 There be 句型的将来时构成。物理上不能用 have，排除 A/C。反义疑问句 isn't there 提示主句是 is...be 结构。", "误选 A，汉语式翻译‘将会有’物理性导致错用 have。", "今晚电视上将有一场足球赛给我们看，不是吗？"),
-                PastExamQuestion("2022", "广东中考", "— I have never been to Paris in my life. What about you?\n— ______.", listOf("A. So have I", "B. Neither have I", "C. So I have", "D. Neither I have"), "B", "【答案】B。本题考查倒装句逻辑。前句是完成时的否定句，表达‘我也没去过’需用 Neither + 助动词 + 主语。", "误选 A，物理性忽略了前句中 never 这一否定词的存在。", "—— 我一生从未去过巴黎。你呢？ —— 我也没去过。")
+                PastExamQuestion("2016", "北京中考", "— Li Hua won the first prize in the national math competition.\n— ______. He worked really hard.", listOf("A. So he did", "B. So did he", "C. Neither did he", "D. So was he"), "A", "【答案】A。本题考查 so 引导的强调赞同。后句‘他工作努力’证明了前句的事实，故用 So he did (他的确如此)。", "误选 B，So did he 意为‘他也赢了’，物理逻辑不符合当前语境。", "—— 李华在国家数学竞赛中获得了一等奖。 —— 他确实获得了。他工作非常努力。"),
+                PastExamQuestion("2015", "上海中考", "There ______ a football match on TV tonight for us to watch, isn't there?", listOf("A. will have", "B. is going to be", "C. is going to have", "D. was"), "B", "【答案】B。本题考查 There be 句型的将来时构成。物理上不能用 have，排除 A/C。反义疑问句 isn't there 提示主句是 is...be 结构。", "误选 A，汉语式翻译‘将会有’物理性导致错用 have。", "今晚电视上将有一场足球赛给我们看，不是吗？"),
+                PastExamQuestion("2016", "广东中考", "— I have never been to Paris in my life. What about you?\n— ______.", listOf("A. So have I", "B. Neither have I", "C. So I have", "D. Neither I have"), "B", "【答案】B。本题考查倒装句逻辑。前句是完成时的否定句，表达‘我也没去过’需用 Neither + 助动词 + 主语。", "误选 A，物理性忽略了前句中 never 这一否定词的存在。", "—— 我一生从未去过巴黎。你呢？ —— 我也没去过。")
             ),
             textbookParagraphs = listOf(
                 TextbookParagraph("There is a small park near our school with many green trees. There are many colorful flowers in it during every spring and summer. It's a good place for us to relax and study. It takes about five minutes to walk there from our classroom every day.", listOf(
@@ -1350,7 +1398,9 @@ object KnowledgeProvider {
                 TeachingNote("教学建议", "建议教师采用‘镜子原理’讲解倒装：So do I 就像在照镜子；对比练习 so do I 与 so I do 的微差；强化 There be 句型的时态变换训练。")
             ),
             famousQuote = "It is never too late to learn.",
-            quoteAuthor = "English Proverb"
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "暂无翻译",
+            quoteAnalysis = "暂无解析"
         )
     )
 
