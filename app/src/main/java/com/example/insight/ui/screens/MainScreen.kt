@@ -86,7 +86,8 @@ fun MainScreen(
     onNavigateToMindMap: () -> Unit,
     onNavigateToCourseware: (String) -> Unit,
     onNavigateToCoursewareEditor: (String?) -> Unit,
-    onNavigateToLessonPlanSample: (String) -> Unit
+    onNavigateToLessonPlanSample: (String) -> Unit,
+    onNavigateToKnowledgeDetail: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
@@ -137,7 +138,7 @@ fun MainScreen(
                         label = "tab_transition"
                     ) { targetTab ->
                         when (targetTab) {
-                            InsightTab.Home -> HomeTab(preferences = preferences)
+                            InsightTab.Home -> HomeTab(preferences = preferences, onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail)
                             InsightTab.Map -> MapTab(preferences)
                             InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
                             InsightTab.Profile -> ProfileTab(
@@ -320,7 +321,7 @@ fun BoxScope.TabIconFluid(
 }
 
 @Composable
-fun HomeTab(preferences: UserPreferences) {
+fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
 
@@ -370,9 +371,9 @@ fun HomeTab(preferences: UserPreferences) {
                     TextButton(onClick = { }) { Text("全部", color = primaryColor) }
                 }
             }
-            items(5) { index -> HistoryCard(index) }
+            items(5) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
         } else {
-            items(3) { index -> SearchResultItem(index) }
+            items(3) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
         }
     }
 }
@@ -633,10 +634,10 @@ fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
 }
 
 @Composable
-fun SearchResultItem(index: Int) {
+fun SearchResultItem(index: Int, onClick: () -> Unit) {
     val results = listOf("如何在句子中识别【定语从句】", "定语从句中 that 和 which 的区别", "2023 中考英语语法真题集")
     val resultText = results[index % results.size]
-    Card(modifier = Modifier.fillMaxWidth().clickable { }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
+    Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
         Row(modifier = Modifier.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(imageVector = Icons.Outlined.History, contentDescription = null, tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
             Spacer(modifier = Modifier.width(16.dp))
@@ -646,11 +647,11 @@ fun SearchResultItem(index: Int) {
 }
 
 @Composable
-fun HistoryCard(index: Int) {
+fun HistoryCard(index: Int, onClick: () -> Unit) {
     val labels = listOf("定语从句", "虚拟语气", "分词结构", "阅读理解", "长难句")
     val status = listOf("已掌握", "练习中", "待复习")
     val primaryColor = MaterialTheme.colorScheme.primary
-    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
+    Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(modifier = Modifier.size(80.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
                 Icon(Icons.Outlined.Description, null, tint = primaryColor.copy(alpha = 0.5f))

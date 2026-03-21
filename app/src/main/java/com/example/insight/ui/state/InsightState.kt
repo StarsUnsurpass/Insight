@@ -10,6 +10,7 @@ sealed class ScreenState {
     object LessonPlanList : ScreenState()
     data class LessonPlanEditor(val planId: String?) : ScreenState()
     object MindMap : ScreenState()
+    data class KnowledgeDetail(val nodeId: String) : ScreenState()
 }
 
 enum class ThemeStyle {

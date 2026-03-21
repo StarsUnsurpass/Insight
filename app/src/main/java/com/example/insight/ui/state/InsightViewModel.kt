@@ -171,6 +171,10 @@ class InsightViewModel @Inject constructor(
         _uiState.update { it.copy(screen = ScreenState.LessonPlanEditor(planId)) }
     }
 
+    fun navigateToKnowledgeDetail(nodeId: String) {
+        _uiState.update { it.copy(screen = ScreenState.KnowledgeDetail(nodeId)) }
+    }
+
     fun onImageCaptured(bitmap: Bitmap) {
         val image = InputImage.fromBitmap(bitmap, 0)
         _uiState.update { it.copy(screen = ScreenState.Analyzing("正在识别文字...")) }
