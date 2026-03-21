@@ -1,0 +1,277 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.insight"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:4:5-65
+11-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:4:22-62
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:5:5-67
+12-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:5:22-64
+13
+14    <uses-feature
+14-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:5-85
+15        android:name="android.hardware.camera"
+15-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:19-57
+16        android:required="false" />
+16-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:58-82
+17    <uses-feature
+17-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:5-95
+18        android:name="android.hardware.camera.autofocus"
+18-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:19-67
+19        android:required="false" />
+19-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:68-92
+20
+21    <permission
+21-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+22        android:name="com.example.insight.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+22-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+23        android:protectionLevel="signature" />
+23-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+24
+25    <uses-permission android:name="com.example.insight.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+25-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+25-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+26    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+27    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+27-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:25:5-79
+27-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:25:22-76
+28
+29    <application
+29-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-37:19
+30        android:name="com.example.insight.InsightApplication"
+30-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:11:9-43
+31        android:allowBackup="true"
+31-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:12:9-35
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+33        android:extractNativeLibs="false"
+34        android:icon="@drawable/ic_launcher_foreground"
+34-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:13:9-56
+35        android:label="Insight"
+35-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:14:9-32
+36        android:roundIcon="@drawable/ic_launcher_foreground"
+36-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:15:9-61
+37        android:supportsRtl="true"
+37-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:16:9-35
+38        android:theme="@android:style/Theme.Material.NoActionBar" >
+38-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:17:9-66
+39        <activity
+39-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:18:9-26:20
+40            android:name="com.example.insight.MainActivity"
+40-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:19:13-41
+41            android:exported="true"
+41-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:20:13-36
+42            android:theme="@android:style/Theme.Material.NoActionBar" >
+42-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:21:13-70
+43            <intent-filter>
+43-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:22:13-25:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:17-69
+44-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:17-77
+46-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:27-74
+47            </intent-filter>
+48        </activity>
+49
+50        <provider
+50-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:28:9-36:20
+51            android:name="androidx.core.content.FileProvider"
+51-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:29:13-62
+52            android:authorities="com.example.insight.fileprovider"
+52-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:30:13-67
+53            android:exported="false"
+53-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:31:13-37
+54            android:grantUriPermissions="true" >
+54-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:32:13-47
+55            <meta-data
+55-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:33:13-35:54
+56                android:name="android.support.FILE_PROVIDER_PATHS"
+56-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:34:17-67
+57                android:resource="@xml/file_paths" />
+57-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:35:17-51
+58        </provider>
+59
+60        <service
+60-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:24:9-33:19
+61            android:name="androidx.camera.core.impl.MetadataHolderService"
+61-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:25:13-75
+62            android:enabled="false"
+62-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:26:13-36
+63            android:exported="false" >
+63-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:27:13-37
+64            <meta-data
+64-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:30:13-32:89
+65                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+65-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:31:17-103
+66                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+66-->[androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:32:17-86
+67        </service>
+68        <service
+68-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:9:9-15:19
+69            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+69-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:10:13-91
+70            android:directBootAware="true"
+70-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:17:13-43
+71            android:exported="false" >
+71-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:11:13-37
+72            <meta-data
+72-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:12:13-14:85
+73                android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar"
+73-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:13:17-114
+74                android:value="com.google.firebase.components.ComponentRegistrar" />
+74-->[com.google.android.gms:play-services-mlkit-text-recognition:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7568197091f4348da62d35acffdbb271\transformed\jetified-play-services-mlkit-text-recognition-16.0.0\AndroidManifest.xml:14:17-82
+75            <meta-data
+75-->[com.google.mlkit:vision-common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\6a8d8af75f273fa8846da4adfb4a3711\transformed\jetified-vision-common-16.0.0\AndroidManifest.xml:12:13-14:85
+76                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+76-->[com.google.mlkit:vision-common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\6a8d8af75f273fa8846da4adfb4a3711\transformed\jetified-vision-common-16.0.0\AndroidManifest.xml:13:17-124
+77                android:value="com.google.firebase.components.ComponentRegistrar" />
+77-->[com.google.mlkit:vision-common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\6a8d8af75f273fa8846da4adfb4a3711\transformed\jetified-vision-common-16.0.0\AndroidManifest.xml:14:17-82
+78            <meta-data
+78-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:20:13-22:85
+79                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+79-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:21:17-120
+80                android:value="com.google.firebase.components.ComponentRegistrar" />
+80-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:22:17-82
+81        </service>
+82
+83        <provider
+83-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:9:9-13:38
+84            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+84-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:10:13-78
+85            android:authorities="com.example.insight.mlkitinitprovider"
+85-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:11:13-69
+86            android:exported="false"
+86-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:12:13-37
+87            android:initOrder="99" />
+87-->[com.google.mlkit:common:16.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\459679f3da82fa4918108dd15233f81d\transformed\jetified-common-16.0.0\AndroidManifest.xml:13:13-35
+88
+89        <activity
+89-->[com.google.android.gms:play-services-base:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\2072276990c3ddf768521f51f34c2441\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+90            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+90-->[com.google.android.gms:play-services-base:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\2072276990c3ddf768521f51f34c2441\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+91            android:exported="false"
+91-->[com.google.android.gms:play-services-base:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\2072276990c3ddf768521f51f34c2441\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+92-->[com.google.android.gms:play-services-base:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\2072276990c3ddf768521f51f34c2441\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+93
+94        <meta-data
+94-->[com.google.android.gms:play-services-basement:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\4e983f9ff754aa7667b23bd8fca2193e\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+95            android:name="com.google.android.gms.version"
+95-->[com.google.android.gms:play-services-basement:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\4e983f9ff754aa7667b23bd8fca2193e\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+96            android:value="@integer/google_play_services_version" />
+96-->[com.google.android.gms:play-services-basement:17.0.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\4e983f9ff754aa7667b23bd8fca2193e\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+97
+98        <provider
+98-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+99            android:name="androidx.startup.InitializationProvider"
+99-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:25:13-67
+100            android:authorities="com.example.insight.androidx-startup"
+100-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:26:13-68
+101            android:exported="false" >
+101-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:27:13-37
+102            <meta-data
+102-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+103                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+103-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+104                android:value="androidx.startup" />
+104-->[androidx.emoji2:emoji2:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\b37c7b60a2db929f1f9de989cda3df2b\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+105            <meta-data
+105-->[androidx.lifecycle:lifecycle-process:2.7.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\bfaa2aa38fbd3bd81e814c4caa31061b\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+106                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+106-->[androidx.lifecycle:lifecycle-process:2.7.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\bfaa2aa38fbd3bd81e814c4caa31061b\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+107                android:value="androidx.startup" />
+107-->[androidx.lifecycle:lifecycle-process:2.7.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\bfaa2aa38fbd3bd81e814c4caa31061b\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+108            <meta-data
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+109                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+109-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+110                android:value="androidx.startup" />
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+111        </provider>
+112
+113        <service
+113-->[androidx.room:room-runtime:2.6.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\1a9696ba66bbc2fafe3c398058396f5e\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+114            android:name="androidx.room.MultiInstanceInvalidationService"
+114-->[androidx.room:room-runtime:2.6.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\1a9696ba66bbc2fafe3c398058396f5e\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+115            android:directBootAware="true"
+115-->[androidx.room:room-runtime:2.6.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\1a9696ba66bbc2fafe3c398058396f5e\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+116            android:exported="false" />
+116-->[androidx.room:room-runtime:2.6.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\1a9696ba66bbc2fafe3c398058396f5e\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+117        <service
+117-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:29:9-35:19
+118            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+118-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:30:13-103
+119            android:exported="false" >
+119-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:31:13-37
+120            <meta-data
+120-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:32:13-34:39
+121                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+121-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:33:17-94
+122                android:value="cct" />
+122-->[com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:34:17-36
+123        </service>
+124        <service
+124-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:26:9-30:19
+125            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+125-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:27:13-117
+126            android:exported="false"
+126-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:28:13-37
+127            android:permission="android.permission.BIND_JOB_SERVICE" >
+127-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:29:13-69
+128        </service>
+129
+130        <receiver
+130-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:32:9-34:40
+131            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+131-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:33:13-132
+132            android:exported="false" />
+132-->[com.google.android.datatransport:transport-runtime:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\fb2213ea869b83b622317caec079e560\transformed\jetified-transport-runtime-2.2.2\AndroidManifest.xml:34:13-37
+133        <receiver
+133-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+134            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+134-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+135            android:directBootAware="false"
+135-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+136            android:enabled="true"
+136-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+137            android:exported="true"
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+138            android:permission="android.permission.DUMP" >
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+139            <intent-filter>
+139-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+140                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+141            </intent-filter>
+142            <intent-filter>
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+143                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+144            </intent-filter>
+145            <intent-filter>
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+146                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+147            </intent-filter>
+148            <intent-filter>
+148-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+149                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\f0d06937bf68f8c6d2a0b405ce88b9a0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+150            </intent-filter>
+151        </receiver>
+152    </application>
+153
+154</manifest>

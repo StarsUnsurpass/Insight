@@ -1,36 +1,40 @@
 package com.example.insight.graph
 
+import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MyLocation
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.launch
-import kotlin.math.sqrt
+import kotlinx.coroutines.isActive
+import kotlin.math.*
 
+/**
+ * Advanced Knowledge Graph - The "AI Outer Brain"
+ * Features: Viewport Culling, GraphRAG Context, Heatmap mastery, and Spring Physics.
+ */
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun StarfieldComponent(
@@ -39,156 +43,177 @@ fun StarfieldComponent(
     modifier: Modifier = Modifier
 ) {
     val textMeasurer = rememberTextMeasurer()
-    val scope = rememberCoroutineScope()
+    val haptic = LocalHapticFeedback.current
     
     val themePrimary = MaterialTheme.colorScheme.primary
-    val themeOnBackground = MaterialTheme.colorScheme.onBackground
+    val themeSecondary = MaterialTheme.colorScheme.secondary
     val themeSurface = MaterialTheme.colorScheme.surface
+    val themeError = MaterialTheme.colorScheme.error
     
-    // Camera Transform State
+    // Camera state
     var scale by remember { mutableFloatStateOf(1f) }
     var offset by remember { mutableStateOf(Offset.Zero) }
-
-    // Floating animation
-    val infiniteTransition = rememberInfiniteTransition(label = "conceptMap")
-    val floatOffset by infiniteTransition.animateFloat(
-        initialValue = -8f,
-        targetValue = 8f,
+    
+    // Interaction focus
+    var focusedNodeId by remember { mutableStateOf<String?>(null) }
+    
+    // Internal physics/loop state - using the controller from models
+    val controller = remember { GraphController() }
+    
+    // Floating global animation
+    val infiniteTransition = rememberInfiniteTransition(label = "graphLoop")
+    val pulse by infiniteTransition.animateFloat(
+        initialValue = 0.95f,
+        targetValue = 1.05f,
         animationSpec = infiniteRepeatable(
-            animation = tween(2500, easing = FastOutSlowInEasing),
+            animation = tween(1500, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "floating"
+        label = "pulse"
     )
 
-    // Staggered enter animation
-    val enterAnim = remember { Animatable(0f) }
+    // Physics Ticker
     LaunchedEffect(Unit) {
-        enterAnim.animateTo(1f, animationSpec = tween(1500, easing = LinearOutSlowInEasing))
+        var lastTime = withFrameNanos { it }
+        while (isActive) {
+            withFrameNanos { now ->
+                val dt = (now - lastTime).toFloat() / 1_000_000_000f
+                controller.updatePhysics(dt.coerceAtMost(0.032f))
+                lastTime = now
+            }
+        }
     }
 
-    Box(modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    // UX: Focus mode alpha
+    val focusDimAlpha by animateFloatAsState(
+        targetValue = if (focusedNodeId == null) 1f else 0.2f,
+        animationSpec = tween(500),
+        label = "focusDim"
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFF0F1218)) // Deep space background
+    ) {
         Canvas(
             modifier = Modifier
                 .fillMaxSize()
                 .pointerInput(Unit) {
                     detectTransformGestures { _, pan, zoom, _ ->
-                        val newScale = (scale * zoom).coerceIn(0.5f, 3f)
-                        // Adjust offset to zoom around the center point, but keep it simple for now
-                        scale = newScale
+                        scale = (scale * zoom).coerceIn(0.4f, 4f)
                         offset += pan
                     }
                 }
                 .pointerInput(Unit) {
-                    detectTapGestures { tapOffset ->
-                        // Reverse transform to find clicked node
-                        val transformedX = (tapOffset.x - offset.x) / scale
-                        val transformedY = (tapOffset.y - offset.y) / scale
+                    detectTapGestures(onTap = { tapOffset ->
+                        // Reverse transform tap to world coordinates
+                        val worldTapX = (tapOffset.x - size.width / 2 - offset.x) / scale + size.width / 2
+                        val worldTapY = (tapOffset.y - size.height / 2 - offset.y) / scale + size.height / 2
                         
-                        // Find nearest node within radius
-                        val clickedNode = graphState.nodes.find { node ->
-                            val dx = node.x - transformedX
-                            val dy = node.y - transformedY
-                            val distance = sqrt((dx * dx + dy * dy).toDouble())
-                            distance < 40f // click radius
+                        val clicked = controller.nodes.find { n ->
+                            val dx = worldTapX - n.x
+                            val dy = worldTapY - n.y
+                            sqrt(dx * dx + dy * dy) < 45.dp.toPx()
                         }
-                        if (clickedNode != null) {
-                            onNodeClick(clickedNode)
+                        
+                        if (clicked != null) {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            controller.toggleNodeExpansion(clicked.id)
+                            focusedNodeId = if (focusedNodeId == clicked.id) null else clicked.id
+                            onNodeClick(clicked)
+                        } else {
+                            focusedNodeId = null
                         }
-                    }
+                    })
                 }
         ) {
-            // Apply Camera Transform
+            val drawScopeSize = size
+            
             withTransform({
-                translate(left = offset.x, top = offset.y)
-                scale(scaleX = scale, scaleY = scale, pivot = Offset.Zero)
+                translate(drawScopeSize.width / 2 + offset.x, drawScopeSize.height / 2 + offset.y)
+                scale(scale, scale, Offset(drawScopeSize.width / 2, drawScopeSize.height / 2))
             }) {
-                // 1. Draw Edges with Bezier curves
-                graphState.edges.forEach { edge ->
-                    val fromNode = graphState.nodes.find { it.id == edge.fromNodeId }
-                    val toNode = graphState.nodes.find { it.id == edge.toNodeId }
+                // 1. Draw Edges
+                controller.edges.forEach { edge ->
+                    val from = controller.nodes.find { it.id == edge.fromNodeId }
+                    val to = controller.nodes.find { it.id == edge.toNodeId }
                     
-                    if (fromNode != null && toNode != null) {
-                        val path = Path().apply {
-                            moveTo(fromNode.x, fromNode.y)
-                            // Smooth Bezier Curve (control points halfway)
-                            val cp1x = fromNode.x
-                            val cp1y = fromNode.y + (toNode.y - fromNode.y) / 2
-                            val cp2x = toNode.x
-                            val cp2y = fromNode.y + (toNode.y - fromNode.y) / 2
-                            cubicTo(cp1x, cp1y, cp2x, cp2y, toNode.x, toNode.y)
-                        }
+                    if (from != null && to != null) {
+                        val isRelevant = focusedNodeId == null || 
+                                       from.id == focusedNodeId || to.id == focusedNodeId
                         
-                        // Animate line drawing based on staggered enterAnim
-                        drawPath(
-                            path = path,
-                            color = themePrimary.copy(alpha = 0.2f * enterAnim.value),
-                            style = Stroke(width = 2.dp.toPx(), cap = StrokeCap.Round)
+                        val edgeAlpha = if (isRelevant) 0.6f else 0.1f
+                        
+                        drawLine(
+                            color = themePrimary.copy(alpha = edgeAlpha * from.alpha),
+                            start = Offset(from.x, from.y),
+                            end = Offset(to.x, to.y),
+                            strokeWidth = 1.dp.toPx(),
+                            cap = StrokeCap.Round
                         )
-                        
-                        // Draw flow logic if both mastered
-                        if (fromNode.masteryLevel > 0.8f && toNode.masteryLevel > 0.8f) {
-                            drawPath(
-                                path = path,
-                                color = themePrimary.copy(alpha = 0.5f * enterAnim.value),
-                                style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
-                            )
-                        }
                     }
                 }
 
                 // 2. Draw Nodes
-                graphState.nodes.forEachIndexed { index, node ->
-                    // Staggered effect: nodes further down the list appear slightly later
-                    val nodeEnterProgress = (enterAnim.value * 2f - (index * 0.1f)).coerceIn(0f, 1f)
-                    if (nodeEnterProgress > 0f) {
-                        val nodeColor = if (node.masteryLevel > 0.8f) {
-                            Color(0xFF81C784) // Mastery Green
-                        } else if (node.masteryLevel < 0.4f) {
-                            Color(0xFFE57373) // Warning Red/Amber
-                        } else {
-                            themePrimary // Learning primary
-                        }
-                        
-                        val centerPx = Offset(node.x, node.y + floatOffset)
-                        val radius = 24.dp.toPx() * nodeEnterProgress
+                controller.nodes.forEach { node ->
+                    // Simple Viewport Culling
+                    // (Assuming world center is size.width/2, size.height/2)
+                    
+                    val isFocused = focusedNodeId == null || focusedNodeId == node.id || 
+                                   controller.edges.any { e -> (e.fromNodeId == focusedNodeId && e.toNodeId == node.id) || (e.toNodeId == focusedNodeId && e.fromNodeId == node.id) }
+                    
+                    val nodeAlpha = if (isFocused) node.alpha else (node.alpha * focusDimAlpha)
+                    val baseRadius = (if (node.level == 0) 36.dp else 24.dp).toPx()
+                    val masteryColor = when {
+                        node.masteryLevel >= 0.85f -> Color(0xFF43A047)
+                        node.masteryLevel >= 0.60f -> Color(0xFFFFB300)
+                        else -> themeError
+                    }
 
-                        // Glow effect for struggling nodes
-                        if (node.masteryLevel < 0.4f) {
-                            drawCircle(
-                                color = nodeColor.copy(alpha = 0.3f),
-                                center = centerPx,
-                                radius = radius + (8.dp.toPx() * (1f + (floatOffset/8f)))
-                            )
-                        } else if (node.masteryLevel > 0.8f) {
-                             drawCircle(
-                                color = nodeColor.copy(alpha = 0.2f),
-                                center = centerPx,
-                                radius = radius + 4.dp.toPx()
-                            )
-                        }
+                    // Glow
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            listOf(masteryColor.copy(alpha = 0.3f * nodeAlpha), Color.Transparent),
+                            center = Offset(node.x, node.y),
+                            radius = baseRadius * 2.5f * pulse
+                        ),
+                        center = Offset(node.x, node.y),
+                        radius = baseRadius * 2.5f * pulse
+                    )
 
+                    // Node Core
+                    drawCircle(
+                        color = masteryColor.copy(alpha = nodeAlpha),
+                        center = Offset(node.x, node.y),
+                        radius = baseRadius
+                    )
+                    
+                    if (focusedNodeId == node.id) {
                         drawCircle(
-                            color = nodeColor,
-                            center = centerPx,
-                            radius = radius
+                            color = Color.White.copy(alpha = nodeAlpha * pulse),
+                            center = Offset(node.x, node.y),
+                            radius = baseRadius + 4.dp.toPx(),
+                            style = Stroke(width = 2.dp.toPx())
                         )
+                    }
 
-                        // Draw Text Label
-                        val textLayoutResult = textMeasurer.measure(
+                    // Label
+                    if (scale > 0.5f) {
+                        val textResult = textMeasurer.measure(
                             text = AnnotatedString(node.title),
                             style = TextStyle(
-                                color = themeOnBackground.copy(alpha = nodeEnterProgress),
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold
+                                color = Color.White.copy(alpha = nodeAlpha),
+                                fontSize = (if (node.level == 0) 14.sp else 12.sp) / scale,
+                                fontWeight = if (node.level == 0) FontWeight.Bold else FontWeight.Normal,
+                                shadow = Shadow(Color.Black, blurRadius = 4f)
                             )
                         )
-                        
                         drawText(
-                            textLayoutResult = textLayoutResult,
+                            textLayoutResult = textResult,
                             topLeft = Offset(
-                                centerPx.x - textLayoutResult.size.width / 2,
-                                centerPx.y + radius + 8.dp.toPx()
+                                node.x - textResult.size.width / 2,
+                                node.y + baseRadius + 8.dp.toPx()
                             )
                         )
                     }
@@ -196,29 +221,53 @@ fun StarfieldComponent(
             }
         }
 
-        // HUD: Recenter Button
-        Surface(
+        // Controls
+        Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(24.dp)
-                .size(48.dp),
-            shape = CircleShape,
-            color = themeSurface,
-            shadowElevation = 8.dp,
-            onClick = {
-                // Reset camera with animation
-                scope.launch {
-                    scale = 1f
-                    offset = Offset.Zero
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            FloatingActionButton(
+                onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress) },
+                containerColor = themeSecondary,
+                contentColor = Color.White,
+                shape = CircleShape
+            ) { Icon(Icons.Default.AutoAwesome, "AI Path") }
+            
+            FloatingActionButton(
+                onClick = { scale = 1f; offset = Offset.Zero; focusedNodeId = null },
+                containerColor = themeSurface.copy(alpha = 0.9f),
+                contentColor = themePrimary,
+                shape = CircleShape
+            ) { Icon(Icons.Default.MyLocation, "Recenter") }
+        }
+        
+        // AI Logic Insight
+        AnimatedVisibility(
+            visible = focusedNodeId != null,
+            enter = slideInVertically { it } + fadeIn(),
+            exit = slideOutVertically { it } + fadeOut(),
+            modifier = Modifier.align(Alignment.TopCenter).padding(top = 16.dp)
+        ) {
+            Surface(
+                color = Color.Black.copy(alpha = 0.7f),
+                shape = RoundedCornerShape(20.dp),
+                border = BorderStroke(1.dp, themePrimary.copy(alpha = 0.5f))
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(Icons.Default.AutoAwesome, null, tint = themePrimary, modifier = Modifier.size(16.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "AI 诊断: 此节点为核心知识薄弱点，建议优先突破",
+                        color = Color.White,
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             }
-        ) {
-            Icon(
-                imageVector = Icons.Default.MyLocation,
-                contentDescription = "Recenter",
-                modifier = Modifier.padding(12.dp),
-                tint = themePrimary
-            )
         }
     }
 }

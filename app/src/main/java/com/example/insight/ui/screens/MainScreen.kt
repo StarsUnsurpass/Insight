@@ -12,6 +12,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -56,10 +58,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyRow
 import com.example.insight.data.model.sampleCoursewares
+import androidx.compose.material.icons.automirrored.filled.*
 import com.example.insight.data.model.Courseware
 import com.example.insight.data.model.sampleLessonPlans
 import com.example.insight.data.model.LessonPlanSample
 import com.example.insight.data.model.KnowledgeProvider
+import kotlin.collections.*
 
 enum class InsightTab(
     val title: String,
@@ -139,7 +143,7 @@ fun MainScreen(
                         when (targetTab) {
                             InsightTab.Home -> HomeTab(preferences = preferences, onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail)
                             InsightTab.Map -> MapTab(preferences)
-                            InsightTab.Analysis -> KnowledgeGraphScreen(preferences)
+                            InsightTab.Analysis -> AnalysisTab(preferences, uiState.students, uiState.allScans)
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
                                 studentCount = uiState.students.size,
@@ -325,9 +329,20 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
     var searchQuery by remember { mutableStateOf("") }
     val expandedSections = remember { mutableStateListOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)") }
 
+    val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
+
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(20.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                    if (searchQuery.isEmpty()) {
+                        // Just clear focus, we are already showing default view
+                    }
+                })
+            },
+        contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 120.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
@@ -345,50 +360,57 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
             
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "您好, ${preferences.username}",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Black,
+                    text = "您好，${preferences.username}${if (preferences.role == UserRole.Teacher) "老师" else "学生"}",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )
-                Spacer(modifier = Modifier.width(12.dp))
-                Surface(
-                    color = primaryColor.copy(alpha = 0.1f),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = if (preferences.role == UserRole.Teacher) "老师" else "同学",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = primaryColor,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Icon(
-                            imageVector = if (preferences.role == UserRole.Teacher) Icons.Default.School else Icons.Default.MenuBook,
-                            contentDescription = null,
-                            tint = primaryColor,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Icon(
+                    imageVector = if (preferences.role == UserRole.Teacher) Icons.Default.School else Icons.AutoMirrored.Filled.MenuBook,
+                    contentDescription = null,
+                    tint = primaryColor.copy(alpha = 0.8f),
+                    modifier = Modifier.size(24.dp)
+                )
             }
             Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = todayQuote,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = Color.Gray.copy(alpha = 0.08f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black.copy(alpha = 0.05f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                Text(
+                    text = todayQuote,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
+                    lineHeight = 16.sp
+                )
+            }
+    }
 
-        item {
+    item {
+        // Equal spacing between Quote -> Search and Search -> Modules
+        Spacer(modifier = Modifier.height(4.dp))
+    }
+
+    item {
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 0.dp, bottom = 0.dp),
                 shape = RoundedCornerShape(20.dp),
                 singleLine = true,
                 leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
@@ -406,6 +428,9 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
             
             sections.forEach { sectionName ->
                 val isExpanded = expandedSections.contains(sectionName)
+                item {
+                    Spacer(modifier = Modifier.height(4.dp))
+                }
                 item {
                     Row(
                         modifier = Modifier
@@ -425,9 +450,10 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                             color = primaryColor
                         )
                         Icon(
-                            imageVector = if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                             contentDescription = if (isExpanded) "Collapse" else "Expand",
-                            tint = primaryColor
+                            tint = primaryColor,
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
@@ -503,7 +529,13 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, onC
     Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
-                Icon(Icons.Outlined.Description, null, tint = primaryColor.copy(alpha = 0.5f))
+                val iconVec = when (point.section) {
+                    com.example.insight.data.model.KnowledgeProvider.SEC_1 -> Icons.Outlined.Spellcheck
+                    com.example.insight.data.model.KnowledgeProvider.SEC_2 -> Icons.Outlined.Schedule
+                    com.example.insight.data.model.KnowledgeProvider.SEC_3 -> Icons.Outlined.AccountTree
+                    else -> Icons.Outlined.Description
+                }
+                Icon(iconVec, null, tint = primaryColor.copy(alpha = 0.5f))
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
@@ -854,8 +886,14 @@ fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, q
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.Search, contentDescription = null, tint = primaryColor)
-                Spacer(modifier = Modifier.width(8.dp))
+                val iconVec = when (point.section) {
+                    com.example.insight.data.model.KnowledgeProvider.SEC_1 -> Icons.Outlined.Spellcheck
+                    com.example.insight.data.model.KnowledgeProvider.SEC_2 -> Icons.Outlined.Schedule
+                    com.example.insight.data.model.KnowledgeProvider.SEC_3 -> Icons.Outlined.AccountTree
+                    else -> Icons.Outlined.Description
+                }
+                Icon(iconVec, contentDescription = null, tint = primaryColor, modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.width(12.dp))
                 HighlightedText(
                     text = point.title, 
                     keyword = query, 
@@ -864,7 +902,7 @@ fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, q
                     highlightColor = primaryColor
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             HighlightedText(
                 text = snippet,
                 keyword = query,
@@ -946,23 +984,225 @@ fun MapTab(preferences: UserPreferences) {
     val sheetState = rememberModalBottomSheetState()
     var selectedNode by remember { mutableStateOf<KnowledgeNode?>(null) }
     var showSheet by remember { mutableStateOf(false) }
+    
+    // Mock data for initial view
     val mockGraphState = remember { GraphState(
-        nodes = listOf(KnowledgeNode("n1", "初中核心语法", 0.9f, 500f, 300f), KnowledgeNode("n2", "时态体系", 0.6f, 300f, 600f), KnowledgeNode("n3", "从句基础", 0.8f, 700f, 600f)),
-        edges = listOf(KnowledgeEdge("n1", "n2"), KnowledgeEdge("n1", "n3"))
+        nodes = kotlin.collections.listOf(
+            KnowledgeNode(id = "r1", title = "词法体系", level = 0, masteryLevel = 0.85f, x = 300f, y = 300f),
+            KnowledgeNode(id = "r2", title = "句法体系", level = 0, masteryLevel = 0.60f, x = 800f, y = 350f),
+            KnowledgeNode(id = "r3", title = "时态语态", level = 0, masteryLevel = 0.45f, x = 550f, y = 600f)
+        ),
+        edges = kotlin.collections.listOf()
     ) }
-    Box(modifier = Modifier.fillMaxSize()) {
-        StarfieldComponent(graphState = mockGraphState, onNodeClick = { node -> selectedNode = node; showSheet = true }, modifier = Modifier.fillMaxSize())
-        Column(modifier = Modifier.padding(20.dp).align(Alignment.TopStart)) {
-            Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-            Text(text = if (preferences.role == UserRole.Student) "探索你的星系" else "班级知识图谱", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+
+    Box(modifier = Modifier.fillMaxSize().background(Color(0xFF0F1218))) {
+        StarfieldComponent(
+            graphState = mockGraphState,
+            onNodeClick = { node -> 
+                selectedNode = node
+                showSheet = true 
+            },
+            modifier = Modifier.fillMaxSize()
+        )
+        
+        // Header
+        Column(modifier = Modifier.padding(top = 24.dp, start = 24.dp).align(Alignment.TopStart)) {
+            Text(
+                "知识图谱", 
+                style = MaterialTheme.typography.headlineMedium, 
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.White
+            )
+            Text(
+                text = if (preferences.role == UserRole.Teacher) "班级认知链路全景图" else "你的 AI 知识大脑", 
+                style = MaterialTheme.typography.bodyMedium, 
+                color = Color.White.copy(alpha = 0.6f)
+            )
         }
     }
+    
     if (showSheet && selectedNode != null) {
-        ModalBottomSheet(onDismissRequest = { showSheet = false }, sheetState = sheetState) {
-            Column(modifier = Modifier.fillMaxWidth().padding(24.dp).padding(bottom = 32.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(text = "考点: ${selectedNode!!.title}", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                Text("掌握度: ${(selectedNode!!.masteryLevel * 100).toInt()}%")
-                Button(onClick = { }, modifier = Modifier.fillMaxWidth().height(56.dp), shape = RoundedCornerShape(16.dp)) { Text("获取高频真题") }
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surface,
+            dragHandle = { BottomSheetDefaults.DragHandle(color = Color.Gray.copy(alpha = 0.4f)) }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+                    .padding(bottom = 40.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    val color = when {
+                        selectedNode!!.masteryLevel >= 0.85f -> Color(0xFF43A047)
+                        selectedNode!!.masteryLevel >= 0.60f -> Color(0xFFFFB300)
+                        else -> MaterialTheme.colorScheme.error
+                    }
+                    Box(modifier = Modifier.size(12.dp).background(color, CircleShape))
+                    Spacer(Modifier.width(12.dp))
+                    Text(
+                        text = selectedNode!!.title, 
+                        style = MaterialTheme.typography.headlineSmall, 
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text("当前掌握度", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                        Text("${(selectedNode!!.masteryLevel * 100).toInt()}%", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Black)
+                        Spacer(Modifier.height(8.dp))
+                        LinearProgressIndicator(
+                            progress = { selectedNode!!.masteryLevel },
+                            modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
+                        )
+                    }
+                }
+                
+                Button(
+                    onClick = { showSheet = false },
+                    modifier = Modifier.fillMaxWidth().height(56.dp),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Icon(Icons.Default.AutoAwesome, null)
+                    Spacer(Modifier.width(8.dp))
+                    Text("开启认知链路溯源")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GraphPreviewCard(onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().height(160.dp).clickable { onClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0F1218))
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Static background or mini canvas could go here
+            Column(modifier = Modifier.padding(20.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.AutoAwesome, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("点击探索多维认知图谱", color = Color.White, style = MaterialTheme.typography.titleSmall)
+                }
+                Spacer(Modifier.weight(1f))
+                Text("AI 动态追踪 42 个核心考点", color = Color.White.copy(alpha = 0.5f), style = MaterialTheme.typography.labelSmall)
+            }
+        }
+    }
+}
+
+@Composable
+fun LearningAnalysisSummary(students: List<com.example.insight.data.local.entities.StudentEntity>, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+    ) {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column {
+                    Text("当前班级平均分", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                    val avg = if (students.isEmpty()) "0" else students.map { it.latestScore }.average().toInt().toString()
+                    Text(avg, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+                }
+                Icon(Icons.Default.TrendingUp, null, tint = MaterialTheme.colorScheme.primary)
+            }
+            Spacer(Modifier.height(12.dp))
+            Text("班级近期进步最快：句法结构模块", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+        }
+    }
+}
+
+@Composable
+fun AnalysisTab(
+    preferences: UserPreferences,
+    students: List<com.example.insight.data.local.entities.StudentEntity>,
+    scans: List<com.example.insight.data.local.entities.ScanRecordEntity>
+) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 120.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        item {
+            Column {
+                Text("学情分析", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                Text(text = "实时掌握学生的认知状态与成长趋势", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+            }
+        }
+
+        item {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                StatCard(
+                    label = "班级平均分", 
+                    value = if (students.isEmpty()) "0" else (students.map { it.latestScore }.average().toInt()).toString(), 
+                    modifier = Modifier.weight(1f)
+                )
+                StatCard(
+                    label = "活跃考点数", 
+                    value = "24", 
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.TrendingUp, null, tint = primaryColor)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("全班掌握度概览", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Box(modifier = Modifier.fillMaxWidth().height(200.dp).background(primaryColor.copy(alpha = 0.05f), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+                        Text("近期全班考点掌握度趋于稳定，从句法模块有显著提升", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        item {
+            Text("按掌握度查看学生", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+        }
+
+        items(students.sortedByDescending { it.latestScore }.take(5)) { student ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            ) {
+                Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                        Text(student.name.take(1), fontWeight = FontWeight.Bold, color = primaryColor)
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(student.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                        Text(student.className, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                    }
+                    Text("${student.latestScore.toInt()}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Black, color = primaryColor)
+                }
             }
         }
     }
