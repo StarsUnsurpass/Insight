@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.insight.data.model.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,20 +27,12 @@ fun KnowledgeDetailScreen(
     nodeId: String,
     onBack: () -> Unit
 ) {
-    // Mock data based on nodeId
-    val title = when (nodeId) {
-        "0" -> "定语从句"
-        "1" -> "虚拟语气"
-        "2" -> "分词结构"
-        "3" -> "阅读理解"
-        "4" -> "长难句"
-        else -> nodeId
-    }
+    val point = remember(nodeId) { KnowledgeProvider.getPoint(nodeId) } ?: return
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(title, fontWeight = FontWeight.Bold) },
+                title = { Text(point.title, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -63,7 +56,7 @@ fun KnowledgeDetailScreen(
                 SectionHeader(title = "知识点详情", icon = Icons.Default.Info)
                 DetailCard {
                     Text(
-                        text = "定语从句（Attributive Clause）是在复合句中修饰某一名词或代词的从句。被修饰的名词或代词叫做先行词，引导定语从句的词叫关系词。",
+                        text = point.description,
                         style = MaterialTheme.typography.bodyMedium,
                         lineHeight = 24.sp
                     )
@@ -77,7 +70,7 @@ fun KnowledgeDetailScreen(
                     mainAxisSpacing = 8.dp,
                     crossAxisSpacing = 8.dp
                 ) {
-                    listOf("关系代词", "关系副词", "限制性定语从句", "非限制性定语从句", "先行词").forEach { tag ->
+                    point.relatedPoints.forEach { tag ->
                         SuggestionChip(
                             onClick = { },
                             label = { Text(tag) },
@@ -89,45 +82,57 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            item {
-                SectionHeader(title = "核心例题", icon = Icons.Default.Assignment)
-                ExampleProblemItem(
-                    question = "This is the car ________ I bought last year.",
-                    options = listOf("A. who", "B. whom", "C. which", "D. whose"),
-                    answer = "C",
-                    explanation = "which 引导定语从句，先行词 car 是物，且关系词在从句中充当宾语。"
-                )
-            }
-
-            item {
-                SectionHeader(title = "课本文章段落", icon = Icons.Default.AutoStories)
-                DetailCard {
-                    Text(
-                        text = "The Great Wall, which is one of the eight wonders in the world, attracts millions of tourists every year.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
-                        fontFamily = FontFamily.Serif
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "—— 摘自《九年级英语全一册》Unit 5",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Color.Gray
-                    )
+            if (point.exampleProblems.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "核心例题", icon = Icons.Default.Assignment)
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        point.exampleProblems.forEach { problem ->
+                            ExampleProblemItem(
+                                question = problem.question,
+                                options = problem.options,
+                                answer = problem.answer,
+                                explanation = problem.explanation
+                            )
+                        }
+                    }
                 }
             }
 
-            item {
-                SectionHeader(title = "常用例句", icon = Icons.Default.Translate)
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    ExampleSentence(
-                        english = "The man who is wearing a red hat is my uncle.",
-                        chinese = "那个戴红帽子的男人是我叔叔。"
-                    )
-                    ExampleSentence(
-                        english = "I still remember the day when we first met.",
-                        chinese = "我仍然记得我们初次见面的那一天。"
-                    )
+            if (point.textbookParagraphs.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "课本文章段落", icon = Icons.Default.AutoStories)
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        point.textbookParagraphs.forEach { paragraph ->
+                            DetailCard {
+                                Text(
+                                    text = paragraph.content,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
+                                    fontFamily = FontFamily.Serif
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = paragraph.source,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color.Gray
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (point.exampleSentences.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "常用例句", icon = Icons.Default.Translate)
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        point.exampleSentences.forEach { sentence ->
+                            ExampleSentenceItem(
+                                english = sentence.english,
+                                chinese = sentence.chinese
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -205,10 +210,12 @@ fun ExampleProblemItem(
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier.clickable { showExplanation = !showExplanation }
                 )
-                if (showExplanation) {
-                    Icon(Icons.Default.ExpandLess, null)
-                } else {
-                    Icon(Icons.Default.ExpandMore, null)
+                IconButton(onClick = { showExplanation = !showExplanation }, modifier = Modifier.size(24.dp)) {
+                    Icon(
+                        imageVector = if (showExplanation) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
             if (showExplanation) {
@@ -224,7 +231,7 @@ fun ExampleProblemItem(
 }
 
 @Composable
-fun ExampleSentence(english: String, chinese: String) {
+fun ExampleSentenceItem(english: String, chinese: String) {
     Column {
         Text(text = english, fontWeight = FontWeight.Medium, fontSize = 15.sp)
         Text(text = chinese, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
