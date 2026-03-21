@@ -1,5 +1,6 @@
 package com.example.insight.ui.screens
 
+import android.widget.TextView
 import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -25,8 +27,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import com.example.insight.data.model.*
+import io.noties.markwon.Markwon
+import io.noties.markwon.ext.tables.TablePlugin
+import io.noties.markwon.html.HtmlPlugin
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +48,7 @@ fun KnowledgeDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("📌 知识点名称：${point.title}", fontWeight = FontWeight.Bold) },
+                title = { Text(point.title, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
@@ -62,25 +68,59 @@ fun KnowledgeDetailScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(bottom = 40.dp)
         ) {
-            // 1. 📖 知识点详解 (Core Explanation)
+            // 📌 核心标题
             item {
-                Text("1. 📖 知识点详解 (Core Explanation)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(12.dp))
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
-                    shape = RoundedCornerShape(12.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.1f)),
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(point.description, style = MaterialTheme.typography.bodyMedium, lineHeight = 24.sp)
+                    Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text("📌", fontSize = 24.sp)
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column {
+                            Text("知识点名称", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                            Text(point.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                        }
                     }
                 }
             }
 
-            // 2. 📚 课本相关段落 (Textbook Mapping)
+            // 1. 📋 考纲要求 (ORDER: FIRST)
+            if (point.syllabusDetails.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "1. 📋 考纲要求 (Syllabus Requirements)", icon = Icons.Default.ListAlt)
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            point.syllabusDetails.forEach { detail ->
+                                Row(verticalAlignment = Alignment.Top) {
+                                    Text("• ", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                                    Text(detail, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 2. 📖 知识点详解 (Markdown Rendering)
+            item {
+                SectionHeader(title = "2. 📖 知识点详解 (Core Explanation)", icon = Icons.AutoMirrored.Filled.Assignment)
+                MarkdownText(
+                    markdown = point.description,
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                )
+            }
+
+            // 3. 📚 课本相关段落
             if (point.textbookParagraphs.isNotEmpty()) {
                 item {
-                    Text("2. 📚 课本相关段落 (Textbook Mapping)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    SectionHeader(title = "3. 📚 课本相关段落 (Textbook Mapping)", icon = Icons.Default.AutoStories)
                 }
                 
                 items(point.textbookParagraphs) { paragraph ->
@@ -88,82 +128,61 @@ fun KnowledgeDetailScreen(
                 }
 
                 item {
-                    Spacer(modifier = Modifier.height(8.dp))
                     Button(
                         onClick = { /* TODO: Open PDF */ },
+                        modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), contentColor = MaterialTheme.colorScheme.primary),
-                        elevation = ButtonDefaults.buttonElevation(0.dp)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Icon(Icons.Default.PictureAsPdf, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("点击直接打开对应的电子课本扫描件")
+                        Text("查看电子课本原件")
                     }
                 }
             }
 
-            // 3. 💬 经典例句 (Example Sentences)
+            // 4. 💬 经典例句 (With Analysis)
             if (point.exampleSentences.isNotEmpty()) {
                 item {
-                    Text("3. 💬 经典例句 (Example Sentences)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    SectionHeader(title = "4. 💬 经典例句 (Example Sentences)", icon = Icons.Default.Translate)
                 }
                 
                 items(point.exampleSentences) { sentence ->
+                    ExampleSentenceCard(sentence)
+                }
+            }
+
+            // 5. 🔗 关联知识点 (Detailed Analysis)
+            if (point.relatedPoints.isNotEmpty()) {
+                item {
+                    SectionHeader(title = "5. 🔗 关联知识点 (Knowledge Links)", icon = Icons.Default.Link)
                     Card(
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                         shape = RoundedCornerShape(12.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                            Column {
-                                Text(sentence.english, fontWeight = FontWeight.Bold, fontSize = 16.sp, lineHeight = 24.sp)
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(sentence.chinese, style = MaterialTheme.typography.bodyMedium, color = Color.Gray)
-                                
-                                sentence.analysis?.let { analysis ->
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                    Surface(
-                                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                                        shape = RoundedCornerShape(8.dp),
-                                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
-                                    ) {
-                                        Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
-                                            Icon(Icons.Default.Analytics, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
-                                            Spacer(modifier = Modifier.width(8.dp))
-                                            Text(analysis, style = MaterialTheme.typography.bodySmall, lineHeight = 20.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 4. 🔗 关联知识点 (Knowledge Graph Links)
-            if (point.relatedPoints.isNotEmpty()) {
-                item {
-                    Text("4. 🔗 关联知识点 (Knowledge Graph Links)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Card(
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                             point.relatedPoints.forEach { rp ->
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.clickable { selectedRelatedPoint = rp }
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { selectedRelatedPoint = rp }
+                                        .padding(8.dp)
                                 ) {
-                                    Text("👉 ", fontSize = 16.sp)
-                                    Text(
-                                        text = rp.title, 
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        fontWeight = FontWeight.Medium,
-                                        textDecoration = TextDecoration.Underline
-                                    )
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(Icons.Default.Link, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = rp.title, 
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            color = MaterialTheme.colorScheme.primary,
+                                            fontWeight = FontWeight.Bold,
+                                            textDecoration = TextDecoration.Underline
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Text(rp.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), maxLines = 1)
                                 }
                             }
                         }
@@ -171,13 +190,10 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            // 5. 📝 近十年相关中考真题 (10-Year Real Exam Questions)
+            // 6. 📝 近十年相关中考真题
             if (point.pastExamQuestions.isNotEmpty()) {
                 item {
-                    Text("5. 📝 近十年相关中考真题 (10-Year Real Exam Questions)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text("(这里应该是一个可互动的题库列表，默认隐藏答案)", style = MaterialTheme.typography.labelMedium, color = Color.Gray)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    SectionHeader(title = "6. 📝 近十年相关中考真题 (Real Exam Questions)", icon = Icons.Default.Quiz)
                 }
                 
                 items(point.pastExamQuestions) { question ->
@@ -185,25 +201,25 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            // 6. 💡 授课与学情备忘 (Teaching & Insight Notes)
+            // 7. 💡 授课与学情备忘
             if (point.teachingNotes.isNotEmpty()) {
                 item {
-                    Text("6. 💡 授课与学情备忘 (Teaching & Insight Notes)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text("(这是一个非常有价值的专属板块，平时供备课参考，诊断时供调用)", style = MaterialTheme.typography.labelMedium, color = Color.Gray)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    
+                    SectionHeader(title = "7. 💡 授课与学情备忘 (Teaching Notes)", icon = Icons.Default.Lightbulb)
                     Card(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(16.dp),
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                             point.teachingNotes.forEach { note ->
                                 Column {
-                                    Text(note.title + "：", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Box(modifier = Modifier.size(8.dp).background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(2.dp)))
+                                        Spacer(modifier = Modifier.width(12.dp))
+                                        Text(note.title, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.titleSmall)
+                                    }
+                                    Spacer(modifier = Modifier.height(8.dp))
                                     Text(note.content, style = MaterialTheme.typography.bodyMedium, lineHeight = 24.sp)
                                 }
                             }
@@ -212,85 +228,132 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            // 7. 名人名言
+            // 🌟 名人名言
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 24.dp)
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(16.dp))
-                        .padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(Icons.Default.FormatQuote, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), modifier = Modifier.size(48.dp))
-                    Text(
-                        text = point.famousQuote,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontStyle = FontStyle.Italic,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        lineHeight = 28.sp
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(
-                        text = "— ${point.quoteAuthor}",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
+                FamousQuoteCard(point.famousQuote, point.quoteAuthor)
             }
         }
     }
 
-    // 弹窗：关联知识点详情
+    // 弹窗逻辑
     selectedRelatedPoint?.let { rp ->
-        AlertDialog(
-            onDismissRequest = { selectedRelatedPoint = null },
-            title = { Text(text = "🔗 关联知识点：${rp.title}", fontWeight = FontWeight.Bold) },
-            text = {
-                Column {
-                    Text(text = rp.description, style = MaterialTheme.typography.bodyMedium)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = "💡 进阶关联：为什么关联？", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = rp.connectionReason, style = MaterialTheme.typography.bodySmall, lineHeight = 22.sp)
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { selectedRelatedPoint = null }) { Text("知道了") }
-            },
-            shape = RoundedCornerShape(24.dp)
-        )
+        RelatedPointDialog(rp) { selectedRelatedPoint = null }
     }
 
-    // 弹窗：句子详细分析
     selectedSentenceAnalysis?.let { hs ->
-        Dialog(onDismissRequest = { selectedSentenceAnalysis = null }) {
-            Card(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-            ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Analytics, null, tint = MaterialTheme.colorScheme.primary)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "深度句法分析", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+        SentenceAnalysisDialog(hs) { selectedSentenceAnalysis = null }
+    }
+}
+
+@Composable
+fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val markwon = remember {
+        Markwon.builder(context)
+            .usePlugin(HtmlPlugin.create())
+            .usePlugin(TablePlugin.create(context))
+            .build()
+    }
+
+    AndroidView(
+        factory = { ctx ->
+            TextView(ctx).apply {
+                textSize = 16f
+                setLineSpacing(0f, 1.4f)
+                setTextColor(android.graphics.Color.DKGRAY)
+            }
+        },
+        update = { view ->
+            // Markwon needs the text to be correctly escaped for actual newlines
+            val cleanMarkdown = markdown.replace("\\n", "\n")
+            markwon.setMarkdown(view, cleanMarkdown)
+        },
+        modifier = modifier
+    )
+}
+
+@Composable
+fun SectionHeader(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+    ) {
+        Icon(icon, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+fun TextbookParagraphCard(paragraph: TextbookParagraph, onSentenceClick: (HighlightedSentence) -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            val annotatedString = buildAnnotatedString {
+                val fullContent = paragraph.content
+                append(fullContent)
+                paragraph.highlightedSentences.forEach { hs ->
+                    val startIndex = fullContent.indexOf(hs.text)
+                    if (startIndex != -1) {
+                        addStyle(
+                            style = SpanStyle(
+                                background = Color.Yellow.copy(alpha = 0.3f),
+                                fontWeight = FontWeight.Bold,
+                                textDecoration = TextDecoration.Underline,
+                                color = MaterialTheme.colorScheme.primary
+                            ),
+                            start = startIndex,
+                            end = startIndex + hs.text.length
+                        )
+                        addStringAnnotation(tag = "ANALYSIS", annotation = hs.text, start = startIndex, end = startIndex + hs.text.length)
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = hs.text, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium, lineHeight = 24.sp)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = hs.analysis, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Button(
-                        onClick = { selectedSentenceAnalysis = null },
-                        modifier = Modifier.align(Alignment.End),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text("关闭")
+                }
+            }
+
+            ClickableText(
+                text = annotatedString,
+                style = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Serif, lineHeight = 28.sp, color = MaterialTheme.colorScheme.onSurface),
+                onClick = { offset ->
+                    annotatedString.getStringAnnotations("ANALYSIS", offset, offset).firstOrNull()?.let { ann ->
+                        paragraph.highlightedSentences.find { it.text == ann.item }?.let { onSentenceClick(it) }
+                    }
+                }
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("💡 点击高亮部分查看语法剖析", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, fontStyle = FontStyle.Italic)
+                Text(paragraph.source, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+            }
+        }
+    }
+}
+
+@Composable
+fun ExampleSentenceCard(sentence: ExampleSentence) {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(sentence.english, fontWeight = FontWeight.Bold, fontSize = 17.sp, lineHeight = 24.sp)
+            Text(sentence.chinese, style = MaterialTheme.typography.bodyMedium, color = Color.Gray, modifier = Modifier.padding(top = 4.dp))
+            
+            sentence.analysis?.let { analysis ->
+                Spacer(modifier = Modifier.height(12.dp))
+                Surface(
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
+                        Icon(Icons.Default.Analytics, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(analysis, style = MaterialTheme.typography.bodySmall, lineHeight = 20.sp)
                     }
                 }
             }
@@ -299,64 +362,65 @@ fun KnowledgeDetailScreen(
 }
 
 @Composable
-fun TextbookParagraphCard(paragraph: TextbookParagraph, onSentenceClick: (HighlightedSentence) -> Unit) {
-    val annotatedString = buildAnnotatedString {
-        val fullContent = paragraph.content
-        append(fullContent)
-        
-        paragraph.highlightedSentences.forEach { hs ->
-            val startIndex = fullContent.indexOf(hs.text)
-            if (startIndex != -1) {
-                addStyle(
-                    style = SpanStyle(
-                        background = Color.Yellow.copy(alpha = 0.3f),
-                        fontWeight = FontWeight.Bold,
-                        textDecoration = TextDecoration.Underline,
-                        color = MaterialTheme.colorScheme.primary
-                    ),
-                    start = startIndex,
-                    end = startIndex + hs.text.length
-                )
-                addStringAnnotation(
-                    tag = "ANALYSIS",
-                    annotation = hs.text,
-                    start = startIndex,
-                    end = startIndex + hs.text.length
-                )
-            }
-        }
-    }
-
-    Surface(
-        color = MaterialTheme.colorScheme.surface,
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
-        modifier = Modifier.padding(vertical = 8.dp)
+fun FamousQuoteCard(quote: String, author: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(16.dp))
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            ClickableText(
-                text = annotatedString,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontFamily = FontFamily.Serif,
-                    lineHeight = 28.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                ),
-                onClick = { offset ->
-                    annotatedString.getStringAnnotations(tag = "ANALYSIS", start = offset, end = offset)
-                        .firstOrNull()?.let { annotation ->
-                            paragraph.highlightedSentences.find { it.text == annotation.item }?.let {
-                                onSentenceClick(it)
-                            }
-                        }
-                }
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "💡 提示：点击黄色高亮句子查看深度分析",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.secondary,
-                fontStyle = FontStyle.Italic
-            )
+        Icon(Icons.Default.FormatQuote, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), modifier = Modifier.size(48.dp))
+        Text(
+            text = quote,
+            style = MaterialTheme.typography.titleMedium,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Bold,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            lineHeight = 28.sp
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(text = "— $author", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+fun RelatedPointDialog(rp: RelatedPoint, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(rp.title, fontWeight = FontWeight.Bold) },
+        text = {
+            Column {
+                Text(rp.description, style = MaterialTheme.typography.bodyMedium)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text("💡 关联逻辑：", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Text(rp.connectionReason, style = MaterialTheme.typography.bodySmall, lineHeight = 20.sp)
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("知道了") } },
+        shape = RoundedCornerShape(24.dp)
+    )
+}
+
+@Composable
+fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            shape = RoundedCornerShape(24.dp)
+        ) {
+            Column(modifier = Modifier.padding(24.dp)) {
+                Text("深度句法分析", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(hs.text, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(hs.analysis, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
+                Spacer(modifier = Modifier.height(24.dp))
+                Button(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text("确认") }
+            }
         }
     }
 }
@@ -366,86 +430,43 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
     var showExplanation by remember { mutableStateOf(false) }
     
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = "[${examQuestion.year}·${examQuestion.location}]",
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
-            )
+            Text("[${examQuestion.year}·${examQuestion.location}]", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(examQuestion.question, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium, lineHeight = 24.sp)
             Spacer(modifier = Modifier.height(12.dp))
-            
-            Text(text = "题目：\n${examQuestion.question}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium, lineHeight = 22.sp)
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            val optionsText = examQuestion.options.joinToString("   ")
-            Text(text = optionsText, style = MaterialTheme.typography.bodyMedium)
+            Text(examQuestion.options.joinToString("   "), style = MaterialTheme.typography.bodyMedium)
             
             Spacer(modifier = Modifier.height(16.dp))
-            
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { showExplanation = !showExplanation }
-                    .padding(vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().clickable { showExplanation = !showExplanation }.padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = if (showExplanation) "隐藏解析" else "点击查看深度解析",
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold
-                )
-                Icon(
-                    imageVector = if (showExplanation) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                Text(if (showExplanation) "收起解析" else "点击查看深度解析", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                Icon(if (showExplanation) Icons.Default.ExpandLess else Icons.Default.ExpandMore, null, tint = MaterialTheme.colorScheme.primary)
             }
             
             AnimatedVisibility(visible = showExplanation) {
                 Column {
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                    Spacer(modifier = Modifier.height(12.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    Text(examQuestion.explanation, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
                     
-                    Text(
-                        text = examQuestion.explanation,
-                        style = MaterialTheme.typography.bodyMedium,
-                        lineHeight = 22.sp
-                    )
-                    
-                    examQuestion.errorProne?.let { errorProne ->
+                    examQuestion.errorProne?.let {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Surface(
-                            color = Color.Red.copy(alpha = 0.05f),
-                            shape = RoundedCornerShape(8.dp),
-                            border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.1f))
-                        ) {
-                            Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
-                                Icon(Icons.Default.Warning, contentDescription = null, tint = Color.Red.copy(alpha = 0.8f), modifier = Modifier.size(18.dp))
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text("易错点：$errorProne", style = MaterialTheme.typography.bodySmall, color = Color.Red.copy(alpha = 0.8f), lineHeight = 20.sp)
-                            }
+                        Surface(color = Color.Red.copy(alpha = 0.05f), shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.1f))) {
+                            Text("⚠️ 易错点：$it", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodySmall, color = Color.Red.copy(alpha = 0.8f))
                         }
                     }
-
-                    examQuestion.translation?.let { translation ->
+                    
+                    examQuestion.translation?.let {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Surface(
-                            color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(8.dp),
-                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
-                        ) {
-                            Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
-                                Icon(Icons.Default.Translate, contentDescription = null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(18.dp))
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text("翻译：$translation", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 20.sp)
-                            }
+                        Surface(color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp)) {
+                            Text("🌐 翻译：$it", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodySmall)
                         }
                     }
                 }
