@@ -61,6 +61,7 @@ import com.example.insight.data.model.sampleCoursewares
 import com.example.insight.data.model.Courseware
 import com.example.insight.data.model.sampleLessonPlans
 import com.example.insight.data.model.LessonPlanSample
+import com.example.insight.data.model.KnowledgeProvider
 
 enum class InsightTab(
     val title: String,
@@ -371,9 +372,9 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                     TextButton(onClick = { }) { Text("全部", color = primaryColor) }
                 }
             }
-            items(7) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
+            items(KnowledgeProvider.allPoints.size) { index -> HistoryCard(index) { onNavigateToKnowledgeDetail(index.toString()) } }
         } else {
-            items(5) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
+            items(KnowledgeProvider.allPoints.size) { index -> SearchResultItem(index) { onNavigateToKnowledgeDetail("search_$index") } }
         }
     }
 }
@@ -635,14 +636,8 @@ fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
 
 @Composable
 fun SearchResultItem(index: Int, onClick: () -> Unit) {
-    val results = listOf(
-        "如何在句子中识别【定语从句】",
-        "宾语从句的语序要求详解",
-        "被动语态在写作中的高级应用",
-        "中考英语情态动词易错点汇总",
-        "形容词比较级最高级规则变化表"
-    )
-    val resultText = results[index % results.size]
+    val point = KnowledgeProvider.allPoints[index % KnowledgeProvider.allPoints.size]
+    val resultText = "关于【${point.title}】的知识点详解"
     Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
         Row(modifier = Modifier.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(imageVector = Icons.Outlined.History, contentDescription = null, tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
@@ -654,7 +649,7 @@ fun SearchResultItem(index: Int, onClick: () -> Unit) {
 
 @Composable
 fun HistoryCard(index: Int, onClick: () -> Unit) {
-    val labels = listOf("定语从句", "虚拟语气", "现在分词", "宾语从句", "被动语态", "情态动词", "比较级最高级")
+    val point = KnowledgeProvider.allPoints[index % KnowledgeProvider.allPoints.size]
     val status = listOf("已掌握", "练习中", "待复习")
     val primaryColor = MaterialTheme.colorScheme.primary
     Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
@@ -664,7 +659,7 @@ fun HistoryCard(index: Int, onClick: () -> Unit) {
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                Text(labels[index % labels.size], style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                 Text("扫描时间: 2024.03.1${index}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
                 Spacer(modifier = Modifier.height(8.dp))
                 Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> HighlightYellow.copy(alpha = 0.2f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
