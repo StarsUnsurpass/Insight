@@ -368,7 +368,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
         if (searchQuery.isEmpty()) {
             item {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(if (preferences.role == UserRole.Student) "最近扫描" else "班级动态", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                    Text(if (preferences.role == UserRole.Student) "最近扫描" else "中考英语考点通", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                     TextButton(onClick = { }) { Text("全部", color = primaryColor) }
                 }
             }
