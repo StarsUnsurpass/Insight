@@ -60,9 +60,9 @@ fun KnowledgeDetailScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(bottom = 40.dp)
         ) {
-            // 1. 知识点概览
+            // 1. 知识点详解
             item {
-                SectionHeader(title = "考纲要求", icon = Icons.AutoMirrored.Filled.Assignment)
+                SectionHeader(title = "📖 知识点详解 (Core Explanation)", icon = Icons.AutoMirrored.Filled.Assignment)
                 DetailCard {
                     Text(
                         text = point.description,
@@ -81,7 +81,7 @@ fun KnowledgeDetailScreen(
 
             // 2. 关联知识点 (点击弹出)
             item {
-                SectionHeader(title = "关联知识点", icon = Icons.Default.Link)
+                SectionHeader(title = "🔗 关联知识点 (Knowledge Graph Links)", icon = Icons.Default.Link)
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
                     mainAxisSpacing = 8.dp,
@@ -102,7 +102,7 @@ fun KnowledgeDetailScreen(
             // 3. 中考真题 (按年份排序)
             if (point.pastExamQuestions.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "近十年中考真题", icon = Icons.Default.AutoAwesome)
+                    SectionHeader(title = "📝 近十年相关中考真题 (10-Year Real Exam Questions)", icon = Icons.Default.AutoAwesome)
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         point.pastExamQuestions.forEach { question ->
                             PastExamQuestionItem(question)
@@ -114,7 +114,7 @@ fun KnowledgeDetailScreen(
             // 4. 核心例题
             if (point.exampleProblems.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "经典模拟题", icon = Icons.Default.Quiz)
+                    SectionHeader(title = "✏️ 核心练习 (Core Exercises)", icon = Icons.Default.Quiz)
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         point.exampleProblems.forEach { problem ->
                             ExampleProblemItem(
@@ -131,7 +131,7 @@ fun KnowledgeDetailScreen(
             // 5. 课本文章段落 (点击句子分析)
             if (point.textbookParagraphs.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "课本文章段落", icon = Icons.Default.AutoStories)
+                    SectionHeader(title = "📚 课本相关段落 (Textbook Mapping)", icon = Icons.Default.AutoStories)
                     point.textbookParagraphs.forEach { paragraph ->
                         TextbookParagraphCard(paragraph) { selectedSentenceAnalysis = it }
                     }
@@ -141,7 +141,7 @@ fun KnowledgeDetailScreen(
             // 6. 常用例句 (提升难度)
             if (point.exampleSentences.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "高阶应用例句", icon = Icons.Default.Translate)
+                    SectionHeader(title = "💬 经典例句 (Example Sentences)", icon = Icons.Default.Translate)
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         point.exampleSentences.forEach { sentence ->
                             DetailCard {
@@ -161,7 +161,7 @@ fun KnowledgeDetailScreen(
             // 7. 授课与学情备忘 (新增)
             if (point.teachingNotes.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "授课与学情备忘", icon = Icons.Default.Lightbulb)
+                    SectionHeader(title = "💡 授课与学情备忘 (Teaching & Insight Notes)", icon = Icons.Default.Lightbulb)
                     DetailCard {
                         point.teachingNotes.forEach { note ->
                             Text(text = note.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)

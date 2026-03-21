@@ -400,11 +400,11 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                     AnimatedVisibility(
                         visible = isExpanded,
                         enter = expandVertically(
-                            animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing)
-                        ) + fadeIn(animationSpec = tween(durationMillis = 300)),
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessLow)
+                        ) + fadeIn(animationSpec = tween(300)),
                         exit = shrinkVertically(
-                            animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
-                        ) + fadeOut(animationSpec = tween(durationMillis = 200))
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessLow)
+                        ) + fadeOut(animationSpec = tween(200))
                     ) {
                         Column(
                             verticalArrangement = Arrangement.spacedBy(16.dp),
