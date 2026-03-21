@@ -6,8 +6,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.*
-import androidx.compose.material.icons.*
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -89,7 +88,7 @@ fun SolutionScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             IconButton(onClick = onBack) {
-                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
+                                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
                             }
                             Text(
                                 "DeepSeek 智能解析",

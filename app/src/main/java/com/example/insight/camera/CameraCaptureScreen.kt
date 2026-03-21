@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -163,7 +163,7 @@ fun CameraCaptureScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBack) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
             }
             if (mode == CaptureMode.EDITING) {
                 Text("调整选区", color = Color.White, fontWeight = FontWeight.Bold)

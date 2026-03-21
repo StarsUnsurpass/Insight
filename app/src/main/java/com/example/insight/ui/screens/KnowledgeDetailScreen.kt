@@ -238,7 +238,7 @@ fun KnowledgeDetailScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(text = hs.text, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium, lineHeight = 24.sp)
                     Spacer(modifier = Modifier.height(16.dp))
-                    Divider(color = MaterialTheme.colorScheme.outlineVariant)
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(text = hs.analysis, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
                     Spacer(modifier = Modifier.height(24.dp))
@@ -418,7 +418,7 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
             }
             if (showExplanation) {
                 Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
+                HorizontalDivider(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = examQuestion.explanation,

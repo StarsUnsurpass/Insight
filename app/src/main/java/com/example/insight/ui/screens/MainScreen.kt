@@ -19,8 +19,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -325,6 +323,7 @@ fun BoxScope.TabIconFluid(
 fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
+    val expandedSections = remember { mutableStateListOf("板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系") }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -369,20 +368,39 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
             val sections = listOf("板块一：词法体系", "板块二：时态与语态体系", "板块三：句法体系")
             
             sections.forEach { sectionName ->
+                val isExpanded = expandedSections.contains(sectionName)
                 item {
-                    Text(
-                        text = sectionName,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = primaryColor,
-                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                if (isExpanded) expandedSections.remove(sectionName)
+                                else expandedSections.add(sectionName)
+                            }
+                            .padding(top = 12.dp, bottom = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = sectionName,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = primaryColor
+                        )
+                        Icon(
+                            imageVector = if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                            contentDescription = if (isExpanded) "Collapse" else "Expand",
+                            tint = primaryColor
+                        )
+                    }
                 }
                 
-                val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
-                items(sectionPoints.size) { index ->
-                    val point = sectionPoints[index]
-                    HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
+                if (isExpanded) {
+                    val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                    items(sectionPoints.size) { index ->
+                        val point = sectionPoints[index]
+                        HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
+                    }
                 }
             }
         } else {

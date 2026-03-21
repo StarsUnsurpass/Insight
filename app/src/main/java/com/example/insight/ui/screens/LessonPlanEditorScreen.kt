@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -156,7 +155,7 @@ fun LessonPlanEditorScreen(
             TopAppBar(
                 title = { Text(if (plan == null) "新建教案" else "编辑教案", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, null) }
+                    IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, null) }
                 },
                 actions = {
                     IconButton(onClick = { isPreviewMode = !isPreviewMode }) {
