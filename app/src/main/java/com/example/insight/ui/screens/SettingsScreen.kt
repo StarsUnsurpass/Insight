@@ -135,32 +135,7 @@ fun SettingsScreen(
                     onCheckedChange = onHapticToggle
                 )
             }
-
-            item {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("AI 引擎配置", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
-            }
-
-            item {
-                SettingItem(
-                    icon = Icons.Default.AutoAwesome,
-                    title = "DeepSeek API Key",
-                    subtitle = if (preferences.deepSeekApiKey.isBlank()) "未配置" else "已配置 (sk-***)",
-                    onClick = { showApiKeyDialog = true }
-                )
-            }
         }
-    }
-
-    if (showApiKeyDialog) {
-        ApiKeyEditDialog(
-            initialKey = preferences.deepSeekApiKey,
-            onConfirm = {
-                onDeepSeekApiKeyChange(it)
-                showApiKeyDialog = false
-            },
-            onDismiss = { showApiKeyDialog = false }
-        )
     }
 
     if (showNameDialog) {
