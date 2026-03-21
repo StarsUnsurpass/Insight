@@ -309,6 +309,51 @@ object KnowledgeProvider {
             ),
             textbookParagraphs = listOf(TextbookParagraph("He asked me where I was going.", "—— 摘自《科普版》")),
             exampleSentences = listOf(ExampleSentence("She told me she liked music.", "她告诉我她喜欢音乐。"), ExampleSentence("He said that the earth goes round the sun.", "他说地球绕着太阳转。"))
+        ),
+        KnowledgePoint(
+            id = "18",
+            title = "句子成分与基本句型 (Sentence Structure)",
+            description = "中考大纲要求：1. 掌握句子六大成分（主、谓、宾、表、定、状）；2. 掌握五种基本句型（S+V, S+V+O, S+V+P, S+V+IO+DO, S+V+O+OC）；3. 理解宾语补足语与表语的区别。",
+            relatedPoints = listOf("主谓宾结构", "系表结构", "宾语补足语", "定语与状语的位置"),
+            exampleProblems = listOf(
+                ExampleProblem("The news made us ______. ", listOf("A. happily", "B. happy", "C. happiness", "D. to happy"), "B", "made us happy 属于 S+V+O+OC 结构，happy 是宾补。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2023", "辽宁沈阳中考", "Our teacher always tells us ______ hard for our future.", listOf("A. work", "B. working", "C. to work", "D. worked"), "C", "考查 S+V+O+OC 结构。tell sb to do sth。"),
+                PastExamQuestion("2022", "黑龙江哈尔滨中考", "He found the book very ______.", listOf("A. interest", "B. interesting", "C. interested", "D. interests"), "B", "考查宾语补足语。find sth + adj.")
+            ),
+            textbookParagraphs = listOf(TextbookParagraph("I found the city very beautiful.", "—— 摘自《人教版初二上》")),
+            exampleSentences = listOf(ExampleSentence("He plays football every day.", "他每天踢足球。"), ExampleSentence("My mother looks young.", "我妈妈看起来很年轻。"))
+        ),
+        KnowledgePoint(
+            id = "19",
+            title = "It 句型与 There be 句型 (Special Patterns)",
+            description = "中考大纲重点：1. It 作形式主语/形式宾语的句型（It's adj. for/of sb to do...）；2. It 指代时间、天气、距离、距离、身份等；3. There be 句型的就近原则及各时态变化；4. There be 与 have/has 的区别。",
+            relatedPoints = listOf("It's time to do", "There's no need to", "It seems that", "就近原则"),
+            exampleProblems = listOf(
+                ExampleProblem("It's kind ______ you to help me.", listOf("A. for", "B. of", "C. with", "D. to"), "B", "kind 是描写人物性格的形容词，用 of sb to do。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2023", "江苏扬州中考", "There ______ a football match in our school tomorrow.", listOf("A. is", "B. will have", "C. will be", "D. has"), "C", "考查 There be 句型的一般将来时：There will be 或 There is going to be。"),
+                PastExamQuestion("2022", "广东广州中考", "It is very important ______ us ______ protect the environment.", listOf("A. for; to", "B. of; to", "C. for; for", "D. of; of"), "A", "考查 It is adj for sb to do 结构。")
+            ),
+            textbookParagraphs = listOf(TextbookParagraph("It's a long way to the library.", "—— 摘自《人教版初一上》")),
+            exampleSentences = listOf(ExampleSentence("There are some birds in the tree.", "树上有一些鸟。"), ExampleSentence("It takes me an hour to do my homework.", "做作业花了我一个小时。"))
+        ),
+        KnowledgePoint(
+            id = "20",
+            title = "核心词汇辨析 (Vocabulary Distinctions)",
+            description = "中考高频易混词辨析：1. spend/take/pay/cost (花费)；2. also/too/either/as well (也)；3. dress/wear/put on/in (穿戴)；4. look/see/watch/read (看)；5. say/speak/tell/talk (说)；6. borrow/lend/keep (借)。",
+            relatedPoints = listOf("花费四巨头", "借走 vs 借入", "看字诀", "说字诀"),
+            exampleProblems = listOf(
+                ExampleProblem("He ______ 20 yuan on the book.", listOf("A. paid", "B. cost", "C. spent", "D. took"), "C", "spend money on sth 为固定搭配。")
+            ),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2023", "湖北随州中考", "I ______ the book for two weeks.", listOf("A. borrowed", "B. lent", "C. kept", "D. have borrowed"), "C", "考查延续性动词。for two weeks 要求用 keep。"),
+                PastExamQuestion("2022", "四川达州中考", "The new dress ______ her 200 yuan.", listOf("A. spent", "B. paid", "C. cost", "D. took"), "C", "考查花费。sth cost sb money.")
+            ),
+            textbookParagraphs = listOf(TextbookParagraph("I spent my vacation in the mountains.", "—— 摘自《人教版初二上》")),
+            exampleSentences = listOf(ExampleSentence("Can you lend me your pen?", "你能把笔借我吗？"), ExampleSentence("He wears a pair of glasses.", "他戴着一副眼镜。"))
         )
     )
 

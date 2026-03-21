@@ -662,8 +662,8 @@ fun HistoryCard(index: Int, onClick: () -> Unit) {
                 Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                 Text("扫描时间: 2024.03.1${index}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
                 Spacer(modifier = Modifier.height(8.dp))
-                Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> HighlightYellow.copy(alpha = 0.2f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
-                    Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> Color(0xFFB8860B); else -> Color.Red })
+                Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
+                    Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> MaterialTheme.colorScheme.secondary; else -> Color.Red })
                 }
             }
         }
