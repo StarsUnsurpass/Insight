@@ -13,7 +13,9 @@ data class PastExamQuestion(
     val question: String,
     val options: List<String>,
     val answer: String,
-    val explanation: String
+    val explanation: String,
+    val errorProne: String? = null,
+    val translation: String? = null
 )
 
 data class HighlightedSentence(
@@ -30,6 +32,7 @@ data class TextbookParagraph(
 data class ExampleSentence(
     val english: String,
     val chinese: String,
+    val analysis: String? = null,
     val difficulty: String = "中考难度"
 )
 
@@ -197,21 +200,25 @@ object KnowledgeProvider {
                     "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me. I didn't do it.", 
                     listOf("A. is cleaning", "B. has cleaned", "C. was cleaning", "D. cleans"), 
                     "B", 
-                    "考察现在完成时的“影响结果”。教室现在很干净（It's so clean now），说明打扫的动作发生在过去，但对现在造成了影响。"
+                    "【答案】B\n【解析】考察现在完成时的“影响结果”。教室现在很干净（It's so clean now），说明打扫的动作发生在过去，但对现在造成了影响。",
+                    errorProne = "学生容易看到 'Look!' 就习惯性选择现在进行时 (A. is cleaning)。但在本题语境中，打扫的动作已经完成，强调的是造成的结果（教室干净了），而非动作正在进行。",
+                    translation = "— 看！有人打扫过教室了。现在真干净。\n— 哎，不是我。我没打扫。"
                 ),
                 PastExamQuestion(
                     "2023", "苏州中考", 
                     "Mr. Wu ______ in this school since he graduated from university.", 
                     listOf("A. teaches", "B. taught", "C. has taught", "D. will teach"), 
                     "C", 
-                    "考察现在完成时的“持续动作”。标志词为 since + 过去时的句子，主句必须用现在完成时，且 teach 为延续性动词，符合语法规范。"
+                    "【答案】C\n【解析】考察现在完成时的“持续动作”。标志词为 since + 过去时的句子，主句必须用现在完成时，且 teach 为延续性动词，符合语法规范。",
+                    translation = "吴老师自从大学毕业以来，一直在这所学校教书。"
                 ),
                 PastExamQuestion(
                     "2021", "南京中考改编", 
                     "His uncle _______ for three years.", 
                     listOf("A. has died", "B. has been dead", "C. died", "D. dies"), 
                     "B", 
-                    "这是现在完成时最经典的“瞬间动词转换”陷阱。有 for three years 必须用延续性动词，die 是瞬间动词，不能和 for 连用，必须转为状态 be dead。"
+                    "【答案】B\n【解析】这是现在完成时最经典的“瞬间动词转换”陷阱。有 for three years 必须用延续性动词，die 是瞬间动词，不能和 for 连用，必须转为状态 be dead。",
+                    errorProne = "极易错选 A。很多学生看到 for three years 知道用现在完成时，但忽略了 die 是瞬间动作，不能延续三年。"
                 )
             ),
             textbookParagraphs = listOf(
@@ -225,9 +232,24 @@ object KnowledgeProvider {
                 )
             ),
             exampleSentences = listOf(
-                ExampleSentence("I have already finished my homework.", "我已经做完作业了。—— 影响：现在可以出去玩了", "中考核心"),
-                ExampleSentence("She hasn't arrived yet.", "她还没到。—— 影响：我们还要继续等", "中考核心"),
-                ExampleSentence("We have lived in Suzhou since 10 years ago.", "我们住在苏州已经 10 年了。—— 持续：现在依然住在这里", "中考核心")
+                ExampleSentence(
+                    "I have already finished my homework.", 
+                    "我已经做完作业了。", 
+                    analysis = "【影响】过去完成的动作（写作业）对现在产生了影响（现在可以出去玩了）。already 是标志词，通常放在 have/has 和过去分词之间。",
+                    difficulty = "中考核心"
+                ),
+                ExampleSentence(
+                    "She hasn't arrived yet.", 
+                    "她还没到。", 
+                    analysis = "【影响】过去的动作未发生，其影响是“我们现在还需要继续等”。yet 常用于否定句和疑问句句末。",
+                    difficulty = "中考核心"
+                ),
+                ExampleSentence(
+                    "We have lived in Suzhou since 10 years ago.", 
+                    "我们住在苏州已经 10 年了。", 
+                    analysis = "【持续】表示“居住”这个动作从 10 年前开始，一直延续到现在，并且可能继续下去。live 是延续性动词，可以和 since + 时间点连用。",
+                    difficulty = "中考核心"
+                )
             ),
             teachingNotes = listOf(
                 TeachingNote("常见学生错因", "1. 忘记把动词变为过去分词，常跟一般过去时的过去式混淆（尤其是 catch, bring 等不规则变化）。\n2. 做单选题时，看到 since/for 不假思索直接选完成时，忽略了动词是否具有延续性。"),
