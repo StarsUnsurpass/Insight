@@ -21,6 +21,8 @@ import hilt_aggregated_deps._com_example_insight_InsightApplication_GeneratedInj
 import hilt_aggregated_deps._com_example_insight_MainActivity_GeneratedInjector;
 import hilt_aggregated_deps._com_example_insight_di_AppModule;
 import hilt_aggregated_deps._com_example_insight_di_NetworkModule;
+import hilt_aggregated_deps._com_example_insight_ui_schedule_ScheduleViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_example_insight_ui_schedule_ScheduleViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._com_example_insight_ui_screens_MindMapViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._com_example_insight_ui_screens_MindMapViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._com_example_insight_ui_state_InsightViewModel_HiltModules_BindsModule;
@@ -69,6 +71,8 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_example_insight_MainActivity_GeneratedInjector.class,
         _com_example_insight_di_AppModule.class,
         _com_example_insight_di_NetworkModule.class,
+        _com_example_insight_ui_schedule_ScheduleViewModel_HiltModules_BindsModule.class,
+        _com_example_insight_ui_schedule_ScheduleViewModel_HiltModules_KeyModule.class,
         _com_example_insight_ui_screens_MindMapViewModel_HiltModules_BindsModule.class,
         _com_example_insight_ui_screens_MindMapViewModel_HiltModules_KeyModule.class,
         _com_example_insight_ui_state_InsightViewModel_HiltModules_BindsModule.class,

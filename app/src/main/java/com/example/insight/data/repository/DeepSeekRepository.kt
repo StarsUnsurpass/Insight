@@ -9,6 +9,7 @@ import com.example.insight.data.remote.DeepSeekRequest
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import okhttp3.ResponseBody
@@ -56,12 +57,12 @@ class DeepSeekRepository @Inject constructor(
 
     suspend fun generateWeeklyReport(apiKey: String): Flow<String> = flow {
         val scans = scanDao.getAllScans()
-        val nodes = knowledgeDao.getAllNodes()
+        val nodes = knowledgeDao.getAllNodes().firstOrNull() ?: emptyList()
         
         val contextData = mapOf(
             "total_scans" to scans.size,
             "mastered_count" to scans.count { it.isMastered },
-            "knowledge_status" to nodes.map { mapOf("title" to it.title, "mastery" to it.masteryLevel) }
+            "knowledge_status" to nodes.map { mapOf("title" to it.title) }
         )
 
         val systemPrompt = """

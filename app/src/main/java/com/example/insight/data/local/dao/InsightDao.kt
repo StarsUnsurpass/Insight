@@ -27,23 +27,54 @@ interface ScanDao {
 
 @Dao
 interface KnowledgeDao {
+    @Query("SELECT * FROM knowledge_nodes")
+    fun getAllNodes(): Flow<List<KnowledgeNodeEntity>>
+
+    @Query("SELECT * FROM knowledge_edges")
+    fun getAllEdges(): Flow<List<KnowledgeEdgeEntity>>
+
+    @Query("""
+        SELECT n.* FROM knowledge_nodes n
+        JOIN knowledge_edges e ON n.nodeId = e.sourceNodeId
+        WHERE e.targetNodeId = :nodeId AND e.relationType = 'PREREQUISITE'
+    """)
+    suspend fun getPrerequisites(nodeId: String): List<KnowledgeNodeEntity>
+
+    @Query("""
+        SELECT n.* FROM knowledge_nodes n
+        JOIN knowledge_closure_table c ON n.nodeId = c.ancestorId
+        WHERE c.descendantId = :nodeId AND c.depth > 0
+    """)
+    fun getAncestors(nodeId: String): Flow<List<KnowledgeNodeEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNodes(nodes: List<KnowledgeNodeEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEdges(edges: List<KnowledgeEdgeEntity>)
 
-    @Query("SELECT * FROM knowledge_node_table")
-    fun getAllNodesFlow(): Flow<List<KnowledgeNodeEntity>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertClosure(closures: List<KnowledgeClosureEntity>)
 
-    @Query("SELECT * FROM knowledge_node_table")
-    suspend fun getAllNodes(): List<KnowledgeNodeEntity>
+    @Query("SELECT * FROM student_mastery WHERE studentId = :studentId")
+    fun getStudentMastery(studentId: String): Flow<List<StudentMasteryEntity>>
 
-    @Query("SELECT * FROM knowledge_edge_table")
-    fun getAllEdgesFlow(): Flow<List<KnowledgeEdgeEntity>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateMastery(mastery: StudentMasteryEntity)
 
-    @Query("UPDATE knowledge_node_table SET masteryLevel = :level WHERE nodeId = :id")
-    suspend fun updateMastery(id: String, level: Float)
+    @Transaction
+    suspend fun updateMasteryWithRules(studentId: String, nodeId: String, isCorrect: Boolean) {
+        val current = getMasterySync(studentId, nodeId) ?: StudentMasteryEntity(studentId, nodeId, 60f)
+        val newScore = if (isCorrect) {
+            (current.masteryScore + 5f).coerceAtMost(100f)
+        } else {
+            (current.masteryScore - 10f).coerceAtLeast(0f)
+        }
+        updateMastery(current.copy(masteryScore = newScore, lastUpdateTime = System.currentTimeMillis()))
+    }
+
+    @Query("SELECT * FROM student_mastery WHERE studentId = :studentId AND nodeId = :nodeId")
+    suspend fun getMasterySync(studentId: String, nodeId: String): StudentMasteryEntity?
 }
 
 @Dao

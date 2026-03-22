@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-39:12
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-44:12
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:2:1-44:12
 MERGED from [com.patrykandpatrick.vico:compose-m3:1.14.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\7be242b9a1c97a54ef6151919c8d619b\transformed\jetified-compose-m3-1.14.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.patrykandpatrick.vico:compose:1.14.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\fef6aa7418e9e7fbf4186da7a08513c5\transformed\jetified-compose-1.14.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-video:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\6ced008194565c4ed251d3f4f09a2300\transformed\jetified-camera-video-1.3.1\AndroidManifest.xml:2:1-7:12
@@ -120,21 +120,33 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.2] E:\De
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.2] E:\DevTools\gradle-8.6\caches\8.9\transforms\42a087330e572c18dea26704bd5e2212\transformed\jetified-transport-backend-cct-2.2.2\AndroidManifest.xml:26:5-67
 	android:name
 		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.SCHEDULE_EXACT_ALARM
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:5-77
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:22-74
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:22-78
 uses-feature#android.hardware.camera
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:5-85
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-85
 	android:required
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:58-82
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:58-82
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:7:19-57
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:19-57
 uses-feature#android.hardware.camera.autofocus
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:5-95
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:11:5-95
 	android:required
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:68-92
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:11:68-92
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:8:19-67
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:11:19-67
 application
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-37:19
-INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:10:5-37:19
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:13:5-42:19
+INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:13:5-42:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-camera2:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\dbe756a45ec9b5bf4ce5f43ab1068e92\transformed\jetified-camera-camera2-1.3.1\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-core:1.3.1] E:\DevTools\gradle-8.6\caches\8.9\transforms\3a284d11c12d8a25ddfe1b2b73f16ec1\transformed\jetified-camera-core-1.3.1\AndroidManifest.xml:23:5-34:19
@@ -182,53 +194,57 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] E:\DevTools\gradle-8.6\cach
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] E:\DevTools\gradle-8.6\caches\8.9\transforms\12959b5afa7467af596736a97e79ad1b\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:16:9-35
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:19:9-35
 	android:label
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:14:9-32
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:17:9-32
 	android:roundIcon
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:15:9-61
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:18:9-61
 	android:icon
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:13:9-56
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:16:9-56
 	android:allowBackup
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:15:9-35
 	android:theme
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:17:9-66
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:20:9-66
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:14:9-43
 activity#com.example.insight.MainActivity
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:18:9-26:20
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:21:9-29:20
 	android:exported
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:20:13-36
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:13-36
 	android:theme
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:21:13-70
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:13-70
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:19:13-41
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:22:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:22:13-25:29
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:17-69
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:25-66
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:17-77
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:27-74
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:27:27-74
 provider#androidx.core.content.FileProvider
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:28:9-36:20
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:31:9-39:20
 	android:grantUriPermissions
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:32:13-47
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:35:13-47
 	android:authorities
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:30:13-67
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:33:13-67
 	android:exported
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:31:13-37
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:34:13-37
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:29:13-62
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:32:13-62
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:33:13-35:54
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:36:13-38:54
 	android:resource
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:35:17-51
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:38:17-51
 	android:name
-		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:34:17-67
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:37:17-67
+receiver#com.example.insight.util.ScheduleAlarmReceiver
+ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:41:9-64
+	android:name
+		ADDED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:41:19-61
 uses-sdk
 INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml

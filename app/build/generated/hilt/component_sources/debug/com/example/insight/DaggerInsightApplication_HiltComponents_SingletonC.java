@@ -13,21 +13,26 @@ import com.example.insight.data.local.dao.DiagnosticDao;
 import com.example.insight.data.local.dao.KnowledgeDao;
 import com.example.insight.data.local.dao.LessonPlanDao;
 import com.example.insight.data.local.dao.ScanDao;
+import com.example.insight.data.local.dao.ScheduleDao;
 import com.example.insight.data.local.dao.StudentDao;
 import com.example.insight.data.remote.DeepSeekApiService;
 import com.example.insight.data.repository.DeepSeekRepository;
 import com.example.insight.data.repository.InsightRepository;
+import com.example.insight.data.repository.ScheduleRepository;
 import com.example.insight.di.AppModule_ProvideAppDatabaseFactory;
 import com.example.insight.di.AppModule_ProvideDiagnosticDaoFactory;
 import com.example.insight.di.AppModule_ProvideKnowledgeDaoFactory;
 import com.example.insight.di.AppModule_ProvideLessonPlanDaoFactory;
 import com.example.insight.di.AppModule_ProvidePreferenceManagerFactory;
 import com.example.insight.di.AppModule_ProvideScanDaoFactory;
+import com.example.insight.di.AppModule_ProvideScheduleDaoFactory;
 import com.example.insight.di.AppModule_ProvideStudentDaoFactory;
 import com.example.insight.di.AppModule_ProvideTextRecognizerFactory;
 import com.example.insight.di.NetworkModule_ProvideDeepSeekApiServiceFactory;
 import com.example.insight.di.NetworkModule_ProvideOkHttpClientFactory;
 import com.example.insight.di.NetworkModule_ProvideRetrofitFactory;
+import com.example.insight.ui.schedule.ScheduleViewModel;
+import com.example.insight.ui.schedule.ScheduleViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.example.insight.ui.screens.MindMapViewModel;
 import com.example.insight.ui.screens.MindMapViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.example.insight.ui.state.InsightViewModel;
@@ -387,7 +392,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     @Override
     public Set<String> getViewModelKeys() {
-      return SetBuilder.<String>newSetBuilder(2).add(InsightViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(MindMapViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
+      return SetBuilder.<String>newSetBuilder(3).add(InsightViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(MindMapViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(ScheduleViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -417,6 +422,8 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     private Provider<MindMapViewModel> mindMapViewModelProvider;
 
+    private Provider<ScheduleViewModel> scheduleViewModelProvider;
+
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
         ViewModelLifecycle viewModelLifecycleParam) {
@@ -432,11 +439,12 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
         final ViewModelLifecycle viewModelLifecycleParam) {
       this.insightViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
       this.mindMapViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
+      this.scheduleViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
     }
 
     @Override
     public Map<String, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(2).put("com.example.insight.ui.state.InsightViewModel", ((Provider) insightViewModelProvider)).put("com.example.insight.ui.screens.MindMapViewModel", ((Provider) mindMapViewModelProvider)).build();
+      return MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(3).put("com.example.insight.ui.state.InsightViewModel", ((Provider) insightViewModelProvider)).put("com.example.insight.ui.screens.MindMapViewModel", ((Provider) mindMapViewModelProvider)).put("com.example.insight.ui.schedule.ScheduleViewModel", ((Provider) scheduleViewModelProvider)).build();
     }
 
     @Override
@@ -470,6 +478,9 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
           case 1: // com.example.insight.ui.screens.MindMapViewModel 
           return (T) new MindMapViewModel(singletonCImpl.deepSeekRepositoryProvider.get());
+
+          case 2: // com.example.insight.ui.schedule.ScheduleViewModel 
+          return (T) new ScheduleViewModel(singletonCImpl.scheduleRepositoryProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -567,6 +578,8 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
     private Provider<TextRecognizer> provideTextRecognizerProvider;
 
+    private Provider<ScheduleRepository> scheduleRepositoryProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -593,6 +606,10 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       return AppModule_ProvideLessonPlanDaoFactory.provideLessonPlanDao(provideAppDatabaseProvider.get());
     }
 
+    private ScheduleDao scheduleDao() {
+      return AppModule_ProvideScheduleDaoFactory.provideScheduleDao(provideAppDatabaseProvider.get());
+    }
+
     @SuppressWarnings("unchecked")
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.providePreferenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<PreferenceManager>(singletonCImpl, 1));
@@ -603,6 +620,7 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
       this.provideDeepSeekApiServiceProvider = DoubleCheck.provider(new SwitchingProvider<DeepSeekApiService>(singletonCImpl, 4));
       this.deepSeekRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<DeepSeekRepository>(singletonCImpl, 3));
       this.provideTextRecognizerProvider = DoubleCheck.provider(new SwitchingProvider<TextRecognizer>(singletonCImpl, 7));
+      this.scheduleRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ScheduleRepository>(singletonCImpl, 8));
     }
 
     @Override
@@ -661,6 +679,9 @@ public final class DaggerInsightApplication_HiltComponents_SingletonC {
 
           case 7: // com.google.mlkit.vision.text.TextRecognizer 
           return (T) AppModule_ProvideTextRecognizerFactory.provideTextRecognizer();
+
+          case 8: // com.example.insight.data.repository.ScheduleRepository 
+          return (T) new ScheduleRepository(singletonCImpl.scheduleDao());
 
           default: throw new AssertionError(id);
         }

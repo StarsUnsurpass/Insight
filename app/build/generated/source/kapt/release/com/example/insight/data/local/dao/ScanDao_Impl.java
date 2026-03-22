@@ -83,7 +83,7 @@ public final class ScanDao_Impl implements ScanDao {
 
   @Override
   public Object insertScanRecord(final ScanRecordEntity record,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -97,7 +97,7 @@ public final class ScanDao_Impl implements ScanDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
@@ -265,7 +265,7 @@ public final class ScanDao_Impl implements ScanDao {
   }
 
   @Override
-  public Object getAllScans(final Continuation<? super List<ScanRecordEntity>> $completion) {
+  public Object getAllScans(final Continuation<? super List<ScanRecordEntity>> arg0) {
     final String _sql = "SELECT * FROM scan_record_table";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -337,7 +337,7 @@ public final class ScanDao_Impl implements ScanDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override

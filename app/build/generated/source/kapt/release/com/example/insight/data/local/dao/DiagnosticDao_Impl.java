@@ -74,7 +74,7 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
 
   @Override
   public Object insertReport(final DiagnosticReportEntity report,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -88,7 +88,7 @@ public final class DiagnosticDao_Impl implements DiagnosticDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override

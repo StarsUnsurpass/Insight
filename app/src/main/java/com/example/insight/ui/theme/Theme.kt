@@ -53,15 +53,41 @@ private val SakuraColorScheme = lightColorScheme(
     surface = Color.White
 )
 
-private val DarkColorScheme = darkColorScheme(
-    primary = SageGreen,
-    secondary = InkBlue,
-    tertiary = HighlightYellow,
+// --- Dark Color Schemes ---
+
+private val DarkDefaultColorScheme = darkColorScheme(
+    primary = Color(0xFF90CAF9), // Light Blue 200
+    secondary = Color(0xFFA5D6A7), // Green 200
     background = Color(0xFF121212),
     surface = Color(0xFF1E1E1E),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onBackground = Color.White,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black
+)
+
+private val DarkOceanColorScheme = darkColorScheme(
+    primary = Color(0xFF48CAE4),
+    secondary = Color(0xFF0077B6),
+    background = Color(0xFF03045E),
+    surface = Color(0xFF023E8A),
+    onPrimary = Color.Black,
+    onSurface = Color.White
+)
+
+private val DarkSunsetColorScheme = darkColorScheme(
+    primary = Color(0xFFFCBF49),
+    secondary = Color(0xFFF77F00),
+    background = Color(0xFF003049),
+    surface = Color(0xFFD62828),
+    onPrimary = Color.Black,
+    onSurface = Color.White
+)
+
+private val DarkSakuraColorScheme = darkColorScheme(
+    primary = Color(0xFFFFB7C5),
+    secondary = Color(0xFFF28482),
+    background = Color(0xFF2D1B2E),
+    surface = Color(0xFF4A2F4D),
+    onPrimary = Color.Black,
     onSurface = Color.White
 )
 
@@ -71,9 +97,15 @@ fun InsightTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> when (style) {
+    val colorScheme = if (darkTheme) {
+        when (style) {
+            ThemeStyle.Default, ThemeStyle.Minimal, ThemeStyle.Modern -> DarkDefaultColorScheme
+            ThemeStyle.Ocean -> DarkOceanColorScheme
+            ThemeStyle.Sunset -> DarkSunsetColorScheme
+            ThemeStyle.Sakura -> DarkSakuraColorScheme
+        }
+    } else {
+        when (style) {
             ThemeStyle.Default -> LightColorScheme
             ThemeStyle.Minimal -> LightColorScheme.copy(background = Color.White, surface = Color.White)
             ThemeStyle.Modern -> ModernColorScheme
@@ -82,11 +114,11 @@ fun InsightTheme(
             ThemeStyle.Sakura -> SakuraColorScheme
         }
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            @Suppress("DEPRECATION")
             window.statusBarColor = colorScheme.background.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }

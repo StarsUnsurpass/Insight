@@ -54,6 +54,8 @@ import com.example.insight.ui.state.UserPreferences
 import com.example.insight.ui.state.UserRole
 import com.example.insight.graph.*
 import com.example.insight.ui.theme.*
+import com.example.insight.util.triggerHaptic
+import com.example.insight.util.hapticClickable
 import kotlin.math.hypot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -96,6 +98,7 @@ fun MainScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
+    val haptic = LocalHapticFeedback.current
 
     var selectedTab by rememberSaveable { mutableStateOf(InsightTab.Home) }
     var isDockVisible by remember { mutableStateOf(true) }
@@ -146,8 +149,8 @@ fun MainScreen(
                             InsightTab.Home -> HomeTab(preferences = preferences, onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail)
                             InsightTab.Map -> MapTab(preferences)
                             InsightTab.Analysis -> AnalysisTab(
-                                students = uiState.students,
-                                onNavigateToSchedule = onNavigateToSchedule
+                                preferences = preferences,
+                                students = uiState.students
                             )
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
@@ -156,6 +159,7 @@ fun MainScreen(
                                 onManageStudents = onNavigateToStudentList,
                                 onManageLessonPlans = onNavigateToLessonPlans,
                                 onNavigateToMindMap = onNavigateToMindMap,
+                                onNavigateToSchedule = onNavigateToSchedule,
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport,
                                 onNavigateToCourseware = onNavigateToCourseware,
@@ -184,8 +188,12 @@ fun MainScreen(
                         selectedTab = selectedTab,
                         isVisible = isDockVisible,
                         currentDockWidth = dockWidth,
+                        preferences = preferences,
                         onTabSelected = { selectedTab = it },
-                        onCameraClick = { isRevealing = true }
+                        onCameraClick = { 
+                            triggerHaptic(preferences, haptic)
+                            isRevealing = true 
+                        }
                     )
                 }
             }
@@ -214,10 +222,10 @@ fun GooeyDockContent(
     selectedTab: InsightTab,
     isVisible: Boolean,
     currentDockWidth: Dp,
+    preferences: UserPreferences,
     onTabSelected: (InsightTab) -> Unit,
     onCameraClick: () -> Unit
 ) {
-    val haptic = LocalHapticFeedback.current
     val primaryColor = MaterialTheme.colorScheme.primary
     val slotWidth = currentDockWidth / 5
     
@@ -258,8 +266,8 @@ fun GooeyDockContent(
                 animationSpec = tween(250)
             )
 
-            TabIconFluid(InsightTab.Home, selectedTab, alpha, slotWidth, onTabSelected)
-            TabIconFluid(InsightTab.Map, selectedTab, alpha, slotWidth, onTabSelected)
+            TabIconFluid(InsightTab.Home, selectedTab, alpha, slotWidth, preferences, onTabSelected)
+            TabIconFluid(InsightTab.Map, selectedTab, alpha, slotWidth, preferences, onTabSelected)
             
             Box(
                 modifier = Modifier
@@ -267,17 +275,14 @@ fun GooeyDockContent(
                     .requiredSize(64.dp)
                     .clip(CircleShape)
                     .background(primaryColor)
-                    .clickable { 
-                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                        onCameraClick() 
-                    },
+                    .clickable { onCameraClick() },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(imageVector = Icons.Default.CameraAlt, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
             }
 
-            TabIconFluid(InsightTab.Analysis, selectedTab, alpha, slotWidth, onTabSelected)
-            TabIconFluid(InsightTab.Profile, selectedTab, alpha, slotWidth, onTabSelected)
+            TabIconFluid(InsightTab.Analysis, selectedTab, alpha, slotWidth, preferences, onTabSelected)
+            TabIconFluid(InsightTab.Profile, selectedTab, alpha, slotWidth, preferences, onTabSelected)
         }
     }
 }
@@ -288,6 +293,7 @@ fun BoxScope.TabIconFluid(
     selectedTab: InsightTab,
     alpha: Float,
     slotWidth: Dp,
+    preferences: UserPreferences,
     onTabSelected: (InsightTab) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -311,7 +317,7 @@ fun BoxScope.TabIconFluid(
                     indication = null,
                     onClick = {
                         if (!isSelected) {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            triggerHaptic(preferences, haptic)
                             onTabSelected(tab)
                         }
                     }
@@ -425,7 +431,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
-                            .clickable {
+                            .hapticClickable(preferences) {
                                 if (isExpanded) expandedSections.remove(sectionName)
                                 else expandedSections.add(sectionName)
                             }
@@ -464,7 +470,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                             modifier = Modifier.padding(bottom = 8.dp)
                         ) {
                             sectionPoints.forEach { point ->
-                                HistoryCardByPoint(point) { onNavigateToKnowledgeDetail(point.id) }
+                                HistoryCardByPoint(point, preferences) { onNavigateToKnowledgeDetail(point.id) }
                             }
                         }
                     }
@@ -474,25 +480,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
             val searchResults = KnowledgeProvider.allPoints.filter { point ->
                 val q = searchQuery.lowercase()
                 point.title.lowercase().contains(q) ||
-                point.description.lowercase().contains(q) ||
-                point.syllabusDetails.any { it.lowercase().contains(q) } ||
-                point.teachingNotes.any { note -> 
-                    note.title.lowercase().contains(q) || 
-                    note.content.lowercase().contains(q) 
-                } ||
-                point.textbookParagraphs.any { it.content.lowercase().contains(q) } ||
-                point.exampleSentences.any { 
-                    it.english.lowercase().contains(q) || 
-                    it.chinese.lowercase().contains(q) 
-                } ||
-                point.exampleProblems.any { 
-                    it.question.lowercase().contains(q) || 
-                    it.explanation.lowercase().contains(q)
-                } ||
-                point.pastExamQuestions.any {
-                    it.question.lowercase().contains(q) ||
-                    it.explanation.lowercase().contains(q)
-                }
+                point.description.lowercase().contains(q)
             }
 
             if (searchResults.isEmpty()) {
@@ -503,7 +491,7 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                 }
             } else {
                 items(searchResults) { point ->
-                    SearchResultItemData(point, searchQuery) { onNavigateToKnowledgeDetail(point.id) }
+                    SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
                 }
             }
         }
@@ -511,12 +499,12 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
 }
 
 @Composable
-fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, onClick: () -> Unit) {
+fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, preferences: UserPreferences, onClick: () -> Unit) {
     val status = listOf("已掌握", "练习中", "待复习")
     val primaryColor = MaterialTheme.colorScheme.primary
     val index = point.id.toIntOrNull() ?: 0
     
-    Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
+    Card(modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
                 val iconVec = when (point.section) {
@@ -530,15 +518,7 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, onC
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-                val previewText = point.description
-                    .replace(Regex("#+\\s*"), "")
-                    .replace(Regex("\\*\\*"), "")
-                    .replace(Regex("\\*"), "")
-                    .replace(Regex("\\\\n"), " ")
-                    .replace("\n", " ")
-                    .replace(Regex("\\s+"), " ")
-                    .trim()
-                Text(previewText, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1)
+                Text(point.description.take(30) + "...", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1)
                 Spacer(modifier = Modifier.height(8.dp))
                 Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
                     Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> MaterialTheme.colorScheme.secondary; else -> Color.Red })
@@ -550,8 +530,8 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, onC
 
 @Composable
 fun AnalysisTab(
-    students: List<com.example.insight.data.local.entities.StudentEntity>,
-    onNavigateToSchedule: () -> Unit
+    preferences: UserPreferences,
+    students: List<com.example.insight.data.local.entities.StudentEntity>
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
     
@@ -567,37 +547,16 @@ fun AnalysisTab(
             }
         }
 
-        // --- Schedule Management ---
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth().clickable { onNavigateToSchedule() },
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
-            ) {
-                Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier.size(48.dp).background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                        Icon(Icons.Default.DateRange, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
-                    }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text("全能课表管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                    }
-                    Icon(Icons.Default.ChevronRight, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
-                }
-            }
-        }
-
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 StatCard(
+                    preferences = preferences,
                     label = "班级平均分", 
                     value = if (students.isEmpty()) "0" else (students.map { it.latestScore }.average().toInt()).toString(), 
                     modifier = Modifier.weight(1f)
                 )
                 StatCard(
+                    preferences = preferences,
                     label = "活跃考点数", 
                     value = "24", 
                     modifier = Modifier.weight(1f)
@@ -662,6 +621,7 @@ fun ProfileTab(
     onManageStudents: () -> Unit,
     onManageLessonPlans: () -> Unit,
     onNavigateToMindMap: () -> Unit,
+    onNavigateToSchedule: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
     onNavigateToCourseware: (String) -> Unit,
@@ -699,12 +659,14 @@ fun ProfileTab(
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 StatCard(
+                    preferences = preferences,
                     label = if (preferences.role == UserRole.Student) "累计扫描" else "我的教案", 
                     value = if (preferences.role == UserRole.Student) "128" else lessonPlanCount.toString(), 
                     modifier = Modifier.weight(1f),
                     onClick = { if (preferences.role == UserRole.Teacher) onManageLessonPlans() }
                 )
                 StatCard(
+                    preferences = preferences,
                     label = if (preferences.role == UserRole.Student) "攻克考点" else "班级人数", 
                     value = if (preferences.role == UserRole.Student) "42" else studentCount.toString(), 
                     modifier = Modifier.weight(1f),
@@ -720,7 +682,7 @@ fun ProfileTab(
                 
                 // --- Class Management ---
                 Card(
-                    modifier = Modifier.fillMaxWidth().clickable { onManageStudents() },
+                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageStudents() },
                     shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -740,10 +702,33 @@ fun ProfileTab(
                 }
                 
                 Spacer(modifier = Modifier.height(12.dp))
+
+                // --- Schedule Management (Moved Here) ---
+                Card(
+                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onNavigateToSchedule() },
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                ) {
+                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(Icons.Default.DateRange, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("全能课表管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                        }
+                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
+                    }
+                }
+                
+                Spacer(modifier = Modifier.height(12.dp))
                 
                 // --- Lesson Plan Management ---
                 Card(
-                    modifier = Modifier.fillMaxWidth().clickable { onManageLessonPlans() },
+                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageLessonPlans() },
                     shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -768,7 +753,7 @@ fun ProfileTab(
             Text("AI 实验室", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
             Card(
-                modifier = Modifier.fillMaxWidth().clickable { onNavigateToMindMap() },
+                modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onNavigateToMindMap() },
                 shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -788,61 +773,6 @@ fun ProfileTab(
             }
         }
 
-        // --- Featured Lesson Plan Library ---
-        item {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.AutoStories, null, tint = primaryColor, modifier = Modifier.size(18.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("精品教案库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
-                }
-                IconButton(onClick = { onManageLessonPlans() }) {
-                    Icon(Icons.Default.ChevronRight, null, tint = primaryColor)
-                }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(horizontal = 4.dp)
-            ) {
-                items(sampleLessonPlans) { plan ->
-                    LessonPlanSampleCard(
-                        plan = plan, 
-                        onClick = { onNavigateToLessonPlanSample(plan.id) }
-                    )
-                }
-            }
-        }
-
-        // --- Featured Courseware Library ---
-        item {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.Lightbulb, null, tint = primaryColor, modifier = Modifier.size(18.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("精品教学课件库", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
-                }
-                IconButton(onClick = { onNavigateToCoursewareEditor(null) }) {
-                    Icon(Icons.Default.AddCircleOutline, null, tint = primaryColor)
-                }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(horizontal = 4.dp)
-            ) {
-                items(sampleCoursewares) { courseware ->
-                    CoursewareCard(
-                        courseware = courseware, 
-                        onClick = { onNavigateToCourseware(courseware.id) },
-                        onEdit = { onNavigateToCoursewareEditor(courseware.id) }
-                    )
-                }
-            }
-        }
-
         item {
             Text("应用配置", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
@@ -855,9 +785,9 @@ fun ProfileTab(
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
-                    SettingRow(icon = Icons.Default.PictureAsPdf, title = exportTitle, onClick = onNavigateToExport)
-                    SettingRow(icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
-                    SettingRow(Icons.Default.CloudUpload, "同步云端数据")
+                    SettingRow(preferences = preferences, icon = Icons.Default.PictureAsPdf, title = exportTitle, onClick = onNavigateToExport)
+                    SettingRow(preferences = preferences, icon = Icons.Default.Settings, title = "偏好设置", onClick = onNavigateToSettings)
+                    SettingRow(preferences = preferences, icon = Icons.Default.CloudUpload, title = "同步云端数据")
                 }
             }
         }
@@ -865,64 +795,44 @@ fun ProfileTab(
 }
 
 @Composable
-fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
+fun StatCard(preferences: UserPreferences, label: String, value: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+    val primaryColor = MaterialTheme.colorScheme.primary
     Card(
-        modifier = Modifier
-            .width(240.dp)
-            .height(140.dp)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        modifier = modifier.hapticClickable(preferences) { onClick() }, 
+        shape = RoundedCornerShape(24.dp), 
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        border = BorderStroke(1.dp, plan.themeColor.copy(alpha = 0.1f))
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Surface(
-                color = plan.themeColor.copy(alpha = 0.1f),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text(
-                    text = plan.category,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = plan.themeColor,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            
-            Text(
-                text = plan.title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif,
-                maxLines = 2,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
-            )
-            
-            Text(
-                text = plan.targetClass,
-                style = MaterialTheme.typography.labelSmall,
-                color = Color.Gray
-            )
+        Column(modifier = Modifier.padding(20.dp)) {
+            Text(label, style = MaterialTheme.typography.labelSmall, color = primaryColor.copy(alpha = 0.6f))
+            Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
         }
     }
 }
 
 @Composable
-fun SearchResultItem(index: Int, onClick: () -> Unit) {
-    val point = KnowledgeProvider.allPoints[index % KnowledgeProvider.allPoints.size]
-    val resultText = "关于【${point.title}】的知识点详解"
-    Card(modifier = Modifier.fillMaxWidth().clickable { onClick() }, colors = CardDefaults.cardColors(containerColor = Color.Transparent)) {
-        Row(modifier = Modifier.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = Icons.Outlined.History, contentDescription = null, tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text = resultText, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+fun SettingRow(preferences: UserPreferences, icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .hapticClickable(preferences, enabled = onClick != null) { onClick?.invoke() }
+            .padding(vertical = 10.dp, horizontal = 8.dp), 
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .background(primaryColor.copy(alpha = 0.1f), CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(18.dp), tint = primaryColor)
         }
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+        Spacer(modifier = Modifier.weight(1f))
+        Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
     }
 }
 
@@ -970,12 +880,12 @@ fun HighlightedText(
 }
 
 @Composable
-fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, query: String, onClick: () -> Unit) {
+fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, query: String, preferences: UserPreferences, onClick: () -> Unit) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val snippet = getSnippet(point, query)
     
     Card(
-        modifier = Modifier.fillMaxWidth().clickable { onClick() },
+        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(16.dp)
@@ -1228,48 +1138,6 @@ fun LearningAnalysisSummary(students: List<com.example.insight.data.local.entiti
 }
 
 @Composable
-fun StatCard(label: String, value: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    Card(
-        modifier = modifier.clickable { onClick() }, 
-        shape = RoundedCornerShape(24.dp), 
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-    ) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = primaryColor.copy(alpha = 0.6f))
-            Text(value, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = primaryColor)
-        }
-    }
-}
-
-@Composable
-fun SettingRow(icon: ImageVector, title: String, onClick: (() -> Unit)? = null) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(enabled = onClick != null) { onClick?.invoke() }
-            .padding(vertical = 10.dp, horizontal = 8.dp), 
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(36.dp)
-                .background(primaryColor.copy(alpha = 0.1f), CircleShape),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(18.dp), tint = primaryColor)
-        }
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f))
-    }
-}
-
-@Composable
 fun ExportProgressDialog(role: UserRole) {
     Dialog(onDismissRequest = { }, properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)) {
         Surface(modifier = Modifier.width(280.dp), shape = RoundedCornerShape(28.dp), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
@@ -1347,6 +1215,55 @@ fun CoursewareCard(courseware: Courseware, onClick: () -> Unit, onEdit: () -> Un
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun LessonPlanSampleCard(plan: LessonPlanSample, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .width(240.dp)
+            .height(140.dp)
+            .clickable { onClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        border = BorderStroke(1.dp, plan.themeColor.copy(alpha = 0.1f))
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Surface(
+                color = plan.themeColor.copy(alpha = 0.1f),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = plan.category,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = plan.themeColor,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            
+            Text(
+                text = plan.title,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif,
+                maxLines = 2,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+            )
+            
+            Text(
+                text = plan.targetClass,
+                style = MaterialTheme.typography.labelSmall,
+                color = Color.Gray
+            )
         }
     }
 }

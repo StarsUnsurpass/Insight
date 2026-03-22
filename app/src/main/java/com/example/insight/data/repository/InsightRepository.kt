@@ -36,13 +36,25 @@ class InsightRepository @Inject constructor(
     fun getMasteredCount(): Flow<Int> = scanDao.getMasteredCountFlow()
 
     // Knowledge Graph
-    fun getAllNodes(): Flow<List<KnowledgeNodeEntity>> = knowledgeDao.getAllNodesFlow()
-    fun getAllEdges(): Flow<List<KnowledgeEdgeEntity>> = knowledgeDao.getAllEdgesFlow()
-    suspend fun initializeGraph(nodes: List<KnowledgeNodeEntity>, edges: List<KnowledgeEdgeEntity>) {
+    fun getAllNodes(): Flow<List<KnowledgeNodeEntity>> = knowledgeDao.getAllNodes()
+    fun getAllEdges(): Flow<List<KnowledgeEdgeEntity>> = knowledgeDao.getAllEdges()
+    fun getStudentMastery(studentId: String): Flow<List<StudentMasteryEntity>> = knowledgeDao.getStudentMastery(studentId)
+    
+    suspend fun getPrerequisites(nodeId: String): List<KnowledgeNodeEntity> = knowledgeDao.getPrerequisites(nodeId)
+    fun getAncestors(nodeId: String): Flow<List<KnowledgeNodeEntity>> = knowledgeDao.getAncestors(nodeId)
+    
+    suspend fun initializeGraph(
+        nodes: List<KnowledgeNodeEntity>, 
+        edges: List<KnowledgeEdgeEntity>,
+        closures: List<KnowledgeClosureEntity>
+    ) {
         knowledgeDao.insertNodes(nodes)
         knowledgeDao.insertEdges(edges)
+        knowledgeDao.insertClosure(closures)
     }
-    suspend fun updateNodeMastery(nodeId: String, level: Float) = knowledgeDao.updateMastery(nodeId, level)
+    
+    suspend fun updateMastery(studentId: String, nodeId: String, isCorrect: Boolean) = 
+        knowledgeDao.updateMasteryWithRules(studentId, nodeId, isCorrect)
 
     // Diagnostic Reports
     fun getLatestReport(): Flow<DiagnosticReportEntity?> = diagnosticDao.getLatestReportFlow()

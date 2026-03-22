@@ -3,16 +3,19 @@ package com.example.insight.data.local.dao;
 import android.database.Cursor;
 import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
+import androidx.room.RoomDatabaseKt;
 import androidx.room.RoomSQLiteQuery;
-import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
+import com.example.insight.data.local.entities.KnowledgeClosureEntity;
 import com.example.insight.data.local.entities.KnowledgeEdgeEntity;
 import com.example.insight.data.local.entities.KnowledgeNodeEntity;
+import com.example.insight.data.local.entities.StudentMasteryEntity;
 import java.lang.Class;
 import java.lang.Exception;
 import java.lang.Object;
@@ -35,7 +38,9 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
 
   private final EntityInsertionAdapter<KnowledgeEdgeEntity> __insertionAdapterOfKnowledgeEdgeEntity;
 
-  private final SharedSQLiteStatement __preparedStmtOfUpdateMastery;
+  private final EntityInsertionAdapter<KnowledgeClosureEntity> __insertionAdapterOfKnowledgeClosureEntity;
+
+  private final EntityInsertionAdapter<StudentMasteryEntity> __insertionAdapterOfStudentMasteryEntity;
 
   public KnowledgeDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
@@ -43,7 +48,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `knowledge_node_table` (`nodeId`,`title`,`masteryLevel`,`canvasX`,`canvasY`) VALUES (?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `knowledge_nodes` (`nodeId`,`title`,`category`,`importanceLevel`,`canvasX`,`canvasY`,`description`) VALUES (?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -59,40 +64,90 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
         } else {
           statement.bindString(2, entity.getTitle());
         }
-        statement.bindDouble(3, entity.getMasteryLevel());
-        statement.bindDouble(4, entity.getCanvasX());
-        statement.bindDouble(5, entity.getCanvasY());
+        statement.bindLong(3, entity.getCategory());
+        statement.bindLong(4, entity.getImportanceLevel());
+        statement.bindDouble(5, entity.getCanvasX());
+        statement.bindDouble(6, entity.getCanvasY());
+        if (entity.getDescription() == null) {
+          statement.bindNull(7);
+        } else {
+          statement.bindString(7, entity.getDescription());
+        }
       }
     };
     this.__insertionAdapterOfKnowledgeEdgeEntity = new EntityInsertionAdapter<KnowledgeEdgeEntity>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `knowledge_edge_table` (`edgeId`,`fromNodeId`,`toNodeId`) VALUES (nullif(?, 0),?,?)";
+        return "INSERT OR REPLACE INTO `knowledge_edges` (`edgeId`,`sourceNodeId`,`targetNodeId`,`relationType`) VALUES (nullif(?, 0),?,?,?)";
       }
 
       @Override
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final KnowledgeEdgeEntity entity) {
         statement.bindLong(1, entity.getEdgeId());
-        if (entity.getFromNodeId() == null) {
+        if (entity.getSourceNodeId() == null) {
           statement.bindNull(2);
         } else {
-          statement.bindString(2, entity.getFromNodeId());
+          statement.bindString(2, entity.getSourceNodeId());
         }
-        if (entity.getToNodeId() == null) {
+        if (entity.getTargetNodeId() == null) {
           statement.bindNull(3);
         } else {
-          statement.bindString(3, entity.getToNodeId());
+          statement.bindString(3, entity.getTargetNodeId());
+        }
+        if (entity.getRelationType() == null) {
+          statement.bindNull(4);
+        } else {
+          statement.bindString(4, entity.getRelationType());
         }
       }
     };
-    this.__preparedStmtOfUpdateMastery = new SharedSQLiteStatement(__db) {
+    this.__insertionAdapterOfKnowledgeClosureEntity = new EntityInsertionAdapter<KnowledgeClosureEntity>(__db) {
       @Override
       @NonNull
-      public String createQuery() {
-        final String _query = "UPDATE knowledge_node_table SET masteryLevel = ? WHERE nodeId = ?";
-        return _query;
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `knowledge_closure_table` (`ancestorId`,`descendantId`,`depth`) VALUES (?,?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final KnowledgeClosureEntity entity) {
+        if (entity.getAncestorId() == null) {
+          statement.bindNull(1);
+        } else {
+          statement.bindString(1, entity.getAncestorId());
+        }
+        if (entity.getDescendantId() == null) {
+          statement.bindNull(2);
+        } else {
+          statement.bindString(2, entity.getDescendantId());
+        }
+        statement.bindLong(3, entity.getDepth());
+      }
+    };
+    this.__insertionAdapterOfStudentMasteryEntity = new EntityInsertionAdapter<StudentMasteryEntity>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `student_mastery` (`studentId`,`nodeId`,`masteryScore`,`lastUpdateTime`) VALUES (?,?,?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final StudentMasteryEntity entity) {
+        if (entity.getStudentId() == null) {
+          statement.bindNull(1);
+        } else {
+          statement.bindString(1, entity.getStudentId());
+        }
+        if (entity.getNodeId() == null) {
+          statement.bindNull(2);
+        } else {
+          statement.bindString(2, entity.getNodeId());
+        }
+        statement.bindDouble(3, entity.getMasteryScore());
+        statement.bindLong(4, entity.getLastUpdateTime());
       }
     };
   }
@@ -136,42 +191,54 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
   }
 
   @Override
-  public Object updateMastery(final String id, final float level,
+  public Object insertClosure(final List<KnowledgeClosureEntity> closures,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
       public Unit call() throws Exception {
-        final SupportSQLiteStatement _stmt = __preparedStmtOfUpdateMastery.acquire();
-        int _argIndex = 1;
-        _stmt.bindDouble(_argIndex, level);
-        _argIndex = 2;
-        if (id == null) {
-          _stmt.bindNull(_argIndex);
-        } else {
-          _stmt.bindString(_argIndex, id);
-        }
+        __db.beginTransaction();
         try {
-          __db.beginTransaction();
-          try {
-            _stmt.executeUpdateDelete();
-            __db.setTransactionSuccessful();
-            return Unit.INSTANCE;
-          } finally {
-            __db.endTransaction();
-          }
+          __insertionAdapterOfKnowledgeClosureEntity.insert(closures);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
         } finally {
-          __preparedStmtOfUpdateMastery.release(_stmt);
+          __db.endTransaction();
         }
       }
     }, $completion);
   }
 
   @Override
-  public Flow<List<KnowledgeNodeEntity>> getAllNodesFlow() {
-    final String _sql = "SELECT * FROM knowledge_node_table";
+  public Object updateMastery(final StudentMasteryEntity mastery,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __insertionAdapterOfStudentMasteryEntity.insert(mastery);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object updateMasteryWithRules(final String studentId, final String nodeId,
+      final boolean isCorrect, final Continuation<? super Unit> $completion) {
+    return RoomDatabaseKt.withTransaction(__db, (__cont) -> KnowledgeDao.DefaultImpls.updateMasteryWithRules(KnowledgeDao_Impl.this, studentId, nodeId, isCorrect, __cont), $completion);
+  }
+
+  @Override
+  public Flow<List<KnowledgeNodeEntity>> getAllNodes() {
+    final String _sql = "SELECT * FROM knowledge_nodes";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"knowledge_node_table"}, new Callable<List<KnowledgeNodeEntity>>() {
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"knowledge_nodes"}, new Callable<List<KnowledgeNodeEntity>>() {
       @Override
       @NonNull
       public List<KnowledgeNodeEntity> call() throws Exception {
@@ -179,9 +246,11 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
         try {
           final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
-          final int _cursorIndexOfMasteryLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "masteryLevel");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfImportanceLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "importanceLevel");
           final int _cursorIndexOfCanvasX = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasX");
           final int _cursorIndexOfCanvasY = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasY");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final List<KnowledgeNodeEntity> _result = new ArrayList<KnowledgeNodeEntity>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final KnowledgeNodeEntity _item;
@@ -197,13 +266,21 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
             } else {
               _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
             }
-            final float _tmpMasteryLevel;
-            _tmpMasteryLevel = _cursor.getFloat(_cursorIndexOfMasteryLevel);
+            final int _tmpCategory;
+            _tmpCategory = _cursor.getInt(_cursorIndexOfCategory);
+            final int _tmpImportanceLevel;
+            _tmpImportanceLevel = _cursor.getInt(_cursorIndexOfImportanceLevel);
             final float _tmpCanvasX;
             _tmpCanvasX = _cursor.getFloat(_cursorIndexOfCanvasX);
             final float _tmpCanvasY;
             _tmpCanvasY = _cursor.getFloat(_cursorIndexOfCanvasY);
-            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpMasteryLevel,_tmpCanvasX,_tmpCanvasY);
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpCategory,_tmpImportanceLevel,_tmpCanvasX,_tmpCanvasY,_tmpDescription);
             _result.add(_item);
           }
           return _result;
@@ -220,9 +297,73 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
   }
 
   @Override
-  public Object getAllNodes(final Continuation<? super List<KnowledgeNodeEntity>> $completion) {
-    final String _sql = "SELECT * FROM knowledge_node_table";
+  public Flow<List<KnowledgeEdgeEntity>> getAllEdges() {
+    final String _sql = "SELECT * FROM knowledge_edges";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"knowledge_edges"}, new Callable<List<KnowledgeEdgeEntity>>() {
+      @Override
+      @NonNull
+      public List<KnowledgeEdgeEntity> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfEdgeId = CursorUtil.getColumnIndexOrThrow(_cursor, "edgeId");
+          final int _cursorIndexOfSourceNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "sourceNodeId");
+          final int _cursorIndexOfTargetNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "targetNodeId");
+          final int _cursorIndexOfRelationType = CursorUtil.getColumnIndexOrThrow(_cursor, "relationType");
+          final List<KnowledgeEdgeEntity> _result = new ArrayList<KnowledgeEdgeEntity>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final KnowledgeEdgeEntity _item;
+            final long _tmpEdgeId;
+            _tmpEdgeId = _cursor.getLong(_cursorIndexOfEdgeId);
+            final String _tmpSourceNodeId;
+            if (_cursor.isNull(_cursorIndexOfSourceNodeId)) {
+              _tmpSourceNodeId = null;
+            } else {
+              _tmpSourceNodeId = _cursor.getString(_cursorIndexOfSourceNodeId);
+            }
+            final String _tmpTargetNodeId;
+            if (_cursor.isNull(_cursorIndexOfTargetNodeId)) {
+              _tmpTargetNodeId = null;
+            } else {
+              _tmpTargetNodeId = _cursor.getString(_cursorIndexOfTargetNodeId);
+            }
+            final String _tmpRelationType;
+            if (_cursor.isNull(_cursorIndexOfRelationType)) {
+              _tmpRelationType = null;
+            } else {
+              _tmpRelationType = _cursor.getString(_cursorIndexOfRelationType);
+            }
+            _item = new KnowledgeEdgeEntity(_tmpEdgeId,_tmpSourceNodeId,_tmpTargetNodeId,_tmpRelationType);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Object getPrerequisites(final String nodeId,
+      final Continuation<? super List<KnowledgeNodeEntity>> $completion) {
+    final String _sql = "\n"
+            + "        SELECT n.* FROM knowledge_nodes n\n"
+            + "        JOIN knowledge_edges e ON n.nodeId = e.sourceNodeId\n"
+            + "        WHERE e.targetNodeId = ? AND e.relationType = 'PREREQUISITE'\n"
+            + "    ";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (nodeId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, nodeId);
+    }
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
     return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<KnowledgeNodeEntity>>() {
       @Override
@@ -232,9 +373,11 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
         try {
           final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
-          final int _cursorIndexOfMasteryLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "masteryLevel");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfImportanceLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "importanceLevel");
           final int _cursorIndexOfCanvasX = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasX");
           final int _cursorIndexOfCanvasY = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasY");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final List<KnowledgeNodeEntity> _result = new ArrayList<KnowledgeNodeEntity>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final KnowledgeNodeEntity _item;
@@ -250,13 +393,21 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
             } else {
               _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
             }
-            final float _tmpMasteryLevel;
-            _tmpMasteryLevel = _cursor.getFloat(_cursorIndexOfMasteryLevel);
+            final int _tmpCategory;
+            _tmpCategory = _cursor.getInt(_cursorIndexOfCategory);
+            final int _tmpImportanceLevel;
+            _tmpImportanceLevel = _cursor.getInt(_cursorIndexOfImportanceLevel);
             final float _tmpCanvasX;
             _tmpCanvasX = _cursor.getFloat(_cursorIndexOfCanvasX);
             final float _tmpCanvasY;
             _tmpCanvasY = _cursor.getFloat(_cursorIndexOfCanvasY);
-            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpMasteryLevel,_tmpCanvasX,_tmpCanvasY);
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpCategory,_tmpImportanceLevel,_tmpCanvasX,_tmpCanvasY,_tmpDescription);
             _result.add(_item);
           }
           return _result;
@@ -269,36 +420,63 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
   }
 
   @Override
-  public Flow<List<KnowledgeEdgeEntity>> getAllEdgesFlow() {
-    final String _sql = "SELECT * FROM knowledge_edge_table";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"knowledge_edge_table"}, new Callable<List<KnowledgeEdgeEntity>>() {
+  public Flow<List<KnowledgeNodeEntity>> getAncestors(final String nodeId) {
+    final String _sql = "\n"
+            + "        SELECT n.* FROM knowledge_nodes n\n"
+            + "        JOIN knowledge_closure_table c ON n.nodeId = c.ancestorId\n"
+            + "        WHERE c.descendantId = ? AND c.depth > 0\n"
+            + "    ";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (nodeId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, nodeId);
+    }
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"knowledge_nodes",
+        "knowledge_closure_table"}, new Callable<List<KnowledgeNodeEntity>>() {
       @Override
       @NonNull
-      public List<KnowledgeEdgeEntity> call() throws Exception {
+      public List<KnowledgeNodeEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
-          final int _cursorIndexOfEdgeId = CursorUtil.getColumnIndexOrThrow(_cursor, "edgeId");
-          final int _cursorIndexOfFromNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "fromNodeId");
-          final int _cursorIndexOfToNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "toNodeId");
-          final List<KnowledgeEdgeEntity> _result = new ArrayList<KnowledgeEdgeEntity>(_cursor.getCount());
+          final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
+          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfImportanceLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "importanceLevel");
+          final int _cursorIndexOfCanvasX = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasX");
+          final int _cursorIndexOfCanvasY = CursorUtil.getColumnIndexOrThrow(_cursor, "canvasY");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final List<KnowledgeNodeEntity> _result = new ArrayList<KnowledgeNodeEntity>(_cursor.getCount());
           while (_cursor.moveToNext()) {
-            final KnowledgeEdgeEntity _item;
-            final int _tmpEdgeId;
-            _tmpEdgeId = _cursor.getInt(_cursorIndexOfEdgeId);
-            final String _tmpFromNodeId;
-            if (_cursor.isNull(_cursorIndexOfFromNodeId)) {
-              _tmpFromNodeId = null;
+            final KnowledgeNodeEntity _item;
+            final String _tmpNodeId;
+            if (_cursor.isNull(_cursorIndexOfNodeId)) {
+              _tmpNodeId = null;
             } else {
-              _tmpFromNodeId = _cursor.getString(_cursorIndexOfFromNodeId);
+              _tmpNodeId = _cursor.getString(_cursorIndexOfNodeId);
             }
-            final String _tmpToNodeId;
-            if (_cursor.isNull(_cursorIndexOfToNodeId)) {
-              _tmpToNodeId = null;
+            final String _tmpTitle;
+            if (_cursor.isNull(_cursorIndexOfTitle)) {
+              _tmpTitle = null;
             } else {
-              _tmpToNodeId = _cursor.getString(_cursorIndexOfToNodeId);
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
             }
-            _item = new KnowledgeEdgeEntity(_tmpEdgeId,_tmpFromNodeId,_tmpToNodeId);
+            final int _tmpCategory;
+            _tmpCategory = _cursor.getInt(_cursorIndexOfCategory);
+            final int _tmpImportanceLevel;
+            _tmpImportanceLevel = _cursor.getInt(_cursorIndexOfImportanceLevel);
+            final float _tmpCanvasX;
+            _tmpCanvasX = _cursor.getFloat(_cursorIndexOfCanvasX);
+            final float _tmpCanvasY;
+            _tmpCanvasY = _cursor.getFloat(_cursorIndexOfCanvasY);
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new KnowledgeNodeEntity(_tmpNodeId,_tmpTitle,_tmpCategory,_tmpImportanceLevel,_tmpCanvasX,_tmpCanvasY,_tmpDescription);
             _result.add(_item);
           }
           return _result;
@@ -312,6 +490,120 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Flow<List<StudentMasteryEntity>> getStudentMastery(final String studentId) {
+    final String _sql = "SELECT * FROM student_mastery WHERE studentId = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (studentId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, studentId);
+    }
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"student_mastery"}, new Callable<List<StudentMasteryEntity>>() {
+      @Override
+      @NonNull
+      public List<StudentMasteryEntity> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfStudentId = CursorUtil.getColumnIndexOrThrow(_cursor, "studentId");
+          final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
+          final int _cursorIndexOfMasteryScore = CursorUtil.getColumnIndexOrThrow(_cursor, "masteryScore");
+          final int _cursorIndexOfLastUpdateTime = CursorUtil.getColumnIndexOrThrow(_cursor, "lastUpdateTime");
+          final List<StudentMasteryEntity> _result = new ArrayList<StudentMasteryEntity>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final StudentMasteryEntity _item;
+            final String _tmpStudentId;
+            if (_cursor.isNull(_cursorIndexOfStudentId)) {
+              _tmpStudentId = null;
+            } else {
+              _tmpStudentId = _cursor.getString(_cursorIndexOfStudentId);
+            }
+            final String _tmpNodeId;
+            if (_cursor.isNull(_cursorIndexOfNodeId)) {
+              _tmpNodeId = null;
+            } else {
+              _tmpNodeId = _cursor.getString(_cursorIndexOfNodeId);
+            }
+            final float _tmpMasteryScore;
+            _tmpMasteryScore = _cursor.getFloat(_cursorIndexOfMasteryScore);
+            final long _tmpLastUpdateTime;
+            _tmpLastUpdateTime = _cursor.getLong(_cursorIndexOfLastUpdateTime);
+            _item = new StudentMasteryEntity(_tmpStudentId,_tmpNodeId,_tmpMasteryScore,_tmpLastUpdateTime);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Object getMasterySync(final String studentId, final String nodeId,
+      final Continuation<? super StudentMasteryEntity> $completion) {
+    final String _sql = "SELECT * FROM student_mastery WHERE studentId = ? AND nodeId = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+    int _argIndex = 1;
+    if (studentId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, studentId);
+    }
+    _argIndex = 2;
+    if (nodeId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, nodeId);
+    }
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<StudentMasteryEntity>() {
+      @Override
+      @Nullable
+      public StudentMasteryEntity call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfStudentId = CursorUtil.getColumnIndexOrThrow(_cursor, "studentId");
+          final int _cursorIndexOfNodeId = CursorUtil.getColumnIndexOrThrow(_cursor, "nodeId");
+          final int _cursorIndexOfMasteryScore = CursorUtil.getColumnIndexOrThrow(_cursor, "masteryScore");
+          final int _cursorIndexOfLastUpdateTime = CursorUtil.getColumnIndexOrThrow(_cursor, "lastUpdateTime");
+          final StudentMasteryEntity _result;
+          if (_cursor.moveToFirst()) {
+            final String _tmpStudentId;
+            if (_cursor.isNull(_cursorIndexOfStudentId)) {
+              _tmpStudentId = null;
+            } else {
+              _tmpStudentId = _cursor.getString(_cursorIndexOfStudentId);
+            }
+            final String _tmpNodeId;
+            if (_cursor.isNull(_cursorIndexOfNodeId)) {
+              _tmpNodeId = null;
+            } else {
+              _tmpNodeId = _cursor.getString(_cursorIndexOfNodeId);
+            }
+            final float _tmpMasteryScore;
+            _tmpMasteryScore = _cursor.getFloat(_cursorIndexOfMasteryScore);
+            final long _tmpLastUpdateTime;
+            _tmpLastUpdateTime = _cursor.getLong(_cursorIndexOfLastUpdateTime);
+            _result = new StudentMasteryEntity(_tmpStudentId,_tmpNodeId,_tmpMasteryScore,_tmpLastUpdateTime);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @NonNull

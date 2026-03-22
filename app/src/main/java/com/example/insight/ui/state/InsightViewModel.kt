@@ -62,7 +62,28 @@ class InsightViewModel @Inject constructor(
         // Collect knowledge nodes
         viewModelScope.launch {
             repository.getAllNodes().collect { nodes ->
+                if (nodes.isEmpty()) {
+                    initializeMockKnowledgeGraph()
+                }
                 _uiState.update { it.copy(knowledgeNodes = nodes) }
+            }
+        }
+
+        // Collect knowledge edges
+        viewModelScope.launch {
+            repository.getAllEdges().collect { edges ->
+                _uiState.update { it.copy(knowledgeEdges = edges) }
+            }
+        }
+
+        // Collect student mastery (for the first student or a default one)
+        viewModelScope.launch {
+            repository.getAllStudents().collect { students ->
+                if (students.isNotEmpty()) {
+                    repository.getStudentMastery(students.first().studentId).collect { mastery ->
+                        _uiState.update { it.copy(studentMastery = mastery) }
+                    }
+                }
             }
         }
 
@@ -72,6 +93,27 @@ class InsightViewModel @Inject constructor(
                 _uiState.update { it.copy(allScans = scans) }
             }
         }
+    }
+
+    private suspend fun initializeMockKnowledgeGraph() {
+        val nodes = listOf(
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n1", "词法基础", 1, 5, 500f, 500f, "名词、代词、冠词等基础词法"),
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n2", "动词时态", 2, 5, 800f, 400f, "八大基本时态"),
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n3", "现在完成时", 2, 4, 1100f, 300f, "have + p.p."),
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n4", "过去分词", 1, 3, 1100f, 550f, "动词的不规则变化"),
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n5", "从句体系", 3, 5, 800f, 700f, "定语从句、宾语从句"),
+            com.example.insight.data.local.entities.KnowledgeNodeEntity("n6", "被动语态", 2, 4, 1100f, 450f, "be + p.p.")
+        )
+        
+        val edges = listOf(
+            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n1", targetNodeId = "n2", relationType = "PREREQUISITE"),
+            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n2", targetNodeId = "n3", relationType = "PREREQUISITE"),
+            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n4", targetNodeId = "n3", relationType = "PREREQUISITE"),
+            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n1", targetNodeId = "n5", relationType = "INCLUDE"),
+            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n4", targetNodeId = "n6", relationType = "PREREQUISITE")
+        )
+        
+        repository.initializeGraph(nodes, edges, emptyList())
     }
 
     // Lesson Plan Management

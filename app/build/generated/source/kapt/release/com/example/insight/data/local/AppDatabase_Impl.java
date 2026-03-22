@@ -26,6 +26,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,25 +48,31 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(4) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(5) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `scan_record_table` (`id` TEXT NOT NULL, `originalImagePath` TEXT NOT NULL, `ocrText` TEXT NOT NULL, `llmAnalysisJson` TEXT NOT NULL, `coreKnowledgeId` TEXT NOT NULL, `studentId` TEXT NOT NULL, `isMastered` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_node_table` (`nodeId` TEXT NOT NULL, `title` TEXT NOT NULL, `masteryLevel` REAL NOT NULL, `canvasX` REAL NOT NULL, `canvasY` REAL NOT NULL, PRIMARY KEY(`nodeId`))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_edge_table` (`edgeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fromNodeId` TEXT NOT NULL, `toNodeId` TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_nodes` (`nodeId` TEXT NOT NULL, `title` TEXT NOT NULL, `category` INTEGER NOT NULL, `importanceLevel` INTEGER NOT NULL, `canvasX` REAL NOT NULL, `canvasY` REAL NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY(`nodeId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_edges` (`edgeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sourceNodeId` TEXT NOT NULL, `targetNodeId` TEXT NOT NULL, `relationType` TEXT NOT NULL, FOREIGN KEY(`sourceNodeId`) REFERENCES `knowledge_nodes`(`nodeId`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`targetNodeId`) REFERENCES `knowledge_nodes`(`nodeId`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_knowledge_edges_sourceNodeId` ON `knowledge_edges` (`sourceNodeId`)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_knowledge_edges_targetNodeId` ON `knowledge_edges` (`targetNodeId`)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `knowledge_closure_table` (`ancestorId` TEXT NOT NULL, `descendantId` TEXT NOT NULL, `depth` INTEGER NOT NULL, PRIMARY KEY(`ancestorId`, `descendantId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `student_mastery` (`studentId` TEXT NOT NULL, `nodeId` TEXT NOT NULL, `masteryScore` REAL NOT NULL, `lastUpdateTime` INTEGER NOT NULL, PRIMARY KEY(`studentId`, `nodeId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `diagnostic_report_table` (`reportId` TEXT NOT NULL, `aiInsightText` TEXT NOT NULL, `radarVocabulary` REAL NOT NULL, `radarGrammar` REAL NOT NULL, `radarContext` REAL NOT NULL, `radarLogic` REAL NOT NULL, `radarCulture` REAL NOT NULL, `studentId` TEXT NOT NULL, `errorCauseJson` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`reportId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `student_table` (`studentId` TEXT NOT NULL, `name` TEXT NOT NULL, `gender` INTEGER NOT NULL, `age` INTEGER NOT NULL, `className` TEXT NOT NULL, `latestScore` REAL NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`studentId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_plan_table` (`planId` TEXT NOT NULL, `title` TEXT NOT NULL, `lessonType` TEXT NOT NULL, `keyPoints` TEXT NOT NULL, `difficulties` TEXT NOT NULL, `contentMarkdown` TEXT NOT NULL, `blocksJson` TEXT NOT NULL, `targetClassName` TEXT NOT NULL, `relatedKnowledgeNodeId` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`planId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `lesson_question_cross_ref` (`planId` TEXT NOT NULL, `questionId` TEXT NOT NULL, PRIMARY KEY(`planId`, `questionId`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7968dc6ef4efce1c99b8e760820a024e')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '26c23cf4dcd6a9399c65ee82cbb01181')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `scan_record_table`");
-        db.execSQL("DROP TABLE IF EXISTS `knowledge_node_table`");
-        db.execSQL("DROP TABLE IF EXISTS `knowledge_edge_table`");
+        db.execSQL("DROP TABLE IF EXISTS `knowledge_nodes`");
+        db.execSQL("DROP TABLE IF EXISTS `knowledge_edges`");
+        db.execSQL("DROP TABLE IF EXISTS `knowledge_closure_table`");
+        db.execSQL("DROP TABLE IF EXISTS `student_mastery`");
         db.execSQL("DROP TABLE IF EXISTS `diagnostic_report_table`");
         db.execSQL("DROP TABLE IF EXISTS `student_table`");
         db.execSQL("DROP TABLE IF EXISTS `lesson_plan_table`");
@@ -91,6 +98,7 @@ public final class AppDatabase_Impl extends AppDatabase {
       @Override
       public void onOpen(@NonNull final SupportSQLiteDatabase db) {
         mDatabase = db;
+        db.execSQL("PRAGMA foreign_keys = ON");
         internalInitInvalidationTracker(db);
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
@@ -131,33 +139,67 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoScanRecordTable + "\n"
                   + " Found:\n" + _existingScanRecordTable);
         }
-        final HashMap<String, TableInfo.Column> _columnsKnowledgeNodeTable = new HashMap<String, TableInfo.Column>(5);
-        _columnsKnowledgeNodeTable.put("nodeId", new TableInfo.Column("nodeId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeNodeTable.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeNodeTable.put("masteryLevel", new TableInfo.Column("masteryLevel", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeNodeTable.put("canvasX", new TableInfo.Column("canvasX", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeNodeTable.put("canvasY", new TableInfo.Column("canvasY", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        final HashSet<TableInfo.ForeignKey> _foreignKeysKnowledgeNodeTable = new HashSet<TableInfo.ForeignKey>(0);
-        final HashSet<TableInfo.Index> _indicesKnowledgeNodeTable = new HashSet<TableInfo.Index>(0);
-        final TableInfo _infoKnowledgeNodeTable = new TableInfo("knowledge_node_table", _columnsKnowledgeNodeTable, _foreignKeysKnowledgeNodeTable, _indicesKnowledgeNodeTable);
-        final TableInfo _existingKnowledgeNodeTable = TableInfo.read(db, "knowledge_node_table");
-        if (!_infoKnowledgeNodeTable.equals(_existingKnowledgeNodeTable)) {
-          return new RoomOpenHelper.ValidationResult(false, "knowledge_node_table(com.example.insight.data.local.entities.KnowledgeNodeEntity).\n"
-                  + " Expected:\n" + _infoKnowledgeNodeTable + "\n"
-                  + " Found:\n" + _existingKnowledgeNodeTable);
+        final HashMap<String, TableInfo.Column> _columnsKnowledgeNodes = new HashMap<String, TableInfo.Column>(7);
+        _columnsKnowledgeNodes.put("nodeId", new TableInfo.Column("nodeId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("category", new TableInfo.Column("category", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("importanceLevel", new TableInfo.Column("importanceLevel", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("canvasX", new TableInfo.Column("canvasX", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("canvasY", new TableInfo.Column("canvasY", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeNodes.put("description", new TableInfo.Column("description", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysKnowledgeNodes = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesKnowledgeNodes = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoKnowledgeNodes = new TableInfo("knowledge_nodes", _columnsKnowledgeNodes, _foreignKeysKnowledgeNodes, _indicesKnowledgeNodes);
+        final TableInfo _existingKnowledgeNodes = TableInfo.read(db, "knowledge_nodes");
+        if (!_infoKnowledgeNodes.equals(_existingKnowledgeNodes)) {
+          return new RoomOpenHelper.ValidationResult(false, "knowledge_nodes(com.example.insight.data.local.entities.KnowledgeNodeEntity).\n"
+                  + " Expected:\n" + _infoKnowledgeNodes + "\n"
+                  + " Found:\n" + _existingKnowledgeNodes);
         }
-        final HashMap<String, TableInfo.Column> _columnsKnowledgeEdgeTable = new HashMap<String, TableInfo.Column>(3);
-        _columnsKnowledgeEdgeTable.put("edgeId", new TableInfo.Column("edgeId", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeEdgeTable.put("fromNodeId", new TableInfo.Column("fromNodeId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsKnowledgeEdgeTable.put("toNodeId", new TableInfo.Column("toNodeId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        final HashSet<TableInfo.ForeignKey> _foreignKeysKnowledgeEdgeTable = new HashSet<TableInfo.ForeignKey>(0);
-        final HashSet<TableInfo.Index> _indicesKnowledgeEdgeTable = new HashSet<TableInfo.Index>(0);
-        final TableInfo _infoKnowledgeEdgeTable = new TableInfo("knowledge_edge_table", _columnsKnowledgeEdgeTable, _foreignKeysKnowledgeEdgeTable, _indicesKnowledgeEdgeTable);
-        final TableInfo _existingKnowledgeEdgeTable = TableInfo.read(db, "knowledge_edge_table");
-        if (!_infoKnowledgeEdgeTable.equals(_existingKnowledgeEdgeTable)) {
-          return new RoomOpenHelper.ValidationResult(false, "knowledge_edge_table(com.example.insight.data.local.entities.KnowledgeEdgeEntity).\n"
-                  + " Expected:\n" + _infoKnowledgeEdgeTable + "\n"
-                  + " Found:\n" + _existingKnowledgeEdgeTable);
+        final HashMap<String, TableInfo.Column> _columnsKnowledgeEdges = new HashMap<String, TableInfo.Column>(4);
+        _columnsKnowledgeEdges.put("edgeId", new TableInfo.Column("edgeId", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeEdges.put("sourceNodeId", new TableInfo.Column("sourceNodeId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeEdges.put("targetNodeId", new TableInfo.Column("targetNodeId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeEdges.put("relationType", new TableInfo.Column("relationType", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysKnowledgeEdges = new HashSet<TableInfo.ForeignKey>(2);
+        _foreignKeysKnowledgeEdges.add(new TableInfo.ForeignKey("knowledge_nodes", "CASCADE", "NO ACTION", Arrays.asList("sourceNodeId"), Arrays.asList("nodeId")));
+        _foreignKeysKnowledgeEdges.add(new TableInfo.ForeignKey("knowledge_nodes", "CASCADE", "NO ACTION", Arrays.asList("targetNodeId"), Arrays.asList("nodeId")));
+        final HashSet<TableInfo.Index> _indicesKnowledgeEdges = new HashSet<TableInfo.Index>(2);
+        _indicesKnowledgeEdges.add(new TableInfo.Index("index_knowledge_edges_sourceNodeId", false, Arrays.asList("sourceNodeId"), Arrays.asList("ASC")));
+        _indicesKnowledgeEdges.add(new TableInfo.Index("index_knowledge_edges_targetNodeId", false, Arrays.asList("targetNodeId"), Arrays.asList("ASC")));
+        final TableInfo _infoKnowledgeEdges = new TableInfo("knowledge_edges", _columnsKnowledgeEdges, _foreignKeysKnowledgeEdges, _indicesKnowledgeEdges);
+        final TableInfo _existingKnowledgeEdges = TableInfo.read(db, "knowledge_edges");
+        if (!_infoKnowledgeEdges.equals(_existingKnowledgeEdges)) {
+          return new RoomOpenHelper.ValidationResult(false, "knowledge_edges(com.example.insight.data.local.entities.KnowledgeEdgeEntity).\n"
+                  + " Expected:\n" + _infoKnowledgeEdges + "\n"
+                  + " Found:\n" + _existingKnowledgeEdges);
+        }
+        final HashMap<String, TableInfo.Column> _columnsKnowledgeClosureTable = new HashMap<String, TableInfo.Column>(3);
+        _columnsKnowledgeClosureTable.put("ancestorId", new TableInfo.Column("ancestorId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeClosureTable.put("descendantId", new TableInfo.Column("descendantId", "TEXT", true, 2, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsKnowledgeClosureTable.put("depth", new TableInfo.Column("depth", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysKnowledgeClosureTable = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesKnowledgeClosureTable = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoKnowledgeClosureTable = new TableInfo("knowledge_closure_table", _columnsKnowledgeClosureTable, _foreignKeysKnowledgeClosureTable, _indicesKnowledgeClosureTable);
+        final TableInfo _existingKnowledgeClosureTable = TableInfo.read(db, "knowledge_closure_table");
+        if (!_infoKnowledgeClosureTable.equals(_existingKnowledgeClosureTable)) {
+          return new RoomOpenHelper.ValidationResult(false, "knowledge_closure_table(com.example.insight.data.local.entities.KnowledgeClosureEntity).\n"
+                  + " Expected:\n" + _infoKnowledgeClosureTable + "\n"
+                  + " Found:\n" + _existingKnowledgeClosureTable);
+        }
+        final HashMap<String, TableInfo.Column> _columnsStudentMastery = new HashMap<String, TableInfo.Column>(4);
+        _columnsStudentMastery.put("studentId", new TableInfo.Column("studentId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentMastery.put("nodeId", new TableInfo.Column("nodeId", "TEXT", true, 2, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentMastery.put("masteryScore", new TableInfo.Column("masteryScore", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsStudentMastery.put("lastUpdateTime", new TableInfo.Column("lastUpdateTime", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysStudentMastery = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesStudentMastery = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoStudentMastery = new TableInfo("student_mastery", _columnsStudentMastery, _foreignKeysStudentMastery, _indicesStudentMastery);
+        final TableInfo _existingStudentMastery = TableInfo.read(db, "student_mastery");
+        if (!_infoStudentMastery.equals(_existingStudentMastery)) {
+          return new RoomOpenHelper.ValidationResult(false, "student_mastery(com.example.insight.data.local.entities.StudentMasteryEntity).\n"
+                  + " Expected:\n" + _infoStudentMastery + "\n"
+                  + " Found:\n" + _existingStudentMastery);
         }
         final HashMap<String, TableInfo.Column> _columnsDiagnosticReportTable = new HashMap<String, TableInfo.Column>(10);
         _columnsDiagnosticReportTable.put("reportId", new TableInfo.Column("reportId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
@@ -231,7 +273,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "7968dc6ef4efce1c99b8e760820a024e", "2e137c9a5cf374abac62c7994b8d0de5");
+    }, "26c23cf4dcd6a9399c65ee82cbb01181", "9b3233ca2712f9a041833f87065273cc");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -242,18 +284,27 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_node_table","knowledge_edge_table","diagnostic_report_table","student_table","lesson_plan_table","lesson_question_cross_ref");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "scan_record_table","knowledge_nodes","knowledge_edges","knowledge_closure_table","student_mastery","diagnostic_report_table","student_table","lesson_plan_table","lesson_question_cross_ref");
   }
 
   @Override
   public void clearAllTables() {
     super.assertNotMainThread();
     final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
+    final boolean _supportsDeferForeignKeys = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP;
     try {
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = FALSE");
+      }
       super.beginTransaction();
+      if (_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA defer_foreign_keys = TRUE");
+      }
       _db.execSQL("DELETE FROM `scan_record_table`");
-      _db.execSQL("DELETE FROM `knowledge_node_table`");
-      _db.execSQL("DELETE FROM `knowledge_edge_table`");
+      _db.execSQL("DELETE FROM `knowledge_nodes`");
+      _db.execSQL("DELETE FROM `knowledge_edges`");
+      _db.execSQL("DELETE FROM `knowledge_closure_table`");
+      _db.execSQL("DELETE FROM `student_mastery`");
       _db.execSQL("DELETE FROM `diagnostic_report_table`");
       _db.execSQL("DELETE FROM `student_table`");
       _db.execSQL("DELETE FROM `lesson_plan_table`");
@@ -261,6 +312,9 @@ public final class AppDatabase_Impl extends AppDatabase {
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = TRUE");
+      }
       _db.query("PRAGMA wal_checkpoint(FULL)").close();
       if (!_db.inTransaction()) {
         _db.execSQL("VACUUM");
