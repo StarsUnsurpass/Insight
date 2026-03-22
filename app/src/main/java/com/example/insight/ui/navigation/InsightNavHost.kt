@@ -36,6 +36,7 @@ sealed class Route(val path: String) {
     object KnowledgeDetail : Route("knowledge_detail/{nodeId}") {
         fun createRoute(id: String) = "knowledge_detail/$id"
     }
+    object Schedule : Route("schedule")
 }
 
 @Composable
@@ -79,7 +80,16 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToKnowledgeDetail = { id ->
                     navController.navigate(Route.KnowledgeDetail.createRoute(id))
+                },
+                onNavigateToSchedule = {
+                    navController.navigate(Route.Schedule.path)
                 }
+            )
+        }
+
+        composable(Route.Schedule.path) {
+            com.example.insight.ui.schedule.ScheduleScreen(
+                onBack = { navController.popBackStack() }
             )
         }
 

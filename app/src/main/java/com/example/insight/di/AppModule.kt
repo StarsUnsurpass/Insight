@@ -52,6 +52,9 @@ object AppModule {
     fun provideLessonPlanDao(db: AppDatabase): com.example.insight.data.local.dao.LessonPlanDao = db.lessonPlanDao()
 
     @Provides
+    fun provideScheduleDao(db: AppDatabase): com.example.insight.data.local.dao.ScheduleDao = db.scheduleDao()
+
+    @Provides
     @Singleton
     fun providePreferenceManager(app: Application): PreferenceManager {
         return PreferenceManager(app)
