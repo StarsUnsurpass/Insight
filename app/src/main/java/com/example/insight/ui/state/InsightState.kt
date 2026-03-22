@@ -1,5 +1,13 @@
 package com.example.insight.ui.state
 
+import com.example.insight.data.local.entities.KnowledgeEdgeEntity
+import com.example.insight.data.local.entities.KnowledgeNodeEntity
+import com.example.insight.data.local.entities.LessonPlanEntity
+import com.example.insight.data.local.entities.ScanRecordEntity
+import com.example.insight.data.local.entities.StudentEntity
+import com.example.insight.data.local.entities.StudentMasteryEntity
+import com.example.insight.data.local.entities.DiagnosticReportEntity
+
 sealed class ScreenState {
     object Scanning : ScreenState()
     data class Analyzing(val capturedText: String) : ScreenState()
@@ -11,6 +19,12 @@ sealed class ScreenState {
     data class LessonPlanEditor(val planId: String?) : ScreenState()
     object MindMap : ScreenState()
     data class KnowledgeDetail(val nodeId: String) : ScreenState()
+}
+
+enum class KnowledgeStatus(val label: String) {
+    TO_REVIEW("待复习"),
+    PRACTICING("练习中"),
+    COMPLETED("已掌握")
 }
 
 enum class ThemeStyle {
@@ -69,22 +83,23 @@ data class UserPreferences(
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
     val hapticEnabled: Boolean = true,
-    val deepSeekApiKey: String = "sk-83c0282197994bbd8fa34948f7872ebf"
+    val deepSeekApiKey: String = "sk-83c0282197994bbd8fa34948f7872ebf",
+    val knowledgeStatuses: Map<String, KnowledgeStatus> = emptyMap()
 )
 
 data class InsightUiState(
     val screen: ScreenState = ScreenState.Scanning,
     val isStreaming: Boolean = false,
     val preferences: UserPreferences = UserPreferences(),
-    val students: List<com.example.insight.data.local.entities.StudentEntity> = emptyList(),
-    val selectedStudent: com.example.insight.data.local.entities.StudentEntity? = null,
-    val studentScans: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList(),
-    val studentReport: com.example.insight.data.local.entities.DiagnosticReportEntity? = null,
-    val lessonPlans: List<com.example.insight.data.local.entities.LessonPlanEntity> = emptyList(),
-    val selectedPlan: com.example.insight.data.local.entities.LessonPlanEntity? = null,
-    val planQuestions: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList(),
-    val knowledgeNodes: List<com.example.insight.data.local.entities.KnowledgeNodeEntity> = emptyList(),
-    val knowledgeEdges: List<com.example.insight.data.local.entities.KnowledgeEdgeEntity> = emptyList(),
-    val studentMastery: List<com.example.insight.data.local.entities.StudentMasteryEntity> = emptyList(),
-    val allScans: List<com.example.insight.data.local.entities.ScanRecordEntity> = emptyList()
+    val students: List<StudentEntity> = emptyList(),
+    val selectedStudent: StudentEntity? = null,
+    val studentScans: List<ScanRecordEntity> = emptyList(),
+    val studentReport: DiagnosticReportEntity? = null,
+    val lessonPlans: List<LessonPlanEntity> = emptyList(),
+    val selectedPlan: LessonPlanEntity? = null,
+    val planQuestions: List<ScanRecordEntity> = emptyList(),
+    val knowledgeNodes: List<KnowledgeNodeEntity> = emptyList(),
+    val knowledgeEdges: List<KnowledgeEdgeEntity> = emptyList(),
+    val studentMastery: List<StudentMasteryEntity> = emptyList(),
+    val allScans: List<ScanRecordEntity> = emptyList()
 )

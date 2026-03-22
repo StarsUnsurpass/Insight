@@ -117,7 +117,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val w = size.width
@@ -125,14 +125,20 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             val groundY = h * 0.65f
             val centerX = w / 2f
             
-            val gradient = Brush.linearGradient(
-                colors = listOf(primaryColor, secondaryColor, primaryColor.copy(alpha = 0.7f)),
+            val gradientMain = Brush.linearGradient(
+                colors = listOf(primaryColor, secondaryColor, primaryColor.copy(alpha = 0.8f)),
                 start = Offset(0f, 0f),
                 end = Offset(w, h)
             )
+            
+            val gradientSub = Brush.linearGradient(
+                colors = listOf(secondaryColor, primaryColor, secondaryColor.copy(alpha = 0.6f)),
+                start = Offset(w, 0f),
+                end = Offset(0f, h)
+            )
 
             if (animationState == 0) {
-                // 抛物线下落模拟
+                // 抛物线下落渲染
                 val currentX = (centerX - 400f) + 400f * dropProgress.value
                 val currentY = -100f + (groundY + 100f) * dropProgress.value
                 
@@ -141,7 +147,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                     rotate(lerp(0f, 15f, dropProgress.value))
                     scale(scaleX = 0.85f, scaleY = 1.15f)
                 }) {
-                    drawCircle(brush = gradient, radius = 14.dp.toPx())
+                    drawCircle(brush = gradientMain, radius = 12.dp.toPx())
                 }
             } else if (animationState == 1 || animationState == 2) {
                 val pathMeasure = PathMeasure(brandPath.asAndroidPath(), false)
@@ -156,10 +162,17 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                         val trailPath = android.graphics.Path()
                         pathMeasure.getSegment(0f, currentDist, trailPath, true)
                         
+                        // 多层笔刷实现 Apple 级流光效果
                         drawPath(
                             path = trailPath.asComposePath(),
-                            brush = gradient,
-                            style = Stroke(width = 8.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round),
+                            brush = gradientSub,
+                            style = Stroke(width = 10.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round),
+                            alpha = textAlpha.value * 0.4f
+                        )
+                        drawPath(
+                            path = trailPath.asComposePath(),
+                            brush = gradientMain,
+                            style = Stroke(width = 5.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round),
                             alpha = textAlpha.value
                         )
 
@@ -169,14 +182,14 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                                 translate(pos[0], pos[1])
                                 scale(scaleX = scaleX.value, scaleY = scaleY.value)
                             }) {
-                                drawCircle(brush = gradient, radius = 14.dp.toPx())
+                                drawCircle(brush = gradientMain, radius = 12.dp.toPx())
                             }
                         }
                     } else {
                         withTransform({
                             scale(scaleX = scaleX.value, scaleY = scaleY.value)
                         }) {
-                            drawCircle(brush = gradient, radius = 14.dp.toPx())
+                            drawCircle(brush = gradientMain, radius = 12.dp.toPx())
                         }
                     }
                 }

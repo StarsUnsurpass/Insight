@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen(this)
         super.onCreate(savedInstanceState)
         
         when {
@@ -57,34 +58,35 @@ class MainActivity : ComponentActivity() {
         androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
         
         setContent {
-            // 首先独立显示开屏，不等待 ViewModel 初始化
             var showSplash by remember { mutableStateOf(true) }
 
-            if (showSplash) {
-                // 在极简主题下渲染开屏，确保第一帧秒出
-                SplashScreen {
-                    showSplash = false
-                }
-            } else {
-                // 仅在动画结束后进行 Hilt/ViewModel 的重型初始化
-                val viewModel: InsightViewModel = hiltViewModel()
-                val uiState by viewModel.uiState.collectAsState()
-                val preferences = uiState.preferences
+            InsightTheme { // 使用默认主题渲染
+                androidx.compose.animation.Crossfade(
+                    targetState = showSplash,
+                    animationSpec = tween(durationMillis = 1000, easing = LinearEasing),
+                    label = "AppReveal"
+                ) { isSplash ->
+                    if (isSplash) {
+                        SplashScreen {
+                            showSplash = false
+                        }
+                    } else {
+                        // 动画结束后正式初始化 ViewModel
+                        val viewModel: InsightViewModel = hiltViewModel()
+                        val uiState by viewModel.uiState.collectAsState()
+                        val preferences = uiState.preferences
 
-                InsightTheme(
-                    style = preferences.themeStyle,
-                    darkTheme = preferences.isDarkMode
-                ) {
-                    androidx.compose.animation.Crossfade(
-                        targetState = false, // 此时由于 showSplash 为 false，实际上这里执行切换
-                        animationSpec = tween(durationMillis = 800),
-                        label = "AppReveal"
-                    ) { _ ->
-                        Surface(
-                            modifier = Modifier.fillMaxSize(),
-                            color = MaterialTheme.colorScheme.background
+                        // 再次应用正式主题（支持暗色模式/样式切换）
+                        InsightTheme(
+                            style = preferences.themeStyle,
+                            darkTheme = preferences.isDarkMode
                         ) {
-                            InsightNavHost(viewModel)
+                            Surface(
+                                modifier = Modifier.fillMaxSize(),
+                                color = MaterialTheme.colorScheme.background
+                            ) {
+                                InsightNavHost(viewModel)
+                            }
                         }
                     }
                 }

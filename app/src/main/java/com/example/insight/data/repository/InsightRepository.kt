@@ -27,6 +27,7 @@ class InsightRepository @Inject constructor(
     suspend fun updateThemeStyle(style: ThemeStyle) = preferenceManager.updateThemeStyle(style)
     suspend fun updateHapticFeedback(enabled: Boolean) = preferenceManager.updateHapticFeedback(enabled)
     suspend fun updateDeepSeekApiKey(apiKey: String) = preferenceManager.updateDeepSeekApiKey(apiKey)
+    suspend fun updateKnowledgeStatus(nodeId: String, status: KnowledgeStatus) = preferenceManager.updateKnowledgeStatus(nodeId, status)
 
     // Scans
     fun getAllScans(): Flow<List<ScanRecordEntity>> = scanDao.getAllScansFlow()

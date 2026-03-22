@@ -404,6 +404,10 @@ class InsightViewModel @Inject constructor(
         viewModelScope.launch { repository.updateDarkMode(enabled) }
     }
 
+    fun updateKnowledgeStatus(nodeId: String, status: KnowledgeStatus) {
+        viewModelScope.launch { repository.updateKnowledgeStatus(nodeId, status) }
+    }
+
     fun updateThemeStyle(style: ThemeStyle) {
         viewModelScope.launch { repository.updateThemeStyle(style) }
     }

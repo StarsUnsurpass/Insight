@@ -24,6 +24,7 @@ class PreferenceManager(private val context: Context) {
         val THEME_STYLE = stringPreferencesKey("theme_style")
         val HAPTIC_ENABLED = booleanPreferencesKey("haptic_enabled")
         val DEEPSEEK_API_KEY = stringPreferencesKey("deepseek_api_key")
+        val KNOWLEDGE_STATUSES = stringPreferencesKey("knowledge_statuses")
     }
 
     val userPreferencesFlow: Flow<UserPreferences> = context.dataStore.data
@@ -42,9 +43,22 @@ class PreferenceManager(private val context: Context) {
                 isDarkMode = preferences[Keys.DARK_MODE] ?: false,
                 themeStyle = ThemeStyle.valueOf(preferences[Keys.THEME_STYLE] ?: ThemeStyle.Default.name),
                 hapticEnabled = preferences[Keys.HAPTIC_ENABLED] ?: true,
-                deepSeekApiKey = preferences[Keys.DEEPSEEK_API_KEY] ?: "sk-83c0282197994bbd8fa34948f7872ebf"
+                deepSeekApiKey = preferences[Keys.DEEPSEEK_API_KEY] ?: "sk-83c0282197994bbd8fa34948f7872ebf",
+                knowledgeStatuses = parseKnowledgeStatuses(preferences[Keys.KNOWLEDGE_STATUSES] ?: "")
             )
         }
+
+    private fun parseKnowledgeStatuses(serialized: String): Map<String, com.example.insight.ui.state.KnowledgeStatus> {
+        if (serialized.isBlank()) return emptyMap()
+        return serialized.split(",").filter { it.contains(":") }.associate {
+            val parts = it.split(":")
+            parts[0] to com.example.insight.ui.state.KnowledgeStatus.valueOf(parts[1])
+        }
+    }
+
+    private fun serializeKnowledgeStatuses(map: Map<String, com.example.insight.ui.state.KnowledgeStatus>): String {
+        return map.entries.joinToString(",") { "${it.key}:${it.value.name}" }
+    }
 
     suspend fun updateUsername(name: String) {
         context.dataStore.edit { it[Keys.USERNAME] = name }
@@ -72,5 +86,13 @@ class PreferenceManager(private val context: Context) {
 
     suspend fun updateDeepSeekApiKey(apiKey: String) {
         context.dataStore.edit { it[Keys.DEEPSEEK_API_KEY] = apiKey }
+    }
+
+    suspend fun updateKnowledgeStatus(nodeId: String, status: com.example.insight.ui.state.KnowledgeStatus) {
+        context.dataStore.edit { preferences ->
+            val currentMap = parseKnowledgeStatuses(preferences[Keys.KNOWLEDGE_STATUSES] ?: "").toMutableMap()
+            currentMap[nodeId] = status
+            preferences[Keys.KNOWLEDGE_STATUSES] = serializeKnowledgeStatuses(currentMap)
+        }
     }
 }

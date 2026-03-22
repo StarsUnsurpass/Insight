@@ -147,7 +147,11 @@ fun MainScreen(
                         label = "tab_transition"
                     ) { targetTab ->
                         when (targetTab) {
-                            InsightTab.Home -> HomeTab(preferences = preferences, onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail)
+                            InsightTab.Home -> HomeTab(
+                                preferences = preferences, 
+                                onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail,
+                                onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
+                            )
                             InsightTab.Map -> MapTab(preferences)
                             InsightTab.Analysis -> AnalysisTab(
                                 preferences = preferences,
@@ -335,7 +339,11 @@ fun BoxScope.TabIconFluid(
 }
 
 @Composable
-fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) -> Unit) {
+fun HomeTab(
+    preferences: UserPreferences, 
+    onNavigateToKnowledgeDetail: (String) -> Unit,
+    onUpdateStatus: (String, com.example.insight.ui.state.KnowledgeStatus) -> Unit
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
     val expandedSections = remember { mutableStateListOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)") }
@@ -470,7 +478,12 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
                             modifier = Modifier.padding(bottom = 8.dp)
                         ) {
                             sectionPoints.forEach { point ->
-                                HistoryCardByPoint(point, preferences) { onNavigateToKnowledgeDetail(point.id) }
+                                HistoryCardByPoint(
+                                    point = point, 
+                                    preferences = preferences, 
+                                    onUpdateStatus = onUpdateStatus,
+                                    onClick = { onNavigateToKnowledgeDetail(point.id) }
+                                )
                             }
                         }
                     }
@@ -499,14 +512,15 @@ fun HomeTab(preferences: UserPreferences, onNavigateToKnowledgeDetail: (String) 
 }
 
 @Composable
-fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, preferences: UserPreferences, onClick: () -> Unit) {
-    val status = listOf("已掌握", "练习中", "待复习")
+fun HistoryCardByPoint(
+    point: com.example.insight.data.model.KnowledgePoint, 
+    preferences: UserPreferences, 
+    onUpdateStatus: (String, com.example.insight.ui.state.KnowledgeStatus) -> Unit,
+    onClick: () -> Unit
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    val index = point.id.toIntOrNull() ?: 0
+    val currentStatus = preferences.knowledgeStatuses[point.id] ?: com.example.insight.ui.state.KnowledgeStatus.PRACTICING
     val cleanedDesc = cleanDescription(point.description)
-    
-    val hash = point.id.hashCode()
-    val statusIndex = Math.abs(hash) % 3
     
     Card(
         modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
@@ -527,21 +541,29 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, pre
                 Text(cleanedDesc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 Spacer(modifier = Modifier.height(8.dp))
                 Surface(
-                    color = when(statusIndex) { 
-                        0 -> primaryColor.copy(alpha = 0.1f)
-                        1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
-                        else -> Color.Red.copy(alpha = 0.05f) 
+                    color = when(currentStatus) { 
+                        com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> primaryColor.copy(alpha = 0.1f)
+                        com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
+                        com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color.Red.copy(alpha = 0.05f) 
                     }, 
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.clickable {
+                        val nextStatus = when(currentStatus) {
+                            com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW
+                            com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> com.example.insight.ui.state.KnowledgeStatus.COMPLETED
+                            com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> com.example.insight.ui.state.KnowledgeStatus.PRACTICING
+                        }
+                        onUpdateStatus(point.id, nextStatus)
+                    }
                 ) {
                     Text(
-                        text = status[statusIndex], 
+                        text = currentStatus.label, 
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), 
                         style = MaterialTheme.typography.labelSmall, 
-                        color = when(statusIndex) { 
-                            0 -> primaryColor
-                            1 -> MaterialTheme.colorScheme.secondary
-                            else -> Color.Red 
+                        color = when(currentStatus) { 
+                            com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> primaryColor
+                            com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> MaterialTheme.colorScheme.secondary
+                            com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color.Red 
                         }
                     )
                 }
