@@ -968,31 +968,37 @@ fun cleanDescription(description: String): String {
 fun getPointIcon(id: String, title: String): ImageVector {
     val t = title.lowercase()
     return when {
-        id.contains("noun") || t.contains("名词") -> Icons.Outlined.Label
-        id.contains("pronoun") || t.contains("代词") -> Icons.Outlined.Portrait
-        id.contains("article") || t.contains("冠词") -> Icons.Outlined.ShortText
-        id.contains("numeral") || t.contains("数词") -> Icons.Outlined.Numbers
-        id.contains("adj") || id.contains("adv") || t.contains("形容词") || t.contains("副词") -> Icons.Outlined.ColorLens
-        id.contains("preposition") || t.contains("介词") -> Icons.Outlined.LocationOn
-        id.contains("conjunction") || t.contains("连词") -> Icons.Outlined.Link
+        id == "001" || t.contains("名词") -> Icons.AutoMirrored.Outlined.Label
+        id == "002" || t.contains("代词") -> Icons.Outlined.Portrait
+        id == "003" || t.contains("冠词") -> Icons.AutoMirrored.Outlined.ShortText
+        id == "004" || t.contains("数词") -> Icons.Outlined.Numbers
+        id == "005" || t.contains("形容词") || t.contains("副词") -> Icons.Outlined.ColorLens
+        id == "006" || t.contains("介词") -> Icons.Outlined.LocationOn
+        id == "007" || t.contains("连词") -> Icons.Outlined.Link
         
-        // 时态类
-        id.contains("present_perfect") || t.contains("现在完成") -> Icons.Outlined.AddTask
-        id.contains("past_perfect") || t.contains("过去完成") -> Icons.Outlined.HistoryEdu
-        id.contains("continuous") || t.contains("进行时") -> Icons.Outlined.Autorenew
-        id.contains("future") || t.contains("将来时") -> Icons.Outlined.Forward
-        id.contains("past") || t.contains("过去时") -> Icons.Outlined.History
-        id.contains("present") || t.contains("现在时") -> Icons.Outlined.Repeat
+        // 时态类 (8-15)
+        id == "008" || t == "一般现在时" -> Icons.Outlined.Repeat
+        id == "009" || t == "一般过去时" -> Icons.Outlined.History
+        id == "010" || t == "一般将来时" -> Icons.Outlined.Upcoming
+        id == "011" || t == "现在进行时" -> Icons.Outlined.Autorenew
+        id == "012" || t == "过去进行时" -> Icons.Outlined.VideoStable
+        id == "013" || t == "现在完成时" -> Icons.Outlined.TaskAlt
+        id == "014" || t == "过去完成时" -> Icons.Outlined.Restore
+        id == "015" || t == "过去将来时" -> Icons.AutoMirrored.Outlined.Forward
         
-        // 句式类
-        id.contains("passive") || t.contains("被动") -> Icons.Outlined.FactCheck
-        id.contains("attribute") || t.contains("定语从句") -> Icons.Outlined.Hub
-        id.contains("agreement") || t.contains("主谓一致") -> Icons.Outlined.Tune
-        id.contains("modal") || t.contains("情态") -> Icons.Outlined.AutoFixHigh
-        id.contains("speech") || t.contains("间接引语") -> Icons.Outlined.QuestionAnswer
-        id.contains("exclamatory") || t.contains("感叹") -> Icons.Outlined.PriorityHigh
+        // 被动与特殊句式 (16-25)
+        id == "016" || t.contains("被动") && t.contains("现在") -> Icons.AutoMirrored.Outlined.FactCheck
+        id == "017" || t.contains("被动") && t.contains("过去") -> Icons.Outlined.LibraryAddCheck
+        id == "018" || t.contains("被动") && t.contains("将来") -> Icons.Outlined.PublishedWithChanges
+        id == "019" || t.contains("被动") && t.contains("完成") -> Icons.Outlined.AssignmentReturned
+        id == "020" || t.contains("情态动词") -> Icons.Outlined.AutoFixHigh
+        id == "021" || t.contains("间接引语") -> Icons.AutoMirrored.Outlined.QuestionAnswer
+        id == "022" || t.contains("主谓一致") -> Icons.Outlined.Tune
+        id == "023" || t.contains("感叹") -> Icons.Outlined.PriorityHigh
+        id == "024" || t.contains("宾语补足语") -> Icons.Outlined.AddCircleOutline
+        id == "025" || t.contains("定语从句") -> Icons.Outlined.Hub
         
-        else -> Icons.Outlined.MenuBook
+        else -> Icons.AutoMirrored.Outlined.MenuBook
     }
 }
 
