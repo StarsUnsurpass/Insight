@@ -148,11 +148,14 @@ fun KnowledgeDetailScreen(
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                             point.syllabusDetails.forEach { detail ->
                                 Row(verticalAlignment = Alignment.Top) {
-                                    Text("• ", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                                    Text(detail, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
+                                    Text("• ", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 2.dp))
+                                    MarkdownText(
+                                        markdown = detail, 
+                                        modifier = Modifier.weight(1f)
+                                    )
                                 }
                             }
                         }
@@ -272,11 +275,7 @@ fun KnowledgeDetailScreen(
                                         Text(note.title, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.titleSmall)
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
-                                    val formattedContent = note.content
-                                        .replace("；", "；\n")
-                                        .replace(Regex("([^\\n])\\s*(?=\\d+\\.)"), "$1\n")
-                                        .trim()
-                                    Text(formattedContent, style = MaterialTheme.typography.bodyMedium, lineHeight = 24.sp)
+                                    MarkdownText(markdown = note.content, modifier = Modifier.fillMaxWidth())
                                 }
                             }
                         }
@@ -413,7 +412,7 @@ fun ExampleSentenceCard(sentence: ExampleSentence) {
                     Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
                         Icon(Icons.Default.Analytics, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(analysis, style = MaterialTheme.typography.bodySmall, lineHeight = 20.sp)
+                        MarkdownText(markdown = analysis, modifier = Modifier.fillMaxWidth())
                     }
                 }
             }
@@ -468,10 +467,10 @@ fun RelatedPointDialog(rp: RelatedPoint, onDismiss: () -> Unit) {
         title = { Text(rp.title, fontWeight = FontWeight.Bold) },
         text = {
             Column {
-                Text(rp.description, style = MaterialTheme.typography.bodyMedium)
+                MarkdownText(markdown = rp.description)
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("💡 关联逻辑：", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                Text(rp.connectionReason, style = MaterialTheme.typography.bodySmall, lineHeight = 20.sp)
+                MarkdownText(markdown = rp.connectionReason)
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("知道了") } },
@@ -493,7 +492,7 @@ fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(hs.analysis, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
+                MarkdownText(markdown = hs.analysis, modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(24.dp))
                 Button(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text("确认") }
             }
@@ -530,19 +529,19 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
             AnimatedVisibility(visible = showExplanation) {
                 Column {
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                    Text(examQuestion.explanation, style = MaterialTheme.typography.bodyMedium, lineHeight = 22.sp)
+                    MarkdownText(markdown = examQuestion.explanation, modifier = Modifier.fillMaxWidth())
                     
                     examQuestion.errorProne?.let {
                         Spacer(modifier = Modifier.height(8.dp))
                         Surface(color = Color.Red.copy(alpha = 0.05f), shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.1f))) {
-                            Text("⚠️ 易错点：$it", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodySmall, color = Color.Red.copy(alpha = 0.8f))
+                            MarkdownText(markdown = "**⚠️ 易错点**：$it", modifier = Modifier.padding(12.dp))
                         }
                     }
                     
                     examQuestion.translation?.let {
                         Spacer(modifier = Modifier.height(8.dp))
                         Surface(color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp)) {
-                            Text("🌐 翻译：$it", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodySmall)
+                            MarkdownText(markdown = "**🌐 翻译**：$it", modifier = Modifier.padding(12.dp))
                         }
                     }
                 }
