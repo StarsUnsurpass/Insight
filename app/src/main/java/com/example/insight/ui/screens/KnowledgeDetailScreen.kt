@@ -18,7 +18,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -33,13 +36,19 @@ import com.example.insight.data.model.*
 import io.noties.markwon.Markwon
 import io.noties.markwon.ext.tables.TablePlugin
 import io.noties.markwon.html.HtmlPlugin
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.example.insight.ui.state.KnowledgeStatus
+import com.example.insight.ui.theme.SageGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KnowledgeDetailScreen(
     nodeId: String,
+    currentStatus: KnowledgeStatus,
+    onStatusChange: (KnowledgeStatus) -> Unit,
     onBack: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
     val point = remember(nodeId) { KnowledgeProvider.getPoint(nodeId) } ?: return
     
     var selectedRelatedPoint by remember { mutableStateOf<RelatedPoint?>(null) }
@@ -68,7 +77,7 @@ fun KnowledgeDetailScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(bottom = 40.dp)
         ) {
-            // 📌 核心标题
+            // 📌 核心标题与状态切换
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -76,12 +85,55 @@ fun KnowledgeDetailScreen(
                     shape = RoundedCornerShape(16.dp),
                     border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
                 ) {
-                    Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text("📌", fontSize = 24.sp)
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Column {
-                            Text("知识点名称", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
-                            Text(point.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("📌", fontSize = 24.sp)
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text("知识点名称", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                                Text(point.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                            }
+                        }
+                        
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
+                        
+                        Text("当前进度学习状态 (Learning Status)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            KnowledgeStatus.values().forEach { status ->
+                                val isSelected = currentStatus == status
+                                val color = when(status) {
+                                    KnowledgeStatus.TO_REVIEW -> Color(0xFFE57373)
+                                    KnowledgeStatus.PRACTICING -> Color(0xFFFFB74D)
+                                    KnowledgeStatus.COMPLETED -> SageGreen
+                                }
+                                
+                                OutlinedCard(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .clickable { 
+                                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                            onStatusChange(status) 
+                                        },
+                                    colors = CardDefaults.outlinedCardColors(
+                                        containerColor = if (isSelected) color.copy(alpha = 0.15f) else Color.Transparent,
+                                    ),
+                                    border = BorderStroke(1.5.dp, if (isSelected) color else MaterialTheme.colorScheme.outlineVariant)
+                                ) {
+                                    Box(modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp), contentAlignment = Alignment.Center) {
+                                        Text(
+                                            status.label,
+                                            style = MaterialTheme.typography.labelMedium,
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                            color = if (isSelected) color else MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -282,7 +334,7 @@ fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SectionHeader(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
+fun SectionHeader(title: String, icon: ImageVector) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)

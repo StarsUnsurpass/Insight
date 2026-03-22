@@ -152,7 +152,7 @@ fun MainScreen(
                                 onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail,
                                 onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
                             )
-                            InsightTab.Map -> MapTab(preferences)
+                            InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
                             InsightTab.Analysis -> AnalysisTab(
                                 preferences = preferences,
                                 students = uiState.students
@@ -1110,108 +1110,23 @@ fun HistoryCard(index: Int, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MapTab(preferences: UserPreferences) {
+fun MapTab(
+    preferences: UserPreferences,
+    onNavigateToKnowledgeDetail: (String) -> Unit
+) {
     val viewModel: InsightViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     
-    val sheetState = rememberModalBottomSheetState()
-    var selectedNode by remember { mutableStateOf<com.example.insight.data.local.entities.KnowledgeNodeEntity?>(null) }
-    var showSheet by remember { mutableStateOf(false) }
-    
     Box(modifier = Modifier.fillMaxSize().background(Color(0xFF0F1218))) {
-        StarfieldComponent(
-            nodes = uiState.knowledgeNodes,
-            edges = uiState.knowledgeEdges,
-            mastery = uiState.studentMastery,
-            onNodeClick = { node -> 
-                selectedNode = node
-                showSheet = true 
-            },
-            modifier = Modifier.fillMaxSize()
-        )
-        
-        // Header
-        Column(modifier = Modifier.padding(top = 24.dp, start = 24.dp).align(Alignment.TopStart)) {
-            Text(
-                "知识图谱", 
-                style = MaterialTheme.typography.headlineMedium, 
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White
-            )
-            Text(
-                text = if (preferences.role == UserRole.Teacher) "班级认知链路全景图" else "你的 AI 知识大脑", 
-                style = MaterialTheme.typography.bodyMedium, 
-                color = Color.White.copy(alpha = 0.6f)
-            )
-        }
-    }
-    
-    if (showSheet && selectedNode != null) {
-        ModalBottomSheet(
-            onDismissRequest = { showSheet = false },
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.surface,
-            dragHandle = { BottomSheetDefaults.DragHandle(color = Color.Gray.copy(alpha = 0.4f)) }
-        ) {
-            val nodeMastery = uiState.studentMastery.find { it.nodeId == selectedNode!!.nodeId }?.masteryScore ?: 60f
-            
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-                    .padding(bottom = 40.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val color = when {
-                        nodeMastery >= 85f -> Color(0xFF43A047)
-                        nodeMastery >= 60f -> Color(0xFFFFB300)
-                        else -> MaterialTheme.colorScheme.error
-                    }
-                    Box(modifier = Modifier.size(12.dp).background(color, CircleShape))
-                    Spacer(Modifier.width(12.dp))
-                    Text(
-                        text = selectedNode!!.title, 
-                        style = MaterialTheme.typography.headlineSmall, 
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                
-                Text(
-                    text = selectedNode!!.description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text("当前掌握度", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                        Text("${nodeMastery.toInt()}%", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Black)
-                        Spacer(Modifier.height(8.dp))
-                        LinearProgressIndicator(
-                            progress = { nodeMastery / 100f },
-                            modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
-                        )
-                    }
-                }
-                
-                Button(
-                    onClick = { 
-                        showSheet = false
-                        viewModel.navigateToKnowledgeDetail(selectedNode!!.nodeId)
-                    },
-                    modifier = Modifier.fillMaxWidth().height(56.dp),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Icon(Icons.Default.AutoAwesome, null)
-                    Spacer(Modifier.width(8.dp))
-                    Text("查看关联教案与真题")
-                }
+        KnowledgeGraphScreen(
+            preferences = preferences,
+            dbNodes = uiState.knowledgeNodes,
+            dbEdges = uiState.knowledgeEdges,
+            dbMastery = uiState.studentMastery,
+            onNodeClick = { id ->
+                onNavigateToKnowledgeDetail(id)
             }
-        }
+        )
     }
 }
 

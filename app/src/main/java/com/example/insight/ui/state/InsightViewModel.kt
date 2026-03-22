@@ -96,24 +96,60 @@ class InsightViewModel @Inject constructor(
     }
 
     private suspend fun initializeMockKnowledgeGraph() {
-        val nodes = listOf(
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n1", "词法基础", 1, 5, 500f, 500f, "名词、代词、冠词等基础词法"),
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n2", "动词时态", 2, 5, 800f, 400f, "八大基本时态"),
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n3", "现在完成时", 2, 4, 1100f, 300f, "have + p.p."),
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n4", "过去分词", 1, 3, 1100f, 550f, "动词的不规则变化"),
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n5", "从句体系", 3, 5, 800f, 700f, "定语从句、宾语从句"),
-            com.example.insight.data.local.entities.KnowledgeNodeEntity("n6", "被动语态", 2, 4, 1100f, 450f, "be + p.p.")
-        )
+        // Use real data from KnowledgeProvider
+        val allPoints = com.example.insight.data.model.KnowledgeProvider.allPoints
+        val nodes = allPoints.mapIndexed { index, point ->
+            // Create a simple circular or grid layout initially
+            val angle = index * (2 * Math.PI / allPoints.size).toFloat()
+            val radius = 600f
+            com.example.insight.data.local.entities.KnowledgeNodeEntity(
+                nodeId = point.id,
+                title = point.title.substringBefore(" ("), // Clean title for graph
+                category = when(point.section) {
+                    com.example.insight.data.model.KnowledgeProvider.SEC_1 -> 1
+                    com.example.insight.data.model.KnowledgeProvider.SEC_2 -> 2
+                    com.example.insight.data.model.KnowledgeProvider.SEC_3 -> 3
+                    else -> 1
+                },
+                importanceLevel = 4,
+                canvasX = radius * kotlin.math.cos(angle.toDouble()).toFloat() + 800f,
+                canvasY = radius * kotlin.math.sin(angle.toDouble()).toFloat() + 800f,
+                description = point.description.take(50) + "..."
+            )
+        }
         
-        val edges = listOf(
-            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n1", targetNodeId = "n2", relationType = "PREREQUISITE"),
-            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n2", targetNodeId = "n3", relationType = "PREREQUISITE"),
-            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n4", targetNodeId = "n3", relationType = "PREREQUISITE"),
-            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n1", targetNodeId = "n5", relationType = "INCLUDE"),
-            com.example.insight.data.local.entities.KnowledgeEdgeEntity(sourceNodeId = "n4", targetNodeId = "n6", relationType = "PREREQUISITE")
-        )
+        val edges = mutableListOf<com.example.insight.data.local.entities.KnowledgeEdgeEntity>()
+        val closures = mutableListOf<com.example.insight.data.local.entities.KnowledgeClosureEntity>()
         
-        repository.initializeGraph(nodes, edges, emptyList())
+        // Add self-closures
+        nodes.forEach { node ->
+            closures.add(com.example.insight.data.local.entities.KnowledgeClosureEntity(node.nodeId, node.nodeId, 0))
+        }
+
+        allPoints.forEach { point ->
+            point.relatedPoints.forEach { related ->
+                // Find matching node by title
+                val target = allPoints.find { it.title.contains(related.title) || related.title.contains(it.title) }
+                if (target != null && target.id != point.id) {
+                    val relationType = if (related.connectionReason.contains("基础") || related.connectionReason.contains("决定")) 
+                        "PREREQUISITE" else "INCLUDE"
+                    
+                    edges.add(com.example.insight.data.local.entities.KnowledgeEdgeEntity(
+                        sourceNodeId = target.id, // Prerequisite is source
+                        targetNodeId = point.id,
+                        relationType = relationType
+                    ))
+                    
+                    // Simple direct closure
+                    closures.add(com.example.insight.data.local.entities.KnowledgeClosureEntity(target.id, point.id, 1))
+                }
+            }
+        }
+        
+        // NOTE: A more complex transitive closure calculation could be done here if needed
+        // but for now, direct relationships are a good start.
+
+        repository.initializeGraph(nodes, edges, closures)
     }
 
     // Lesson Plan Management
@@ -405,7 +441,18 @@ class InsightViewModel @Inject constructor(
     }
 
     fun updateKnowledgeStatus(nodeId: String, status: KnowledgeStatus) {
-        viewModelScope.launch { repository.updateKnowledgeStatus(nodeId, status) }
+        viewModelScope.launch { 
+            repository.updateKnowledgeStatus(nodeId, status)
+            
+            // Sync with mastery score
+            val currentStudentId = uiState.value.students.firstOrNull()?.studentId ?: "default_student"
+            val score = when(status) {
+                KnowledgeStatus.TO_REVIEW -> 40f
+                KnowledgeStatus.PRACTICING -> 70f
+                KnowledgeStatus.COMPLETED -> 100f
+            }
+            repository.updateMasteryScore(currentStudentId, nodeId, score)
+        }
     }
 
     fun updateThemeStyle(style: ThemeStyle) {

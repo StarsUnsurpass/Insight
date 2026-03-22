@@ -73,6 +73,9 @@ interface KnowledgeDao {
         updateMastery(current.copy(masteryScore = newScore, lastUpdateTime = System.currentTimeMillis()))
     }
 
+    @Query("UPDATE student_mastery SET masteryScore = :score, lastUpdateTime = :time WHERE studentId = :studentId AND nodeId = :nodeId")
+    suspend fun updateMasteryScore(studentId: String, nodeId: String, score: Float, time: Long = System.currentTimeMillis())
+
     @Query("SELECT * FROM student_mastery WHERE studentId = :studentId AND nodeId = :nodeId")
     suspend fun getMasterySync(studentId: String, nodeId: String): StudentMasteryEntity?
 }

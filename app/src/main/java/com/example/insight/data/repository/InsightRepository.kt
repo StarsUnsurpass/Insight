@@ -56,6 +56,9 @@ class InsightRepository @Inject constructor(
     
     suspend fun updateMastery(studentId: String, nodeId: String, isCorrect: Boolean) = 
         knowledgeDao.updateMasteryWithRules(studentId, nodeId, isCorrect)
+        
+    suspend fun updateMasteryScore(studentId: String, nodeId: String, score: Float) = 
+        knowledgeDao.updateMasteryScore(studentId, nodeId, score)
 
     // Diagnostic Reports
     fun getLatestReport(): Flow<DiagnosticReportEntity?> = diagnosticDao.getLatestReportFlow()

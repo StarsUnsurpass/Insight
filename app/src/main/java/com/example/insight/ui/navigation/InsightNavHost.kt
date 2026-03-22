@@ -11,6 +11,7 @@ import com.example.insight.camera.CameraCaptureScreen
 import com.example.insight.ui.screens.*
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.ScreenState
+import com.example.insight.ui.state.KnowledgeStatus
 
 sealed class Route(val path: String) {
     object Main : Route("main")
@@ -99,8 +100,12 @@ fun InsightNavHost(viewModel: InsightViewModel) {
             )
         ) { backStackEntry ->
             val nodeId = backStackEntry.arguments?.getString("nodeId") ?: ""
+            val status = uiState.preferences.knowledgeStatuses[nodeId] ?: KnowledgeStatus.PRACTICING
+            
             KnowledgeDetailScreen(
                 nodeId = nodeId,
+                currentStatus = status,
+                onStatusChange = { viewModel.updateKnowledgeStatus(nodeId, it) },
                 onBack = { navController.popBackStack() }
             )
         }
@@ -205,7 +210,15 @@ fun InsightNavHost(viewModel: InsightViewModel) {
         }
 
         composable(Route.Starfield.path) {
-            KnowledgeGraphScreen(uiState.preferences)
+            KnowledgeGraphScreen(
+                preferences = uiState.preferences,
+                dbNodes = uiState.knowledgeNodes,
+                dbEdges = uiState.knowledgeEdges,
+                dbMastery = uiState.studentMastery,
+                onNodeClick = { id ->
+                    navController.navigate(Route.KnowledgeDetail.createRoute(id))
+                }
+            )
         }
 
         composable(Route.Settings.path) {

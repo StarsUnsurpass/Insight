@@ -46,9 +46,19 @@ import androidx.compose.ui.draw.alpha
 
 @Suppress("UNUSED_PARAMETER")
 @Composable
-fun KnowledgeGraphScreen(preferences: UserPreferences) {
+fun KnowledgeGraphScreen(
+    preferences: com.example.insight.ui.state.UserPreferences,
+    dbNodes: List<com.example.insight.data.local.entities.KnowledgeNodeEntity>,
+    dbEdges: List<com.example.insight.data.local.entities.KnowledgeEdgeEntity>,
+    dbMastery: List<com.example.insight.data.local.entities.StudentMasteryEntity>,
+    onNodeClick: (String) -> Unit = {}
+) {
     val controller = remember { com.example.insight.graph.GraphController() }
     
+    // Sync DB data to controller
+    LaunchedEffect(dbNodes, dbEdges, dbMastery) {
+        controller.syncWithData(dbNodes, dbEdges, dbMastery)
+    }
     // Viewport transform states
     var scale by remember { mutableStateOf(1f) }
     var offset by remember { mutableStateOf(Offset.Zero) }
@@ -251,9 +261,9 @@ fun KnowledgeGraphScreen(preferences: UserPreferences) {
             }
         }
         
-        // Floating Controls / Legends
+        // --- Floating Controls / Legends ---
         Column(modifier = Modifier.align(Alignment.TopStart).padding(top = 16.dp, start = 20.dp, end = 20.dp)) {
-            Text("知识图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Text("认知语义图谱", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(4.dp))
             Text("点击节点进行认知链路追踪", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f))
             Spacer(modifier = Modifier.height(16.dp))
@@ -269,6 +279,76 @@ fun KnowledgeGraphScreen(preferences: UserPreferences) {
                 Box(modifier = Modifier.size(10.dp).background(Color(0xFFE57373), CircleShape))
                 Spacer(modifier = Modifier.width(6.dp))
                 Text("薄弱环节", style = MaterialTheme.typography.labelSmall)
+            }
+        }
+        
+        // Node Detail Sheet (if focused)
+        val focusedNode = controller.nodes.find { it.id == controller.focusedNodeId }
+        AnimatedVisibility(
+            visible = focusedNode != null,
+            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+            exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
+            modifier = Modifier.align(Alignment.BottomCenter)
+        ) {
+            focusedNode?.let { node ->
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 0.dp) // flush with bottom
+                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
+                    color = MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp),
+                    tonalElevation = 8.dp
+                ) {
+                    Column(modifier = Modifier.padding(24.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = node.title,
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Box(
+                                modifier = Modifier
+                                    .background(SageGreen.copy(0.1f), CircleShape)
+                                    .padding(horizontal = 8.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    "${(node.masteryLevel * 100).toInt()}% 掌握",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = SageGreen
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            "基于 GraphRAG 的认知归因：此节点由 ${dbEdges.count { it.targetNodeId == node.id }} 个前置知识点决定。建议优先巩固基础路径。",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Button(
+                                onClick = { onNodeClick(node.id) },
+                                modifier = Modifier.weight(1f),
+                                colors = ButtonDefaults.buttonColors(containerColor = SageGreen)
+                            ) {
+                                Text("查看详解")
+                            }
+                            Spacer(modifier = Modifier.width(12.dp))
+                            OutlinedButton(
+                                onClick = { 
+                                    // BFS path demo - for now just expand
+                                    controller.toggleNodeExpansion(node.id)
+                                },
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Text(if (node.isExpanded) "收拢图谱" else "全景展开")
+                            }
+                        }
+                    }
+                }
             }
         }
     }
