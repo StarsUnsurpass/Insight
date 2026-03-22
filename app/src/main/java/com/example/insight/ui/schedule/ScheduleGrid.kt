@@ -11,6 +11,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import androidx.compose.animation.core.*
+import java.util.Calendar
 import com.example.insight.data.local.dao.CourseWithTimeSlot
 import com.example.insight.data.local.entities.LessonTimeEntity
 import com.example.insight.data.local.entities.TimeSlotEntity
@@ -92,6 +96,101 @@ fun ScheduleGrid(
                     }
                 }
             }
+            
+            // --- Current Time Indicator Overlay ---
+            TimeIndicatorOverlay(
+                lessonTimes = lessonTimes,
+                rowHeight = rowHeight,
+                sidebarWidth = sidebarWidth
+            )
+        }
+    }
+}
+
+@Composable
+fun TimeIndicatorOverlay(
+    lessonTimes: List<LessonTimeEntity>,
+    rowHeight: Dp,
+    sidebarWidth: Dp
+) {
+    if (lessonTimes.isEmpty()) return
+    
+    val calendar = Calendar.getInstance()
+    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+    val minute = calendar.get(Calendar.MINUTE)
+    val currentMinutes = hour * 60 + minute
+    
+    // Calculate Y offset based on current time linearly mapped to periods
+    // Simplifying: find if it's within a period or between periods
+    var yOffset: Float? = null
+    
+    for (i in lessonTimes.indices) {
+        val time = lessonTimes[i]
+        val startParts = time.startTime.split(":")
+        val endParts = time.endTime.split(":")
+        if (startParts.size == 2 && endParts.size == 2) {
+            val startMin = startParts[0].toInt() * 60 + startParts[1].toInt()
+            val endMin = endParts[0].toInt() * 60 + endParts[1].toInt()
+            
+            val periodYStart = (time.period - 1) * rowHeight.value
+            var extraSectionGaps = 0f
+            if (time.section >= 1) extraSectionGaps += (rowHeight.value / 2)
+            if (time.section >= 2) extraSectionGaps += (rowHeight.value / 2)
+            
+            val absoluteYStart = periodYStart + extraSectionGaps
+            
+            if (currentMinutes in startMin..endMin) {
+                val progress = (currentMinutes - startMin).toFloat() / (endMin - startMin).toFloat()
+                yOffset = absoluteYStart + progress * rowHeight.value
+                break
+            } else if (i < lessonTimes.lastIndex) {
+                // Check if in gap
+                val nextTime = lessonTimes[i+1]
+                val nextStartParts = nextTime.startTime.split(":")
+                val nextStartMin = nextStartParts[0].toInt() * 60 + nextStartParts[1].toInt()
+                if (currentMinutes in endMin..nextStartMin && endMin != nextStartMin) {
+                    val gapProgress = (currentMinutes - endMin).toFloat() / (nextStartMin - endMin).toFloat()
+                    
+                    var nextExtraSectionGaps = 0f
+                    if (nextTime.section >= 1) nextExtraSectionGaps += (rowHeight.value / 2)
+                    if (nextTime.section >= 2) nextExtraSectionGaps += (rowHeight.value / 2)
+                    
+                    val nextAbsoluteYStart = ((nextTime.period - 1) * rowHeight.value) + nextExtraSectionGaps
+                    val gapHeight = nextAbsoluteYStart - (absoluteYStart + rowHeight.value)
+                    yOffset = (absoluteYStart + rowHeight.value) + gapProgress * gapHeight
+                    break
+                }
+            }
+        }
+    }
+    
+    if (yOffset != null) {
+        val infiniteTransition = rememberInfiniteTransition()
+        val alpha by infiniteTransition.animateFloat(
+            initialValue = 0.3f,
+            targetValue = 1.0f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1000, easing = LinearEasing),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+        
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset(y = yOffset.dp)
+                .height(2.dp)
+                .zIndex(10f)
+                .background(MaterialTheme.colorScheme.error.copy(alpha = alpha))
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(start = sidebarWidth - 4.dp)
+                    .size(6.dp)
+                    .offset(y = (-2).dp)
+                    .clip(androidx.compose.foundation.shape.CircleShape)
+                    .background(MaterialTheme.colorScheme.error)
+            )
         }
     }
 }

@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier;
 import androidx.compose.ui.text.font.FontWeight;
 import androidx.compose.ui.text.style.TextAlign;
 import androidx.compose.ui.unit.Dp;
+import androidx.compose.animation.core.*;
+import java.util.Calendar;
 import com.example.insight.data.local.dao.CourseWithTimeSlot;
 import com.example.insight.data.local.entities.LessonTimeEntity;
 import com.example.insight.data.local.entities.TimeSlotEntity;

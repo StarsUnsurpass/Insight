@@ -208,7 +208,8 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
   }
 
   @Override
-  public Object insertPlan(final LessonPlanEntity plan, final Continuation<? super Unit> arg1) {
+  public Object insertPlan(final LessonPlanEntity plan,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -222,12 +223,12 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object insertQuestionRef(final LessonQuestionCrossRef ref,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -241,11 +242,12 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object deletePlan(final LessonPlanEntity plan, final Continuation<? super Unit> arg1) {
+  public Object deletePlan(final LessonPlanEntity plan,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -259,11 +261,12 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object updatePlan(final LessonPlanEntity plan, final Continuation<? super Unit> arg1) {
+  public Object updatePlan(final LessonPlanEntity plan,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -277,7 +280,7 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
@@ -379,7 +382,8 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
   }
 
   @Override
-  public Object getPlanById(final String id, final Continuation<? super LessonPlanEntity> arg1) {
+  public Object getPlanById(final String id,
+      final Continuation<? super LessonPlanEntity> $completion) {
     final String _sql = "SELECT * FROM lesson_plan_table WHERE planId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -476,7 +480,7 @@ public final class LessonPlanDao_Impl implements LessonPlanDao {
           _statement.release();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override

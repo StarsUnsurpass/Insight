@@ -14,6 +14,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions
 import javax.inject.Singleton
 
 @Module
@@ -23,7 +24,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideTextRecognizer(): TextRecognizer {
-        return TextRecognition.getClient()
+        return TextRecognition.getClient(ChineseTextRecognizerOptions.Builder().build())
     }
 
     @Provides

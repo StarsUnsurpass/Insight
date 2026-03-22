@@ -154,7 +154,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
 
   @Override
   public Object insertNodes(final List<KnowledgeNodeEntity> nodes,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -168,12 +168,12 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object insertEdges(final List<KnowledgeEdgeEntity> edges,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -187,12 +187,12 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object insertClosure(final List<KnowledgeClosureEntity> closures,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -206,12 +206,12 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object updateMastery(final StudentMasteryEntity mastery,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -225,13 +225,13 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object updateMasteryWithRules(final String studentId, final String nodeId,
-      final boolean isCorrect, final Continuation<? super Unit> arg3) {
-    return RoomDatabaseKt.withTransaction(__db, (__cont) -> KnowledgeDao.DefaultImpls.updateMasteryWithRules(KnowledgeDao_Impl.this, studentId, nodeId, isCorrect, __cont), arg3);
+      final boolean isCorrect, final Continuation<? super Unit> $completion) {
+    return RoomDatabaseKt.withTransaction(__db, (__cont) -> KnowledgeDao.DefaultImpls.updateMasteryWithRules(KnowledgeDao_Impl.this, studentId, nodeId, isCorrect, __cont), $completion);
   }
 
   @Override
@@ -351,7 +351,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
 
   @Override
   public Object getPrerequisites(final String nodeId,
-      final Continuation<? super List<KnowledgeNodeEntity>> arg1) {
+      final Continuation<? super List<KnowledgeNodeEntity>> $completion) {
     final String _sql = "\n"
             + "        SELECT n.* FROM knowledge_nodes n\n"
             + "        JOIN knowledge_edges e ON n.nodeId = e.sourceNodeId\n"
@@ -416,7 +416,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           _statement.release();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
@@ -549,7 +549,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
 
   @Override
   public Object getMasterySync(final String studentId, final String nodeId,
-      final Continuation<? super StudentMasteryEntity> arg2) {
+      final Continuation<? super StudentMasteryEntity> $completion) {
     final String _sql = "SELECT * FROM student_mastery WHERE studentId = ? AND nodeId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
@@ -603,7 +603,7 @@ public final class KnowledgeDao_Impl implements KnowledgeDao {
           _statement.release();
         }
       }
-    }, arg2);
+    }, $completion);
   }
 
   @NonNull

@@ -9,8 +9,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.PickVisualMediaRequest
+import android.net.Uri
+import androidx.compose.ui.platform.LocalContext
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions
+import com.example.insight.util.ScheduleAlarmManager
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +46,39 @@ fun ScheduleScreen(
     // Quick Add State
     var prefillDay by remember { mutableStateOf(1) }
     var prefillPeriod by remember { mutableStateOf(1) }
+    
+    var showImportMenu by remember { mutableStateOf(false) }
+    var showCorrectionDialog by remember { mutableStateOf<List<ParsedGridItem>?>(null) }
+    
+    val context = LocalContext.current
+    LaunchedEffect(scheduleData, lessonTimes) {
+        if (scheduleData.isNotEmpty() && lessonTimes.isNotEmpty()) {
+            val alarmManager = ScheduleAlarmManager(context)
+            scheduleData.forEach { courseData ->
+                alarmManager.scheduleCourseAlarm(courseData, lessonTimes)
+            }
+        }
+    }
 
+    // Photo Picker for importing schedule image
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri: Uri? ->
+            uri?.let {
+                val image = InputImage.fromFilePath(context, it)
+                val recognizer = TextRecognition.getClient(ChineseTextRecognizerOptions.Builder().build())
+                recognizer.process(image)
+                    .addOnSuccessListener { visionText ->
+                        val items = ScheduleImportEngine.parseGrid(visionText.textBlocks, image.width, image.height)
+                        showCorrectionDialog = items
+                    }
+                    .addOnFailureListener { e ->
+                        // Handle failure
+                    }
+            }
+        }
+    )
+    
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -89,12 +133,29 @@ fun ScheduleScreen(
                 )
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = { 
-                    prefillDay = 1
-                    prefillPeriod = 1
-                    showAddCourseDialog = true 
-                }) {
-                    Icon(Icons.Default.Add, contentDescription = "添加课程")
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FloatingActionButton(onClick = { showImportMenu = true }) {
+                        Icon(Icons.Default.Add, contentDescription = "操作菜单")
+                    }
+                    FloatingActionButton(onClick = {
+                        val active = activeSchedule ?: return@FloatingActionButton
+                        val text = buildString {
+                            appendLine("【${active.scheduleName}】")
+                            scheduleData.forEach { courseData ->
+                                appendLine("- ${courseData.course.courseName} (${courseData.course.location})")
+                                courseData.timeSlots.forEach { slot ->
+                                    appendLine("  周${slot.dayOfWeek} 第${slot.startPeriod}-${slot.endPeriod}节")
+                                }
+                            }
+                        }
+                        val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(android.content.Intent.EXTRA_TEXT, text)
+                        }
+                        context.startActivity(android.content.Intent.createChooser(intent, "分享课表"))
+                    }) {
+                        Icon(Icons.Default.Share, contentDescription = "分享课表")
+                    }
                 }
             }
         ) { padding ->
@@ -123,13 +184,70 @@ fun ScheduleScreen(
             onDismissRequest = { showCreateScheduleDialog = false },
             title = { Text("新建课表") },
             text = {
-                TextField(value = name, onValueChange = { name = it }, placeholder = { Text("例如：2026春季课表") })
+                OutlinedTextField(value = name, onValueChange = { name = it }, placeholder = { Text("例如：2026春季课表") })
             },
             confirmButton = {
                 Button(onClick = {
-                    viewModel.createSchedule(name)
-                    showCreateScheduleDialog = false
+                    if (name.isNotBlank()) {
+                        viewModel.createSchedule(name)
+                        showCreateScheduleDialog = false
+                    }
                 }) { Text("确定") }
+            }
+        )
+    }
+
+    if (showImportMenu) {
+        ModalBottomSheet(onDismissRequest = { showImportMenu = false }) {
+            Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                ListItem(
+                    headlineContent = { Text("手动添加") },
+                    leadingContent = { Icon(Icons.Default.Add, contentDescription = null) },
+                    modifier = Modifier.clickable { 
+                        showImportMenu = false
+                        prefillDay = 1
+                        prefillPeriod = 1
+                        showAddCourseDialog = true 
+                    }
+                )
+                ListItem(
+                    headlineContent = { Text("从相册导入") },
+                    leadingContent = { Icon(Icons.Default.Image, contentDescription = null) },
+                    modifier = Modifier.clickable { 
+                        showImportMenu = false
+                        photoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    }
+                )
+                ListItem(
+                    headlineContent = { Text("拍照导入") },
+                    leadingContent = { Icon(Icons.Default.CameraAlt, contentDescription = null) },
+                    modifier = Modifier.clickable { 
+                        showImportMenu = false
+                        // TODO: Implement camera capture
+                    }
+                )
+            }
+        }
+    }
+
+    if (showCorrectionDialog != null) {
+        CorrectionDialog(
+            items = showCorrectionDialog!!,
+            onDismiss = { showCorrectionDialog = null },
+            onConfirm = { correctedItems ->
+                correctedItems.forEach {
+                    viewModel.addCourse(
+                        name = it.text,
+                        teacher = "",
+                        location = "",
+                        color = 0xFFBBDEFB.toInt(),
+                        dayOfWeek = it.dayOfWeek,
+                        startPeriod = it.startPeriod,
+                        endPeriod = it.endPeriod,
+                        weeks = (1..20).toList()
+                    )
+                }
+                showCorrectionDialog = null
             }
         )
     }
@@ -145,6 +263,56 @@ fun ScheduleScreen(
             }
         )
     }
+}
+
+@Composable
+fun CorrectionDialog(
+    items: List<ParsedGridItem>,
+    onDismiss: () -> Unit,
+    onConfirm: (List<ParsedGridItem>) -> Unit
+) {
+    var editableItems by remember { mutableStateOf(items) }
+    
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("AI 识别校对") },
+        text = {
+            LazyColumn {
+                items(editableItems) { item ->
+                    val index = editableItems.indexOf(item)
+                    Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                        OutlinedTextField(
+                            value = item.text,
+                            onValueChange = { newText ->
+                                val newList = editableItems.toMutableList()
+                                newList[index] = item.copy(text = newText)
+                                editableItems = newList
+                            },
+                            modifier = Modifier.weight(1f),
+                            label = { Text("周${item.dayOfWeek} 第${item.startPeriod}-${item.endPeriod}节") }
+                        )
+                        IconButton(onClick = { 
+                            val newList = editableItems.toMutableList()
+                            newList.removeAt(index)
+                            editableItems = newList
+                        }) {
+                            Icon(Icons.Default.Delete, contentDescription = "删除")
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            Button(onClick = { onConfirm(editableItems) }) {
+                Text("确认并导入")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("取消")
+            }
+        }
+    )
 }
 
 @Composable

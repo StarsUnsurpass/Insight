@@ -7,8 +7,14 @@ import androidx.compose.material3.*;
 import androidx.compose.runtime.*;
 import androidx.compose.ui.Alignment;
 import androidx.compose.ui.Modifier;
+import androidx.activity.result.contract.ActivityResultContracts;
+import android.net.Uri;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions;
+import com.example.insight.util.ScheduleAlarmManager;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000,\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\b\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0010\u000e\n\u0002\u0010 \n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0000\u001aj\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u00032\u0006\u0010\u0004\u001a\u00020\u00032\f\u0010\u0005\u001a\b\u0012\u0004\u0012\u00020\u00010\u00062B\u0010\u0007\u001a>\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00030\n\u0012\u0004\u0012\u00020\u00010\bH\u0007\u001a\u0016\u0010\u000b\u001a\u00020\u00012\f\u0010\f\u001a\b\u0012\u0004\u0012\u00020\u00010\u0006H\u0007\u001a \u0010\r\u001a\u00020\u00012\f\u0010\u000e\u001a\b\u0012\u0004\u0012\u00020\u00010\u00062\b\b\u0002\u0010\u000f\u001a\u00020\u0010H\u0007\u00a8\u0006\u0011"}, d2 = {"AddCourseDialog", "", "initialDay", "", "initialStart", "onDismiss", "Lkotlin/Function0;", "onConfirm", "Lkotlin/Function8;", "", "", "EmptyScheduleState", "onCreateClick", "ScheduleScreen", "onBack", "viewModel", "Lcom/example/insight/ui/schedule/ScheduleViewModel;", "app_debug"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u00008\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\b\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0010\u000e\n\u0002\u0010 \n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0000\u001aj\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u00032\u0006\u0010\u0004\u001a\u00020\u00032\f\u0010\u0005\u001a\b\u0012\u0004\u0012\u00020\u00010\u00062B\u0010\u0007\u001a>\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\t\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\u0004\u0012\u00020\u0003\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00030\n\u0012\u0004\u0012\u00020\u00010\bH\u0007\u001a>\u0010\u000b\u001a\u00020\u00012\f\u0010\f\u001a\b\u0012\u0004\u0012\u00020\r0\n2\f\u0010\u0005\u001a\b\u0012\u0004\u0012\u00020\u00010\u00062\u0018\u0010\u0007\u001a\u0014\u0012\n\u0012\b\u0012\u0004\u0012\u00020\r0\n\u0012\u0004\u0012\u00020\u00010\u000eH\u0007\u001a\u0016\u0010\u000f\u001a\u00020\u00012\f\u0010\u0010\u001a\b\u0012\u0004\u0012\u00020\u00010\u0006H\u0007\u001a \u0010\u0011\u001a\u00020\u00012\f\u0010\u0012\u001a\b\u0012\u0004\u0012\u00020\u00010\u00062\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u00a8\u0006\u0015"}, d2 = {"AddCourseDialog", "", "initialDay", "", "initialStart", "onDismiss", "Lkotlin/Function0;", "onConfirm", "Lkotlin/Function8;", "", "", "CorrectionDialog", "items", "Lcom/example/insight/ui/schedule/ParsedGridItem;", "Lkotlin/Function1;", "EmptyScheduleState", "onCreateClick", "ScheduleScreen", "onBack", "viewModel", "Lcom/example/insight/ui/schedule/ScheduleViewModel;", "app_debug"})
 public final class ScheduleScreenKt {
     
     @kotlin.OptIn(markerClass = {androidx.compose.material3.ExperimentalMaterial3Api.class})
@@ -16,6 +22,13 @@ public final class ScheduleScreenKt {
     public static final void ScheduleScreen(@org.jetbrains.annotations.NotNull()
     kotlin.jvm.functions.Function0<kotlin.Unit> onBack, @org.jetbrains.annotations.NotNull()
     com.example.insight.ui.schedule.ScheduleViewModel viewModel) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void CorrectionDialog(@org.jetbrains.annotations.NotNull()
+    java.util.List<com.example.insight.ui.schedule.ParsedGridItem> items, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.util.List<com.example.insight.ui.schedule.ParsedGridItem>, kotlin.Unit> onConfirm) {
     }
     
     @androidx.compose.runtime.Composable()

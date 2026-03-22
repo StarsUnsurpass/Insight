@@ -126,7 +126,8 @@ public final class StudentDao_Impl implements StudentDao {
   }
 
   @Override
-  public Object insertStudent(final StudentEntity student, final Continuation<? super Unit> arg1) {
+  public Object insertStudent(final StudentEntity student,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -140,12 +141,12 @@ public final class StudentDao_Impl implements StudentDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object insertStudents(final List<StudentEntity> students,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -159,11 +160,12 @@ public final class StudentDao_Impl implements StudentDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object deleteStudent(final StudentEntity student, final Continuation<? super Unit> arg1) {
+  public Object deleteStudent(final StudentEntity student,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -177,11 +179,12 @@ public final class StudentDao_Impl implements StudentDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object updateStudent(final StudentEntity student, final Continuation<? super Unit> arg1) {
+  public Object updateStudent(final StudentEntity student,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -195,7 +198,7 @@ public final class StudentDao_Impl implements StudentDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
@@ -261,7 +264,8 @@ public final class StudentDao_Impl implements StudentDao {
   }
 
   @Override
-  public Object getStudentById(final String id, final Continuation<? super StudentEntity> arg1) {
+  public Object getStudentById(final String id,
+      final Continuation<? super StudentEntity> $completion) {
     final String _sql = "SELECT * FROM student_table WHERE studentId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -322,7 +326,7 @@ public final class StudentDao_Impl implements StudentDao {
           _statement.release();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
