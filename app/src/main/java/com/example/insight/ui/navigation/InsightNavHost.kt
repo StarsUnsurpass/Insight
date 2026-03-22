@@ -72,9 +72,6 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onNavigateToCourseware = { id ->
                     navController.navigate(Route.CoursewarePlayer.createRoute(id))
                 },
-                onNavigateToCoursewareEditor = { id ->
-                    navController.navigate(Route.CoursewareEditor.createRoute(id))
-                },
                 onNavigateToLessonPlanSample = { id ->
                     navController.navigate(Route.LessonPlanSampleDetail.createRoute(id))
                 },

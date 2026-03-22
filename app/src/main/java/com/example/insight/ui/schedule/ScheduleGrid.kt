@@ -47,17 +47,39 @@ fun ScheduleGrid(
     val afternoonPeriods = lessonTimes.filter { it.section == 1 }
     val eveningPeriods = lessonTimes.filter { it.section == 2 }
 
+    val todayCalendar = Calendar.getInstance()
+    val currentDayOfWeek = if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) 7 
+                           else todayCalendar.get(Calendar.DAY_OF_WEEK) - 1
+
     Column(modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         // --- X Axis: Days ---
         Row(modifier = Modifier.fillMaxWidth().height(headerHeight).background(MaterialTheme.colorScheme.surface)) {
             Box(modifier = Modifier.width(sidebarWidth))
-            days.forEach { day ->
+            days.forEachIndexed { index, day ->
+                val dayOffset = (index + 1) - currentDayOfWeek
+                val colCalendar = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, dayOffset) }
+                val dateStr = "${colCalendar.get(Calendar.MONTH) + 1}/${colCalendar.get(Calendar.DAY_OF_MONTH)}"
+                val isToday = index + 1 == currentDayOfWeek
+                
                 Column(
-                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                    modifier = Modifier.weight(1f).fillMaxHeight().background(
+                        if (isToday) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f) else Color.Transparent
+                    ),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text(text = day, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = day, 
+                        style = MaterialTheme.typography.labelMedium, 
+                        fontWeight = if (isToday) FontWeight.Bold else FontWeight.Normal,
+                        color = if (isToday) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = dateStr, 
+                        style = MaterialTheme.typography.labelSmall, 
+                        fontSize = 9.sp,
+                        color = if (isToday) MaterialTheme.colorScheme.primary else Color.Gray
+                    )
                 }
             }
         }
@@ -71,7 +93,7 @@ fun ScheduleGrid(
                     RenderSection(afternoonPeriods, sidebarWidth, rowHeight, onEmptyCellClick)
                 }
                 if (eveningPeriods.isNotEmpty()) {
-                    SectionDivider("晚修", rowHeight / 2)
+                    SectionDivider("晚饭", rowHeight / 2)
                     RenderSection(eveningPeriods, sidebarWidth, rowHeight, onEmptyCellClick)
                 }
             }
@@ -211,16 +233,22 @@ fun RenderSection(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(text = time.period.toString(), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
-                Text(text = time.startTime, style = MaterialTheme.typography.labelSmall, fontSize = 8.sp, color = Color.Gray)
-                Text(text = time.endTime, style = MaterialTheme.typography.labelSmall, fontSize = 8.sp, color = Color.Gray)
+                Text(text = time.startTime, style = MaterialTheme.typography.labelSmall, fontSize = 9.sp, color = Color.Gray)
+                Text(text = time.endTime, style = MaterialTheme.typography.labelSmall, fontSize = 9.sp, color = Color.Gray)
             }
             
             // Grid Cells
+            val todayCalendar = Calendar.getInstance()
+            val currentDayOfWeek = if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) 7 
+                                   else todayCalendar.get(Calendar.DAY_OF_WEEK) - 1
+
             repeat(7) { dayIndex ->
+                val isToday = dayIndex + 1 == currentDayOfWeek
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
+                        .background(if (isToday) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.15f) else Color.Transparent)
                         .border(0.5.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
                         .clickable { onEmptyCellClick(dayIndex + 1, time.period) }
                 )
@@ -232,12 +260,12 @@ fun RenderSection(
 @Composable
 fun SectionDivider(label: String, height: Dp) {
     Row(
-        modifier = Modifier.fillMaxWidth().height(height).background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+        modifier = Modifier.fillMaxWidth().height(height).background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        HorizontalDivider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-        Text(text = label, style = MaterialTheme.typography.labelSmall, color = Color.Gray, fontSize = 10.sp)
+        HorizontalDivider(modifier = Modifier.weight(1f).padding(start = 48.dp, end = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        Text(text = "☕ $label", style = MaterialTheme.typography.labelSmall, color = Color.Gray, fontSize = 11.sp)
         HorizontalDivider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
     }
 }

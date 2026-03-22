@@ -160,4 +160,11 @@ class ScheduleViewModel @Inject constructor(
             repository.deleteSchedule(schedule)
         }
     }
+
+    fun updateLessonTimes(updatedTimes: List<LessonTimeEntity>) {
+        viewModelScope.launch {
+            repository.saveLessonTimes(updatedTimes)
+            // The flow will automatically emit the new list
+        }
+    }
 }

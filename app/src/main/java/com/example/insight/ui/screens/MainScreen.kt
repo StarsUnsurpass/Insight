@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -91,7 +92,6 @@ fun MainScreen(
     onNavigateToLessonPlans: () -> Unit,
     onNavigateToMindMap: () -> Unit,
     onNavigateToCourseware: (String) -> Unit,
-    onNavigateToCoursewareEditor: (String?) -> Unit,
     onNavigateToLessonPlanSample: (String) -> Unit,
     onNavigateToKnowledgeDetail: (String) -> Unit,
     onNavigateToSchedule: () -> Unit
@@ -163,7 +163,6 @@ fun MainScreen(
                                 onNavigateToSettings = onNavigateToSettings,
                                 onNavigateToExport = onNavigateToExport,
                                 onNavigateToCourseware = onNavigateToCourseware,
-                                onNavigateToCoursewareEditor = onNavigateToCoursewareEditor,
                                 onNavigateToLessonPlanSample = onNavigateToLessonPlanSample
                             )
                         }
@@ -625,7 +624,6 @@ fun ProfileTab(
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
     onNavigateToCourseware: (String) -> Unit,
-    onNavigateToCoursewareEditor: (String?) -> Unit,
     onNavigateToLessonPlanSample: (String) -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
@@ -769,6 +767,46 @@ fun ProfileTab(
                         Text("AI 驱动的内容创建与可视化思维导图", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                     }
                     Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
+                }
+            }
+        }
+
+        item {
+            Text("教学资源示例 (示例数据)", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(12.dp))
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Card(
+                    modifier = Modifier.weight(1f).hapticClickable(preferences) { onNavigateToLessonPlanSample(com.example.insight.data.model.sampleLessonPlans.first().id) },
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(Icons.AutoMirrored.Filled.MenuBook, null, tint = primaryColor, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text("教案示例", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("查看AI生成的标准教案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                    }
+                }
+
+                Card(
+                    modifier = Modifier.weight(1f).hapticClickable(preferences) { onNavigateToCourseware(com.example.insight.data.model.sampleCoursewares.first().id) },
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                            Icon(Icons.Default.Slideshow, null, tint = primaryColor, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text("课件示例", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("查看互动式演示文稿", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                    }
                 }
             }
         }

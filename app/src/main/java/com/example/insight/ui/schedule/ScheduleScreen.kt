@@ -3,6 +3,7 @@ package com.example.insight.ui.schedule
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,6 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -42,6 +49,7 @@ fun ScheduleScreen(
     var currentWeek by remember { mutableStateOf(1) }
     var showAddCourseDialog by remember { mutableStateOf(false) }
     var showCreateScheduleDialog by remember { mutableStateOf(false) }
+    var showTimeSettingsDialog by remember { mutableStateOf(false) }
     
     // Quick Add State
     var prefillDay by remember { mutableStateOf(1) }
@@ -72,7 +80,7 @@ fun ScheduleScreen(
                         val items = ScheduleImportEngine.parseGrid(visionText.textBlocks, image.width, image.height)
                         showCorrectionDialog = items
                     }
-                    .addOnFailureListener { e ->
+                    .addOnFailureListener { _ ->
                         // Handle failure
                     }
             }
@@ -123,8 +131,8 @@ fun ScheduleScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { /* Settings */ }) {
-                            Icon(Icons.Default.Settings, contentDescription = "设置")
+                        IconButton(onClick = { showTimeSettingsDialog = true }) {
+                            Icon(Icons.Default.Settings, contentDescription = "时间模板设置")
                         }
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Default.Menu, contentDescription = "菜单")
@@ -196,6 +204,35 @@ fun ScheduleScreen(
             }
         )
     }
+    if (showAddCourseDialog) {
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        ModalBottomSheet(
+            onDismissRequest = { showAddCourseDialog = false },
+            sheetState = sheetState
+        ) {
+            AddCourseBottomSheetContent(
+                initialDay = prefillDay,
+                initialStart = prefillPeriod,
+                onConfirm = { name, teacher, location, color, day, start, end, weeks ->
+                    viewModel.addCourse(name, teacher, location, color, day, start, end, weeks)
+                    scope.launch { sheetState.hide() }.invokeOnCompletion { 
+                        if (!sheetState.isVisible) showAddCourseDialog = false
+                    }
+                }
+            )
+        }
+    }
+    
+    if (showTimeSettingsDialog) {
+        TimeSettingsMenu(
+            onDismiss = { showTimeSettingsDialog = false },
+            currentLessonTimes = lessonTimes,
+            onSave = { updatedTimes ->
+                viewModel.updateLessonTimes(updatedTimes)
+                showTimeSettingsDialog = false
+            }
+        )
+    }
 
     if (showImportMenu) {
         ModalBottomSheet(onDismissRequest = { showImportMenu = false }) {
@@ -250,20 +287,7 @@ fun ScheduleScreen(
                 showCorrectionDialog = null
             }
         )
-    }
-
-    if (showAddCourseDialog) {
-        AddCourseDialog(
-            initialDay = prefillDay,
-            initialStart = prefillPeriod,
-            onDismiss = { showAddCourseDialog = false },
-            onConfirm = { name, teacher, loc, color, day, start, end, weeks ->
-                viewModel.addCourse(name, teacher, loc, color, day, start, end, weeks)
-                showAddCourseDialog = false
-            }
-        )
-    }
-}
+    }}
 
 @Composable
 fun CorrectionDialog(
@@ -271,7 +295,7 @@ fun CorrectionDialog(
     onDismiss: () -> Unit,
     onConfirm: (List<ParsedGridItem>) -> Unit
 ) {
-    var editableItems by remember { mutableStateOf(items) }
+    var editableItems by remember(items) { mutableStateOf(items) }
     
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -339,50 +363,246 @@ fun EmptyScheduleState(onCreateClick: () -> Unit) {
 }
 
 @Composable
-fun AddCourseDialog(
+fun AddCourseBottomSheetContent(
     initialDay: Int,
     initialStart: Int,
-    onDismiss: () -> Unit,
     onConfirm: (String, String, String, Int, Int, Int, Int, List<Int>) -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
     var teacher by remember { mutableStateOf("") }
-    var day by remember { mutableStateOf(initialDay) }
-    var start by remember { mutableStateOf(initialStart) }
-    var end by remember { mutableStateOf(initialStart) }
+    var span by remember { mutableStateOf(1) }
     
-    val colors = listOf(0xFFBBDEFB, 0xFFC8E6C9, 0xFFFFF9C4, 0xFFFFE0B2, 0xFFF8BBD0, 0xFFE1BEE7)
+    val days = listOf("周一", "周二", "周三", "周四", "周五", "周六", "周日")
+    
+    // Morandi colors
+    val colors = listOf(0xFFB1BFC3, 0xFFE0C1B3, 0xFFD2D8B3, 0xFFE2D4C5, 0xFFB9C4C6, 0xFFD9B8C4, 0xFFF2E3C6, 0xFFA5B8A8)
+    var selectedColor by remember { mutableStateOf(colors[0]) }
 
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("课程信息") },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("课程名称") }, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(value = location, onValueChange = { location = it }, label = { Text("上课地点") }, modifier = Modifier.fillMaxWidth())
-                
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    // Simplified selectors
-                    Text("周 $day", modifier = Modifier.weight(1f))
-                    Text("第 $start - $end 节", modifier = Modifier.weight(1f))
-                }
-                
-                Text("选择颜色", style = MaterialTheme.typography.labelSmall)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    colors.forEach { colorInt ->
-                        RadioButton(selected = false, onClick = { /* Select */ }, colors = RadioButtonDefaults.colors(selectedColor = Color(colorInt.toInt())))
+    var selectedWeeks by remember { mutableStateOf((1..20).toSet()) }
+
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text("添加课程", style = MaterialTheme.typography.titleLarge)
+        
+        Row(modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.shapes.medium).padding(12.dp)) {
+            Text("${days[initialDay - 1]} 第 $initialStart 节起", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        
+        OutlinedTextField(
+            value = name, 
+            onValueChange = { name = it }, 
+            label = { Text("课程名称 (必填)") }, 
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+        
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedTextField(
+                value = location, 
+                onValueChange = { location = it }, 
+                label = { Text("上课地点 (选填)") }, 
+                modifier = Modifier.weight(1f),
+                singleLine = true
+            )
+            OutlinedTextField(
+                value = teacher, 
+                onValueChange = { teacher = it }, 
+                label = { Text("任课教师 (选填)") }, 
+                modifier = Modifier.weight(1f),
+                singleLine = true
+            )
+        }
+        
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+            Text("连上几节", style = MaterialTheme.typography.bodyMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { if (span > 1) span-- }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "减少") }
+                Text(span.toString(), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(horizontal = 8.dp))
+                IconButton(onClick = { if (span < 5) span++ }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "增加") }
+            }
+        }
+        
+        Text("颜色选择", style = MaterialTheme.typography.bodyMedium)
+        Row(modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            colors.forEach { colorInt ->
+                Box(
+                    modifier = Modifier.size(36.dp).clip(androidx.compose.foundation.shape.CircleShape).background(Color(colorInt))
+                        .clickable { selectedColor = colorInt }
+                        .border(
+                            width = if (selectedColor == colorInt) 2.dp else 0.dp,
+                            color = if (selectedColor == colorInt) MaterialTheme.colorScheme.primary else Color.Transparent,
+                            shape = androidx.compose.foundation.shape.CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (selectedColor == colorInt) {
+                        Icon(Icons.Default.Check, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
                     }
                 }
             }
-        },
-        confirmButton = {
-            Button(onClick = { onConfirm(name, teacher, location, 0xFFBBDEFB.toInt(), day, start, end, (1..20).toList()) }) {
-                Text("保存")
+        }
+        
+        // Simplified Weekly Picker for now
+        Text("周次 (${selectedWeeks.size}周)", style = MaterialTheme.typography.bodyMedium)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = selectedWeeks.size == 20, onClick = { selectedWeeks = (1..20).toSet() }, label = { Text("全选") })
+            FilterChip(selected = selectedWeeks.all { it % 2 != 0 }, onClick = { selectedWeeks = (1..20).filter { it % 2 != 0 }.toSet() }, label = { Text("单周") })
+            FilterChip(selected = selectedWeeks.all { it % 2 == 0 }, onClick = { selectedWeeks = (1..20).filter { it % 2 == 0 }.toSet() }, label = { Text("双周") })
+        }
+        
+        Spacer(Modifier.height(8.dp))
+        Button(
+            onClick = {
+                if (name.isNotBlank()) {
+                    onConfirm(name.trim(), teacher.trim(), location.trim(), selectedColor.toInt(), initialDay, initialStart, initialStart + span - 1, selectedWeeks.toList())
+                }
+            },
+            modifier = Modifier.fillMaxWidth().height(50.dp),
+            enabled = name.isNotBlank()
+        ) {
+            Text("保存课程")
+        }
+        Spacer(Modifier.height(16.dp))
+    }
+}
+
+@Composable
+fun TimeSettingsMenu(
+    onDismiss: () -> Unit,
+    currentLessonTimes: List<com.example.insight.data.local.entities.LessonTimeEntity>,
+    onSave: (List<com.example.insight.data.local.entities.LessonTimeEntity>) -> Unit
+) {
+    var morningCount by remember { mutableStateOf(4) }
+    var afternoonCount by remember { mutableStateOf(4) }
+    var eveningCount by remember { mutableStateOf(3) }
+    var classDuration by remember { mutableStateOf(40) }
+    var breakDuration by remember { mutableStateOf(10) }
+    var startTimeInput by remember { mutableStateOf("08:00") }
+    var longBreakDuration by remember { mutableStateOf(30) }
+    var longBreakAfter by remember { mutableStateOf(2) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("作息时间模板") },
+        text = {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Text("节次结构配置", style = MaterialTheme.typography.titleSmall)
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                    Text("上午节数")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { if (morningCount > 0) morningCount-- }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null) }
+                        Text("$morningCount", modifier = Modifier.padding(horizontal = 8.dp))
+                        IconButton(onClick = { if (morningCount < 8) morningCount++ }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) }
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                    Text("下午节数")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { if (afternoonCount > 0) afternoonCount-- }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null) }
+                        Text("$afternoonCount", modifier = Modifier.padding(horizontal = 8.dp))
+                        IconButton(onClick = { if (afternoonCount < 8) afternoonCount++ }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) }
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                    Text("晚自习节数")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { if (eveningCount > 0) eveningCount-- }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null) }
+                        Text("$eveningCount", modifier = Modifier.padding(horizontal = 8.dp))
+                        IconButton(onClick = { if (eveningCount < 6) eveningCount++ }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) }
+                    }
+                }
+
+                HorizontalDivider()
+
+                Text("一键时间推算", style = MaterialTheme.typography.titleSmall)
+                OutlinedTextField(
+                    value = startTimeInput, 
+                    onValueChange = { startTimeInput = it }, 
+                    label = { Text("第一节课开始 (HH:MM)") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(
+                        value = classDuration.toString(), 
+                        onValueChange = { classDuration = it.toIntOrNull() ?: classDuration }, 
+                        label = { Text("每节课时长(分)") },
+                        modifier = Modifier.weight(1f)
+                    )
+                    OutlinedTextField(
+                        value = breakDuration.toString(), 
+                        onValueChange = { breakDuration = it.toIntOrNull() ?: breakDuration }, 
+                        label = { Text("课间休息(分)") },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(
+                        value = longBreakDuration.toString(), 
+                        onValueChange = { longBreakDuration = it.toIntOrNull() ?: longBreakDuration }, 
+                        label = { Text("大课间时长(分)") },
+                        modifier = Modifier.weight(1f)
+                    )
+                    OutlinedTextField(
+                        value = longBreakAfter.toString(), 
+                        onValueChange = { longBreakAfter = it.toIntOrNull() ?: longBreakAfter }, 
+                        label = { Text("在第几节课后") },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
+        },
+        confirmButton = { 
+            Button(onClick = { 
+                val timeParts = startTimeInput.split(":")
+                val startHour = timeParts.getOrNull(0)?.toIntOrNull() ?: 8
+                val startMin = timeParts.getOrNull(1)?.toIntOrNull() ?: 0
+                var currentMin = startHour * 60 + startMin
+
+                val newTimes = mutableListOf<com.example.insight.data.local.entities.LessonTimeEntity>()
+                val totalCount = morningCount + afternoonCount + eveningCount
+                
+                for (i in 1..totalCount) {
+                    val sh = currentMin / 60
+                    val sm = currentMin % 60
+                    
+                    currentMin += classDuration
+                    val eh = currentMin / 60
+                    val em = currentMin % 60
+                    
+                    val section = when {
+                        i <= morningCount -> 0
+                        i <= morningCount + afternoonCount -> 1
+                        else -> 2
+                    }
+                    val currentScheduleId = currentLessonTimes.firstOrNull()?.scheduleId ?: 0L
+                    
+                    newTimes.add(
+                        com.example.insight.data.local.entities.LessonTimeEntity(
+                            scheduleId = currentScheduleId,
+                            period = i,
+                            startTime = String.format("%02d:%02d", sh, sm),
+                            endTime = String.format("%02d:%02d", eh, em),
+                            section = section
+                        )
+                    )
+                    
+                    if (i == longBreakAfter) {
+                        currentMin += longBreakDuration
+                    } else if (i == morningCount || i == morningCount + afternoonCount) {
+                        currentMin += 120 // 默认午休晚饭两个小时
+                    } else {
+                        currentMin += breakDuration
+                    }
+                }
+                onSave(newTimes)
+            }) { 
+                Text("一键生成并保存") 
+            } 
         },
         dismissButton = {
             TextButton(onClick = onDismiss) { Text("取消") }
         }
     )
 }
+
