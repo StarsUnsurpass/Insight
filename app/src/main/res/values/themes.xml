@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Insight.Launch" parent="android:Theme.Material.NoActionBar">
+        <!-- 核心：将启动背景设为纯白，与动画对齐 -->
+        <item name="android:windowBackground">@android:color/white</item>
+        <!-- API 31+ 禁用系统强制显示的启动图标 -->
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@android:color/transparent</item>
+    </style>
+</resources>

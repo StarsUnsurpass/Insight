@@ -71,16 +71,16 @@
 41        android:supportsRtl="true"
 41-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:19:9-35
 42        android:testOnly="true"
-43        android:theme="@android:style/Theme.Material.NoActionBar" >
-43-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:20:9-66
+43        android:theme="@style/Theme.Insight.Launch" >
+43-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:20:9-52
 44        <activity
 44-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:21:9-29:20
 45            android:name="com.example.insight.MainActivity"
 45-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:22:13-41
 46            android:exported="true"
 46-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:23:13-36
-47            android:theme="@android:style/Theme.Material.NoActionBar" >
-47-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:13-70
+47            android:theme="@style/Theme.Insight.Launch" >
+47-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:24:13-56
 48            <intent-filter>
 48-->E:\Code\IDE\AndroidStudio\Insight\app\src\main\AndroidManifest.xml:25:13-28:29
 49                <action android:name="android.intent.action.MAIN" />

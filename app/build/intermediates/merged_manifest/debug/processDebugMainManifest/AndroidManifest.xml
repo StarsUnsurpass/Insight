@@ -40,11 +40,11 @@
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@android:style/Theme.Material.NoActionBar" >
+        android:theme="@style/Theme.Insight.Launch" >
         <activity
             android:name="com.example.insight.MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.Material.NoActionBar" >
+            android:theme="@style/Theme.Insight.Launch" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

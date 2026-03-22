@@ -17,11 +17,11 @@
         android:label="Insight"
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.NoActionBar">
+        android:theme="@style/Theme.Insight.Launch">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.Material.NoActionBar">
+            android:theme="@style/Theme.Insight.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
