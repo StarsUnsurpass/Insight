@@ -1,19 +1,16 @@
 package com.example.insight.ui.schedule
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.insight.util.ShareManager
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,7 +19,6 @@ fun ScheduleScreen(
     onBack: () -> Unit,
     viewModel: ScheduleViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     
@@ -39,15 +35,13 @@ fun ScheduleScreen(
     var prefillDay by remember { mutableStateOf(1) }
     var prefillPeriod by remember { mutableStateOf(1) }
 
-    val shareManager = remember { ShareManager(context) }
-    
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
                 Spacer(Modifier.height(12.dp))
                 Text("课表管理", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
-                Divider()
+                HorizontalDivider()
                 allSchedules.forEach { schedule ->
                     NavigationDrawerItem(
                         label = { Text(schedule.scheduleName) },
@@ -81,7 +75,7 @@ fun ScheduleScreen(
                     },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = "返回")
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                         }
                     },
                     actions = {

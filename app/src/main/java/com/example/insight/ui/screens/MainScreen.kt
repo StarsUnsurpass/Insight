@@ -572,7 +572,7 @@ fun AnalysisTab(
             Card(
                 modifier = Modifier.fillMaxWidth().clickable { onNavigateToSchedule() },
                 shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
             ) {
@@ -583,7 +583,7 @@ fun AnalysisTab(
                     Spacer(modifier = Modifier.width(16.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text("全能课表管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
                     }
                     Icon(Icons.Default.ChevronRight, null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
                 }

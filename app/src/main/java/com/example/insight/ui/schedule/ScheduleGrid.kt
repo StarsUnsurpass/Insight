@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,7 +54,6 @@ fun ScheduleGrid(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(text = day, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
-                    // Date could be added here
                 }
             }
         }
@@ -62,14 +61,14 @@ fun ScheduleGrid(
         Box(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
             // --- Background Grid & Y Axis ---
             Column {
-                RenderSection(morningPeriods, "上午", sidebarWidth, rowHeight, onEmptyCellClick)
+                RenderSection(morningPeriods, sidebarWidth, rowHeight, onEmptyCellClick)
                 if (afternoonPeriods.isNotEmpty()) {
                     SectionDivider("午休", rowHeight / 2)
-                    RenderSection(afternoonPeriods, "下午", sidebarWidth, rowHeight, onEmptyCellClick)
+                    RenderSection(afternoonPeriods, sidebarWidth, rowHeight, onEmptyCellClick)
                 }
                 if (eveningPeriods.isNotEmpty()) {
                     SectionDivider("晚修", rowHeight / 2)
-                    RenderSection(eveningPeriods, "晚上", sidebarWidth, rowHeight, onEmptyCellClick)
+                    RenderSection(eveningPeriods, sidebarWidth, rowHeight, onEmptyCellClick)
                 }
             }
 
@@ -83,7 +82,6 @@ fun ScheduleGrid(
                     courseData.timeSlots.forEach { slot ->
                         CourseCard(
                             courseData = courseData,
-                            slot = slot,
                             modifier = Modifier.coursePosition(
                                 day = slot.dayOfWeek,
                                 start = slot.startPeriod,
@@ -101,7 +99,6 @@ fun ScheduleGrid(
 @Composable
 fun RenderSection(
     periods: List<LessonTimeEntity>,
-    label: String,
     sidebarWidth: Dp,
     rowHeight: Dp,
     onEmptyCellClick: (Int, Int) -> Unit
@@ -140,9 +137,9 @@ fun SectionDivider(label: String, height: Dp) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Divider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        HorizontalDivider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
         Text(text = label, style = MaterialTheme.typography.labelSmall, color = Color.Gray, fontSize = 10.sp)
-        Divider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        HorizontalDivider(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
     }
 }
 
@@ -171,21 +168,18 @@ fun ScheduleLayout(
             ))
         }
 
-        layout(constraints.maxWidth, 1500) { // Height is large enough to scroll
+        layout(constraints.maxWidth, 1500) { 
             placeables.forEachIndexed { index, placeable ->
                 val parentData = measurables[index].parentData as? CoursePositionData
                 if (parentData != null) {
                     val x = (parentData.day - 1) * columnWidth
                     
-                    // Calculate Y based on period and section gaps
                     val startTime = lessonTimes.find { it.period == parentData.start }
                     var yOffset = 0
                     if (startTime != null) {
-                        // Rough calculation: morning starts at 0, afternoon has a gap, etc.
                         yOffset = (parentData.start - 1) * rowHeight.roundToPx()
-                        // Add gaps for dividers
-                        if (startTime.section >= 1) yOffset += (rowHeight.roundToPx() / 2) // 午休 gap
-                        if (startTime.section >= 2) yOffset += (rowHeight.roundToPx() / 2) // 晚修 gap
+                        if (startTime.section >= 1) yOffset += (rowHeight.roundToPx() / 2) 
+                        if (startTime.section >= 2) yOffset += (rowHeight.roundToPx() / 2) 
                     }
                     
                     placeable.placeRelative(x, yOffset)
@@ -211,7 +205,6 @@ fun Modifier.coursePosition(day: Int, start: Int, end: Int): Modifier = this.the
 @Composable
 fun CourseCard(
     courseData: CourseWithTimeSlot,
-    slot: TimeSlotEntity,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
