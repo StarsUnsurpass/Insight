@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.*
+import androidx.compose.material.icons.automirrored.outlined.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -992,7 +993,7 @@ fun getPointIcon(id: String, title: String): ImageVector {
         id == "018" || t.contains("被动") && t.contains("将来") -> Icons.Outlined.PublishedWithChanges
         id == "019" || t.contains("被动") && t.contains("完成") -> Icons.Outlined.AssignmentReturned
         id == "020" || t.contains("情态动词") -> Icons.Outlined.AutoFixHigh
-        id == "021" || t.contains("间接引语") -> Icons.AutoMirrored.Outlined.QuestionAnswer
+        id == "021" || t.contains("间接引语") -> Icons.Outlined.QuestionAnswer
         id == "022" || t.contains("主谓一致") -> Icons.Outlined.Tune
         id == "023" || t.contains("感叹") -> Icons.Outlined.PriorityHigh
         id == "024" || t.contains("宾语补足语") -> Icons.Outlined.AddCircleOutline
