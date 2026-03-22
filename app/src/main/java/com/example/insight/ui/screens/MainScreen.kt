@@ -502,22 +502,25 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, pre
     val status = listOf("已掌握", "练习中", "待复习")
     val primaryColor = MaterialTheme.colorScheme.primary
     val index = point.id.toIntOrNull() ?: 0
+    val cleanedDesc = cleanDescription(point.description)
     
-    Card(modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), shape = RoundedCornerShape(20.dp)) {
+    Card(
+        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), 
+        shape = RoundedCornerShape(20.dp)
+    ) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {
-                val iconVec = when (point.section) {
-                    com.example.insight.data.model.KnowledgeProvider.SEC_1 -> Icons.Outlined.Spellcheck
-                    com.example.insight.data.model.KnowledgeProvider.SEC_2 -> Icons.Outlined.Schedule
-                    com.example.insight.data.model.KnowledgeProvider.SEC_3 -> Icons.Outlined.AccountTree
-                    else -> Icons.Outlined.Description
-                }
-                Icon(iconVec, null, tint = primaryColor.copy(alpha = 0.5f))
+            Box(
+                modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), 
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(getPointIcon(point.id, point.title), null, tint = primaryColor.copy(alpha = 0.5f))
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-                Text(point.description.take(30) + "...", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1)
+                Text(cleanedDesc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 Spacer(modifier = Modifier.height(8.dp))
                 Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
                     Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> MaterialTheme.colorScheme.secondary; else -> Color.Red })
@@ -930,13 +933,7 @@ fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, q
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                val iconVec = when (point.section) {
-                    com.example.insight.data.model.KnowledgeProvider.SEC_1 -> Icons.Outlined.Spellcheck
-                    com.example.insight.data.model.KnowledgeProvider.SEC_2 -> Icons.Outlined.Schedule
-                    com.example.insight.data.model.KnowledgeProvider.SEC_3 -> Icons.Outlined.AccountTree
-                    else -> Icons.Outlined.Description
-                }
-                Icon(iconVec, contentDescription = null, tint = primaryColor, modifier = Modifier.size(20.dp))
+                Icon(getPointIcon(point.id, point.title), contentDescription = null, tint = primaryColor, modifier = Modifier.size(20.dp))
                 Spacer(modifier = Modifier.width(12.dp))
                 HighlightedText(
                     text = point.title, 
@@ -960,9 +957,50 @@ fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, q
     }
 }
 
+fun cleanDescription(description: String): String {
+    // 移除 markdown 标题 "### 核心概念详解" 或 "### 深度考点解析" 等
+    var cleaned = description.replace(Regex("### [^\\n]+\\n?"), "")
+    // 移除星号和换行
+    cleaned = cleaned.replace(Regex("[*`#\\n]"), " ").replace(Regex("\\s+"), " ").trim()
+    return if (cleaned.length > 80) cleaned.take(77) + "..." else cleaned
+}
+
+fun getPointIcon(id: String, title: String): ImageVector {
+    val t = title.lowercase()
+    return when {
+        id.contains("noun") || t.contains("名词") -> Icons.Outlined.Label
+        id.contains("pronoun") || t.contains("代词") -> Icons.Outlined.Portrait
+        id.contains("article") || t.contains("冠词") -> Icons.Outlined.ShortText
+        id.contains("numeral") || t.contains("数词") -> Icons.Outlined.Numbers
+        id.contains("adj") || id.contains("adv") || t.contains("形容词") || t.contains("副词") -> Icons.Outlined.ColorLens
+        id.contains("preposition") || t.contains("介词") -> Icons.Outlined.LocationOn
+        id.contains("conjunction") || t.contains("连词") -> Icons.Outlined.Link
+        
+        // 时态类
+        id.contains("present_perfect") || t.contains("现在完成") -> Icons.Outlined.AddTask
+        id.contains("past_perfect") || t.contains("过去完成") -> Icons.Outlined.HistoryEdu
+        id.contains("continuous") || t.contains("进行时") -> Icons.Outlined.Autorenew
+        id.contains("future") || t.contains("将来时") -> Icons.Outlined.Forward
+        id.contains("past") || t.contains("过去时") -> Icons.Outlined.History
+        id.contains("present") || t.contains("现在时") -> Icons.Outlined.Repeat
+        
+        // 句式类
+        id.contains("passive") || t.contains("被动") -> Icons.Outlined.FactCheck
+        id.contains("attribute") || t.contains("定语从句") -> Icons.Outlined.Hub
+        id.contains("agreement") || t.contains("主谓一致") -> Icons.Outlined.Tune
+        id.contains("modal") || t.contains("情态") -> Icons.Outlined.AutoFixHigh
+        id.contains("speech") || t.contains("间接引语") -> Icons.Outlined.QuestionAnswer
+        id.contains("exclamatory") || t.contains("感叹") -> Icons.Outlined.PriorityHigh
+        
+        else -> Icons.Outlined.MenuBook
+    }
+}
+
 fun getSnippet(point: com.example.insight.data.model.KnowledgePoint, query: String): String {
     val q = query.lowercase()
-    if (point.title.lowercase().contains(q)) return point.description.replace(Regex("[#*`\\n]"), " ").replace(Regex("\\s+"), " ").take(100) + "..."
+    val cleanedBase = cleanDescription(point.description)
+    
+    if (point.title.lowercase().contains(q)) return cleanedBase
     if (point.description.lowercase().contains(q)) return extractSnippet(point.description, q)
     
     val syllabusMatch = point.syllabusDetails.find { it.lowercase().contains(q) }
@@ -983,7 +1021,7 @@ fun getSnippet(point: com.example.insight.data.model.KnowledgePoint, query: Stri
     val examMatch = point.pastExamQuestions.find { it.question.lowercase().contains(q) || it.explanation.lowercase().contains(q) }
     if (examMatch != null) return "[真题] " + extractSnippet(examMatch.question + " " + examMatch.explanation, q)
     
-    return point.description.replace(Regex("[#*`\\n]"), " ").replace(Regex("\\s+"), " ").take(100) + "..."
+    return cleanedBase
 }
 
 fun extractSnippet(text: String, query: String): String {
