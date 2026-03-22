@@ -505,6 +505,9 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, pre
     val index = point.id.toIntOrNull() ?: 0
     val cleanedDesc = cleanDescription(point.description)
     
+    val hash = point.id.hashCode()
+    val statusIndex = Math.abs(hash) % 3
+    
     Card(
         modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
@@ -523,8 +526,24 @@ fun HistoryCardByPoint(point: com.example.insight.data.model.KnowledgePoint, pre
                 Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                 Text(cleanedDesc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 Spacer(modifier = Modifier.height(8.dp))
-                Surface(color = when(index % 3) { 0 -> primaryColor.copy(alpha = 0.1f); 1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f); else -> Color.Red.copy(alpha = 0.05f) }, shape = RoundedCornerShape(8.dp)) {
-                    Text(text = status[index % 3], modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = when(index % 3) { 0 -> primaryColor; 1 -> MaterialTheme.colorScheme.secondary; else -> Color.Red })
+                Surface(
+                    color = when(statusIndex) { 
+                        0 -> primaryColor.copy(alpha = 0.1f)
+                        1 -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
+                        else -> Color.Red.copy(alpha = 0.05f) 
+                    }, 
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = status[statusIndex], 
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), 
+                        style = MaterialTheme.typography.labelSmall, 
+                        color = when(statusIndex) { 
+                            0 -> primaryColor
+                            1 -> MaterialTheme.colorScheme.secondary
+                            else -> Color.Red 
+                        }
+                    )
                 }
             }
         }
@@ -969,35 +988,35 @@ fun cleanDescription(description: String): String {
 fun getPointIcon(id: String, title: String): ImageVector {
     val t = title.lowercase()
     return when {
-        id == "001" || t.contains("名词") -> Icons.AutoMirrored.Outlined.Label
-        id == "002" || t.contains("代词") -> Icons.Outlined.Portrait
-        id == "003" || t.contains("冠词") -> Icons.AutoMirrored.Outlined.ShortText
-        id == "004" || t.contains("数词") -> Icons.Outlined.Numbers
-        id == "005" || t.contains("形容词") || t.contains("副词") -> Icons.Outlined.ColorLens
-        id == "006" || t.contains("介词") -> Icons.Outlined.LocationOn
-        id == "007" || t.contains("连词") -> Icons.Outlined.Link
+        // 板块一：词法
+        id == "nouns" || t.contains("名词") -> Icons.AutoMirrored.Outlined.Label
+        id == "pronouns" || t.contains("代词") -> Icons.Outlined.Portrait
+        id == "articles" || t.contains("冠词") -> Icons.AutoMirrored.Outlined.ShortText
+        id == "numerals" || t.contains("数词") -> Icons.Outlined.Numbers
+        id == "adj_adv" || t.contains("形容词") || t.contains("副词") -> Icons.Outlined.ColorLens
+        id == "prepositions" || t.contains("介词") -> Icons.Outlined.LocationOn
+        id == "conjunctions" || t.contains("连词") -> Icons.Outlined.Link
         
-        // 时态类 (8-15)
-        id == "008" || t == "一般现在时" -> Icons.Outlined.Repeat
-        id == "009" || t == "一般过去时" -> Icons.Outlined.History
-        id == "010" || t == "一般将来时" -> Icons.Outlined.Upcoming
-        id == "011" || t == "现在进行时" -> Icons.Outlined.Autorenew
-        id == "012" || t == "过去进行时" -> Icons.Outlined.VideoStable
-        id == "013" || t == "现在完成时" -> Icons.Outlined.TaskAlt
-        id == "014" || t == "过去完成时" -> Icons.Outlined.Restore
-        id == "015" || t == "过去将来时" -> Icons.AutoMirrored.Outlined.Forward
+        // 板块二：动词与时态
+        id == "verbs_basic" || t.contains("动词基础") -> Icons.AutoMirrored.Outlined.MenuBook
+        id == "simple_present" || t.contains("一般现在时") -> Icons.Outlined.Repeat
+        id == "simple_past" || t.contains("一般过去时") -> Icons.Outlined.History
+        id == "simple_future" || t.contains("一般将来时") -> Icons.Outlined.Upcoming
+        id == "present_continuous" || t.contains("现在进行时") -> Icons.Outlined.Autorenew
+        id == "past_continuous" || t.contains("过去进行时") -> Icons.Outlined.VideoStable
+        id == "present_perfect" || t.contains("现在完成时") -> Icons.Outlined.TaskAlt
+        id == "past_perfect" || t.contains("过去完成时") -> Icons.Outlined.Restore
+        id == "past_future" || t.contains("过去将来时") -> Icons.AutoMirrored.Outlined.Forward
+        id == "non_finite_verbs" || t.contains("非谓语") -> Icons.Outlined.SlowMotionVideo
+        id == "passive_voice" || t.contains("被动") -> Icons.AutoMirrored.Outlined.FactCheck
         
-        // 被动与特殊句式 (16-25)
-        id == "016" || t.contains("被动") && t.contains("现在") -> Icons.AutoMirrored.Outlined.FactCheck
-        id == "017" || t.contains("被动") && t.contains("过去") -> Icons.Outlined.LibraryAddCheck
-        id == "018" || t.contains("被动") && t.contains("将来") -> Icons.Outlined.PublishedWithChanges
-        id == "019" || t.contains("被动") && t.contains("完成") -> Icons.Outlined.AssignmentReturned
-        id == "020" || t.contains("情态动词") -> Icons.Outlined.AutoFixHigh
-        id == "021" || t.contains("间接引语") -> Icons.Outlined.QuestionAnswer
-        id == "022" || t.contains("主谓一致") -> Icons.Outlined.Tune
-        id == "023" || t.contains("感叹") -> Icons.Outlined.PriorityHigh
-        id == "024" || t.contains("宾语补足语") -> Icons.Outlined.AddCircleOutline
-        id == "025" || t.contains("定语从句") -> Icons.Outlined.Hub
+        // 板块三：句法
+        id == "sentence_types" || t.contains("句子种类") -> Icons.Outlined.QuestionAnswer
+        id == "five_basic_patterns" || t.contains("基本句型") -> Icons.Outlined.Tune
+        id == "object_clause" || t.contains("宾语从句") -> Icons.Outlined.MeetingRoom
+        id == "attributive_clause" || t.contains("定语从句") -> Icons.Outlined.Hub
+        id == "adverbial_clause" || t.contains("状语从句") -> Icons.Outlined.FilterAlt
+        id == "special_patterns" || t.contains("特殊句式") -> Icons.Outlined.AutoAwesome
         
         else -> Icons.AutoMirrored.Outlined.MenuBook
     }
