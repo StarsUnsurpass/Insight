@@ -117,7 +117,7 @@ fun InsightNavHost(viewModel: InsightViewModel) {
             LessonPlanDetailScreen(
                 sampleId = sampleId,
                 onBack = { navController.popBackStack() },
-                onClone = { sample ->
+                onClone = { _ ->
                     // For demo, we just go to editor
                     navController.navigate(Route.LessonPlanEditor.path)
                 }

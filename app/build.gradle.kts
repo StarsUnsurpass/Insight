@@ -126,8 +126,7 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
-
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
     // Excel & Word
     implementation("org.apache.poi:poi-ooxml:5.2.5")

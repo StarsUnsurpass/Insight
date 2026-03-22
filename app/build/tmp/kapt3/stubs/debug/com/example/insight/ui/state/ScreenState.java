@@ -1,5 +1,13 @@
 package com.example.insight.ui.state;
 
+import com.example.insight.data.local.entities.KnowledgeEdgeEntity;
+import com.example.insight.data.local.entities.KnowledgeNodeEntity;
+import com.example.insight.data.local.entities.LessonPlanEntity;
+import com.example.insight.data.local.entities.ScanRecordEntity;
+import com.example.insight.data.local.entities.StudentEntity;
+import com.example.insight.data.local.entities.StudentMasteryEntity;
+import com.example.insight.data.local.entities.DiagnosticReportEntity;
+
 @kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u00006\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u000b\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\b6\u0018\u00002\u00020\u0001:\n\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\fB\u0007\b\u0004\u00a2\u0006\u0002\u0010\u0002\u0082\u0001\n\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u00a8\u0006\u0017"}, d2 = {"Lcom/example/insight/ui/state/ScreenState;", "", "()V", "Analyzing", "Graph", "KnowledgeDetail", "LessonPlanEditor", "LessonPlanList", "MindMap", "Scanning", "Solution", "StudentDetail", "StudentList", "Lcom/example/insight/ui/state/ScreenState$Analyzing;", "Lcom/example/insight/ui/state/ScreenState$Graph;", "Lcom/example/insight/ui/state/ScreenState$KnowledgeDetail;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanEditor;", "Lcom/example/insight/ui/state/ScreenState$LessonPlanList;", "Lcom/example/insight/ui/state/ScreenState$MindMap;", "Lcom/example/insight/ui/state/ScreenState$Scanning;", "Lcom/example/insight/ui/state/ScreenState$Solution;", "Lcom/example/insight/ui/state/ScreenState$StudentDetail;", "Lcom/example/insight/ui/state/ScreenState$StudentList;", "app_debug"})
 public abstract class ScreenState {
     

@@ -90,7 +90,7 @@ fun KnowledgeDetailScreen(
             // 1. 📋 考纲要求 (ORDER: FIRST)
             if (point.syllabusDetails.isNotEmpty()) {
                 item {
-                    SectionHeader(title = "1. 📋 考纲要求 (Syllabus Requirements)", icon = Icons.Default.ListAlt)
+                    SectionHeader(title = "1. 📋 考纲要求 (Syllabus Requirements)", icon = Icons.AutoMirrored.Filled.ListAlt)
                     Card(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
                         shape = RoundedCornerShape(12.dp),

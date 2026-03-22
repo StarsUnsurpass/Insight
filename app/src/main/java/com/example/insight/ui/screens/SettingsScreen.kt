@@ -135,7 +135,32 @@ fun SettingsScreen(
                     onCheckedChange = onHapticToggle
                 )
             }
+
+            item {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("高级配置", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+            }
+
+            item {
+                SettingItem(
+                    icon = Icons.Default.Key,
+                    title = "DeepSeek API Key",
+                    subtitle = if(preferences.deepSeekApiKey.isEmpty()) "未配置" else "已配置 (点击修改)",
+                    onClick = { showApiKeyDialog = true }
+                )
+            }
         }
+    }
+
+    if (showApiKeyDialog) {
+        ApiKeyEditDialog(
+            initialKey = preferences.deepSeekApiKey,
+            onConfirm = {
+                onDeepSeekApiKeyChange(it)
+                showApiKeyDialog = false
+            },
+            onDismiss = { showApiKeyDialog = false }
+        )
     }
 
     if (showNameDialog) {

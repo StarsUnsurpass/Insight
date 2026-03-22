@@ -23,6 +23,7 @@ import com.example.insight.ui.screens.SplashScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.theme.InsightTheme
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen(this)
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         
         when {
