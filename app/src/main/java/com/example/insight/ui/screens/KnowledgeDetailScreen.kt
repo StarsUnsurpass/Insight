@@ -36,7 +36,7 @@ import com.example.insight.data.model.*
 import io.noties.markwon.Markwon
 import io.noties.markwon.ext.tables.TablePlugin
 import io.noties.markwon.html.HtmlPlugin
-import androidx.compose.material3.ExperimentalMaterial3Api
+import com.example.insight.ui.util.MarkdownText
 import com.example.insight.ui.state.KnowledgeStatus
 import com.example.insight.ui.theme.SageGreen
 
@@ -299,37 +299,6 @@ fun KnowledgeDetailScreen(
     selectedSentenceAnalysis?.let { hs ->
         SentenceAnalysisDialog(hs) { selectedSentenceAnalysis = null }
     }
-}
-
-@Composable
-fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
-    val context = LocalContext.current
-    val markwon = remember {
-        Markwon.builder(context)
-            .usePlugin(HtmlPlugin.create())
-            .usePlugin(TablePlugin.create(context))
-            .build()
-    }
-
-    AndroidView(
-        factory = { ctx ->
-            TextView(ctx).apply {
-                textSize = 16f
-                setLineSpacing(0f, 1.4f)
-                setTextColor(android.graphics.Color.DKGRAY)
-            }
-        },
-        update = { view ->
-            // Markwon needs the text to be correctly escaped for actual newlines
-            var cleanMarkdown = markdown.replace("\\n", "\n")
-            
-            // Format inline numbered lists (e.g. "1. xxx 2. yyy") to separate paragraphs
-            cleanMarkdown = cleanMarkdown.replace(Regex("([^\\n])\\s*(?=\\d+\\.(?!\\d))"), "$1\n\n")
-            
-            markwon.setMarkdown(view, cleanMarkdown)
-        },
-        modifier = modifier
-    )
 }
 
 @Composable
