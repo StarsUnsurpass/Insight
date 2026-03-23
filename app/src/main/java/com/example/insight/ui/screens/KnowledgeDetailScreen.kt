@@ -33,9 +33,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import com.example.insight.data.model.*
-import io.noties.markwon.Markwon
-import io.noties.markwon.ext.tables.TablePlugin
-import io.noties.markwon.html.HtmlPlugin
 import com.example.insight.ui.util.MarkdownText
 import com.example.insight.ui.state.KnowledgeStatus
 import com.example.insight.ui.theme.SageGreen
@@ -53,6 +50,10 @@ fun KnowledgeDetailScreen(
     
     var selectedRelatedPoint by remember { mutableStateOf<RelatedPoint?>(null) }
     var selectedSentenceAnalysis by remember { mutableStateOf<HighlightedSentence?>(null) }
+
+    // Logic for conditional highlighting
+    val shouldHighlight = point.id != "nouns"
+    val customHighlightColor = Color(0xFFE1F5FE) // Light Blue highlight
 
     Scaffold(
         topBar = {
@@ -154,7 +155,9 @@ fun KnowledgeDetailScreen(
                                     Text("• ", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 2.dp))
                                     MarkdownText(
                                         markdown = detail, 
-                                        modifier = Modifier.weight(1f)
+                                        modifier = Modifier.weight(1f),
+                                        isHighlightBold = shouldHighlight,
+                                        highlightColor = customHighlightColor
                                     )
                                 }
                             }
@@ -163,12 +166,14 @@ fun KnowledgeDetailScreen(
                 }
             }
 
-            // 2. 📖 知识点详解 (Markdown Rendering)
+            // 2. 📖 核心概念详解 (Markdown Rendering)
             item {
-                SectionHeader(title = "2. 📖 知识点详解 (Core Explanation)", icon = Icons.AutoMirrored.Filled.Assignment)
+                SectionHeader(title = "2. 📖 核心概念详解 (Core Concept Analysis)", icon = Icons.AutoMirrored.Filled.Assignment)
                 MarkdownText(
                     markdown = point.description,
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    isHighlightBold = shouldHighlight,
+                    highlightColor = customHighlightColor
                 )
             }
 
@@ -203,7 +208,7 @@ fun KnowledgeDetailScreen(
                 }
                 
                 items(point.exampleSentences) { sentence ->
-                    ExampleSentenceCard(sentence)
+                    ExampleSentenceCard(sentence, shouldHighlight, customHighlightColor)
                 }
             }
 
@@ -252,7 +257,7 @@ fun KnowledgeDetailScreen(
                 }
                 
                 items(point.pastExamQuestions) { question ->
-                    PastExamQuestionItem(question)
+                    PastExamQuestionItem(question, shouldHighlight, customHighlightColor)
                 }
             }
 
@@ -275,7 +280,12 @@ fun KnowledgeDetailScreen(
                                         Text(note.title, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.titleSmall)
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
-                                    MarkdownText(markdown = note.content, modifier = Modifier.fillMaxWidth())
+                                    MarkdownText(
+                                        markdown = note.content, 
+                                        modifier = Modifier.fillMaxWidth(),
+                                        isHighlightBold = shouldHighlight,
+                                        highlightColor = customHighlightColor
+                                    )
                                 }
                             }
                         }
@@ -286,18 +296,18 @@ fun KnowledgeDetailScreen(
             // 🌟 名人名言
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                FamousQuoteCard(point.famousQuote, point.quoteAuthor, point.quoteTranslation)
+                FamousQuoteCard(point.famousQuote, point.quoteAuthor, point.quoteTranslation, shouldHighlight, customHighlightColor)
             }
         }
     }
 
     // 弹窗逻辑
     selectedRelatedPoint?.let { rp ->
-        RelatedPointDialog(rp) { selectedRelatedPoint = null }
+        RelatedPointDialog(rp, shouldHighlight, customHighlightColor) { selectedRelatedPoint = null }
     }
 
     selectedSentenceAnalysis?.let { hs ->
-        SentenceAnalysisDialog(hs) { selectedSentenceAnalysis = null }
+        SentenceAnalysisDialog(hs, shouldHighlight, customHighlightColor) { selectedSentenceAnalysis = null }
     }
 }
 
@@ -362,7 +372,7 @@ fun TextbookParagraphCard(paragraph: TextbookParagraph, onSentenceClick: (Highli
 }
 
 @Composable
-fun ExampleSentenceCard(sentence: ExampleSentence) {
+fun ExampleSentenceCard(sentence: ExampleSentence, isHighlight: Boolean, hColor: Color) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
         shape = RoundedCornerShape(12.dp),
@@ -381,7 +391,12 @@ fun ExampleSentenceCard(sentence: ExampleSentence) {
                     Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
                         Icon(Icons.Default.Analytics, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        MarkdownText(markdown = analysis, modifier = Modifier.fillMaxWidth())
+                        MarkdownText(
+                            markdown = analysis, 
+                            modifier = Modifier.fillMaxWidth(),
+                            isHighlightBold = isHighlight,
+                            highlightColor = hColor
+                        )
                     }
                 }
             }
@@ -390,7 +405,7 @@ fun ExampleSentenceCard(sentence: ExampleSentence) {
 }
 
 @Composable
-fun FamousQuoteCard(quote: String, author: String, translation: String) {
+fun FamousQuoteCard(quote: String, author: String, translation: String, isHighlight: Boolean, hColor: Color) {
     if (quote.isNotEmpty()) {
         Column(
             modifier = Modifier
@@ -430,16 +445,16 @@ fun FamousQuoteCard(quote: String, author: String, translation: String) {
 }
 
 @Composable
-fun RelatedPointDialog(rp: RelatedPoint, onDismiss: () -> Unit) {
+fun RelatedPointDialog(rp: RelatedPoint, isHighlight: Boolean, hColor: Color, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(rp.title, fontWeight = FontWeight.Bold) },
         text = {
             Column {
-                MarkdownText(markdown = rp.description)
+                MarkdownText(markdown = rp.description, isHighlightBold = isHighlight, highlightColor = hColor)
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("💡 关联逻辑：", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                MarkdownText(markdown = rp.connectionReason)
+                MarkdownText(markdown = rp.connectionReason, isHighlightBold = isHighlight, highlightColor = hColor)
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("知道了") } },
@@ -448,7 +463,7 @@ fun RelatedPointDialog(rp: RelatedPoint, onDismiss: () -> Unit) {
 }
 
 @Composable
-fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
+fun SentenceAnalysisDialog(hs: HighlightedSentence, isHighlight: Boolean, hColor: Color, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -461,7 +476,7 @@ fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(16.dp))
-                MarkdownText(markdown = hs.analysis, modifier = Modifier.fillMaxWidth())
+                MarkdownText(markdown = hs.analysis, modifier = Modifier.fillMaxWidth(), isHighlightBold = isHighlight, highlightColor = hColor)
                 Spacer(modifier = Modifier.height(24.dp))
                 Button(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text("确认") }
             }
@@ -470,7 +485,7 @@ fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
 }
 
 @Composable
-fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
+fun PastExamQuestionItem(examQuestion: PastExamQuestion, isHighlight: Boolean, hColor: Color) {
     var showExplanation by remember { mutableStateOf(false) }
     
     Card(
@@ -498,19 +513,34 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
             AnimatedVisibility(visible = showExplanation) {
                 Column {
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                    MarkdownText(markdown = examQuestion.explanation, modifier = Modifier.fillMaxWidth())
+                    MarkdownText(
+                        markdown = examQuestion.explanation, 
+                        modifier = Modifier.fillMaxWidth(),
+                        isHighlightBold = isHighlight,
+                        highlightColor = hColor
+                    )
                     
                     examQuestion.errorProne?.let {
                         Spacer(modifier = Modifier.height(8.dp))
                         Surface(color = Color.Red.copy(alpha = 0.05f), shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.1f))) {
-                            MarkdownText(markdown = "**⚠️ 易错点**：$it", modifier = Modifier.padding(12.dp))
+                            MarkdownText(
+                                markdown = "**⚠️ 易错点**：$it", 
+                                modifier = Modifier.padding(12.dp),
+                                isHighlightBold = isHighlight,
+                                highlightColor = hColor
+                            )
                         }
                     }
                     
                     examQuestion.translation?.let {
                         Spacer(modifier = Modifier.height(8.dp))
                         Surface(color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp)) {
-                            MarkdownText(markdown = "**🌐 翻译**：$it", modifier = Modifier.padding(12.dp))
+                            MarkdownText(
+                                markdown = "**🌐 翻译**：$it", 
+                                modifier = Modifier.padding(12.dp),
+                                isHighlightBold = isHighlight,
+                                highlightColor = hColor
+                            )
                         }
                     }
                 }
