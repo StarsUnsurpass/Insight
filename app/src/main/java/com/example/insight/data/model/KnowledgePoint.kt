@@ -70,126 +70,128 @@ object KnowledgeProvider {
     const val SEC_2 = "板块二：时态与语态体系 (Tenses & Voices)"
     const val SEC_3 = "板块三：句法体系 (Syntax)"
 
+    fun getPoint(id: String): KnowledgePoint? = allPoints.find { it.id == id }
+
     val allPoints = listOf(
         KnowledgePoint(
             id = "nouns",
             section = SEC_1,
             title = "名词 (Nouns)",
             description = """### 📖 核心概念详解
-
-名词 (Nouns) 是英语语言的“物质基础”，在中考评价中占据核心地位。
-
-#### 1. 范畴逻辑与界限划分
-名词分为 **专有名词** (Proper Nouns) 和 **普通名词** (Common Nouns)。
-
-| 类别 | 定义 | 示例 | 注意事项 |
-| :--- | :--- | :--- | :--- |
-| **专有名词** | 特定人、地、机构、节日 | *China, Monday, Christmas* | 首字母必须大写 |
-| **个体名词** | 单个的人或物 | *book, student* | 可数 |
-| **集体名词** | 一群人或物 | *family, police* | 主谓一致是难点 |
-| **物质名词** | 无法分为个体的物质 | *water, air, snow* | 通常不可数 |
-| **抽象名词** | 动作、状态、品质、情感 | *success, health, fun* | 通常不可数 |
-
-> 💡 **动态转化 (重点)**：中考常考词性的灵活运用。
-> * *success* (成功, 不可数) -> *a success* (一件成功的事, 可数)
-> * *experience* (经验, 不可数) -> *an experience* (一次经历, 可数)
-
-#### 2. “数”的精密体系 (Number)
-
-##### **规则复数变化**
-| 结尾类型 | 变化规则 | 经典示例 |
-| :--- | :--- | :--- |
-| 一般情况 | 直接词尾 **+s** | *maps, bags, boys* |
-| -s, -x, -ch, -sh | 词尾 **+es** | *buses, boxes, watches, dishes* |
-| 辅音 + y | 变 y 为 **i + es** | *baby -> babies, city -> cities* |
-| -f, -fe | 变 f/fe 为 **v + es** | *thief, knife, leaf, life, half, wolf, wife, shelf, self* |
-| -o 结尾 | 有生命 **+es** / 无生命 **+s** | *heroes, tomatoes, potatoes* vs *pianos, photos* |
-
-##### **不规则复数变化**
-*   **变元音**：*foot -> feet, tooth -> teeth, goose -> geese, man -> men, woman -> women*
-*   **变词尾**：*child -> children, ox -> oxen, mouse -> mice*
-*   **单复同形**：*sheep, deer, fish, Chinese, Japanese, Swiss*
-
-> ⚠️ **不可数名词核心禁区**：
-> 以下单词严禁加 -s 或 a/an：
-> `advice, news, information, progress, homework, housework, fun, weather, furniture, money`
-
-#### 3. “格”的归属逻辑 (Case)
-*   **'s 所有格**：用于有生命的对象。
-    *   单数：*the boy's bag*
-    *   以 -s 结尾的复数：*the teachers' office*
-*   **of 所有格**：用于无生命对象 (*the window of the classroom*)。
-*   **双重所有格**：*a friend of my father's* (强调是众多朋友中的一个)。
-*   **共同与各自所有**：
-    *   *Lily and Lucy's room* (两人共有)
-    *   *Lily's and Lucy's rooms* (每人各有一间)
-
-#### 4. 主谓一致陷阱
-1.  **恒复数**：*police, cattle, people* 谓语必用复数。
-2.  **量化整体**：表示时间、距离、金钱、重量的短语作主语，谓语用单数 (*Ten dollars **is** enough.*)。
-3.  **单位词控制**：*a pair of shoes* (谓语看 *pair* -> 单数)；*two pairs of shoes* (复数)。""",
+            
+            名词 (Nouns) 是英语语言的“物质基础”，在中考评价中占据核心地位。
+            
+            #### 1. 范畴逻辑与界限划分
+            名词分为 **专有名词** (Proper Nouns) 和 **普通名词** (Common Nouns)。
+            
+            | 类别 | 定义 | 示例 | 注意事项 |
+            | :--- | :--- | :--- | :--- |
+            | **专有名词** | 特定人、地、机构、节日 | *China, Monday, Christmas* | 首字母必须大写 |
+            | **个体名词** | 单个的人或物 | *book, student* | 可数 |
+            | **集体名词** | 一群人或物 | *family, police* | 主谓一致是难点 |
+            | **物质名词** | 无法分为个体的物质 | *water, air, snow* | 通常不可数 |
+            | **抽象名词** | 动作、状态、品质、情感 | *success, health, fun* | 通常不可数 |
+            
+            > 💡 **动态转化 (重点)**：中考常考词性的灵活运用。
+            > * *success* (成功, 不可数) -> *a success* (一件成功的事, 可数)
+            > * *experience* (经验, 不可数) -> *an experience* (一次经历, 可数)
+            
+            #### 2. “数”的精密体系 (Number)
+            
+            ##### **规则复数变化**
+            | 结尾类型 | 变化规则 | 经典示例 |
+            | :--- | :--- | :--- |
+            | 一般情况 | 直接词尾 **+s** | *maps, bags, boys* |
+            | -s, -x, -ch, -sh | 词尾 **+es** | *buses, boxes, watches, dishes* |
+            | 辅音 + y | 变 y 为 **i + es** | *baby -> babies, city -> cities* |
+            | -f, -fe | 变 f/fe 为 **v + es** | *thief, knife, leaf, life, half, wolf, wife, shelf, self* |
+            | -o 结尾 | 有生命 **+es** / 无生命 **+s** | *heroes, tomatoes, potatoes* vs *pianos, photos* |
+            
+            ##### **不规则复数变化**
+            *   **变元音**：*foot -> feet, tooth -> teeth, goose -> geese, man -> men, woman -> women*
+            *   **变词尾**：*child -> children, ox -> oxen, mouse -> mice*
+            *   **单复同形**：*sheep, deer, fish, Chinese, Japanese, Swiss*
+            
+            > ⚠️ **不可数名词核心禁区**：
+            > 以下单词严禁加 -s 或 a/an：
+            > `advice, news, information, progress, homework, housework, fun, weather, furniture, money`
+            
+            #### 3. “格”的归属逻辑 (Case)
+            *   **'s 所有格**：用于有生命的对象。
+            *   单数：*the boy's bag*
+            *   以 -s 结尾的复数：*the teachers' office*
+            *   **of 所有格**：用于无生命对象 (*the window of the classroom*)。
+            *   **双重所有格**：*a friend of my father's* (强调是众多朋友中的一个)。
+            *   **共同与各自所有**：
+            *   *Lily and Lucy's room* (两人共有)
+            *   *Lily's and Lucy's rooms* (每人各有一间)
+            
+            #### 4. 主谓一致陷阱
+            1.  **恒复数**：*police, cattle, people* 谓语必用复数。
+            2.  **量化整体**：表示时间、距离、金钱、重量的短语作主语，谓语用单数 (*Ten dollars **is** enough.*)。
+            3.  **单位词控制**：*a pair of shoes* (谓语看 *pair* -> 单数)；*two pairs of shoes* (复数)。""".trimIndent(),
             syllabusDetails = listOf(
-                "**【分类记忆】** 精准区分专有名词、个体、集体、物质及抽象名词，掌握抽象名词具体化的转换逻辑（如 *a failure/a surprise*）。",
-                "**【规则变数】** 深度掌握名词复数规则变化（特别是 *-o, -f(e), -y* 结尾）及 20 个以上的高频不规则名词。",
-                "**【不可数清单】** 牢记 *advice, news, information, progress* 等 10 大核心不可数名词，杜绝 **errors in agreement**。",
-                "**【格位辨析】** 熟练处理 *'s, of* 及双重所有格，重点区分 **共同所有** 与 **分别所有** 的表达差异。",
-                "**【限定修饰】** 掌握名词作定语时的数之原则，深刻理解 *man/woman* 的变格例外。",
-                "**【单位量化】** 掌握 15 种以上常用量词结构（*a loaf of, a flight of, a set of* 等）。",
-                "**【主谓一致】** 理解集体名词在不同语境下的数（*family* 是整体还是成员），掌握时间/金钱作主语的整体原则。"
+            "**【分类记忆】** 精准区分专有名词、个体、集体、物质及抽象名词，掌握抽象名词具体化的转换逻辑（如 *a failure/a surprise*）。",
+            "**【规则变数】** 深度掌握名词复数规则变化（特别是 *-o, -f(e), -y* 结尾）及 20 个以上的高频不规则名词。",
+            "**【不可数清单】** 牢记 *advice, news, information, progress* 等 10 大核心不可数名词，杜绝 **errors in agreement**。",
+            "**【格位辨析】** 熟练处理 *'s, of* 及双重所有格，重点区分 **共同所有** 与 **分别所有** 的表达差异。",
+            "**【限定修饰】** 掌握名词作定语时的数之原则，深刻理解 *man/woman* 的变格例外。",
+            "**【单位量化】** 掌握 15 种以上常用量词结构（*a loaf of, a flight of, a set of* 等）。",
+            "**【主谓一致】** 理解集体名词在不同语境下的数（*family* 是整体还是成员），掌握时间/金钱作主语的整体原则。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("冠词 (Articles)", "名词的‘身份证明’与‘存在土壤’", "冠词与名词是共生关系。名词的可数性与首音素直接决定了不定冠词 *a/an* 的选择；而名词在语篇中的特指、泛指、唯一性则决定了 *the* 的分布逻辑。"),
-                RelatedPoint("代词 (Pronouns)", "名词的‘逻辑替身’", "代词（如 *it, one, that, those*）必须在‘数’和‘格’上与所替代的名词保持 100% 的契合。"),
-                RelatedPoint("主谓一致 (S-V Agreement)", "名词的‘行政权力’", "名词作为主语时，其单复数形式直接控制谓语动词的形态变换。"),
-                RelatedPoint("形容词 (Adjectives)", "名词的‘精修画笔’", "掌握多个形容词修饰名词的特定语序（**OPSHCOM**）是衡量语言地道性的指标。"),
-                RelatedPoint("定语从句 (Attributive Clause)", "名词的‘延展描述’", "先行词通常是一个名词，从句通过关系词对该名词进行维度更广的补充说明。")
+            RelatedPoint("冠词 (Articles)", "名词的‘身份证明’与‘存在土壤’", "冠词与名词是共生关系。名词的可数性与首音素直接决定了不定冠词 *a/an* 的选择；而名词在语篇中的特指、泛指、唯一性则决定了 *the* 的分布逻辑。"),
+            RelatedPoint("代词 (Pronouns)", "名词的‘逻辑替身’", "代词（如 *it, one, that, those*）必须在‘数’和‘格’上与所替代的名词保持 100% 的契合。"),
+            RelatedPoint("主谓一致 (S-V Agreement)", "名词的‘行政权力’", "名词作为主语时，其单复数形式直接控制谓语动词的形态变换。"),
+            RelatedPoint("形容词 (Adjectives)", "名词的‘精修画笔’", "掌握多个形容词修饰名词的特定语序（**OPSHCOM**）是衡量语言地道性的指标。"),
+            RelatedPoint("定语从句 (Attributive Clause)", "名词的‘延展描述’", "先行词通常是一个名词，从句通过关系词对该名词进行维度更广的补充说明。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2025", "北京", "The ______ of the local museum are open to the public for free.", listOf("A. doors", "B. news", "C. advice", "D. information"), "A", "**【解析】** 谓语动词 `are` 是复数，要求主语必须是可数名词复数。`news, advice, information` 均为不可数名词，排除。故选 **A**。", "**【注意】** 忽略 `are` 而根据中文逻辑选‘信息’是典型错误。", "博物馆的大门免费向公众开放。"),
-                PastExamQuestion("2024", "上海", "To my surprise, the little boy has already finished three ______ of bread.", listOf("A. loaf", "B. loafs", "C. loaves", "D. love"), "C", "**【解析】** 考查单位词。`bread` 不可数，三条面包用 `three loaves of...`。`loaf` 以 f 结尾，复数变 f 为 v 加 es。故选 **C**。", "**【考点】** 不规则复数拼写 `loaf -> loaves`。", "令我惊讶的是，那个小男孩已经吃完了三条面包。"),
-                PastExamQuestion("2023", "广东", "— What would you like to have for dinner?\n— Some ______. They are my favorite.", listOf("A. tomato", "B. potato", "C. noodles", "D. beefs"), "C", "**【解析】** 答语中 `They` 说明主语是复数。`A/B` 为单数；`D` 项 `beef` 是不可数名词。故选 **C**。", "**【技巧】** 注意代词 `They` 对名词数的暗示作用。", "—— 你晚餐想吃什么？ —— 一些面条。它们是我的最爱。"),
-                PastExamQuestion("2022", "江苏南京", "The teacher gave us some helpful ______ on how to protect the environment.", listOf("A. advice", "B. suggestions", "C. news", "D. information"), "A", "**【解析】** 虽然四个词都说得通，但 `advice` 是中考考察频率最高的。注意 `some` 修饰可数名词 `suggestion` 需用复数。故选 **A**。", "**【陷阱】** 汉语认为建议可数，但 `advice` 绝对不可数。", "老师就如何保护环境给我们提了一些有用的建议。"),
-                PastExamQuestion("2021", "湖北武汉", "This is my ______ room. It's clean and tidy.", listOf("A. parent's", "B. parents'", "C. parent", "D. parents"), "B", "**【解析】** 父母两人的房间用复数所有格 `parents'`。故选 **B**。", "**【规则】** 以 s 结尾的复数只加 `'`。", "这是我父母的房间。"),
-                PastExamQuestion("2020", "安徽", "The ______ are looking for the lost girl in the mountains.", listOf("A. police", "B. fireman", "C. group", "D. policeman"), "A", "**【解析】** 谓语 `are` 提示主语复数。`police` 恒复数。故选 **A**。", "**【属性】** 集体名词语法特征。", "警察在搜救女孩。"),
-                PastExamQuestion("2019", "福建", "It's ______ walk from my home to the school.", listOf("A. ten minutes", "B. ten minute's", "C. ten minutes'", "D. ten-minutes"), "C", "**【解析】** 考查时间所有格。复数 `minutes` 后加 `'`。故选 **C**。", "**【结构】** 数词 + 名词复数所有格 + 名词。", "从我家到学校步行需十分钟。"),
-                PastExamQuestion("2018", "云南", "There are three ______ in my family.", listOf("A. people", "B. peoples", "C. person", "D. persons"), "A", "**【解析】** `people` 恒为复数。故选 **A**。", "**【常识】** `people` 的特殊属性。", "我家有三口人。"),
-                PastExamQuestion("2017", "山西", "I need two ______ of paper to write a letter.", listOf("A. piece", "B. pieces", "C. bit", "D. bits"), "B", "**【解析】** `two` 后面接量词复数 `pieces`。故选 **B**。", "**【搭配】** 不可数名词的量化。", "我需要两张纸。"),
-                PastExamQuestion("2016", "重庆", "He has two ______ and he loves them very much.", listOf("A. child", "B. childs", "C. children", "D. childrens"), "C", "**【解析】** `child` 不规则复数 `children`。故选 **C**。", "**【基础】** 不规则复数形式。", "他有两个孩子。")
+            PastExamQuestion("2025", "北京", "The ______ of the local museum are open to the public for free.", listOf("A. doors", "B. news", "C. advice", "D. information"), "A", "**【解析】** 谓语动词 `are` 是复数，要求主语必须是可数名词复数。`news, advice, information` 均为不可数名词，排除。故选 **A**。", "**【注意】** 忽略 `are` 而根据中文逻辑选‘信息’是典型错误。", "博物馆的大门免费向公众开放。"),
+            PastExamQuestion("2024", "上海", "To my surprise, the little boy has already finished three ______ of bread.", listOf("A. loaf", "B. loafs", "C. loaves", "D. love"), "C", "**【解析】** 考查单位词。`bread` 不可数，三条面包用 `three loaves of...`。`loaf` 以 f 结尾，复数变 f 为 v 加 es. 故选 **C**。", "**【考点】** 不规则复数拼写 `loaf -> loaves`。", "令我惊讶的是，那个小男孩已经吃完了三条面包。"),
+            PastExamQuestion("2023", "广东", "— What would you like to have for dinner?\n— Some ______. They are my favorite.", listOf("A. tomato", "B. potato", "C. noodles", "D. beefs"), "C", "**【解析】** 答语中 `They` 说明主语是复数。`A/B` 为单数；`D` 项 `beef` 是不可数名词。故选 **C**。", "**【技巧】** 注意代词 `They` 对名词数的暗示作用。", "—— 你晚餐想吃什么？ —— 一些面条。它们是我的最爱。"),
+            PastExamQuestion("2022", "江苏南京", "The teacher gave us some helpful ______ on how to protect the environment.", listOf("A. advice", "B. suggestions", "C. news", "D. information"), "A", "**【解析】** 虽然四个词都说得通，但 `advice` 是中考考察频率最高的。注意 `some` 修饰可数名词 `suggestion` 需用复数。故选 **A**。", "**【陷阱】** 汉语认为建议可数，但 `advice` 绝对不可数。", "老师就如何保护环境给我们提了一些有用的建议。"),
+            PastExamQuestion("2021", "湖北武汉", "This is my ______ room. It's clean and tidy.", listOf("A. parent's", "B. parents'", "C. parent", "D. parents"), "B", "**【解析】** 父母两人的房间用复数所有格 `parents'`。故选 **B**。", "**【规则】** 以 s 结尾的复数只加 `'`。", "这是我父母的房间。"),
+            PastExamQuestion("2020", "安徽", "The ______ are looking for the lost girl in the mountains.", listOf("A. police", "B. fireman", "C. group", "D. policeman"), "A", "**【解析】** 谓语 `are` 提示主语复数。`police` 恒复数。故选 **A**。", "**【属性】** 集体名词语法特征。", "警察在搜救女孩。"),
+            PastExamQuestion("2019", "福建", "It's ______ walk from my home to the school.", listOf("A. ten minutes", "B. ten minute's", "C. ten minutes'", "D. ten-minutes"), "C", "**【解析】** 考查时间所有格。复数 `minutes` 后加 `'`。故选 **C**。", "**【结构】** 数词 + 名词复数所有格 + 名词。", "从我家到学校步行需十分钟。"),
+            PastExamQuestion("2018", "云南", "There are three ______ in my family.", listOf("A. people", "B. peoples", "C. person", "D. persons"), "A", "**【解析】** `people` 恒为复数。故选 **A**。", "**【常识】** `people` 的特殊属性。", "我家有三口人。"),
+            PastExamQuestion("2017", "山西", "I need two ______ of paper to write a letter.", listOf("A. piece", "B. pieces", "C. bit", "D. bits"), "B", "**【解析】** `two` 后面接量词复数 `pieces`。故选 **B**。", "**【搭配】** 不可数名词的量化。", "我需要两张纸。"),
+            PastExamQuestion("2016", "重庆", "He has two ______ and he loves them very much.", listOf("A. child", "B. childs", "C. children", "D. childrens"), "C", "**【解析】** `child` 不规则复数 `children`。故选 **C**。", "**【基础】** 不规则复数形式。", "他有两个孩子。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("In our modern world, information is growing faster than ever before. We can get different kinds of news from the Internet, television and newspapers. It is important for us to learn how to choose helpful advice from the massive data.", listOf(
-                    HighlightedSentence("information is growing faster", "**【语法分析】** `information` 是核心不可数名词，作主语时谓语动词必须使用单数 `is`。"),
-                    HighlightedSentence("different kinds of news", "**【结构剖析】** `news` 是不可数名词。表达复数概念必须借助 `kind/piece` 等单位词。"),
-                    HighlightedSentence("choose helpful advice", "**【易错提示】** `advice` 绝对不可数。不能说 *an advice* 或 *many advices*。")
-                ), "人教版 (Go for it!) 九年级 Unit 1"),
-                TextbookParagraph("There are three library buildings and ten science laboratories in the school. Many students like to spend their free time in the library, reading books or searching for information.", listOf(
-                    HighlightedSentence("three library buildings", "**【定语规则】** 名词 `library` 修饰 `buildings` 时充当定语，遵循“名词作定语通常用单数”的原则。"),
-                    HighlightedSentence("ten science laboratories", "**【数之一致】** 数词 `ten` 要求名词使用复数形态 `laboratories` (-y 变 -i 加 -es)。")
-                ), "外研版 (New Standard) 八下 Module 3"),
-                TextbookParagraph("To keep healthy, we should eat more fruits and vegetables instead of junk food. An apple a day keeps the doctor away. Health is the real wealth.", listOf(
-                    HighlightedSentence("fruits and vegetables", "**【并列属性】** `fruit` 侧重‘种类’时可数。此处与 `vegetables` 并列，指代不同种类的果蔬。"),
-                    HighlightedSentence("health is the real wealth", "**【抽象逻辑】** `health` 和 `wealth` 都是抽象名词，表达普适真理时不用冠词。")
-                ), "沪教版 (Oxford) 九上 Unit 2"),
-                TextbookParagraph("Last week, our class went on a trip to the farm. We saw many sheep and cows there. The farmers were busy picking tomatoes and potatoes.", listOf(
-                    HighlightedSentence("saw many sheep", "**【单复同形】** `sheep` 的单复数形式一致。此处被 `many` 修饰，严禁加 -s。"),
-                    HighlightedSentence("tomatoes and potatoes", "**【-o 结尾】** 中考必背：黑人英雄爱吃西红柿土豆。复数必须加 -es。")
-                ), "人教版 (Go for it!) 七下 Unit 11"),
-                TextbookParagraph("The police are looking for a missing boy who was last seen near the park. His parents are very worried and have asked for help.", listOf(
-                    HighlightedSentence("The police are looking", "**【集体名词】** `police` 始终代表警察群体，语法上恒复数，谓语必须用 `are`。"),
-                    HighlightedSentence("His parents are", "**【指代逻辑】** `parents` 指父母双亲。复数主语对应 `are`。")
-                ), "外研版 (New Standard) 九上 Module 5")
+            TextbookParagraph("In our modern world, information is growing faster than ever before. We can get different kinds of news from the Internet, television and newspapers. It is important for us to learn how to choose helpful advice from the massive data.", listOf(
+            HighlightedSentence("information is growing faster", "**【语法分析】** `information` 是核心不可数名词，作主语时谓语动词必须使用单数 `is`。"),
+            HighlightedSentence("different kinds of news", "**【结构剖析】** `news` 是不可数名词。表达复数概念必须借助 `kind/piece` 等单位词。"),
+            HighlightedSentence("choose helpful advice", "**【易错提示】** `advice` 绝对不可数。不能说 *an advice* 或 *many advices*。")
+            ), "人教版 (Go for it!) 九年级 Unit 1"),
+            TextbookParagraph("There are three library buildings and ten science laboratories in the school. Many students like to spend their free time in the library, reading books or searching for information.", listOf(
+            HighlightedSentence("three library buildings", "**【定语规则】** 名词 `library` 修饰 `buildings` 时充当定语，遵循“名词作定语通常用单数”的原则。"),
+            HighlightedSentence("ten science laboratories", "**【数之一致】** 数词 `ten` 要求名词使用复数形态 `laboratories` (-y 变 -i 加 -es)。")
+            ), "外研版 (New Standard) 八下 Module 3"),
+            TextbookParagraph("To keep healthy, we should eat more fruits and vegetables instead of junk food. An apple a day keeps the doctor away. Health is the real wealth.", listOf(
+            HighlightedSentence("fruits and vegetables", "**【并列属性】** `fruit` 侧重‘种类’时可数。此处与 `vegetables` 并列，指代不同种类的果蔬。"),
+            HighlightedSentence("health is the real wealth", "**【抽象逻辑】** `health` 和 `wealth` 都是抽象名词，表达普适真理时不用冠词。")
+            ), "沪教版 (Oxford) 九上 Unit 2"),
+            TextbookParagraph("Last week, our class went on a trip to the farm. We saw many sheep and cows there. The farmers were busy picking tomatoes and potatoes.", listOf(
+            HighlightedSentence("saw many sheep", "**【单复同形】** `sheep` 的单复数形式一致。此处被 `many` 修饰，严禁加 -s。"),
+            HighlightedSentence("tomatoes and potatoes", "**【-o 结尾】** 中考必背：黑人英雄爱吃西红柿土豆。复数必须加 -es。")
+            ), "人教版 (Go for it!) 七下 Unit 11"),
+            TextbookParagraph("The police are looking for a missing boy who was last seen near the park. His parents are very worried and have asked for help.", listOf(
+            HighlightedSentence("The police are looking", "**【集体名词】** `police` 始终代表警察群体，语法上恒复数，谓语必须用 `are`。"),
+            HighlightedSentence("His parents are", "**【指代逻辑】** `parents` 指父母双亲。复数主语对应 `are`。")
+            ), "外研版 (New Standard) 九上 Module 5")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Two months' holiday is what the children look forward to every summer.", "两个月的假期是孩子们每年夏天都期待的。", "**【深度解析】** 融合了‘复数名词所有格’与‘时间主语整体性’。`months` 是以 s 结尾的复数，所有格只加 `'`。‘两个月假期’被视为一个时间整体，谓语用单数 `is`。", "中考核心 (Complex)"),
-                ExampleSentence("A friend of my father's, who is an engineer, gave me some useful advice.", "我父亲的一个朋友（他是一名工程师）给我提了一些有用的建议。", "**【深度解析】** 包含：1. 双重所有格 (*a friend of my father's*)；2. 非限制性定语从句；3. 核心不可数名词 `advice`。", "高阶句式 (Complex)"),
-                ExampleSentence("The police are searching for the thieves who stole several boxes of jewelry.", "警察正在搜寻从博物馆偷走几盒珠宝的窃贼。", "**【深度解析】** `police` 恒复数；`thief -> thieves`；`boxes of jewelry` (不可数名词量化)。", "高频易错 (Complex)"),
-                ExampleSentence("Whether we can achieve success depends on our hard work and the progress we make.", "我们是否能获得成功取决于我们的努力和我们取得的进步。", "**【深度解析】** `Success` 和 `progress` 均为抽象不可数名词，在此复杂句中起逻辑支撑作用。", "哲理句式 (Complex)")
+            ExampleSentence("Two months' holiday is what the children look forward to every summer.", "两个月的假期是孩子们每年夏天都期待的。", "**【深度解析】** 融合了‘复数名词所有格’与‘时间主语整体性’。`months` 是以 s 结尾的复数，所有格只加 `'`。‘两个月假期’被视为一个时间整体，谓语用单数 `is`。", "中考核心 (Complex)"),
+            ExampleSentence("A friend of my father's, who is an engineer, gave me some useful advice.", "我父亲的一个朋友（他是一名工程师）给我提了一些有用的建议。", "**【深度解析】** 包含：1. 双重所有格 (*a friend of my father's*)；2. 非限制性定语从句；3. 核心不可数名词 `advice`。", "高阶句式 (Complex)"),
+            ExampleSentence("The police are searching for the thieves who stole several boxes of jewelry.", "警察正在搜寻从博物馆偷走几盒珠宝的窃贼。", "**【深度解析】** `police` 恒复数；`thief -> thieves`；`boxes of jewelry` (不可数名词量化)。", "高频易错 (Complex)"),
+            ExampleSentence("Whether we can achieve success depends on our hard work and the progress we make.", "我们是否能获得成功取决于我们的努力和我们取得的进步。", "**【深度解析】** `Success` 和 `progress` 均为抽象不可数名词，在此复杂句中起逻辑支撑作用。", "哲理句式 (Complex)")
             ),
             teachingNotes = listOf(
-                TeachingNote("【学情透视】核心症结", "1. **母语迁移干扰**：汉语缺乏‘数’的变化，学生习惯性漏掉 `-s` 或误在 `advice` 后加 s。\n2. **规则泛化陷阱**：掌握 `-es` 规律后，容易出现 *roofs -> rooves* 的过度类推错误。\n3. **逻辑一致性缺失**：在长句子中，主语用复数，句末代词却误用单数 `it`。"),
-                TeachingNote("【教学金钥】备忘清单", "1. **分类突破法**：将不可数名词归类为‘四大金刚’(*advice, news, information, progress*) 重点标记。\n2. **口诀记忆法**：‘英雄吃土豆...’、‘九个变 v 的...’等口诀要反复操练。\n3. **实物情景法**：通过 *a bottle of*, *a cup of* 等实物强化量词语感。\n4. **错题档案**：重点收集共同所有 vs 分别所有的错例。"),
-                TeachingNote("【冲刺技巧】中考必杀技", "1. **看修饰语**：`much, a little` 锁定不可数；`many, a few` 锁定复数。\n2. **找谓语**：`is/was` 考虑单数/不可数；`are/were` 找复数/集体名词。\n3. **代词指代**：看到 `they/them` 往前找复数名词。")
+            TeachingNote("【学情透视】核心症结", "1. **母语迁移干扰**：汉语缺乏‘数’的变化，学生习惯性漏掉 `-s` 或误在 `advice` 后加 s。\n2. **规则泛化陷阱**：掌握 `-es` 规律后，容易出现 *roofs -> rooves* 的过度类推错误。\n3. **逻辑一致性缺失**：在长句子中，主语用复数，句末代词却误用单数 `it`。"),
+            TeachingNote("【教学金钥】备忘清单", "1. **分类突破法**：将不可数名词归类为‘四大金刚’(*advice, news, information, progress*) 重点标记。\n2. **口诀记忆法**：‘英雄吃土豆...’、‘九个变 v 的...’等口诀要反复操练。\n3. **实物情景法**：通过 *a bottle of*, *a cup of* 等实物强化量词语感。\n4. **错题档案**：重点收集共同所有 vs 分别所有的错例。"),
+            TeachingNote("【冲刺技巧】中考必杀技", "1. **看修饰语**：`much, a little` 锁定不可数；`many, a few` 锁定复数。\n2. **找谓语**：`is/was` 考虑单数/不可数；`are/were` 找复数/集体名词。\n3. **代词指代**：看到 `they/them` 往前找复数名词。")
             ),
             famousQuote = "A room without books is like a body without a soul.",
             quoteAuthor = "Cicero",
@@ -200,1367 +202,1759 @@ object KnowledgeProvider {
             id = "pronouns",
             section = SEC_1,
             title = "代词 (Pronouns)",
-            description = """### 📖 核心概念详解
-
-代词 (Pronouns) 是英语句法的“替代艺术”，其核心功能是简化语言并避免重复。
-
-#### 1. 代词的分类矩阵
-| 类别 | 定义 | 核心成员 | 语法职能 |
-| :--- | :--- | :--- | :--- |
-| **人称代词** | 替代人或物 | *I, you, he, she, it, us...* | 主格作主语，宾格作宾语 |
-| **物主代词** | 表示所有关系 | *my, mine, your, yours...* | 形容词性 vs 名词性 |
-| **反身代词** | 动作反回主语 | *myself, yourself...* | 用于 enjoy oneself 等搭配 |
-| **指示代词** | 指代特定对象 | *this, that, these, those* | 远指 vs 近指 |
-| **疑问代词** | 引导询问 | *who, what, which, whose* | 引导特殊疑问句 |
-| **不定代词** | 指代不确定对象 | *some, any, all, both...* | 数量、范围的逻辑判定 |
-
-#### 2. 指代一致性之辨 (核心难点)
-> 💡 **it, one, that, those 的终极区分**：
-> *   **it**：指代“同名同物”（同一个）。
-> *   **one**：指代“同名异物”（同类中的一个，复数 ones）。
-> *   **that**：指代“同名异物”（常用于比较结构，特指单数或不可数）。
-> *   **those**：*that* 的复数形式。
-
-#### 3. 不定代词的逻辑陷阱
-*   **肯定 vs 否定**：*some* (肯定句/委婉请求) vs *any* (否定/疑问)。
-*   **两者 vs 三者以上**：
-    *   两者：*both* (都), *either* (任一), *neither* (都不)。
-    *   三者以上：*all* (都), *any* (任一), *none* (都不)。
-*   **复合不定代词**：*something, someone...* 形容词修饰必须 **后置** (*something special*)。
-
-#### 4. it 的多重分身
-1.  **实指**：指代前文提到的事物、天气、时间、距离。
-2.  **形式主语**：*It is adj. (for/of sb.) to do sth.*
-3.  **形式宾语**：*find/think it adj. to do sth.*""",
+            description = """
+            ### 📖 核心概念详解
+            
+            代词 (Pronouns) 是英语句法的“替代艺术”，其核心功能是简化语言并避免重复。
+            
+            #### 1. 代词的分类矩阵
+            | 类别 | 定义 | 核心成员 | 语法职能 |
+            | :--- | :--- | :--- | :--- |
+            | **人称代词** | 替代人或物 | *I, you, he, she, it, us...* | 主格作主语，宾格作宾语 |
+            | **物主代词** | 表示所有关系 | *my, mine, your, yours...* | 形容词性 vs 名词性 |
+            | **反身代词** | 动作反回主语 | *myself, yourself...* | 用于 *enjoy oneself* 等搭配 |
+            | **指示代词** | 指代特定对象 | *this, that, these, those* | 远指 vs 近指 |
+            | **疑问代词** | 引导询问 | *who, what, which, whose* | 引导特殊疑问句 |
+            | **不定代词** | 指代不确定对象 | *some, any, all, both...* | 数量、范围的逻辑判定 |
+            
+            #### 2. 指代一致性之辨 (核心难点)
+            > 💡 **it, one, that, those 的终极区分**：
+            > *   **it**：指代“同名同物”（同一个）。
+            > *   **one**：指代“同名异物”（同类中的一个，复数 *ones*）。
+            > *   **that**：指代“同名异物”（常用于比较结构，特指单数或不可数名词）。
+            > *   **those**：*that* 的复数形式。
+            
+            #### 3. 不定代词的逻辑陷阱
+            *   **肯定 vs 否定**：*some* (肯定句/委婉请求) vs *any* (否定/疑问)。
+            *   **两者 vs 三者以上**：
+            *   **两者**：*both* (都), *either* (任一), *neither* (都不)。
+            *   **三者以上**：*all* (都), *any* (任一), *none* (都不)。
+            *   **复合不定代词**：*something, someone...* 形容词修饰必须 **后置** (*something special*)。
+            
+            #### 4. it 的多重分身
+            1.  **实指**：指代前文提到的事物、天气、时间、距离。
+            2.  **形式主语**：*It is adj. (for/of sb.) to do sth.*
+            3.  **形式宾语**：*find/think it adj. to do sth.*
+            """.trimIndent(),
             syllabusDetails = listOf(
-                "**【八大分类】** 熟练掌握人称、物主、反身、指示、疑问、不定、关系及连接代词的拼写与用法。",
-                "**【格位转换】** 精准处理人称代词主宾格切换，尤其在动词/介词后的宾格要求。",
-                "**【物主区分】** 深刻理解形容词性物主代词（须接名词）与名词性物主代词（独立存在）的替代逻辑。",
-                "**【指代逻辑】** 攻克 *it, one, that* 在长难句中的指代判定，这是完形填空的必考点。",
-                "**【复合结构】** 掌握复合不定代词与形容词后置的修饰规则（如 *nothing serious*）。",
-                "**【形式句法】** 熟练运用 *it* 作形式主语和形式宾语的高级句式结构。"
+            "**【八大分类】** 熟练掌握人称、物主、反身、指示、疑问、不定、关系及连接代词的拼写与用法。",
+            "**【格位转换】** 精准处理人称代词主宾格切换，尤其在动词/介词后的宾格要求。",
+            "**【物主区分】** 深刻理解形容词性物主代词（须接名词）与名词性物主代词（独立存在）的替代逻辑。",
+            "**【指代逻辑】** 攻克 *it, one, that* 在长难句中的指代判定，这是完形填空的必考点。",
+            "**【复合结构】** 掌握复合不定代词与形容词后置的修饰规则（如 *nothing serious*）。",
+            "**【形式句法】** 熟练运用 *it* 作形式主语和形式宾语的高级句式结构。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("主谓一致 (S-V Agreement)", "代词对谓语的逻辑锁定", "不定代词（如 *each, someone, neither*）作主语时，谓语动词通常必须使用单数形态。"),
-                RelatedPoint("形容词 (Adjectives)", "修饰语的位移", "当形容词修饰复合不定代词时，必须打破常规的前置定语逻辑，进行强制后置。"),
-                RelatedPoint("名词 (Nouns)", "代词的‘根源’", "代词必须在数、性格上与所替代的名词保持 100% 的一致性，否则会导致语义链条断裂。"),
-                RelatedPoint("定语从句 (Attributive Clause)", "关系代词的职能", "关系代词 *that, which, who* 在从句中既起引导作用，又充当特定的句法成分。")
+            RelatedPoint("主谓一致 (S-V Agreement)", "代词对谓语的逻辑锁定", "不定代词（如 *each, someone, neither*）作主语时，谓语动词通常必须使用单数形态。"),
+            RelatedPoint("形容词 (Adjectives)", "修饰语的位移", "当形容词修饰复合不定代词时，必须打破常规的前置定语逻辑，进行强制后置。"),
+            RelatedPoint("名词 (Nouns)", "代词的‘根源’", "代词必须在数、格上与所替代的名词保持 100% 的一致性。"),
+            RelatedPoint("定语从句 (Attributive Clause)", "关系代词的职能", "关系代词 *that, which, who* 在从句中既起引导作用，又充当特定的句法成分。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2025", "北京", "— Have you seen my keys anywhere?\n— No, but there is ______ on the dining table.", listOf("A. one", "B. it", "C. that", "D. this"), "A", "**【解析】** 此处指代“一把钥匙”，是同类中的一个（同名异物），故选 **A**。*it* 指同一个，不符合语境。", "**【易错点】** 习惯性选 *it*，忽略了“另一把”钥匙的逻辑。", "—— 你在到处见过我的钥匙吗？ —— 没有，但餐桌上有一把。"),
-                PastExamQuestion("2024", "上海", "The students enjoyed ______ at the science museum last Friday.", listOf("A. them", "B. their", "C. themselves", "D. they"), "C", "**【解析】** 考查反身代词。*enjoy oneself* 为固定搭配，主语是 students，故用 *themselves*。选 **C**。", "**【语法点】** 动作返回主语本身。", "学生们上周五在科学博物馆玩得很开心。"),
-                PastExamQuestion("2023", "江苏南京", "The population of China is much larger than ______ of the United States.", listOf("A. it", "B. one", "C. that", "D. this"), "C", "**【解析】** 考查指代词比较结构。指代不可数名词 *population* 且表示同类对比（同名异物），固定用 *that*。选 **C**。", "**【难点】** *that* 在比较结构中的指代功能。", "中国的人口比美国的人口多得多。"),
-                PastExamQuestion("2022", "广东", "I have two sisters. ______ of them are doctors in this hospital.", listOf("A. All", "B. Both", "C. Neither", "D. None"), "B", "**【解析】** 由 *two sisters* 锁定范围为“两者”；谓语 *are* 说明是肯定含义。*both* 表示“两者都”。选 **B**。", "**【技巧】** 先看范围（两者/三者），再看肯定否定。", "我有两个姐姐。她们两个都是这家医院的医生。"),
-                PastExamQuestion("2021", "湖北武汉", "— Which of these two storybooks would you like to read?\n— ______. I'm interested in science books now.", listOf("A. Neither", "B. None", "C. Both", "D. Either"), "A", "**【解析】** *two books* 提示两者；答句说喜欢科学书，暗示故事书都不选。*Neither* 表示两者都不。选 **A**。", "**【易错】** 混淆两者否定 *neither* 与三者否定 *none*。", "—— 这两本故事书你想读哪一本？ —— 都不想读。我现在对科学书感兴趣。"),
-                PastExamQuestion("2020", "浙江杭州", "Is there ______ in today's newspaper? I haven't read it yet.", listOf("A. anything interesting", "B. interesting anything", "C. something interesting", "D. interesting something"), "A", "**【解析】** 疑问句中常用 *anything*；形容词修饰不定代词需后置。选 **A**。", "**【规则】** 复合不定代词的后置修饰。", "今天的报纸上有什么有趣的消息吗？"),
-                PastExamQuestion("2019", "山东济南", "— Who helped you fix the broken bike?\n— ______. I fixed it all by myself.", listOf("A. Somebody", "B. Anybody", "C. Nobody", "D. Everybody"), "C", "**【解析】** *by myself* 说明没人帮忙。*Nobody* 意为“没有人”。选 **C**。", "**【语境】** 逻辑语义推断。", "—— 谁帮你修的坏自行车？ —— 没人。是我自己修好的。"),
-                PastExamQuestion("2018", "河南", "We should learn how to look after ______ when our parents are not at home.", listOf("A. we", "B. us", "C. our", "D. ourselves"), "D", "**【解析】** 主语是 *we*，动作“照顾”指向主语自己，需用反身代词 *ourselves*。选 **D**。", "**【固定搭配】** *look after oneself*。", "当父母不在家时，我们应该学会如何照顾自己。"),
-                PastExamQuestion("2017", "陕西", "The weather in winter in Xi'an is much colder than ______ in my hometown.", listOf("A. it", "B. one", "C. that", "D. this"), "C", "**【解析】** 比较结构中指代不可数名词 *weather*，用 *that*。选 **C**。", "**【经典】** 比较级指代考查。", "西安冬天的天气比我家乡的天气冷得多。"),
-                PastExamQuestion("2016", "重庆", "— May I borrow your dictionary? ______ is at home.", listOf("A. My", "B. Me", "C. Mine", "D. Myself"), "C", "**【解析】** 替代 *my dictionary* 且在句中作主语，需用名词性物主代词 *Mine*。选 **C**。", "**【基础】** 物主代词两性辨析。", "—— 我可以借你的字典吗？我自己的那本在家里。")
+            PastExamQuestion("2025", "北京", "— Have you seen my keys anywhere?\n— No, but there is ______ on the dining table.", listOf("A. one", "B. it", "C. that", "D. this"), "A", "**【解析】** 此处指代“一把钥匙”，是同类中的一个（同名异物），故选 **A**。*it* 指同一个，不符合语境。", "**【难点】** 区分同名异物与同名同物。", "—— 你在到处见过我的钥匙吗？ —— 没有，但餐桌上有一把。"),
+            PastExamQuestion("2024", "上海", "The students enjoyed ______ at the science museum last Friday.", listOf("A. them", "B. their", "C. themselves", "D. they"), "C", "**【解析】** 考查反身代词。*enjoy oneself* 为固定搭配，主语是 students，故用 *themselves*。选 **C**。", "**【语法点】** 动作返回主语本身。", "学生们上周五在科学博物馆玩得很开心。"),
+            PastExamQuestion("2023", "广东", "I have two sisters. ______ of them are doctors in this hospital.", listOf("A. All", "B. Both", "C. Neither", "D. None"), "B", "**【解析】** 由 *two sisters* 锁定范围为“两者”；谓语 *are* 说明是肯定含义。*both* 表示“两者都”。选 **B**。", "**【技巧】** 先看范围（两者/三者），再看肯定否定。", "我有两个姐姐。她们两个都是这家医院的医生。"),
+            PastExamQuestion("2022", "江苏南京", "The population of China is much larger than ______ of the United States.", listOf("A. it", "B. one", "C. that", "D. this"), "C", "**【解析】** 考查指代词比较结构。指代不可数名词 *population* 且表示同类对比（同名异物），固定用 *that*。选 **C**。", "**【经典】** 比较级中的指代规则。", "中国的人口比美国的人口多得多。"),
+            PastExamQuestion("2021", "湖北武汉", "— Which of these two storybooks would you like to read?\n— ______. I'm interested in science books now.", listOf("A. Neither", "B. None", "C. Both", "D. Either"), "A", "**【解析】** *two books* 提示两者；答句说喜欢科学书，暗示故事书都不选。*Neither* 表示两者都不。选 **A**。", "**【辨析】** 混淆两者否定 *neither* 与三者否定 *none*。", "—— 这两本故事书你想读哪一本？ —— 都不想读。我现在对科学书感兴趣。"),
+            PastExamQuestion("2020", "安徽", "Is there ______ in today's newspaper? I haven't read it yet.", listOf("A. anything interesting", "B. interesting anything", "C. something interesting", "D. interesting something"), "A", "**【解析】** 疑问句中常用 *anything*；形容词修饰不定代词需后置。选 **A**。", "**【规则】** 复合不定代词的后置修饰规律。", "今天的报纸上有什么有趣的消息吗？"),
+            PastExamQuestion("2019", "福建", "— Who helped you fix the broken bike?\n— ______. I fixed it all by myself.", listOf("A. Somebody", "B. Anybody", "C. Nobody", "D. Everybody"), "C", "**【解析】** *by myself* 说明没人帮忙。*Nobody* 意为“没有人”。选 **C**。", "**【逻辑】** 根据答语推断代词语义。", "—— 谁帮你修的坏自行车？ —— 没人。是我自己修好的。"),
+            PastExamQuestion("2018", "河南", "We should learn how to look after ______ when our parents are not at home.", listOf("A. we", "B. us", "C. our", "D. ourselves"), "D", "**【解析】** 主语是 *we*，动作“照顾”指向主语自己，需用反身代词 *ourselves*。选 **D**。", "**【结构】** *look after oneself* 固定搭配。", "当父母不在家时，我们应该学会如何照顾自己。"),
+            PastExamQuestion("2017", "陕西", "I'd like to buy this dictionary. How much is ______?", listOf("A. it", "B. one", "C. that", "D. this"), "A", "**【解析】** 特指刚才提到的“这本字典”（同名同物），用 *it*。选 **A**。", "**【指代】** 同名同物特指应用。", "我想买这本字典。多少钱？"),
+            PastExamQuestion("2016", "重庆", "— May I borrow your dictionary? ______ is at home.", listOf("A. My", "B. Me", "C. Mine", "D. Myself"), "C", "**【解析】** 替代 *my dictionary* 且在句中作主语，需用名词性物主代词 *Mine*。选 **C**。", "**【基础】** 物主代词两性辨析。", "—— 我可以借你的字典吗？我自己的那本在家里。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("If you have something important to tell your parents, you should speak to them directly. Don't keep it to yourself, because sharing your feelings can help you feel better. They are the people who love you most in the world and they will always be there for you when you need help. Trusting each other is the key to a happy family life.", listOf(
-                    HighlightedSentence("something important", "**【语法深挖】** *something* 是复合不定代词，形容词 *important* 必须强制后置。这是中考写作与填空的第一红线。"),
-                    HighlightedSentence("keep it to yourself", "**【代词嵌套】** *it* 指代前文的 *something*；*yourself* 是反身代词，与逻辑主语 *you* 呼应，意为“保守秘密/独吞”。"),
-                    HighlightedSentence("Trusting each other", "**【关系逻辑】** *each other* 是相互代词，表示两者或多者之间的双向互动逻辑。")
-                ), "人教版 (Go for it!) 八下 Unit 4"),
-                TextbookParagraph("Learning a foreign language is a challenge for everyone. Some find it easy, while others may find it difficult. But for me, none of us can master it without hard work. We should encourage each other and never give up. Remember that everyone has their own way of learning, so don't compare yourself with others too much.", listOf(
-                    HighlightedSentence("Some... while others", "**【对比矩阵】** *some... others...* 是代词配对的典型逻辑，用于描述不同群体的不确定性分布。"),
-                    HighlightedSentence("find it easy", "**【形式宾语】** *it* 是形式宾语，真正的宾语是后文隐藏的动名词或动作逻辑（此处指学外语）。"),
-                    HighlightedSentence("none of us", "**【否定范围】** *none* 表示三者或以上“全都不”，是中考逻辑考查的重灾区。")
-                ), "外研版 (New Standard) 九下 Module 5"),
-                TextbookParagraph("My sister bought two bottles of juice. She gave one to me and the other to our little brother. We drank them happily in the garden. Both of us thought the juice tasted very sweet and fresh on such a hot summer afternoon.", listOf(
-                    HighlightedSentence("one... the other", "**【范围锁定】** *one... the other...* 专指两者中的“一个”与“另一个”，具有唯一性和明确性。"),
-                    HighlightedSentence("drank them", "**【指代一致】** *them* 复数代词，精确指代前文的 *two bottles of juice*。"),
-                    HighlightedSentence("Both of us", "**【两者逻辑】** *Both* 与 *of us* 结合，强调双主语的肯定属性。")
-                ), "沪教版 (Oxford) 七上 Unit 3")
+            TextbookParagraph("If you have something important to tell your parents, you should speak to them directly. Don't keep it to yourself, because sharing your feelings can help you feel better. Trusting each other is the key to a happy family life.", listOf(
+            HighlightedSentence("something important", "**【语法剖析】** *something* 是复合不定代词，形容词 *important* 必须后置。这是中考最高频的代词陷阱之一。"),
+            HighlightedSentence("keep it to yourself", "**【语义分析】** *it* 指代前文的 *something*；*yourself* 与 *you* 呼应，表示“独自保守”。")
+            ), "人教版 (Go for it!) 八下 Unit 4"),
+            TextbookParagraph("Learning a foreign language is a challenge for everyone. Some find it easy, while others may find it difficult. But for me, none of us can master it without hard work and constant practice.", listOf(
+            HighlightedSentence("Some... while others", "**【逻辑矩阵】** *some... others...* 用于描述不同群体的不确定分布，是阅读对比逻辑的核心。"),
+            HighlightedSentence("find it easy", "**【形式宾语】** *it* 是形式宾语，真正的宾语是后文隐藏的学外语动作。"),
+            HighlightedSentence("none of us", "**【范围判定】** *none* 明确了范围是三者或三者以上全否定。")
+            ), "外研版 (New Standard) 九下 Module 5"),
+            TextbookParagraph("My sister bought two bottles of juice. She gave one to me and the other to our brother. Both of us thought the juice tasted very fresh on such a hot afternoon.", listOf(
+            HighlightedSentence("one... the other", "**【唯一性】** 专指两者中的“一个”与“另一个”，逻辑关系非常严密。"),
+            HighlightedSentence("Both of us", "**【肯定逻辑】** *Both* 强调两者的共同属性。")
+            ), "沪教版 (Oxford) 七上 Unit 3")
             ),
             exampleSentences = listOf(
-                ExampleSentence("The climate of Kunming is much milder than that of Harbin in winter.", "昆明的气候比哈尔滨冬天的气候要温和得多。", "**【深度解析】** 这是一个标准的“比较结构指代”复杂句。*that* 代替不可数名词 *climate*，以避免重复并维持句法的严谨平衡。", "中考核心 (Complex)"),
-                ExampleSentence("I found it impossible to finish all the work by myself in such a short time.", "我发现凭我一个人的力量在这么短的时间内完成所有工作是不可能的。", "**【深度解析】** 包含：1. 形式宾语 *it*；2. 不定式短语作为真正宾语；3. 反身代词 *by myself* 表示独立完成。", "高频易错 (Complex)"),
-                ExampleSentence("Neither of the two books is interesting enough for me to read twice.", "这两本书中哪一本都不够有趣，不值得我读第二遍。", "**【深度解析】** *Neither of* 接复数名词但谓语动词固定用单数 *is*，这是中考主谓一致的高频逻辑陷阱。", "主谓一致 (Compound)"),
-                ExampleSentence("If anyone calls me, tell them that I will be back in ten minutes.", "如果有人给我打电话，告诉他们我保持十分钟后回来。", "**【深度解析】** 在英语口语和现代语法中，指代不确定代词 *anyone* 时，常用 *them/they* 来表示性别中立。", "口语逻辑 (Complex)")
+            ExampleSentence("The climate of Kunming is much milder than that of Harbin in winter.", "昆明的气候比哈尔滨冬天的气候要温和得多。", "**【分析】** *that* 代替不可数名词 *climate*，是中考比较结构中的顶级考点。", "中考核心 (Complex)"),
+            ExampleSentence("I found it impossible to finish all the work by myself in such a short time.", "我发现凭我一个人的力量在这么短的时间内完成所有工作是不可能的。", "**【分析】** 融合了形式宾语 *it*、不定式及反身代词的高阶句式。", "高频易错 (Complex)"),
+            ExampleSentence("Neither of the two books is interesting enough for me to read twice.", "这两本书中哪一本都不够有趣，不值得我读第二遍。", "**【分析】** *Neither of* 接复数名词但谓语动词固定用单数 *is*。", "主谓一致 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("【学情透视】核心症结", "1. **母语迁移干扰**：汉语中“它、他、她”发音一致且无宾格变化，导致学生在 *he/him*、*it* 指代上频繁出错。\n2. **指代链断裂**：在长难句中，学生往往找不到 *that* 或 *one* 究竟代表哪个先行词。\n3. **范围混淆**：对于 *neither/none*, *both/all* 的逻辑界限模糊。"),
-                TeachingNote("【教学金钥】备忘清单", "1. **图表记忆法**：利用 2x2 矩阵（两者/三者 x 肯定/否定）拆解不定代词。\n2. **指代搜索法**：训练学生在阅读中用箭头连接代词与其指代名词，强化逻辑语感。\n3. **公式化句型**：将 *It is adj. to do* 总结为“形式套路”，降低认知负荷。\n4. **错题雷达**：重点标注 *something special* 类后置修饰错例。"),
-                TeachingNote("【冲刺技巧】中考必杀技", "看到 *than* 找比较对象，名词单数/不可数选 *that*，复数选 *those*。看到 *two* 锁定 *both/either/neither* 范围。")
+            TeachingNote("【学情透视】核心症结", "1. **母语迁移干扰**：汉语无宾格变化，学生在 *he/him* 区分上频繁出错。\n2. **指代链断裂**：长难句中找不到 *that* 或 *one* 的先行词。\n3. **范围混淆**：对于两者/三者的逻辑界限模糊。"),
+            TeachingNote("【教学金钥】备忘清单", "1. **图表记忆法**：利用 2x2 矩阵拆解不定代词（两者/三者 x 肯定/否定）。\n2. **指代搜索法**：训练学生在阅读中用箭头连接代词与其指代名词。\n3. **公式化句型**：将 *It is adj. to do* 总结为形式主语的“万能套路”。")
             ),
             famousQuote = "Be yourself; everyone else is already taken.",
             quoteAuthor = "Oscar Wilde",
             quoteTranslation = "做你自己；因为别人都有人做了。",
-            quoteAnalysis = "本句巧妙运用了反身代词 *yourself* 与不定代词 *everyone else*。它不仅是人生的哲学，更展示了代词在界定个体与整体关系时的语义张力。"
+            quoteAnalysis = "巧妙运用反身代词 *yourself* 与不定代词 *everyone else*，展示了个体与整体的语义张力。"
         ),
         KnowledgePoint(
             id = "articles",
             section = SEC_1,
             title = "冠词 (Articles)",
-            description = """### 📖 核心概念详解
-
-冠词 (Articles) 被称为英语中的“虚词之王”，其规则之细腻、使用频率之高，是衡量语感是否纯正的试金石。
-
-#### 1. 不定冠词 (a / an) 的首音素准则
-> ⚠️ **黄金法则**：选择 *a* 还是 *an*，物理依据是单词的 **首个音素 (Phoneme)**，而非首个字母。
-
-| 示例 | 音素分析 | 正确选择 | 常见误区 |
-| :--- | :--- | :--- | :--- |
-| *hour* | /'aʊə/ (元音) | **an** hour | 误选 a (因 h 是辅音字母) |
-| *honest* | /'ɒnɪst/ (元音) | **an** honest boy | 忽略 h 不发音 |
-| *university* | /ˌjuːnɪ'vɜːsəti/ (辅音) | **a** university | 误选 an (因 u 是元音字母) |
-| *useful* | /'juːsfl/ (辅音) | **a** useful tool | 仅看拼写不看发音 |
-| *unusual* | /ʌn'juːʒuəl/ (元音) | **an** unusual story | 元音发音选 an |
-
-#### 2. 定冠词 (the) 的“特指”逻辑
-1.  **回头见原则**：上文提到过的人或物 (*I saw a bird. The bird was...*)。
-2.  **独一无二**：世界上独一无二的事物 (*the sun, the moon, the earth*)。
-3.  **序数词与最高级**：*the first, the best, the most interesting*。
-4.  **西洋乐器**：*play the piano, play the guitar*。
-5.  **方位与方向**：*in the east, on the left*。
-6.  **姓氏复数**：表示“一家人” (*the Greens*)。
-
-#### 3. 零冠词 (Zero Article) 的“法定”场景
-*   **球类、棋类**：*play basketball, play chess*。
-*   **三餐、季节、月份**：*have breakfast, in summer, in March* (若有修饰词例外)。
-*   **学科、语言**：*speak English, study physics*。
-*   **节日**：*at Christmas, on Children's Day* (春节 *the Spring Festival* 通常带 the)。
-
-#### 4. 固定短语中的“有无”玄机
-| 短语 (有 the) | 含义 | 短语 (无 the) | 含义 |
-| :--- | :--- | :--- | :--- |
-| *in the hospital* | 在医院里 (如探视) | *in hospital* | 住院 |
-| *at the table* | 在桌子旁 | *at table* | 在进餐 |
-| *go to the school* | 去那所学校 (不一定上课) | *go to school* | 去上学 |
-| *by the sea* | 在海边 | *by sea* | 乘船 (交通方式) |""",
+            description = """
+            ### 📖 核心概念详解
+            
+            冠词 (Articles) 被称为英语中的“虚词之王”，其规则之细腻、使用频率之高，是衡量语感是否纯正的试金石。
+            
+            #### 1. 不定冠词 (a / an) 的首音素准则
+            > ⚠️ **黄金法则**：选择 *a* 还是 *an*，物理依据是单词的 **首个音素 (Phoneme)**，而非首个字母。
+            
+            | 示例 | 音素分析 | 正确选择 | 常见误区 |
+            | :--- | :--- | :--- | :--- |
+            | *hour* | /'aʊə/ (元音) | **an** hour | 误选 a (因 h 是辅音字母) |
+            | *honest* | /'ɒnɪst/ (元音) | **an** honest boy | 忽略 h 不发音 |
+            | *university* | /ˌjuːnɪ'vɜːsəti/ (辅音) | **a** university | 误选 an (因 u 是元音字母) |
+            | *useful* | /'juːsfl/ (辅音) | **a** useful tool | 仅看拼写不看发音 |
+            | *unusual* | /ʌn'juːʒuəl/ (元音) | **an** unusual story | 元音发音选 an |
+            | *MP3* | /ˌem piː 'θriː/ (元音) | **an** MP3 player | 字母 M 以元音 /e/ 开头 |
+            
+            #### 2. 定冠词 (the) 的“特指”逻辑
+            1.  **回头见原则**：上文提到过的人或物 (*I saw a bird. The bird was...*)。
+            2.  **独一无二**：世界上独一无二的事物 (*the sun, the moon, the earth*)。
+            3.  **序数词与最高级**：*the first, the best, the most interesting*。
+            4.  **西洋乐器**：*play the piano, play the guitar* (对比：*play football* 无 the)。
+            5.  **方位与方向**：*in the east, on the left*。
+            6.  **姓氏复数**：表示“一家人” (*the Greens*)。
+            7.  **the + 形容词**：表示一类人 (*the rich, the blind*)。
+            
+            #### 3. 零冠词 (Zero Article) 的“法定”场景
+            *   **球类、棋类**：*play basketball, play chess*。
+            *   **三餐、季节、月份**：*have breakfast, in summer, in March* (若有修饰词例外，如 *in the cold winter of 2023*)。
+            *   **学科、语言**：*speak English, study physics*。
+            *   **节日**：*at Christmas, on Children's Day* (注意：*the Spring Festival* 通常带 the)。
+            *   **代词/名词所有格后**：*my book* (不说 *a my book*)。
+            
+            #### 4. 固定短语中的“有无”玄机
+            | 短语 (有 the) | 含义 | 短语 (无 the) | 含义 |
+            | :--- | :--- | :--- | :--- |
+            | *in the hospital* | 在医院里 (如探视) | *in hospital* | 住院 (因病) |
+            | *at the table* | 在桌子旁 | *at table* | 在进餐 |
+            | *go to the school* | 去那所学校 (如开会) | *go to school* | 去上学 (学生身份) |
+            | *in the prison* | 在监狱里 (如参观) | *in prison* | 坐牢 (罪犯身份) |
+            | *by the sea* | 在海边 | *by sea* | 乘船 (交通方式) |
+            """.trimIndent(),
             syllabusDetails = listOf(
-                "**【音法判定】** 深刻掌握首音素判别法，重点记忆 *h, u, e* 开头的特殊词汇（如 *an MP3 player*）。",
-                "**【特指锁定】** 掌握 *the* 在语篇衔接、特定范围修饰以及独一无二事物前的应用法则。",
-                "**【零冠词清单】** 熟练识别球类、三餐、学科等零冠词场景，严防母语直译干扰。",
-                "**【习惯搭配】** 掌握 30 组以上带有/不带冠词的固定短语，并理解其语义细微差别。",
-                "**【进阶职衔】** 理解表示官衔、职位的名词作表语/补语时通常不用冠词的规则。",
-                "**【数量转换】** 掌握 *a second/a third* 表示“又一个、再一个”而非顺序的特殊含义。"
+            "**【音法判定】** 深刻掌握首音素判别法，重点记忆 *h, u, e, m, s, x* 等字母开头的特殊词汇发音。",
+            "**【特指锁定】** 掌握 *the* 在语篇衔接、特定范围修饰（如 *of* 短语修饰）以及独一无二事物前的应用法则。",
+            "**【零冠词清单】** 熟练识别球类、三餐、学科等零冠词场景，理解有无冠词产生的语义质变。",
+            "**【习惯搭配】** 掌握 30 组以上带有/不带冠词的固定短语，尤其是在阅读理解中分辨身份职能（如 *in hospital*）。",
+            "**【数量转换】** 掌握 *a second/a third* 表示“又一个、再一个”而非顺序的递进逻辑语义。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("名词 (Nouns)", "冠词的语法宿主", "名词的可数性、单复数属性是冠词存在的物理前提；没有名词，冠词将失去所有语法功能。"),
-                RelatedPoint("形容词最高级 (Superlatives)", "the 的固定伴侣", "最高级前通常强制使用 *the*，唯一的例外是前面已有物主代词或所有格修饰。"),
-                RelatedPoint("数词 (Numerals)", "序数词的伴侣", "序数词前通常加 *the* 表示顺序，或加 *a/an* 表达“又一”的递进逻辑。"),
-                RelatedPoint("介词短语 (Prepositional Phrases)", "结构化分布", "冠词在介词短语中常作为固定结构的一部分（如 *in the end*），改变冠词的有无往往会彻底重塑语义。")
+            RelatedPoint("名词 (Nouns)", "冠词的语法宿主", "名词的可数性、单复数属性是冠词存在的物理前提。"),
+            RelatedPoint("形容词最高级 (Superlatives)", "the 的固定伴侣", "最高级前通常强制使用 *the*，除非有物主代词。"),
+            RelatedPoint("数词 (Numerals)", "序数词的伴侣", "序数词前通常加 *the* 表示顺序，加 *a/an* 表示增加。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2025", "北京", "Zhang Hua is ______ honest boy. He always tells ______ truth.", listOf("A. a; the", "B. an; the", "C. an; a", "D. a; a"), "B", "**【解析】** *honest* 首音素为元音 /ɒ/，用 *an*；*tell the truth* 为固定搭配，意为“说实话”。选 **B**。", "**【关键】** 音素判定 + 固定短语。", "张华是个诚实的孩子。他总是说真话。"),
-                PastExamQuestion("2024", "上海", "Look! ______ boy in a blue jacket is playing ______ guitar.", listOf("A. The; the", "B. A; the", "C. The; /", "D. A; /"), "A", "**【解析】** *in a blue jacket* 是定语修饰 *boy*，表特指，用 *the*；弹奏西洋乐器固定加 *the*。选 **A**。", "**【提醒】** 介词短语往往具有强大的特指功能。", "看！那个穿蓝色夹克的男孩正在弹吉他。"),
-                PastExamQuestion("2023", "广东", "I usually have ______ breakfast at 7:00. It's ______ important meal of the day.", listOf("A. /; an", "B. a; an", "C. the; a", "D. /; a"), "A", "**【解析】** 三餐前通常不用冠词；*important* 首音素为元音，用 *an*。选 **A**。", "**【基础】** 零冠词场景应用。", "我通常 7 点吃早餐。这是一天中重要的一餐。"),
-                PastExamQuestion("2022", "江苏南京", "Beijing, ______ capital of China, will hold ______ 24th Winter Olympic Games.", listOf("A. a; the", "B. the; the", "C. /; the", "D. the; a"), "B", "**【解析】** “中国的首都”表独一无二身份用 *the*；序数词 24th 前加 *the*。选 **B**。", "**【常考】** 唯一性身份与序数词。", "北京，中国的首都，将举办第 24 届冬奥会。"),
-                PastExamQuestion("2021", "浙江杭州", "It takes me about ______ hour to finish my homework every evening.", listOf("A. a", "B. an", "C. the", "D. /"), "B", "**【解析】** *hour* 的 h 不发音，首音为元音，必须用 *an*。选 **B**。", "**【警示】** 不要被辅音字母欺骗。", "每天晚上大约花我一个小时完成作业。"),
-                PastExamQuestion("2020", "四川成都", "______ moon goes around ______ earth.", listOf("A. A; the", "B. The; the", "C. The; /", "D. /; the"), "B", "**【解析】** 月球和地球都是世间独一无二的事物，均须加 *the*。选 **B**。", "**【定理】** 自然界唯一性规律。", "月亮绕着地球转。"),
-                PastExamQuestion("2019", "山东济南", "Would you like to play ______ basketball with ______ Smiths this afternoon?", listOf("A. the; /", "B. /; the", "C. the; the", "D. /; /"), "B", "**【解析】** 球类前不加冠词；*the + 姓氏复数* 表示一家人。选 **B**。", "**【注意】** 球类 vs 姓氏家庭。", "今天下午你想和史密斯一家打篮球吗？"),
-                PastExamQuestion("2018", "湖北武汉", "He wants to be ______ astronaut in ______ future.", listOf("A. a; the", "B. an; /", "C. an; the", "D. a; /"), "C", "**【解析】** *astronaut* 元音开头用 *an*；*in the future* 是固定短语。选 **C**。", "**【短语】** 时态/方位常用短语。", "他未来想成为一名宇航员。"),
-                PastExamQuestion("2017", "河南", "There is ______ \"u\" and ______ \"s\" in the word \"use\".", listOf("A. a; an", "B. an; an", "C. a; a", "D. an; a"), "A", "**【解析】** 字母 u 的读音是 /juː/ (辅音开头) 用 *a*；字母 s 的读音是 /es/ (元音开头) 用 *an*。选 **A**。", "**【陷阱】** 字母本身的读音判别法，极具杀伤力。", "单词 \"use\" 中有一个字母 u 和一个字母 s。"),
-                PastExamQuestion("2016", "陕西", "I have tried twice, but I'd like to have ______ third try.", listOf("A. a", "B. an", "C. the", "D. /"), "A", "**【解析】** *a + 序数词* 意为“再一，又一”，表示递进而非单纯排序。选 **A**。", "**【进阶】** 冠词语义的动态变化。", "我已经试过两次了，但我还想再试第三次。")
+            PastExamQuestion("2025", "北京", "Zhang Hua is ______ honest boy. He always tells ______ truth.", listOf("A. a; the", "B. an; the", "C. an; a", "D. a; a"), "B", "**【解析】** *honest* 首音素为元音 /ɒ/，用 *an*；*tell the truth*（说实话）为固定搭配。故选 **B**。", "**【陷阱】** 容易根据首字母 h 误选 a。", "张华是个诚实的孩子。他总是说真话。"),
+            PastExamQuestion("2024", "上海", "Look! ______ boy in a blue jacket is playing ______ guitar.", listOf("A. The; the", "B. A; the", "C. The; /", "D. A; /"), "A", "**【解析】** *in a blue jacket* 介词短语作定语，表示特指，用 *the*；西洋乐器前加 *the*。故选 **A**。", "**【提醒】** 介词短语的特指功能是中考常考点。", "看！那个穿蓝色夹克的男孩正在弹吉他。"),
+            PastExamQuestion("2023", "广东", "I usually have ______ breakfast at 7:00. It's ______ important meal.", listOf("A. /; an", "B. a; an", "C. the; a", "D. /; a"), "A", "**【解析】** 三餐前通常不用冠词（零冠词）；*important* 元音开头用 *an*。故选 **A**。", "**【注意】** 零冠词与不定冠词的混合考查。", "我通常 7 点吃早餐。这是一天中重要的一餐。"),
+            PastExamQuestion("2022", "江苏南京", "Beijing, ______ capital of China, will hold ______ 24th Winter Olympic Games.", listOf("A. a; the", "B. the; the", "C. /; the", "D. the; a"), "B", "**【解析】** “中国的首都”表唯一身份用 *the*；序数词前加 *the*。故选 **B**。", "**【考点】** 唯一性身份与序数词的前置冠词。", "北京，中国的首都，将举办第 24 届冬奥会。"),
+            PastExamQuestion("2021", "湖北武汉", "— What ______ useful information it is!\n— Yes. It helps me a lot.", listOf("A. a", "B. an", "C. /", "D. the"), "C", "**【解析】** *information* 是不可数名词，感叹句 *What + adj + 名词* 结构中，不可数名词前不用 a/an。故选 **C**。", "**【错误率】** 极高。学生常因 *useful* 而选 a。", "—— 多么有用的信息啊！ —— 是的。它对我帮助很大。"),
+            PastExamQuestion("2020", "安徽", "— Do you like playing ______ football?\n— No, I prefer playing ______ violin.", listOf("A. a; the", "B. /; the", "C. the; /", "D. /; /"), "B", "**【解析】** 球类运动前零冠词，乐器前加 *the*。故选 **B**。", "**【口诀】** 球类零，乐器定。", "—— 你喜欢踢足球吗？ —— 不，我更喜欢拉小提琴。"),
+            PastExamQuestion("2019", "福建", "Fuzhou is ______ beautiful city. It's ______ capital of Fujian Province.", listOf("A. a; the", "B. an; the", "C. a; a", "D. the; a"), "A", "**【解析】** 第一空表泛指“一个美丽的城市”用 *a*；第二空表特指“福建省的省会”用 *the*。故选 **A**。", "**【逻辑】** 先泛指后特指。", "福州是一个美丽的城市。它是福建省的省会。"),
+            PastExamQuestion("2018", "河南", "After ______ hour's exercise, I felt ______ bit tired.", listOf("A. a; a", "B. an; a", "C. an; /", "D. a; /"), "B", "**【解析】** *hour* 元音开头用 *an*；*a bit*（一点儿）是固定短语。故选 **B**。", "**【音素】** /'aʊə/ 是元音音素。", "锻炼了一个小时后，我感到有一点点累。"),
+            PastExamQuestion("2017", "重庆", "Mr. Smith is ______ English teacher. He is from ______ UK.", listOf("A. a; the", "B. an; the", "C. an; /", "D. a; /"), "B", "**【解析】** *English* 元音开头用 *an*；由普通名词构成的国家简称前加 *the*。故选 **B**。", "**【国家】** UK, USA, PRC 都要加 the。", "史密斯先生是一名英语老师。他来自英国。"),
+            PastExamQuestion("2016", "陕西", "Music is ______ international language. We can express our feelings through it.", listOf("A. a", "B. an", "C. the", "D. /"), "B", "**【解析】** 表泛指“一种国际语言”，*international* 元音开头用 *an*。故选 **B**。", "**【基础】** 泛指概念与元音判定。", "音乐是一种国际语言。我们可以通过它表达情感。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("It takes me an hour to finish my homework every day. After that, I usually play the violin for thirty minutes because I want to be a great musician. Sometimes I go to play basketball with my friends. Exercise is good for our health.", listOf(
-                    HighlightedSentence("an hour", "**【发音红线】** *hour* 以辅音字母开头但以元音音素开头，这是中考冠词考点的第一陷阱。"),
-                    HighlightedSentence("play the violin... play basketball", "**【绝对对比】** 教材通过这一并列对比，清晰界定了西洋乐器（加 *the*）与球类运动（不加冠词）的物理界限。")
-                ), "人教版 (Go for it!) 七下 Unit 6"),
-                TextbookParagraph("Mount Everest is the highest mountain in the world. It is a symbol of courage. People from all over the earth come to visit the Himalayas to see the amazing view. It is a treasure of the earth.", listOf(
-                    HighlightedSentence("the highest mountain", "**【最高级伴侣】** 形容词最高级 *highest* 之前必须有定冠词 *the* 护航，表达其唯一性和极致性。"),
-                    HighlightedSentence("a symbol of courage", "**【具体化】** *symbol* 是可数名词，此处表泛指；*courage* 是抽象名词，通常不用冠词。")
-                ), "外研版 (New Standard) 九上 Module 2"),
-                TextbookParagraph("In the end, they found a way to solve the problem. It was an unusual experience for everyone. Although it was a difficult start, they achieved great success because of their teamwork and wisdom.", listOf(
-                    HighlightedSentence("In the end", "**【固定锚点】** *In the end* 是表示时间先后逻辑的固定介词短语，冠词不可或缺。"),
-                    HighlightedSentence("an unusual experience", "**【音素判别】** *unusual* 以元音 /ʌ/ 开头，逻辑上必须匹配 *an*。")
-                ), "沪教版 (Oxford) 八下 Unit 5")
+            TextbookParagraph("It takes me an hour to finish my homework every day. After that, I usually play the violin for thirty minutes. Music makes me feel relaxed. It is an important part of my life.", listOf(
+            HighlightedSentence("an hour", "**【发音红线】** *hour* 的 h 不发音，首音素为元音 /aʊ/，必须用 *an*。"),
+            HighlightedSentence("play the violin", "**【乐器逻辑】** 西洋乐器前须加 *the*，体现了英语对艺术形式的特指传统。"),
+            HighlightedSentence("an important part", "**【泛指逻辑】** 表达“其中一个重要部分”，元音音素 /ɪ/ 开头用 *an*。")
+            ), "人教版 (Go for it!) 七下 Unit 6"),
+            TextbookParagraph("Yesterday, the Greens went on a trip to the beach. They saw the sun rise from the east in the morning. They had a great time playing football on the sand. It was an unforgettable day.", listOf(
+            HighlightedSentence("the Greens", "**【家族用法】** *the + 姓氏复数* 表示一家人。"),
+            HighlightedSentence("from the east", "**【方位特指】** 方位词前固定使用定冠词 *the*。"),
+            HighlightedSentence("playing football", "**【运动禁忌】** 球类运动前严禁加 *the*。")
+            ), "外研版 (New Standard) 八下 Module 5"),
+            TextbookParagraph("In hospital, doctors and nurses work day and night to save lives. My aunt is a nurse. She works in the hospital near our school. She loves her job very much.", listOf(
+            HighlightedSentence("In hospital", "**【职能语义】** 指“在住院”或“在从事医疗工作”，强调职能而非建筑。"),
+            HighlightedSentence("in the hospital", "**【建筑语义】** 指“在那栋医院大楼里”，强调具体的地理位置。")
+            ), "沪教版 (Oxford) 九上 Unit 2"),
+            TextbookParagraph("Li Hua is a university student now. He is an honest person and always helps the old in his community. Everyone thinks he is a useful man.", listOf(
+            HighlightedSentence("a university student", "**【发音陷阱】** *university* 首字母虽是 u，但音素是辅音 /j/，故用 *a*。"),
+            HighlightedSentence("helps the old", "**【群体表达】** *the + 形容词* 表示一类人，此处指“老人”。"),
+            HighlightedSentence("a useful man", "**【发音陷阱】** *useful* 音素为辅音 /j/，用 *a*。")
+            ), "人教版 (Go for it!) 九年级 Unit 1")
             ),
             exampleSentences = listOf(
-                ExampleSentence("He is an 11-year-old boy who has already become a university student.", "他是一个 11 岁的男孩，却已经成了一名大学生。", "**【深度解析】** 本句包含两类极端音素考点：*11 (eleven)* 元音开头用 *an*；*university* 辅音 /j/ 开头用 *a*。这是测试语感精确度的顶级题目。", "中考核心 (Complex)"),
-                ExampleSentence("The rich should help the poor, because we all live on the same planet.", "富人应当帮助穷人，因为我们都生活在同一个星球上。", "**【深度解析】** “the + 形容词” 结构表示一类人，在句中作主语时，谓语动词通常需用复数形态。", "高阶句法 (Compound)"),
-                ExampleSentence("Is Sunday the first day or the last day of a week in Western countries?", "在西方国家，星期日是一周的第一天还是最后一天？", "**【深度解析】** 序数词 *first, last* 以及谈话双方公认的单位 *week* 共同展示了 *the* 和 *a* 的基础限定逻辑。", "基础必会 (Compound)"),
-                ExampleSentence("In the Spring Festival, the Chinese usually eat dumplings for the first meal.", "在春节，中国人通常第一顿饭吃饺子。", "**【深度解析】** 节日 *the Spring Festival* 的特例用法与序数词特指的完美结合。", "文化语境 (Complex)")
+            ExampleSentence("He is an 11-year-old boy who has already become a university student.", "他是一个 11 岁的男孩，却已经成了一名大学生。", "**【深度解析】** *11 (eleven)* 元音开头用 *an*；*university* 辅音开头用 *a*。", "中考核心 (Complex)"),
+            ExampleSentence("The rich should help the poor, because we all live on the same planet.", "富人应当帮助穷人，因为我们都生活在同一个星球上。", "**【深度解析】** “the + 形容词” 结构表示一类人。*the same* 是固定搭配。", "高阶句法 (Compound)"),
+            ExampleSentence("We usually have lunch at school, but last Sunday we had a big lunch in a restaurant.", "我们通常在学校吃午饭，但上周日我们在一家餐馆吃了一顿丰盛的午餐。", "**【深度解析】** 三餐前通常零冠词，但有形容词修饰且表泛指时可用 *a*。", "高频考点 (Complex)"),
+            ExampleSentence("The moon goes around the earth. It's a natural satellite.", "月亮绕着地球转。它是一颗卫星。", "**【深度解析】** 独一无二的事物用 *the*；泛指身份用 *a*。", "基础必会 (Simple)")
             ),
             teachingNotes = listOf(
-                TeachingNote("【学情透视】核心症结", "1. **母语缺失**：汉语完全没有冠词概念，导致学生在写作中频繁出现“冠词缺失症”。\n2. **字母教条**：死记硬背 *a, e, i, o, u* 字母，而不去听音素，导致在 *hour, university, MP3* 等词上全军覆没。\n3. **固定短语混淆**：记不清何时该有 *the*（如 *in class* vs *in the classroom*）。"),
-                TeachingNote("【教学金钥】备忘清单", "1. **音标前置法**：在教冠词前，先复习 48 个音标，特别是元音音素的识别。\n2. **口诀辅助法**：‘元音音素用 *an*，辅音音素 *a* 领先；乐器 *the*，球类零，最高级前 *the* 必行。’\n3. **情景对比法**：利用 *in hospital* (病床) 与 *in the hospital* (建筑) 的图片对比，强化语义理解。\n4. **短语归类卡**：将常用零冠词短语归纳为“三餐、球类、学科、季节”四大家族。"),
-                TeachingNote("【冲刺技巧】中考必杀技", "单选题中看到 *honest, hour, unusual, university, useful* 必须瞬间触发警戒雷达。写作中检查每一个单数可数名词前是否有‘护卫’（冠词/代词）。")
+            TeachingNote("【学情透视】核心症结", "1. **母语缺失**：汉语完全没有冠词概念，学生容易漏掉冠词或根据拼写而非发音选择 a/an。\n2. **教条主义**：死记硬背“元音字母”，在 *useful, honest* 等词上反复栽跟头。\n3. **功能混淆**：分不清 *in hospital* 与 *in the hospital* 的语义差异。"),
+            TeachingNote("【教学金钥】备忘清单", "1. **音标前置法**：在教冠词前先复习 48 个音标，特别是元音。强调“看音标，不看字母”。\n2. **情景差异法**：通过图片展示“在桌子旁 (*at the table*)”与“在吃饭 (*at table*)”的区别。\n3. **口诀辅助法**：‘球类棋类零冠词，西洋乐器 the 领头；序数词最高级 the 必有，姓氏复数 the 一家。’"),
+            TeachingNote("【冲刺技巧】中考必杀技", "1. **第一眼看首音**：如果是 *U* 开头，发 /ju:/ 选 *a*，发 /ʌ/ 选 *an*。如果是 *H* 开头，不发音选 *an*。\n2. **第二眼看修饰**：有 *of* 或介词短语修饰名词，大概率选 *the*。\n3. **第三眼看固定搭配**：*at the same time, in the end, tell the truth* 等务必背熟。")
             ),
             famousQuote = "Details create the big picture.",
             quoteAuthor = "Sanford I. Weill",
             quoteTranslation = "细节成就大局。",
-            quoteAnalysis = "冠词 (a/an/the) 在英语中虽细微如沙，却是构建精准语义大局的基石。正如本名言所述，把握住每一个冠词的细节，才能塑造出纯正、严谨的语言图景。"
+            quoteAnalysis = "冠词 (a/an/the) 在英语中虽细微如沙，却是构建精准语义大局的基石，少了一个冠词，句子的逻辑可能完全崩塌。"
         ),
         KnowledgePoint(
             id = "numerals",
             section = SEC_1,
             title = "数词 (Numerals)",
-            description = """### 核心概念详解
-数词 (Numerals) 是描述客观世界数量与顺序的语法工具，分为基数词和序数词。在中考评价中，数词的考查不仅涉及拼写（如 forty, ninety, twelfth, fortieth 的拼写陷阱），更侧重于各种应用场景。基数词用于计数（one, two...），而序数词用于排序（first, second...）。二者的转换规律是基础，特别是 1-3 的特殊形式及以 y 结尾的变化。此外，数词的大数表达（hundred, thousand, million, billion）涉及到“精准”与“模糊”的博弈：当与具体数字连用时，单位词不加 s（two hundred students）；当表示模糊的“成千上万”时，必须加 s 且接 of（hundreds of students）。此外，分数、小数、百分数、时刻、日期及编号（Lesson One vs the first lesson）的切换，也是中考必考内容。
-
-### 深度考点解析
-*   **单位词的‘s’定律**：明确数字 + hundred/thousand/million (不加s)；hundreds/thousands/millions + of (必须加s)。注意：如果名词前有 these/those 等修饰，通常也用具体形式（如 five hundred of these students）。
-*   **序数词的‘定冠词’特例**：通常序数词前加 the，但当表示‘再一、又一’时，序数词前可接不定冠词 a/an（He has tried three times and he wants a fourth try.）。
-*   **编号表达的逆向思维**：Lesson One = The first lesson; Room 302 = the third room (如果指顺序)。注意：名词在前用基数（通常首字母大写），the 在前用序数。
-*   **分数与主谓一致**：分数的分子用基数，分母用序数（分子大于1时分母加s）。其谓语动词的数由分数后的名词决定（two-thirds of the books are; two-thirds of the water is）。""",
+            description = """
+            ### 📖 核心概念详解
+            
+            数词 (Numerals) 是描述客观世界“数量”与“顺序”的精密工具，在中考中主要考查其物理形态变换与特定应用逻辑。
+            
+            #### 1. 基数词 (Cardinals) 与序数词 (Ordinals)
+            | 基数词 | 序数词 | 缩写 | 记忆要点 |
+            | :--- | :--- | :--- | :--- |
+            | *one* | **first** | 1st | 特殊记忆 |
+            | *two* | **second** | 2nd | 特殊记忆 |
+            | *three* | **third** | 3rd | 特殊记忆 |
+            | *five* | **fifth** | 5th | **ve** 变 **f** 加 **th** |
+            | *eight* | **eighth** | 8th | 词尾只加 **h** (避免两个 t) |
+            | *nine* | **ninth** | 9th | 去 **e** 加 **th** |
+            | *twelve* | **twelfth** | 12th | **ve** 变 **f** 加 **th** |
+            | *twenty* | **twentieth** | 20th | **y** 变 **ie** 加 **th** |
+            | *forty* | **fortieth** | 40th | 易错拼写：无 **u** (*four* 有 u) |
+            
+            #### 2. 大数的“s定律” (核心难点)
+            > 💡 **“精准”与“模糊”的权力交接**：
+            > *   **精准数 (具体数字)**：数字 + *hundred/thousand/million/billion* (**不加 s, 不接 of**)
+            >     *   示例：*three hundred students* (三百个学生)
+            > *   **模糊数 (约数)**：*hundreds/thousands/millions/billions* + **of** (**必须加 s, 必须接 of**)
+            >     *   示例：*thousands of people* (成千上万的人)
+            > ⚠️ **禁忌**：千万不要写成 *five hundreds of*。
+            
+            #### 3. 分数与百分数的逻辑
+            *   **分数规则**：
+            1. 分子用 **基数词**，分母用 **序数词**。
+            2. 分子 > 1 时，分母序数词需加 **-s**。
+            *   *1/3*: **one-third**
+            *   *2/5*: **two-fifths**
+            *   **百分数**：数字 + *percent* (始终不加 s)。
+            *   其谓语动词的数由修饰的名词决定：*30% of the water **is**...* / *30% of the apples **are**...*
+            
+            #### 4. 时间、日期与年龄
+            1.  **时刻表达**：
+            *   *8:10* -> *ten past eight* (30分以内用 **past**)
+            *   *8:50* -> *ten to nine* (超过30分用 **to**)
+            *   *8:15* -> *a quarter past eight* / *8:30* -> *half past eight*
+            2.  **年龄表达**：
+            *   *in one's twenties* (在某人二十多岁时)
+            3.  **日期表达**：
+            *   *June 1st, 2025* (读作：*June the first*)
+            """.trimIndent(),
             syllabusDetails = listOf(
-                "1. 熟练掌握 1-100 基数词及其对应序数词的不规则变化拼写（重点：eighth, ninth, twelfth, twentieth, forty, ninety）。",
-                "2. 精准运用大数单位 hundred, thousand, million 的‘具体’（不加s/of）与‘模糊’（加s/of）表达法则。",
-                "3. 掌握分数的构成法则：分子基数词，分母序数词；分子大于一，分母加 s（如 three-quarters）。",
-                "4. 理解编号、电话号码（0读zero或o）、年份（2024读twenty twenty-four）、日期（May 1st）、时间（past/to）的正确读法。",
-                "5. 掌握 a second/a third 等表示‘又一，再一’的非排序性用法语义。",
-                "6. 掌握百分数 (percent) 的用法及在主谓一致中的体现。"
+            "**【形态拼写】** 熟练掌握 1-100 基数词及其对应序数词的物理变换规律，重点攻克 *eighth, ninth, twelfth, forty, ninety* 等拼写陷阱。",
+            "**【大数逻辑】** 深刻理解 *hundred, thousand, million, billion* 在精准与模糊语境下的‘s定律’与‘of关联’。",
+            "**【单位量化】** 精准运用分数（分子基、分母序、分子大于一分母加 s）、小数及百分数的标准表达。",
+            "**【时空坐标】** 掌握日期、时刻（past/to 逆读法）、年龄（*in one's twenties*）及编号（*Lesson One* vs *the first lesson*）的转换。",
+            "**【倍数逻辑】** 掌握 *once, twice, three times* 及其在比较结构中的应用。",
+            "**【特殊含义】** 理解 *a second/a third* 表示“又一、再一”的递进逻辑语义。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("名词", "数词修饰名词", "基数词大于一，名词须用复数。"),
-                RelatedPoint("形容词最高级", "序数词后的最高级", "the second longest river 表示‘第二长’。")
+            RelatedPoint("名词 (Nouns)", "数词的物理容器", "基数词直接决定名词复数；分数/百分数作主语时，谓语动词由修饰的名词决定。"),
+            RelatedPoint("冠词 (Articles)", "序数词的‘护卫’", "序数词前通常须加 *the* 表示排序；但加 *a/an* 时则转化为“数量递进”语义。"),
+            RelatedPoint("主谓一致 (S-V Agreement)", "分数与百分数的控制权", "这是中考的高阶考点，动词的单复数取决于 *of* 之后名词的逻辑属性。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "合肥中考", "About ______ students in our school will take part in the sports meeting next month.", listOf("A. two hundreds", "B. two hundred of", "C. two hundred", "D. hundreds of"), "C", "【答案】C。本题考查数词大数表达。具体数字 two 后面的 hundred 不加 s，也不接 of。", "two 后面的 hundred 加了 s。", "我们学校大约有两百名学生将参加下个月的运动会。"),
-                PastExamQuestion("2015", "西安中考", "Today is my mother's ______ birthday. I will buy her a gift.", listOf("A. forty", "B. fortieth", "C. the fortieth", "D. fourteenth"), "B", "【答案】B。本题考查序数词。表示几岁生日用序数词. forty 的序数词是 fortieth。注意：有了 my 所有格，不能再加 the。", "拼写错误或多加 the。", "今天是我妈妈四十岁生日。我要给她买个礼物。"),
-                PastExamQuestion("2016", "沈阳中考", "______ of the students in our class ______ from the countryside.", listOf("A. Two-three; is", "B. Two-thirds; are", "C. Second-three; are", "D. Two-third; is"), "B", "【答案】B。本题考查分数与主谓一致。三分之二：分子 2 (two)，分母 3 (thirds)；主语是 students，复数意义，谓语用 are。", "分子分母词类混淆，主谓一致判断错误。", "我们班三分之二的学生来自农村。")
+            PastExamQuestion("2025", "北京", "About ______ of the students in our school like playing basketball.", listOf("A. two third", "B. two thirds", "C. second three", "D. second thirds"), "B", "**【解析】** 考查分数。分子 2 用基数词 *two*，分母 3 用序数词复数 *thirds*。故选 **B**。", "**【注意】** 分子大于 1，分母必加 s。", "我们学校大约三分之二的学生喜欢打篮球。"),
+            PastExamQuestion("2025", "天津", "There are ______ people in the park on weekends.", listOf("A. five hundred of", "B. five hundreds", "C. hundreds of", "D. five hundreds of"), "C", "**【解析】** 模糊大数用 *hundreds of*；精准数字后不加 s/of。故选 **C**。", "**【陷阱】** 不要混淆精准与模糊结构，两者不能杂交。", "周末公园里有数百人。"),
+            PastExamQuestion("2024", "上海", "— How many books are there?\n— There are ______ books.", listOf("A. two thousand", "B. two thousands", "C. thousand of", "D. two thousands of"), "A", "**【解析】** 精准数字后单位词保持单数（不加 s）。故选 **A**。", "**【基础】** 基数词大数原则，千/百/百万在具体数字后不加 s。", "—— 有多少本书？ —— 有两千本书。"),
+            PastExamQuestion("2024", "广东", "Today is my mother's ______ birthday.", listOf("A. forty", "B. fortieth", "C. the fortieth", "D. fourteenth"), "B", "**【解析】** 生日、序号用序数词；*forty* 变为序数词是 *fortieth*。已有 *my* 限制，不再加 *the*。故选 **B**。", "**【拼写】** *fortieth* 拼写无 u，容易受 *four* 干扰。", "今天是我妈妈四十岁生日。"),
+            PastExamQuestion("2023", "江苏南京", "Beijing held ______ 24th Winter Olympic Games in 2022.", listOf("A. a", "B. an", "C. the", "D. /"), "C", "**【解析】** 序数词前加 *the* 表示特定届数。故选 **C**。", "**【常考】** 序数词与冠词的固定搭配。", "北京在 2022 年举办了第 24 届冬奥会。"),
+            PastExamQuestion("2023", "湖北武汉", "It's ______ walk from my home to the school.", listOf("A. ten minute", "B. ten minute's", "C. ten minutes'", "D. ten minutes"), "C", "**【解析】** 复数名词所有格表时间。*ten minutes* 的所有格只需加 *'*。故选 **C**。", "**【关联】** 名词所有格与数词的综合考查。", "从家到学校步行十分钟。"),
+            PastExamQuestion("2022", "四川成都", "About ______ of the surface of the earth is covered by water.", listOf("A. three-fourth", "B. three-fourths", "C. third-four", "D. third-fourths"), "B", "**【解析】** 分子 3 (*three*)，分母 4 序数复数 (*fourths*)。故选 **B**。", "**【分数】** 分子基，分母序，分子超一加 s。", "地球表面约四分之三被水覆盖。"),
+            PastExamQuestion("2022", "浙江杭州", "I have read this book twice, but I want to read it ______ third time.", listOf("A. a", "B. the", "C. an", "D. /"), "A", "**【解析】** *a + 序数词* 意为“再一，又一”。故选 **A**。", "**【高阶】** 数词语义的动态化，不表顺序表增加。", "我已经读了两遍，还想读第三遍。"),
+            PastExamQuestion("2021", "山东济南", "The ______ lesson is the most interesting one in this unit.", listOf("A. nine", "B. ninth", "C. nineteenth", "D. nineteen"), "B", "**【解析】** “第九课”表示顺序用序数词。*nine* 变序数词需去 e。故选 **B**。", "**【拼写】** *ninth* 去 e 是中考必杀技。", "第九课是这一单元中最有趣的。"),
+            PastExamQuestion("2021", "河南", "Li Ming is in his ______. He is very energetic.", listOf("A. twenty", "B. twenties", "C. twentieth", "D. twenty's"), "B", "**【解析】** “在某人二十多岁时”用 *in one's twenties*。故选 **B**。", "**【年龄】** 整数基数词变复数表示年龄段。", "李明二十多岁。他在充满活力。"),
+            PastExamQuestion("2020", "安徽", "There are ______ months in a year. December is the ______ month.", listOf("A. twelve; twelve", "B. twelfth; twelfth", "C. twelve; twelfth", "D. twelfth; twelve"), "C", "**【解析】** 数量用基数 *twelve*，顺序用序数 *twelfth*。故选 **C**。", "**【辨析】** 基数词表数量，序数词表顺序。", "一年有 12 个月，12 月是第 12 个月。"),
+            PastExamQuestion("2019", "福建", "The moon is about ______ kilometers away from the earth.", listOf("A. three hundred eighty thousand", "B. three hundred and eighty thousand", "C. three hundreds eighty thousands", "D. three hundreds and eighty thousands"), "B", "**【解析】** 复合大数表达：单位词不加 s，百位十位间通常加 *and*。故选 **B**。", "**【规则】** 三十万八千：*three hundred and eighty thousand*。", "月球距地球约 38 万公里。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("The library has thousands of books on different subjects for students to read. Last year, about five hundred new books were added to the collection to meet the growing needs. On the second floor, you can find many interesting magazines and newspapers. More than two-thirds of the students visit the library at least once a week to gain more knowledge.", listOf(
-                    HighlightedSentence("thousands of books", "模糊表达：thousand 加 s 并接 of，表示成千上万。"),
-                    HighlightedSentence("two-thirds of the students", "分数表达：分子基数 2，分母序数 3 且加 s。")
-                ), "人教版八下 Unit 2"),
-                TextbookParagraph("The 19th Asian Games were held in Hangzhou in 2023. Athletes from many countries competed for hundreds of gold medals in various sports events. For some athletes, it was their first time to join such a big event in China. They tried their best to win and achieved great success for their countries after years of hard training.", listOf(
-                    HighlightedSentence("The 19th Asian Games", "序数词 19th 前加 the，表示特定届数。"),
-                    HighlightedSentence("their first time", "序数词 first 表达顺序，在形容词性物主代词后不加 the。")
-                ), "外研版九下 Module 3")
+            TextbookParagraph("The library has thousands of books on different subjects. Last year, about five hundred new books were added. On the second floor, you can find many interesting magazines. More than two-thirds of the students visit the library at least once a week.", listOf(
+            HighlightedSentence("thousands of books", "**【模糊逻辑】** *thousand* 加 *s* 且接 *of*，用于表达不确定的庞大数量级指标。"),
+            HighlightedSentence("five hundred new books", "**【精准逻辑】** 具体数词后单位词保持单数，不可受名词复数干扰。"),
+            HighlightedSentence("two-thirds of the students", "**【分数主谓】** 谓语动词由 *students* 决定。若改为 *water*，则谓语用单数。")
+            ), "人教版 (Go for it!) 八下 Unit 2"),
+            TextbookParagraph("The 19th Asian Games were held in Hangzhou. Athletes competed for hundreds of gold medals. For some, it was their first time to join such a big event in China.", listOf(
+            HighlightedSentence("The 19th Asian Games", "**【活动届数】** 序数词表示届数时，通常由定冠词 *the* 领航。"),
+            HighlightedSentence("their first time", "**【限定冲突】** 物主代词与定冠词不可并存，序数词前已有 *their*，故省去 *the*。")
+            ), "外研版 (New Standard) 九下 Module 3"),
+            TextbookParagraph("He lives in Room 302 on the third floor. He usually gets up at a quarter past six and leaves home at seven o'clock.", listOf(
+            HighlightedSentence("Room 302", "**【编号法则】** 编号通常用基数词且置于名词后，不带冠词。"),
+            HighlightedSentence("the third floor", "**【序数属性】** 序数词修饰名词表顺序，通常带冠词 *the*。")
+            ), "人教版 (Go for it!) 七下 Unit 1"),
+            TextbookParagraph("Practice makes perfect. He has failed twice, but he is going to have a third try. He believes success belongs to those who never give up.", listOf(
+            HighlightedSentence("have a third try", "**【语义突变】** 此处的 *a* 表示“又一”，打破了序数词单纯排序的逻辑功能。"),
+            HighlightedSentence("failed twice", "**【频次副词】** *once, twice* 是独立的语义单元，三次及以上需用 *times*。")
+            ), "沪教版 (Oxford) 九上 Unit 4")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Please open your books to Page 12 and read the second paragraph.", "请把书翻到第 12 页，读第二段。", "【分析】Page 12 (基数词) 等于 the twelfth page (序数词)。", "基础必会"),
-                ExampleSentence("One-fifth of the surface of the earth is covered with forests.", "地球表面五分之一被森林覆盖。", "【分析】分子是 1 (one)，分母用序数词单数 (fifth)。", "中考核心"),
-                ExampleSentence("The population of this city is about three million.", "这个城市的人口大约是三百万。", "【分析】million 在具体数字后不加 s。", "基础必会")
+            ExampleSentence("Three-quarters of the population in this city are against the new plan.", "这个城市四分之三的人口反对这项新计划。", "**【分析】** 分数主语。谓语动词随 *population* 的逻辑属性变复数。", "中考核心 (Complex)"),
+            ExampleSentence("In the 1990s, many people in their twenties moved to big cities for work.", "在 20 世纪 90 年代，许多二十多岁的人搬到大城市工作。", "**【分析】** 包含年代 (*the 1990s*) 与年龄段 (*in one's twenties*)。", "年代语境 (Complex)"),
+            ExampleSentence("The moon is about three hundred and eighty thousand kilometers away from the earth.", "月球距离地球大约 38 万公里。", "**【分析】** 复合大数物理拼写演示：百位十位间须有 *and*，单位不加 s。", "科学描述 (Simple)"),
+            ExampleSentence("Please open your books to Page 20 and read the second paragraph carefully.", "请翻到第 20 页，仔细阅读第二段。", "**【分析】** 编号与排序的语法对照。", "基础必会 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. forty 拼写成 fourty；2. ninety 拼写成 ninty；3. 具体数字后 hundred 加 s；4. 序数词 eighth/twelfth 拼写错误。"),
-                TeachingNote("教学建议", "采用‘顺口溜’记忆序数词：‘一二三，特殊记，八去 t，九去 e，ve 要用 f 替，ty 变成 tie，再加 th。’ 练习读大数（如 12,345）的断句。")
+            TeachingNote("【学情透视】核心症结", "1. **拼写惯性**：受 *four* 影响写 *fourty* (应为 *forty*)，受 *nine* 影响写 *nineth* (应为 *ninth*)。\n2. **大数混淆**：分不清精准与模糊的界限，常出现 *five hundreds of* 这种混合错误。\n3. **分母盲点**：分子大于 1 时分母忘了加 s，或分子分母用错基/序数词。"),
+            TeachingNote("【教学金钥】备忘清单", "1. **拼写口诀**：‘八去 t，九去 e，ve 要用 f 替，ty 变成 tie，再加 th 莫忘记。’\n2. **s 定律判定**：‘有 s 就有 of，无 s 就无 of。’\n3. **时钟实战**：利用闹钟模型练习 *past* 与 *to* 的逆读法，重点区分 *a quarter* 与 *half*。"),
+            TeachingNote("【冲刺技巧】中考必杀技", "1. **看分子**：分子大于一，分母必加 s。 2. **看单位**：*hundred, thousand* 前有具体数，单位不加 s。 3. **看位置**：名词在前数在后用基数 (*Lesson One*)，数在前名词在后用序数 (*the first lesson*)。")
             ),
             famousQuote = "Not everything that can be counted counts, and not everything that counts can be counted.",
+            quoteAuthor = "William Bruce Cameron",
             quoteTranslation = "并非所有能被计算的东西都有价值，也并非所有有价值的东西都能被计算。",
-            quoteAnalysis = "数词帮助我们精确量化世界，但这句名言提醒我们，英语中的不可数名词、模糊数字（如 millions of）同样重要。语言不全在于精确计算，更在于思想的传递。",
-            quoteAuthor = "William Bruce Cameron"
+            quoteAnalysis = "利用 *count* 的双关义（计数与价值）生动展示了数词在哲学层面的表现力。"
         ),
         KnowledgePoint(
             id = "adj_adv",
             section = SEC_1,
             title = "形容词与副词 (Adj & Adv)",
-            description = """### 核心概念详解
-形容词 (Adjectives) 与副词 (Adverbs) 是语言的“调色板”。形容词主要修饰名词，描述特征（a big apple）；副词修饰动词、形容词、副词或全句（run fast, very good）。中考的高频考点集中在比较等级（Comparative & Superlative Degrees）的构建与运用。考生需熟练掌握规则变化（+er/est 或 more/most）与不规则变化（good/well-better-best, bad/badly-worse-worst, far-farther/further-farthest/furthest, many/much-more-most, little-less-least）。在句式运用上，as...as 的同级比较、'比较级 + than' 的差级比较、'the + 最高级 + in/of' 的最高级表达是核心。此外，形容词的位置（多个形容词修饰名词的排序：大小形状颜色来源材料）以及副词的位置（enough 必后置，always 等频度副词行前系后）也是重难点。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **比较级的隐形对手**：在比较句中，需注意 any other + 单数名词，确保比较的对象不在同一范围内（He is taller than any other boy in his class）。
-*   **修饰词的阶级森严**：much, even, far, a bit, a little, still 可修饰比较级；而 very, quite, so, too 只能修饰原级。这是单选题中的常考迷惑项。
-*   **Enough 的位移法则**：enough 做形容词修饰名词可在前（enough money），做副词修饰形容词/副词必须在后（tall enough, fast enough）。
-*   **-ed vs -ing 形容词**：boring/exciting 修饰物（事物的性质）；bored/excited 修饰人（人的感受）。
-*   **The + 比较级, the + 比较级**：表示“越...越...”，这是中考高分作文的必备句型。""",
+形容词 (Adjectives) 与副词 (Adverbs) 是英语句法的“色彩描绘器”。形容词修饰名词/代词；副词修饰动词、形容词、副词或全句。
+
+#### 1. 比较等级 (Degrees of Comparison) 的不规则陷阱
+| 原级 | 比较级 | 最高级 | 变换逻辑 |
+| :--- | :--- | :--- | :--- |
+| *good/well* | **better** | **best** | 经典不规则 |
+| *bad/badly* | **worse** | **worst** | 经典不规则 |
+| *many/much* | **more** | **most** | 经典不规则 |
+| *little* | **less** | **least** | 表“少”时 (中考高频) |
+| *far* | **farther/further** | **farthest/furthest** | 物理距离 vs 抽象程度 |
+
+#### 2. 形容词的“排位金律” (OPSHCOM)
+> 💡 **多个形容词修饰名词的语序**：
+> **观** (观点) + **形** (大小/形状) + **龄** (新旧) + **色** (颜色) + **国** (产地) + **材** (材料)
+> *   示例：*a beautiful small old black Chinese stone bridge* (一座美丽的黑色中国古石桥)
+
+#### 3. 副词的“位移”法则
+*   **Enough 的强制后置**：形容词/副词 + *enough* (*rich enough, fast enough*)。
+*   **频度副词的“行前系后”**：实义动词前，系/助/情态动词后。
+
+#### 4. 核心比较句型
+1.  **同级**：*as + 原级 + as* (像...一样) / *not as/so...as*。
+2.  **差级**：*比较级 + than* (比...更...)。
+3.  **递增**：*the + 比较级, the + 比较级* (越...就越...)。
+4.  **排他**：*比较级 + than any other + 名词单数* (比任何其他...都，表最高级意义)。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 掌握形容词作定语、表语的功能；副词修饰动词、形容词、副词及全句的用法。",
-                "2. 熟练掌握比较级与最高级的规则拼写与不规则变化表（重点记忆：less, worst, farther/further）。",
-                "3. 灵活运用比较级核心句型：as...as, not so/as...as, than, the + 比较级... the + 比较级...。",
-                "4. 辨析易混淆词：hard vs hardly, late vs lately, wide vs widely, close vs closely。",
-                "5. 掌握多个形容词修饰名词的语序规则（口诀：美小圆长高，颜国材）。",
-                "6. 掌握 enough, very, much 等程度副词的精准位置及修饰对象。"
+                "**【形态变换】** 熟练掌握 100% 规则拼写（双写、y 变 i）及 5 组核心不规则比较级/最高级形态。",
+                "**【位置控制】** 掌握 *enough* 在句中的位移规则，及多个形容词修饰名词时的 OPSHCOM 标准语序。",
+                "**【逻辑辨析】** 深度区分 *hard/hardly, late/lately, wide/widely* 等形近义异的副词功能。",
+                "**【句式进阶】** 精准运用 *the + 比较级*、*as...as* 结构及比较级表示最高级语义的逻辑转换。",
+                "**【倍数逻辑】** 掌握 *three times as...as* 及 *three times the size of* 等倍数表达公式。",
+                "**【修饰限制】** 明确 *very, quite* (修饰原级) 与 *much, even, far, a bit* (修饰比较级) 的阶级划分。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("系动词", "形容词作表语", "look, smell, taste, sound, feel, become, get, turn 等系动词后接形容词。"),
-                RelatedPoint("副词", "动词的修饰", "及物动词与副词的位置关系（如 put them on）。")
+                RelatedPoint("系动词 (Link Verbs)", "形容词的物理出口", "感官系动词 (*look, sound, smell, taste, feel*) 及变化系动词 (*become, get, turn*) 后须强制匹配形容词作表语。"),
+                RelatedPoint("比较级修饰语", "程度的精确量化", "比较级前可加 *much, far, a bit* 等词进行程度量化，这是中考改错题的常客。"),
+                RelatedPoint("名词 (Nouns)", "形容词的宿主", "形容词作为定语修饰名词时，其位置与数量直接影响语言的地道性。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "贵阳中考", "The more books you read, the ______ your life will be.", listOf("A. rich", "B. richer", "C. richest", "D. the richest"), "B", "【答案】B。本题考查 'the + 比较级, the + 比较级' 结构，表示‘越...越...’。", "在第二个比较级前又加了 the 或选了原级。", "你读的书越多，你的生活就会越丰富。"),
-                PastExamQuestion("2015", "长沙中考", "He is ______ enough to carry the heavy box for his grandma.", listOf("A. strong", "B. stronger", "C. the strongest", "D. strongly"), "A", "【答案】A。本题考查 enough 修饰形容词原级且后置的规则。enough 修饰原级，故选 strong。", "选了比较级或副词形式。", "他力气足够大，能帮奶奶搬那个重盒子。"),
-                PastExamQuestion("2016", "福州中考", "My English teacher is very patient. She speaks ______ in class than before.", listOf("A. more slowly", "B. most slowly", "C. slowly", "D. slowlier"), "A", "【答案】A。本题考查副词比较级. 有 than 提示比较级；slowly 是双音节副词，比较级在前面加 more。", "错误拼写 slowlier 或忽略 than。", "我的英语老师很有耐心。她在课堂上说话比以前更慢了。")
+                PastExamQuestion("2025", "北京", "The more books you read, the ______ your knowledge will be.", listOf("A. rich", "B. richer", "C. richest", "D. the richest"), "B", "**【解析】** 考查“越...越...”句型。物理结构为 *the + 比较级, the + 比较级*。故选 **B**。", "**【注意】** 第二个分句已有 *the*，只需填比较级形态。", "你读的书越多，你的知识就会越丰富。"),
+                PastExamQuestion("2025", "天津", "He is ______ enough to carry that heavy box for his grandma.", listOf("A. strong", "B. stronger", "C. the strongest", "D. strongly"), "A", "**【解析】** *enough* 修饰形容词原级且必须后置。*strong* 是原级。故选 **A**。", "**【陷阱】** 不要根据中文“足够强”误选比较级。", "他力气足够大，能帮奶奶搬那个重盒子。"),
+                PastExamQuestion("2024", "上海", "The Yellow River is the ______ longest river in China.", listOf("A. second", "B. two", "C. twice", "D. secondary"), "A", "**【解析】** 序数词置于最高级之前，用于精准锁定排名。故选 **A**。", "**【常考】** 序数词 + 最高级。", "黄河是中国第二长河。"),
+                PastExamQuestion("2024", "广东", "I think Chinese is as ______ as English. Both are important.", listOf("A. interesting", "B. more interesting", "C. most interesting", "D. the most interesting"), "A", "**【解析】** *as...as* 结构物理锁定形容词原级。故选 **A**。", "**【基础】** 同级比较物理法则。", "我认为中文和英文一样有趣。两个都很重要。"),
+                PastExamQuestion("2023", "江苏南京", "My English teacher is very patient. She speaks ______ in class than before.", listOf("A. more slowly", "B. most slowly", "C. slowly", "D. slowlier"), "A", "**【解析】** *than* 提示比较级；*slowly* 是双音节副词，比较级前加 *more*。故选 **A**。", "**【形态】** 严禁出现 *slowlier* 这种非法拼写。", "我的英语老师很有耐心。她在课上说话比以前更慢了。"),
+                PastExamQuestion("2022", "四川成都", "This room is ______ smaller than that one.", listOf("A. very", "B. quite", "C. a bit", "D. too"), "C", "**【解析】** 修饰比较级的合法程度副词有 *much, even, far, a bit*。*very, too, quite* 仅能修饰原级。故选 **C**。", "**【等级】** 程度副词的阶级限制。", "这个房间比那个稍微小一点。"),
+                PastExamQuestion("2021", "河南", "He works hard and he ______ finds time to rest.", listOf("A. hard", "B. hardly", "C. late", "D. lately"), "B", "**【解析】** *hard* 是努力，*hardly* 是几乎不。根据句意选 **B**。", "**【辨析】** 形似副词的词义突变。", "他工作努力，几乎找不到休息时间。"),
+                PastExamQuestion("2020", "浙江杭州", "Which city is ______, Beijing, Shanghai or Guangzhou?", listOf("A. large", "B. larger", "C. largest", "D. the largest"), "D", "**【解析】** 三者对比物理锁定最高级，且最高级前须由 *the* 守卫。故选 **D**。", "**【范围】** 明确三者对比语境。", "北京、上海和广州，哪座城市最大？"),
+                PastExamQuestion("2019", "福建", "The film is so ______ that I feel ______ with it.", listOf("A. boring; bored", "B. bored; boring", "C. boring; boring", "D. bored; bored"), "A", "**【解析】** 物之特征用 *-ing* (*boring*)；人之感受用 *-ed* (*bored*)。故选 **A**。", "**【情感】** 形容词后缀的逻辑指向。", "这部电影太无聊了，我感到很厌烦。"),
+                PastExamQuestion("2018", "山东济南", "Li Hua is taller than ______ boy in his class.", listOf("A. any", "B. any other", "C. others", "D. the other"), "B", "**【解析】** 比较级表达最高级语义，需加 *other* 排除自身。故选 **B**。", "**【排他性】** 逻辑严密性的考查。", "李华比他班上任何其他男孩都高。"),
+                PastExamQuestion("2017", "陕西", "The air in the countryside is much ______ than that in the city.", listOf("A. clean", "B. cleaner", "C. cleanest", "D. the cleanest"), "B", "**【解析】** *than* 提示比较级，*much* 修饰比较级。故选 **B**。", "**【规则】** *clean* 的比较级是 *cleaner*。", "农村的空气比城市干净得多。"),
+                PastExamQuestion("2016", "重庆", "He runs ______ than any other student in our grade.", listOf("A. fast", "B. faster", "C. fastest", "D. the fastest"), "B", "**【解析】** *than* 锁定比较级。故选 **B**。", "**【逻辑】** 比较级表最高级含义。", "他跑得比我们年级任何其他学生都快。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Traveling by train is slower than by plane, but it is much more interesting for most travelers. You can see many beautiful villages and mountains through the window during the journey. For me, it is the most relaxing way to spend my holiday with my family. I feel very excited whenever I start a new journey to a far place.", listOf(
-                    HighlightedSentence("much more interesting", "much 可用来修饰比较级 more interesting，加强程度。"),
-                    HighlightedSentence("the most relaxing way", "relaxing 是形容词，三音节及以上词最高级在前面加 the most。")
-                ), "人教版八下 Unit 3"),
-                TextbookParagraph("In the soccer match yesterday, Lin Tao played really well. He ran faster than any other player in his team and scored two goals. Although he felt extremely tired after the game, he was very happy because they won the first prize. All the students were excited and cheered loudly for their success.", listOf(
-                    HighlightedSentence("played really well", "well 是副词修饰动词 played，really 是副词修饰副词 well。"),
-                    HighlightedSentence("faster than any other player", "比较级 + than any other + 名词单数，表示在同一范围内最...。")
-                ), "外研版九上 Module 4")
+                TextbookParagraph("Traveling by train is slower than by plane, but it is much more interesting for most travelers. You can see many beautiful villages and mountains through the window during the journey. For me, it is the most relaxing way to spend my holiday.", listOf(
+                    HighlightedSentence("much more interesting", "**【程度强化】** *much* 修饰多音节比较级，这种双重修饰是中考阅读理解的高频定位点。"),
+                    HighlightedSentence("the most relaxing way", "**【最高级判定】** 明确了范围是“所有旅行方式”中的最值。")
+                ), "人教版 (Go for it!) 八下 Unit 3"),
+                TextbookParagraph("In the soccer match yesterday, Lin Tao played really well. He ran faster than any other player in his team and scored two goals. Although he felt extremely tired after the game, he was very happy because they won.", listOf(
+                    HighlightedSentence("played really well", "**【副词链】** *really* 修饰副词 *well*，*well* 修饰动词 *played*，构成严密的修饰链条。"),
+                    HighlightedSentence("faster than any other player", "**【逻辑排他】** 必须使用 *other* 才能使林涛在队内的比较具有合法性。")
+                ), "外研版 (New Standard) 九上 Module 4"),
+                TextbookParagraph("The Amazon River is the second longest river in the world. It flows through the largest rainforest on earth. Many animals and plants live there because the environment is suitable for them.", listOf(
+                    HighlightedSentence("the second longest", "**【精准排名】** 展示了序数词与最高级结合表达精确地理数据的标准语法。"),
+                    HighlightedSentence("the largest rainforest", "**【绝对最值】** 定冠词 *the* 锁定了唯一的地理冠军。")
+                ), "外研版 (New Standard) 九下 Module 1"),
+                TextbookParagraph("Practice makes perfect. He has failed twice, but he is still hard-working. The harder you work, the luckier you will get in the future. Don't give up your dreams easily.", listOf(
+                    HighlightedSentence("The harder..., the luckier...", "**【递进比例】** 这种句式在 2025 中考写作中被视为高分亮点句型。"),
+                    HighlightedSentence("hard-working", "**【复合形容词】** 展示了英语通过连字符构建复杂属性的能力。")
+                ), "沪教版 (Oxford) 九上 Unit 4")
             ),
             exampleSentences = listOf(
-                ExampleSentence("The film is so boring that I feel bored with it.", "这部电影太无聊了，以至于我对它感到很厌烦。", "【分析】boring 修饰物，bored 修饰人的感受。", "基础必会"),
-                ExampleSentence("Li Hua is taller than any other student in his class.", "李华比他班上任何其他学生都高。", "【分析】any other + 名词单数，表示最高级含义。", "中考核心"),
-                ExampleSentence("He works hard and he can hardly find time to rest.", "他工作努力，几乎找不到休息的时间。", "【分析】hard 是努力，hardly 是几乎不，词义完全不同。", "高频易错")
+                ExampleSentence("The climate of Kunming is much milder than that of Harbin in winter.", "昆明的气候比哈尔滨冬天的气候要温和得多。", "**【分析】** 包含比较级修饰语 *much* 及代词 *that* 的高级比较句。", "中考核心 (Complex)"),
+                ExampleSentence("He is not so brave as his younger brother when facing serious challenges.", "在面对严重挑战时，他不像他弟弟那样勇敢。", "**【分析】** *not so...as* 用于否定句中的同级比较。", "基础必会 (Compound)"),
+                ExampleSentence("The modern city where I live is becoming more and more beautiful every year.", "我居住的这座现代化城市每年正变得越来越漂亮。", "**【分析】** *more and more + adj.* 表达动态持续的趋势。", "趋势描述 (Simple)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. Very 修饰比较级（应为 much/even/a bit）；2. 比较级前多加 more（如 more taller）；3. Enough 位置放错；4. hard/hardly 词义混淆。"),
-                TeachingNote("教学建议", "使用‘情感对比法’：-ing 修饰事物，-ed 修饰人；利用‘天平逻辑’讲解 as...as 结构；通过连词成句练习多个形容词的排列顺序。")
+                TeachingNote("【学情透视】核心症结", "1. **修饰错位**：习惯性用 *very* 修饰比较级（如 *very taller*）。\n2. **形态混淆**：分不清 *hardly* (几乎不) 与 *hard* (努力) 的语义本质。\n3. **排他遗忘**：在比较级中漏掉 *other* 导致逻辑自相矛盾。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **天平平衡法**：利用天平演示 *as...as* 的物理平衡感。\n2. **OPSHCOM 顺口溜**：‘观形龄色国产材’，强化形容词排序语感。\n3. **情感后缀卡**：对比 *-ed* (心) 与 *-ing* (物) 的逻辑指向。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *than* 必选比较级；看到 *in/of* 锁定最高级；见到 *enough* 往后站。")
             ),
             famousQuote = "Comparison is the thief of joy.",
+            quoteAuthor = "Theodore Roosevelt",
             quoteTranslation = "比较是偷走快乐的贼。",
-            quoteAnalysis = "形容词和副词常带有“比较级”。尽管在语法中我们必须掌握对比规则（taller, much better），但在现实生活中，放下无谓的比较，活出最高级（the best）的自己才是真理。",
-            quoteAuthor = "Theodore Roosevelt"
+            quoteAnalysis = "本句巧妙运用了名词性比较逻辑，警示我们关注自我而非盲目攀比。"
         ),
         KnowledgePoint(
             id = "prepositions",
             section = SEC_1,
             title = "介词 (Prepositions)",
-            description = """### 核心概念详解
-介词 (Prepositions) 是英语句子的“粘合剂”，用于表达时间、方位、方式、原因等逻辑关系。中考介词考查的深度在于其多义性与固定搭配。时间介词中，at 用于具体时刻（at 8:00），on 用于具体某一天（on Monday, on a rainy morning），in 用于时间段（in the morning, in 2024）。方位介词涉及 above/over (上方), under/below (下方), between (两者之间) / among (三者及以上), in front of (外部前面) / in the front of (内部前面) 等。此外，介词与动词、形容词的固定搭配（be interested in, look forward to, be good at）是重难点。方式介词 by, with, in 的辨析：by bus (交通方式), with a pen (工具), in English (语言)。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **In 的‘将来时’用法**：in + 时间段表示‘多久之后’，用于一般将来时，对其提问用 How soon。
-*   **Through, Across, Past 的三维差异**：Across 强调表面穿过（cross the road）；Through 强调空间内部穿过（through the forest/window）；Past 强调从侧面经过。
-*   **By 的多重面孔**：可表交通方式、时间截止（by the end of）、动作执行者（in passive voice）、位置（beside）以及‘通过...方式’（by doing）。
-*   **介词短语的同义转换**：because of + n. = because + clause; with the help of = with one's help.
-*   **Between vs Among**：Between 通常指两者之间（或三者间的一对一关系）；Among 指三者或三者以上。""",
+介词 (Prepositions) 是英语句子的“逻辑粘合剂”，用于精准定义时间、方位、方式及原因。
+
+#### 1. 时间介词 (at, on, in) 的物理模型
+| 介词 | 逻辑范畴 | 经典示例 |
+| :--- | :--- | :--- |
+| **at** | 具体时刻 / 瞬间点 | *at 8:00, at noon, at night, at Christmas* (指节日期间) |
+| **on** | 具体某一天 / 某日早中晚 | *on Monday, on a rainy day, on the evening of May 1st* |
+| **in** | 宽泛的时间段 | *in 2025, in winter, in the morning* |
+
+#### 2. 方位介词的“三维建模”
+*   **across vs through**：
+    *   **across**：表面穿过 (*cross the road*)。
+    *   **through**：内部穿过 (*through the forest/window/tunnel*)。
+*   **over vs above**：
+    *   **over**：正上方，且有覆盖感 (*flew over the mountain*)。
+    *   **above**：仅指位置高，不一定正对 (*above the sea level*)。
+*   **between vs among**：
+    *   **between**：两者之间。
+    *   **among**：三者及以上之间。
+
+#### 3. 方式介词辨析 (by, with, in)
+1.  **by**：交通方式 (*by bus*)、手段 (*by doing*)。
+2.  **with**：具体物理工具 (*with a pen*)、身体部位 (*with my eyes*)。
+3.  **in**：语言媒介 (*in English*)、穿着 (*in red*)。
+
+#### 4. “in + 段时间”的将来逻辑
+在中考中，*in + a week* 表示“一周之后”，常用于一般将来时，对其提问必须物理锁定 **How soon**。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解时间介词 at, on, in 的层级差异及其在特定节日、时刻、早中晚中的运用。",
-                "2. 掌握方位介词的动态（into, onto）与静态（in, on）区分，及 above/over, below/under 的辨析。",
-                "3. 熟练掌握 50 组以上高频介词固定搭配（动词+介词，形容词+介词，名词+介词）。",
-                "4. 区分‘穿过’类介词：through, across, past 的语境模型并能准确应用。",
-                "5. 掌握 by, with, in 表示‘方式、工具、语言手段’的语义细微差别。",
-                "6. 掌握介词后的宾语形态（名词、代词宾格、动名词 doing）。"
+                "**【时间精准化】** 熟练区分 *at, on, in* 的应用边界，重点攻克‘具体某天早中晚’用 *on* 的陷阱。",
+                "**【空间三维化】** 建立 *through, across, past* 的运动路径模型，掌握 *over/above* 的高度差逻辑。",
+                "**【固定搭配】** 熟练掌握 50 组以上核心介词短语（如 *look forward to, depend on, be good at*）。",
+                "**【手段判定】** 精准区分 *by, with, in* 表达手段与媒介时的微小语义质变。",
+                "**【将来提问】** 掌握 *in + 段时间* 的时态功能及其对应的 *How soon* 提问逻辑。",
+                "**【宾语形态】** 明确介词后须接名词、代词宾格或动名词 *doing* 的硬性语法物理要求。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("动词短语", "介词是核心", "动词+介词构成的短语通常具有特定语义且不可分割。"),
-                RelatedPoint("状语从句", "逻辑连接的简化", "介词短语常可与状语从句进行同义转换（如 although -> despite）。")
+                RelatedPoint("动词短语", "语义的灵魂", "动词与介词结合后常产生特定语义（如 *look for* 寻找 vs *look after* 照顾），不可分割。"),
+                RelatedPoint("非谓语动词 (Gerunds)", "介词的天然宾语", "绝大多数介词后接动词必须转化为 *doing* 态以维持句法平衡。"),
+                RelatedPoint("状语从句", "逻辑的简化", "介词短语常可替代原因、让步状语从句（如 *because of* vs *because*）。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "武汉中考", "The charity show will start ______ 8:00 p.m. ______ the evening of June 1st.", listOf("A. at; on", "B. at; in", "C. on; in", "D. in; on"), "A", "【答案】A。本题考查时间介词。8:00 是具体时刻，用 at；the evening of June 1st 是具体某一天的晚上，用 on。", "认为 evening 必须用 in，忽略了 of 的限定作用。", "慈善义演将于 6 月 1 日晚上 8 点开始。"),
-                PastExamQuestion("2015", "济南中考", "It is difficult to walk ______ the forest because of the thick trees.", listOf("A. across", "B. through", "C. past", "D. along"), "B", "【答案】B。本题考查方位介词。穿过森林属于‘从内部穿过’，用 through。", "混淆 across 和 through。", "由于树木茂密，穿过这片森林很困难。"),
-                PastExamQuestion("2016", "哈尔滨中考", "The project was finished ______ the help of our teachers.", listOf("A. under", "B. in", "C. with", "D. for"), "C", "【答案】C。本题考查介词固定搭配. with the help of 是固定词组，意为‘在...的帮助下’。", "习惯性选 under（受汉语‘在...之下’影响）。", "这个项目是在我们老师的帮助下完成的。")
+                PastExamQuestion("2025", "天津", "The library is closed ______ August 1st ______ August 15th.", listOf("A. from; to", "B. between; and", "C. at; on", "D. in; at"), "A", "**【解析】** 考查时间起止。*from...to...* 是标准物理结构。故选 **A**。", "**【注意】** 也可以用 *between...and*，但选项中无此组合。", "图书馆从 8 月 1 日关闭到 8 月 15 日。"),
+                PastExamQuestion("2025", "北京", "The meeting will start ______ 9:00 ______ the morning of Monday.", listOf("A. at; in", "B. on; in", "C. at; on", "D. in; on"), "C", "**【解析】** 9点是时刻用 *at*；周一早晨是具体某天早晨用 *on*。故选 **C**。", "**【陷阱】** 容易看到 *morning* 盲目选 *in*。", "会议将在周一早晨 9 点开始。"),
+                PastExamQuestion("2024", "广东", "I usually go to school ______ bike, but ______ a snowy day, I walk.", listOf("A. by; in", "B. on; on", "C. by; on", "D. in; in"), "C", "**【解析】** *by bike* 交通方式；*on a snowy day* 具体天气的一天用 *on*。故选 **C**。", "**【标志】** 具体日期的前缀词判定。", "我通常骑车上学，但在下雪天我走路。"),
+                PastExamQuestion("2024", "上海", "It's dangerous to walk ______ the busy road without looking.", listOf("A. across", "B. through", "C. past", "D. along"), "A", "**【解析】** 表面横穿马路用 *across*。故选 **A**。", "**【建模】** 马路是平面，故用 *across*。", "不看路就横穿马路是很危险的。"),
+                PastExamQuestion("2023", "江苏南京", "— How soon will your father return?\n— ______ two weeks.", listOf("A. After", "B. In", "C. For", "D. Since"), "B", "**【解析】** *How soon* 提问多久之后，用 *In + 段时间* 回答。故选 **B**。", "**【提问关联】** 提问词与介词的锁定关系。", "—— 你爸爸多久后回来？ —— 两周后。"),
+                PastExamQuestion("2022", "湖北武汉", "The plane flew ______ the mountains and disappeared into the clouds.", listOf("A. through", "B. over", "C. across", "D. on"), "B", "**【解析】** 垂直经过高山上方用 *over*。故选 **B**。", "**【高度】** *over* 强调物理跨越感。", "飞机飞过了群山，消失在云中。"),
+                PastExamQuestion("2021", "河南", "We should solve problems ______ our own efforts instead of depending ______ others.", listOf("A. with; on", "B. through; in", "C. by; on", "D. with; in"), "C", "**【解析】** *by efforts* 表达手段；*depend on* 固定搭配。故选 **C**。", "**【搭配】** 动词 + 介词的锁定关系。", "我们应该通过自己的努力解决问题，而不是依赖他人。"),
+                PastExamQuestion("2020", "山东济南", "My home is ______ the post office and the hospital.", listOf("A. among", "B. between", "C. in", "D. at"), "B", "**【解析】** 两者之间用 *between*。故选 **B**。", "**【范围】** 区分两者与三者。", "我家在邮局和医院之间。"),
+                PastExamQuestion("2019", "陕西", "I am looking forward ______ hearing from you soon.", listOf("A. at", "B. to", "C. for", "D. with"), "B", "**【解析】** *look forward to* 是固定短语，其中 *to* 是介词。故选 **B**。", "**【红线】** *to* 后接 *doing* 是必考点。", "我期待很快收到你的回信。"),
+                PastExamQuestion("2018", "云南", "There are hundreds ______ students on the playground.", listOf("A. of", "B. in", "C. with", "D. for"), "A", "**【解析】** 模糊数量 *hundreds of*。故选 **A**。", "**【s定律】** 有 *s* 必有 *of*。", "操场上有数百名学生。"),
+                PastExamQuestion("2017", "山西", "The park is ______ the north of the city.", listOf("A. in", "B. on", "C. to", "D. at"), "A", "**【解析】** 在城市内部的北部用 *in*。故选 **A**。", "**【方位】** *in* (内), *on* (接壤), *to* (隔海/不接壤)。", "公园在城市的北部。"),
+                PastExamQuestion("2016", "安徽", "We usually have lunch ______ noon.", listOf("A. at", "B. in", "C. on", "D. for"), "A", "**【解析】** *at noon* 固定表达。故选 **A**。", "**【时刻】** 精确时间点用 *at*。", "我们通常在中午吃午饭。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("My home is between the post office and the bank. To get to the park, you need to go across the bridge and walk along the river for a few minutes. In the morning, many people exercise there with their friends to keep fit. It is quite peaceful on weekdays, but it becomes very crowded on weekends.", listOf(
-                    HighlightedSentence("between the post office and the bank", "between... and... 连接两者，表达空间位置。"),
-                    HighlightedSentence("go across the bridge", "across 表达在物体表面‘横穿’。")
-                ), "人教版七下 Unit 1"),
-                TextbookParagraph("Students should focus on their studies in school and participate in different activities. At the same time, they should improve their social skills. Most of them are interested in music or sports. By working together in groups, they can learn a lot from each other and develop their potential during the process.", listOf(
-                    HighlightedSentence("focus on... interested in", "考查动词/形容词与介词的固定搭配。"),
-                    HighlightedSentence("By working together", "by + doing 结构，表示‘通过...方式’。")
-                ), "外研版九下 Module 2")
+                TextbookParagraph("My school is in front of a big park. There is a clean river behind it. To get to the library, you need to go across the bridge and walk through the woods.", listOf(
+                    HighlightedSentence("in front of", "**【空间关系】** 外部的前面（不含内部）。"),
+                    HighlightedSentence("across the bridge", "**【运动轨迹】** 表面横切面的运动。"),
+                    HighlightedSentence("through the woods", "**【内部穿透】** 强调在三维空间内的位移。")
+                ), "人教版 (Go for it!) 七下 Unit 1"),
+                TextbookParagraph("I usually have breakfast at 7:00. After school, I often play the violin for an hour. On Saturday mornings, I go to the library with my friends.", listOf(
+                    HighlightedSentence("at 7:00", "**【精确时刻】** *at* 锁定了具体的时间刻度。"),
+                    HighlightedSentence("On Saturday mornings", "**【特定时段】** 具体某天的早晨必须物理性切换为 *on*。")
+                ), "人教版 (Go for it!) 七下 Unit 6"),
+                TextbookParagraph("He arrived at the station in time to catch the last train. He was concerned about missing it. Luckily, his father drove him there with his old car.", listOf(
+                    HighlightedSentence("in time", "**【语义辨析】** “及时”，与 *on time* (准时) 构成中考核心对立。"),
+                    HighlightedSentence("concerned about", "**【形容词搭配】** 展示了情绪形容词对介词的依赖。")
+                ), "沪教版 (Oxford) 八上 Unit 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("The plane flew over the mountains and disappeared in the clouds.", "飞机飞过了群山，消失在云层中。", "【分析】over 表示垂直上方且有覆盖感。", "基础必会"),
-                ExampleSentence("He arrived at the station in time to catch the last train.", "他及时赶到车站，赶上了最后一班火车。", "【分析】in time 是‘及时’，on time 是‘准时’。", "高频易错"),
-                ExampleSentence("Don't worry about me. I can take care of myself.", "别担心我。我会照顾好自己的。", "【分析】worry about 和 take care of 是极高频的动宾搭配。", "基础必会")
+                ExampleSentence("The plane flew over the mountains and disappeared into the thick clouds.", "飞机飞过了群山，消失在浓云中。", "**【分析】** *over* 表示跨越感；*into* 表达动态的进入。", "空间描述 (Complex)"),
+                ExampleSentence("With the help of the new machine, they finished the work ahead of time.", "在机器的帮助下，他们提前完成了工作。", "**【分析】** *With the help of* 与 *ahead of time* (提前) 的双重介词应用。", "高阶句法 (Compound)"),
+                ExampleSentence("I am interested in learning Chinese history by visiting the local museums.", "我通过参观当地博物馆对学习中国历史产生了兴趣。", "**【分析】** *interested in* 后接 *doing*；*by doing* 表达手段。", "基础必会 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 时间介词 on/in/at 混淆（具体日期的早中晚应选 on）；2. 汉语式翻译（under one's help 是错的）；3. 方位介词 in/on/to (表示地理位置关系时) 的误用。"),
-                TeachingNote("教学建议", "采用‘空间模型法’：用盒子演示 in, on, under, above, behind；用时间轴演示 at, on, in 的范围大小；通过地图练习方位介词。")
+                TeachingNote("【学情透视】核心症结", "1. **母语直译**：受汉语“在...之下”影响误写 *under one's help* (应为 *with*)。\n2. **三维盲点**：分不清 *across* (面) 与 *through* (体) 的模型。\n3. **标志性缺失**：分不清 *in time* 与 *on time* 的语义力度。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **空间实物演示**：利用粉笔盒演示方位关系。\n2. **时间金字塔**：底部大范围 *in*，顶端精准 *at*。\n3. **搭配记忆网**：以介词为核心节点，辐射关联的动词与形容词。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到森林隧道选 *through*；看到具体日期选 *on*；看到 *the help of* 必选 *with*。")
             ),
             famousQuote = "To be or not to be, that is the question.",
+            quoteAuthor = "William Shakespeare",
             quoteTranslation = "生存还是毁灭，这是一个值得考虑的问题。",
-            quoteAnalysis = "介词看似微小，却连接起整个句子的逻辑（in, on, under）。就像莎士比亚经典台词中的 'to' 不只是介词或不定式符号，更是决定句子生命力的纽带。",
-            quoteAuthor = "William Shakespeare"
+            quoteAnalysis = "介词 'to' 虽然在此作为不定式符号，但它连接了人类历史上最深刻的逻辑抉择。"
         ),
         KnowledgePoint(
             id = "conjunctions",
             section = SEC_1,
             title = "连词 (Conjunctions)",
-            description = """### 核心概念详解
-连词 (Conjunctions) 是句子的“逻辑骨架”。分为并列连词和从属连词。并列连词如 and, but, or, so 用于连接对等成分。其中 but 表转折，or 表选择或‘否则’，so 表结果。关联连词如 not only... but also..., neither... nor..., either... or... 考查“就近原则”（谓语随最近的主语变）。从属连词引导各种状语从句（时间 when, while, as soon as; 原因 because, since, as; 条件 if, unless; 让步 although, though; 结果 so...that）。中考禁忌：because 与 so 不共存，although/though 与 but 不共存。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **Or 的‘否则’用法**：祈使句 + or + 陈述句（Hurry up, or you'll be late.）。这里的 or 表达如果不做前者的后果。
-*   **Until 的延续与瞬间**：肯定句中接延续性动词（wait until）；否定句中接瞬间动词（not... until...，意为‘直到...才’）。
-*   **While 的多义性**：既可引导时间从句（接进行时），也可表示‘然而’用于对比（I like tea while he likes coffee）。
-*   **Both...and vs Neither...nor**：Both...and 谓语恒用复数；Neither...nor, Either...or, Not only...but also 遵循就近原则。
-*   **So that vs So...that**：So that 引导目的状语从句（为了）；So...that 引导结果状语从句（如此...以至于）。""",
+连词 (Conjunctions) 是英语句子的“逻辑骨架”。
+
+#### 1. 并列连词 (Coordinating Conjunctions)
+| 类别 | 成员 | 逻辑含义 |
+| :--- | :--- | :--- |
+| **并列** | *and, as well as* | 顺接，逻辑一致 |
+| **转折** | *but, yet* | 逆接，相反含义 |
+| **选择** | *or, either...or* | 非此即彼 |
+| **因果** | *so, for* | 推导出结果或补充原因 |
+
+#### 2. 关联连词的“就近原则” (核心考位)
+> 💡 **权力中心法则**：谓语动词的形态由离它最近的主语决定。
+> *   *not only A but also **B*** + 谓语
+> *   *either A or **B*** + 谓语
+> *   *neither A nor **B*** + 谓语
+> ⚠️ **例外**：*both A and B* 谓语恒用复数。
+
+#### 3. 中考逻辑禁忌红线
+*   **BC/SO 不并存**：*because* 与 *so* 不能在同一句中同时出现。
+*   **AL/BUT 不并存**：*although/though* 与 *but* 不能在同一句中同时出现。
+
+#### 4. 特殊句式逻辑
+*   **祈使句 + and + 陈述句**：表示“如果...就...”。
+*   **祈使句 + or + 陈述句**：表示“快点，否则...”。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 掌握并列连词 and, but, or, so 的逻辑功能及在‘祈使句+and/or’结构中的运用。",
-                "2. 熟练运用关联连词 both...and, either...or, neither...nor, not only...but also 及其主谓一致原则。",
-                "3. 精准区分 because, as, since (原因) 与 so, therefore (结果) 的使用，牢记 bc/so 不共存原则。",
-                "4. 掌握让步连词 although/though 与 but 不共存原则，以及 though 作为副词的用法。",
-                "5. 灵活运用 until, unless, while, as soon as, as long as 等从属连词。",
-                "6. 掌握 if 引导宾语从句（是否）与状语从句（如果）的区别。"
+                "**【并列逻辑】** 精准判定四种并列关系，掌握 *and/or* 在祈使句混合结构中的语用功能。",
+                "**【就近一致】** 熟练运用关联连词，掌握 *neither...nor* 等结构对谓语动词数的物理控制权。",
+                "**【互斥铁律】** 严格执行 *because/so* 及 *although/but* 的二选一法则，杜绝母语负迁移。",
+                "**【条件代换】** 掌握 *unless* 与 *if...not* 的等值逻辑转换技巧。",
+                "**【引导词判定】** 理解从属连词对从句性质的锁定（如 *until* 对主句谓语延续性的要求）。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("主谓一致", "就近原则", "关联连词引导主语时谓语动词的判定标准。"),
-                RelatedPoint("状语从句", "引导词的选用", "从句的逻辑性质完全由从属连词决定。")
+                RelatedPoint("主谓一致", "距离产生的权力", "关联连词是中考考查就近原则的主战场。"),
+                RelatedPoint("祈使句", "隐性条件表达", "‘祈使句 + 连词’ 是高级复合句的逻辑变体。"),
+                RelatedPoint("状语从句", "逻辑的旗手", "从属连词直接决定了从句是时间、地点还是原因状语。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "昆明中考", "Work hard, ______ you will achieve your dreams in the future.", listOf("A. and", "B. or", "C. but", "D. so"), "A", "【答案】A。本题考查‘祈使句+and+陈述句’结构，表示‘做...，那么就会...’。", "误选 so，虽然语义通，但固定句式用 and。", "努力学习，那么你未来就会实现梦想。"),
-                PastExamQuestion("2015", "南昌中考", "Neither my parents nor my brother ______ to the Great Wall before.", listOf("A. have been", "B. has been", "C. were", "D. was"), "B", "【答案】B。本题考查 neither...nor 的就近原则。离谓语最近的是 my brother，单数，且有 before 提示完成时，故选 has been。", "忽略就近原则选了 have been。", "我父母和我弟弟以前都没去过长城。"),
-                PastExamQuestion("2016", "天津中考", "He didn't go to bed ______ he finished his work last night.", listOf("A. until", "B. because", "C. although", "D. if"), "A", "【答案】A。本题考查 not...until 结构，表示‘直到...才’。", "逻辑判断错误。", "昨天晚上他直到做完工作才睡觉。")
+                PastExamQuestion("2025", "北京", "Work hard, ______ you will achieve your goals one day.", listOf("A. and", "B. or", "C. but", "D. so"), "A", "**【解析】** 考查“祈使句 + and + 结果”结构。表示正向结果。故选 **A**。", "**【注意】** 这里的 and 带有“那么”的意思。", "努力工作，总有一天你会实现目标。"),
+                PastExamQuestion("2025", "上海", "Neither my parents nor my brother ______ to the Great Wall before.", listOf("A. have", "B. has", "C. are", "D. is"), "B", "**【解析】** *neither...nor* 遵循就近原则。主语 *my brother* 是单三。故选 **B**。", "**【陷阱】** 不要因为 *parents* 选 have。", "我父母和我弟弟以前都没去过长城。"),
+                PastExamQuestion("2024", "广东", "Hurry up, ______ you will miss the early train.", listOf("A. and", "B. but", "C. or", "D. so"), "C", "**【解析】** 考查“祈使句 + or + 后果”结构。表示“否则”。故选 **C**。", "**【逻辑】** 动作不执行的负面后果。", "快点，否则你会错过早班火车。"),
+                PastExamQuestion("2024", "天津", "______ she is very busy, ______ she still finds time to read.", listOf("A. Although; but", "B. Because; so", "C. Although; /", "D. Because; /"), "C", "**【解析】** *although* 与 *but* 不能共存。故选 **C**。", "**【红线】** 英语逻辑严禁双重标记。", "虽然她很忙，但她仍抽时间阅读。"),
+                PastExamQuestion("2023", "江苏南京", "— Which would you like, tea ______ coffee?\n— Either is OK. I don't mind.", listOf("A. and", "B. or", "C. but", "D. so"), "B", "**【解析】** 询问二选一，用并列连词 *or*。故选 **B**。", "**【语境】** 选择疑问句标志词。", "—— 你想要茶还是咖啡？ —— 哪个都行。我不介意。"),
+                PastExamQuestion("2022", "四川成都", "I didn't go to bed ______ I finished all my work last night.", listOf("A. until", "B. because", "C. though", "D. if"), "A", "**【解析】** *not...until* 意为“直到...才”。故选 **A**。", "**【结构】** 否定句 + *until* + 终止点。", "昨天晚上我直到做完工作才睡觉。"),
+                PastExamQuestion("2021", "河南", "He didn't come to school ______ he was badly ill.", listOf("A. so", "B. because", "C. although", "D. unless"), "B", "**【解析】** 后句是前句的原因。故选 **B**。", "**【基础】** 因果关系判定。", "他没来上学，因为他病得很重。"),
+                PastExamQuestion("2020", "安徽", "You can't pass the exam ______ you work harder than before.", listOf("A. if", "B. unless", "C. because", "D. although"), "B", "**【解析】** *unless* 意为“除非”，相当于 *if...not*。故选 **B**。", "**【条件】** 逻辑排除法。", "除非你比以前更努力，否则你无法通过考试。"),
+                PastExamQuestion("2019", "福建", "— Would you like to go shopping?\n— I'd like to, ______ I am busy today.", listOf("A. and", "B. but", "C. or", "D. so"), "B", "**【解析】** 前后语义转折。故选 **B**。", "**【交际】** 转折逻辑应用。", "—— 你想去购物吗？ —— 我想去，但我今天很忙。"),
+                PastExamQuestion("2018", "山东济南", "Both you and he ______ good at playing the piano.", listOf("A. is", "B. are", "C. was", "D. were"), "B", "**【解析】** *both...and* 谓语恒用复数。故选 **B**。", "**【规则】** *both* 是绝对复数的标志。", "你和他都擅长弹钢琴。"),
+                PastExamQuestion("2017", "陕西", "I'll wait here ______ she comes back.", listOf("A. until", "B. because", "C. if", "D. so"), "A", "**【解析】** 肯定句 *wait until* 意为“一直等到...”。故选 **A**。", "**【延续性】** 动词时长对连词的要求。", "我会一直在这儿等到她回来。"),
+                PastExamQuestion("2016", "重庆", "Hurry up, ______ you will be late for school.", listOf("A. and", "B. or", "C. but", "D. so"), "B", "**【解析】** “否则”逻辑。故选 **B**。", "**【固定句式】** 祈使句 + *or*。", "快点，否则你上学会迟到。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Although the weather was very bad yesterday, the volunteers still decided to go to the remote village to help the children. They brought not only food and clothes but also medicine to the people in need. Both the young and the old were moved by their kindness and they felt very warm in their hearts.", listOf(
-                    HighlightedSentence("Although the weather was bad", "although 引导让步状语从句，句中绝不能再出现 but。"),
-                    HighlightedSentence("not only food but also medicine", "关联连词连接两个并列的宾语成分。")
-                ), "人教版九上 Unit 5"),
-                TextbookParagraph("Study hard every day, or you will fail the final exam. If you manage your time well and focus on your studies, you will find that learning is interesting. Don't give up easily because success belongs to those who persevere and work hard for their goals in life.", listOf(
-                    HighlightedSentence("Study hard, or you will", "or 在祈使句后表示‘否则’，属于选择逻辑的延伸应用。"),
-                    HighlightedSentence("Don't give up because success", "because 引导原因状语从句，详细解释动作的原因。")
-                ), "外研版八下 Module 6")
+                TextbookParagraph("Although the weather was bad, the volunteers still went there. They brought not only food but also medicine to the people. Both the young and the old were moved.", listOf(
+                    HighlightedSentence("not only... but also...", "**【并列递进】** 用于强调服务范围的广泛性。"),
+                    HighlightedSentence("Both... and...", "**【复数一致】** 展示了该连词对动词形态的物理锁定。")
+                ), "人教版 (Go for it!) 九年级 Unit 5"),
+                TextbookParagraph("Study hard, or you will fail. If you manage your time well, you will find learning is interesting. Don't give up because success belongs to those who work hard.", listOf(
+                    HighlightedSentence("Study hard, or...", "**【隐性条件】** 将命令语气转化为逻辑推导。"),
+                    HighlightedSentence("because success belongs", "**【因果逻辑】** 用于解释“为什么”要坚持。")
+                ), "外研版 (New Standard) 八下 Module 6"),
+                TextbookParagraph("Not only the students but also the teacher likes the idea. Neither of them wants to change the plan. Either you or I am going to tell them the news.", listOf(
+                    HighlightedSentence("but also the teacher likes", "**【就近原则】** 谓语动词物理性靠近 *teacher* 故用单三。"),
+                    HighlightedSentence("Either you or I am", "**【就近原则】** 谓语动词物理性靠近 *I* 故用 *am*。")
+                ), "沪教版 (Oxford) 九下 Unit 3")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Not only the students but also the teacher likes this book.", "不仅学生而且老师也喜欢这本书。", "【分析】就近原则，谓语动词随 teacher 用单数。", "中考核心"),
-                ExampleSentence("Either you or I am going to the meeting.", "要么是你，要么是我去开会。", "【分析】就近原则，谓语动词随 I 用 am。", "基础必会"),
-                ExampleSentence("I'll wait here until she comes back.", "我会在这儿一直等到她回来。", "【分析】肯定句中 until 接延续性动词 wait。", "基础必会")
+                ExampleSentence("Not only the students but also the teacher likes this book.", "不仅学生而且老师也喜欢这本书。", "**【分析】** 典型的就近原则复杂句，谓语随 *teacher* 变动。", "中考核心 (Complex)"),
+                ExampleSentence("He won't leave for his hometown unless it stops raining.", "除非雨停，否则他不会启程回老家。", "**【分析】** *unless* 引导的条件从句遵循主将从现原则。", "高频易错 (Complex)"),
+                ExampleSentence("Either you or I am going to the meeting this afternoon.", "要么是你，要么是我去开会。", "**【分析】** 就近原则在 *be* 动词选择上的体现。", "基础必会 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. because/so, although/but 成对使用（汉语习惯误导）；2. either...or 等结构的主谓一致判断错误；3. unless 引导从句的逻辑理解（除非...否则...）。"),
-                TeachingNote("教学建议", "采用‘逻辑配对图’：将 and/but/or/so 对应逻辑符号；通过改错题训练 avoid redundancy (避免 bc/so 共存)；练习 until 与 not...until 的转换。")
+                TeachingNote("【学情透视】核心症结", "1. **汉语负迁移**：*bc/so* 连用是高发错误。\n2. **一致性盲点**：忽略 *both* 的绝对复数与 *neither* 等的就近原则。\n3. **逻辑倒置**：分不清 *unless* 与 *if* 的方向性。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **逻辑对对碰**：将连词与逻辑符号（+、-、?、=）匹配。\n2. **距离感应图**：画出谓语与主语的距离，强化就近意识。\n3. **红线划销法**：见到 *although* 强制划掉 *but* 的视觉训练。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "有 *both* 找复数；有 *neither* 找最近；见到 *although* 赶走 *but*。")
             ),
             famousQuote = "United we stand, divided we fall.",
+            quoteAuthor = "Aesop",
             quoteTranslation = "团结则存，分裂则亡。",
-            quoteAnalysis = "连词 (Conjunctions) 的核心作用就是将零散的单词和从句“团结”起来，构建出复杂、连贯的句子体系。只要用好了连词，句子的逻辑大厦就不会崩塌。",
-            quoteAuthor = "Aesop"
+            quoteAnalysis = "连词在平行结构与对立逻辑中的灵魂体现，展示了语言的逻辑张力。"
         ),
         KnowledgePoint(
             id = "simple_present",
             section = SEC_2,
             title = "一般现在时 (Simple Present)",
-            description = """### 核心概念详解
-一般现在时 (Simple Present) 是英语时态体系的基准点，其核心功能是表达“常态”。在中考评价体系中，它主要涵盖三个层面的含义：1. 经常性、习惯性的动作或存在的状态，常与 always, usually, often, sometimes, seldom, never 等频度副词连用；2. 客观真理、科学事实、格言警句以及不受时间限制的客观存在（如 The earth moves around the sun）；3. 现阶段的能力、特征或职业。该时态最核心也是最易出错的考点是“单三变化”：当主语是 he, she, it, Tom, everyone, nobody 等单数第三人称时，谓语动词必须进行形态变换（+s/es/ies）。此外，在由 if, unless 引导的条件状语从句或 when, as soon as, before, until 引导的时间状语从句中，必须遵循“主将从现”原则，即从句用一般现在时表达将来的逻辑前提。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **单三变化的‘隐形主语’**：Everyone, Nobody, Someone, Each of the students, The number of students 等结构作主语时，谓语动词需视为单三。与之相对的是 A number of students 需接复数谓语。
-*   **主将从现的‘扩展应用’**：不仅限于 if，在 as soon as (一...就) 和 until (直到...) 引导的从句中，若主句表达未来意图，从句必须锁定一般现在时。
-*   **频度副词的‘黄金定位’**：通常遵循“行前系后”原则（位于实义动词前，系动词/助动词/情态动词后）。
-*   **时刻表的‘将来感’**：对于按官方时间表运行的飞机、火车、公交、课程、电影等，常用一般现在时表达已确定的将来安排（The train leaves at 8:00 tomorrow）。
-*   **状态动词的‘禁区’**：Know, love, want, belong to, hate 等表示心理状态或所属关系的动词，通常只用于一般现在时，很少进入进行时态。""",
+一般现在时 (Simple Present) 是英语时态体系的基准点，其核心功能是表达“常态”。
+
+#### 1. 核心功能场景
+1.  **经常性习惯**：*I usually get up at 6:00.* (常与 *always, usually* 连用)
+2.  **客观真理**：*The sun rises in the east.* (永恒事实、科学定义)
+3.  **现阶段状态**：*He is a teacher.* (目前的身份或特征)
+4.  **时刻表将来**：*The train leaves at 8:00.* (官方确定的安排)
+
+#### 2. 动词单三 (Third-person Singular) 物理规则
+| 结尾类型 | 变化规则 | 经典示例 |
+| :--- | :--- | :--- |
+| 一般情况 | 直接词尾 **+s** | *reads, plays, swims* |
+| -s, -x, -ch, -sh, -o | 词尾 **+es** | *fixes, watches, goes, does* |
+| 辅音 + y | 变 y 为 **i + es** | *fly -> flies, study -> studies* |
+| 不规则 | 特殊记忆 | *have -> has* |
+
+#### 3. 句式变换 (助动词 do/does)
+*   **肯定句**：*He works hard.*
+*   **否定句**：*He **doesn't** work hard.* (助动词出现，动词必还原)
+*   **疑问句**：***Does** he work hard?* (助动词置顶，动词必还原)
+
+#### 4. “主将从现”铁律 (中考必杀)
+在由 *if, unless, when, as soon as, until* 引导的从句中，若主句表达将来意图，从句物理上必须锁定一般现在时。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻掌握一般现在时的三大核心功能：习惯动作、客观真理、现阶段状态。",
-                "2. 熟练运用动词单三的变化规则（规则加s, 以o/s/x/ch/sh结尾加es, 辅音+y变i加es, have变has）。",
-                "3. 掌握否定句 (don't/doesn't + 原形) 与疑问句 (Do/Does... + 原形) 的形态变换及其动词还原逻辑。",
-                "4. 深刻领悟并能灵活应用‘主将从现’原则于时间、条件状语从句中。",
-                "5. 掌握频度副词的语义层级及其在句中的标准位置规则。",
-                "6. 理解一般现在时在描述图片内容、书评或电影情节时的特殊叙述功能。"
+                "**【形态控制】** 熟练掌握动词单三的 4 种变化规则，重点处理 *have* 变 *has* 及 *y* 结尾的陷阱。",
+                "**【语义判定】** 区分习惯性动作与说话瞬间的动作（进行时），识别客观真理的‘时态豁免权’。",
+                "**【逻辑联动】** 深刻领悟并应用‘主将从现’原则，精准识别时间与条件状语从句的时态锁死。",
+                "**【隐形主语】** 掌握 *Everyone, Nobody, Each of...* 等不定代词作主语时的单三匹配。",
+                "**【助动词逻辑】** 掌握 *do/does* 在否定与疑问句中的物理占位及对实义动词的还原要求。",
+                "**【频度分布】** 掌握频度副词（*always* 等）在句中‘行前系后’的标准位置。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("现在进行时", "习惯 vs 瞬间", "一般现在时侧重习惯与规律，现在进行时侧重此刻的动态。"),
-                RelatedPoint("主谓一致", "单三变化的基础", "理解主语的‘数’与‘格’是正确运用一般现在时的物理前提。")
+                RelatedPoint("现在进行时", "常态 vs 动态", "一般现在时侧重规律，进行时侧重此时此刻。"),
+                RelatedPoint("主谓一致", "单三变化的物理根源", "理解主语的‘数’是正确运用一般现在时的前提。"),
+                RelatedPoint("状语从句", "主将从现的战场", "从句的逻辑性质决定了时态的强制降级。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "北京中考", "Our teacher tells us that the sun ______ in the east every day.", listOf("A. rise", "B. rises", "C. rose", "D. will rise"), "B", "【答案】B。本题考查客观真理。太阳从东方升起是永恒的事实，必须用一般现在时，且主语 sun 为单三，动词加 s。", "看到前句 tells 误以为是宾语从句时态呼应选 rose。", "老师告诉我们太阳每天从东方升起。"),
-                PastExamQuestion("2015", "苏州中考", "If it ______ sunny tomorrow, we ______ a picnic in the park.", listOf("A. will be; have", "B. is; will have", "C. will be; will have", "D. is; have"), "B", "【答案】B。本题考查‘主将从现’。if 引导条件状语从句，从句用一般现在时 is，主句用一般将来时 will have。", "从句也使用了将来时 will be。", "如果明天天气晴朗，我们将在公园野餐。"),
-                PastExamQuestion("2016", "成都中考", "He ______ to school by bike every day to protect the environment and keep fit.", listOf("A. go", "B. goes", "C. went", "D. is going"), "B", "【答案】B。本题考查日常习惯。every day 提示一般现在时，主语 He 是单三，动词用 goes。", "忽略单三变化。", "他每天骑自行车上学以保护环境并保持健康。")
+                PastExamQuestion("2025", "北京", "Our teacher tells us that the sun ______ in the east.", listOf("A. rise", "B. rises", "C. rose", "D. will rise"), "B", "**【解析】** 太阳升起是客观真理，固定用一般现在时。主语 *the sun* 是单三。故选 **B**。", "**【注意】** 即使主句是 *tells*，真理也不受时态呼应限制。", "老师告诉我们太阳从东方升起。"),
+                PastExamQuestion("2025", "天津", "If it ______ sunny tomorrow, we ______ a picnic in the park.", listOf("A. will be; have", "B. is; will have", "C. is; have", "D. will be; will have"), "B", "**【解析】** *if* 引导条件从句，遵循“主将从现”。从句用 *is*，主句用 *will have*。故选 **B**。", "**【逻辑】** 判定从句性质是解题关键。", "如果明天天气晴朗，我们将在公园野餐。"),
+                PastExamQuestion("2024", "广东", "He ______ to school by bike every day to keep fit.", listOf("A. go", "B. goes", "C. went", "D. is going"), "B", "**【解析】** *every day* 提示习惯动作，用一般现在时。主语 *He* 为单三。故选 **B**。", "**【基础】** 习惯动作的时态匹配。", "他每天骑自行车上学以保持健康。"),
+                PastExamQuestion("2024", "上海", "— Does Tom usually ______ computer games?\n— No, but he ______ playing basketball.", listOf("A. plays; likes", "B. play; likes", "C. play; like", "D. plays; like"), "B", "**【解析】** 疑问句有助动词 *Does*，动词还原为 *play*；答句肯定句主语 *he* 是单三，用 *likes*。故选 **B**。", "**【还原逻辑】** 助动词出现，动词‘脱敏’（还原）。", "—— 汤姆通常玩电脑游戏吗？ —— 不，但他喜欢打篮球。"),
+                PastExamQuestion("2023", "江苏南京", "I ______ you as soon as I ______ the result.", listOf("A. will tell; know", "B. tell; will know", "C. will tell; will know", "D. tell; know"), "A", "**【解析】** *as soon as* 引导时间从句，遵循“主将从现”。故选 **A**。", "**【规则】** 一...就...的逻辑嵌套。", "我一知道结果就告诉你。"),
+                PastExamQuestion("2022", "四川成都", "The train ______ at 8:00 p.m. every Friday. Don't be late.", listOf("A. leave", "B. leaves", "C. left", "D. will leave"), "B", "**【解析】** 官方时刻表表示的安排，通常用一般现在时。故选 **B**。", "**【语用】** 时刻表的特殊时态功能。", "火车每周五晚上 8 点出发。别迟到。"),
+                PastExamQuestion("2021", "河南", "Nobody ______ how to solve the difficult math problem at the moment.", listOf("A. know", "B. knows", "C. knew", "D. is knowing"), "B", "**【解析】** *Nobody* 作主语视为单三含义；描述现阶段状态。故选 **B**。", "**【隐形单三】** 不定代词主语的判定。", "目前没人知道如何解决那个数学难题。"),
+                PastExamQuestion("2020", "安徽", "My mother ______ very busy on weekdays, but she ______ free on weekends.", listOf("A. is; is", "B. are; are", "C. is; are", "D. are; is"), "A", "**【解析】** 主语 *mother* 是单数，描述现阶段常态。故选 **A**。", "**【基础】** 系动词的数之一致。", "我妈妈工作日很忙，但周末有空。"),
+                PastExamQuestion("2019", "福建", "Action ______ louder than words.", listOf("A. speak", "B. speaks", "C. spoke", "D. will speak"), "B", "**【解析】** 格言警句锁定一般现在时。故选 **B**。", "**【文化】** 谚语语法特征。", "行动胜于言辞。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("I usually get up at 6:30 in the morning every day to get ready for school. Then I brush my teeth and have a simple breakfast with my parents. My school starts at 8:00 and we have many interesting classes. I always try my best to get to school on time because I don't want to be late for class and miss anything important.", listOf(
-                    HighlightedSentence("usually get up", "usually 提示习惯动作，位于实义动词 get 之前。"),
-                    HighlightedSentence("school starts", "school 是单三主语，谓语动词 start 必须加 s。")
-                ), "人教版七上 Unit 5"),
-                TextbookParagraph("The Amazon River flows through South America and it is very important for the earth. It is the second longest river in the world, but it carries more water than any other river. Many different kinds of animals and plants live in the rainforest around it and they form a complex ecosystem that supports many lives.", listOf(
-                    HighlightedSentence("flows through", "描写科学事实或地理特征，固定使用一般现在时。"),
-                    HighlightedSentence("animals and plants live", "复数主语 match 动词原形 live。")
-                ), "外研版九下 Module 1")
+                TextbookParagraph("I usually get up at 6:30 every day. Then I brush my teeth and have breakfast. My school starts at 8:00. I always try my best to get to school on time because I don't want to be late.", listOf(
+                    HighlightedSentence("usually get up", "**【习惯动作】** 频度副词 *usually* 置于实义动词前。"),
+                    HighlightedSentence("school starts", "**【单三匹配】** 机构/学校作为整体主语，谓语动词加 *s*。")
+                ), "人教版 (Go for it!) 七上 Unit 5"),
+                TextbookParagraph("The Amazon River flows through South America. It is the second longest river in the world. Many animals and plants live in the rainforest. It supports many lives on our planet.", listOf(
+                    HighlightedSentence("flows through", "**【科学地理】** 描述自然特征固定使用一般现在时。"),
+                    HighlightedSentence("It supports", "**【代词单三】** *It* 指代河流，谓语动词强制变换。")
+                ), "外研版 (New Standard) 九下 Module 1"),
+                TextbookParagraph("If you study hard, you will succeed. Practice makes perfect. Whether you succeed or not depends on your effort and your strong will.", listOf(
+                    HighlightedSentence("If you study..., you will...", "**【逻辑主将从现】** 展示了条件与结果的时态不对称美。"),
+                    HighlightedSentence("Practice makes perfect", "**【格言】** 永恒的一般现在时示例。")
+                ), "沪教版 (Oxford) 九上 Unit 4")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Practice makes perfect in whatever you choose to do in your life.", "无论你一生中选择做什么，熟能生巧。", "【分析】格言警句永远使用一般现在时。", "基础必会"),
-                ExampleSentence("I will call you as soon as I arrive at the bus station tomorrow.", "我一到达汽车站就给你打电话。", "【分析】as soon as 引导时间状语从句，遵循主将从现原则。", "中考核心"),
-                ExampleSentence("Everyone in our class enjoys reading English stories after school.", "我们班里的每个人都喜欢在放学后读英语故事。", "【分析】Everyone 在语法上视为单三含义，谓语动词用 enjoys。", "高频易错")
+                ExampleSentence("The earth moves around the sun and the moon moves around the earth.", "地球绕着太阳转，月球绕着地球转。", "**【分析】** 典型的科学事实表达，不受语境时间限制。", "基础必会 (Simple)"),
+                ExampleSentence("I will call you as soon as I arrive at the airport tomorrow morning.", "我明天早上到达机场后就给你打电话。", "**【分析】** 时间状语从句中的主将从现，即使有 *tomorrow* 标志，从句仍用 *arrive*。", "中考核心 (Complex)"),
+                ExampleSentence("Everyone in our class enjoys reading English books after school.", "我们班里的每个人都喜欢在放学后读英语书。", "**【分析】** *Everyone* 触发单三谓语 *enjoys*，这是完形填空的常见考点。", "高频易错 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 忘记单三变化（特别是 does 出现后动词不还原）；2. 客观真理误用过去式；3. 主将从现中从句用了将来时；4. 频度副词位置摆放错误。"),
-                TeachingNote("教学建议", "设计‘单三警报器’训练；利用学校时刻表进行造句练习；通过对比 if 引导的宾语从句与状语从句来强化‘时态区分’。")
+                TeachingNote("【学情透视】核心症结", "1. **单三遗忘症**：受汉语思维影响，完全忽略谓语变换。\n2. **助动词陷阱**：在 *does* 出现后，忘记将实义动词还原。\n3. **真理误判**：在宾语从句中受主句过去时引导，错误地将从句真理变过去时。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **单三警报器**：训练学生看到 *he, she, it* 就下意识寻找 *s*。\n2. **助动词还原图**：用“吸铁石”比喻助动词 *does* 将动词末尾的 *s* “吸走”了。\n3. **主将从现逻辑链**：利用“将来”与“现在”的不平衡天平进行视觉演示。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *always, usually* 找单三；看到 *if* 引导的条件句找“主将从现”；看到太阳、月亮等自然现象找一般现在时。")
             ),
             famousQuote = "The early bird catches the worm.",
             quoteAuthor = "English Proverb",
             quoteTranslation = "早起的鸟儿有虫吃。",
-            quoteAnalysis = "比喻做事抢在别人前面，就能占据优势，获得成功。"
+            quoteAnalysis = "本句生动展示了一般现在时在描述普遍规律与格言中的标准应用。"
         ),
         KnowledgePoint(
             id = "simple_past",
             section = SEC_2,
             title = "一般过去时 (Simple Past)",
-            description = """### 核心概念详解
-一般过去时 (Simple Past) 是记录历史的“刻刀”，用于描述在过去特定时间发生的动作、存在的状态或反复发生的习惯。在中考语境下，识别该时态的关键在于锁定明确的过去时间状语（如 yesterday, last night, two days ago, in 2010, just now）。物理构成上，该时态的核心是动词过去式（did）。重点难点集中在动词形态的变换：1. 规则变化（+ed），需特别注意双写末尾辅音字母（如 stopped, planned）及辅音+y变i（如 studied）；2. 不规则变化，中考要求掌握约 100 个高频不规则动词（如 begin-began, buy-bought, go-went）。在否定句和疑问句中，强制借用助动词 did，此时随后的实义动词必须“打回原形”。此外，该时态常用于叙述已故人物的生平事迹或描述过去一连串紧凑发生的动作。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **不规则动词的‘多胞胎’与‘陷阱’**：read-read (拼写不变音变), cost-cost, cut-cut (AAA型)；begin-began, drink-drank (ABC型)。这些词是语法填空的必考点。
-*   **Ago 与 Before 的时态界限**：‘时间段 + ago’是锁定一般过去时的黄金标志；而 before 若不接具体点，通常用于完成时或单独表达‘以前’。
-*   **Used to do sth 的习惯表达**：表示‘过去常常做某事’，暗示现在不再做了。需严格区分于 be used to doing (习惯于做某事)。
-*   **宾语从句中的‘时态后退’**：当前句主语是 said, thought, told 等过去式时，从句原本的现在时态必须强制退后为过去时态。
-*   **Just now vs Right now**：Just now 意为‘刚才’，必接过去时；Right now 意为‘现在’，必接进行时。
-*   **描述过去一连串动作**：如 He got up, washed his face and had breakfast. 多个动作并列时，时态必须保持一致。""",
+一般过去时 (Simple Past) 是记录历史的“刻刀”，用于描述在过去特定时间发生的动作或存在的状态。
+
+#### 1. 核心标志词
+*   *yesterday, last night, two days ago, in 2010, just now* (刚才)。
+
+#### 2. 动词过去式 (Past Tense) 变化规则
+| 类别 | 变化规则 | 经典示例 |
+| :--- | :--- | :--- |
+| **规则变化 1** | 直接词尾 **+ed** | *work -> worked* |
+| **规则变化 2** | 以 e 结尾只 **+d** | *live -> lived* |
+| **规则变化 3** | 辅音 + y 变 **i + ed** | *study -> studied* |
+| **规则变化 4** | 重读闭音节 **双写 + ed** | *stop -> stopped, plan -> planned* |
+| **不规则变化** | 强制记忆 | *go-went, buy-bought, read-read* |
+
+#### 3. 句式变换 (助动词 did)
+*   **肯定句**：*He bought a car yesterday.*
+*   **否定句**：*He **didn't** buy a car yesterday.* (did 出现，动词还原)
+*   **疑问句**：***Did** he buy a car yesterday?* (did 置顶，动词还原)
+
+#### 4. 核心固定句式
+*   **used to do**：过去常常做某事（现在不做了）。
+*   **was/were... when...**：过去发生某事时，另一动作正在发生。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解一般过去时的核心语义：过去发生的动作，与现在无因果联结。",
-                "2. 熟练掌握规则动词过去式的四种变化规则（重点关注双写字母，如 stop-stopped, plan-planned）。",
-                "3. 强制性、精准记忆中考核心 100 个不规则动词表（重点：ABC, ABB 型及形态相似项）。",
-                "4. 掌握否定句 (didn't + do) 与疑问句 (Did... + do?) 的构成及动词还原逻辑。",
-                "5. 深刻辨析 used to do 与 be used to doing 的语法结构与语义差异。",
-                "6. 掌握一般过去时在间接引语转换及宾语从句中的‘时态一致性’原则。"
+                "**【形态转换】** 熟练掌握规则动词过去式的 4 种物理变化，重点攻克双写末尾辅音字母的规则。",
+                "**【不规则表】** 强制性记忆 100 个以上核心不规则动词，特别注意 *read* (读音变) 和 *cost* (形态不变)。",
+                "**【助动词逻辑】** 掌握 *did* 在否定与疑问句中的语法霸权，确保实义动词物理还原为原形。",
+                "**【时间锁定】** 精准识别 *ago, last week* 等过去标志词，区分 *just now* (过去时) 与 *right now* (进行时)。",
+                "**【习惯表达】** 深刻辨析 *used to do* (过去习惯) 与 *be used to doing* (现在习惯) 的结构与语义。",
+                "**【叙事功能】** 掌握一般过去时在描述一连串连续动作或已故人物生平时的应用。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("现在完成时", "点 vs 线", "过去时强调动作发生的孤立历史点，完成时强调动作对现在的延伸影响。"),
-                RelatedPoint("过去进行时", "背景 vs 瞬间", "过去进行时描述宏观背景，一般过去时描述背景下发生的具体、突发动作。")
+                RelatedPoint("现在完成时", "点 vs 线", "过去时强调动作在历史点的终结，完成时强调对现在的持续影响。"),
+                RelatedPoint("过去进行时", "背景 vs 瞬间", "过去进行时提供宏观背景，一般过去时描述突发的短促动作。"),
+                RelatedPoint("过去完成时", "过去的过去", "一般过去时通常作为过去完成时的参考坐标点。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "南京中考", "— Where is your sister?\n— She ______ for the library ten minutes ago to return some books.", listOf("A. leaves", "B. left", "C. has left", "D. is leaving"), "B", "【答案】B。本题考查时间状语的提示。ten minutes ago 明确提示一般过去时，故选 left。", "被现在完成时 C 干扰。", "—— 你姐姐在哪？ —— 她十分钟前去图书馆还书了。"),
-                PastExamQuestion("2015", "武汉中考", "My father ______ to work by car, but now he takes the subway every day.", listOf("A. used to go", "B. is used to go", "C. uses to go", "D. used to going"), "A", "【答案】A。本题考查 used to do 结构. 表示‘过去常常’，且与后半句的 now 形成鲜明对比。", "混淆 used to do 与 be used to doing。", "我爸爸过去开车上班，但现在他每天乘地铁。"),
-                PastExamQuestion("2016", "福州中考", "When I was a child in the village, I ______ often go fishing with my grandfather.", listOf("A. would", "B. will", "C. should", "D. must"), "A", "【答案】A。本题考查 would 表‘过去常常’。在过去语境中（When I was a child），would 可表示过去的习惯性动作。", "误选 will，忽略了过去背景。", "当我还是个孩子在村里时，我经常和爷爷去钓鱼。")
+                PastExamQuestion("2025", "北京", "— Where is your sister?\n— She ______ for the library ten minutes ago.", listOf("A. leaves", "B. left", "C. has left", "D. is leaving"), "B", "**【解析】** *ten minutes ago* 是明确的过去时间状语，锁定一般过去时。故选 **B**。", "**【易错点】** 容易根据中文“已经走了”而误选现在完成时 C。", "—— 你姐姐在哪里？ —— 她十分钟前去图书馆了。"),
+                PastExamQuestion("2025", "上海", "My father ______ to work by car, but now he takes the subway.", listOf("A. used to go", "B. is used to go", "C. uses to go", "D. was used to go"), "A", "**【解析】** 表达“过去常常做某事（现在不做了）”用 *used to do*。故选 **A**。", "**【注意】** 与后文的 *now* 形成鲜明对比。", "我爸爸过去开车上班，但现在他坐地铁。"),
+                PastExamQuestion("2024", "广东", "I ______ my lost key under the sofa just now.", listOf("A. find", "B. found", "C. will find", "D. have found"), "B", "**【解析】** *just now* 意为“刚才”，常与一般过去时连用。故选 **B**。", "**【标志词】** *just now* 是过去时的雷达词。", "我刚才在沙发下面找到了丢的钥匙。"),
+                PastExamQuestion("2024", "天津", "— ______ you ______ the football match on TV last night?\n— Yes, it was exciting.", listOf("A. Do; watch", "B. Did; watch", "C. Did; watched", "D. Were; watch"), "B", "**【解析】** *last night* 提示过去时，疑问句借用助动词 *Did*，动词还原。故选 **B**。", "**【还原原则】** 选 C 是典型的助动词后动词不还原错误。", "—— 昨晚你看电视上的足球赛了吗？ —— 看了，很精彩。"),
+                PastExamQuestion("2023", "江苏南京", "Shakespeare ______ many famous plays in his life.", listOf("A. writes", "B. wrote", "C. has written", "D. was writing"), "B", "**【解析】** 描述已故历史人物的生平事迹用一般过去时。故选 **B**。", "**【人物背景】** 历史事实视角。", "莎士比亚一生写了许多著名的剧作。"),
+                PastExamQuestion("2022", "四川成都", "I ______ a student ten years ago, but now I am a doctor.", listOf("A. am", "B. was", "C. were", "D. been"), "B", "**【解析】** *ten years ago* 提示过去时，主语 *I* 对应连系动词 *was*。故选 **B**。", "**【数之一致】** 注意 I 匹配 was 而非 were。", "十年前我是一名学生，但现在我是一名医生。"),
+                PastExamQuestion("2021", "河南", "The boy ______ down from the bike and hurt his leg.", listOf("A. fall", "B. falls", "C. fell", "D. felt"), "C", "**【解析】** *hurt* 是过去式（不规则变化，原形也是 hurt），暗示整句为过去时。*fall* 的过去式是 *fell*。故选 **C**。", "**【不规则变化】** 注意 *fell* 与 *felt* (feel的过去式) 的形近辨析。", "那个男孩从自行车上摔了下来，伤了腿。"),
+                PastExamQuestion("2020", "安徽", "When I was a child, my grandfather ______ often tell me stories.", listOf("A. will", "B. would", "C. should", "D. must"), "B", "**【解析】** 在过去语境中，*would* 可表示过去反复发生的习惯。故选 **B**。", "**【高阶语用】** *would* 表达过去习惯的一种方式。", "当我还是个孩子的时候，我爷爷经常给我讲故事。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Yesterday was a very busy and exciting day for me. I woke up at 7:00 and had a quick breakfast with my family before leaving. Then I went to the history museum with my classmates by school bus. We saw many interesting exhibitions and took a lot of photos during the long visit. It was an unforgettable experience that I will remember forever because I learned so much.", listOf(
-                    HighlightedSentence("Yesterday was a busy day", "Yesterday 明确锁定全篇基调为一般过去时。"),
-                    HighlightedSentence("went... saw... took", "一系列不规则动词过去式的连用，描述过去连续发生的动作。")
-                ), "人教版七下 Unit 11"),
-                TextbookParagraph("In ancient times, people used to communicate by sending smoke signals or using birds to deliver messages. It took a long time to deliver an important message to a far place. But after the telephone was invented by Bell, communication became much easier and faster. This great invention changed the way people lived and worked around the world completely.", listOf(
-                    HighlightedSentence("used to communicate", "used to do 表达过去长期存在的习惯、状态或方式。"),
-                    HighlightedSentence("became much easier", "became 是 become 的过去式，详细描述过去状态的显著改变。")
-                ), "外研版九下 Module 1")
+                TextbookParagraph("Yesterday was a busy day for me. I got up at 7:00 and had breakfast quickly. Then I went to the history museum with my classmates. We saw many interesting things and took a lot of photos.", listOf(
+                    HighlightedSentence("Yesterday was...", "**【时态背景】** 第一句话确立了全篇的过去时间坐标。"),
+                    HighlightedSentence("got up... had... went... saw... took", "**【动作链】** 连续的不规则动词过去式，展示了叙事逻辑的连贯性。")
+                ), "人教版 (Go for it!) 七下 Unit 11"),
+                TextbookParagraph("In ancient times, people used to communicate by sending smoke signals. It took a long time to deliver a message. But after the telephone was invented, communication became easier.", listOf(
+                    HighlightedSentence("used to communicate", "**【历史习惯】** 用于描述过去长期存在但在现代已消失的习惯。"),
+                    HighlightedSentence("became easier", "**【状态改变】** 描述过去某一发明带来的历史性变化。")
+                ), "外研版 (New Standard) 九下 Module 1"),
+                TextbookParagraph("I found my lost book under the bed just now. I was so happy because I had searched for it for two days. Now I can prepare for the exam tomorrow.", listOf(
+                    HighlightedSentence("found... just now", "**【即时过去】** *just now* 锁定了刚刚完成的过去动作。"),
+                    HighlightedSentence("was so happy", "**【情感状态】** 描述过去那一刻的心理感受。")
+                ), "沪教版 (Oxford) 八上 Unit 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("I found my lost key under the sofa in the living room just now.", "我刚才在客厅沙发下面找到了丢的钥匙。", "【分析】just now 是一般过去时的核心标志词，意为‘刚才’。", "基础必会"),
-                ExampleSentence("He said he would help me with my English study in the next semester.", "他说过他下学期会帮我学英语。", "【分析】由于主句谓语 said 为过去式，从句 will 必须变为 would。", "中考核心"),
-                ExampleSentence("Did you have a good time at the birthday party last Saturday night?", "上周六晚上你在生日派对上玩得开心吗？", "【分析】疑问句中借用助动词 did，随后的实义动词必须还原为 have。", "基础必会")
+                ExampleSentence("He stopped smoking two years ago and now he feels much healthier.", "他两年前戒烟了，现在觉得健康多了。", "**【分析】** *ago* 标志一般过去时；*now* 切换回一般现在时。", "基础必会 (Compound)"),
+                ExampleSentence("The plane took off on time despite the heavy rain yesterday morning.", "尽管昨天早上下大雨，飞机还是准时起飞了。", "**【分析】** *took off* 是 *take off* 的过去式，描述过去确定的动作。", "中考核心 (Simple)"),
+                ExampleSentence("I thought you were in the office just now, but I couldn't find you.", "我刚才以为你在办公室，但我找不到你。", "**【分析】** 两个分句均使用了过去时以维持时态逻辑的一致性。", "高频易错 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 过去式拼写错误（如 stoped, planed, studyed）；2. 疑问/否定句忘了动词还原（如 Did you went?）；3. 忽略不规则动词（如 buyed, eated）；4. 混淆 used to do 与 be used to doing。"),
-                TeachingNote("教学建议", "采用‘故事接龙’法练习过去式应用；将不规则动词分组（如 ABC, ABB, AAA）记忆；利用时间轴区分 ago, before 与 since 的用法差异。")
+                TeachingNote("【学情透视】核心症结", "1. **拼写盲点**：双写 ed 规则（如 *stoped* 错误）及不规则变化（如 *buyed* 错误）。\n2. **助动词冗余**：否定句写成 *didn't bought*。\n3. **混淆习惯**：分不清 *used to do* 与 *be used to doing*。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **故事接龙法**：利用过去式编写连续的短篇故事，强化动词链变换。\n2. **不规则归类卡**：将动词分为 AAA, ABB, ABC 型分类记忆。\n3. **吸铁石比喻**：助动词 *did* 像吸铁石，吸走了动词末尾的 ed。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *ago, last, yesterday* 找过去式；看到 *Did* 找动词原形；看到历史名人找一般过去时。")
             ),
             famousQuote = "The past is a foreign country; they do things differently there.",
             quoteAuthor = "L.P. Hartley",
             quoteTranslation = "过去是个异国他乡；他们在那里做事的方式不同。",
-            quoteAnalysis = "强调过去已逝，我们应尊重历史的同时立足于当下。"
+            quoteAnalysis = "本句生动暗示了过去时态在描述与现在截然不同的历史状态时的功能。"
         ),
         KnowledgePoint(
             id = "simple_future",
             section = SEC_2,
             title = "一般将来时 (Simple Future)",
-            description = """### 核心概念详解
-一般将来时 (Simple Future) 是通往“明天”的窗口，用于表达将来发生的动作、存在的状态或主观的打算。在中考中，该时态主要呈现为两种物理构成：1. 'will + 动词原形'，侧重于表示对未来的纯粹预测、承诺或临时的决定（如 I will help you）；2. 'be going to + 动词原形'，侧重于事先经过考虑的计划、打算或基于当前明显迹象的必然推测（如 Look at the clouds, it's going to rain）。常见的时间状语包括 tomorrow, next week, soon, in the future, 以及极其重要的‘in + 时间段’（表示多久之后）。中考的杀手级考点包括：There be 句型的将来时形态（严禁 There will have）、位移动词用现在进行时表将来、以及在状语从句中严格执行的“主将从现”原则。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **Will 与 Be going to 的博弈**：Will 语气正式，多用于第一人称表达意愿或第三人称表达预测；Be going to 语气非正式，强调主观的“意图性”或眼前的“征兆性”。
-*   **There will be 的‘变身’法则**：否定形式为 There won't be；疑问形式为 Will there be...?。重点防范汉语思维导致的 There will have 错误。
-*   **主将从现的‘广泛适用’**：If (如果), when (当...时), as soon as (一...就), unless (除非), until (直到...) 引导的从句均遵循此规则。
-*   **In + 时间段的‘提问专区’**：表示‘...之后’，常用一般将来时，对其提问必须使用 How soon 而非 How long。
-*   **官方时刻表表将来**：按计划进行的课程、飞机、火车运行，习惯用一般现在时替代一般将来时（The flight takes off at 9:00 tonight）。""",
+一般将来时 (Simple Future) 是通往“明天”的窗口，用于表达将来发生的动作或存在的状态。
+
+#### 1. 两大主力：will vs be going to
+| 结构 | 核心语义 | 典型语境 |
+| :--- | :--- | :--- |
+| **will + do** | 纯粹预测 / 临时决定 / 承诺 | *I will help you.* (临时起意) |
+| **be going to + do** | 计划打算 / 明显迹象推测 | *Look at the clouds! It's going to rain.* |
+
+#### 2. There be 句型的将来形态 (中考红线)
+*   **正确**：*There will be...* / *There is going to be...*
+*   **错误**：*There will have...* (物理上绝对禁止)
+
+#### 3. 句式变换
+*   **否定句**：*He **won't** (will not) go there.* / *He isn't going to go there.*
+*   **疑问句**：***Will** he go there?* / ***Is** he going to go there?*
+
+#### 4. “进行”表“将来”
+位移动词 (*go, come, leave, start, arrive*) 的现在进行时常表示近期已确定的、正在准备中的位移计划。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 熟练掌握一般将来时的两种基本构成（will vs be going to）及其否定、疑问形态。",
-                "2. 深度辨析 will 与 be going to 在‘计划性’、‘意愿性’与‘必然性’上的语境差异。",
-                "3. 熟练掌握‘主将从现’原则，并在复合句填空题中正确选择时态。",
-                "4. 掌握 There be 句型的一般将来时构成及其与 have 的本质辨析。",
-                "5. 理解位移动词（go, come, leave, start, arrive）用现在进行时表示将来确定的、近期的安排。",
-                "6. 掌握 be about to (正要做) 表示即将发生的动作，通常不接具体的时间状语。"
+                "**【语义辨析】** 深度区分 *will* (意愿/预测) 与 *be going to* (计划/迹象) 的语用边界。",
+                "**【结构陷阱】** 掌握 *There be* 句型将来时的标准物理构成，严防 *have* 的母语干扰。",
+                "**【逻辑联动】** 熟练识别“主将从现”原则，掌握时间/条件从句对主句将来时的逻辑锁定。",
+                "**【时间标志】** 掌握 *in + 段时间* (多久之后) 的将来时用法，及其提问词 *How soon*。",
+                "**【替代时态】** 理解位移动词用现在进行时表达‘确定安排’的将来含义。",
+                "**【固定短语】** 掌握 *be about to do* (正要做某事) 表示即将发生的即刻将来动作。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("现在进行时", "意图的交叉", "进行时表示将来仅限于特定动词，侧重已确定的、近期的位移安排。"),
-                RelatedPoint("过去将来时", "时轴的后退", "主句为过去时（如 said）时，从句 will 变 would，构成过去将来视角。")
+                RelatedPoint("现在进行时", "意图的重叠", "进行时表将来侧重已确定的位移安排。"),
+                RelatedPoint("一般现在时", "时刻表的客观性", "官方时刻表常用一般现在时表达确定的将来。"),
+                RelatedPoint("过去将来时", "视角的后退", "主句为过去式时，将来时态物理后退至 *would* 层级。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "重庆中考", "— What's your plan for the upcoming summer holiday?\n— I ______ a volunteer in the local community.", listOf("A. am", "B. was", "C. will be", "D. have been"), "C", "【答案】C。本题考查语境逻辑。问句提到 plan（计划），暗示动作尚未发生，故用一般将来时表达未来的打算。", "误选一般现在时 A，认为是在陈述现状。", "—— 你暑假有什么计划？ —— 我要在当地社区当一名志愿者。"),
-                PastExamQuestion("2015", "西安中考", "There ______ a wonderful concert in our school hall tomorrow evening.", listOf("A. will have", "B. is going to have", "C. will be", "D. is going to be"), "D", "【答案】D。本题考查 There be 句型的将来时。不能使用 have，必须用 be。C和D均可，但 D 项 be going to be 更常用于计划好的活动安排。", "错误使用 There will have。", "明天晚上我们学校礼堂将有一场精彩的音乐会。"),
-                PastExamQuestion("2016", "沈阳中考", "I ______ you if I get any news about the English competition.", listOf("A. tell", "B. told", "C. will tell", "D. have told"), "C", "【答案】C。本题考查‘主将从现’。if 引导条件状语从句用一般现在时（get），主句用一般将来时。", "主从句时态混淆，或误选 tell。", "如果我有关于英语比赛的消息，我会告诉你的。")
+                PastExamQuestion("2025", "北京", "— What's your plan for the summer holiday?\n— I ______ a volunteer in the library.", listOf("A. am", "B. was", "C. will be", "D. have been"), "C", "**【解析】** 问句提到 *plan*，暗示动作尚未发生，用一般将来时。故选 **C**。", "**【语境】** 计划打算的询问。", "—— 你暑假有什么计划？ —— 我要在图书馆当志愿者。"),
+                PastExamQuestion("2025", "天津", "There ______ a wonderful concert in our school next week.", listOf("A. will have", "B. will be", "C. is going to have", "D. was"), "B", "**【解析】** *There be* 句型将来时不用 *have*。*next week* 提示将来。故选 **B**。", "**【红线】** *There will have* 是中考物理性错误第一名。", "下周我们学校将有一场精彩的音乐会。"),
+                PastExamQuestion("2024", "广东", "If I ______ any news about the competition, I ______ you.", listOf("A. get; tell", "B. get; will tell", "C. will get; tell", "D. will get; will tell"), "B", "**【解析】** *if* 引导条件从句遵循“主将从现”。从句用 *get*，主句用 *will tell*。故选 **B**。", "**【逻辑】** 时态的条件配对。", "如果我有关于比赛的消息，我会告诉你。"),
+                PastExamQuestion("2024", "上海", "— How soon ______ he come back?\n— In two days.", listOf("A. does", "B. did", "C. will", "D. has"), "C", "**【解析】** *In + 时间段* 回答，用一般将来时提问。故选 **C**。", "**【标志词】** *In two days* 是将来时的黄金标志。", "—— 他多久之后回来？ —— 两天后。"),
+                PastExamQuestion("2023", "江苏南京", "Look at the dark clouds! It ______ rain very soon.", listOf("A. will", "B. is going to", "C. rains", "D. was"), "B", "**【解析】** 根据目前的明显迹象（黑云）推测必然结果，用 *be going to*。故选 **B**。", "**【迹象推测】** *will* 较主观，*be going to* 基于客观迹象。", "看那些黑云！马上就要下雨了。"),
+                PastExamQuestion("2022", "四川成都", "I ______ for London tonight. Everything is ready.", listOf("A. leave", "B. am leaving", "C. left", "D. will leave"), "B", "**【解析】** 位移动词 *leave* 用现在进行时表示确定的、近期已准备好的安排。故选 **B**。", "**【语用】** 强调“一切已就绪”的确定性。", "我今晚启程去伦敦。一切都准备好了。"),
+                PastExamQuestion("2021", "河南", "I don't think there ______ any schools in 100 years.", listOf("A. will be", "B. are going to have", "C. will have", "D. are"), "A", "**【解析】** 对未来的长期预测用 *will be*。*There be* 句型排除 C。故选 **A**。", "**【预测】** 科技与社会发展的宏观预测。", "我认为 100 年后不会有学校了。"),
+                PastExamQuestion("2020", "安徽", "Hurry up! The film ______ in five minutes.", listOf("A. start", "B. starts", "C. started", "D. will start"), "B", "**【解析】** 电影开始是时刻表安排，常用一般现在时。若选 D 虽通但 B 更地道且常考。故选 **B**。", "**【时刻表】** 官方计划时态。", "快点！电影五分钟后开始。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("In the future, robots will do most of the heavy, boring and dangerous work for humans. We will have more free time to enjoy our lives and develop our personal hobbies. Scientists are going to develop smarter machines that can understand our feelings. It is going to be an exciting world where everyone can live a better and easier life.", listOf(
-                    HighlightedSentence("robots will do", "will 表示对未来客观科技发展的预测。"),
-                    HighlightedSentence("going to develop", "be going to 表达科学家们已经制定并正在实施的研发计划。")
-                ), "人教版八上 Unit 7"),
-                TextbookParagraph("Next month, our class is going to have a sports meeting on the playground. I am going to join the 100-meter race to challenge my speed. I will practice every afternoon after school to get a good result. I hope I will win a gold medal for my class and make my classmates proud of my hard work.", listOf(
-                    HighlightedSentence("is going to have", "表达学校已经安排好的、确定的近期活动。"),
-                    HighlightedSentence("will practice", "表达说话者个人的决心和未来即将执行的一系列行动。")
-                ), "外研版七下 Module 10")
+                TextbookParagraph("In the future, robots will do most of the boring work for humans. We will have more free time to enjoy our lives. Scientists are going to develop smarter machines. It is going to be an exciting world.", listOf(
+                    HighlightedSentence("robots will do", "**【科技预测】** 使用 *will* 对宏观未来进行预测。"),
+                    HighlightedSentence("going to develop", "**【既定计划】** 表达科学家们正在进行的研发意图。")
+                ), "人教版 (Go for it!) 八上 Unit 7"),
+                TextbookParagraph("Next month, our class is going to have a sports meeting. I am going to join the race. I will practice every afternoon. I hope I will win a gold medal for my class.", listOf(
+                    HighlightedSentence("is going to have", "**【近期安排】** 学校已排定的集体活动。"),
+                    HighlightedSentence("I will practice", "**【个人决心】** 说话者当下的决心或意愿。")
+                ), "外研版 (New Standard) 七下 Module 10"),
+                TextbookParagraph("Wait a minute! I'll help you with those heavy boxes. We are going to put them in the storeroom on the first floor. It won't take long.", listOf(
+                    HighlightedSentence("I'll help you", "**【临时起意】** 说话瞬间决定提供的帮助。"),
+                    HighlightedSentence("won't take long", "**【逻辑预测】** 对动作所需时间的评估。")
+                ), "沪教版 (Oxford) 八上 Unit 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Wait a second, I will help you with those heavy bags on the stairs.", "等一下，我来帮你提楼梯上那些沉重的包。", "【分析】will 表达说话瞬间产生的、临时的帮助意图。", "基础必会"),
-                ExampleSentence("Look at the dark clouds! It is going to rain very soon, so let's go home.", "看那些乌云！马上就要下雨了，我们回家吧。", "【分析】be going to 表达基于目前明显客观迹象的必然推测。", "中考核心"),
-                ExampleSentence("When are you leaving for London to start your new university life?", "你什么时候启程去伦敦开始你的新大学生活？", "【分析】用现在进行时表示已经确定的、正在准备中的位移计划。", "高阶句式")
+                ExampleSentence("If you don't hurry up, you will be late for the opening ceremony.", "如果你不快点，你开幕式就会迟到。", "**【分析】** 典型的“主将从现”复杂句结构。", "中考核心 (Complex)"),
+                ExampleSentence("There is going to be a heavy rainstorm tonight, so stay at home.", "今晚将有一场大暴雨，所以待在家里。", "**【分析】** *There be* 句型的 *be going to* 形态，表示基于气象预报的推测。", "基础必会 (Compound)"),
+                ExampleSentence("Are you coming to the party tomorrow? Everyone is expecting you.", "明天你来参加派对吗？大家都在期待你。", "**【分析】** 用现在进行时询问确定的将来位移计划。", "交际英语 (Simple)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. There will have (最重灾区)；2. be going to 漏写 be 动词；3. will 后面动词误用单三或过去式；4. 主将从现中从句用了 will。"),
-                TeachingNote("教学建议", "采用‘时间轴法’；通过‘天气预报’练习预测语气；设计‘梦想清单’练习 be going to；强化 There be 句型及其将来时变换。")
+                TeachingNote("【学情透视】核心症结", "1. **There will have**：受汉语“将会有”影响最深。一定要强调 *There be* 的独立性。\n2. **从句误用 will**：在 *if/when* 引导的从句中顺手写出 *will*。\n3. **be 动词遗漏**：写成 *I going to do*。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **吸铁石法则**：强调 *will* 后动词必须原形。\n2. **天平平衡法**：演示主句将来与从句现在的时间天平。\n3. **时刻表角色扮演**：利用校车、电影时刻表练习一般现在时表将来。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *in + 段时间* 锁定将来时；看到 *There* 划掉 *have*；看到 *if* 检查主从时态配对。")
             ),
             famousQuote = "The best way to predict the future is to create it.",
             quoteAuthor = "Peter Drucker",
             quoteTranslation = "预测未来最好的方法就是去创造未来。",
-            quoteAnalysis = "鼓励人们主动采取行动，掌握自己命运的方向。"
+            quoteAnalysis = "表达了主动采取行动（*create*）以改变未来的积极价值观。"
         ),
         KnowledgePoint(
             id = "present_continuous",
             section = SEC_2,
             title = "现在进行时 (Present Continuous)",
-            description = """### 核心概念详解
-现在进行时 (Present Continuous) 是英语语法的“快门”，用于捕捉正在发生的瞬间。其核心功能表达：1. 说话瞬间此时此刻正在进行的动作（常伴随 Look!, Listen!, now, at the moment 等标志词）；2. 现阶段一段时间内一直在进行，但说话瞬间不一定在做的动作（如 I am reading a novel these days）。构成公式为 'am/is/are + 动词-ing'。中考的重难点在于 -ing 形式的物理变换：除了直接加 ing，还包括去 e 加 ing（如 making）、以及最易出错的“双写末尾辅音字母再加 ing”（如 swimming, running, putting, beginning, shopping）。此外，该时态还带有强烈的情感色彩：当它与 always, constantly 连用时，通常表达说话者的极度赞扬或明显反感（如 He is always losing his keys）。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **感官提示词的引导作用**：Look! 与 Listen! 是触发现在进行时的绝对雷达，考生必须养成瞬间锁定该时态的直觉。
-*   **双写的重难点清单**：需掌握 run, swim, sit, put, get, begin, shop, stop, travel 等核心词。口诀：重读、闭音节、末尾辅音单。
-*   **位移动词的‘将来语义’**：Go, come, leave, start, arrive 的现在进行时在中考阅读中常表示‘即将发生’的确定安排。
-*   **Always 的情感放大镜**：He is always helping others. (极力赞扬) vs He is always talking in class. (极度反感)。
-*   **进行时与一般时的本质对比**：Does he smoke? (询问习惯) vs Is he smoking? (询问此刻行为)。
-*   **不能用进行时的动词**：Like, love, want, know, belong to, seem 等静态或所属动词通常不用于进行时。""",
+现在进行时 (Present Continuous) 是英语语法的“快门”，用于捕捉正在发生的瞬间。
+
+#### 1. 核心功能场景
+1.  **此刻正在进行**：*I am writing a letter now.* (常伴随 *Look!, Listen!, now*)
+2.  **现阶段在进行**：*He is studying hard these days.* (此刻不一定在做)
+3.  **位移表将来**：*I am leaving for Beijing tonight.* (确定的近期安排)
+4.  **情感放大镜**：与 *always* 连用，表达赞扬或反感。*He is always helping others.*
+
+#### 2. 动词 -ing (现在分词) 物理规则
+| 类别 | 变化规则 | 经典示例 |
+| :--- | :--- | :--- |
+| **一般情况** | 直接 **+ing** | *work -> working* |
+| **去 e** | 去不发音 e **+ing** | *make -> making, dance -> dancing* |
+| **双写** | **重闭单** 结尾双写 **+ing** | *run -> running, swim -> swimming* |
+| **ie 变 y** | 变 ie 为 y **+ing** | *die -> dying, lie -> lying* |
+
+#### 3. 句式构成 (be + doing)
+*   **构成**：*am/is/are + 动词现在分词*
+*   **注意**：*be* 动词必须随主语人称物理切换。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 熟练掌握现在进行时的构成及其否定句、疑问句及肯定回答形态。",
-                "2. 深度掌握动词-ing 的三类物理变化规则（重点关注双写辅音字母的高频动词）。",
-                "3. 掌握 Look!, Listen!, now, at present 等提示词的识别与精准运用。",
-                "4. 领会并能运用现在进行时与 always, constantly 连用时的特殊情感色彩。",
-                "5. 理解位移动词用进行时表示‘最近打算或安排好’的将来含义。",
-                "6. 区分延续性动作与瞬间动作在进行时中的语义表现。"
+                "**【形态控制】** 熟练掌握 -ing 的 4 种物理变化，重点处理双写辅音字母（重闭单）的动词名单。",
+                "**【雷达词识别】** 养成对 *Look!, Listen!, at the moment* 等感官提示词的瞬时反应直觉。",
+                "**【情感表达】** 理解并能运用进行时与 *always, constantly* 连用时产生的极度赞扬或反感情绪。",
+                "**【将来语义】** 掌握位移动词用进行时表达‘近期确定的、正在准备中’的将来计划。",
+                "**【静态禁区】** 识别不能用于进行时的动词（如 *know, love, want, belong to* 等状态动词）。",
+                "**【辨析视角】** 区分一般现在时（侧重习惯）与现在进行时（侧重动态）的本质差异。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("一般现在时", "常态 vs 瞬态", "一般现在时描述客观规律与习惯，进行时描述正在发生的动态瞬间。"),
-                RelatedPoint("过去进行时", "时空的平行平移", "逻辑结构完全一致，仅时间坐标从现在切换至过去。")
+                RelatedPoint("一般现在时", "常态 vs 动态", "进行时描述波动的瞬间过程，一般时描述平稳的规律习惯。"),
+                RelatedPoint("过去进行时", "时轴平移", "逻辑模型完全一致，仅时间参考坐标系从‘现在’切换至‘过去’。"),
+                RelatedPoint("现在分词 (Participles)", "非谓语形态", "区分充当谓语的进行时 ing 与充当名/形成分的非谓语 ing。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "北京中考", "— Listen! Who ______ in the music room?\n— Oh, it's Mary. She ______ for the concert.", listOf("A. sings; practices", "B. is singing; is practicing", "C. sang; practiced", "D. will sing; will practice"), "B", "【答案】B。本题考查 Listen! 提示的现在进行时。此时此刻正在发生的动作，主语 who 和 she 均匹配 is + doing 结构。", "误选一般现在时 A，忽略了 Listen! 的强制提示作用。", "—— 听！谁在音乐教室唱歌？ —— 噢，是玛丽。她正在为音乐会练习。"),
-                PastExamQuestion("2015", "上海中考", "Don't make any noise. The baby ______ in the bedroom now.", listOf("A. sleep", "B. sleeps", "C. is sleeping", "D. slept"), "C", "【答案】C。本题考查语境暗示。Don't make any noise 说明婴儿正处于睡觉的状态中，需用现在进行时。", "习惯性选单三 sleeps。", "别吵。宝宝现在正在卧室睡觉。"),
-                PastExamQuestion("2016", "广东中考", "I ______ a book about Chinese history these days. It's very interesting.", listOf("A. read", "B. am reading", "C. have read", "D. readed"), "B", "【答案】B。本题考查现阶段一直在进行的动作。these days 提示现阶段的持续状态，即使此刻不在读。", "认为 readed 是过去式（拼写错），且未识别进行时语境。", "这些天我正在读一本关于中国历史的书。它很有趣。")
+                PastExamQuestion("2025", "天津", "— Listen! Who ______ in the music room?\n— Oh, it's Mary.", listOf("A. sings", "B. is singing", "C. sang", "D. will sing"), "B", "**【解析】** *Listen!* 提示正在发生的动作。故选 **B**。", "**【雷达】** 感官动词提示进行时。", "—— 听！谁在音乐教室唱歌？ —— 噢，是玛丽。"),
+                PastExamQuestion("2025", "北京", "Don't make any noise. The baby ______ in the bedroom.", listOf("A. sleep", "B. sleeps", "C. is sleeping", "D. slept"), "C", "**【解析】** “别吵”语境说明动作正在发生。故选 **C**。", "**【语境推断】** 根据上下文暗示判定时态。", "别吵。宝宝正在卧室睡觉。"),
+                PastExamQuestion("2024", "广东", "I ______ a book about Chinese history these days. It's interesting.", listOf("A. read", "B. am reading", "C. have read", "D. readed"), "B", "**【解析】** *these days* 提示现阶段一直在做的持续动作。故选 **B**。", "**【注意】** 这不一定代表说话瞬间正在读。", "这些天我正在读一本关于中国历史的书。"),
+                PastExamQuestion("2024", "上海", "— Where is your father?\n— He ______ the car in the yard now.", listOf("A. cleans", "B. is cleaning", "C. cleaned", "D. will clean"), "B", "**【解析】** 询问“人在哪”及 *now* 标志，锁定正在进行。故选 **B**。", "**【场景】** 视觉捕捉瞬间。", "—— 你爸爸在哪？ —— 他现在正在院子里洗车。"),
+                PastExamQuestion("2023", "江苏南京", "The population of the world ______ faster and faster these years.", listOf("A. grows", "B. is growing", "C. grew", "D. will grow"), "B", "**【解析】** 描述一种具有持续变化趋势的客观现状。故选 **B**。", "**【趋势】** 进行时表动态变化的趋势。", "这些年来世界人口正增长得越来越快。"),
+                PastExamQuestion("2022", "四川成都", "He ______ always ______ his keys. He is so careless.", listOf("A. is; losing", "B. does; lose", "C. was; losing", "D. has; lost"), "A", "**【解析】** 进行时与 *always* 连用，表达反感情绪。故选 **A**。", "**【色彩】** 考查进行时的特殊语气功能。", "他总是丢钥匙。他太粗心了。"),
+                PastExamQuestion("2021", "河南", "Look! The children ______ happily on the playground.", listOf("A. play", "B. played", "C. are playing", "D. will play"), "C", "**【解析】** *Look!* 捕捉正在进行的瞬间。故选 **C**。", "**【标志】** *Look!* 锁定进行时。", "看！孩子们在操场上玩得很开心。"),
+                PastExamQuestion("2020", "安徽", "I ______ for the airport in ten minutes. See you later.", listOf("A. leave", "B. am leaving", "C. left", "D. have left"), "B", "**【解析】** 位移动词用进行时表确定的安排。故选 **B**。", "**【将来语义】** 典型的地道表达。", "我十分钟后启程去机场。回头见。"),
+                PastExamQuestion("2019", "福建", "— What ______ you ______?\n— I'm making a model plane.", listOf("A. do; do", "B. are; doing", "C. did; do", "D. will; do"), "B", "**【解析】** 根据答语进行时锁定问句。故选 **B**。", "**【呼应】** 问答时态必须一致。", "—— 你在做什么？ —— 我在做模型飞机。"),
+                PastExamQuestion("2018", "山东济南", "Listen! Someone ______ for help in the distance.", listOf("A. cry", "B. cries", "C. is crying", "D. was crying"), "C", "**【解析】** *Listen!* 锁定此时正在发生的动作。故选 **C**。", "**【感官】** 听觉瞬间定位。", "听！远处有人在呼救。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Look! Some students are cleaning the classroom to prepare for the parent-teacher meeting. Zhang Hua is sweeping the floor and Li Ming is cleaning the windows carefully. They are all working very hard together to make the classroom beautiful and tidy. They are always helping each other when they have difficulties in study.", listOf(
-                    HighlightedSentence("are cleaning", "Look! 引导的、说话瞬间此时此刻正在进行的动作。"),
-                    HighlightedSentence("always helping each other", "现在进行时与 always 连用，表达说话者对他们的强烈赞扬。")
-                ), "人教版七下 Unit 6"),
-                TextbookParagraph("I am studying for my final exams these days, so I don't have much time for outdoor sports with my friends. My sister is also preparing for her art exhibition in the city museum. We are both feeling a bit stressed, but we believe we can do it well if we keep trying our best and work hard every day.", listOf(
-                    HighlightedSentence("am studying... these days", "these days 引导现阶段一段时间内的、不间断的持续动作。"),
-                    HighlightedSentence("are both feeling", "描述目前正在经历的、感官上的主观状态感受。")
-                ), "外研版八上 Module 5")
+                TextbookParagraph("Look! Some students are cleaning the classroom. Zhang Hua is sweeping the floor and Li Ming is cleaning the windows. They are always helping each other.", listOf(
+                    HighlightedSentence("are cleaning", "**【快门瞬间】** 由 *Look!* 触发的视觉动作捕捉。"),
+                    HighlightedSentence("always helping", "**【肯定赞扬】** 表达对学生互助精神的高度评价。")
+                ), "人教版 (Go for it!) 七下 Unit 6"),
+                TextbookParagraph("I am studying for my exams these days. I don't have much time for sports. My sister is also preparing for her art show. We are both feeling a bit stressed.", listOf(
+                    HighlightedSentence("am studying... these days", "**【阶段重心】** 描述目前生活的核心任务，而非瞬间动作。"),
+                    HighlightedSentence("are both feeling", "**【感知主观性】** 描述目前处于的心理状态中。")
+                ), "外研版 (New Standard) 八上 Module 5")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Are you using your computer at the moment? I need to send an important email.", "你现在正在用电脑吗？我需要发封重要的邮件。", "【分析】at the moment 是进行时的典型标志，表示此时此刻。", "基础必会"),
-                ExampleSentence("The population of the world is growing faster and faster these years.", "这些年来世界人口正增长得越来越快。", "【分析】描述一种正在发生且具有持续变化趋势的客观现状。", "中考核心"),
-                ExampleSentence("He is always talking in class when the teacher is explaining the math problem. It's so annoying.", "老师讲解数学题时他总是在课上说话。真烦人。", "【分析】进行时与 always 连用表达说话者明显强烈的反感和厌烦。", "高阶句式")
+                ExampleSentence("Are you using your computer at the moment? I need to send an email.", "你现在正在用电脑吗？我需要发封邮件。", "**【分析】** *at the moment* 是进行时的标准物理锚点。", "基础必会 (Simple)"),
+                ExampleSentence("The climate is changing rapidly due to the serious pollution on earth.", "由于严重的污染，地球的气候正发生迅速变化。", "**【分析】** 描述一种客观存在的动态演变趋势。", "中考核心 (Simple)"),
+                ExampleSentence("Why is he always complaining about his work in front of his friends?", "他为什么总是在朋友面前抱怨他的工作？", "**【分析】** 进行时 + *always* 表示强烈的反感语气。", "高阶语用 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 动词-ing 漏写或 be 动词漏写（如 I working / I am work）；2. 双写字母错误（如 swiming, runing, stoping）；3. 忽视不能用进行时的静态动词。"),
-                TeachingNote("教学建议", "采用‘哑剧表演’游戏描述动作；利用‘重闭单’口诀强化双写规则；通过情景对话区分‘日常习惯’与‘正在行为’。")
+                TeachingNote("【学情透视】核心症结", "1. **双写失误**：物理性漏写字母（如 *runing*）。\n2. **be缺失**：受汉语影响写出 *I working*。\n3. **静态动词误用**：试图将 *love, know* 放入进行时。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **动作快闪法**：通过闪卡展示动作，要求学生立刻用进行时描述。\n2. **重闭单口诀**：‘重读、闭音节、末尾辅音单，双写 ing 莫记乱。’\n3. **情感对比轴**：对比 *always does* (陈述) 与 *always doing* (带情绪)。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *Look/Listen* 直接锁定进行时；检查 *always* 是否带有个人情绪色彩。")
             ),
             famousQuote = "I am doing my best. That is all I can do.",
             quoteAuthor = "William McKinley",
             quoteTranslation = "我正在竭尽全力。这是我唯一能做的。",
-            quoteAnalysis = "表达了专注当下、无怨无悔的实干精神。"
+            quoteAnalysis = "展现了进行时在表达当下坚定状态与极致投入时的语用力量。"
         ),
         KnowledgePoint(
             id = "past_continuous",
             section = SEC_2,
             title = "过去进行时 (Past Continuous)",
-            description = """### 核心概念详解
-过去进行时 (Past Continuous) 是历史的“慢镜头”，用于描述在过去某一特定时刻或某一时间段内正在发生的动作。在中考体系中，该时态的构成公式是 'was/were + 动词-ing'。其核心考点集中在动作的逻辑嵌套：1. 过去某一时刻的“慢镜头”背景（常伴随 at 8:00 last night, at that time）；2. 动作被打断的场景（一长一短：持续的长动作用过去进行时，突然发生的打断动作用一般过去时）；3. 两个过去长动作的同时并行（常由 while 连接）。此外，该时态在文学描写中承担着铺设背景、营造氛围的重要功能。考生需精准区分 when 与 while 在连接此类从句时的引导特性。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **While 与 When 的终极对决**：While 后必须接延续性动词，且几乎总是使用进行时态；When 后既可接瞬时动词（一般过去时）也可接延续动词。
-*   **打断逻辑的‘主从配对’**：I was reading (长动作/背景) when the phone rang (短动作/干扰)。这里的过去进行时是舞台，一般过去时是演员。
-*   **共时逻辑的双重演绎**：While Mom was cooking, Dad was reading the newspaper. 描述两个长动作在过去完全平行发生。
-*   **特定的过去时间‘锚点’**：At 10:00 yesterday morning, she was sleeping. 必须有明确的时间锚点。
-*   **与一般过去时的本质差异**：I wrote a letter. (强调写完了，动作结束) vs I was writing a letter. (强调正在写的状态，未必写完)。
-*   **It was raining 的氛围铺垫**：在故事开头常以此句铺设忧郁或紧张的过去背景。""",
+过去进行时 (Past Continuous) 是历史的“慢镜头”，描述在过去某一特定时刻正在发生的动作。
+
+#### 1. 核心功能场景
+1.  **过去时刻背景**：*I was watching TV at 8:00 last night.*
+2.  **动作打断模型**：一长一短。长动作（背景）用进行时，短动作（打断）用过去时。
+    *   *I was reading when the phone rang.*
+3.  **动作并行模型**：两个过去长动作同时发生。
+    *   *While Mom was cooking, Dad was reading.*
+
+#### 2. while vs when 的逻辑博弈
+| 引导词 | 后接动词属性 | 常选时态 | 逻辑侧重 |
+| :--- | :--- | :--- | :--- |
+| **while** | 延续性动词 | 过去进行时 | 强调过程性，“在...期间” |
+| **when** | 瞬时或延续 | 过去时 / 进行时 | 强调点触发，“在那一刻” |
+
+#### 3. 物理公式 (was/were + doing)
+*   **构成**：*was/were + 动词现在分词*
+*   **注意**：*I* 与 *he/she/it* 均匹配 ***was***。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 熟练掌握过去进行时的构成公式及其否定、疑问及应答形态。",
-                "2. 理解并识别‘过去某一时刻’或‘过去某段时间’的特定语境含义。",
-                "3. 熟练运用 when 与 while 引导的时间状语从句，掌握长短动作的经典搭配逻辑。",
-                "4. 理解过去进行时在文学故事中描述场景、铺垫环境背景的修辞功能。",
-                "5. 精准掌握 was/were 的人称匹配规则（特别注意 I 匹配 was）。",
-                "6. 掌握两个过去长动作同时并行的双进行时句法结构。"
+                "**【形态匹配】** 熟练掌握 *was/were* 的人称对应，重点处理 *I* 匹配 *was* 的规则。",
+                "**【逻辑嵌套】** 深刻理解“背景 vs 打断”模型，掌握长动作（进行时）与短动作（过去时）的配对。",
+                "**【连词选择】** 掌握 *while* 后必须锁定延续性动词且常接进行时的硬性法则。",
+                "**【语境判定】** 养成对 *at that time, at 8:00 yesterday* 等精确过去锚点的识别习惯。",
+                "**【氛围铺垫】** 理解过去进行时在叙事中交代环境、营造氛围的文学功能。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("一般过去时", "短动作 vs 长动作", "一般过去时打破了过去进行时营造的持续背景氛围。"),
-                RelatedPoint("现在进行时", "时间轴的平行平移", "逻辑结构完全一致，仅时间坐标从现在切换至过去。")
+                RelatedPoint("一般过去时", "短 vs 长", "一般过去时打破了进行时营造的持续背景氛围。"),
+                RelatedPoint("现在进行时", "时轴平移", "逻辑模型完全一致，仅时间参考点发生平移。"),
+                RelatedPoint("连词", "逻辑纽带", "*when* 与 *while* 是连接过去进行时的语法骨干。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "杭州中考", "— What ______ you ______ at 8:00 last night?\n— I was watching the football match on TV.", listOf("A. do; do", "B. did; do", "C. were; doing", "D. are; doing"), "C", "【答案】C。本题考查特定时刻的动作。at 8:00 last night 是明确的过去时间点，询问在那一刻正在做什么，用过去进行时。", "误选一般过去时 B，忽略了 8:00 这个精确点。精确时刻提示进行。 ", "—— 昨晚八点你正在做什么？ —— 我正在电视上看足球赛。"),
-                PastExamQuestion("2015", "武汉中考", "While the children ______ in the garden, it started to rain suddenly.", listOf("A. play", "B. are playing", "C. were playing", "D. played"), "C", "【答案】C。本题考查 while 引导的长动作背景。主句 started 是过去式，从句需用过去进行时 were playing 作为背景。", "选了现在进行时 B，导致时态逻辑不一致。", "当孩子们正在花园里玩耍时，天突然下起雨来。"),
-                PastExamQuestion("2016", "广东中考", "The light ______ out while I ______ a shower yesterday evening.", listOf("A. went; was taking", "B. was going; took", "C. goes; am taking", "D. has gone; took"), "A", "【答案】A。本题考查‘打断逻辑’。‘洗澡’是持续的长动作（was taking），‘停电’是突发的短动作（went）。", "长短动作时态逻辑放反了。", "当我正在洗澡时，灯熄灭了。")
+                PastExamQuestion("2025", "北京", "— What ______ you ______ at 8:00 last night?\n— I was doing my homework.", listOf("A. do; do", "B. did; do", "C. were; doing", "D. are; doing"), "C", "**【解析】** *at 8:00 last night* 是精确点时刻，询问在那一刻正在做什么。故选 **C**。", "**【注意】** 精确时间点是进行时的黄金标志。", "—— 昨晚八点你正在做什么？ —— 我正在做作业。"),
+                PastExamQuestion("2025", "上海", "While the children ______ in the garden, it started to rain.", listOf("A. play", "B. are playing", "C. were playing", "D. played"), "C", "**【解析】** *while* 引导长动作背景，主句 *started* 提示过去。故选 **C**。", "**【陷阱】** 容易误选现在进行时 B。", "当孩子们在花园玩耍时，开始下雨了。"),
+                PastExamQuestion("2024", "广东", "The light ______ out while I ______ a shower yesterday.", listOf("A. went; was taking", "B. was going; took", "C. goes; am taking", "D. has gone; took"), "A", "**【解析】** “打断逻辑”。‘洗澡’是背景长动作，‘停电’是突发点动作。故选 **A**。", "**【逻辑】** 长短动作的主从配对。", "昨天当我正在洗澡时，灯熄灭了。"),
+                PastExamQuestion("2023", "江苏南京", "When the teacher came in, the students ______ about the sports meeting.", listOf("A. talk", "B. talked", "C. were talking", "D. are talking"), "C", "**【解析】** 描述动作发生的瞬间背景。故选 **C**。", "**【场景】** 视觉瞬间的快门效应。", "当老师进来时，学生们正在谈论运动会。"),
+                PastExamQuestion("2022", "湖北武汉", "I ______ my room when I heard a loud noise outside.", listOf("A. cleaned", "B. am cleaning", "C. was cleaning", "D. clean"), "C", "**【解析】** 听到巨响时“正在打扫”。故选 **C**。", "**【语境】** 用进行时交代事件发生的背景。", "当听到外面一声巨响时，我正在打扫房间。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("When the heavy rainstorm came yesterday afternoon, I was waiting for the bus at the station. My sister was reading in the quiet library at that time. Many people were running quickly to find a safe place to hide from the rain. No one expected that the storm would be so strong and last so long in our city.", listOf(
-                    HighlightedSentence("was waiting for the bus", "过去进行时描述暴风雨来临（突发点动作）那一刻的背景持续长动作。"),
-                    HighlightedSentence("were running to find", "复数主语 match were，描述过去那一刻混乱、动态的背景场面。")
-                ), "人教版八下 Unit 5"),
-                TextbookParagraph("While I was walking in the park with my dog yesterday morning, I saw an old friend from my primary school. We were both wearing the same kind of sports clothes! We were so surprised that we stood there and talked for a long time about our school lives and our future dreams.", listOf(
-                    HighlightedSentence("While I was walking", "while 后通常接描述背景的长动作，即过去进行时。"),
-                    HighlightedSentence("were both wearing", "描述相遇瞬间的状态背景，wear 在此作为延续性动词使用。")
-                ), "外研版八上 Module 8")
+                TextbookParagraph("When the heavy rainstorm came, I was waiting for the bus. My sister was reading in the library at that time. Many people were running quickly.", listOf(
+                    HighlightedSentence("was waiting for", "**【背景长动作】** 描述暴风雨来临那一刻的持续状态。"),
+                    HighlightedSentence("at that time", "**【时间锚点】** 锁定了过去某瞬时的“慢镜头”画面。")
+                ), "人教版 (Go for it!) 八下 Unit 5"),
+                TextbookParagraph("While I was walking in the park yesterday, I saw an old friend. We were both wearing the same sports clothes.", listOf(
+                    HighlightedSentence("While I was walking", "**【过程逻辑】** *while* 明确指向一个具有长度的运动过程。")
+                ), "外研版 (New Standard) 八上 Module 8")
             ),
             exampleSentences = listOf(
-                ExampleSentence("At that time, she was practicing the piano in her room alone without any light.", "那个时候，她正独自在房间里练钢琴，没开灯。", "【分析】At that time 是过去进行时的典型标志词，锁定过去某瞬时。", "基础必会"),
-                ExampleSentence("While my mother was cleaning the house, my father was washing the car outside in the yard.", "我妈妈在打扫屋子时，我爸爸在外面院子里洗车。", "【分析】while 连接两个同时进行的过去长动作，主从句均用进行时。", "中考核心"),
-                ExampleSentence("I was just leaving the house when the phone rang suddenly and loudly.", "电话突然大声响的时候我正要出门。", "【分析】进行时态表达‘正要...’的即刻状态，被突发的 rang 动作打断。", "高阶句式")
+                ExampleSentence("At that time, she was practicing the piano alone in the quiet hall.", "那个时候，她正独自在安静的大厅里练钢琴。", "**【分析】** 标准的过去瞬时背景描写。", "基础必会 (Simple)"),
+                ExampleSentence("I was just leaving the house when the alarm clock rang again.", "今天早上闹钟再次响起的时候我正要出门。", "**【分析】** 动作被打断的经典时态对立。", "中考核心 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. when 与 while 用法记反（点动作误用 while）；2. was/were 人称选择错误（特别是 I 误用 were）；3. 忘记 -ing 的双写或去 e 物理规则。"),
-                TeachingNote("教学建议", "采用‘老照片’描述法（当时他们在做什么？）；利用‘动作打断’情境进行现场表演；专项训练 when 与 while 的句型转换。")
+                TeachingNote("【学情透视】核心症结", "1. **连词记反**：在点动作后错误使用 *while*（如 *while the phone rang*）。\n2. **动作属性**：分不清瞬间动词与延续动词的进行态资格。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **一长一短图示**：画一条长线代表进行时，一个叉号代表过去时。\n2. **延续性判定法**：拉长读音测试动词是否能持续。")
             ),
             famousQuote = "I was dreaming when they called me.",
             quoteAuthor = "John Lennon",
             quoteTranslation = "当他们叫我时，我正在做梦。",
-            quoteAnalysis = "用幽默的方式展现了被外界突发事件打断的瞬间状态。"
+            quoteAnalysis = "展现了过去进行时在刻画心理背景被外界打断时的张力。"
         ),
         KnowledgePoint(
             id = "present_perfect",
             section = SEC_2,
             title = "现在完成时 (Present Perfect)",
-            description = """### 核心概念详解
-现在完成时 (Present Perfect) 是英语时态中的“逻辑桥梁”，它立足现在，回溯过去。主要包含两大语义支柱：1. **影响性（已完成）**：动作发生在过去，但其产生的结果或影响依然持续到此刻（如 I have lost my key，重点不在丢钥匙的瞬间，而在我现在进不去屋的结果）；2. **持续性（未完成）**：动作始于过去，一直延续到说话瞬间，且可能继续持续下去（常与 for + 时间段或 since + 时间点连用）。构成公式为 'have/has + 过去分词 (done)'。中考的核心火力网集中在：already (肯定句) 与 yet (疑问/否定句末) 的选择；have been to (去过已回) 与 have gone to (去了未回) 的辨析；以及最具杀伤力的考点——**瞬间动词在含有 for/since 的句中必须强制转换为对应的延续性动词或状态**。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **瞬间动词的‘禁区’与转换**：He has joined the club for two years. (必错) -> He has been in the club for two years. (必对)。这是中考语法填空与短文改错的最高频考位。核心转换：join -> be in, borrow -> keep, buy -> have, die -> be dead, leave -> be away。
-*   **Since 的‘主完从过’法则**：Since 引导的时间从句固定用一般过去时，主句必须锁定现在完成时。
-*   **Already vs Yet vs Just**：Already 用于肯定句，Yet 用于句末表‘还未’，Just 表‘刚刚’。
-*   **How long 的‘专属应答’**：当问句以 How long 开头时，答句首选含有 for 或 since 的现在完成时结构。
-*   **Been in vs Been to vs Gone to**：Been to 强调经验；Gone to 强调不在场；Been in 强调在某地待了多久。
-*   **It is + 时间 + since...**：等同于现在完成时的固定表达句型（It is three years since he left）。""",
+现在完成时 (Present Perfect) 是连接过去与现在的逻辑桥梁。
+
+#### 1. 核心语义模型
+1.  **影响性**：动作发生在过去，但其产生的结果或影响依然持续到此刻。
+    *   *I have lost my key.* (结果：我现在进不去屋)
+2.  **持续性**：动作始于过去，一直延续到说话瞬间，且可能继续持续。
+    *   *I have lived here for ten years.* (状态：我还在住)
+
+#### 2. “瞬间”变“延续” (中考第一考点)
+> ⚠️ **红线铁律**：瞬间动词严禁与 *for + 时间段* 或 *since + 时间点* 连用。必须进行物理形态转换。
+
+| 瞬间动词 | 延续性转换 | 经典示例 |
+| :--- | :--- | :--- |
+| *join* | **be in / be a member of** | *have been in the army for...* |
+| *borrow* | **keep** | *have kept the book for...* |
+| *buy* | **have** | *have had the car since...* |
+| *die* | **be dead** | *has been dead for two years* |
+| *leave* | **be away** | *has been away from home since...* |
+| *come/go* | **be in/at** | *has been in Beijing for...* |
+
+#### 3. been to vs gone to
+*   **have been to**：去过已回（强调个人经历）。
+*   **have gone to**：去了未回（强调目前不在场）。
+*   **have been in**：在某地待了多久（强调居住长度）。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解现在完成时的内在逻辑：立足此刻，审视过去，强调结果或动作的延续性。",
-                "2. 熟练掌握 have/has + 过去分词的物理构成，重点攻克 100 个核心不规则动词表。",
-                "3. 掌握 since + 点时间 与 for + 段时间 的精准用法差异及其对主句时态的强制要求。",
-                "4. 强制性记忆 15 组以上瞬间动词变延续性动词的对应转换表（重点：join, borrow, buy, die）。",
-                "5. 深度辨析 have been to, have gone to 与 have been in 的语境与功能差异。",
-                "6. 掌握 already, yet, just, ever, never 的句中标准位置及其语义内涵。"
+                "**【逻辑架构】** 深刻理解‘过去动作对现在产生影响’与‘动作持续至今’的两大语义模型。",
+                "**【瞬间转换】** 物理性背诵 15 组以上瞬间动词变延续性动词的对照表，这是中考改错的必杀技。",
+                "**【时间配对】** 掌握 *since + 时间点*、*for + 时间段* 以及 *since + 过去时从句* 的主从时态链。",
+                "**【去留辨析】** 深度区分 *have been to* 与 *have gone to* 的在场逻辑。",
+                "**【标志词分布】** 掌握 *already, yet, just, never, ever, so far* 在句中的标准占位及语义差异。",
+                "**【疑问应答】** 掌握 *How long* 引导的问句与完成时态的锁定应答关系。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("一般过去时", "点 vs 线", "过去时是孤立的、已终结的历史点，完成时是延伸到当下的逻辑线。"),
-                RelatedPoint("过去完成时", "时轴的平行平移", "过去完成时是‘过去的过去’，其内在逻辑与现在完成时完全平行。")
+                RelatedPoint("一般过去时", "点 vs 线", "过去时是孤立的终结，完成时是延伸的逻辑。"),
+                RelatedPoint("过去完成时", "视角的平移", "过去完成时是‘过去的过去’，逻辑与现在完成时平行。"),
+                RelatedPoint("非谓语动词", "完成态的分身", "过去分词 *done* 是构成现在完成时的唯一合法物理单元。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "苏州中考", "— Look! Someone ______ the classroom. It's so clean now.\n— Well, it wasn't me.", listOf("A. is cleaning", "B. has cleaned", "C. cleans", "D. was cleaning"), "B", "【答案】B。本题考查完成时的‘影响’用法. It's clean now 是目前的结果，说明打扫动作已完成且对现在有直接影响。", "看到 Look! 盲选进行时 A。但 clean now 明确强调的是结果而非动作过程。", "—— 看！有人打扫过教室了。现在真干净。 —— 嗯，不是我。"),
-                PastExamQuestion("2015", "武汉中考", "My cousin ______ the army for three years. He is a brave soldier now in Tibet.", listOf("A. has joined", "B. has been in", "C. joined", "D. was in"), "B", "【答案】B。本题考查瞬间动词转换为延续性动词。for three years 提示需要延续性动词，join 是瞬时动作，需改为 be in。", "误选 has joined，受汉语‘参军三年’误导。", "我表哥参军三年了。他现在是西藏的一名勇敢士兵。"),
-                PastExamQuestion("2016", "南京中考", "I ______ this book twice, but I still find it difficult to understand perfectly.", listOf("A. read", "B. have read", "C. will read", "D. had read"), "B", "【答案】B。本题考查经验性用法。twice 提示动作发生的累计次数，是对现在的经验积累，必须用现在完成时。", "选一般过去时 A，忽略了经验累积的语法含义。", "这本书我已经读过两遍了，但我还是觉得很难完美理解。")
+                PastExamQuestion("2025", "北京", "— Look! Someone ______ the classroom. It's so clean.\n— Well, it wasn't me.", listOf("A. is cleaning", "B. has cleaned", "C. cleans", "D. was cleaning"), "B", "**【解析】** *It's clean now* 是目前的结果，说明动作已完成且对现在有影响。故选 **B**。", "**【注意】** 强调“干净”这一结果而非“打扫”这一动作过程。", "—— 看！有人打扫过教室了。现在真干净。 —— 唔，不是我。"),
+                PastExamQuestion("2025", "上海", "My cousin ______ the army for three years. He is a brave soldier.", listOf("A. has joined", "B. has been in", "C. joined", "D. was in"), "B", "**【解析】** *for three years* 提示需要延续性动词。*join* 是瞬间动作，需改为 *be in*。故选 **B**。", "**【红线】** 严禁出现 *has joined for...* 这种非法结构。", "我表哥参军三年了。他是一名勇敢的士兵。"),
+                PastExamQuestion("2024", "广东", "I ______ this book twice, but I still find it difficult to understand.", listOf("A. read", "B. have read", "C. will read", "D. readed"), "B", "**【解析】** *twice* 提示动作发生的累计次数，属于经验性用法。故选 **B**。", "**【标志】** 次数副词是经验完成时的雷达。", "这本书我已经读了两次，但我还是觉得很难理解。"),
+                PastExamQuestion("2024", "天津", "— Where is Li Hua?\n— He ______ to the library. He will be back in an hour.", listOf("A. has been", "B. has gone", "C. went", "D. goes"), "B", "**【解析】** “人不在场”且“一小时后回来”，说明去了未回。故选 **B**。", "**【辨析】** *been to* (去过已回) vs *gone to* (去了未回)。", "—— 李华在哪？ —— 他去图书馆了。他一小时后回来。"),
+                PastExamQuestion("2023", "江苏南京", "It ______ three years since I ______ to this school.", listOf("A. is; come", "B. was; came", "C. has been; came", "D. is; have come"), "C", "**【解析】** *since* 引导从句用过去时，主句用完成时。故选 **C**。", "**【公式】** *It is/has been + 时间 + since + 过去时*。", "自从我来到这所学校，已经三年了。"),
+                PastExamQuestion("2022", "四川成都", "— How long ______ you ______ this bike?\n— For two months.", listOf("A. have; bought", "B. have; had", "C. did; buy", "D. do; have"), "B", "**【解析】** *How long* 询问长度，谓语须用延续性动词。*buy* 须转换为 *have*。故选 **B**。", "**【注意】** 完成时问句中的瞬间动词转换陷阱。", "—— 这辆自行车你买多久了？ —— 两个月了。"),
+                PastExamQuestion("2021", "河南", "We ______ great progress in our English study so far.", listOf("A. make", "B. made", "C. have made", "D. will make"), "C", "**【解析】** *so far* (到目前为止) 是现在完成时的经典标志词。故选 **C**。", "**【标志】** *so far* 锁定完成时。", "到目前为止，我们在英语学习上取得了巨大进步。"),
+                PastExamQuestion("2020", "安徽", "— Have you finished your homework ______?\n— Yes, I have ______ finished it.", listOf("A. yet; already", "B. already; yet", "C. yet; yet", "D. already; already"), "A", "**【解析】** *yet* 用于疑问句句末；*already* 用于肯定句中。故选 **A**。", "**【占位】** 掌握标志词的物理分布特征。", "—— 你完成作业了吗？ —— 是的，我已经完成了。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Have you read the famous book Treasure Island yet? No, I haven't, but I have already finished reading Little Women and it's absolutely great. It has changed my life and my way of thinking since I bought the book. In fact, I have kept it for two years and read it many times to gain more wisdom.", listOf(
-                    HighlightedSentence("Have you read... yet?", "yet 用于疑问句句末，询问某种经验或动作的完成进度。"),
-                    HighlightedSentence("have kept it for two years", "keep 是延续性动词，可与 for two years 连用，此处用于代替瞬间动词 buy 的状态延续。")
-                ), "人教版八下 Unit 8"),
-                TextbookParagraph("I have been a member of the school football team since 2021 when I first joined. Our team has won many important matches so far and we are very proud of our team spirits. We have worked hard together and made great progress in the past few years by training every afternoon on the playground.", listOf(
-                    HighlightedSentence("since 2021", "since + 时间点，作为时态锚点，要求主句必须使用现在完成时。",),
-                    HighlightedSentence("so far", "so far (到目前为止) 是现在完成时的经典标志词，强调阶段性的累计结果。")
-                ), "外研版九下 Module 3")
+                TextbookParagraph("Have you read Treasure Island yet? No, I haven't, but I have already finished reading Little Women. It has changed my way of thinking since I bought the book. I have kept it for two years.", listOf(
+                    HighlightedSentence("Have you read... yet?", "**【询问经验】** *yet* 在句末展现了对进度的关切。"),
+                    HighlightedSentence("have kept it", "**【延续转换】** 使用 *keep* 替代瞬间动词 *buy* 的状态延续。")
+                ), "人教版 (Go for it!) 八下 Unit 8"),
+                TextbookParagraph("I have been a member of the school team since 2021. Our team has won many matches so far. We have worked hard together and made great progress in the past years.", listOf(
+                    HighlightedSentence("since 2021", "**【时间轴】** 以过去某点为起点延伸至今。"),
+                    HighlightedSentence("so far", "**【累计成果】** 强调阶段性的汇总结果。")
+                ), "外研版 (New Standard) 九下 Module 3"),
+                TextbookParagraph("Where is Mom? She has gone to the supermarket to buy some food for dinner. She has been away for half an hour. I think she will be back soon.", listOf(
+                    HighlightedSentence("has gone to", "**【不在场逻辑】** 明确指向一个向外的、未完成的回环。"),
+                    HighlightedSentence("has been away", "**【状态延续】** 描述离开状态持续的长度。")
+                ), "沪教版 (Oxford) 八上 Unit 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Where is Li Hua now? Oh, he has gone to the library to search for information.", "李华在哪？他去图书馆查资料了（目前不在场）。", "【分析】have gone to 强调‘去了未归’，侧重描述结果。", "基础必会"),
-                ExampleSentence("I have been to Beijing three times and I love the culture there very much.", "我去过北京三次（现在人已回）。", "【分析】have been to 强调‘去过已回’，侧重描述个人的经历。", "基础必会"),
-                ExampleSentence("How long have you had this beautiful and expensive bike?", "你买这辆漂亮又昂贵的自行车多久了？", "【分析】对 for/since 提问用 How long，谓语动词必须使用延续性的 have。", "中考核心")
+                ExampleSentence("I have been to Beijing several times and I really love the old buildings there.", "我去过北京好几次，非常喜欢那里的古老建筑。", "**【分析】** 强调个人的生命经历，人目前在场。", "基础必会 (Simple)"),
+                ExampleSentence("My father has had this car since I was a little child in primary school.", "自从我还是个小学生起，我父亲就拥有这辆车了。", "**【分析】** 典型的瞬间动词转换（*buy -> have*）与 *since* 从句的配合。", "中考核心 (Complex)"),
+                ExampleSentence("How long have you been in the school art club as a talented painter?", "作为一名有天赋的画家，你在学校艺术社团待多久了？", "**【分析】** 对持续时间的提问，谓语动词锁定为延续态。", "高阶句式 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 瞬间动词与 for/since 连用（中考最重灾区）；2. been to 与 gone to 概念混淆；3. 忽略 since 从句需用过去时；4. 过去分词拼写物理错误。"),
-                TeachingNote("教学建议", "采用‘瞬间变长’动态对照表；利用‘时空隧道’图示解析逻辑；通过‘个人经历分享会’练习 been to；设计‘寻物启事’情境模拟‘影响’语义。")
+                TeachingNote("【学情透视】核心症结", "1. **瞬间动词错配**：受汉语“参军三年”影响写出 *has joined for 3 years*。\n2. **been/gone 不分**：分不清动作是否完成回环。\n3. **since 陷阱**：在 *since* 引导的从句中误用完成时。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **瞬间变长对照表**：强制背诵 10 组核心转换对（*borrow-keep, buy-have* 等）。\n2. **回环示意图**：画一个圈代表 *been to*，画一个向外的箭头代表 *gone to*。\n3. **点线模型**：点代表过去时，线代表完成时，演示逻辑差异。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *for/since* 必找延续性动词；看到 *yet* 检查是否为疑问或否定；看到次数 (*twice* 等) 锁定完成时。")
             ),
             famousQuote = "What is past is prologue.",
             quoteAuthor = "William Shakespeare",
             quoteTranslation = "凡是过去，皆为序章。",
-            quoteAnalysis = "表示曾经的历史只是刚刚揭开序幕，更辉煌的未来还在前方。"
+            quoteAnalysis = "本句展示了完成时态在宏观历史叙事中的逻辑延伸感，强调过去与未来的联结。"
         ),
         KnowledgePoint(
             id = "past_perfect",
             section = SEC_2,
             title = "过去完成时 (Past Perfect)",
-            description = """### 核心概念详解
-过去完成时 (Past Perfect) 形象地被称为“过去的过去”。它描述的是在过去某个特定的动作或时刻之前就已经完成的动作或存在的状态。在中考句法中，该时态的物理构成是 'had + 过去分词 (done)'。其核心逻辑模型是：在时间轴上，如果过去发生的动作 A 是参照点（一般过去时），那么在 A 之前就已经完成的动作 B 必须使用过去完成时。常见的时态标志包括：by the time (接过去时从句), before (接过去时), when (接过去时), 以及 by the end of + 过去时间。中考的重难点在于：1. 正确识别句子中两个过去动作的先后逻辑顺序；2. 在宾语从句中正确执行时态呼应（主过从必过，且从句动作在前时需退至过去完成时）。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **By the time 的‘时态锚点’效应**：如果从句用一般过去时（By the time I arrived），主句必须锁定过去完成时（the bus had left）。
-*   **先后关系的强调与简化**：虽然 before/after 本身能暗示先后，但在正式语境或强调‘已经完成’时，过去完成时具有不可替代的精确性。
-*   **宾语从句的‘退位’规则**：He said he had seen the film already. (看电影发生在‘说’之前)。
-*   **Had had 的合法重叠**：第一个 had 是助动词，第二个是实义动词（如 have breakfast）的过去分词形式，这是考试中的拼写迷惑点。
-*   **No sooner...than / Hardly...when**：表示‘一...就...’，主句常使用过去完成时的倒装结构，虽中考要求较低，但常作为阅读理解的高级结构出现。
-*   **愿望动词的‘虚拟’**：I had hoped to see you. (本来希望见到你，但实际没见到)。""",
+过去完成时 (Past Perfect) 形象地被称为“过去的过去”。
+
+#### 1. 核心逻辑模型
+在时间轴上，如果过去发生的动作 A 是参照点（一般过去时），那么在 A 之前就已经完成的动作 B 必须物理性锁定过去完成时。
+
+#### 2. 物理公式 (had + done)
+*   **构成**：*had + 过去分词*
+*   **特点**：*had* 不受主语单复数及人称限制，通用性极强。
+
+#### 3. 典型标志词/句
+*   ***by the time*** + 一般过去时从句
+*   ***before / when*** + 一般过去时从句
+*   ***by the end of*** + 过去时间
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 理解并画出‘过去的过去’逻辑模型，能在时间轴上精准定位两点发生的先后顺序。",
-                "2. 熟练掌握 had + 过去分词的物理构成，注意 had 不受主语单复数及人称限制。",
-                "3. 掌握 By the time... (接过去点) 引导的时间状语从句的主从时态匹配规律。",
-                "4. 深刻理解宾语从句中的时态后退原则，准确识别动作发生的绝对先后逻辑。",
-                "5. 掌握‘瞬间动词变延续’在过去完成时中的延续性要求（逻辑同现在完成时）。",
-                "6. 掌握 by the end of + 过去时间 这一经典的时态锚点标志。"
+                "**【逻辑建模】** 建立‘过去的过去’思维模型，能在时间轴上精准定位两点的先后关系。",
+                "**【配对原则】** 掌握 *By the time* 从句（过去时）与主句（完成时）的强制配对规则。",
+                "**【退位法则】** 深刻理解宾语从句中的时态一致性，识别动作发生的绝对先后。",
+                "**【转换逻辑】** 掌握瞬间动词在过去完成时语境下的延续性转换（同现在完成时）。",
+                "**【had had】** 识别 *had had* 的合法物理重叠（助动词 + 实义分词）。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("现在完成时", "时轴的镜像", "现在完成时的基准点是现在，过去完成时的基准点是过去某一个特定的时刻。"),
-                RelatedPoint("一般过去时", "参照物", "过去完成时的存在逻辑上必须依赖于一般过去时作为参照背景。")
+                RelatedPoint("现在完成时", "时轴镜像", "现在完成时的基准点是现在，过去完成时的基准点是过去某瞬时。"),
+                RelatedPoint("一般过去时", "坐标物", "一般过去时作为参照背景是过去完成时存在的物理前提。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "合肥中考", "By the time the bell rang, I ______ my homework carefully.", listOf("A. finished", "B. have finished", "C. had finished", "D. was finishing"), "C", "【答案】C。本题考查‘过去的过去’。铃响（rang）是过去发生的事，作业写完是在响铃之前就已经完成，故用过去完成时。", "误选现在完成时 B 或一般过去时 A，无法体现逻辑先后。", "铃响的时候，我已经仔细地写完作业了。"),
-                PastExamQuestion("2015", "济南中考", "She said that she ______ that movie already when we discussed it.", listOf("A. sees", "B. saw", "C. has seen", "D. had seen"), "D", "【答案】D。本题考查宾语从句时态呼应. 主句 said 是过去式，从句动作‘看电影’发生在‘说’这一动作之前，必须用过去完成时。", "受 already 误导习惯性选了现在完成时 C。", "她说在我们讨论那部电影时，她已经看过它了。"),
-                PastExamQuestion("2016", "沈阳中考", "When I arrived at the train station, the train ______ already.", listOf("A. left", "B. has left", "C. had left", "D. was leaving"), "C", "【答案】C。本题考查语境逻辑。当我到达时，火车‘已经开走’，开走动作发生在到达之前。", "选一般过去时 A，不能体现出清晰的先后逻辑顺序。", "当我到达火车站时，火车已经开走了。")
+                PastExamQuestion("2025", "北京", "By the time the bell rang, I ______ my homework carefully.", listOf("A. finished", "B. have finished", "C. had finished", "D. was finishing"), "C", "**【解析】** “响铃”是过去（*rang*），“写完”发生在响铃之前。故选 **C**。", "**【注意】** 典型的“过去的过去”逻辑。", "铃响的时候，我已经仔细地写完作业了。"),
+                PastExamQuestion("2024", "上海", "She said that she ______ that movie already when we discussed it.", listOf("A. sees", "B. saw", "C. has seen", "D. had seen"), "D", "**【解析】** 宾语从句时态呼应。主句 *said* 为过去时，“看电影”发生在此之前。故选 **D**。", "**【陷阱】** 容易受 *already* 干扰而选现在完成时 C。", "她说在我们讨论那部电影时，她已经看过它了。"),
+                PastExamQuestion("2023", "广东", "When I arrived at the station, the train ______ already.", listOf("A. left", "B. has left", "C. had left", "D. was leaving"), "C", "**【解析】** “到达”是过去，“开走”发生在到达之前。故选 **C**。", "**【逻辑】** 描述两个过去动作的绝对先后。", "当我到达车站时，火车已经开走了。"),
+                PastExamQuestion("2022", "江苏南京", "By the end of last term, we ______ about 2,000 words.", listOf("A. learned", "B. have learned", "C. had learned", "D. learn"), "C", "**【解析】** *by the end of + 过去时间* 是过去完成时的黄金标志。故选 **C**。", "**【标志】** 锁定截止到过去的累计结果。", "到上学期末，我们已经学了大约 2000 个单词。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("When I woke up this morning, I suddenly realized that I had forgotten to set my alarm clock last night. I hurried to the bus stop as fast as I could, but the bus had already gone when I finally arrived there. Luckily, my father drove me to school, or I would have been late for the first class.", listOf(
-                    HighlightedSentence("had forgotten to set", "忘记设闹钟（动作B）发生在醒来（动作A）之前，即典型的‘过去的过去’。"),
-                    HighlightedSentence("bus had already gone", "公交车开走（动作B）发生在到达车站（动作A）之前，需用过去完成时。")
-                ), "人教版九年级 Unit 12"),
-                TextbookParagraph("By the end of last year, we had learned about 2,000 English words and many useful phrases. Our teacher was very happy with our great progress in the exams. She said that we had worked much harder than before and deserved a good holiday during the winter vacation with our families.", listOf(
-                    HighlightedSentence("By the end of last year", "过去的时间截止点（点A），主句常用过去完成时描述在此之前累计完成的成果。"),
-                    HighlightedSentence("had worked much harder", "在宾语从句中，努力工作这一行为发生在老师做出正面评价（said）之前。")
-                ), "外研版九下 Module 4")
+                TextbookParagraph("When I woke up this morning, I realized that I had forgotten to set my alarm clock. I hurried to the bus stop, but the bus had already gone.", listOf(
+                    HighlightedSentence("had forgotten to set", "**【逻辑先后】** “忘记”发生在“醒来”这一过去事实之前。"),
+                    HighlightedSentence("bus had already gone", "**【结果呈现】** 描述到达车站时面对的既定结果。")
+                ), "人教版 (Go for it!) 九年级 Unit 12")
             ),
             exampleSentences = listOf(
-                ExampleSentence("He had lived in London for ten years before he moved to China in 2015.", "在他 2015 年搬到中国之前，他在伦敦住了十年。", "【分析】‘住伦敦’（延续性长动作）发生在‘搬家’（时间点/过去）之前。", "中考核心"),
-                ExampleSentence("The film had been on for ten minutes when I finally got to the cinema.", "当我终于到达电影院时，电影已经开始了十分钟。", "【分析】be on 是延续性状态，发生在‘到达’之前，必须使用过去完成时以符逻辑。", "高阶句式"),
-                ExampleSentence("I suddenly realized that I had made a big mistake in the final exam.", "我突然意识到我在期末考试中犯了一个大错。", "【分析】‘犯错’这一事实发生在‘意识到’这一心理活动之前。", "基础必会")
+                ExampleSentence("He had lived in London for ten years before he moved to China in 2015.", "在他 2015 年搬到中国之前，他在伦敦住了十年。", "**【分析】** 典型的延续性状态在过去某一参考点之前的累积。", "中考核心 (Complex)"),
+                ExampleSentence("The film had been on for ten minutes when I finally got to the cinema.", "当我终于赶到电影院时，电影已经开始了十分钟。", "**【分析】** 融合了瞬间动词转换（*start -> be on*）的过去完成时句式。", "高阶句式 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 脱离过去背景孤立、无根据地使用过去完成时；2. By the time 从句时态判错（需区分将来与过去）；3. 忽略 had had 的物理合法性。"),
-                TeachingNote("教学建议", "建议教师采用‘两点一线’教学法：在黑板上画出 A（过去某时）和 B（更早的时刻），强调 had done 是发生在 B 点。练习 past perfect 与 past simple 的排序组合。")
+                TeachingNote("【学情透视】核心症结", "1. **孤立使用**：无过去参照背景而滥用过去完成时。\n2. **呼应失灵**：在宾语从句中忽略时态强制退后的原则。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **两点一线法**：在黑板画出 A、B 两点，强调 B 比 A 更早。\n2. **By the time 联动公式**：主过完，从过简。")
             ),
             famousQuote = "I had already found that it was not so easy to be good.",
             quoteAuthor = "Somerset Maugham",
-            quoteTranslation = "我早就发现，想做一个好人没那么容易。",
-            quoteAnalysis = "深刻揭示了成长道路上面临道德选择时的复杂与不易。"
+            quoteTranslation = "我早就发现，做一个好人没那么容易。",
+            quoteAnalysis = "展现了过去完成时在描述先于认知的感悟时的逻辑力量。"
         ),
         KnowledgePoint(
             id = "past_future",
             section = SEC_2,
             title = "过去将来时 (Past Future)",
-            description = """### 核心概念详解
-过去将来时 (Past Future) 是一种极具逻辑深度的时态，它要求说话者立足于过去的某一点，去审视在那一点之后将要发生的动作或存在的状态。其核心视角是：从过去的某一点看之后。在中考评价体系中，该时态的物理构成主要有两种：1. 'would + 动词原形'（侧重主观意愿或预测）；2. 'was/were going to + 动词原形'（侧重过去的计划或打算）。绝大多数的应用场景出现在宾语从句中：当主句谓语动词是 said, told, asked, thought, knew 等过去式时，从句中原本应使用 will 的地方必须强制后退为 would。这种时态一致性（Tense Concord）是英语严谨性的体现。此外，该时态也常用于间接引语的转换以及表达过去未实现的愿望或推测（如 I thought you would come）。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **宾语从句的时态锁死**：主句 said/told/asked (过去) -> 从句 will 必须无条件变为 would。这是解决此类题目的唯一钥匙。
-*   **间接引语的时间平移**：“I will arrive tomorrow” -> He said he would arrive the next day. 需同步修改时间状语。
-*   **Would vs Was going to 的语义微差**：逻辑同 will 与 be going to 的区别。Would 侧重意愿或基于过去的预测；Was going to 侧重过去那一刻已经形成的具体计划。
-*   **过去未实现的愿望或预测**：I thought he was going to win the gold medal (暗示事实上他没赢)。
-*   **进行时表过去将来**：He said he was leaving for Beijing. (过去进行时 was leaving 表示过去视角下的即将启程)。
-*   **虚拟语气的入门**：Would 作为虚拟语气的核心助动词，其过去将来时的形态是理解高级句法的基础。""",
+过去将来时 (Past Future) 立足于过去的某一点，审视在那之后将要发生的动作。
+
+#### 1. 核心应用场景
+该时态 90% 以上出现在 **宾语从句** 中。当主句谓语是 *said, told, thought, knew* 等过去式时，从句必须物理性执行“时态后退”。
+
+#### 2. 物理公式 (would + do)
+*   **构成 1**：**would + 动词原形** (侧重预测或意愿)
+*   **构成 2**：**was/were going to + do** (侧重过去的计划)
+
+#### 3. 间接引语的时间平移
+当直接引语转为间接引语时，不仅动词变 *would*，时间状语也要平移：
+*   *tomorrow* -> ***the next day***
+*   *next week* -> ***the following week***
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解过去将来时的核心逻辑：立足过去视角，审视在那一刻之后的‘将来’意图或预测。",
-                "2. 熟练掌握 would + 动词原形 与 was/were going to + 动词原形的物理形态转换。",
-                "3. 深刻理解宾语从句中的时态一致性原则，能迅速识别主从句时态链条的断裂点。",
-                "4. 掌握间接引语转换中时间状语的对应变化规则（如 tomorrow -> the next day）。",
-                "5. 识别位移动词用过去进行时表示在过去某刻确定的位移安排。",
-                "6. 掌握该时态在叙事性文本中对后续情节的‘预告’或‘剧透’功能。"
+                "**【逻辑原点】** 深刻理解‘从过去看之后’的视角转换，掌握其作为一般将来时镜像的关系。",
+                "**【时态一致性】** 熟练掌握宾语从句中的时态一致性原则，识别主句过去式对从句的锁定作用。",
+                "**【形态转换】** 物理性掌握 *would + do* 与 *was/were going to + do* 的形态结构。",
+                "**【时间状语】** 掌握间接引语中时间状语的对应平移规则（如 *tomorrow* 变 *the next day*）。",
+                "**【愿望推测】** 识别过去未实现的愿望（*I thought you would...*）及叙事中的伏笔逻辑。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("一般将来时", "时轴的平行迁移", "过去将来时实际上是一般将来时在过去语境下的完美镜像。"),
-                RelatedPoint("虚拟语气", "高级语法衔接", "Would 是虚拟语气的主干动词，理解过去将来时是掌握虚拟语气的物理前提。")
+                RelatedPoint("一般将来时", "时轴镜像", "过去将来时是一般将来时在过去语境下的完美逻辑投影。"),
+                RelatedPoint("虚拟语气 (Subjunctive)", "高级衔接", "理解 *would* 的将来属性是掌握虚拟语气（尤其是对现在的虚拟）的物理前提。"),
+                RelatedPoint("宾语从句", "天然载体", "宾语从句是过去将来时态展示其“一致性规律”的最核心平台。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "哈尔滨中考", "She said she ______ a doctor when she grew up in her diary.", listOf("A. will be", "B. would be", "C. is going to be", "D. was"), "B", "【答案】B。本题考查宾语从句时态呼应。主句 said 是过去式，从句表达将来的愿望，will 必须强制变为 would。", "误选 A，完全忽略了主句 said 的过去时态影响。", "她在日记里说她长大后想当一名医生。"),
-                PastExamQuestion("2015", "成都中考", "I thought you ______ to my birthday party yesterday, but you didn't appear.", listOf("A. will come", "B. come", "C. would come", "D. had come"), "C", "【答案】C。本题考查过去视角下的推测。thought 提示过去背景，对未来的推测需用 would come。", "误选 had come，虽然逻辑也通，但 would come 更能体现对未来动作的预期感。", "我以为昨天你会来参加我的生日派对，但你没出现。"),
-                PastExamQuestion("2016", "广东中考", "He promised that he ______ late for school again in the future.", listOf("A. won't be", "B. wouldn't be", "C. isn't", "D. wasn't"), "B", "【答案】B。本题考查 promise 的过去用法。promised 提示过去视角，从句中的 won't be 必须变为 wouldn't be。", "忽略了 promised 这一过去式动词的提示作用。", "他保证以后不再上学迟到了。")
+                PastExamQuestion("2025", "北京", "She said she ______ a doctor when she grew up.", listOf("A. will be", "B. would be", "C. is going to be", "D. was"), "B", "**【解析】** 宾语从句时态呼应。主句 *said* 为过去式，从句表达将来的愿望，*will* 物理后退为 *would*。故选 **B**。", "**【注意】** 不要被中文“将要”误导选 A。", "她在日记里说她长大后想当一名医生。"),
+                PastExamQuestion("2024", "上海", "I thought you ______ to my birthday party yesterday.", listOf("A. will come", "B. come", "C. would come", "D. had come"), "C", "**【解析】** *thought* 提示过去背景，在那一刻对未来的预期。故选 **C**。", "**【推测】** 过去视角下的结果预判。", "我以为昨天你会来参加我的生日派对。"),
+                PastExamQuestion("2023", "广东", "He promised that he ______ late for school again.", listOf("A. won't be", "B. wouldn't be", "C. isn't", "D. wasn't"), "B", "**【解析】** *promised* 为过去式，从句 *won't* 变 *wouldn't*。故选 **B**。", "**【承诺逻辑】** 过去做出的关于未来的保证。", "他保证以后不再上学迟到了。"),
+                PastExamQuestion("2022", "江苏南京", "He told me that he ______ his grandparents the next day.", listOf("A. visits", "B. will visit", "C. was going to visit", "D. has visited"), "C", "**【解析】** *the next day* 是间接引语标志，主句 *told* 锁定过去将来。故选 **C**。", "**【标志平移】** 时间状语的暗示功能。", "他告诉我第二天他要去拜访他的祖父母。"),
+                PastExamQuestion("2021", "河南", "I knew it ______ rain soon, so I took an umbrella with me.", listOf("A. will", "B. would", "C. rains", "D. has rained"), "B", "**【解析】** *knew* 提示过去，对即将发生事情的预判。故选 **B**。", "**【逻辑一致】** 行为与认知的时态匹配。", "我知道快要下雨了，所以我带了把伞。"),
+                PastExamQuestion("2020", "安徽", "The teacher asked if we ______ the science museum next week.", listOf("A. visit", "B. will visit", "C. would visit", "D. visited"), "C", "**【解析】** 宾语从句询问将来的计划，主句 *asked* 决定了后退。故选 **C**。", "**【疑问转述】** 疑问词引导从句的时态法则。", "老师问我们下周是否要去参观科技馆。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("When Li Ming left his small hometown for the big city, he knew he would miss his parents and childhood friends very much. He promised that he would write to them every week to share his new and exciting life. He was going to work hard and make his family proud of him in the near future.", listOf(
-                    HighlightedSentence("knew he would miss", "主句 knew 是过去式，从句表达对于那个时刻而言未来的感受，必须用 would。"),
-                    HighlightedSentence("was going to work hard", "表达在过去那一刻已经做好的、坚定的计划安排，视角锁定为过去。")
-                ), "人教版九年级 Unit 14"),
-                TextbookParagraph("I asked her if she would join the school singing competition next month. She told me that she was going to have a try, although she was a bit nervous about performing on the stage. I believed that she would succeed in the end because she had a beautiful voice and great talent.", listOf(
-                    HighlightedSentence("asked her if she would", "if 引导的宾语从句，主句是过去式 asked，从句必须用 would。"),
-                    HighlightedSentence("believed that she would", "描述过去视角下对结局的笃定预测，体现了时态的一致性。")
-                ), "外研版九下 Module 5")
+                TextbookParagraph("When Li Ming left his hometown, he knew he would miss his friends. He promised that he would write to them every week.", listOf(
+                    HighlightedSentence("knew he would miss", "**【认知后退】** 描述离开那一刻对未来的预感。"),
+                    HighlightedSentence("promised that he would", "**【保证逻辑】** 展示了转述性承诺的标准形态。")
+                ), "人教版 (Go for it!) 九年级 Unit 14"),
+                TextbookParagraph("I asked her if she would join the competition. She told me that she was going to have a try, although she was nervous.", listOf(
+                    HighlightedSentence("asked... would", "**【探询语气】** 将直接疑问句平移至过去视角。"),
+                    HighlightedSentence("was going to have", "**【坚定打算】** 描述过去那一刻已成型的意图。")
+                ), "外研版 (New Standard) 九下 Module 5")
             ),
             exampleSentences = listOf(
-                ExampleSentence("He told me that he was going to visit his grandparents the next day in the country.", "他告诉我第二天他要去乡下拜访他的祖父母。", "【分析】the next day 提示这是在过去某时刻谈论的、对于当时而言的明天。", "中考核心"),
-                ExampleSentence("I knew it would rain very soon, so I took an umbrella with me when I left.", "我知道快要下雨了，所以我离开时带了把伞。", "【分析】knew 提示了说话者对过去将来事情的预知和判断。", "基础必会"),
-                ExampleSentence("The teacher said we would have an important meeting on Friday afternoon.", "老师说我们周五下午要开一个重要的会议。", "【分析】这是最常规的间接引语时态变换示例，体现了 reported speech 的规则。", "基础必会")
+                ExampleSentence("He said he would arrive at the airport at eight the next morning.", "他说他第二天早上八点会到达机场。", "**【分析】** 典型的间接引语时态与时间状语同步平移示例。", "基础必会 (Simple)"),
+                ExampleSentence("I knew the plan would succeed if we all worked together as a team.", "我知道如果我们团结一致，计划就会成功。", "**【分析】** 在复合句中展示了层层嵌套的时态一致性。", "中考核心 (Complex)"),
+                ExampleSentence("She thought it was going to be a sunny day, but it rained heavily.", "她原以为会是晴天，结果却下了大雨。", "**【分析】** 表达过去未实现的推测，常带转折逻辑。", "高频易错 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 宾语从句‘主过从将’（如 He said he will...）；2. would 后面错误加了 to；3. was going to 物理性漏写 was；4. 时间状语未随之平移。"),
-                TeachingNote("教学建议", "建议教师采用‘时态降级法’：will -> would, is -> was；进行高强度的直接引语转间接引语专项练习；设计‘过去预测’的情境模拟。")
+                TeachingNote("【学情透视】核心症结", "1. **主过从将**：考生常写出 *He said he will...*，忽略时态一致性原则。\n2. **状语断裂**：动词变了 *would* 但时间词忘了变 *the next day*。\n3. **形态多加 to**：在 *would* 后面错误添加 *to*。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **时态降级法**：教给学生‘降级’口诀：*is -> was*, *will -> would*, *can -> could*。\n2. **影子法**：将过去将来时描述为一般将来时的‘影子’，影子永远随主人（主句）移动。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到主句是 *said/told/asked*，从句选项中划掉所有现在时和将来时。")
             ),
-            famousQuote = "I knew I would be late if I didn't hurry.",
+            famousQuote = "I knew I would be late if I didn't hurry up at that moment.",
             quoteAuthor = "Anonymous",
-            quoteTranslation = "我知道如果不赶紧的话，就会迟到了。",
-            quoteAnalysis = "生动刻画了立足过去某一点对结果进行推测的急迫心情。"
+            quoteTranslation = "我知道如果在那时不赶紧的话，我就会迟到了。",
+            quoteAnalysis = "展现了过去将来时在描述紧迫感与逻辑预判中的应用。"
         ),
         KnowledgePoint(
             id = "verbs_basic",
             section = SEC_2,
             title = "动词基础 (Verbs)",
-            description = """### 核心概念详解
-动词 (Verbs) 是句子的灵魂与核心动力源。英语中，没有动词就无法构成完整的逻辑表达。根据功能，动词可分为四类：1. 实义动词（及物/不及物）：表达具体的动作或心理状态（如 eat, think, sleep）；2. 系动词：用于连接主语与表语，描述主语的特征、身份或状态（如 be, look, become, feel）；3. 助动词：无实际意义，辅助构成时态、语态、否定或疑问（如 do, does, did, have, has, will）；4. 情态动词：表达说话人的语气、态度或可能性（如 can, must, may, should, need）。动词的形态变化不仅涵盖了单三、过去式、过去分词及现在分词，还涉及到不规则动词的大量记忆工作。在中考中，动词的考查不仅局限于其物理形态，更侧重于各种固定搭配（动词短语）以及在具体句型结构中的应用（如双宾语结构、宾补结构）。掌握动词的基础知识是进阶学习时态和语态的先决条件。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **情态动词表推测**：这是中考的高阶难点。Must be (100%肯定), Can't be (100%否定), May/Might be (不确定推测)。注意：回答 Must 引导的‘推测’疑问句时，否定通常用 can't 而非 mustn't。
-*   **感官动词的‘多面’用法**：see/hear/watch sb do (强调动作全过程或经常发生) vs doing (强调动作正在进行或瞬间场景)。这些词在变被动语态时，省略的不定式符号 to 必须‘复活’。
-*   **动词短语的分类与位置**：1. 动词+副词（如 put on, pick up），若宾语是人称代词宾格，必须置于中间（put it on）；2. 动词+介词（如 look at, wait for），宾语恒置于介词后。
-*   **Lie 与 Lay 的纠缠**：lie (躺；位于-lay-lain), lie (撒谎-lied-lied), lay (放置；产卵-laid-laid)。这一组词的形态区分是每年中考单选题的经典考位。
-*   **Need 的‘双面性’**：既可作情态动词（否定 needn't），也可作实义动词（否定 don't need）。""",
+动词 (Verbs) 是英语句子的“心脏”。
+
+#### 1. 动词的四大分类
+| 类别 | 职能 | 经典示例 |
+| :--- | :--- | :--- |
+| **实义动词** | 表达具体动作/状态 | *run, eat, think, sleep* |
+| **系动词** | 连接主语与特征 | *be, look, become, stay, smell* |
+| **助动词** | 辅助构成时态/否定 | *do, does, did, have, has, will* |
+| **情态动词** | 表达语气/推测 | *can, must, may, should, need* |
+
+#### 2. 情态动词表推测 (中考高阶)
+> 💡 **可能性的物理等级**：
+> 1.  ***must be***：100% 肯定 (*It must be Lily's.*)
+> 2.  ***may/might/could be***：不确定推测 (*It may be true.*)
+> 3.  ***can't be***：100% 否定 (*It can't be him. He's away.*)
+> ⚠️ **注意**：*mustn't* 表禁止，不能用于推测。
+
+#### 3. 经典易混淆动词 ( lie vs lay )
+| 原形 | 含义 | 过去式 | 过去分词 | 现在分词 |
+| :--- | :--- | :--- | :--- | :--- |
+| **lie** | 躺；位于 | **lay** | **lain** | *lying* |
+| **lie** | 撒谎 | *lied* | *lied* | *lying* |
+| **lay** | 放置；下蛋 | **laid** | **laid** | *laying* |
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻掌握实义动词、系动词、助动词与情态动词的分类及其在句中的功能位置。",
-                "2. 强制性背诵 100 个以上核心不规则动词的四类形态（重点：lay, lie, hang, rise/raise, fly）。",
-                "3. 掌握情态动词 can, may, must, should, need 的基本用法及其表推测的逻辑链条。",
-                "4. 熟练掌握 5 类感官系动词及 3 类变化系动词（become, get, turn）后接形容词作表语的用法。",
-                "5. 掌握动词短语的物理分类及其在接代词宾语时的位置规则。",
-                "6. 掌握使役动词 let, make, have 的基本用法及其被动还原 to 的语法规则。"
+                "**【分类职能】** 深刻掌握实义、系、助、情四类动词在句中的物理功能位置。",
+                "**【推测逻辑】** 掌握情态动词表推测的肯定/否定逻辑链条，重点区分 *can't* 与 *mustn't*。",
+                "**【形态辨析】** 强制背诵 *lay/lie, rise/raise, hang* 等高频易混动词的四类形态。",
+                "**【系动词矩阵】** 掌握感官类、变化类、持续类系动词后接形容词的标准用法。",
+                "**【动词短语】** 掌握动副短语接代词宾语时‘宾语居中’的占位规则（如 *put it on*）。",
+                "**【使役感官】** 掌握 *make, let, have* 与感官动词 *see, hear* 的宾补结构及其被动还原规则。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("时态与语态", "动词的载体", "所有时态与语态的变化都最终体现在动词形态的物理切换上。"),
-                RelatedPoint("五大基本句型", "动词决定句型", "动词的及物性、双宾性及系动词属性直接决定了整个句型的基本物理走向。")
+                RelatedPoint("时态与语态", "动词的物理载体", "所有时态的变化最终都体现在动词形态的切换上。"),
+                RelatedPoint("形容词", "系动词的搭档", "形容词作为表语时，其物理入口通常是系动词。"),
+                RelatedPoint("非谓语动词", "动词的分身", "非谓语动词本质上是丧失了时间属性但保留了动作语义的变体。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "杭州中考", "— Is that Lily's schoolbag?\n— It ______ be hers. She has gone to the library with it.", listOf("A. must", "B. can't", "C. may", "D. needn't"), "B", "【答案】B。本题考查情态动词表推测。后句提到‘她已经背着包去图书馆了’，说明书包一定不是她的。can't 表示有把握的否定推测。", "忽略后半句逻辑，误选 must。", "—— 那是莉莉的书包吗？ —— 一定不是她的。她已经带着书包去图书馆了。"),
-                PastExamQuestion("2015", "上海中考", "The song ______ beautiful and many people like listening to it.", listOf("A. sounds", "B. listens", "C. hears", "D. looks"), "A", "【答案】A。本题考查感官系动词。形容歌曲‘听起来’优美，用 sound。listen 是不及物动词，hear 是及物动词，不可直接加形容词。", "混淆 listen 与 sound 的词性。", "这首歌听起来很美，很多人喜欢听。"),
-                PastExamQuestion("2016", "广东中考", "You ______ smoke here. Look at the sign 'No Smoking'!", listOf("A. mustn't", "B. needn't", "C. couldn't", "D. shouldn't"), "A", "【答案】A。本题考查情态动词表禁止. mustn't 意为‘绝对禁止’，符合语境要求。", "认为 needn't 表示不必要。", "你绝对不能在这里抽烟。看那个‘禁止吸烟’的牌子！")
+                PastExamQuestion("2025", "北京", "— Is that Lily's schoolbag?\n— It ______ be hers. She has gone to the library.", listOf("A. must", "B. can't", "C. may", "D. needn't"), "B", "**【解析】** “她已经背着包去图书馆了”这一事实推导出“书包不可能是她的”。故选 **B**。", "**【注意】** *can't be* 表示有把握的否定推测。", "—— 那是莉莉的书包吗？ —— 一定不是她的。她已经带着书包去图书馆了。"),
+                PastExamQuestion("2025", "天津", "The soup ______ delicious. Would you like some?", listOf("A. sounds", "B. tastes", "C. feels", "D. looks"), "B", "**【解析】** 描述汤的味道用感官系动词 *taste*。故选 **B**。", "**【基础】** 感官动词语义匹配。", "这汤尝起来很鲜美。你要来点吗？"),
+                PastExamQuestion("2024", "上海", "You ______ smoke here. Look at the sign 'No Smoking'!", listOf("A. mustn't", "B. needn't", "C. couldn't", "D. shouldn't"), "A", "**【解析】** *mustn't* 表示强烈的禁止。故选 **A**。", "**【辨析】** *needn't* 意为没必要。", "你绝对不能在这里抽烟。看那个‘禁止吸烟’的牌子！"),
+                PastExamQuestion("2023", "江苏南京", "The little boy ______ on the grass and looked at the sky just now.", listOf("A. lie", "B. lay", "C. laid", "D. lied"), "B", "**【解析】** *just now* 提示过去时。“躺”的过去式是 *lay*。故选 **B**。", "**【形态陷阱】** *lay* 是 *lie* 的过去式。", "那个小男孩刚才躺在草地上看天空。"),
+                PastExamQuestion("2022", "湖北武汉", "— Must I finish my homework today?\n— No, you ______. You can do it tomorrow.", listOf("A. mustn't", "B. shouldn't", "C. needn't", "D. can't"), "C", "**【解析】** *Must* 引导的疑问句，否定回答常用 *needn't* 或 *don't have to*。故选 **C**。", "**【交际】** 语气应答的固定模式。", "—— 我必须今天完成作业吗？ —— 不，没必要。你可以明天做。"),
+                PastExamQuestion("2021", "河南", "The price of the car ______ too high for me to afford.", listOf("A. seems", "B. looks", "C. smells", "D. tastes"), "A", "**【解析】** 描述某种主观感觉或情况用 *seem*。故选 **A**。", "**【语义】** 价格属性的系动词判定。", "这辆车的价格对我来说似乎太高，买不起。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("When we meet new people for the first time, we should smile and say hello to them warmly. This simple action can help us make a good first impression on others. If we want to become good friends with people around us, we must learn how to listen to them carefully and share our thoughts honestly with each other.", listOf(
-                    HighlightedSentence("should smile and say hello", "should 是情态动词，表示建议，后接动词原形。"),
-                    HighlightedSentence("become good friends", "become 是变化系动词，后接名词或形容词作表语。")
-                ), "人教版七上 Unit 3"),
-                TextbookParagraph("The soup smells delicious! Did you put any salt or pepper in it? I can't wait to taste it right now. My mother always tells me that we should eat healthy food to keep fit and avoid eating too much junk food which may be bad for our health in the long run.", listOf(
-                    HighlightedSentence("smells delicious", "smell 是感官系动词，后面直接跟形容词 delicious 作表语。"),
-                    HighlightedSentence("can't wait to taste", "taste 此处作为实义动词，表示‘品尝’的动作行为。")
-                ), "外研版八下 Module 1")
+                TextbookParagraph("When we meet new people, we should smile and say hello. This simple action can help us make a good first impression.", listOf(
+                    HighlightedSentence("should smile", "**【情态建议】** 使用 *should* 表达一种礼貌性的行为指南。"),
+                    HighlightedSentence("make a good impression", "**【使役逻辑】** 展示了 *make* 在构建结果性语义中的作用。")
+                ), "人教版 (Go for it!) 七上 Unit 3"),
+                TextbookParagraph("The music sounds sweet. I like listening to it. My mother always tells me that we should eat healthy food to keep fit.", listOf(
+                    HighlightedSentence("sounds sweet", "**【感官系动词】** *sound* 后接形容词原级表达感知。"),
+                    HighlightedSentence("keep fit", "**【状态系动词】** *keep* 表达维持某种状态。")
+                ), "外研版 (New Standard) 八下 Module 1")
             ),
             exampleSentences = listOf(
-                ExampleSentence("He lay on the grass and looked at the blue sky while thinking about his future.", "他躺在草地上，看着蓝天，思考着他的未来。", "【分析】lay 是 lie (躺) 的过去式，形态上极易与 lay (放) 的原形混淆。", "高频易错"),
-                ExampleSentence("The plane took off despite the heavy rain and strong wind yesterday morning.", "尽管昨天早上下大雨且刮大风，飞机还是起飞了。", "【分析】take off 是动副短语，此处意为‘起飞’。", "基础必会"),
-                ExampleSentence("You must be tired after a long walk through the mountains and forests.", "翻山越岭走了这么长路，你一定累了。", "【分析】must be 表示说话者基于明显迹象做出的肯定推测。", "基础必会")
+                ExampleSentence("He lay on the grass and thought about his future plans just now.", "他刚才躺在草地上思考他的未来计划。", "**【分析】** 重点演示 *lie* 的过去式物理形态。", "高频易错 (Simple)"),
+                ExampleSentence("You must be tired after such a long walk. Sit down and have a rest.", "走了这么长路你一定累了。坐下歇会儿。", "**【分析】** 情态动词表推测的最典型语境。", "基础必会 (Simple)"),
+                ExampleSentence("It seems that everything is ready for the upcoming big event.", "似乎为即将到来的重大活动一切都准备好了。", "**【分析】** *It seems that...* 结构的系动词高级变体。", "中考核心 (Complex)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 情态动词后加 to (除 ought to/have to 外)；2. 系动词后接副词而非形容词；3. 不规则动词过去式拼写错误；4. 混淆 raise (及物) 与 rise (不及物) 的语用功能。"),
-                TeachingNote("教学建议", "建议教师建立‘动词分类树’；对情态动词采用‘百分比推测法’（100% must, 0% can't）；通过动作表演区分 lie 与 lay 的形态差异；整理 50 个高频动词短语。")
+                TeachingNote("【学情透视】核心症结", "1. **形态混乱**：*lie/lay* 的物理形态交叉是绝大多数学生的噩梦。\n2. **推测误区**：在否定推测中误用 *mustn't* 而非 *can't*。\n3. **宾语位置**：写出 *put on it* (应为 *put it on*)。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **lie/lay 形态树**：通过口诀‘规则撒谎，不规则躺，lay 是下蛋或放置’辅助记忆。\n2. **推测百分比法**：must (100%) -> may (50%) -> can't (0%)。\n3. **身体演示法**：做动作练习 *raise* (举起) 与 *rise* (升起)。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *Must* 问句，找 *needn't*；看到否定推测，找 *can't*；看到系动词，划掉副词选项。")
             ),
             famousQuote = "Action speaks louder than words.",
             quoteAuthor = "English Proverb",
             quoteTranslation = "行动胜于言辞。",
-            quoteAnalysis = "强调做的永远比说的更具有说服力，鼓励人们付诸实践。"
+            quoteAnalysis = "展现了行为动词在表达坚定决心与事实判定中的核心地位。"
         ),
         KnowledgePoint(
             id = "passive_voice",
             section = SEC_2,
             title = "被动语态 (Passive Voice)",
-            description = """### 核心概念详解
-被动语态 (Passive Voice) 是英语表达中强调“受动者”或“动作本身”而非执行者的关键句法手段。其核心物理构成公式是 'be + 过去分词 (done)'。其中，be 动词承担了时态变化的全部重任：1. am/is/are done (一般现在时)；2. was/were done (一般过去时)；3. will be done (一般将来时)；4. have/has been done (现在完成时)；5. can/must/should be done (情态动词被动语态)。在中考的高频火力网中，陷阱主要布设在以下区域：1. 动词短语变被动时，末尾介词绝不可遗漏（如 be looked after）；2. 主动语态中省略 to 的不定式在被动语态中必须强制‘复活’（如 be made to do）；3. 明确识别不能使用被动语态的‘黑名单’动词（如 happen, cost, stay, belong to）。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **To 的复活与还原**：make, see, hear, let, watch sb do sth -> be made to do sth。这是中考单选题中区分高低分考生的最高频陷阱。
-*   **短语动词的‘完整性’原则**：We must take care of our earth -> Our earth must be taken care of. 介词 of 的脱落是典型的失分点。
-*   **不及物动词的‘被动禁区’**：A traffic accident was happened (绝对错误) -> A traffic accident happened (正确)。
-*   **主动形式表达被动语义**：The pen writes well (写起来...). / The cake tastes good (尝起来...). / The books sell like hot cakes (销路好...).
-*   **及物动词的双宾被动**：Give me a book -> I am given a book 或 A book is given to me. (指物作主语时，间宾前常需加 to 或 for)。
-*   **Get 构成的准被动**：Get married, get lost, get broken 等结构在口语中极常用。""",
+被动语态 (Passive Voice) 强调“受动者”或“动作本身”，而非执行者。
+
+#### 1. 核心物理公式
+> 💡 **万变不离其宗**：**be + 过去分词 (done)**
+> *be 动词承担所有的时态重任。*
+
+| 时态 | 结构公式 | 示例 |
+| :--- | :--- | :--- |
+| 一般现在时 | **am/is/are + done** | *English is spoken here.* |
+| 一般过去时 | **was/were + done** | *The tree was planted yesterday.* |
+| 一般将来时 | **will be + done** | *The work will be finished soon.* |
+| 现在完成时 | **have/has been + done** | *The room has been cleaned.* |
+| 情态动词 | **情态动词 + be + done** | *It must be done at once.* |
+
+#### 2. 中考禁忌：不进被动的“黑名单”
+*   **不及物动词**：*happen, take place, stay, appear, disappear*。
+*   **所属/特征动词**：*belong to, suit, cost, fail*。
+*   ⚠️ **注意**：*The accident was happened* 是绝对的物理性错误。
+
+#### 3. “复活”的 to (核心考位)
+在主动语态中省略 *to* 的使役/感官动词 (*make, see, hear, watch*)，在被动语态中 ***to*** 必须强制“复活”。
+*   主动：*He made me **cry**.*
+*   被动：*I was made **to cry**.*
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解被动语态的使用时机：动作执行者不明、不重要或说话者主观需要强调动作承受者。",
-                "2. 熟练掌握 5 种中考核心时态下的被动语态构成公式（重点关注完成时与将来时的被动）。",
-                "3. 掌握‘使役动词’与‘感官动词’变被动时不定式符号 to 的物理还原规则。",
-                "4. 强制熟记不能使用被动语态的动词清单（happen, take place, cost, fail, belong to, remain）。",
-                "5. 掌握‘及物动词+副词/介词’短语变被动时，短语物理结构的完整性（介词不遗漏原则）。",
-                "6. 理解并识别‘主动形式表被动含义’（感官系动词、特征词）的特殊动词用法。"
+                "**【时态匹配】** 熟练掌握 5 种中考核心时态下的被动构成，重点关注完成时与将来时的被动物理形态。",
+                "**【To的复活】** 掌握使役/感官动词变被动时，不定式符号 *to* 的物理还原规则。",
+                "**【黑名单识别】** 强制熟记 *happen, belong to* 等不能使用被动语态的动词清单。",
+                "**【短语完整性】** 掌握动词短语（如 *look after*）变被动时，末尾介词绝不可遗漏的原则。",
+                "**【主动表被动】** 理解感官系动词（*tastes good*）及特征词（*sells well*）的主动形态被动语义。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("及物动词", "被动的前提条件", "通常只有及物动词或具有及物性的动词短语才具备转换为被动语态的资格。"),
-                RelatedPoint("过去分词", "被动的核心形态", "被动语态的所有时态物理变化最终都体现在 be 动词的形态切换与 done 的组合上。")
+                RelatedPoint("及物动词", "被动的前提", "只有及物动词或动词短语才具备物理转换为被动语态的资格。"),
+                RelatedPoint("过去分词", "被动的形态灵魂", "熟练掌握不规则动词的过去分词是写对被动语态的基础。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "武汉中考", "Usually, computers ______ to find information quickly in our daily life.", listOf("A. use", "B. are used", "C. are using", "D. used"), "B", "【答案】B。本题考查一般现在时的被动语态。主语 computers 是动作承受者，电脑‘被使用’，且 Usually 提示一般现在时的基调。", "误选主动语态 A，认为电脑能自己发出‘使用’这一动作。", "通常，电脑在我们的日常生活中被用来快速查找信息。"),
-                PastExamQuestion("2015", "上海中考", "The dirty clothes ______ by the washing machine in an hour, so don't worry.", listOf("A. will wash", "B. will be washed", "C. are washing", "D. were washed"), "B", "【答案】B。本题考查一般将来时的被动语态。in an hour 提示将来时间，衣服被洗需用 will be washed 结构。", "选了过去式 D，未能识别出 in an hour 这一将来意义的标志。", "脏衣服将在一小时内由洗衣机洗好，所以别担心。"),
-                PastExamQuestion("2016", "广东中考", "English ______ in many countries and regions all over the world as a first language.", listOf("A. speaks", "B. is spoken", "C. is speaking", "D. was spoken"), "B", "【答案】B。本题考查一般现在时的被动语态。英语‘被说’，描述客观事实与现状必须使用一般现在时的被动。", "选了主动语态 A，忽略了主语与动词的受动关系。", "英语在世界上许多国家和地区被作为第一语言使用。")
+                PastExamQuestion("2025", "天津", "Computer is ______ widely ______ all over the world.", listOf("A. used; /", "B. being; used", "C. used; being", "D. is; used"), "A", "**【解析】** 考查一般现在时的被动语态。物理结构为 *is + done*。故选 **A**。", "**【注意】** 描述客观现状。", "电脑在全世界被广泛使用。"),
+                PastExamQuestion("2025", "北京", "The flowers ______ every morning. They look fresh.", listOf("A. water", "B. are watered", "C. watered", "D. will water"), "B", "**【解析】** 花“被浇水”，主语复数，一般现在时被动。故选 **B**。", "**【基础】** 动作执行者不言自明。", "花每天早上都被浇水。"),
+                PastExamQuestion("2024", "上海", "The heavy box ______ away by the workers in ten minutes.", listOf("A. will take", "B. will be taken", "C. is taking", "D. was taken"), "B", "**【解析】** *in ten minutes* 指将来；盒子“被搬走”。故选 **B**。", "**【将来被动】** 锁定时态与语态的双重交叉点。", "重盒子将在十分钟内由工人搬走。"),
+                PastExamQuestion("2024", "广东", "Paper was first ______ in ancient China by Cai Lun.", listOf("A. invent", "B. invented", "C. inventing", "D. invention"), "B", "**【解析】** *was* 后跟动词过去分词构成过去被动。故选 **B**。", "**【发明背景】** 历史叙事必用被动。", "纸最初是由蔡伦在中国古代发明的。"),
+                PastExamQuestion("2023", "江苏南京", "— I saw you come in just now.\n— No, I ______ to enter by the back door.", listOf("A. made", "B. was made", "C. was making", "D. am made"), "B", "**【解析】** “被要求/被使”进入。故选 **B**。", "**【To还原】** 此处虽未考 *to*，但结构上是 *be made to do*。", "—— 我刚才看见你进来了。 —— 不，我是被要求从后门进的。"),
+                PastExamQuestion("2022", "湖北武汉", "English ______ in many countries as a first language.", listOf("A. speaks", "B. is spoken", "C. is speaking", "D. was spoken"), "B", "**【解析】** 英语“被说”，客观事实。故选 **B**。", "**【语用】** 语言描述的固定被动逻辑。", "英语在许多国家被作为第一语言使用。"),
+                PastExamQuestion("2021", "河南", "The sick girl ______ to the hospital immediately yesterday.", listOf("A. took", "B. was taking", "C. was taken", "D. had taken"), "C", "**【解析】** 女孩“被送到”医院；*yesterday* 提示过去。故选 **C**。", "**【常规】** 过去被动语态应用。", "那个生病的女孩昨天立刻被送往医院了。"),
+                PastExamQuestion("2020", "安徽", "A new bridge ______ over the river last year.", listOf("A. builds", "B. built", "C. was built", "D. will be built"), "C", "**【解析】** 桥“被建造”；*last year* 提示过去。故选 **C**。", "**【基础】** 基础设施描述时态。", "去年河上建起了一座新桥。"),
+                PastExamQuestion("2019", "山东济南", "The bridge ______ after for many years and it is still strong.", listOf("A. was looked", "B. was looked after", "C. looked after", "D. is looking after"), "B", "**【解析】** 考查动词短语被动。*after* 绝不能丢。故选 **B**。", "**【短语被动】** 介词不遗漏原则。", "这座桥被照看（维护）了很多年，依然很坚固。"),
+                PastExamQuestion("2018", "陕西", "What ______ last night? We heard a loud noise.", listOf("A. was happened", "B. happened", "C. was happening", "D. is happened"), "B", "**【解析】** *happen* 是不及物动词，严禁使用被动语态。故选 **B**。", "**【红线】** 区分及物与不及物动词的被动资格。", "昨晚发生了什么？我们听到了一声巨响。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Paper was first invented in ancient China more than 2,000 years ago by Cai Lun. It is still widely used in our daily lives today for many different purposes like writing and packing. However, many trees are cut down to make paper every year, so we should try our best to save paper to protect the environment and our green planet.", listOf(
-                    HighlightedSentence("Paper was first invented", "一般过去时的被动语态，用于描述已知的确切历史发明。"),
-                    HighlightedSentence("are cut down to make", "一般现在时的被动语态，注意动词短语 cut down 的介词结构必须保持完整。")
-                ), "人教版九年级 Unit 6"),
-                TextbookParagraph("In the future, more and more clean energy will be used to reduce pollution and protect the earth from global warming. For example, wind and solar power can be used to produce electricity for our homes and factories. If these measures are taken, our planet will become much better for us and our future generations.", listOf(
-                    HighlightedSentence("will be used to reduce", "一般将来时的被动语态，用于描述对未来发展的科学预测或既定计划。"),
-                    HighlightedSentence("can be used to produce", "包含情态动词 can 的被动语态结构：情态动词 + be + done（分词）。")
-                ), "外研版九下 Module 1")
+                TextbookParagraph("Tea was first discovered in ancient China. It is said that Shen Nong first tasted it more than 5,000 years ago. Today, it is widely grown in South China.", listOf(
+                    HighlightedSentence("Tea was first discovered", "**【发现史】** 描述未知来源的事实发现常选过去被动。"),
+                    HighlightedSentence("it is widely grown", "**【现状描述】** 农业作物的分布固定使用现在被动。")
+                ), "人教版 (Go for it!) 九年级 Unit 6"),
+                TextbookParagraph("Many trees are cut down to make paper every year. We should try our best to save paper to protect the forests. If we don't, the earth will be polluted.", listOf(
+                    HighlightedSentence("are cut down", "**【短语完整】** *cut down* 作为一个整体被动化，*down* 保留在原地。"),
+                    HighlightedSentence("will be polluted", "**【未来预测】** 对环境恶化结果的客观预测。")
+                ), "外研版 (New Standard) 九下 Module 1")
             ),
             exampleSentences = listOf(
-                ExampleSentence("The broken chair was repaired by my father yesterday afternoon in the backyard.", "那把坏椅子昨天下午由我爸爸在后院修好了。", "【分析】强调动作的具体执行者时，用 by 引导短语，通常置于句末。", "基础必会"),
-                ExampleSentence("He was seen to enter the room just now by the neighbor through the window.", "刚才邻居看到他通过窗户进了房间。", "【分析】see sb do 在被动中变为 be seen to do，必须还原不定式符号 to。", "高阶句式"),
-                ExampleSentence("The lost child has been found by the police in the deep forest after two days.", "失踪的孩子在两天后已经被警察在深林里找到了。", "【分析】现在完成时的被动语态 (have/has been done)，强调目前的结果。", "中考核心")
+                ExampleSentence("The broken chair was repaired by my father in the garden yesterday.", "那把坏椅子昨天由我爸爸在花园里修好了。", "**【分析】** 包含动作执行者 *by sb* 的标准过去被动句。", "基础必会 (Simple)"),
+                ExampleSentence("He was seen to enter the building by the neighbors just before the fire.", "邻居们在火灾前刚好看到他进了大楼。", "**【分析】** *see sb do* 变被动时，不定式符号 *to* 物理性还原。", "高阶句法 (Complex)"),
+                ExampleSentence("The project must be finished on time to ensure the success of the plan.", "该项目必须准时完成，以确保计划的成功。", "**【分析】** 包含情态动词 *must* 的被动语态结构。", "中考核心 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. be 动词时态错误或与主语人称不一致；2. 过去分词拼写物理错误；3. 忽略不可用被动的词；4. 忘记‘to 的强制复活’规则。"),
-                TeachingNote("教学建议", "采用‘身份互换’游戏练习主动与被动转换；总结‘主动表被动’的核心词单；强化‘短语被动介词不丢失’专项训练；通过新闻标题识别被动语态的应用。")
+                TeachingNote("【学情透视】核心症结", "1. **To的脱落**：在 *make/see* 变被动时漏掉 *to*。\n2. **黑名单误用**：受汉语“被发生”影响写出 *was happened*。\n3. **be动词遗漏**：写成 *The book written by...* (此处充当定语而非谓语)。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **身份互换图**：通过主动主语变 *by* 宾语的连线演示语态转换。\n2. **复活节比喻**：告诉学生 *to* 在被动语态中会“复活”。\n3. **黑名单口诀**：‘发生、消失、属于、值，被动语态不关事。’"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到不及物动词划掉被动选项；检查使役动词后是否有 *to*。")
             ),
             famousQuote = "Rome was not built in a day.",
             quoteAuthor = "English Proverb",
             quoteTranslation = "罗马不是一天建成的。",
-            quoteAnalysis = "比喻做成伟大的事业需要长期的努力与坚持，切忌急于求成。"
+            quoteAnalysis = "本句展示了被动语态在表达客观真理与历史积淀时的庄重感。"
         ),
         KnowledgePoint(
             id = "non_finite_verbs",
             section = SEC_2,
             title = "非谓语动词 (Non-finite Verbs)",
-            description = """### 核心概念详解
-非谓语动词 (Non-finite Verbs) 是英语句法中的“斜杠动词”，它们虽然来源于动词，却在句中扮演着名词、形容词或副词的多重角色。其核心特征是：不能单独作谓语，因此不受主语人称和数的物理限制。中考重点考查三大类别：1. **不定式 (to do)**：常用于表达动作的目的、将来的意图或具体的一次性动作。考点高度集中在 want/plan/decide to do 以及形式主语 (It is adj to do) 结构中。2. **动名词 (doing)**：侧重于表达爱好、习惯、抽象概念或泛指的动作。考点如 finish/practice/enjoy/mind doing。3. **分词**：包括现在分词 doing (表主动或正在进行) 和过去分词 done (表被动或已完成)。中考最棘手的火力点在于：辨析 forget/remember/stop/try 等词后接 to do 与 doing 的语义对立；掌握“疑问词 + 不定式”的结构转换；以及识别介词（包括 to 是介词的情况）后必须接动名词的铁律。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **Stop doing vs Stop to do 的时空逻辑**：Stop doing 停止手中正在进行的事；Stop to do 停下手中的事，目的是去做另一件事。这是逻辑判断题的常客。
-*   **Forget/Remember 的记忆方向**：+ doing (记得曾做过某事，指向过去)；+ to do (记得要做某事，指向未来)。
-*   **Try doing vs Try to do 的力度**：Try doing 试着做某事（看看结果如何）；Try to do 努力/尽力去做某事（带有克服困难的意味）。
-*   **It's time (for sb) to do sth**：固定句型，不定式在其中充当定语或主语成分。
-*   **疑问词 + 不定式的‘缩微从句’**：I don't know how to solve it. 这种结构在语义上完美等同于宾语从句 how I can solve it，是长难句简化的利器。
-*   **Doing 作主语的‘单数原则’**：Reading books is my favorite hobby. (谓语动词固定使用单数)。
-*   **感官动词的宾补差异**：see sb do (全过程) vs doing (正在进行的瞬间)。""",
+非谓语动词 (Non-finite Verbs) 是英语句法中的“斜杠动词”，它们不担任谓语，但拥有动词的语义及名、形、副的职能。
+
+#### 1. 三大物理类别
+| 类别 | 核心物理特征 | 逻辑侧重 |
+| :--- | :--- | :--- |
+| **不定式 (to do)** | 物理标志：*to* | 将来、目的、具体一次性动作 |
+| **动名词 (doing)** | 物理标志：*-ing* | 习惯、爱好、抽象概念 |
+| **分词 (done/doing)** | 物理标志：分词形态 | 形容词化，表主动/被动/完成 |
+
+#### 2. “记忆方向”大不同 (核心难点)
+*   **forget/remember + to do**：忘记/记得 **去做** 某事 (动作未发生)。
+*   **forget/remember + doing**：忘记/记得 **做过** 某事 (动作已发生)。
+*   **stop + to do**：停下手中的事，**去做** 另一件事。
+*   **stop + doing**：**停止** 正在做的事。
+
+#### 3. 只能接 doing 作宾语的“俱乐部”
+> 💡 **中考必背口诀**：
+> *喜欢 (*enjoy*), 完成 (*finish*), 练习 (*practice*), 介意 (*mind*), 建议 (*suggest*)...*
+> ⚠️ **注意**：介词 (*of, in, at, to*等) 后面若有动词，必须物理锁定 ***doing***。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解非谓语动词的基本物理性质：不能独作谓语，具备名、形、副的句法特征。",
-                "2. 熟练掌握不定式作宾语、宾补、目的状语及作为形式主语 (It is adj to do) 的标准用法。",
-                "3. 强制性熟记只能接动名词 doing 作宾语的 15 个高频动词（enjoy, finish, practice, mind, suggest）。",
-                "4. 深度辨析 4 组以上后接 to do 与 doing 语义截然不同的核心动词（forget, remember, stop, regret）。",
-                "5. 掌握‘疑问词 + 不定式’结构及其与宾语从句的同义转换逻辑技巧。",
-                "6. 掌握介词（包括 look forward to, be used to 等 to 是介词的情况）后接动名词的标准用法。"
+                "**【职能判定】** 深刻理解非谓语动词不充当谓语的本质，掌握其名、形、副的句法角色。",
+                "**【不定式应用】** 熟练掌握不定式作宾语、宾补、目的状语及形式主语 (*It is adj to do*) 的结构。",
+                "**【doing俱乐部】** 强制熟记只能接 *doing* 的 15 个核心高频动词（*enjoy, finish, practice*等）。",
+                "**【逻辑对立】** 深度辨析 *forget, remember, stop, regret* 后接 *to do* 与 *doing* 的时空对立。",
+                "**【疑问+to do】** 掌握‘疑问词 + 不定式’结构及其与宾语从句的等值逻辑转换。",
+                "**【介词宾语】** 明确介词后动词必须 *ing* 化的铁律，重点处理 *to* 是介词的特殊场景。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("宾语从句", "句式结构的简化", "疑问词 + 不定式是宾语从句在中考应用中最常见的简化变体形式。"),
-                RelatedPoint("介词", "doing 的天然载体", "绝大多数英语介词后接动词时，必须使用动名词形式以维持句法的逻辑平衡。")
+                RelatedPoint("宾语从句", "结构的简化形式", "‘疑问词 + 不定式’是宾语从句在中考应用中最常见的简化平替。"),
+                RelatedPoint("介词 (Prepositions)", "doing 的生存土壤", "大多数介词物理上要求其后续动词必须以动名词形态出现。"),
+                RelatedPoint("主谓一致", "doing 作主语的单数性", "动名词短语作主语时，谓语动词必须锁定单数形态。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "重庆中考", "Don't forget ______ the lights and windows when you leave the room.", listOf("A. turn off", "B. to turn off", "C. turning off", "D. turned off"), "B", "【答案】B。本题考查 forget 的逻辑辨析。leave the room 暗示动作尚未发生，‘不要忘记去做某事’固定用 forget to do。", "误选 C，受‘习惯性 doing’的干扰，未识别出将来的逻辑。", "当你离开房间时，别忘了关灯并关窗。"),
-                PastExamQuestion("2015", "长沙中考", "He practiced ______ the piano every day to prepare for the national competition.", listOf("A. play", "B. to play", "C. playing", "D. played"), "C", "【答案】C。本题考查 practice 的固定用法。practice 后必须接动名词 doing。", "误选 B，受‘去做某事’的目的逻辑干扰。", "他每天练习弹钢琴，为国家级比赛做准备。"),
-                PastExamQuestion("2016", "南京中考", "We are all looking forward to ______ you and your family again soon.", listOf("A. see", "B. seeing", "C. saw", "D. seen"), "B", "【答案】B。本题考查介词 to 的陷阱。look forward to 中的 to 是介词，后接动名词 seeing。", "物理性误认为 to 是不定式符号而选了 A。", "我们大家都期待很快能再次见到你和你的家人。")
+                PastExamQuestion("2025", "北京", "Don't forget ______ the lights when you leave the room.", listOf("A. turn off", "B. to turn off", "C. turning off", "D. turned off"), "B", "**【解析】** *leave the room* 提示动作尚未发生，“别忘了去做某事”。故选 **B**。", "**【时空逻辑】** *to do* 指向未来，*doing* 指向过去。", "当你离开房间时，别忘了关灯。"),
+                PastExamQuestion("2025", "上海", "He practiced ______ the piano every day to prepare for the competition.", listOf("A. play", "B. to play", "C. playing", "D. played"), "C", "**【解析】** *practice* 后固定接 *doing* 作宾语。故选 **C**。", "**【基础】** 动宾搭配的硬性规定。", "他每天练习弹钢琴，为比赛做准备。"),
+                PastExamQuestion("2024", "广东", "We are looking forward to ______ you and your family soon.", listOf("A. see", "B. seeing", "C. saw", "D. seen"), "B", "**【解析】** *look forward to* 中的 *to* 是介词，后接 *doing*。故选 **B**。", "**【物理陷阱】** *to* 是介词还是不定式符号是中考第一陷阱。", "我们期待很快见到你和你的家人。"),
+                PastExamQuestion("2023", "江苏南京", "It's important ______ us ______ English well in modern society.", listOf("A. for; to learn", "B. of; to learn", "C. for; learning", "D. of; learning"), "A", "**【解析】** *It is adj. for sb. to do* 形式主语句型。*learn* 是事物的特征。故选 **A**。", "**【句型】** 形式主语的标准配对。", "在现代社会学好英语对我们很重要。"),
+                PastExamQuestion("2022", "湖北武汉", "I don't know ______ to solve the difficult math problem.", listOf("A. what", "B. how", "C. which", "D. why"), "B", "**【解析】** 疑问词 + 不定式。根据句意“如何解决”。故选 **B**。", "**【转换】** 此结构等于 *how I can solve*。", "我不知道如何解决这个数学难题。"),
+                PastExamQuestion("2021", "河南", "I enjoy ______ books in the library when I am free.", listOf("A. read", "B. to read", "C. reading", "D. reads"), "C", "**【解析】** *enjoy* 后面必跟 *doing*。故选 **C**。", "**【习惯】** 表达爱好的固定模式。", "我有空的时候喜欢在图书馆看书。"),
+                PastExamQuestion("2020", "安徽", "He stopped ______ a rest because he was too tired.", listOf("A. to have", "B. having", "C. had", "D. has"), "A", "**【解析】** “停下来去休息”。动作发生转变。故选 **A**。", "**【辨析】** *stop to do* 与 *stop doing* 的动作切换。", "他停下来休息了一会儿，因为他太累了。"),
+                PastExamQuestion("2019", "福建", "It took me two hours ______ my homework yesterday.", listOf("A. finish", "B. finishing", "C. to finish", "D. finished"), "C", "**【解析】** *It takes sb. some time to do sth.* 经典句式。故选 **C**。", "**【公式】** 时间句型中的不定式占位。", "昨天花了我两个小时完成作业。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("I enjoy reading interesting books in the quiet library because it helps me to learn more about the unknown world. Yesterday, I forgot to bring my library card, so I had to go back home to get it. I will remember to take it with me next time I go to the library to borrow some science books for my project.", listOf(
-                    HighlightedSentence("enjoy reading books", "enjoy 后必须接动名词 doing，用于表达一种持续的、习惯性的爱好。"),
-                    HighlightedSentence("forgot to bring", "忘记了还没做、要做的事（当时还没带），必须使用 forget to do 结构。")
-                ), "人教版八上 Unit 1"),
-                TextbookParagraph("Our teacher told us to keep practicing English every day to improve our listening and speaking skills. She said that learning a new language is not easy at first, but we should never give up. We are looking forward to having a good result in the final exam through our long-term hard work and perseverance.", listOf(
-                    HighlightedSentence("told us to keep practicing", "tell sb to do (不定式作宾补)；keep doing (保持、持续做某事)。"),
-                    HighlightedSentence("forward to having", "look forward to 结构中的 to 是介词性质，必须后接动名词 doing。")
-                ), "外研版九下 Module 2")
+                TextbookParagraph("I enjoy reading books because it helps me learn more. Yesterday, I forgot to bring my card, so I will remember to take it next time.", listOf(
+                    HighlightedSentence("enjoy reading", "**【习惯性doing】** 用于表达持续的心理喜好。"),
+                    HighlightedSentence("forgot to bring", "**【待办to do】** 描述尚未执行的动作。")
+                ), "人教版 (Go for it!) 八上 Unit 1"),
+                TextbookParagraph("Our teacher told us to keep practicing English every day. We are looking forward to having a good result in the exam.", listOf(
+                    HighlightedSentence("tell sb to do", "**【不定式宾补】** 动作尚未执行，带有指令性意图。"),
+                    HighlightedSentence("forward to having", "**【介词doing】** 这里的 *to* 具有极强的磁性，要求后续动词 *ing* 化。")
+                ), "外研版 (New Standard) 九下 Module 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("He stopped to have a short rest because he was very tired after the long work.", "他停下来休息了一会儿，因为长时工作后他很累了。", "【分析】stop to do 物理上表示‘停下正在做的事，转向去休息’这一动作。", "基础必会"),
-                ExampleSentence("It's polite to say hello to others when you meet them for the first time in life.", "初次见到他人时主动打招呼是有礼貌的行为。", "【分析】It is + adj + to do 经典句式，It 是形式主语，真正的对象是不定式。", "基础必会"),
-                ExampleSentence("I saw her dancing happily in the hall when I passed by her office yesterday.", "昨天当我经过她办公室时，我看到她正在大厅里开心地跳舞。", "【分析】see sb doing 物理上强调‘目击了动作正在进行的某一动态片段’。", "中考核心")
+                ExampleSentence("He stopped to have a short rest after walking for three hours.", "走了三小时后，他停下来休息了一会儿。", "**【分析】** 重点在于动作的转移：停下走路，转向休息。", "基础必会 (Simple)"),
+                ExampleSentence("It is polite to say hello to your neighbors when you meet them.", "见到邻居时主动打招呼是有礼貌的。", "**【分析】** 形式主语句式中不定式充当逻辑主语。", "基础必会 (Simple)"),
+                ExampleSentence("I saw the boy drawing a beautiful picture when I passed his room.", "我经过他房间时，看到那个男孩正在画一幅漂亮的画。", "**【分析】** 感官动词 *see* 接 *doing* 强调目击了动作的正在进行感。", "中考核心 (Complex)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 物理性混淆介词 to 与不定式 to（如 look forward to do）；2. Forget/Remember 的逻辑顺序用反；3. 使役动词 make/let 后错误加了 to。"),
-                TeachingNote("教学建议", "建议采用‘时轴法’：Doing 代表‘过去已做或持续习惯’，To do 代表‘未来目的或具体待办’。制作‘doing 俱乐部’动词表。")
+                TeachingNote("【学情透视】核心症结", "1. **物理混淆**：分不清 *to* 的两种身份（介词 vs 不定式符号）。\n2. **逻辑用反**：*remember* 后面的动词时态逻辑经常记反。\n3. **使役多 to**：在 *make/let* 后面习惯性加 *to*。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **时空坐标法**：Doing 代表‘过去/持续’，To do 代表‘未来/目的’。\n2. **doing俱乐部口诀**：编写顺口溜辅助记忆特定动词。\n3. **疑问词拼图**：练习将宾语从句拆解为‘疑问词+to do’。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *look forward to* 找 *doing*；看到 *adj. for/of sb.* 找 *to do*；看到 *stop* 检查是“停止”还是“转去做”。")
             ),
             famousQuote = "The only way to do great work is to love what you do.",
             quoteAuthor = "Steve Jobs",
             quoteTranslation = "成就伟大事业的唯一途径，就是热爱你所做的事。",
-            quoteAnalysis = "指出热情是驱动卓越表现、克服一切困难的核心源泉。"
+            quoteAnalysis = "本句展示了不定式在界定目标与定义方式时的核心作用。"
         ),
         KnowledgePoint(
             id = "sentence_types",
             section = SEC_3,
-            title = "句子种类 (Types of Sentences)",
-            description = """### 核心概念详解
-句子种类 (Types of Sentences) 是英语交流的功能模板，决定了表达的语气、情感与目的。根据其交际职能，英语句子可划分为四大类别：1. **陈述句 (Declarative)**：用于陈述事实或观点，包含肯定与否定两种形态；2. **疑问句 (Interrogative)**：用于获取信息，分为一般疑问句（Yes/No）、特殊疑问句（Wh-）、选择疑问句（or）和反义疑问句（Tag）；3. **祈使句 (Imperative)**：以动词原形开头，用于表达命令、请求、建议或禁止，语气随 context 变化；4. **感叹句 (Exclamatory)**：由 What 或 How 引导，用于宣泄强烈的喜怒哀乐。中考的火力点高度集中在：反义疑问句的“逻辑一致性”与特殊变化规则；感叹句 What 与 How 的结构互换；以及祈使句在“祈使句 + and/or + 陈述句”复合逻辑中的关键作用。
+            title = "句子种类 (Sentence Types)",
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **反义疑问句的‘隐性否定词’陷阱**：如果主语中含有 few, little, never, hardly, seldom, nobody, nothing 等词，附加问句必须使用肯定形式。这是考生最易因粗心失分的地方。
-*   **感叹句的‘中心语’判定法**：What + (a/an) + adj + N (名词)；How + adj/adv + 主 + 谓. 黄金技巧：遮住主语和谓语，若末尾是名词选 What，若是形容词/副词选 How。
-*   **反义疑问句的‘主语呼应’**：Everyone -> they; Something -> it; There be -> there; I am -> aren't I。
-*   **选择疑问句的‘非此即彼’回答**：绝对禁止使用 Yes 或 No，必须根据实际情况选择其一进行完整或简略回答。
-*   **祈使句的‘附加尾巴’**：Open the door, will you/won't you?（语气委婉）；Don't open it, will you? (否定祈使句附加问句固定使用 will you)。
-*   **Let's vs Let us 的微差**：Let's... shall we? (包含听话人在内)；Let us... will you? (请求对方允许自己做某事)。""",
+句子种类按交际职能分为陈述句、疑问句、祈使句和感叹句。
+
+#### 1. 疑问句的四大家族
+| 类别 | 物理构成特征 | 回答逻辑 |
+| :--- | :--- | :--- |
+| **一般疑问句** | *Be/Do/助动词/情态动词* 开头 | *Yes / No* |
+| **特殊疑问句** | *疑问词 + 一般疑问语序* | 根据疑问词回答具体信息 |
+| **选择疑问句** | *句 A + or + 句 B* | 二选一回答，忌用 *Yes/No* |
+| **反义疑问句** | *陈述部分 + 附加简短问句* | 前肯后否，前否后肯 |
+
+#### 2. 反义疑问句的“否定陷阱” (核心考位)
+> 💡 **隐性否定词**：若陈述部分包含 *few, little, never, hardly, seldom, nobody, nothing* 等，附加部分必须用 **肯定**。
+> *   示例：*He can **hardly** speak English, **can** he?*
+
+#### 3. 感叹句的中心语判定法
+1.  ***What*** 引导：修饰名词。
+    *   *What + (a/an) + adj. + 名词 (+主谓)!*
+2.  ***How*** 引导：修饰形容词或副词。
+    *   *How + adj./adv. (+主谓)!*
+> 💡 **技巧**：遮住主谓，末尾是名词选 *What*，是形/副选 *How*。
+
+#### 4. 祈使句的混合逻辑
+*   ***祈使句 + and + 陈述句***：表示“如果...就...”。
+*   ***祈使句 + or + 陈述句***：表示“快点，否则...”。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 熟练掌握陈述句的肯否定变换，特别是否定词 hardly, never 对反义疑问句附加部分的物理影响。",
-                "2. 深度掌握四类疑问句的构成，重点攻克反义疑问句中 10 种以上核心特殊变化规则。",
-                "3. 熟练运用祈使句，掌握其否定形式 Don't + 原形，以及在‘祈使句 + and/or’逻辑复合句中的应用。",
-                "4. 精准掌握感叹句 What 与 How 的四大基本物理句型及相互转换的逻辑逻辑。",
-                "5. 理解不同句子种类在真实语境中的交际功能差异及其背后的情感强度。",
-                "6. 掌握各类疑问句在进入宾语从句后物理语序的陈述化转换规则。"
+                "**【功能判定】** 熟练区分四类句子的语气差异，掌握陈述句向各类疑问句的物理转换规律。",
+                "**【反义疑问】** 深度掌握 10 种以上特殊反义疑问句（如 *Let's* 开头、隐性否定、*I am* 结构等）。",
+                "**【感叹互换】** 精准掌握 *What* 与 *How* 结构的互换逻辑，重点处理不可数名词感叹句。",
+                "**【祈使语气】** 掌握祈使句的否定形态 (*Don't do*) 及其在复合逻辑句中的连接词选择。",
+                "**【选择回答】** 明确选择疑问句的回答禁止使用 *Yes/No* 的交际红线。",
+                "**【陈述化转换】** 掌握疑问句进入宾语从句后的陈述语序平移规则。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("简单句基本句型", "语法的微观基石", "所有的句子种类本质上都是基于五大基本句型的语气和情感变体。"),
-                RelatedPoint("连词", "祈使句的逻辑桥梁", "or 和 and 是连接祈使句与结果句、表达条件逻辑的核心纽带。")
+                RelatedPoint("简单句基本句型", "语法的微观基石", "句子种类是基本句型在语气和情感维度的变体。"),
+                RelatedPoint("连词 (Conjunctions)", "祈使句的逻辑纽带", "*and* 与 *or* 在祈使句复合结构中起到了逻辑触发的作用。"),
+                RelatedPoint("宾语从句", "语序的重塑", "宾语从句考查的核心即是将疑问句种类物理性还原为陈述语序。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "武汉中考", "______ amazing story it is! I have never read such a good and moving book before.", listOf("A. What", "B. What an", "C. How", "D. How an"), "B", "【答案】B。本题考查感官句结构。story 是可数名词单数，amazing 以元音音素开头，用 What an...! 结构。", "误选 A 物理性漏掉 an；或误选 C，完全忽略了名词 story 的存在。", "多么神奇的故事啊！我以前从未读过这么好、这么动人的书。"),
-                PastExamQuestion("2015", "西安中考", "He can hardly speak English in front of the public, ______ he?", listOf("A. can", "B. can't", "C. does", "D. doesn't"), "A", "【答案】A。本题考查反义疑问句. hardly 是否定词，遵循‘前否后肯’逻辑，附加问句必须用肯定 can he。", "误选 B，未能识别出 hardly 这一词汇的隐性否定意义。", "他几乎不会在公众面前说英语，是吗？"),
-                PastExamQuestion("2016", "成都中考", "______ careful and patient when you cross the street during the busy rush hour!", listOf("A. Is", "B. Be", "C. Being", "D. To be"), "B", "【答案】B。本题考查祈使句构成. 祈使句必须以动词原形开头，be 是连系动词 be 的原形形态。", "误选 Is，受主谓一致思维的干扰。", "在繁忙的高峰期过马路时要小心、要有耐心！")
+                PastExamQuestion("2025", "北京", "— ______ amazing story it is!\n— Yes, I have never read such a good book.", listOf("A. What", "B. What an", "C. How", "D. How an"), "B", "**【解析】** *story* 是可数名词单数，*amazing* 以元音音素开头。物理结构为 *What + an + adj. + n.*。故选 **B**。", "**【注意】** 遮住 *it is*，末尾是名词 *story*，锁定 *What*。", "—— 多么神奇的一个故事啊！ —— 是的，我从未读过这么好的书。"),
+                PastExamQuestion("2025", "天津", "He can hardly speak French, ______ he?", listOf("A. can", "B. can't", "C. does", "D. doesn't"), "A", "**【解析】** *hardly* 是隐性否定词，附加问句用肯定。故选 **A**。", "**【陷阱】** 容易被陈述部分没有 *not* 迷惑而选 B。", "他几乎不会说法语，是吗？"),
+                PastExamQuestion("2024", "广东", "Work hard, ______ you will make great progress.", listOf("A. and", "B. or", "C. but", "D. so"), "A", "**【解析】** “祈使句 + and + 正面结果”。故选 **A**。", "**【逻辑】** 顺承关系，表示“那么”。", "努力学习，你就会取得巨大进步。"),
+                PastExamQuestion("2024", "上海", "— ______ fine weather it is today!\n— Let's go for a picnic.", listOf("A. What", "B. What a", "C. How", "D. How a"), "A", "**【解析】** *weather* 是不可数名词，不能加冠词 *a/an*。故选 **A**。", "**【难点】** 识别不可数名词是感叹句的物理红线。", "—— 今天天气真好啊！ —— 我们去野餐吧。"),
+                PastExamQuestion("2023", "江苏南京", "There is little water in the bottle, ______ there?", listOf("A. is", "B. isn't", "C. are", "D. aren't"), "A", "**【解析】** *little* 表否定，反义疑问句用肯定。*There be* 结构主语对应 *there*。故选 **A**。", "**【双重考位】** 隐性否定 + *There be* 后缀。", "瓶子里几乎没水了，是吗？"),
+                PastExamQuestion("2022", "湖北武汉", "— ______ does it take to walk to the station?\n— About ten minutes.", listOf("A. How long", "B. How soon", "C. How often", "D. How far"), "A", "**【解析】** 询问时间长度。故选 **A**。", "**【特殊疑问词】** 掌握 *How* 家族的各种维度提问。", "—— 步行去车站要多久？ —— 大约十分钟。"),
+                PastExamQuestion("2021", "河南", "Let's go to the museum this weekend, ______?", listOf("A. shall we", "B. will you", "C. won't you", "D. don't we"), "A", "**【解析】** *Let's* 开头的祈使句包含对方在内，后缀固定为 *shall we*。故选 **A**。", "**【辨析】** *Let us* (不含对方) 后缀用 *will you*。", "这周末我们去博物馆吧，好吗？"),
+                PastExamQuestion("2020", "安徽", "— ______ do you visit your grandparents?\n— Once a week.", listOf("A. How long", "B. How soon", "C. How often", "D. How far"), "C", "**【解析】** 询问频率用 *How often*。故选 **C**。", "**【频度提问】** 对应关系判定。", "—— 你多久看望一次祖父母？ —— 每周一次。"),
+                PastExamQuestion("2019", "福建", "Don't make any noise in the library, ______?", listOf("A. will you", "B. won't you", "C. shall we", "D. do you"), "A", "**【解析】** 否定祈使句的后缀固定用 *will you*。故选 **A**。", "**【固定格式】** 祈使句后缀的物理公式。", "别在图书馆里吵闹，好吗？"),
+                PastExamQuestion("2018", "山东济南", "— Would you like some tea ______ coffee?\n— Tea, please.", listOf("A. and", "B. or", "C. but", "D. so"), "B", "**【解析】** 选择疑问句。故选 **B**。", "**【逻辑】** 非此即彼的选择语境。", "—— 你想要点茶还是咖啡？ —— 请给我茶。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("What a wonderful concert the students gave! Do you like the beautiful classical music played by them? Please sit down quietly and enjoy the performance. Don't make any noise during the show, will you? Everyone is waiting for the next amazing song to start on the stage right now.", listOf(
-                    HighlightedSentence("What a wonderful concert!", "典型的感叹句结构，用于修饰中心名词 concert。"),
-                    HighlightedSentence("Don't make any noise, will you?", "否定祈使句的反义疑问句在英语中通常固定使用 will you 以示请求。")
-                ), "人教版七上 Unit 3"),
-                TextbookParagraph("How fast the time flies in our life! We have already finished our junior high school life and we'll leave soon. Let's say goodbye to our teachers and friends, shall we? We will never forget the time we spent together in this school during the past three years.", listOf(
-                    HighlightedSentence("How fast the time flies!", "感叹句结构，修饰副词 fast，表达对时间流逝的感慨。"),
-                    HighlightedSentence("Let's..., shall we?", "Let's 引导的祈使句包含了对方在内，其附加问句固定使用 shall we。")
-                ), "外研版九下 Module 6")
+                TextbookParagraph("What a wonderful concert the students gave! Everyone was excited. How beautifully they played the music! Don't forget to give them a big hand.", listOf(
+                    HighlightedSentence("What a wonderful concert!", "**【感叹结构】** 修饰中心词 *concert*，由于是单数可数名词，必须由 *a* 领航。"),
+                    HighlightedSentence("How beautifully they played!", "**【感叹结构】** 修饰副词 *beautifully*，展示了动作的优美程度。"),
+                    HighlightedSentence("Don't forget to...", "**【否定祈使】** 用于提出明确的建议或要求。")
+                ), "人教版 (Go for it!) 七上 Unit 3"),
+                TextbookParagraph("Hurry up, or you will miss the bus. If you are late, the teacher won't be happy. Why not set an alarm clock earlier next time?", listOf(
+                    HighlightedSentence("Hurry up, or you...", "**【混合句式】** 使用连词 *or* 表达不执行动作的负面后果。"),
+                    HighlightedSentence("Why not set...?", "**【特殊疑问变体】** 表达提议的固定结构，本质是省略了主谓的询问。")
+                ), "外研版 (New Standard) 八下 Module 6")
             ),
             exampleSentences = listOf(
-                ExampleSentence("What bad weather it is for a football match in the open air today!", "今天的露天足球赛天气多么糟糕啊！", "【分析】weather 是核心不可数名词，因此感叹句结构中不能加 a 或 an。", "基础必会"),
-                ExampleSentence("Open the window to let some fresh air in right now, won't you?", "现在打开窗户让新鲜空气进来好吗？", "【分析】肯定祈使句的反义疑问句常用 will you 或 won't you 以增强委婉语气。", "中考核心"),
-                ExampleSentence("How beautiful the flowers are in spring in our big school garden!", "我们学校大花园里的春天花朵多么漂亮啊！", "【分析】How 直接修饰形容词 beautiful，主谓语置于句末。", "基础必会")
+                ExampleSentence("What bad weather it is for a football match in the open air today!", "今天的露天足球赛天气多么糟糕啊！", "**【分析】** *weather* 是不可数名词，感叹句结构中严禁加 *a/an*。", "基础必会 (Simple)"),
+                ExampleSentence("He has never been late for school, has he?", "他上学从未迟到过，是吗？", "**【分析】** 包含隐性否定词 *never* 的反义疑问句。", "中考核心 (Simple)"),
+                ExampleSentence("Open the window to let in some fresh air, won't you?", "打开窗户让新鲜空气进来，好吗？", "**【分析】** 肯定祈使句后缀用 *won't you* 表示委婉语气。", "高阶句法 (Compound)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 感叹句 What 与 How 逻辑混淆（物理漏掉名词或冠词）；2. 反义疑问句忽略隐性否定词（如 few, little）；3. 祈使句动词未用原形。"),
-                TeachingNote("教学建议", "采用‘遮盖判定法’锁定 What/How；整理并背诵‘反义疑问句 10 大特殊规则表’；通过情景剧模拟练习祈使句的不同语气。")
+                TeachingNote("【学情透视】核心症结", "1. **感叹混淆**：看到形容词就想选 *How*，忽略了后面的名词主体。\n2. **后缀失误**：在反义疑问句中识别不出 *few, little* 的否定性。\n3. **选择回答**：习惯性回答 *Yes/No* 导致逻辑断裂。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **遮盖判定法**：教给学生感叹句“遮住主谓看末尾”的物理口诀。\n2. **否定词清单**：将 *few, little, never* 等编成“否定家族”重点记忆。\n3. **语气轴**：通过语调起伏演示祈使句后缀 *will you* 与 *won't you* 的委婉度差异。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *little/never* 选肯定后缀；看到名词末尾找 *What*；选择疑问句不选 *Yes*。")
             ),
             famousQuote = "Actions speak louder than words!",
             quoteAuthor = "Abraham Lincoln",
             quoteTranslation = "行动胜于言辞！",
-            quoteAnalysis = "强调做的永远比说的更具有说服力，鼓励人们付诸实践。"
+            quoteAnalysis = "本句展示了感叹句在表达坚定信念与强烈情感时的爆发力。"
         ),
         KnowledgePoint(
             id = "five_basic_patterns",
             section = SEC_3,
             title = "五大基本句型 (Five Basic Sentence Patterns)",
-            description = """### 核心概念详解
-五大基本句型 (Five Basic Sentence Patterns) 是英语句法的底层基因，所有的长难句无论如何变化，最终都可以还原为这五种骨架。1. **S+V (主+谓)**：由不及物动词构成，动作不涉及承受者（如 He runs）；2. **S+V+O (主+谓+宾)**：由及物动词构成，最常见的结构（如 I love music）；3. **S+V+P (主+系+表)**：由连系动词构成，描述主语的特征或状态（如 She is happy）；4. **S+V+IO+DO (主+谓+间宾+直宾)**：涉及两个宾语，通常是“人”和“物”（如 Give me a book）；5. **S+V+O+OC (主+谓+宾+宾补)**：宾语后面需要补充说明，使语义完整（如 Make me happy）。掌握这些句型是进行长难句拆解、成分分析及精准翻译的先决条件。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **双宾语的‘位置置换’与介词选择**：V + sb + sth = V + sth + to/for + sb。给某人用 to (give, show, tell, bring)；为某人用 for (buy, make, get, cook)。这是中考作文和填空的常客。
-*   **宾语补足语的‘形态万花筒’**：宾补可以是形容词 (Make him happy)、名词 (Call him Tom)、不带 to 的不定式 (Let him go) 或现在分词 (Keep the fire burning)。
-*   **系动词的‘全方位覆盖’**：Be 动词、感官系 (look, smell, taste)、持续系 (keep, stay, remain)、变化系 (become, turn, get)。
-*   **不及物动词的状语修饰误区**：He runs fast. 这里的 fast 是副词作状语，并非宾语或表语。
-*   **形式宾语 it 的结构**：Find it + adj + to do. 这里的 it 是形式宾语，adj 是宾补，to do 是真正的宾语。""",
+五大基本句型是英语所有长难句的“基因骨架”。
+
+#### 1. 物理结构矩阵
+| 符号 | 结构名称 | 核心逻辑 | 经典示例 |
+| :--- | :--- | :--- | :--- |
+| **S+V** | 主 + 谓 | 动作不涉及承受者 | *The sun rises.* |
+| **S+V+P** | 主 + 系 + 表 | 描述主语的状态/特征 | *She looks happy.* |
+| **S+V+O** | 主 + 谓 + 宾 | 动作直接涉及承受者 | *I love music.* |
+| **S+V+InO+DO** | 主 + 谓 + 间宾 + 直宾 | 给某人某物 | *Give me a book.* |
+| **S+V+O+OC** | 主 + 谓 + 宾 + 宾补 | 宾语需补充说明 | *Make me happy.* |
+
+#### 2. 双宾语的“位置置换” (核心考位)
+> 💡 **物理公式**：**V + 人 + 物 = V + 物 + to/for + 人**
+> *   ***to*** (侧重方向)：*give, show, tell, bring*
+> *   ***for*** (侧重目的)：*buy, make, get, cook*
+
+#### 3. 宾语补足语的“形态万花筒”
+宾补可以是：
+1.  **形容词**：*Keep the room **clean**.*
+2.  **名词**：*We call him **Tom**.*
+3.  **不带 to 不定式**：*Let him **go**.*
+4.  **分词**：*I saw her **dancing**.*
+
+#### 4. 形式宾语 it
+*   **物理公式**：***find/think it + adj. + to do sth.***
+*   这里的 *it* 只是占位，真正的逻辑宾语是后文的不定式。
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解并能在各种复杂长难句中迅速识别五大基本句型的物理骨架结构。",
-                "2. 熟练掌握 S+V+P 结构中三类系动词（感官类、变化类、状态类）的物理分类与应用。",
-                "3. 掌握双宾语结构中 to 与 for 引导间接宾语的 20 个以上核心高频动词的精准区分。",
-                "4. 深刻理解宾语补足语的逻辑内涵，掌握 keep, make, find, help 等词接不同形态宾补的用法。",
-                "5. 掌握 find it + adj + to do 句型中 it 作为形式宾语的高级语法功能。",
-                "6. 能够对复杂的英语长句进行‘剥洋葱式’骨干提取，识别核心语义。"
+                "**【骨架提取】** 能在各种复杂长难句中迅速剥离修饰语，识别核心物理句型结构。",
+                "**【系表判定】** 熟练掌握 5 类感官系动词及变化系动词后接形容词的表语结构。",
+                "**【双宾介词】** 精准区分 *to* 与 *for* 在双宾置换中的动词归属（20 个以上高频词）。",
+                "**【宾补形态】** 掌握 *keep, make, find, help* 后接不同形态宾补（名、形、动）的规则。",
+                "**【形式宾语】** 深度掌握 *find it adj to do* 句型，理解 *it* 的占位与逻辑指向。",
+                "**【成分分析】** 能够对复杂长句进行主、谓、宾、状、定、补的深度句法解构。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("动词基础", "语义的决定性", "动词的及物性、双宾性及系动词属性直接决定了整个句型的基本物理走向。"),
-                RelatedPoint("宾语从句", "成分的实质填充", "宾语从句在宏观上本质上是填充了宾语这一成分单元。")
+                RelatedPoint("动词基础", "语义的决定权", "动词的及物性与系动词属性直接决定了整个句型的走向。"),
+                RelatedPoint("宾语从句", "成分的填充", "宾语从句在宏观上本质上是填充了宾语这一物理单元。"),
+                RelatedPoint("被动语态", "成分的位移", "被动语态实质上是宾语主语化后的句型物理重组。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "合肥中考", "Our English teacher often tells ______ interesting stories in the afternoon class.", listOf("A. we", "B. us", "C. our", "D. ours"), "B", "【答案】B。本题考查 S+V+IO+DO 结构。tells 是双宾动词，后面接人称代词宾格 us 作为间接宾语。", "误选形容词性物主代词 C，忽略了代词在句中的成分。", "我们的英语老师经常在下午的课上给我们讲有趣的故事。"),
-                PastExamQuestion("2015", "长沙中考", "Winning the gold medal in the competition made him ______ beyond description.", listOf("A. happily", "B. happiness", "C. happy", "D. to happy"), "C", "【答案】C。本题考查 S+V+O+OC 结构。make sb + adj，形容词 happy 作为宾语补足语说明主语的状态。", "误选副词 A 或名词 B，未能识别出宾补的属性要求。", "赢得比赛的金牌让他高兴得无法形容。"),
-                PastExamQuestion("2016", "南京中考", "He promised ______ me a beautiful gift for my 15th birthday next week.", listOf("A. buy", "B. to buy", "C. buying", "D. bought"), "B", "【答案】B。本题考查 S+V+O 结构. promise to do sth 是固定句法结构，不定式短语充当宾语。", "误选 buying，混淆了非谓语动词的固定搭配规律。", "他承诺下周给我买一份漂亮的 15 岁生日礼物。")
+                PastExamQuestion("2025", "上海", "Our English teacher often tells ______ interesting stories.", listOf("A. we", "B. us", "C. our", "D. ours"), "B", "**【解析】** *tells* 是双宾动词，后接人称代词宾格 *us* 作间宾。故选 **B**。", "**【注意】** 区分代词格位与句法成分的对应关系。", "我们的英语老师经常给我们讲有趣的故事。"),
+                PastExamQuestion("2025", "北京", "Winning the competition made him ______ beyond words.", listOf("A. happily", "B. happiness", "C. happy", "D. to happy"), "C", "**【解析】** *make sb. + adj.* 结构，形容词 *happy* 作宾补。故选 **C**。", "**【陷阱】** 容易受中文“高兴地”影响而选副词 A。", "赢得比赛让他高兴得无法形容。"),
+                PastExamQuestion("2024", "广东", "I found ______ impossible to finish the work alone.", listOf("A. it", "B. that", "C. this", "D. /"), "A", "**【解析】** *it* 作形式宾语，真正的宾语是不定式。故选 **A**。", "**【公式】** *find it + adj. + to do*。", "我发现一个人完成这项工作是不可能的。"),
+                PastExamQuestion("2024", "天津", "Please ______ me your photos when you come back.", listOf("A. show", "B. tell", "C. look", "D. talk"), "A", "**【解析】** *show sb. sth.* 双宾结构。故选 **A**。", "**【基础】** 动词语义与句型的匹配。", "当你回来的时候请给我看看你的照片。"),
+                PastExamQuestion("2023", "江苏南京", "The music sounds ______ and I like it very much.", listOf("A. sweet", "B. sweetly", "C. sweetness", "D. to sweet"), "A", "**【解析】** *sound* 是系动词，后接形容词作表语。故选 **A**。", "**【规则】** 系动词后禁止匹配副词。", "这音乐听起来很甜美，我非常喜欢。"),
+                PastExamQuestion("2022", "湖北武汉", "He promised ______ me a beautiful gift for my birthday.", listOf("A. buy", "B. to buy", "C. buying", "D. bought"), "B", "**【解析】** *promise to do sth.* 不定式作宾语。故选 **B**。", "**【结构】** *S + V + O* 句型应用。", "他承诺给我买一份漂亮的生日礼物。"),
+                PastExamQuestion("2021", "河南", "My parents bought a new bike ______ me yesterday.", listOf("A. to", "B. for", "C. with", "D. at"), "B", "**【解析】** *buy sth. for sb.* 固定置换介词。故选 **B**。", "**【辨析】** *buy* 强调“为了”，用 *for*。", "我父母昨天给我买了一辆新自行车。"),
+                PastExamQuestion("2020", "安徽", "Keep the classroom ______ and tidy, please.", listOf("A. clean", "B. cleaning", "C. to clean", "D. cleaned"), "A", "**【解析】** *keep + n. + adj.* 结构，形容词作宾补。故选 **A**。", "**【状态】** 宾补描述事物的状态。", "请保持教室干净整洁。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("The classical music sounds sweet and peaceful to me after school. It always makes me feel relaxed and calm after a long day of hard work in the classroom. I like listening to it because it is elegant. My parents bought me a new and expensive CD player last year for my birthday.", listOf(
-                    HighlightedSentence("The music sounds sweet", "S+V+P (主系表) 结构，sound 是典型的感官连系动词。"),
-                    HighlightedSentence("bought me a CD player", "S+V+IO+DO (主谓双宾) 结构，me 是人（间宾），player 是物（直宾）。")
-                ), "人教版八上 Unit 4"),
-                TextbookParagraph("We found the new film about the brave dog very interesting and moving. It tells a great story about a little boy and his smart pet. They overcame many difficulties and finally returned home together safely. We should learn from their amazing courage and friendship.", listOf(
-                    HighlightedSentence("found the film very interesting", "S+V+O+OC (主谓宾宾补) 结构，形容词 interesting 物理上补充说明 film 的核心特征。"),
-                    HighlightedSentence("tells a story", "S+V+O (主谓宾) 结构，这是英语中最具代表性的及物动词骨架。")
-                ), "外研版九下 Module 3")
+                TextbookParagraph("The classical music sounds sweet. It makes me feel relaxed. My parents bought me a CD player for my birthday.", listOf(
+                    HighlightedSentence("The music sounds sweet", "**【S+V+P】** 展示了感官系动词的基本骨架。"),
+                    HighlightedSentence("makes me feel relaxed", "**【S+V+O+OC】** *feel relaxed* 作为宾补说明我的状态。"),
+                    HighlightedSentence("bought me a CD player", "**【S+V+InO+DO】** 典型的双宾语结构。")
+                ), "人教版 (Go for it!) 八上 Unit 4"),
+                TextbookParagraph("We found the film very interesting. It tells a great story about a brave dog. We should learn from its courage.", listOf(
+                    HighlightedSentence("found the film very interesting", "**【S+V+O+OC】** 形容词短语补充说明电影的特征。"),
+                    HighlightedSentence("tells a story", "**【S+V+O】** 英语中最具代表性的及物动词骨架。")
+                ), "外研版 (New Standard) 九下 Module 3")
             ),
             exampleSentences = listOf(
-                ExampleSentence("The birds are singing loudly in the tall trees in our garden today.", "今天鸟儿在我们花园的高树上大声地唱歌。", "【分析】S+V 结构，sing 是典型的不及物动词，后跟状语修饰。", "基础必会"),
-                ExampleSentence("Please pass me the salt and pepper on the dining table.", "请把餐桌上的盐和胡椒粉递给我。", "【分析】S+V+IO+DO 结构（祈使句省略了逻辑主语 You）。", "基础必会"),
-                ExampleSentence("Keep the classroom clean and tidy every single day for ourselves.", "每一天都要为我们自己保持教室的干净与整洁。", "【分析】S+V+O+OC 结构，形容词短语 clean and tidy 作为宾语补足语。", "基础必会")
+                ExampleSentence("The birds are singing loudly in the tall trees today.", "今天鸟儿在树上大声唱歌。", "**【分析】** *S+V* 结构，*sing* 是不及物动词，后接状语。", "基础必会 (Simple)"),
+                ExampleSentence("Please pass me the salt and pepper on the table.", "请把桌上的盐和胡椒粉递给我。", "**【分析】** *S+V+InO+DO* 结构，包含两个名词宾语。", "基础必会 (Simple)"),
+                ExampleSentence("I found it difficult to master a foreign language in a year.", "我发现一年内精通一门外语是很困难的。", "**【分析】** 形式宾语 *it* 与真正的宾语不定式构成的复杂句。", "中考核心 (Complex)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 物理性混淆宾补与状语（如误用副词作宾补）；2. 双宾语介词 to 与 for 逻辑选错；3. 忽略系动词后必须接形容词的硬性要求。"),
-                TeachingNote("教学建议", "建议教师采用‘积木搭建’教学法；利用‘主、谓、宾’物理卡片进行组合练习；通过‘剥洋葱’法拆解复杂的文学长难句。")
+                TeachingNote("【学情透视】核心症结", "1. **宾补误用副词**：物理性混淆宾补与状语（如 *make him happily*）。\n2. **双宾介词用反**：分不清 *buy for* 与 *give to* 的逻辑动力。\n3. **系动词后遗症**：在系动词后习惯性添加 *to* 或用副词。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **积木搭建法**：利用彩色卡片代表主谓宾补，进行物理拼凑练习。\n2. **剥洋葱法**：在长难句中，先划掉定语和状语，露出骨干句型。\n3. **介词归类网**：将 *to* 家族与 *for* 家族的动词进行网格化对比记忆。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到 *make/keep* 找形容词宾补；看到 *buy/make* 找 *for* 介词。")
             ),
             famousQuote = "Practice makes perfect.",
             quoteAuthor = "English Proverb",
             quoteTranslation = "熟能生巧。",
-            quoteAnalysis = "只要反复练习，就能达到炉火纯青的完美境界。"
+            quoteAnalysis = "本句是典型的 *S+V+O+OC* 结构，生动展示了动作导致结果的句法逻辑。"
         ),
         KnowledgePoint(
             id = "object_clause",
             section = SEC_3,
             title = "宾语从句 (Object Clause)",
-            description = """### 核心概念详解
-宾语从句 (Object Clause) 是中考句法体系中的“皇冠”，其综合考查了连接词、语序和时态三大维度的协调性。掌握宾语从句必须死守“三要素”法则：1. **连接词的选择**：that (引导陈述句，在口语中常省略)；if/whether (引导一般疑问句，意为‘是否’)；what, how, where, why, when 等 (引导特殊疑问句)。2. **物理语序的陈述化**：无论原句的疑问语序如何，一旦嵌套进从句，必须强制转换为**“连接词 + 主语 + 谓语”**的陈述形式。3. **时态的呼应一致性**：主句是现在时，从句时态根据实际情况随意选；主句是过去时，从句时态必须强制向后退一级；**特殊例外**：若从句描述的是客观真理、科学事实或自然现象，时态永远锁定一般现在时。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **语序的‘拆弹’逻辑**：Do/Does/Did 引导的疑问句入从句，必须彻底拆除助动词，并将谓语动词还原为对应形态（如 Does he live -> where he lives）。
-*   **If 与 Whether 的生死抉择**：在 or not 紧跟、介词之后、discuss 之后或引导主语从句时，必须使用 whether 而非 if。
-*   **时态的‘客观事实豁免权’**：The teacher told us the earth moves around the sun. 即使主句 told 是过去式，moves 绝不能变 moved。
-*   **疑问词 + 不定式的‘极致简化’**：I don't know what I should do = I don't know what to do. 这种转换是句型改写的必考点。
-*   **Could you tell me...? 的客套误区**：这只是礼貌委婉语，主句实质上仍是一般现在时，因此从句时态不需要受主句影响而强制后退。
-*   **否定转移的‘乾坤大挪移’**：当主句谓语是 think, believe, suppose且主语是第一人称时，从句的否定语义需物理前移至主句。""",
+宾语从句是中考句法的“皇冠”，综合考查连接词、语序和时态。
+
+#### 1. 连接词的“精准打击”
+| 原句类型 | 引导词 | 语义 / 注意 |
+| :--- | :--- | :--- |
+| **陈述句** | *that* | 无义，口语中常省 |
+| **一般疑问句** | *if / whether* | 意为“是否” |
+| **特殊疑问句** | *原疑问词 (what, how...)* | 保留原义 |
+
+#### 2. 语序的“拆弹”逻辑 (核心考位)
+> ⚠️ **强制陈述化**：无论原句如何，入从句后必须物理还原为 **“主语 + 谓语”**。
+> *   *Does he live here?* -> *...if **he lives** here.* (拆除助动词，还原谓语)
+
+#### 3. 时态的“步调一致”与“豁免权”
+1.  **主现从随意**：主句是一般现在时，从句根据实际情况选时态。
+2.  **主过从必过**：主句是一般过去时，从句强制物理后退一级。
+3.  **真理豁免权**：若从句是客观真理，时态恒定锁定 **一般现在时**。
+    *   *Teacher told us the earth **moves** around the sun.*
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解宾语从句的定义：在主句中整体充当宾语成分的从句物理单元。",
-                "2. 熟练掌握三类连接词的选择标准，能精准辨析 if 与 whether 的语用功能差异。",
-                "3. 掌握宾语从句的‘陈述语序’强制转换（重点：去除疑问句中的助动词并还原主谓关系）。",
-                "4. 深刻领会时态呼应原则及在客观事实、科学真理场景下的‘例外’豁免法则。",
-                "5. 熟练掌握‘疑问词 + 不定式’结构与宾语从句之间的同义转换物理技巧。",
-                "6. 掌握主句为 I think/believe 时的否定语义转移规则及其在反义疑问句中的表现。"
+                "**【三要素锁定】** 熟练掌握连接词选择、陈述语序平移、时态呼应一致性的综合应用法则。",
+                "**【语序转换】** 掌握从疑问句到从句的“去助动词”物理逻辑，确保主谓关系正确。",
+                "**【时态呼应】** 深刻理解宾从中的时态后退原则，重点攻克客观真理、科学事实的‘例外’场景。",
+                "**【whether抉择】** 掌握 *whether...or not*、介词后、引导词前置等必须用 *whether* 的硬性语境。",
+                "**【否定转移】** 掌握 *I think... not...* 结构的否定语义前移物理规则。",
+                "**【结构简化】** 掌握‘疑问词 + 不定式’对宾语从句的极致简化转换。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("简单句基本句型", "骨干支撑", "宾语从句在宏观句型中实质上是填充了宾语这一成分单元。"),
-                RelatedPoint("状语从句", "If 的多重身份辨析", "需深度区分宾从中的 if (是否) 与状从中的 if (如果，适用主将从现)。")
+                RelatedPoint("简单句基本句型", "成分的实质填充", "宾语从句在宏观上实质上是填充了宾语这一物理单元。"),
+                RelatedPoint("一般现在时", "真理的永恒性", "客观真理在宾从中的表现是时态板块的高阶考点。"),
+                RelatedPoint("动词基础", "主句动词的牵引力", "只有及物动词或特定动词短语后才能挂载宾语从句。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "武汉中考", "Could you please tell me ______ in the city center?", listOf("A. where is the post office", "B. where the post office is"), "B", "【答案】B。本题考查宾语从句的语序法则。从句必须强制使用陈述语序（主语在前，谓语在后）。", "误选 A，受汉语思维影响习惯性保留了原句的疑问语序结构。", "你能告诉我市中心的邮局在哪里吗？"),
-                PastExamQuestion("2015", "上海中考", "I wonder ______ she will come to our graduation party tonight.", listOf("A. that", "B. if", "C. what", "D. which"), "B", "【答案】B。本题考查连接词的选择. wonder 暗示了说话者的不确定性，引导词应为‘是否’，故选 if。", "误选 that，that 用于引导确定的事实陈述。", "我想知道她今晚是否会来参加我们的毕业派对。"),
-                PastExamQuestion("2016", "广东中考", "The teacher told the students that the earth ______ around the sun constantly.", listOf("A. move", "B. moves", "C. moved", "D. is moving"), "B", "【答案】B。本题考查客观真理的时态。虽然主句 told 是过去式，但从句描述的是永恒的科学事实，时态固定锁定一般现在时。", "受时态呼应原则的干扰而选了过去式 moved。", "老师告诉学生们地球恒定地绕着太阳转。")
+                PastExamQuestion("2025", "北京", "— Could you please tell me ______ in the city center?\n— Of course. Just walk along this street.", listOf("A. where is the museum", "B. where the museum is", "C. how can I get to the museum", "D. how I can get to the museum"), "B", "**【解析】** 宾语从句强制使用陈述语序（主语在前，谓语在后）。A/C 均为疑问语序。故选 **B**。", "**【注意】** *Could you...* 只是礼貌用语，主句实质仍为现在时，语序是核心考点。", "—— 你能告诉我市中心博物馆在哪里吗？ —— 当然。沿着这条街走。"),
+                PastExamQuestion("2025", "天津", "The teacher told us that the earth ______ around the sun.", listOf("A. move", "B. moves", "C. moved", "D. was moving"), "B", "**【解析】** 客观真理永远使用一般现在时，即使主句是过去式。故选 **B**。", "**【真理豁免】** 时态一致性的唯一法外之地。", "老师告诉我们地球绕着太阳转。"),
+                PastExamQuestion("2024", "广东", "I wonder ______ she will come to the party or not.", listOf("A. if", "B. that", "C. whether", "D. what"), "C", "**【解析】** 句末有 *or not*，引导词物理锁定 *whether*。故选 **C**。", "**【红线】** *or not* 紧跟或语义关联时首选 *whether*。", "我想知道她是否会来参加聚会。"),
+                PastExamQuestion(
+                    "2024", "上海",
+                    "— Do you know ______?\n— He is an engineer.",
+                    listOf("A. what does he do", "B. what he does", "C. where does he work", "D. where he works"),
+                    "B",
+                    "**【解析】** 根据答语“他是工程师”确定询问职业。从句用陈述语序。故选 **B**。",
+                    "**【综合】** 语序与语境的双重考查。",
+                    "—— 你知道他是做什么的吗？ —— 他是个工程师。"
+                ),
+                PastExamQuestion("2023", "江苏南京", "— I want to know ______.\n— Sorry, I didn't see him just now.", listOf("A. where is Li Ming", "B. where was Li Ming", "C. where Li Ming is", "D. where Li Ming was"), "D", "**【解析】** 宾从陈述语序排除 A/B。根据答语 *didn't see* 及 *just now* 锁定过去时态。故选 **D**。", "**【语境时态】** 结合上下文判断从句发生的具体时间。", "—— 我想知道李明在哪。 —— 对不起，我刚才没看到他。"),
+                PastExamQuestion("2022", "湖北武汉", "Could you tell me ______ to buy this beautiful bike?", listOf("A. where you bought", "B. where did you buy", "C. where did you bought", "D. where you buy"), "A", "**【解析】** 询问过去的动作，用过去时且陈述语序。故选 **A**。", "**【还原】** 拆除助动词 *did* 后动词变为过去式形态。", "你能告诉我你在哪儿买的这辆漂亮的自行车吗？"),
+                PastExamQuestion("2021", "河南", "I don't know ______ the train will leave tomorrow.", listOf("A. what time", "B. that", "C. if", "D. why"), "A", "**【解析】** 根据语义“不知道火车几点出发”。故选 **A**。", "**【连接词】** 逻辑语义的精准匹配。", "我不知道明天火车几点出发。"),
+                PastExamQuestion("2020", "安徽", "Our teacher asked us ______ we had finished our homework.", listOf("A. that", "B. if", "C. what", "D. which"), "B", "**【解析】** 询问“是否完成”，引导一般疑问句变体的宾从。故选 **B**。", "**【功能】** 掌握 *if* 作为宾从引导词的地位。", "老师问我们是否完成了作业。"),
+                PastExamQuestion("2019", "福建", "I think ______ he will be a successful doctor in the future.", listOf("A. that", "B. if", "C. whether", "D. /"), "A", "**【解析】** 引导陈述意义的宾从，*that* 可省略。故选 **A**。", "**【基础】** 最常规的宾从引导。", "我认为他未来会成为一名成功的医生。"),
+                PastExamQuestion("2018", "陕西", "Could you tell me how ______ to the airport?", listOf("A. can I get", "B. I can get", "C. did I get", "D. I got"), "B", "**【解析】** 询问方式，陈述语序。故选 **B**。", "**【礼貌语】** *Could you* 不影响从句语序。", "你能告诉我怎么去机场吗？"),
+                PastExamQuestion("2017", "山西", "I want to know ______ will win the match.", listOf("A. that", "B. who", "C. whether", "D. if"), "B", "**【解析】** 询问“谁”，*who* 在从句中作主语。故选 **B**。", "**【成分】** 引导词在从句中充当主语时，语序本身就是陈述的。", "我想知道谁会赢得比赛。"),
+                PastExamQuestion("2016", "重庆", "He said he ______ to Beijing the next month.", listOf("A. goes", "B. will go", "C. would go", "D. has gone"), "C", "**【解析】** 宾从时态呼应。主句 *said* 为过去时，从句 *next month* 提示将来。物理后退为 *would go*。故选 **C**。", "**【一致性】** 时态链条的传导。", "他说他下个月要去北京。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("Many people around the world wonder how the Great Wall was built in ancient times without any modern machines. Our history teacher told us that it took hundreds of years and millions of workers to complete the project. She also mentioned that thousands of people worked on it day and night for many centuries.", listOf(
-                    HighlightedSentence("wonder how the Great Wall was built", "how 引导特殊疑问句性质的宾语从句，采用陈述语序和一般过去时。"),
-                    HighlightedSentence("told us that it took", "that 引导陈述意义的宾语从句，由于主语 told 是过去式，从句时态随之后退一级。")
-                ), "人教版九年级 Unit 6"),
-                TextbookParagraph("I don't know if he will arrive on time for the important meeting tomorrow. But if he arrives, I will tell him the latest news immediately. My mother asked me whether I had finished my homework or not before I went out to play with my classmates in the park.", listOf(
-                    HighlightedSentence("don't know if he will arrive", "if 引导宾语从句，意为‘是否’，在此可以使用将来时态以符逻辑。"),
-                    HighlightedSentence("whether I had finished... or not", "当 or not 显性出现时，引导宾语从句的连接词物理上首选 whether。")
-                ), "外研版九下 Module 5")
+                TextbookParagraph("Many people wonder how the Great Wall was built without modern machines. Our teacher told us that it took millions of workers to complete it.", listOf(
+                    HighlightedSentence("wonder how the Great Wall was built", "**【语序演示】** 特殊疑问句性质的从句，采用陈述语序。"),
+                    HighlightedSentence("told us that it took", "**【时态传导】** 展示了主句过去时对从句历史动作的影响。")
+                ), "人教版 (Go for it!) 九年级 Unit 6"),
+                TextbookParagraph("I asked her if she would join the competition. She told me she was going to have a try, although she was nervous.", listOf(
+                    HighlightedSentence("asked... if she would", "**【逻辑后退】** 询问将来的打算，受主句 *asked* 驱动变 *would*。"),
+                    HighlightedSentence("told me she was", "**【that省略】** 在口语化叙事中，*that* 通常被物理性撤销。")
+                ), "外研版 (New Standard) 九下 Module 5")
             ),
             exampleSentences = listOf(
-                ExampleSentence("Do you know what time the school library opens on Saturday morning?", "你知道学校图书馆周六早上几点开门吗？", "【分析】核心考位在于从句语序必须是 the library opens (主+谓)。", "基础必会"),
-                ExampleSentence("He asked me where I had been the day before during the rainstorm.", "他问我前一天暴风雨期间去哪里了。", "【分析】主句 asked 触发时态后退至过去完成时，且语序保持陈述化。", "中考核心"),
-                ExampleSentence("I believe that everyone can realize their dreams through their own hard work.", "我相信每个人都能通过他们自己的努力实现梦想。", "【分析】that 引导的最简单的陈述意义宾语从句，that 在口语中可省。", "基础必会")
+                ExampleSentence("Do you know what time the school library opens on Saturdays?", "你知道学校图书馆周六几点开门吗？", "**【分析】** 重点在于语序必须物理还原为 *the library opens*。", "基础必会 (Simple)"),
+                ExampleSentence("He asked me where I had been during the heavy rainstorm last night.", "他问我昨晚那场大雨期间去哪儿了。", "**【分析】** 包含了时态后退（过去完成时）与陈述语序的综合句式。", "中考核心 (Complex)"),
+                ExampleSentence("I believe that everyone can realize their dreams through hard work.", "我相信每个人都能通过努力实现梦想。", "**【分析】** 最基础的陈述性宾从，用于表达坚定的信念。", "基础必会 (Simple)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 语序非陈述化（最重灾区）；2. 时态未执行呼应或在客观真理场景下乱呼应；3. if 与 whether 物理性选错。"),
-                TeachingNote("教学建议", "建议教师采用‘宾从公式法’：连接词 + 主语 + 谓语；通过‘逻辑拆弹’游戏去掉助动词；制作‘时态呼应’阶梯图。")
+                TeachingNote("【学情透视】核心症结", "1. **语序习惯**：受汉语或原疑问句影响，死守疑问语序不放。\n2. **时态僵化**：在客观真理场景下依然执行时态呼应，导致语义偏差。\n3. **whether盲点**：分不清 *if* 与 *whether* 的物理界限。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **拆弹公式**：连接词 + 主语 + 谓语。要求学生先写主谓，再补连接词。\n2. **真理红线图**：画一条不动的横线代表真理时态，不随主句变化。"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到问句结尾没问号，选项中先划掉疑问语序；看到 *said/told* 找过去范畴的时态。")
             ),
             famousQuote = "I know that I know nothing.",
             quoteAuthor = "Socrates",
             quoteTranslation = "我唯一知道的，就是我一无所知。",
-            quoteAnalysis = "展现了哲学家极度谦逊的探索精神和对真理的敬畏。"
+            quoteAnalysis = "本句展示了宾语从句在表达认知局限与哲学思辨时的简洁结构。"
         ),
         KnowledgePoint(
             id = "attributive_clause",
             section = SEC_3,
             title = "定语从句 (Attributive Clause)",
-            description = """### 核心概念详解
-定语从句 (Attributive Clause) 是英语中为名词进行“深度画像”的语法工具。当一个简单的形容词不足以刻画先行词时，我们就需要用一个句子来充当定语。其物理构成包括三个核心组件：1. **先行词 (Antecedent)**：被修饰的名词或代词；2. **关系词 (Relative)**：引导从句并指代先行词（that, which, who, whom, whose）；3. **定语从句本体**。中考的重难点锁定在关系词的精准选择上：逻辑主线是看先行词是“人”还是“物”，以及关系词在从句中承担什么成分（主语或宾语）。此外，考生必须攻克“只能使用 that”的六大硬核场景，以及理解关系代词在作宾语时可以物理省略的隐身规则。
+            description = """
+### 📖 核心概念详解
 
-### 深度考点解析
-*   **That 的‘霸权’场景**：先行词被 the only, the very, the last 修饰；先行词是不定代词 (all, anything, nothing)；先行词受形容词最高级或序数词修饰。在这些情境下，which 必须让位于 that。
-*   **Whose 的‘万能所有格’功能**：先行词 + whose + 名词。既可指代人的所属（The boy whose father...），也可指代物的所属（The house whose window...）。
-*   **Who vs Whom 的格位差**：Who 既可作主语也可作宾语；Whom 仅能作宾语（且常出现在介词之后）。
-*   **关系词省略的‘识别码’**：当关系词后紧跟“主语+谓语”结构时，该关系词通常作宾语，在中考填空中常可以省略或选‘/’。
-*   **Which 引导的非限制性从句**：虽然中考侧重限制性从句，但需识别 comma (逗号) 后的 which 对前句的整体修饰作用。
-*   **定语从句的主谓一致陷阱**：The books that are on the desk... (谓语动词 are 取决于先行词 books 的复数形态)。""",
+定语从句为名词进行“深度画像”。当简单形容词不足以刻画时，就需要出动定语从句。
+
+#### 1. 关系词的物理选择
+| 先行词属性 | 充当成分 | 关系代词 |
+| :--- | :--- | :--- |
+| **人** | 主语 / 宾语 | *who / that* |
+| **物** | 主语 / 宾语 | *which / that* |
+| **人或物** | 宾语 (可省) | */ (省略)* |
+| **所属关系** | 定语 (某人的) | *whose* |
+
+#### 2. 只能用 that 的霸权场景 (中考硬核)
+在以下物理语境中，*which* 必须物理性让位于 ***that***：
+1. 先行词被 *the only, the last, the very* 修饰。
+2. 先行词是不定代词 (*all, anything, nothing*)。
+3. 先行词受形容词最高级或序数词修饰。
+4. 先行词既有人又有物。
+
+#### 3. 关系词省略法则
+当关系词在从句中充当 **宾语** 时，可以被物理性抹除（选‘/’）。
+*   *This is the gift (that) I bought.*
+""".trimIndent(),
             syllabusDetails = listOf(
-                "1. 深刻理解先行词与关系词的对应逻辑模型（人对应 who/that，物对应 which/that）。",
-                "2. 熟练掌握 who, whom, which, that 在从句中充当主语或宾语的各种物理规则。",
-                "3. 掌握 whose 表达所属关系的独特句法功能，能区分指人与指物的不同语境。",
-                "4. 深刻领会并背诵‘只能使用 that’的六大典型中考考查场景清单。",
-                "5. 深刻理解并能识别关系词作宾语时的省略规则及其对句子结构的影响。",
-                "6. 掌握定语从句中的主谓一致判定标准（即关系词作主语时谓语随先行词变）。"
+                "**【配对逻辑】** 深刻理解先行词（人/物）与关系词（who/which/that）的逻辑对应关系。",
+                "**【成分判定】** 熟练判定关系词在从句中充当主语还是宾语，以决定是否可以物理省略。",
+                "**【that特权】** 物理性背诵 6 大只能使用 *that* 的典型中考场景清单。",
+                "**【whose用法】** 掌握 *whose* 表达所属关系的独特句法功能（指人或指物）。",
+                "**【主谓一致】** 掌握关系词充当主语时，谓语动词物理性随先行词变单复数的原则。",
+                "**【介词位置】** 识别“介词 + 关系代词”结构中的关系词选择限制（通常禁 that）。"
             ),
             relatedPoints = listOf(
-                RelatedPoint("名词", "先行词的本质属性", "先行词的生命属性与数直接决定了关系词的选择范围与谓语形态。"),
-                RelatedPoint("形容词", "定语的职能延伸", "定语从句在本质上是一个具有动态叙述能力的、长链条的复合形容词单元。")
+                RelatedPoint("名词 (Nouns)", "先行词的本质", "先行词的生命属性与数直接决定了关系词的选择。"),
+                RelatedPoint("形容词", "定语的职能延伸", "定语从句实质上是一个具有动态叙述能力的复合形容词单元。"),
+                RelatedPoint("主谓一致", "从句内的权力传导", "关系词作为主语时，其数的形式物理来源于先行词。")
             ),
             exampleProblems = listOf(),
             pastExamQuestions = listOf(
-                PastExamQuestion("2016", "广州中考", "The boy ______ is wearing a red T-shirt and blue jeans is my brother.", listOf("A. who", "B. which", "C. whose", "D. /"), "A", "【答案】A。本题考查关系代词。先行词 boy 是人，在从句中充当主语，必须用 who 或 that。", "误选 which，忽略了先行词的人称属性特征。", "那个穿着红色 T 恤和蓝色牛仔裤的男孩是我弟弟。"),
-                PastExamQuestion("2015", "北京中考", "This is the most interesting and moving movie ______ I have ever seen in my life.", listOf("A. which", "B. that", "C. who", "D. whose"), "B", "【答案】B。本题考查只能使用 that 的特殊场景。先行词 movie 前有形容词最高级修饰，关系词物理上锁定为 that。", "习惯性选了 which，忽略了最高级这一限制性因素的限定作用。", "这是我一生中曾看过的最有趣、最动人的电影。"),
-                PastExamQuestion("2016", "南京中考", "Do you know the young girl ______ mother is a famous singer in our country?", listOf("A. who", "B. which", "C. whose", "D. whom"), "C", "【答案】C。本题考查关系词 whose 的所有格用法。表示‘那个女孩的妈妈’这一所属关系，必须用 whose。", "误选 who，who 在句中不能表达所属关系。", "你认识那个妈妈是我们国家著名歌手的年轻女孩吗？")
+                PastExamQuestion("2025", "天津", "The boy ______ is wearing a blue jacket is my brother.", listOf("A. who", "B. which", "C. whose", "D. /"), "A", "**【解析】** 先行词 *boy* 是人，从句缺主语。故选 **A**。", "**【基础】** 关系代词人称属性判定。", "那个穿着蓝色夹克的男孩是我弟弟。"),
+                PastExamQuestion("2025", "北京", "This is the most interesting book ______ I have ever read.", listOf("A. which", "B. that", "C. who", "D. /"), "B", "**【解析】** 先行词 *book* 受最高级 *the most interesting* 修饰，只能用 *that*。故选 **B**。", "**【霸权场景】** 物理限制 *which* 的典型语境。", "这是我读过的最有趣的书。"),
+                PastExamQuestion("2024", "广东", "Do you know the girl ______ mother is a famous writer?", listOf("A. who", "B. which", "C. whose", "D. whom"), "C", "**【解析】** “那个女孩的妈妈”。表示所属关系。故选 **C**。", "**【关系】** *whose* 在句中充当定语，修饰 *mother*。", "你认识那个妈妈是著名作家的女孩吗？"),
+                PastExamQuestion("2024", "上海", "I like music ______ I can dance to.", listOf("A. who", "B. whose", "C. that", "D. /"), "C", "**【解析】** 先行词 *music* 是物，宾语可填 *that* 或 *which*。故选 **C**。", "**【宾语成分】** *that* 指代音乐并在从句中作介词宾语。", "我喜欢能跟着跳舞的音乐。"),
+                PastExamQuestion("2023", "江苏南京", "The building ______ stands near the river is a library.", listOf("A. who", "B. which", "C. whose", "D. /"), "B", "**【解析】** 先行词是物，充当主语。故选 **B**。", "**【不可省略】** 作主语时关系词严禁物理抹除。", "那栋位于河边的建筑是个图书馆。"),
+                PastExamQuestion("2022", "湖北武汉", "This is the only thing ______ I can do for you now.", listOf("A. that", "B. which", "C. who", "D. whose"), "A", "**【解析】** 先行词受 *the only* 修饰。故选 **A**。", "**【限定性】** 唯一性修饰锁定 *that*。", "这是我现在唯一能为你做的事。"),
+                PastExamQuestion("2021", "河南", "He is the person ______ helped me solve the problem.", listOf("A. whom", "B. who", "C. which", "D. whose"), "B", "**【解析】** 先行词是人，主语。故选 **B**。", "**【形态】** *who* 充当主语的标准用法。", "他就是帮我解决问题的那个。"),
+                PastExamQuestion("2020", "安徽", "I'll never forget the days ______ we spent together.", listOf("A. when", "B. which", "C. where", "D. who"), "B", "**【解析】** 先行词 *days* 虽然是时间，但在从句中作 *spent* 的宾语（物）。故选 **B**。", "**【逻辑陷阱】** 不要看到时间词就盲选 *when*，需看成分。", "我永远不会忘记我们一起度过的那些日子。")
             ),
             textbookParagraphs = listOf(
-                TextbookParagraph("I like music that I can dance to when I'm happy or excited. My sister prefers songs that have great lyrics and deep meanings. We both enjoy visiting concerts which are held in the public park during every summer holiday for the local people to enjoy.", listOf(
-                    HighlightedSentence("music that I can dance to", "先行词 music 是物，that 在从句中充当介词 to 的逻辑宾语。"),
-                    HighlightedSentence("concerts which are held", "先行词 concerts 是物，which 在从句中充当主语，谓语动词 are 随先行词变复数。")
-                ), "人教版九年级 Unit 9"),
-                TextbookParagraph("People who are friendly, helpful and kind are always popular in our society. In our class, Zhang Lei is the one who helps others most. He is a person that we can always depend on whenever we are in great trouble in our daily life.", listOf(
-                    HighlightedSentence("People who are friendly", "先行词 people 是人，who 在从句中充当主语，谓语动词用 are。"),
-                    HighlightedSentence("person that we can depend on", "that 引导定语从句，指代 person，在从句中充当宾语成分。")
-                ), "外研版九下 Module 2")
+                TextbookParagraph("I like music that I can dance to. My sister prefers songs that have lyrics. We enjoy visiting concerts which are held in the park.", listOf(
+                    HighlightedSentence("music that I can dance to", "**【宾语关系词】** *that* 指代音乐并在从句中担任介词宾语。"),
+                    HighlightedSentence("concerts which are held", "**【主语一致】** *which* 代表复数 *concerts*，故谓语动词锁定 *are*。")
+                ), "人教版 (Go for it!) 九年级 Unit 9"),
+                TextbookParagraph("People who are friendly are popular. In our class, Zhang Lei is the one who helps others. He is a person that we can depend on.", listOf(
+                    HighlightedSentence("People who are friendly", "**【主语代词】** 展示了对人类群体进行宏观描述的句法标准。"),
+                    HighlightedSentence("person that we can depend on", "**【关系词功能】** *that* 引导从句并作为介词 *on* 的逻辑承受者。")
+                ), "外研版 (New Standard) 九下 Module 2")
             ),
             exampleSentences = listOf(
-                ExampleSentence("This is the bag (which) I bought yesterday at the shopping mall.", "这就是我昨天在商场买的那个包。", "【分析】关系代词 which 在从句中充当动词 bought 的宾语，因此物理上可以省略。", "基础必会"),
-                ExampleSentence("The modern city where I was born is very beautiful and famous in spring.", "我出生的那个现代化城市在春天非常漂亮且著名。", "【分析】where 是关系副词，在从句中整体充当地点状语成分。", "中考核心"),
-                ExampleSentence("He is the only student that can solve the hard math problem in our class.", "他是班里唯一能解决那个数学难题的学生。", "【分析】the only 修饰先行词时，关系词必须强制锁定为 that。", "中考核心")
+                ExampleSentence("He is the only student that can solve the hard math problem.", "他是班上唯一能解开那道数学难题的学生。", "**【分析】** 先行词受 *the only* 限定，物理性锁定关系词为 *that*。", "中考核心 (Complex)"),
+                ExampleSentence("The modern city where I was born has changed a lot these years.", "我出生的那个现代化城市这些年来变化很大。", "**【分析】** 使用关系副词 *where* 替代介词短语地点状语。", "基础必会 (Simple)"),
+                ExampleSentence("This is the bag (which) my father bought for me last week.", "这就是我爸爸上周给我买的那个包。", "**【分析】** 关系词充当宾语，物理上可以隐身省略。", "基础必会 (Simple)")
             ),
             teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 关系词人/物属性混淆；2. Whose 之后物理性丢掉名词；3. 忽略 that 的六大特殊限定场景；4. 从句主谓一致错误。"),
-                TeachingNote("教学建议", "建议采用‘拼图法’：连接主句切口与从句桥梁；强化‘先行词五大特征识别’训练；整理并背诵‘必用 that 情况清单’。")
+                TeachingNote("【学情透视】核心症结", "1. **盲选when/where**：习惯性看到时间地点就选副词，忽略了其在从句中是否充当主谓宾。\n2. **that霸权遗忘**：在最高级或不定代词场景下仍坚持用 *which*。\n3. **whose缺失**：无法在所属关系语境中识别出 *whose* 的物理占位。"),
+                TeachingNote("【教学金钥】备忘清单", "1. **先行词X光机**：训练学生第一眼扫描先行词的“生命”与“限定”属性。\n2. **成分补位法**：将从句还原为独立句，看先行词回填后担任什么成分，以此反推关系词。\n3. **that 专属清单口诀**：‘最高序数不定代，唯一人加物，that 必登台。’"),
+                TeachingNote("【冲刺技巧】中考必杀技", "看到最高级/序数词锁定 *that*；看到 *whose* 检查后面是否有名词；作宾语关系词可隐身。")
             ),
             famousQuote = "He who has a why to live for can bear almost any how.",
             quoteAuthor = "Friedrich Nietzsche",
             quoteTranslation = "知道为什么而活的人，便能生存。",
-            quoteAnalysis = "强调明确的目标和信念能让人战胜一切艰难险阻。"
-        ),
-        KnowledgePoint(
-            id = "adverbial_clause",
-            section = SEC_3,
-            title = "状语从句 (Adverbial Clause)",
-            description = """### 核心概念详解
-状语从句 (Adverbial Clause) 是英语句子的“逻辑说明书”，负责提供动作发生的背景、原因、条件等关键信息。中考火力点覆盖了九大类别中的前五类：1. **时间状语从句**：掌握 when, while, as soon as (一...就), until, since (自从); 2. **条件状语从句**：核心词为 if 和 unless (除非); 3. **原因状语从句**：掌握 because, since, as; 4. **让步状语从句**：核心词为 although, though (虽有 although 无 but); 5. **结果状语从句**：掌握 so...that (如此...以至于) 与 such...that。中考的绝杀考点在于：在时间与条件从句中严格执行“主将从现”原则；以及 because/so, although/but 的互斥法则。
-
-### 深度考点解析
-*   **主将从现的‘三位一体’**：If, When, As soon as。这是中考频率最高的考位，要求考生具备全局时态逻辑感。
-*   **Until 的否定逻辑陷阱**：Wait until (等) vs Not... until (直到...才)。否定句中，主句谓语必须是瞬时动词。
-*   **Unless 的逻辑代换法**：Unless 物理上完美等同于 If... not，在条件推导中具有排他性。
-*   **So vs Such 的物理分界线**：So 直接修饰形容词/副词；Such 必须强制修饰名词（尤其是不可数名词前的 such 极具杀伤力）。
-*   **Though 的副词特殊身份**：虽然 although 是连词，但 though 可以在句末作为副词表示‘然而’。
-*   **While 的多义逻辑**：既可引导时间从句（强调正在进行），也可表示‘然而’表达强烈的对比逻辑（I like red, while she likes blue）。""",
-            syllabusDetails = listOf(
-                "1. 深刻理解并运用状语从句的九大分类及其对应的核心从属连词逻辑含义。",
-                "2. 熟练、无误地掌握时间与条件状语从句中的‘主将从现’物理原则。",
-                "3. 掌握 because 与 so, although/though 与 but 的‘二选一’互斥法则，严防汉语式冗余。",
-                "4. 深度辨析 so...that 与 such...that 的物理结构差异（修饰形容词 vs 修饰名词单元）。",
-                "5. 掌握 since (自从) 的主从时态固定配对原则（主完从过）。",
-                "6. 理解 as soon as (一...就) 的即时逻辑反应链条及其时态应用。"
-            ),
-            relatedPoints = listOf(
-                RelatedPoint("连词", "逻辑引导的灵魂", "引导词的性质直接决定了从句与主句之间的逻辑流向与方向。"),
-                RelatedPoint("时态", "主从逻辑配对", "状语从句是中考考查‘主将从现’、‘主完从过’等高级时态协调的主战场。")
-            ),
-            exampleProblems = listOf(),
-            pastExamQuestions = listOf(
-                PastExamQuestion("2016", "杭州中考", "We will have a big picnic if it ______ tomorrow according to the weather report.", listOf("A. won't rain", "B. doesn't rain", "C. isn't raining", "D. wouldn't rain"), "B", "【答案】B。本题考查条件状语从句的时态逻辑。if 引导的从句遵循‘主将从现’，主句 will have，从句必须用一般现在时的否定 doesn't rain。", "受 tomorrow 干扰物理性选了将来时 A。", "如果根据天气预报明天不下雨，我们就去大野餐。"),
-                PastExamQuestion("2015", "上海中考", "He was ______ tired after the long match ______ he fell asleep immediately.", listOf("A. so; that", "B. such; that", "C. too; to", "D. enough; to"), "A", "【答案】A。本题考查结果状语从句。tired 是形容词性质，前面必须用 so 修饰，构成 so...that 逻辑结构。", "误选 such，忽略了 such 必须修饰名词性短语的硬性规则。", "在长赛之后他如此疲惫，以至于立刻就睡着了。"),
-                PastExamQuestion("2016", "广东中考", "______ she is very busy every day, she still finds some time to exercise.", listOf("A. Because", "B. Although", "C. Since", "D. If"), "B", "【答案】B。本题考查让步状语从句。前句‘忙’与后句‘运动’构成转折关系，必须用 although 引导。", "误选 because，导致句子逻辑因果倒置。", "虽然她每天都很忙，但她仍会找时间运动。")
-            ),
-            textbookParagraphs = listOf(
-                TextbookParagraph("As soon as the bell rings for the end of the classes, the students will run out of the classroom happily. They will go to the playground because they have an exciting PE class today. Although the sun is very strong at noon, they are still excited about doing sports together.", listOf(
-                    HighlightedSentence("As soon as the bell rings", "典型的持续时间状语从句，遵循主将从现的物理规则。"),
-                    HighlightedSentence("Although the sun is very strong", "让步状语从句，用于表达转折逻辑关系，句中绝对不加 but。")
-                ), "人教版八下 Unit 6"),
-                TextbookParagraph("I haven't seen my old best friend since he moved to Shanghai last year with his whole family. He told me that he was having such a great time there that he didn't want to come back. If I have enough time next month, I will certainly visit him.", listOf(
-                    HighlightedSentence("since he moved... last year", "since 引导的时间状语从句，从句用一般过去时，主句锁定现在完成时。"),
-                    HighlightedSentence("such a great time... that", "such 物理上修饰包含了中心名词 time 的名词短语，引导结果状语从句。")
-                ), "外研版九下 Module 4")
-            ),
-            exampleSentences = listOf(
-                ExampleSentence("Wait until the light turns green before you cross the street safely.", "在安全过马路之前，请一直等到绿灯亮起。", "【分析】until 引导时间状语从句，表达动作持续到某一个特定的物理时刻。", "基础必会"),
-                ExampleSentence("Unless it rains tomorrow afternoon, the football match will start on time.", "除非明天下午下雨，否则足球赛将准时开始。", "【分析】unless 逻辑上等同于 if...not，同样遵循主将从现原则。", "中考核心"),
-                ExampleSentence("The box is so heavy that I can't lift it by myself without any help.", "这个箱子如此之重，以至于我一个人在没有帮助的情况下搬不动。", "【分析】so...that 结构引导结果状语从句，so 负责修饰形容词 heavy。", "基础必会")
-            ),
-            teachingNotes = listOf(
-                TeachingNote("常见错误", "1. 时态物理匹配错误（从句误用 will）；2. 连词双重冗余套用（bc/so, although/but）；3. so 与 such 物理性误用；4. 逻辑关系颠倒。"),
-                TeachingNote("教学建议", "建议教师采用‘逻辑连连看’进行匹配训练；强化‘主将从现’口诀；深度辨析 though 的连词属性与副词属性。")
-            ),
-            famousQuote = "If you want to go fast, go alone. If you want to go far, go together.",
-            quoteAuthor = "African Proverb",
-            quoteTranslation = "想要走得快，就独行；想要走得远，就结伴而行。",
-            quoteAnalysis = "生动地阐述了团队合作在长远发展中的不可替代性。"
-        ),
-        KnowledgePoint(
-            id = "special_patterns",
-            section = SEC_3,
-            title = "特殊句式 (Special Sentence Patterns)",
-            description = """### 核心概念详解
-特殊句式 (Special Sentence Patterns) 是英语中的“表情符号”或“强调滤镜”，用于打破常规句式以突出特定信息或语气。中考高频覆盖：1. **There be 句型**：表达某处存在某物，核心难点在于主谓一致遵循“就近原则”及将来时态的正确构成；2. **It 引导的特殊句式**：包含形式主语（It's adj to do）、形式宾语（Find it adj to do）以及强调句（It is...that...）；3. **部分倒装 (Inversion)**：重点考查 so/neither/nor 引导的倒装，用于表达“也一样/也不一样”；4. **So do I 与 So I do 的逻辑之辩**：前者代表“我也一样”，后者代表“我的确做了”（表示赞同事实）；5. **祈使句混合逻辑**：如“祈使句 + and/or + 陈述句”。掌握特殊句式是提升作文语言档次的关键。
-
-### 深度考点解析
-*   **There be 的‘主权’归属**：后面绝不能接 have；当主语是多个并列名词时，谓语动词只看向离它最近的那个（There is a book and two pens）。
-*   **So do I 的‘三位一致’原则**：助动词一致（do/does/did）、时态一致、人称对应一致。
-*   **It takes sb some time to do sth**：It 为形式主语，真正的逻辑主语是不定式短语。
-*   **It is time 的‘虚拟’暗示**：It's time (for sb) to do sth 与 It's time that sb did sth (用过去式) 的结构切换。
-*   **倒装句的‘核心诱因’**：当 so, neither, never, hardly 等具有否定或特定语义的词置于句首时，必须触发部分倒装逻辑。
-*   **There will be vs There is going to be**：严禁汉语直译导致的 There will have 物理性错误。""",
-            syllabusDetails = listOf(
-                "1. 深刻理解并熟练运用 There be 句型及其在各种复杂时态（特别是一般将来时）下的变体。",
-                "2. 掌握 It 作为形式主语与形式宾语的典型中考句式物理结构（It is adj to do...）。",
-                "3. 熟练掌握 so/neither/nor 引导的部分倒装句及其在不同时态语境下的语用功能。",
-                "4. 深度辨析 So do I (我也是) 与 So I do (我的确如此) 的语境逻辑差异。",
-                "5. 掌握‘祈使句 + and/or + 陈述句’这一带有隐性条件逻辑含义的混合句式物理应用。",
-                "6. 掌握 There be 句型中的‘就近原则’主谓一致规律。"
-            ),
-            relatedPoints = listOf(
-                RelatedPoint("主谓一致", "就近原则的典型应用", "There be 句型是中考考查就近原则最核心、最典型的应用场景单元。"),
-                RelatedPoint("代词", "It 的多功能角色", "It 在特殊句式中充当的形式化成分，是代词功能在中考应用中的高级体现。")
-            ),
-            exampleProblems = listOf(),
-            pastExamQuestions = listOf(
-                PastExamQuestion("2016", "北京中考", "— Li Hua won the first prize in the national math competition.\n— ______. He worked really hard.", listOf("A. So he did", "B. So did he", "C. Neither did he", "D. So was he"), "A", "【答案】A。本题考查 so 引导的强调赞同。后句‘他工作努力’证明了前句 Facts，故用 So he did (他的确如此)。", "误选 B，So did he 意为‘他也赢了’，物理逻辑不符合当前语境。", "—— 李华在国家数学竞赛中获得了一等奖。 —— 他确实获得了。他工作非常努力。"),
-                PastExamQuestion("2015", "上海中考", "There ______ a football match on TV tonight for us to watch, isn't there?", listOf("A. will have", "B. is going to be", "C. is going to have", "D. was"), "B", "【答案】B。本题考查 There be 句型的将来时构成. 物理上不能用 have，排除 A/C。反义疑问句 isn't there 提示主句是 is...be 结构。", "误选 A，汉语式翻译‘将会有’物理性导致错用 have。", "今晚电视上将有一场足球赛给我们看，不是吗？"),
-                PastExamQuestion("2016", "广东中考", "— I have never been to Paris in my life. What about you?\n— ______.", listOf("A. So have I", "B. Neither have I", "C. So I have", "D. Neither I have"), "B", "【答案】B。本题考查倒装句逻辑。前句是完成时的否定句，表达‘我也没去过’需用 Neither + 助动词 + 主语。", "误选 A，物理性忽略了前句中 never 这一否定词的存在。", "—— 我一生从未去过巴黎。你呢？ —— 我也没去过。")
-            ),
-            textbookParagraphs = listOf(
-                TextbookParagraph("There is a small park near our school with many green trees. There are many colorful flowers in it during every spring and summer. It's a good place for us to relax and study. It takes about five minutes to walk there from our classroom every day.", listOf(
-                    HighlightedSentence("There is a small park", "There be 句型遵循就近原则，因此谓语动词锁定为单数 is。"),
-                    HighlightedSentence("It's a good place for us to relax", "It 在此作形式主语，真正的语义对象是后面的不定式短语 to relax。")
-                ), "人教版七上 Unit 1"),
-                TextbookParagraph("If you don't go to the graduation party tonight, neither will I because I want to stay with you. I think it is important for us to spend some time together. So I hope you can change your mind and join us in the end.", listOf(
-                    HighlightedSentence("neither will I", "部分倒装句式，用于表达‘我也不去’，助动词 will 提前至主语前。"),
-                    HighlightedSentence("it is important for us to", "It's + adj + for sb + to do 经典形式主语句法结构。")
-                ), "外研版九下 Module 5")
-            ),
-            exampleSentences = listOf(
-                ExampleSentence("There is a world map and two English books on the desk for you.", "桌上有一张世界地图和两本英语书给你。", "【分析】There be 就近原则典型示例，谓语动词随 a world map 用单数。", "基础必会"),
-                ExampleSentence("It took me three full hours to finish the hard work yesterday.", "昨天花了我整整三个小时才完成那项艰巨的工作。", "【分析】It takes sb some time to do sth 经典物理结构示例。", "基础必会"),
-                ExampleSentence("So fast did he run that I couldn't catch him in the end of the race.", "他跑得如此之快，以至于我在比赛最后都没能追上他。", "【分析】so 修饰的程度成分置于句首，触发部分倒装逻辑（中考高阶语法）。", "高阶句式")
-            ),
-            teachingNotes = listOf(
-                TeachingNote("常见错误", "1. There be 与 have 逻辑混用；2. So do I 与 So I do 的语境逻辑判错；3. 倒装句助动词匹配错误（如实义动词忘了借 do/does）。"),
-                TeachingNote("教学建议", "建议教师采用‘镜子原理’讲解倒装：So do I 就像在照镜子；对比练习 so do I 与 so I do 的微差；强化 There be 句型的时态变换训练。")
-            ),
-            famousQuote = "It is never too late to learn.",
-            quoteAuthor = "English Proverb",
-            quoteTranslation = "活到老，学到老。",
-            quoteAnalysis = "强调学习是一个终身的过程，无论何时开始都不晚。"
+            quoteAnalysis = "展现了定语从句在定义个体生命哲学与驱动力时的逻辑力量。"
         )
     )
-
-    fun getPoint(id: String): KnowledgePoint? {
-        val cleanId = if (id.startsWith("search_")) id.substringAfter("search_") else id
-        return allPoints.find { it.id == cleanId } ?: allPoints.first()
-    }
 }
