@@ -567,7 +567,7 @@ fun HomeTab(
 
 @Composable
 fun TextbookSyncView(onNavigateToTextbookDetail: (String) -> Unit) {
-    var selectedTextbookIndex by remember { mutableStateOf(0) }
+    var selectedTextbookIndex by rememberSaveable { mutableStateOf(0) }
     val textbooks = com.example.insight.data.model.TextbookProvider.textbooks
     
     if (textbooks.isEmpty()) return
