@@ -51,10 +51,6 @@ fun KnowledgeDetailScreen(
     var selectedRelatedPoint by remember { mutableStateOf<RelatedPoint?>(null) }
     var selectedSentenceAnalysis by remember { mutableStateOf<HighlightedSentence?>(null) }
 
-    // Logic for conditional highlighting
-    val shouldHighlight = point.id != "nouns"
-    val customHighlightColor = Color(0xFFE1F5FE) // Light Blue highlight
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -156,8 +152,7 @@ fun KnowledgeDetailScreen(
                                     MarkdownText(
                                         markdown = detail, 
                                         modifier = Modifier.weight(1f),
-                                        isHighlightBold = shouldHighlight,
-                                        highlightColor = customHighlightColor
+                                        isHighlightBold = false // Disable highlight for all MarkdownText
                                     )
                                 }
                             }
@@ -172,8 +167,7 @@ fun KnowledgeDetailScreen(
                 MarkdownText(
                     markdown = point.description,
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    isHighlightBold = shouldHighlight,
-                    highlightColor = customHighlightColor
+                    isHighlightBold = false // Disable highlight for all MarkdownText
                 )
             }
 
@@ -208,7 +202,7 @@ fun KnowledgeDetailScreen(
                 }
                 
                 items(point.exampleSentences) { sentence ->
-                    ExampleSentenceCard(sentence, shouldHighlight, customHighlightColor)
+                    ExampleSentenceCard(sentence)
                 }
             }
 
@@ -257,7 +251,7 @@ fun KnowledgeDetailScreen(
                 }
                 
                 items(point.pastExamQuestions) { question ->
-                    PastExamQuestionItem(question, shouldHighlight, customHighlightColor)
+                    PastExamQuestionItem(question)
                 }
             }
 
@@ -283,8 +277,7 @@ fun KnowledgeDetailScreen(
                                     MarkdownText(
                                         markdown = note.content, 
                                         modifier = Modifier.fillMaxWidth(),
-                                        isHighlightBold = shouldHighlight,
-                                        highlightColor = customHighlightColor
+                                        isHighlightBold = false // Disable highlight for all MarkdownText
                                     )
                                 }
                             }
@@ -296,18 +289,18 @@ fun KnowledgeDetailScreen(
             // 🌟 名人名言
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                FamousQuoteCard(point.famousQuote, point.quoteAuthor, point.quoteTranslation, shouldHighlight, customHighlightColor)
+                FamousQuoteCard(point.famousQuote, point.quoteAuthor, point.quoteTranslation)
             }
         }
     }
 
     // 弹窗逻辑
     selectedRelatedPoint?.let { rp ->
-        RelatedPointDialog(rp, shouldHighlight, customHighlightColor) { selectedRelatedPoint = null }
+        RelatedPointDialog(rp) { selectedRelatedPoint = null }
     }
 
     selectedSentenceAnalysis?.let { hs ->
-        SentenceAnalysisDialog(hs, shouldHighlight, customHighlightColor) { selectedSentenceAnalysis = null }
+        SentenceAnalysisDialog(hs) { selectedSentenceAnalysis = null }
     }
 }
 
@@ -340,7 +333,7 @@ fun TextbookParagraphCard(paragraph: TextbookParagraph, onSentenceClick: (Highli
                     if (startIndex != -1) {
                         addStyle(
                             style = SpanStyle(
-                                background = Color.Yellow.copy(alpha = 0.3f),
+                                background = Color.Yellow.copy(alpha = 0.3f), // Keep this yellow highlight for textbook mapping
                                 fontWeight = FontWeight.Bold,
                                 textDecoration = TextDecoration.Underline,
                                 color = MaterialTheme.colorScheme.primary
@@ -372,7 +365,7 @@ fun TextbookParagraphCard(paragraph: TextbookParagraph, onSentenceClick: (Highli
 }
 
 @Composable
-fun ExampleSentenceCard(sentence: ExampleSentence, isHighlight: Boolean, hColor: Color) {
+fun ExampleSentenceCard(sentence: ExampleSentence) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
         shape = RoundedCornerShape(12.dp),
@@ -394,8 +387,7 @@ fun ExampleSentenceCard(sentence: ExampleSentence, isHighlight: Boolean, hColor:
                         MarkdownText(
                             markdown = analysis, 
                             modifier = Modifier.fillMaxWidth(),
-                            isHighlightBold = isHighlight,
-                            highlightColor = hColor
+                            isHighlightBold = false // Disable highlight for all MarkdownText
                         )
                     }
                 }
@@ -405,7 +397,7 @@ fun ExampleSentenceCard(sentence: ExampleSentence, isHighlight: Boolean, hColor:
 }
 
 @Composable
-fun FamousQuoteCard(quote: String, author: String, translation: String, isHighlight: Boolean, hColor: Color) {
+fun FamousQuoteCard(quote: String, author: String, translation: String) {
     if (quote.isNotEmpty()) {
         Column(
             modifier = Modifier
@@ -445,16 +437,16 @@ fun FamousQuoteCard(quote: String, author: String, translation: String, isHighli
 }
 
 @Composable
-fun RelatedPointDialog(rp: RelatedPoint, isHighlight: Boolean, hColor: Color, onDismiss: () -> Unit) {
+fun RelatedPointDialog(rp: RelatedPoint, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(rp.title, fontWeight = FontWeight.Bold) },
         text = {
             Column {
-                MarkdownText(markdown = rp.description, isHighlightBold = isHighlight, highlightColor = hColor)
+                MarkdownText(markdown = rp.description, isHighlightBold = false)
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("💡 关联逻辑：", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                MarkdownText(markdown = rp.connectionReason, isHighlightBold = isHighlight, highlightColor = hColor)
+                MarkdownText(markdown = rp.connectionReason, isHighlightBold = false)
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("知道了") } },
@@ -463,7 +455,7 @@ fun RelatedPointDialog(rp: RelatedPoint, isHighlight: Boolean, hColor: Color, on
 }
 
 @Composable
-fun SentenceAnalysisDialog(hs: HighlightedSentence, isHighlight: Boolean, hColor: Color, onDismiss: () -> Unit) {
+fun SentenceAnalysisDialog(hs: HighlightedSentence, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -476,7 +468,7 @@ fun SentenceAnalysisDialog(hs: HighlightedSentence, isHighlight: Boolean, hColor
                 Spacer(modifier = Modifier.height(16.dp))
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(16.dp))
-                MarkdownText(markdown = hs.analysis, modifier = Modifier.fillMaxWidth(), isHighlightBold = isHighlight, highlightColor = hColor)
+                MarkdownText(markdown = hs.analysis, modifier = Modifier.fillMaxWidth(), isHighlightBold = false)
                 Spacer(modifier = Modifier.height(24.dp))
                 Button(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text("确认") }
             }
@@ -485,7 +477,7 @@ fun SentenceAnalysisDialog(hs: HighlightedSentence, isHighlight: Boolean, hColor
 }
 
 @Composable
-fun PastExamQuestionItem(examQuestion: PastExamQuestion, isHighlight: Boolean, hColor: Color) {
+fun PastExamQuestionItem(examQuestion: PastExamQuestion) {
     var showExplanation by remember { mutableStateOf(false) }
     
     Card(
@@ -516,8 +508,7 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion, isHighlight: Boolean, h
                     MarkdownText(
                         markdown = examQuestion.explanation, 
                         modifier = Modifier.fillMaxWidth(),
-                        isHighlightBold = isHighlight,
-                        highlightColor = hColor
+                        isHighlightBold = false
                     )
                     
                     examQuestion.errorProne?.let {
@@ -526,8 +517,7 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion, isHighlight: Boolean, h
                             MarkdownText(
                                 markdown = "**⚠️ 易错点**：$it", 
                                 modifier = Modifier.padding(12.dp),
-                                isHighlightBold = isHighlight,
-                                highlightColor = hColor
+                                isHighlightBold = false
                             )
                         }
                     }
@@ -538,8 +528,7 @@ fun PastExamQuestionItem(examQuestion: PastExamQuestion, isHighlight: Boolean, h
                             MarkdownText(
                                 markdown = "**🌐 翻译**：$it", 
                                 modifier = Modifier.padding(12.dp),
-                                isHighlightBold = isHighlight,
-                                highlightColor = hColor
+                                isHighlightBold = false
                             )
                         }
                     }

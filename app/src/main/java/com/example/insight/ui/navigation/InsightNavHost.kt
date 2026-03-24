@@ -37,6 +37,9 @@ sealed class Route(val path: String) {
     object KnowledgeDetail : Route("knowledge_detail/{nodeId}") {
         fun createRoute(id: String) = "knowledge_detail/$id"
     }
+    object TextbookDetail : Route("textbook_detail/{unitId}") {
+        fun createRoute(id: String) = "textbook_detail/$id"
+    }
     object Schedule : Route("schedule")
 }
 
@@ -79,9 +82,27 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onNavigateToKnowledgeDetail = { id ->
                     navController.navigate(Route.KnowledgeDetail.createRoute(id))
                 },
+                onNavigateToTextbookDetail = { id ->
+                    navController.navigate(Route.TextbookDetail.createRoute(id))
+                },
                 onNavigateToSchedule = {
                     navController.navigate(Route.Schedule.path)
                 }
+            )
+        }
+
+        composable(
+            route = Route.TextbookDetail.path,
+            arguments = listOf(
+                androidx.navigation.navArgument("unitId") {
+                    type = androidx.navigation.NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val unitId = backStackEntry.arguments?.getString("unitId") ?: ""
+            TextbookDetailScreen(
+                unitId = unitId,
+                onBack = { navController.popBackStack() }
             )
         }
 

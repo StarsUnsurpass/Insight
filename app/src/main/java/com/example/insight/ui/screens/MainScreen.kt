@@ -97,6 +97,7 @@ fun MainScreen(
     onNavigateToCourseware: (String) -> Unit,
     onNavigateToLessonPlanSample: (String) -> Unit,
     onNavigateToKnowledgeDetail: (String) -> Unit,
+    onNavigateToTextbookDetail: (String) -> Unit,
     onNavigateToSchedule: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -563,7 +564,7 @@ fun HomeTab(
 }
 
 @Composable
-fun TextbookSyncView(onNavigateToKnowledgeDetail: (String) -> Unit) {
+fun TextbookSyncView(onNavigateToTextbookDetail: (String) -> Unit) {
     var selectedTextbookIndex by remember { mutableStateOf(0) }
     val textbooks = com.example.insight.data.model.TextbookProvider.textbooks
     
@@ -608,102 +609,32 @@ fun TextbookSyncView(onNavigateToKnowledgeDetail: (String) -> Unit) {
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        var expandedUnitId by remember { mutableStateOf<String?>(null) }
-        
         currentTextbook.units.forEach { unit ->
-            val isExpanded = expandedUnitId == unit.id
-            
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 6.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .clickable { 
-                        expandedUnitId = if (isExpanded) null else unit.id 
+                        onNavigateToTextbookDetail(unit.id)
                     },
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = if (isExpanded) 4.dp else 1.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier.padding(16.dp).fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column {
-                            Text(unit.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                            Text(unit.topic, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
-                        }
-                        Icon(
-                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
+                Row(
+                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(unit.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                        Text(unit.topic, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
                     }
-                    
-                    AnimatedVisibility(visible = isExpanded) {
-                        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
-                            HorizontalDivider(modifier = Modifier.padding(bottom = 12.dp))
-                            
-                            Surface(color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)) {
-                                Text("💡 核心语法: ${unit.coreGrammar}", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                            }
-                            
-                            unit.sections.forEach { section ->
-                                when (section) {
-                                    is com.example.insight.data.model.UnitSection.SectionA -> {
-                                        Text(section.title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(top = 8.dp, bottom = 4.dp))
-                                        Text("词汇: ${section.vocabulary.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
-                                        Text("句型: ${section.sentencePatterns.joinToString(" / ")}", style = MaterialTheme.typography.bodySmall)
-                                    }
-                                    is com.example.insight.data.model.UnitSection.GrammarFocus -> {
-                                        Surface(
-                                            color = Color(0xFFFFF3E0), 
-                                            shape = RoundedCornerShape(8.dp), 
-                                            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
-                                        ) {
-                                            Column(modifier = Modifier.padding(12.dp)) {
-                                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                                    Icon(Icons.Default.Star, null, tint = Color(0xFFFF9800), modifier = Modifier.size(16.dp))
-                                                    Spacer(modifier = Modifier.width(8.dp))
-                                                    Text(section.title, fontWeight = FontWeight.Bold, color = Color(0xFFE65100))
-                                                }
-                                                Spacer(modifier = Modifier.height(8.dp))
-                                                section.grammarNodeIds.forEach { nodeId ->
-                                                    val point = com.example.insight.data.model.KnowledgeProvider.getPoint(nodeId)
-                                                    if (point != null) {
-                                                        Text(
-                                                            text = "🔗 ${point.title}",
-                                                            style = MaterialTheme.typography.bodyMedium,
-                                                            color = MaterialTheme.colorScheme.primary,
-                                                            textDecoration = TextDecoration.Underline,
-                                                            modifier = Modifier.clickable { onNavigateToKnowledgeDetail(nodeId) }.padding(vertical = 4.dp)
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    is com.example.insight.data.model.UnitSection.SectionB -> {
-                                        Text(section.title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(top = 8.dp, bottom = 4.dp))
-                                        Text("阅读: ${section.readingSkills.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
-                                        Text("写作: ${section.writingSkills.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
-                                    }
-                                }
-                            }
-                            
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Button(
-                                onClick = { /* TODO Generate Lesson Plan */ },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(8.dp)
-                            ) {
-                                Icon(Icons.Default.AutoAwesome, null, modifier = Modifier.size(18.dp))
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text("用此单元生成教案")
-                            }
-                        }
-                    }
+                    Icon(
+                        imageVector = Icons.Default.ChevronRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                    )
                 }
             }
         }
