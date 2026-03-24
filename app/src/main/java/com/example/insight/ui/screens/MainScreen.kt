@@ -45,6 +45,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -451,110 +453,110 @@ fun HomeTab(
             Spacer(modifier = Modifier.height(8.dp))
         }
 
-        if (currentMode == HomeMode.EXAM_NETWORK) {
-            item {
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { searchQuery = it },
-                    placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 4.dp),
-                    shape = RoundedCornerShape(24.dp),
-                    singleLine = true,
-                    leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = Color.Transparent,
-                        focusedBorderColor = primaryColor.copy(alpha = 0.5f),
-                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-                        focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
-                    )
-                )
-            }
-
-            if (searchQuery.isEmpty()) {
-                val sections = listOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)")
-                
-                sections.forEach { sectionName ->
-                    val isExpanded = expandedSections.contains(sectionName)
-                    item {
-                        Row(
+        item {
+            Crossfade(
+                targetState = currentMode,
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                label = "mode_switch",
+                modifier = Modifier.fillMaxWidth()
+            ) { mode ->
+                if (mode == HomeMode.EXAM_NETWORK) {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                        OutlinedTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(12.dp))
-                                .hapticClickable(preferences) {
-                                    if (isExpanded) expandedSections.remove(sectionName)
-                                    else expandedSections.add(sectionName)
-                                }
-                                .padding(vertical = 8.dp, horizontal = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = sectionName,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = primaryColor
+                                .padding(top = 4.dp),
+                            shape = RoundedCornerShape(24.dp),
+                            singleLine = true,
+                            leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = Color.Transparent,
+                                focusedBorderColor = primaryColor.copy(alpha = 0.5f),
+                                unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                                focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
                             )
-                            Icon(
-                                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                contentDescription = if (isExpanded) "Collapse" else "Expand",
-                                tint = primaryColor,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
-                    
-                    item {
-                        val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
-                        AnimatedVisibility(
-                            visible = isExpanded,
-                            enter = expandVertically(
-                                animationSpec = spring(dampingRatio = 0.65f, stiffness = 300f)
-                            ) + fadeIn(animationSpec = tween(250)),
-                            exit = shrinkVertically(
-                                animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f)
-                            ) + fadeOut(animationSpec = tween(200))
-                        ) {
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(16.dp),
-                                modifier = Modifier.padding(bottom = 8.dp)
-                            ) {
-                                sectionPoints.forEach { point ->
-                                    HistoryCardByPoint(
-                                        point = point, 
-                                        preferences = preferences, 
-                                        onUpdateStatus = onUpdateStatus,
-                                        onClick = { onNavigateToKnowledgeDetail(point.id) }
+                        )
+
+                        if (searchQuery.isEmpty()) {
+                            val sections = listOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)")
+                            
+                            sections.forEach { sectionName ->
+                                val isExpanded = expandedSections.contains(sectionName)
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clip(RoundedCornerShape(12.dp))
+                                        .hapticClickable(preferences) {
+                                            if (isExpanded) expandedSections.remove(sectionName)
+                                            else expandedSections.add(sectionName)
+                                        }
+                                        .padding(vertical = 8.dp, horizontal = 4.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(
+                                        text = sectionName,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = primaryColor
                                     )
+                                    Icon(
+                                        imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                        contentDescription = if (isExpanded) "Collapse" else "Expand",
+                                        tint = primaryColor,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                                
+                                val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                                AnimatedVisibility(
+                                    visible = isExpanded,
+                                    enter = expandVertically(
+                                        animationSpec = spring(dampingRatio = 0.65f, stiffness = 300f)
+                                    ) + fadeIn(animationSpec = tween(250)),
+                                    exit = shrinkVertically(
+                                        animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f)
+                                    ) + fadeOut(animationSpec = tween(200))
+                                ) {
+                                    Column(
+                                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                                        modifier = Modifier.padding(bottom = 8.dp)
+                                    ) {
+                                        sectionPoints.forEach { point ->
+                                            HistoryCardByPoint(
+                                                point = point, 
+                                                preferences = preferences, 
+                                                onUpdateStatus = onUpdateStatus,
+                                                onClick = { onNavigateToKnowledgeDetail(point.id) }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            val searchResults = KnowledgeProvider.allPoints.filter { point ->
+                                val q = searchQuery.lowercase()
+                                point.title.lowercase().contains(q) ||
+                                point.description.lowercase().contains(q)
+                            }
+
+                            if (searchResults.isEmpty()) {
+                                Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
+                                    Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                                }
+                            } else {
+                                searchResults.forEach { point ->
+                                    SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
                                 }
                             }
                         }
                     }
-                }
-            } else {
-                val searchResults = KnowledgeProvider.allPoints.filter { point ->
-                    val q = searchQuery.lowercase()
-                    point.title.lowercase().contains(q) ||
-                    point.description.lowercase().contains(q)
-                }
-
-                if (searchResults.isEmpty()) {
-                    item {
-                        Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
-                            Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
-                        }
-                    }
                 } else {
-                    items(searchResults) { point ->
-                        SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
-                    }
+                    TextbookSyncView(onNavigateToKnowledgeDetail)
                 }
-            }
-        } else {
-            // Textbook Sync Mode View
-            item {
-                TextbookSyncView(onNavigateToKnowledgeDetail)
             }
         }
     }
