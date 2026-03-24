@@ -1955,6 +1955,126 @@ object KnowledgeProvider {
             quoteAuthor = "Friedrich Nietzsche",
             quoteTranslation = "知道为什么而活的人，便能生存。",
             quoteAnalysis = "展现了定语从句在定义个体生命哲学与驱动力时的逻辑力量。"
+        ),
+        KnowledgePoint(
+            id = "sv_agreement",
+            section = SEC_3,
+            title = "主谓一致 (Subject-Verb Agreement)",
+            description = """
+### 📖 核心概念详解
+
+主谓一致是指谓语动词在“人称”和“数”上必须与主语保持逻辑契合。
+
+#### 1. 语法一致原则 (Grammatical Agreement)
+主语是单数，谓语用单数；主语是复数，谓语用复数。
+*   *The boy **is** reading.* / *The boys **are** reading.*
+
+#### 2. 意义一致原则 (Notional Agreement)
+根据主语表达的逻辑意义而非表面形式决定。
+*   **集体名词**：*family, class, team*。强调整体用单数 (*My family is large*)；强调成员用复数 (*My family are watching TV*)。
+*   **时间/金钱/距离**：视为整体，谓语用单数。 (*Ten dollars **is** enough.*)
+*   **不定代词**：*Everyone, each, neither* 作主语，谓语必用单数。
+
+#### 3. 就近一致原则 (Proximity)
+谓语动词的数由离它最近的主语决定。
+*   **关联连词**关键词：*or, either... or, neither... nor, not only... but also*, 以及 *there be* 句型。
+*   *Neither you nor **I am** right.*
+""".trimIndent(),
+            syllabusDetails = listOf(
+                "**【三原则锁定】** 熟练判别语法一致、意义一致与就近一致的不同物理应用场景。",
+                "**【集体名词】** 掌握 *family, police, cattle* 等词在不同语境下的数之选择。",
+                "**【单位化主语】** 明确时间、金钱、长度等作为整体概念时对单数谓语的锁定性。",
+                "**【并列逻辑】** 区分 *and* 连接时的“同一性”与“多样性”对动词形态的影响。"
+            ),
+            relatedPoints = listOf(
+                RelatedPoint("名词 (Nouns)", "数的源头", "名词的分类是主谓一致发生的物理前提。"),
+                RelatedPoint("代词 (Pronouns)", "数的继承", "不定代词的逻辑单数属性是导致谓语变换的核心诱因。"),
+                RelatedPoint("连词 (Conjunctions)", "就近的纽带", "关联连词是触发就近一致原则的主战场。")
+            ),
+            exampleProblems = listOf(),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2025", "北京", "Each of the students ______ a new dictionary from the school.", listOf("A. have", "B. has", "C. is having", "D. are having"), "B", "**【解析】** *Each of...* 作主语，谓语动词锁定单数。故选 **B**。", "**【注意】** 忽略介词短语修饰，聚焦核心。"),
+                PastExamQuestion("2024", "广东", "The number of the students in our class ______ 50.", listOf("A. is", "B. are", "C. were", "D. be"), "A", "**【解析】** *The number of...* 强调“……的数量”，谓语用单数。故选 **A**。", "**【辨析】** *A number of...* (许多) 谓语用复数。")
+            ),
+            teachingNotes = listOf(
+                TeachingNote("【学情透视】核心症结", "1. **表象误解**：看到 *and* 就用复数，忽略了 *The singer and dancer* (同一个人)。\n2. **距离迷失**：被 *with his friends* 介词短语带偏，忽略了真正的主语。")
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph("My family is large. My family are all busy with their work.", listOf(
+                    HighlightedSentence("family is", "**【整体】** 强调整体，谓语用单数。"),
+                    HighlightedSentence("family are", "**【成员】** 强调个体，谓语用复数。")
+                ), "人教版 (Go for it!) 七上 Unit 2")
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("Not only the teacher but also the students are looking forward to the holiday.", "不仅老师，学生们也都在期待假期。", "**【分析】** 遵循就近原则。"),
+                ExampleSentence("Ten years is a long time for a person to wait.", "十年对一个人来说是漫长的等待。", "**【分析】** 时间整体主格。")
+            ),
+            famousQuote = "A team is only as strong as its weakest link.",
+            quoteAuthor = "English Proverb",
+            quoteTranslation = "团队的实力取决于它最薄弱的一环。",
+            quoteAnalysis = "本句展示了主谓一致在界定整体逻辑强度时的精确性。"
+        ),
+        KnowledgePoint(
+            id = "adverbial_clause",
+            section = SEC_3,
+            title = "状语从句 (Adverbial Clause)",
+            description = """
+### 📖 核心概念详解
+
+状语从句在主句中充当状语，描述动作发生的时间、原因、条件、结果等。
+
+#### 1. 时间状语从句 (Time)
+引导词：*when, while, as, before, after, until, as soon as*。
+*   ⚠️ **物理限制**：**“主将从现”** —— 主句用将来时，从句强制用一般现在时。
+
+#### 2. 条件状语从句 (Condition)
+引导词：*if, unless* (除非)。
+*   ⚠️ **物理限制**：同样遵循 **“主将从现”** 原则。
+
+#### 3. 原因状语从句 (Reason)
+引导词：*because, as, since*。
+*   *Because* 语气最强，回答 *Why* 提问。
+
+#### 4. 让步状语从句 (Concession)
+引导词：*although, though, even though*。
+*   ⚠️ **红线**：英语中 *although* 不能与 *but* 连用。
+
+#### 5. 目的与结果状语从句 (Purpose & Result)
+*   **目的**：*so that...* (为了)。
+*   **结果**：*so... that...* (如此...以至于...)。
+""".trimIndent(),
+            syllabusDetails = listOf(
+                "**【主将从现】** 深度掌握时间、条件状语从句中的时态物理差异。",
+                "**【引导词匹配】** 区分 *if* (如果/是否)、*since* (既然/自从) 在从句中的多重身份。",
+                "**【逻辑排斥】** 掌握 *because... (so)* 与 *although... (but)* 的物理互斥规则。",
+                "**【so...that】** 掌握 *so* 与 *such* 的物理层级匹配（*so* 后面通常接 adj/adv）。"
+            ),
+            relatedPoints = listOf(
+                RelatedPoint("一般现在时", "替代将来", "状语从句是‘主将从现’语法规律的核心应用点。"),
+                RelatedPoint("连词 (Conjunctions)", "逻辑信号", "状语从句本质上是连词驱动的逻辑复合体。")
+            ),
+            exampleProblems = listOf(),
+            pastExamQuestions = listOf(
+                PastExamQuestion("2025", "天津", "I will tell him the news as soon as he ______ back.", listOf("A. come", "B. comes", "C. will come", "D. came"), "B", "**【解析】** *as soon as* 引导时间状语从句，主将从现。故选 **B**。", "**【时态】** 锁定一般现在时。"),
+                PastExamQuestion("2024", "北京", "Although it was raining hard, ______ the students kept on practicing.", listOf("A. but", "B. so", "C. and", "D. /"), "D", "**【解析】** *Although* 与 *but* 不连用。语境中无需额外连词。故选 **D**。", "**【禁忌】** 物理排斥逻辑。")
+            ),
+            teachingNotes = listOf(
+                TeachingNote("【学情透视】核心症结", "1. **时态僵化**：在 *if* 引导的条件句中习惯性匹配 *will*。\n2. **母语迁移**：在受 *although* 影响时下意识加 *but*。")
+            ),
+            textbookParagraphs = listOf(
+                TextbookParagraph("If it is sunny tomorrow, we will go for a picnic. Although we are busy, we should still find time to relax.", listOf(
+                    HighlightedSentence("If it is", "**【条件状语】** 遵循主将从现原则。"),
+                    HighlightedSentence("Although we are", "**【让步状语】** *Although* 后面严禁加 *but*。")
+                ), "外研版 (New Standard) 八下 Module 2")
+            ),
+            exampleSentences = listOf(
+                ExampleSentence("I will tell him the news as soon as he returns.", "他一回来我就告诉他。", "**【分析】** *as soon as* 引导时间状语从句。"),
+                ExampleSentence("Since you are here, why not have dinner with us?", "既然你在这儿，就和我们一起吃晚饭吧。", "**【分析】** *Since* 引导原因状语从句。")
+            ),
+            famousQuote = "If at first you don't succeed, try, try again.",
+            quoteAuthor = "William Hickson",
+            quoteTranslation = "如果起初你没有成功，那就再试一次，再试一次。",
+            quoteAnalysis = "本句生动诠释了条件状语从句在构建人生逻辑链条时的驱动作用。"
         )
     )
 }
