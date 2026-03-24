@@ -351,12 +351,13 @@ enum class HomeMode(val label: String) {
 fun HomeTab(
     preferences: UserPreferences, 
     onNavigateToKnowledgeDetail: (String) -> Unit,
+    onNavigateToTextbookDetail: (String) -> Unit,
     onUpdateStatus: (String, com.example.insight.ui.state.KnowledgeStatus) -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
     val expandedSections = remember { mutableStateListOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)") }
-    var currentMode by remember { mutableStateOf(HomeMode.EXAM_NETWORK) }
+    var currentMode by rememberSaveable { mutableStateOf(HomeMode.EXAM_NETWORK) }
 
     val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
 
@@ -1287,6 +1288,7 @@ fun GraphPreviewCard(onClick: () -> Unit) {
 
 @Composable
 fun LearningAnalysisSummary(students: List<com.example.insight.data.local.entities.StudentEntity>, onClick: () -> Unit) {
+    val primaryColor = MaterialTheme.colorScheme.primary
     Card(
         modifier = Modifier.fillMaxWidth().clickable { onClick() },
         shape = RoundedCornerShape(24.dp),
@@ -1300,7 +1302,7 @@ fun LearningAnalysisSummary(students: List<com.example.insight.data.local.entiti
                     val avg = if (students.isEmpty()) "0" else students.map { it.latestScore }.average().toInt().toString()
                     Text(avg, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                 }
-                Icon(Icons.AutoMirrored.Filled.TrendingUp, null, tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.AutoMirrored.Filled.TrendingUp, null, tint = primaryColor)
             }
             Spacer(Modifier.height(12.dp))
             Text("班级近期进步最快：句法结构模块", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)

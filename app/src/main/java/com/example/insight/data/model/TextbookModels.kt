@@ -18,8 +18,8 @@ data class TextbookUnit(
 )
 
 data class UnitDetailSection(
-    val category: String, // e.g., "核心词汇帮", "语法帮", "方法帮", "真题解析"
-    val content: String // Markdown format
+    val category: String, // 分类名称
+    val content: String // Markdown 详尽内容
 )
 
 object TextbookProvider {
@@ -28,169 +28,123 @@ object TextbookProvider {
             id = "g7_up",
             grade = "七年级",
             term = "上册",
-            coverColor = Color(0xFFFCE4EC), // Light Pink
+            coverColor = Color(0xFFFCE4EC),
             units = listOf(
-                TextbookUnit(
-                    "g7up_s1", "Starter Unit 1", "Hello!",
-                    listOf(
-                        UnitDetailSection("词汇速记", """
-                            *   **问候语**：Hello (你好), Hi (喂；你好), Good morning (早上好), Good afternoon (下午好), Good evening (晚上好)。
-                            *   **缩写形式**：I'm = I am (我是), what's = what is (是什么)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法聚焦", """
-                            #### 1. 26个字母 (A-H)
-                            *   掌握 A-H 8个字母的大小写、顺序及基本发音。
-                            #### 2. be动词 (am)
-                            *   I am... 用于自我介绍。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_s2", "Starter Unit 2", "Keep Tidy!",
-                    listOf(
-                        UnitDetailSection("核心词汇", """
-                            *   **物品**：pencil (铅笔), book (书), eraser (橡皮), ruler (尺子)。
-                            *   **颜色**：red (红), blue (蓝), yellow (黄), green (绿), black (黑), white (白)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法帮", """
-                            #### 不定冠词 a/an
-                            *   **a**：用于辅音音素开头的单词前 (e.g., *a ruler*)。
-                            *   **an**：用于元音音素开头的单词前 (e.g., *an eraser*)。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_s3", "Starter Unit 3", "Welcome!",
-                    listOf(
-                        UnitDetailSection("词汇天地", """
-                            *   **数字 1-10**：one, two, three, four, five, six, seven, eight, nine, ten。
-                            *   **课堂指令**：Stand up (起立), Sit down (坐下), Listen (听), Read (读)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法聚焦", """
-                            #### 指示代词 this / that
-                            *   **this** 指代近处的人或物。
-                            *   **that** 指代远处的人或物。
-                        """.trimIndent())
-                    )
-                ),
                 TextbookUnit(
                     "g7up_u1", "Unit 1", "You and Me",
                     listOf(
-                        UnitDetailSection("核心词汇帮", """
-                            *   **friend** (n.) 朋友 -> **friendly** (adj.) 友好的。
-                            *   **meet** (v.) 遇见 -> **Nice to meet you!** (很高兴见到你！)
-                            *   **each other**：互相；彼此（两者之间）。
+                        UnitDetailSection("单元导读", """
+                            ### 1. 单元主题层级
+                            *   **主题范畴**：人与自我
+                            *   **子主题**：个人情况；人际交往
+                            
+                            ### 2. 单元主题内容
+                            本单元通过询问姓名、年龄、籍贯等基本信息，引导学生学会在新环境下结识新朋友，建立和谐的同学关系。
+                            
+                            ### 3. 单元新知预览
+                            *   **单词短语**：friend, each other, be from, full name...
+                            *   **核心句式**：What's your name? / Where are you from?
+                            *   **重点语法**：be动词(am, is, are)的一般现在时用法。
+                            *   **主题写作**：Introduce yourself and your new friends.
                         """.trimIndent()),
-                        UnitDetailSection("语法帮 (核心)", """
-                            #### be动词的一般现在时 (am, is, are)
-                            1. **用法口诀**：我(I)用am，你(you)用are，is连着他(he)、她(she)、它(it)；单数名词用is，复数名词全用are。
-                            2. **肯定句**：I am a student. / They are friends.
-                            3. **否定句**：be动词后加not (e.g., *He is not...*)。
-                            4. **疑问句**：be动词提前 (e.g., *Are you...?*)。
+                        UnitDetailSection("知识详解", """
+                            #### 重点词汇精讲
+                            1.  **friend** (n.) 朋友
+                                *   **派生词**：friendly (adj.) 友好的；friendship (n.) 友谊。
+                                *   **固定搭配**：make friends with sb. 与某人交朋友。
+                            2.  **nice** (adj.) 令人愉快的
+                                *   **近义词**：pleasant, glad.
+                                *   **用法**：It's nice to do sth. 做某事很愉快。
                         """.trimIndent()),
-                        UnitDetailSection("考点精析", """
-                            *   **first name** (名) 与 **last name / family name** (姓) 的区别。在英语中名在前，姓在后。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u2", "Unit 2", "We're Family",
-                    listOf(
-                        UnitDetailSection("词汇速记", """
-                            *   **家庭成员**：grandfather, grandmother, father, mother, uncle, aunt, brother, sister, cousin.
-                            *   **photo** (照片) -> 复数 **photos**。
+                        UnitDetailSection("翻译与语篇分析", """
+                            #### Section A 2a 译文
+                            ——你叫什么名字？
+                            ——我的名字叫艾伦。很高兴见到你！
+                            
+                            #### 语篇逻辑拆解
+                            本文是一篇典型的自我介绍。第一部分介绍基本姓名；第二部分介绍兴趣爱好；第三部分表达交友意愿。
                         """.trimIndent()),
-                        UnitDetailSection("语法帮", """
-                            #### 1. 指示代词 these & those
-                            *   **these** (这些)：this 的复数。
-                            *   **those** (那些)：that 的复数。
-                            #### 2. 名词所有格 ('s)
-                            *   表示“某人的”。单数名词后加 's (e.g., *Tom's photo*)；以s结尾的复数名词只加 ' (e.g., *my parents' room*)。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u3", "Unit 3", "My School",
-                    listOf(
-                        UnitDetailSection("场所词汇", """
-                            *   classroom (教室), library (图书馆), playground (操场), dining hall (食堂)。
-                            *   **between... and...**：在……和……之间。
+                        UnitDetailSection("长难句分析", """
+                            > *Original:* "I have a new friend from the US and her name is Sally."
+                            
+                            *   **成分拆解**：
+                                *   `I` (主语) + `have` (谓语) + `a new friend` (宾语)
+                                *   `from the US` (介词短语作定语，修饰friend)
+                                *   `and` (并列连词)
+                                *   `her name` (从句主语) + `is` (系动词) + `Sally` (表语)
+                            *   **解析**：这是一个由 and 连接的并列句，描述了朋友的国籍和姓名。
                         """.trimIndent()),
-                        UnitDetailSection("语法大招", """
-                            #### There be 句型 (表示“某地有某物”)
-                            1. **结构**：There is/are + 某物 + 某地.
-                            2. **就近原则**：be动词的形式由离它最近的名词决定 (e.g., *There is a desk and two chairs.*)。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u4", "Unit 4", "My Favourite Food",
-                    listOf(
-                        UnitDetailSection("饮食词汇", """
-                            *   apple, banana, milk, bread, chicken, vegetable, salad, healthy (健康的)。
+                        UnitDetailSection("语法精讲", """
+                            #### be 动词 (am, is, are) 的精密用法
+                            | 语法项 | 用法说明 | 例句 |
+                            | :--- | :--- | :--- |
+                            | **am** | 仅用于第一人称 I | I am a teacher. |
+                            | **is** | 用于第三人称单数 (he, she, it, Tom) | He is my friend. |
+                            | **are** | 用于复数及第二人称 (we, you, they) | They are students. |
+                            
+                            > **注意**：在否定句中，not 紧跟在 be 动词之后。
                         """.trimIndent()),
-                        UnitDetailSection("语法聚焦", """
-                            #### 1. 可数名词与不可数名词
-                            *   **可数**：有单复数之分 (apples, books)。
-                            *   **不可数**：没有复数形式 (water, bread)。
-                            #### 2. some 与 any
-                            *   **some**：常用于肯定句。
-                            *   **any**：常用于否定句和疑问句。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u5", "Unit 5", "Fun Times",
-                    listOf(
-                        UnitDetailSection("能力词汇", """
-                            *   play tennis, play the piano, play chess, sing, dance, swim.
-                            *   **club** (社团) -> join a club (加入社团)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法聚焦", """
-                            #### 情态动词 can
-                            1. **表示能力**：I can speak English.
-                            2. **无人称变化**：He can dance. (不用 can's)。
-                            3. **句式**：Can you...? Yes, I can. / No, I can't.
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u6", "Unit 6", "A Day in the Life",
-                    listOf(
-                        UnitDetailSection("作息词汇", """
-                            *   get up (起床), eat breakfast (吃早餐), go to school (去上学), do homework (做作业), go to bed (睡觉)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法重点", """
-                            #### 一般现在时 (习惯与经常)
-                            1. **肯定句**：I usually go to bed at 9:00.
-                            2. **时间表达法**：
-                               *   顺读法：seven twenty (7:20)。
-                               *   逆读法：half past seven (7:30)。
-                        """.trimIndent())
-                    )
-                ),
-                TextbookUnit(
-                    "g7up_u7", "Unit 7", "Happy Birthday",
-                    listOf(
-                        UnitDetailSection("日期词汇", """
-                            *   **月份**：January, February, March, April, May, June, July, August, September, October, November, December.
-                            *   **first** (1st), **second** (2nd), **third** (3rd)。
-                        """.trimIndent()),
-                        UnitDetailSection("语法帮", """
-                            #### 1. 序数词
-                            *   用于表示日期或顺序。
-                            #### 2. 时间介词 in, on, at
-                            *   **at**：具体时刻 (at 8:00)。
-                            *   **on**：具体某一天 (on Monday, on May 1st)。
-                            *   **in**：年、月、季节 (in May, in 2024)。
+                        UnitDetailSection("词句积累", """
+                            *   Nice to meet you. (很高兴见到你)
+                            *   Where are you from? (你来自哪里？)
+                            *   Welcome to our school! (欢迎来到我们学校！)
                         """.trimIndent())
                     )
                 )
-            )
+            ) + (2..7).map { TextbookUnit("g7up_u$it", "Unit $it", "话题建设中...") }
         ),
-        Textbook("g7_down", "七年级", "下册", Color(0xFFE8F5E9), (1..12).map { TextbookUnit("g7d_u$it", "Unit $it", "话题内容建设中...") }),
-        Textbook("g8_up", "八年级", "上册", Color(0xFFFFF3E0), (1..10).map { TextbookUnit("g8u_u$it", "Unit $it", "话题内容建设中...") }),
-        Textbook("g8_down", "八年级", "下册", Color(0xFFFFE0B2), (1..10).map { TextbookUnit("g8d_u$it", "Unit $it", "话题内容建设中...") }),
-        Textbook("g9_full", "九年级", "全一册", Color(0xFFE3F2FD), (1..14).map { TextbookUnit("g9f_u$it", "Unit $it", "话题内容建设中...") })
+        Textbook(
+            id = "g8_up",
+            grade = "八年级",
+            term = "上册",
+            coverColor = Color(0xFFFFF3E0),
+            units = listOf(
+                TextbookUnit(
+                    "g8up_u1", "Unit 1", "Happy Holiday",
+                    listOf(
+                        UnitDetailSection("单元导读", """
+                            ### 1. 单元主题层级
+                            *   **主题范畴**：人与社会
+                            *   **子主题**：旅游经历；节假日活动
+                            
+                            ### 2. 单元主题内容
+                            探讨假期活动，通过询问“去了哪里”、“和谁一起”以及“感受如何”，练习一般过去时的实际应用。
+                            
+                            ### 3. 单元新知预览
+                            *   **单词短语**：ancient, stay at home, wonderful, go on vacation...
+                            *   **核心句式**：Where did you go? / How was the trip?
+                            *   **重点语法**：一般过去时的特殊疑问句与复合不定代词。
+                        """.trimIndent()),
+                        UnitDetailSection("知识详解", """
+                            #### 复合不定代词全解析 (Starter)
+                            *   **指人**：someone, anyone, no one, everyone.
+                            *   **指物**：something, anything, nothing, everything.
+                            
+                            > 💡 **核心考点**：
+                            > 1. 形容词修饰它们时必须**后置**。 (e.g. *something interesting*)
+                            > 2. 它们作主语时，谓语动词一律用**单数**。
+                        """.trimIndent()),
+                        UnitDetailSection("长难句分析", """
+                            > *Original:* "Did you do anything special on your vacation in the mountains?"
+                            
+                            *   **解析**：
+                                *   `Did` (助动词开头，一般过去时疑问句)
+                                *   `anything special` (不定代词+形容词后置定语)
+                                *   `in the mountains` (地点状语)
+                        """.trimIndent()),
+                        UnitDetailSection("语法精讲", """
+                            #### 一般过去时 (Simple Past Tense)
+                            *   **动词变化**：
+                                *   规则：+ed (worked), 重读闭音节双写 (stopped)。
+                                *   不规则：go -> went, take -> took, buy -> bought。
+                            *   **时间标志**：yesterday, last week, two days ago...
+                        """.trimIndent())
+                    )
+                )
+            ) + (2..10).map { TextbookUnit("g8up_u$it", "Unit $it", "话题建设中...") }
+        ),
+        Textbook("g7_down", "七年级", "下册", Color(0xFFE8F5E9), (1..12).map { TextbookUnit("g7d_u$it", "Unit $it", "建设中") }),
+        Textbook("g8_down", "八年级", "下册", Color(0xFFFFE0B2), (1..10).map { TextbookUnit("g8d_u$it", "Unit $it", "建设中") }),
+        Textbook("g9_full", "九年级", "全一册", Color(0xFFE3F2FD), (1..14).map { TextbookUnit("g9f_u$it", "Unit $it", "建设中") })
     )
 }
