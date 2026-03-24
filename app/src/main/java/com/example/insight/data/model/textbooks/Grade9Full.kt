@@ -13,59 +13,69 @@ object Grade9Full {
         coverColor = Color(0xFFE3F2FD),
         units = listOf(
             TextbookUnit(
-                "g9_u1", "Unit 1", "Good Learners",
+                "g9_u1", "Unit 1", "How can we become good learners?",
                 listOf(
-                    UnitDetailSection("📖 单元导读", """
+                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
                         ### 1. 单元主题层级
-                        *   **主题范畴**：人与自我
-                        *   **子主题**：学习方法与策略；终身学习。
+                        *   **主题范畴**：人与自我 (Man and Self)
+                        *   **子主题**：学习方法与策略；终身学习；如何学好英语。
                         
-                        ### 2. 单元核心新知
-                        *   **核心语法**：介词 **by** 表示手段或方式的用法；**how** 引导的特殊疑问句。
-                        *   **话题句式**：How do you study for a test? / I study by working with a group.
+                        ### 2. 单元主题内容
+                        探讨听、说、读、写各维度的英语学习技巧。重点掌握介词 **by** 引导方式状语的用法，并学会通过分享成功经验来优化个人学习路径。
+                        
+                        ### 3. 单元新知预览
+                        *   **核心语法**：by + doing 结构；how 引导的特殊疑问句。
+                        *   **重点词汇**：textbook, conversation, aloud, pronunciation, patience...
                     """.trimIndent()),
-                    UnitDetailSection("🔤 词汇详解", """
-                        #### ① **textbook** (n.) 教科书；课本
-                        *   **记忆**：text (正文) + book (书)。
+                    UnitDetailSection("🔤 核心词汇知识详解", """
+                        #### ① **aloud** (adv.) 大声地
+                        *   *read aloud* 朗读 (使人听见)
+                        *   *speak loudly* 大声说话 (增加音量)
                         
-                        #### ② **conversation** (n.) 交谈；谈话
-                        *   **词块**：*have a conversation with sb.* 与某人交谈。
-                        
-                        #### ③ **pronunciation** (n.) 发音；读音
-                        *   **动词形式**：**pronounce** (v.)。注意拼写变化：动词里有 'o'，名词里 'o' 消失了。
+                        #### ② **pronunciation** (n.) 发音
+                        *   动词：**pronounce**。记得名词中 'o' 会消失。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲", """
-                        #### 介词 by 的中考全能解析
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 介词 by 的万能指南
+                        1.  **by + doing**：通过……方式 (How do you study? — By listening...)。
+                        2.  **by + 时间/地点**：在……旁；到……为止。
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g9_u2", "Unit 2", "I think that mooncakes are delicious!",
+                listOf(
+                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
+                        ### 1. 单元主题层级
+                        *   **主题范畴**：人与社会
+                        *   **子主题**：传统节日文化；文化习俗。
                         
-                        1.  **表示“通过……方式/手段” (核心考点)**
-                            *   结构：**by + doing sth.**
-                            *   e.g. *I learn English by listening to tapes.*
-                        2.  **表示方位**：在……旁边 (e.g., *by the window*)。
-                        3.  **表示时间**：到……为止；不迟于 (e.g., *by the end of this month*)。
-                        4.  **表示被动**：被，由 (e.g., *written by Lu Xun*)。
-                        
-                        #### 【提问方式】
-                        对 *by + doing* 结构提问时，疑问词统一用 **How**。
+                        ### 2. 单元主题内容
+                        学习如何描述中外节日，重点掌握宾语从句和感叹句，能够地道地表达个人情感与评价。
                     """.trimIndent()),
-                    UnitDetailSection("🔍 长难句分析", """
-                        > *Original:* "The secret to language learning is listening to something you are interested in every day."
+                    UnitDetailSection("🔤 核心词汇知识详解", """
+                        #### ① **admire** (v.) 欣赏；钦佩
+                        *   *admire sb. for sth.* 因某事而钦佩某人。
                         
-                        *   **解析**：
-                            *   `The secret to language learning` (主语)
-                            *   `is` (系动词)
-                            *   `listening to something` (表语，动名词短语)
-                            *   `you are interested in` (定语从句，修饰 something)
+                        #### ② **remind** (v.) 提醒
+                        *   *remind sb. of sth.* 使某人想起……
+                        *   *remind sb. to do sth.* 提醒某人做某事。
                     """.trimIndent()),
-                    UnitDetailSection("✍️ 词句积累", """
-                        *   **It's a piece of cake.** (小菜一碟)
-                        *   **Practice makes perfect.** (熟能生巧)
-                        *   **Knowledge is power.** (知识就是力量)
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 1. 宾语从句 (Objective Clauses)
+                        *   **引导词**：that (陈述), if/whether (疑问)。
+                        *   **语序**：必须用陈述句语序。
+                        *   **时态**：主过从必过。
+                        
+                        #### 2. 感叹句 (Exclamatory Sentences)
+                        *   **What + 名词** (What a lovely day!)
+                        *   **How + 形容词/副词** (How beautiful the moon is!)
                     """.trimIndent())
                 )
             )
-        ) + (2..14).map { i ->
-            TextbookUnit("g9f_u$i", "Unit $i", "中考总复习全维度解析", listOf(
-                UnitDetailSection("📖 单元导读", "本单元包含中考高频词汇 20+，核心语法 1 项..."),
+        ) + (3..14).map { i ->
+            TextbookUnit("g9f_u$i", "Unit $i", "中考总复习全维度解析 (同步更新中)", listOf(
+                UnitDetailSection("📖 单元导读", "本单元包含中考高频词汇及核心语法拆解..."),
                 UnitDetailSection("⚙️ 语法精讲", "针对中考真题趋势进行深度考点剖析..."),
                 UnitDetailSection("📌 核心速记", "同步《教材帮》最新中考教研成果...")
             ))

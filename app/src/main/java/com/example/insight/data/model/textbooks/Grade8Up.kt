@@ -10,76 +10,122 @@ object Grade8Up {
         id = "g8_up",
         grade = "八年级",
         term = "上册",
-        coverColor = Color(0xFFFFF3E0),
+        coverColor = Color(0xFFFFF9C4),
         units = listOf(
             TextbookUnit(
-                "g8up_u1", "Unit 1", "Happy Holiday",
+                "g8up_u1", "Unit 1", "Where did you go on vacation?",
+                listOf(
+                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
+                        *   **主题范畴**：人与自我
+                        *   **子主题**：假期活动；旅游经历。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 1. 一般过去时 (Simple Past Tense)
+                        *   **核心关键词**：*yesterday*, *last week*, *ago*...
+                        
+                        #### 2. 复合不定代词 (Compound Indefinite Pronouns)
+                        *   *someone*, *anything*, *everything*, *nothing*...
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u2", "Unit 2", "How often do you exercise?",
+                listOf(
+                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
+                        *   **子主题**：健康习惯；频率询问。
+                    """.trimIndent()),
+                    UnitDetailSection("🔤 核心词汇知识详解", """
+                        #### ① **hardly** (adv.) 几乎不 (具有否定意义)。
+                        #### ② **once / twice** (adv.) 一次 / 两次。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 1. "How often" 引导的特殊疑问句
+                        *   用于提问频率：*twice a week*.
+                        
+                        #### 2. 频度副词位置
+                        *   **口诀**：“行前系助后”。
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u3", "Unit 3", "I'm more outgoing than my sister.",
                 listOf(
                     UnitDetailSection("📖 单元导读", """
+                        *   **子主题**：朋友间的对比；真正的友谊。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 形容词与副词的比较级
+                        *   **程度修饰**：可用 *much*, *even*, *a bit* 修饰（不可用 very）。
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u4", "Unit 4", "What's the best movie theater?",
+                listOf(
+                    UnitDetailSection("📖 单元导读", """
+                        *   **子主题**：客观评价生活设施。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 形容词与副词的最高级
+                        *   **结构**：**the + 最高级 + in/of ...**
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u5", "Unit 5", "Do you want to watch a game show?",
+                listOf(
+                    UnitDetailSection("📖 单元导读", """
+                        *   **子主题**：节目偏好；个人态度表达。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### 动词不定式 (to do) 作宾语
+                        *   **口诀**：期望计划想，希望答应忙...
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u6", "Unit 6", "I'm going to study computer science.",
+                listOf(
+                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
                         ### 1. 单元主题层级
-                        *   **主题范畴**：人与社会
-                        *   **子主题**：节假日活动；旅游经历与感悟。
+                        *   **主题范畴**：人与自我 —— 职业规划与未来理想。
+                        *   **子主题**：职业理想；实现目标的计划；新年决心。
                         
-                        ### 2. 单元核心新知预览
-                        *   **核心语法**：一般过去时 (Simple Past Tense)；复合不定代词 (Indefinite Pronouns)。
-                        *   **功能句式**：Where did you go? / How was the trip? / Did you do anything special?
+                        ### 2. 单元主题内容
+                        探讨“长大后想做什么”以及“如何实现”。学习表示计划与意图的 **be going to** 结构。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 词汇详解", """
-                        #### ① **wonderful** (adj.) 极好的；精彩的
-                        *   **近义词**：excellent, fantastic, great.
-                        *   **用法**：What a wonderful trip! (多么精彩的一次旅行！)
+                    UnitDetailSection("🔤 核心词汇知识详解", """
+                        #### ① **Jobs** 职业
+                        *   **computer programmer** (程序员)；**engineer** (工程师)。
                         
-                        #### ② **decide** (v.) 决定
-                        *   **搭配**：**decide to do sth.** (决定做某事)。
-                        *   **名词**：**decision** (n.)。常用 *make a decision* (做决定)。
+                        #### ② **grow up** (长大)
+                        *   **be sure about** (对...有把握)。
                         
-                        #### ③ **hardly** (adv.) 几乎不；简直不
-                        *   **注意**：本身含有否定含义。修饰动词时放在实义动词前，助动词/情态动词后。
+                        #### ③ **make a resolution** (下定决心)
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲", """
-                        #### 1. 复合不定代词 (Indefinite Pronouns)
-                        
-                        | | 指物 (-thing) | 指人 (-one / -body) |
-                        | :--- | :--- | :--- |
-                        | **some-** | **something** | **someone / somebody** |
-                        | **any-** | **anything** | **anyone / anybody** |
-                        | **no-** | **nothing** | **no one / nobody** |
-                        | **every-** | **everything** | **everyone / everybody** |
-                        
-                        #### 【高频考点】
-                        1.  **形容词后置**：形容词修饰复合不定代词时，必须放在其后。(e.g., *something special*, *nothing new*)。
-                        2.  **谓语一致性**：它们作主语时，谓语动词一律用**单数**。
-                        
-                        #### 2. 一般过去时 (回顾与深化)
-                        *   **特殊疑问句**：疑问词 + did + 主语 + 动词原形 + ...?
+                    UnitDetailSection("⚙️ 语法深度精讲", """
+                        #### be going to 结构 (一般将来时)
+                        1.  **含义**：表示计划、打算做某事，或根据迹象推测。
+                        2.  **结构**：**am/is/are + going to + 动词原形**。
+                        3.  **注意**：与 **will** 相比，更强调“已经计划好”的意图。
                     """.trimIndent()),
-                    UnitDetailSection("🔍 长难句分析", """
-                        > *Original:* "I arrived in Penang in Malaysia this morning with my family."
-                        
-                        *   **成分解析**：
-                            *   `I` (主语) + `arrived` (谓语) 
-                            *   `in Penang in Malaysia` (地点状语，由大到小排序)
-                            *   `this morning` (时间状语)
-                            *   `with my family` (伴随状语)
+                    UnitDetailSection("🔍 长难句剖析", """
+                        > *Original:* "I'm going to practice harder to become a good violinist."
+                        *   **解析**：*to become...* 是不定式作目的状语。
                     """.trimIndent()),
-                    UnitDetailSection("🌐 翻译与语篇分析", """
-                        #### 【Jane's Diary 重点段落】
-                        "Everything was tasted good. I ate two bowls of noodles."
-                        译文：所有的东西尝起来都很美味。我吃了两碗面条。
-                        
-                        #### 【语篇结构】
-                        本文是一篇典型的日记（Diary）。
-                        *   **格式**：日期 + 天气 + 正文。
-                        *   **基调**：第一人称叙述，时态统一为一般过去时。
+                    UnitDetailSection("📌 重点速记手册", """
+                        *   **口诀**：be going to 打算做，计划安排已确定；be 的形式依主语，后面跟动词原形。
                     """.trimIndent())
                 )
             )
-        ) + (2..10).map { i ->
-            TextbookUnit("g8up_u$i", "Unit $i", "全维度教辅解析", listOf(
-                UnitDetailSection("📖 单元导读", "本单元教辅内容正在根据2025教研标准同步更新中..."),
-                UnitDetailSection("🔤 词汇详解", "涵盖该单元所有四会单词及考纲变形..."),
-                UnitDetailSection("⚙️ 语法精讲", "包含中考高频考点解析与避坑指南...")
+        ) + (7..10).map { i ->
+            TextbookUnit("g8up_u$i", "Unit $i", "全维度同步解析 (同步更新中)", listOf(
+                UnitDetailSection("📖 单元导读", "本单元内容核心话题和词汇分析预览...")
             ))
         }
     )
 }
+
+
+
+
