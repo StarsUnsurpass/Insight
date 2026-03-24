@@ -114,10 +114,10 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             dotBounce.animateTo(0f, spring(dampingRatio = 0.3f, stiffness = 180f)) 
         }
         
-        delay(1400) 
+        delay(500) // 等待物理碰撞核心动作完成
         
-        shimmerProgress.animateTo(1f, tween(1000, easing = FastOutSlowInEasing))
-        delay(200)
+        shimmerProgress.animateTo(1f, tween(800, easing = FastOutSlowInEasing))
+        delay(50) // 极其短暂的停顿后立刻进入主页
         onAnimationFinished()
     }
 

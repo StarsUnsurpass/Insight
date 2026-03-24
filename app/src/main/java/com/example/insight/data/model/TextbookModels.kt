@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 data class Textbook(
     val id: String,
     val grade: String,
-    val term: String, // "上册" or "下册"
+    val term: String, // "上册", "下册", "全一册"
     val coverColor: Color,
     val units: List<TextbookUnit>
 )
@@ -14,8 +14,9 @@ data class TextbookUnit(
     val id: String,
     val title: String,
     val topic: String,
-    val coreGrammar: String,
-    val sections: List<UnitSection>
+    val isFilled: Boolean = false, // Marker to indicate if this unit has real content yet
+    val coreGrammar: String = "核心内容尚未收录",
+    val sections: List<UnitSection> = emptyList()
 )
 
 sealed class UnitSection {
@@ -40,15 +41,37 @@ sealed class UnitSection {
 object TextbookProvider {
     val textbooks = listOf(
         Textbook(
-            id = "grade8_down",
-            grade = "八年级",
+            id = "g7_up",
+            grade = "七年级",
+            term = "上册",
+            coverColor = Color(0xFFFCE4EC), // Light Pink
+            units = generatePlaceholderUnits("g7u", 9)
+        ),
+        Textbook(
+            id = "g7_down",
+            grade = "七年级",
             term = "下册",
             coverColor = Color(0xFFE8F5E9), // Light Green
+            units = generatePlaceholderUnits("g7d", 12)
+        ),
+        Textbook(
+            id = "g8_up",
+            grade = "八年级",
+            term = "上册",
+            coverColor = Color(0xFFFFF3E0), // Light Orange
+            units = generatePlaceholderUnits("g8u", 10)
+        ),
+        Textbook(
+            id = "g8_down",
+            grade = "八年级",
+            term = "下册",
+            coverColor = Color(0xFFFFE0B2), // Orange
             units = listOf(
                 TextbookUnit(
                     id = "g8d_u8",
                     title = "Unit 8",
                     topic = "Have you read Treasure Island yet? (文学与音乐)",
+                    isFilled = true,
                     coreGrammar = "现在完成时 (Present Perfect Tense)",
                     sections = listOf(
                         UnitSection.SectionA(
@@ -68,6 +91,7 @@ object TextbookProvider {
                     id = "g8d_u9",
                     title = "Unit 9",
                     topic = "Have you ever been to a museum? (经历与地点)",
+                    isFilled = true,
                     coreGrammar = "现在完成时 (been to vs gone to)",
                     sections = listOf(
                         UnitSection.SectionA(
@@ -83,10 +107,10 @@ object TextbookProvider {
                         )
                     )
                 )
-            )
+            ) + generatePlaceholderUnits("g8d", 8, startIndex = 10) // 补齐剩余的8个单元
         ),
         Textbook(
-            id = "grade9_up",
+            id = "g9_full",
             grade = "九年级",
             term = "全一册",
             coverColor = Color(0xFFE3F2FD), // Light Blue
@@ -95,6 +119,7 @@ object TextbookProvider {
                     id = "g9_u1",
                     title = "Unit 1",
                     topic = "How can we become good learners? (学习方法)",
+                    isFilled = true,
                     coreGrammar = "by + doing (方式状语)",
                     sections = listOf(
                         UnitSection.SectionA(
@@ -110,7 +135,18 @@ object TextbookProvider {
                         )
                     )
                 )
-            )
+            ) + generatePlaceholderUnits("g9f", 13, startIndex = 2) // 补齐剩余单元
         )
     )
+
+    private fun generatePlaceholderUnits(prefix: String, count: Int, startIndex: Int = 1): List<TextbookUnit> {
+        return (startIndex until startIndex + count).map {
+            TextbookUnit(
+                id = "${prefix}_u$it",
+                title = "Unit $it",
+                topic = "教学大纲内容准备中...",
+                isFilled = false
+            )
+        }
+    }
 }
