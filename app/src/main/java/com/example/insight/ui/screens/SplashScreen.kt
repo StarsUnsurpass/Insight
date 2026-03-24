@@ -52,6 +52,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
     
     val textLayoutResult = remember(textStyle) { textMeasurer.measure("nsight", textStyle) }
     
+    // --- 核心坐标系统 ---
     val baseY = screenHeightPx / 2f + with(density) { 30.dp.toPx() }
     val wordStartX = (screenWidthPx - textLayoutResult.size.width) / 2f + with(density){ 8.dp.toPx() }
     
@@ -62,6 +63,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
     val dotRadius = with(density) { 4.5f.dp.toPx() }
     val stemWidth = with(density) { 9.dp.toPx() }
     
+    // --- 动画状态 ---
     val dotY = remember { Animatable(baseY - 600f) }
     val dotX = remember { Animatable(iStemX - 150f) }
     val squashX = remember { Animatable(1f) }
@@ -75,36 +77,44 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
     val shimmerProgress = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
+        // ACT 1: 小圆点坠落
         launch { dotX.animateTo(iStemX, tween(650, easing = LinearOutSlowInEasing)) }
         dotY.animateTo(baseY, tween(650, easing = CubicBezierEasing(0.42f, 0f, 1f, 1f)))
         haptic.performHapticFeedback(HapticFeedbackType.LongPress) 
         
+        // 触底挤压
         launch { squashX.animateTo(2.4f, tween(100, easing = FastOutSlowInEasing)) }
         squashY.animateTo(0.25f, tween(100, easing = FastOutSlowInEasing))
         
         launch { squashX.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f)) }
         squashY.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f))
         
+        // ACT 2: 向上弹起，并在弹起过程中“拉”出竖线
         val upTime = 900
         val downTime = 900
-        val apexY = iStemTopY - with(density){ 140.dp.toPx() }
+        val apexY = iStemTopY - with(density){ 140.dp.toPx() } // 飞得更高
         
         launch {
-            delay(150)
-            traceProgress.animateTo(1f, tween(upTime + downTime - 150, easing = LinearOutSlowInEasing))
+            // 当小点超过竖线高度时，开始揭示 nsight
+            delay(200)
+            traceProgress.animateTo(1f, tween(1200, easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)))
         }
         
         launch {
-            dotX.animateTo(iStemX + italicSlantOffset, tween(200, easing = LinearOutSlowInEasing))
+            // 配合斜体的X轴偏移
+            dotX.animateTo(iStemX + italicSlantOffset, tween(250, easing = LinearOutSlowInEasing))
         }
         
+        // 飞跃顶点
         dotY.animateTo(apexY, tween(upTime, easing = CubicBezierEasing(0.2f, 0f, 0.2f, 1f)))
         
-        val perfectDotY = iStemTopY - with(density) { 13.dp.toPx() } 
+        // ACT 3: 落下砸中竖线
+        val perfectDotY = iStemTopY - with(density) { 13.dp.toPx() }
         dotY.animateTo(perfectDotY, tween(downTime, easing = CubicBezierEasing(0.5f, 0f, 1f, 1f)))
         isPinned = true
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         
+        // ACT 4: 物理谐振
         launch {
             stemBend.snapTo(with(density) { 14.dp.toPx() }) 
             stemBend.animateTo(0f, spring(dampingRatio = 0.2f, stiffness = 140f)) 
@@ -114,10 +124,9 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             dotBounce.animateTo(0f, spring(dampingRatio = 0.3f, stiffness = 180f)) 
         }
         
-        delay(500) // 等待物理碰撞核心动作完成
-        
+        delay(500) 
         shimmerProgress.animateTo(1f, tween(800, easing = FastOutSlowInEasing))
-        delay(50) // 极其短暂的停顿后立刻进入主页
+        delay(50)
         onAnimationFinished()
     }
 
@@ -136,6 +145,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             val reflectionAlpha = if (isReflection) 0.15f else 1f
             val drawColor = textStyle.color.copy(alpha = reflectionAlpha)
             
+            // 1. i 竖线 (跟随小球轨迹向上生长，封顶于 iStemHeight)
             val drawnStemLength = (baseY - dotY.value).coerceIn(0f, iStemHeight)
             val slantProgress = (drawnStemLength / iStemHeight).coerceIn(0f, 1f)
             val currentSlantX = italicSlantOffset * slantProgress
@@ -164,6 +174,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                 )
             }
             
+            // 2. nsight 文本
             if (traceProgress.value > 0f) {
                 clipRect(
                     left = wordStartX - 20f,
@@ -180,6 +191,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                 }
             }
             
+            // 3. 小圆点
             val finalDotX = if (isPinned) currentStemTopX else dotX.value
             val finalDotY = if (isPinned) dotY.value + dotBounce.value else dotY.value
             
@@ -197,6 +209,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                 )
             }
             
+            // 4. 高光
             if (!isReflection && shimmerProgress.value > 0f) {
                 val glowX = iStemX - 200f + shimmerProgress.value * (textLayoutResult.size.width + 400f)
                 withTransform({
@@ -217,6 +230,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             }
         }
 
+        // --- 倒影层 ---
         Canvas(
             modifier = Modifier
                 .fillMaxSize()
@@ -238,34 +252,18 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                     endY = baseY - with(density){ 30.dp.toPx() } 
                 )
                 
-                drawIntoLayer(
-                    bounds = Rect(0f, 0f, size.width, size.height),
-                    paint = Paint()
-                ) {
-                    drawScene(isReflection = true)
-                    drawRect(
-                        brush = fadeBrush,
-                        blendMode = BlendMode.DstIn
-                    )
-                }
+                val rect = Rect(0f, 0f, size.width, size.height)
+                val paint = Paint()
+                drawContext.canvas.saveLayer(rect, paint)
+                drawScene(isReflection = true)
+                drawRect(brush = fadeBrush, blendMode = BlendMode.DstIn)
+                drawContext.canvas.restore()
             }
         }
         
+        // --- 实体层 ---
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawScene(isReflection = false)
         }
-    }
-}
-
-private inline fun DrawScope.drawIntoLayer(
-    bounds: Rect,
-    paint: Paint,
-    block: DrawScope.() -> Unit
-) {
-    drawContext.canvas.saveLayer(bounds, paint)
-    try {
-        block()
-    } finally {
-        drawContext.canvas.restore()
     }
 }
