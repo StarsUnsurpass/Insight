@@ -1,6 +1,6 @@
 package com.example.insight.ui.screens
 
-import android.graphics.PathMeasure
+import android.os.Build
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -10,149 +10,135 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.abs
-
-fun buildDynamicInsightPath(bend: Float): Path {
-    val p = Path()
-    // fly up from ground bounce
-    p.moveTo(-10f, 0f)
-    val topX = 10f + bend
-    val topY = -50f + abs(bend) * 0.2f
-    p.cubicTo(-5f, -30f, topX - 5f, topY, topX, topY)
-    
-    // 'ı' stem (the first 'i' without dot)
-    p.quadraticBezierTo(10f + bend * 1.5f, topY / 2f, 10f, 0f)
-    
-    // 'n'
-    p.cubicTo(10f, -40f, 25f, -40f, 25f, -10f)
-    p.lineTo(25f, 0f)
-    p.cubicTo(25f, -40f, 40f, -40f, 40f, -10f)
-    p.lineTo(40f, 0f)
-    
-    // 's'
-    p.cubicTo(45f, 0f, 50f, -30f, 55f, -30f) 
-    p.cubicTo(65f, -30f, 60f, 0f, 50f, 0f)   
-    p.cubicTo(45f, 0f, 45f, -10f, 55f, -15f) 
-    p.cubicTo(65f, -20f, 70f, -20f, 75f, -40f) 
-    
-    // 'ı' (2nd i, no dot yet)
-    p.lineTo(75f, 0f) 
-    p.cubicTo(80f, 0f, 85f, -10f, 90f, -35f) 
-    
-    // 'g'
-    p.cubicTo(80f, -40f, 80f, 0f, 90f, 0f) 
-    p.cubicTo(100f, 0f, 100f, -40f, 90f, -40f) 
-    p.lineTo(90f, 40f) // descender
-    p.cubicTo(80f, 50f, 70f, 30f, 80f, 15f) 
-    p.cubicTo(90f, 0f, 100f, -30f, 110f, -100f) // sweep up
-    
-    // 'h'
-    p.lineTo(110f, 0f) 
-    p.cubicTo(110f, -40f, 130f, -40f, 130f, -10f) 
-    p.lineTo(130f, 0f) 
-    p.cubicTo(135f, 0f, 140f, -10f, 145f, -80f) 
-    
-    // 't'
-    p.lineTo(145f, 0f) 
-    p.cubicTo(150f, 0f, 155f, -5f, 160f, -15f) 
-    
-    return p
-}
 
 @Composable
 fun SplashScreen(onAnimationFinished: () -> Unit) {
     val haptic = LocalHapticFeedback.current
     val density = LocalDensity.current
     val configuration = LocalConfiguration.current
+    val textMeasurer = rememberTextMeasurer()
     
     val screenWidthPx = with(density) { configuration.screenWidthDp.dp.toPx() }
     val screenHeightPx = with(density) { configuration.screenHeightDp.dp.toPx() }
     
-    // --- ANIMATION STATES ---
+    val textStyle = TextStyle(
+        fontSize = 68.sp,
+        fontWeight = FontWeight.W600,
+        fontStyle = FontStyle.Italic,
+        fontFamily = FontFamily.Serif,
+        letterSpacing = 1.sp,
+        color = Color(0xFF1A2980) 
+    )
     
-    // Phase 1: Dot 1 Drop
-    val dot1Drop = remember { Animatable(0f) } 
-    val dot1ScaleX = remember { Animatable(1f) }
-    val dot1ScaleY = remember { Animatable(1f) }
+    val textLayoutResult = remember { textMeasurer.measure("nsight", textStyle) }
     
-    // Phase 2: Trace
+    // --- 核心坐标系统 ---
+    val baseY = screenHeightPx / 2f + with(density) { 30.dp.toPx() }
+    val wordStartX = (screenWidthPx - textLayoutResult.size.width) / 2f + with(density){ 8.dp.toPx() }
+    
+    // 计算首字母 i (小写) 的竖线位置
+    val iStemX = wordStartX - with(density) { 14.dp.toPx() } // 与后续 nsight 间距调整
+    val iStemHeight = with(density) { 32.dp.toPx() } // x-height
+    val iStemTopY = baseY - iStemHeight
+    val dotRadius = with(density) { 5.dp.toPx() }
+    val stemWidth = with(density) { 7.dp.toPx() }
+    
+    // --- 动画状态 ---
+    val dot1DropY = remember { Animatable(baseY - 600f) }
+    val dot1X = remember { Animatable(iStemX - 150f) }
+    val squashX = remember { Animatable(1f) }
+    val squashY = remember { Animatable(1f) }
+    
     val traceProgress = remember { Animatable(0f) }
     val dot1Alpha = remember { Animatable(1f) }
     
-    // Phase 3 & 4: Dot 2 Impact
-    val dot2Drop = remember { Animatable(0f) } 
+    val dot2DropY = remember { Animatable(baseY - 800f) }
     val dot2Alpha = remember { Animatable(0f) }
-    val stemBendOffset = remember { Animatable(0f) }
-    val dot2BounceOffset = remember { Animatable(0f) }
     
-    // Phase 5: Final details and Glow
-    val finalDetailsAlpha = remember { Animatable(0f) }
-    val glowProgress = remember { Animatable(0f) }
+    val stemBend = remember { Animatable(0f) }
+    val dot2Bounce = remember { Animatable(0f) }
+    
+    val shimmerProgress = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
-        // ACT 1: Drop
-        launch {
-            delay(100)
-            dot1ScaleY.animateTo(2.2f, tween(300))
-            dot1ScaleX.animateTo(0.4f, tween(300))
-        }
-        dot1Drop.animateTo(1f, tween(700, easing = CubicBezierEasing(0.4f, 0f, 1f, 1f)))
-        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+        // ACT 1: 点1坠落
+        launch { dot1X.animateTo(iStemX, tween(650, easing = LinearOutSlowInEasing)) }
+        dot1DropY.animateTo(baseY, tween(650, easing = CubicBezierEasing(0.42f, 0f, 1f, 1f)))
+        haptic.performHapticFeedback(HapticFeedbackType.LongPress) 
         
-        // Squash & Stretch
+        launch { squashX.animateTo(2.4f, tween(100, easing = FastOutSlowInEasing)) }
+        squashY.animateTo(0.25f, tween(100, easing = FastOutSlowInEasing))
+        
+        launch { squashX.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f)) }
+        squashY.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f))
+        
+        // 画首个小写的 i 竖线
+        dot1DropY.animateTo(iStemTopY, tween(250, easing = FastOutSlowInEasing))
+        
+        // ACT 2: 流光揭示右侧文本 nsight
+        val totalDist = textLayoutResult.size.width.toFloat() + 40f
+        
         launch {
-            dot1ScaleY.animateTo(0.2f, tween(100, easing = FastOutSlowInEasing))
-            dot1ScaleY.animateTo(1f, spring(dampingRatio = 0.45f, stiffness = 300f))
+            traceProgress.animateTo(1f, tween(2400, easing = CubicBezierEasing(0.2f, 0f, 0.2f, 1f)))
         }
         launch {
-            dot1ScaleX.animateTo(2.5f, tween(100, easing = FastOutSlowInEasing))
-            dot1ScaleX.animateTo(1f, spring(dampingRatio = 0.45f, stiffness = 300f))
+            // 点1向右划过
+            dot1X.animateTo(iStemX + totalDist, tween(2400, easing = CubicBezierEasing(0.2f, 0f, 0.2f, 1f)))
         }
-        delay(200) 
+        launch {
+            // S型上下震荡，中心线大约在 iStemTopY 和 baseY 之间，模拟运笔
+            val midY = baseY - iStemHeight / 2f
+            repeat(3) {
+                dot1DropY.animateTo(midY - iStemHeight * 0.4f, tween(400, easing = FastOutLinearInEasing))
+                dot1DropY.animateTo(midY + iStemHeight * 0.4f, tween(400, easing = LinearOutSlowInEasing))
+            }
+        }
         
-        // ACT 2: Trace "insight" 
-        // Elegant, slow handwriting pace (3.2 seconds)
-        traceProgress.animateTo(1f, tween(3200, easing = CubicBezierEasing(0.3f, 0f, 0.7f, 1f)))
-        
-        // Fade out writing dot
+        delay(2200)
         dot1Alpha.animateTo(0f, tween(200))
-        delay(300)
+        delay(300) 
         
-        // ACT 3: Second Dot Drops on the first 'ı'
+        // ACT 3: 第二颗点空降，精准对齐小写 i 的顶部
         dot2Alpha.snapTo(1f)
-        dot2Drop.animateTo(1f, tween(500, easing = CubicBezierEasing(0.5f, 0f, 1f, 1f)))
+        val perfectDotY = iStemTopY - with(density) { 14.dp.toPx() } // 黄金比例间距
+        
+        dot2DropY.animateTo(perfectDotY, tween(500, easing = CubicBezierEasing(0.5f, 0f, 1f, 1f)))
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         
-        // ACT 4: Impact and Bending Physics
         launch {
-            stemBendOffset.snapTo(14f) // max right bend 
-            stemBendOffset.animateTo(0f, spring(dampingRatio = 0.25f, stiffness = 120f)) // High bouncy, low stiffness
+            // 物理弯曲
+            stemBend.snapTo(with(density) { 12.dp.toPx() }) 
+            stemBend.animateTo(0f, spring(dampingRatio = 0.2f, stiffness = 140f))
         }
         launch {
-            dot2BounceOffset.snapTo(10f) // pushed down
-            dot2BounceOffset.animateTo(0f, spring(dampingRatio = 0.35f, stiffness = 180f)) // Slight phase difference
+            // 阻尼弹跳
+            dot2Bounce.snapTo(with(density) { 8.dp.toPx() }) 
+            dot2Bounce.animateTo(0f, spring(dampingRatio = 0.3f, stiffness = 180f))
         }
         
-        // Reveal 2nd 'i' dot and 't' crossbar naturally
-        finalDetailsAlpha.animateTo(1f, tween(500))
-        
-        delay(1400) // wait for physics to settle
-        
-        // ACT 5: Glow effect across the word
-        glowProgress.animateTo(1f, tween(900, easing = FastOutSlowInEasing))
+        delay(1400) 
+        shimmerProgress.animateTo(1f, tween(1000, easing = FastOutSlowInEasing))
         delay(200)
-        
         onAnimationFinished()
     }
 
@@ -161,132 +147,150 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            val pathScale = screenWidthPx / 200f
-            val startX = (screenWidthPx - 160f * pathScale) / 2f
-            val baseY = screenHeightPx / 2f + 20f * pathScale
+        val dotBrush = Brush.linearGradient(
+            colors = listOf(Color(0xFF26D0CE), Color(0xFF1A2980)),
+            start = Offset(-dotRadius, -dotRadius),
+            end = Offset(dotRadius, dotRadius)
+        )
+        
+        fun DrawScope.drawScene(isReflection: Boolean) {
+            val reflectionAlpha = if (isReflection) 0.2f else 1f
+            val drawColor = textStyle.color.copy(alpha = reflectionAlpha)
             
-            // Build the dynamic path (it bends if stemBendOffset > 0)
-            val dynamicPath = buildDynamicInsightPath(stemBendOffset.value)
-            val pathMeasure = PathMeasure(dynamicPath.asAndroidPath(), false)
-            val totalLength = pathMeasure.length
-            val currentTraceLen = totalLength * traceProgress.value
-            
-            val trailPath = android.graphics.Path()
-            pathMeasure.getSegment(0f, currentTraceLen, trailPath, true)
-            
-            // Colors
-            val strokeColor = Color(0xFF1A2980) // Deep Blue base
-            val glowColor = Color(0xFF26D0CE) // Mint Green glow
-            
-            val dotBrush = Brush.radialGradient(
-                colors = listOf(glowColor, strokeColor),
-                center = Offset.Zero,
-                radius = 4f * pathScale
-            )
-
-            withTransform({
-                translate(startX, baseY)
-                scale(pathScale, pathScale, pivot = Offset.Zero)
-            }) {
-                // Outer subtle glow
-                drawPath(
-                    path = trailPath.asComposePath(),
-                    color = glowColor.copy(alpha = 0.3f),
-                    style = Stroke(width = 6f, cap = StrokeCap.Round, join = StrokeJoin.Round)
-                )
-                // Core solid ink
-                drawPath(
-                    path = trailPath.asComposePath(),
-                    color = strokeColor,
-                    style = Stroke(width = 3.5f, cap = StrokeCap.Round, join = StrokeJoin.Round)
-                )
-                
-                // Static details (2nd 'i' dot & 't' crossbar)
-                if (finalDetailsAlpha.value > 0f) {
-                    drawCircle(
-                        color = strokeColor,
-                        radius = 2.5f,
-                        center = Offset(75f, -50f),
-                        alpha = finalDetailsAlpha.value
-                    )
-                    drawLine(
-                        color = strokeColor,
-                        start = Offset(135f, -40f),
-                        end = Offset(155f, -40f),
-                        strokeWidth = 3f,
-                        cap = StrokeCap.Round,
-                        alpha = finalDetailsAlpha.value
-                    )
-                }
-            }
-            
-            // --- Draw Dot 1 (The Calligraphy Skater) ---
+            // 1. 点1 (划过屏幕的流光点)
             if (dot1Alpha.value > 0f) {
-                var dot1LocX = -10f
-                var dot1LocY = 0f
-                
-                if (traceProgress.value == 0f) {
-                    val dropY = -(screenHeightPx / pathScale) * (1f - dot1Drop.value)
-                    dot1LocX = -10f
-                    dot1LocY = dropY
-                } else {
-                    val pos = FloatArray(2)
-                    if (pathMeasure.getPosTan(currentTraceLen, pos, null)) {
-                        dot1LocX = pos[0]
-                        dot1LocY = pos[1]
-                    }
-                }
-                
                 withTransform({
-                    translate(startX + dot1LocX * pathScale, baseY + dot1LocY * pathScale)
-                    // Only apply severe stretch during the initial drop
-                    if (traceProgress.value == 0f) {
-                        scale(dot1ScaleX.value, dot1ScaleY.value)
+                    translate(dot1X.value, dot1DropY.value)
+                    if (!isReflection) {
+                        scale(squashX.value, squashY.value, pivot = Offset(0f, dotRadius))
                     }
                 }) {
-                    drawCircle(brush = dotBrush, radius = 4f * pathScale, alpha = dot1Alpha.value)
+                    drawCircle(
+                        brush = if(isReflection) SolidColor(drawColor) else dotBrush, 
+                        radius = dotRadius, 
+                        alpha = dot1Alpha.value * reflectionAlpha
+                    )
                 }
             }
             
-            // --- Draw Dot 2 (The Impact Dot) ---
+            // 2. 小写 i 的竖线 (支持弹性弯曲)
+            val currentStemTopX = iStemX + stemBend.value
+            val currentStemTopY = iStemTopY + abs(stemBend.value) * 0.15f 
+            
+            if (traceProgress.value > 0f || dot1DropY.value <= baseY - 5f) {
+                val stemPath = Path().apply {
+                    moveTo(iStemX, baseY)
+                    quadraticBezierTo(
+                        x1 = iStemX + stemBend.value * 1.5f, 
+                        y1 = baseY - iStemHeight / 2f, 
+                        x2 = currentStemTopX, 
+                        y2 = currentStemTopY
+                    )
+                }
+                drawPath(
+                    path = stemPath,
+                    color = drawColor,
+                    style = Stroke(width = stemWidth, cap = StrokeCap.Round)
+                )
+            }
+            
+            // 3. 右侧标准文本 "nsight" 动态揭示
+            if (traceProgress.value > 0f) {
+                clipRect(
+                    left = wordStartX - 20f,
+                    top = -1000f,
+                    right = wordStartX + (textLayoutResult.size.width * traceProgress.value),
+                    bottom = 1000f
+                ) {
+                    drawText(
+                        textMeasurer = textMeasurer,
+                        text = "nsight",
+                        topLeft = Offset(wordStartX, baseY - textLayoutResult.firstBaseline),
+                        style = textStyle.copy(color = drawColor)
+                    )
+                }
+            }
+            
+            // 4. 小写 i 上的最终圆点 (第二颗点)
             if (dot2Alpha.value > 0f) {
-                // The position of the top of the 1st stem
-                val topX = 10f + stemBendOffset.value
-                val topY = -50f + abs(stemBendOffset.value) * 0.2f
+                val finalDot2X = if (dot2DropY.value >= iStemTopY - 30f) currentStemTopX else iStemX
+                val finalDot2Y = dot2DropY.value + dot2Bounce.value
                 
-                val targetX = startX + topX * pathScale
-                val targetY = baseY + topY * pathScale
-                
-                // Track the bending stem, and apply gravity & bounce
-                val currentDot2Y = targetY - screenHeightPx * (1f - dot2Drop.value) + dot2BounceOffset.value * pathScale
-                
-                withTransform({
-                    translate(targetX, currentDot2Y)
-                }) {
-                    drawCircle(brush = dotBrush, radius = 4f * pathScale, alpha = dot2Alpha.value)
+                withTransform({ translate(finalDot2X, finalDot2Y) }) {
+                    drawCircle(
+                        brush = if(isReflection) SolidColor(drawColor) else dotBrush, 
+                        radius = dotRadius, 
+                        alpha = dot2Alpha.value * reflectionAlpha
+                    )
                 }
             }
             
-            // --- Final Settling Glow ---
-            if (glowProgress.value > 0f) {
-                val glowX = startX - 300f + (glowProgress.value * (160f * pathScale + 600f))
+            // 5. 高光
+            if (!isReflection && shimmerProgress.value > 0f) {
+                val glowX = iStemX - 200f + shimmerProgress.value * (textLayoutResult.size.width + 400f)
                 withTransform({
-                    translate(glowX, baseY - 50f * pathScale)
-                    rotate(25f)
+                    translate(glowX, baseY - iStemHeight)
+                    rotate(20f)
                 }) {
                     drawRect(
                         brush = Brush.horizontalGradient(
                             0f to Color.Transparent,
-                            0.5f to Color.White.copy(alpha = 0.6f),
+                            0.5f to Color(0xFF26D0CE).copy(alpha = 0.4f),
                             1f to Color.Transparent
                         ),
-                        topLeft = Offset(-100f, -300f),
-                        size = Size(200f, 600f),
-                        blendMode = BlendMode.Overlay // Adds a beautiful sheen
+                        topLeft = Offset(-40f, -100f),
+                        size = Size(80f, 300f),
+                        blendMode = BlendMode.SrcOver
                     )
                 }
             }
+        }
+
+        // ==========================================
+        // 渲染层 1：玻璃倒影系统
+        // ==========================================
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    translationY = 2f 
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        renderEffect = android.graphics.RenderEffect.createBlurEffect(
+                            12f, 12f, android.graphics.Shader.TileMode.DECAL
+                        ).asComposeRenderEffect()
+                    }
+                }
+        ) {
+            withTransform({
+                scale(1f, -1f, pivot = Offset(0f, baseY))
+            }) {
+                val fadeBrush = Brush.verticalGradient(
+                    colors = listOf(Color.White, Color.Transparent), 
+                    startY = baseY,
+                    endY = baseY - with(density){ 30.dp.toPx() } 
+                )
+                
+                // Native saveLayer implementation for Compose
+                val rect = Rect(0f, 0f, size.width, size.height)
+                val paint = Paint()
+                drawContext.canvas.saveLayer(rect, paint)
+                
+                drawScene(isReflection = true)
+                
+                drawRect(
+                    brush = fadeBrush,
+                    blendMode = BlendMode.DstIn // 强力裁剪透明度
+                )
+                
+                drawContext.canvas.restore()
+            }
+        }
+        
+        // ==========================================
+        // 渲染层 2：实体世界
+        // ==========================================
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawScene(isReflection = false)
         }
     }
 }
