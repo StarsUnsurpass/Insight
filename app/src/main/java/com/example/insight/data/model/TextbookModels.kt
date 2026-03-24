@@ -188,9 +188,9 @@ object TextbookProvider {
                 )
             )
         ),
-        Textbook("g7_down", "七年级", "下册", Color(0xFFE8F5E9), emptyList()),
-        Textbook("g8_up", "八年级", "上册", Color(0xFFFFF3E0), emptyList()),
-        Textbook("g8_down", "八年级", "下册", Color(0xFFFFE0B2), emptyList()),
-        Textbook("g9_full", "九年级", "全一册", Color(0xFFE3F2FD), emptyList())
+        Textbook("g7_down", "七年级", "下册", Color(0xFFE8F5E9), (1..12).map { TextbookUnit("g7d_u$it", "Unit $it", "话题内容建设中...") }),
+        Textbook("g8_up", "八年级", "上册", Color(0xFFFFF3E0), (1..10).map { TextbookUnit("g8u_u$it", "Unit $it", "话题内容建设中...") }),
+        Textbook("g8_down", "八年级", "下册", Color(0xFFFFE0B2), (1..10).map { TextbookUnit("g8d_u$it", "Unit $it", "话题内容建设中...") }),
+        Textbook("g9_full", "九年级", "全一册", Color(0xFFE3F2FD), (1..14).map { TextbookUnit("g9f_u$it", "Unit $it", "话题内容建设中...") })
     )
 }
