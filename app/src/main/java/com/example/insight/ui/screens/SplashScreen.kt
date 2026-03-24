@@ -50,7 +50,7 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
         color = Color(0xFF1A2980) 
     )
     
-    val textLayoutResult = remember { textMeasurer.measure("nsight", textStyle) }
+    val textLayoutResult = remember(textStyle) { textMeasurer.measure("nsight", textStyle) }
     
     // --- 核心坐标系统 ---
     val baseY = screenHeightPx / 2f + with(density) { 30.dp.toPx() }
@@ -168,7 +168,8 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                     drawCircle(
                         brush = if(isReflection) SolidColor(drawColor) else dotBrush, 
                         radius = dotRadius, 
-                        alpha = dot1Alpha.value * reflectionAlpha
+                        alpha = dot1Alpha.value * reflectionAlpha,
+                        center = Offset.Zero // <--- 关键修复：防止跟随坐标系原点漂移到右下角
                     )
                 }
             }
@@ -198,9 +199,9 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
             if (traceProgress.value > 0f) {
                 clipRect(
                     left = wordStartX - 20f,
-                    top = -1000f,
+                    top = 0f, // <--- 关键修复：放开顶部裁剪限制
                     right = wordStartX + (textLayoutResult.size.width * traceProgress.value),
-                    bottom = 1000f
+                    bottom = screenHeightPx * 2f // <--- 关键修复：确保文字不会被错误的 bottom 裁剪掉
                 ) {
                     drawText(
                         textMeasurer = textMeasurer,
@@ -220,7 +221,8 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
                     drawCircle(
                         brush = if(isReflection) SolidColor(drawColor) else dotBrush, 
                         radius = dotRadius, 
-                        alpha = dot2Alpha.value * reflectionAlpha
+                        alpha = dot2Alpha.value * reflectionAlpha,
+                        center = Offset.Zero // <--- 关键修复
                     )
                 }
             }
@@ -292,5 +294,18 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawScene(isReflection = false)
         }
+    }
+}
+
+private inline fun DrawScope.drawIntoLayer(
+    bounds: Rect,
+    paint: Paint,
+    block: DrawScope.() -> Unit
+) {
+    drawContext.canvas.saveLayer(bounds, paint)
+    try {
+        block()
+    } finally {
+        drawContext.canvas.restore()
     }
 }
