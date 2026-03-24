@@ -338,6 +338,11 @@ fun BoxScope.TabIconFluid(
     }
 }
 
+enum class HomeMode(val label: String) {
+    EXAM_NETWORK("考点网络"),
+    TEXTBOOK_SYNC("教材同步")
+}
+
 @Composable
 fun HomeTab(
     preferences: UserPreferences, 
@@ -347,6 +352,7 @@ fun HomeTab(
     val primaryColor = MaterialTheme.colorScheme.primary
     var searchQuery by remember { mutableStateOf("") }
     val expandedSections = remember { mutableStateListOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)") }
+    var currentMode by remember { mutableStateOf(HomeMode.EXAM_NETWORK) }
 
     val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
 
@@ -407,109 +413,301 @@ fun HomeTab(
                     lineHeight = 20.sp
                 )
             }
-        }
-
-        item {
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                shape = RoundedCornerShape(24.dp),
-                singleLine = true,
-                leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color.Transparent,
-                    focusedBorderColor = primaryColor.copy(alpha = 0.5f),
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-                    focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
-                )
-            )
-        }
-
-        if (searchQuery.isEmpty()) {
-            val sections = listOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)")
             
-            sections.forEach { sectionName ->
-                val isExpanded = expandedSections.contains(sectionName)
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .hapticClickable(preferences) {
-                                if (isExpanded) expandedSections.remove(sectionName)
-                                else expandedSections.add(sectionName)
-                            }
-                            .padding(vertical = 8.dp, horizontal = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = sectionName,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // Dual-Track Segmented Control
+            TabRow(
+                selectedTabIndex = currentMode.ordinal,
+                containerColor = Color.Transparent,
+                contentColor = primaryColor,
+                modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)),
+                indicator = { tabPositions ->
+                    if (currentMode.ordinal < tabPositions.size) {
+                        TabRowDefaults.SecondaryIndicator(
+                            Modifier.tabIndicatorOffset(tabPositions[currentMode.ordinal]),
                             color = primaryColor
                         )
-                        Icon(
-                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                            contentDescription = if (isExpanded) "Collapse" else "Expand",
-                            tint = primaryColor,
-                            modifier = Modifier.size(20.dp)
-                        )
+                    }
+                },
+                divider = { HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)) }
+            ) {
+                HomeMode.values().forEach { mode ->
+                    Tab(
+                        selected = currentMode == mode,
+                        onClick = { currentMode = mode },
+                        text = { 
+                            Text(
+                                text = mode.label, 
+                                fontWeight = if (currentMode == mode) FontWeight.Bold else FontWeight.Normal,
+                                style = MaterialTheme.typography.titleMedium
+                            ) 
+                        },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
+            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        if (currentMode == HomeMode.EXAM_NETWORK) {
+            item {
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    placeholder = { Text("搜索题目或知识点...", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4f)) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 4.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    singleLine = true,
+                    leadingIcon = { Icon(Icons.Default.Search, null, tint = primaryColor) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = Color.Transparent,
+                        focusedBorderColor = primaryColor.copy(alpha = 0.5f),
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                        focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
+                    )
+                )
+            }
+
+            if (searchQuery.isEmpty()) {
+                val sections = listOf("板块一：词法体系 (Morphology)", "板块二：时态与语态体系 (Tenses & Voices)", "板块三：句法体系 (Syntax)")
+                
+                sections.forEach { sectionName ->
+                    val isExpanded = expandedSections.contains(sectionName)
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .hapticClickable(preferences) {
+                                    if (isExpanded) expandedSections.remove(sectionName)
+                                    else expandedSections.add(sectionName)
+                                }
+                                .padding(vertical = 8.dp, horizontal = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = sectionName,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = primaryColor
+                            )
+                            Icon(
+                                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                contentDescription = if (isExpanded) "Collapse" else "Expand",
+                                tint = primaryColor,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+                    
+                    item {
+                        val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                        AnimatedVisibility(
+                            visible = isExpanded,
+                            enter = expandVertically(
+                                animationSpec = spring(dampingRatio = 0.65f, stiffness = 300f)
+                            ) + fadeIn(animationSpec = tween(250)),
+                            exit = shrinkVertically(
+                                animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f)
+                            ) + fadeOut(animationSpec = tween(200))
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(16.dp),
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            ) {
+                                sectionPoints.forEach { point ->
+                                    HistoryCardByPoint(
+                                        point = point, 
+                                        preferences = preferences, 
+                                        onUpdateStatus = onUpdateStatus,
+                                        onClick = { onNavigateToKnowledgeDetail(point.id) }
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
-                
-                item {
-                    val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
-                    AnimatedVisibility(
-                        visible = isExpanded,
-                        enter = expandVertically(
-                            animationSpec = spring(dampingRatio = 0.65f, stiffness = 300f)
-                        ) + fadeIn(animationSpec = tween(250)),
-                        exit = shrinkVertically(
-                            animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f)
-                        ) + fadeOut(animationSpec = tween(200))
+            } else {
+                val searchResults = KnowledgeProvider.allPoints.filter { point ->
+                    val q = searchQuery.lowercase()
+                    point.title.lowercase().contains(q) ||
+                    point.description.lowercase().contains(q)
+                }
+
+                if (searchResults.isEmpty()) {
+                    item {
+                        Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
+                            Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                        }
+                    }
+                } else {
+                    items(searchResults) { point ->
+                        SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
+                    }
+                }
+            }
+        } else {
+            // Textbook Sync Mode View
+            item {
+                TextbookSyncView(onNavigateToKnowledgeDetail)
+            }
+        }
+    }
+}
+
+@Composable
+fun TextbookSyncView(onNavigateToKnowledgeDetail: (String) -> Unit) {
+    var selectedTextbookIndex by remember { mutableStateOf(0) }
+    val textbooks = com.example.insight.data.model.TextbookProvider.textbooks
+    
+    if (textbooks.isEmpty()) return
+    
+    val currentTextbook = textbooks[selectedTextbookIndex]
+    
+    Column(modifier = Modifier.fillMaxWidth()) {
+        ScrollableTabRow(
+            selectedTabIndex = selectedTextbookIndex,
+            containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.primary,
+            edgePadding = 0.dp,
+            divider = {}
+        ) {
+            textbooks.forEachIndexed { index, textbook ->
+                Tab(
+                    selected = selectedTextbookIndex == index,
+                    onClick = { selectedTextbookIndex = index },
+                    text = { 
+                        Text(
+                            "${textbook.grade}${textbook.term}", 
+                            fontWeight = if (selectedTextbookIndex == index) FontWeight.Bold else FontWeight.Normal 
+                        ) 
+                    }
+                )
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        Card(
+            modifier = Modifier.fillMaxWidth().height(140.dp).padding(horizontal = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = currentTextbook.coverColor),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("${currentTextbook.grade}英语 ${currentTextbook.term}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        var expandedUnitId by remember { mutableStateOf<String?>(null) }
+        
+        currentTextbook.units.forEach { unit ->
+            val isExpanded = expandedUnitId == unit.id
+            
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable { 
+                        expandedUnitId = if (isExpanded) null else unit.id 
+                    },
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = if (isExpanded) 4.dp else 1.dp)
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        ) {
-                            sectionPoints.forEach { point ->
-                                HistoryCardByPoint(
-                                    point = point, 
-                                    preferences = preferences, 
-                                    onUpdateStatus = onUpdateStatus,
-                                    onClick = { onNavigateToKnowledgeDetail(point.id) }
-                                )
+                        Column {
+                            Text(unit.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                            Text(unit.topic, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                        }
+                        Icon(
+                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    
+                    AnimatedVisibility(visible = isExpanded) {
+                        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
+                            HorizontalDivider(modifier = Modifier.padding(bottom = 12.dp))
+                            
+                            Surface(color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)) {
+                                Text("💡 核心语法: ${unit.coreGrammar}", modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                            }
+                            
+                            unit.sections.forEach { section ->
+                                when (section) {
+                                    is com.example.insight.data.model.UnitSection.SectionA -> {
+                                        Text(section.title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(top = 8.dp, bottom = 4.dp))
+                                        Text("词汇: ${section.vocabulary.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
+                                        Text("句型: ${section.sentencePatterns.joinToString(" / ")}", style = MaterialTheme.typography.bodySmall)
+                                    }
+                                    is com.example.insight.data.model.UnitSection.GrammarFocus -> {
+                                        Surface(
+                                            color = Color(0xFFFFF3E0), 
+                                            shape = RoundedCornerShape(8.dp), 
+                                            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                                        ) {
+                                            Column(modifier = Modifier.padding(12.dp)) {
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    Icon(Icons.Default.Star, null, tint = Color(0xFFFF9800), modifier = Modifier.size(16.dp))
+                                                    Spacer(modifier = Modifier.width(8.dp))
+                                                    Text(section.title, fontWeight = FontWeight.Bold, color = Color(0xFFE65100))
+                                                }
+                                                Spacer(modifier = Modifier.height(8.dp))
+                                                section.grammarNodeIds.forEach { nodeId ->
+                                                    val point = com.example.insight.data.model.KnowledgeProvider.getPoint(nodeId)
+                                                    if (point != null) {
+                                                        Text(
+                                                            text = "🔗 ${point.title}",
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            color = MaterialTheme.colorScheme.primary,
+                                                            textDecoration = TextDecoration.Underline,
+                                                            modifier = Modifier.clickable { onNavigateToKnowledgeDetail(nodeId) }.padding(vertical = 4.dp)
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    is com.example.insight.data.model.UnitSection.SectionB -> {
+                                        Text(section.title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(top = 8.dp, bottom = 4.dp))
+                                        Text("阅读: ${section.readingSkills.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
+                                        Text("写作: ${section.writingSkills.joinToString(", ")}", style = MaterialTheme.typography.bodySmall)
+                                    }
+                                }
+                            }
+                            
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Button(
+                                onClick = { /* TODO Generate Lesson Plan */ },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Icon(Icons.Default.AutoAwesome, null, modifier = Modifier.size(18.dp))
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("用此单元生成教案")
                             }
                         }
                     }
                 }
             }
-        } else {
-            val searchResults = KnowledgeProvider.allPoints.filter { point ->
-                val q = searchQuery.lowercase()
-                point.title.lowercase().contains(q) ||
-                point.description.lowercase().contains(q)
-            }
-
-            if (searchResults.isEmpty()) {
-                item {
-                    Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
-                        Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
-                    }
-                }
-            } else {
-                items(searchResults) { point ->
-                    SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
-                }
-            }
         }
     }
 }
+
 
 @Composable
 fun HistoryCardByPoint(
