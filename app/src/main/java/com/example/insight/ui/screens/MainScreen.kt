@@ -153,6 +153,7 @@ fun MainScreen(
                             InsightTab.Home -> HomeTab(
                                 preferences = preferences, 
                                 onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail,
+                                onNavigateToTextbookDetail = onNavigateToTextbookDetail,
                                 onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
                             )
                             InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
@@ -556,7 +557,7 @@ fun HomeTab(
                         }
                     }
                 } else {
-                    TextbookSyncView(onNavigateToKnowledgeDetail)
+                    TextbookSyncView(onNavigateToTextbookDetail)
                 }
             }
         }
