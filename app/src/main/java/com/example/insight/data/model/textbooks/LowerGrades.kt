@@ -169,7 +169,7 @@ object Grade8Down {
             )),
             TextbookUnit("g8d_u4", "Unit 4", "Why don't you talk to your parents?", listOf(
                 UnitDetailSection("📖 单元导读", "生活压力、矛盾纠纷与心理疏导。"),
-                UnitDetailSection("⚙️ 核心语法精析", """
+                UnitDetailSection("⚙️ 语法精析", """
                     ### 提建议的多种物理路径
                     1. *Why don't you do...?*
                     2. *Why not do...?*
@@ -197,7 +197,7 @@ object Grade8Down {
             )),
             TextbookUnit("g8d_u6", "Unit 6", "An old man tried to move the mountains.", listOf(
                 UnitDetailSection("📖 单元导读", "寓言故事、神话传说与哲学启迪。"),
-                UnitDetailSection("⚙️ 核心语法精析", """
+                UnitDetailSection("⚙️ 语法精析", """
                     ### 1. unless (除非)
                     - 引导条件状语，相当于 *if ... not*。
                     
@@ -211,7 +211,7 @@ object Grade8Down {
                     #### ① **the size of** (……的大小)
                     #### ② **as far as I know** (据我所知)
                 """.trimIndent()),
-                UnitDetailSection("⚙️ 核心语法精析", """
+                UnitDetailSection("⚙️ 语法精析", """
                     ### 比较级与最高级的进阶应用
                     - **最高级**：*the + ...est / most ...*。
                     - **比较级表达最高级**：*higher than any other mountain*.
@@ -253,5 +253,4 @@ object Grade8Down {
             )
         )
     )
-)
 }
