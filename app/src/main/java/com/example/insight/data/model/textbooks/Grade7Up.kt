@@ -120,27 +120,47 @@ object Grade7Up {
                 "g7up_u2", "Unit 2", "We're Family!",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        *   **核心内容**：家庭成员关系、所属物品与日常互动。
-                        *   **关键词**：`ping-pong bat`, `fishing rod`, `chess set`, `cousin`.
+                        ### 1. 主题情境透义
+                        *   **核心内容**：介绍家庭成员关系，描述家庭合影。
+                        *   **主题范畴**：人与自我 —— 家庭生活与和谐氛围。
+                        *   **考点分布**：名词所有格；物主代词的进阶应用；have/has 的拥有逻辑。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇详析 (Vocabulary)", """
-                        #### ① **spend time doing sth.** (花时间做某事)
-                        - *I spend time playing chess with my uncle.*
+                    UnitDetailSection("🔤 核心词汇知识详解 (Vocabulary)", """
+                        #### ① **spend time** (花时间; 度过时光)
+                        - **【结构锚定】**：**spend time (in) doing sth.** (花时间做某事) / **spend time with sb.** (和某人共度时光)。
+                        - **【对比】**：*It takes sb. some time to do sth.* (固定搭配对比)。
                         
-                        #### ② **a lot of / lots of** (许多)
-                        - 后面可接可数名词复数或不可数名词。
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精析 (Grammar)", """
-                        #### 1. 一般现在时 (to be, have/has)
-                        - **have/has** 表示“拥有”。 *He has a football.*
+                        #### ② **photo** /ˈfəʊtəʊ/ (n. 照片)
+                        - **【复数】**：**photos** (直接加s)。
+                        - **【词组】**：*a photo of my family* (一张我的全家福)。
                         
-                        #### 2. 物主代词 (Possessive Adjectives)
-                        - *my, your, his, her, its, our, their*。
-                        - **物理位置**：必须放在名词之前。 *my father*.
+                        #### ③ **play chess** (下国际象棋)
+                        - **【语法点】**：棋类、球类运动名词前**不加**冠词 *the*。
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式", """
-                        - *What does family mean to you?*
-                        - *Here's a photo of my family.*
+                    UnitDetailSection("⚙️ 单元语法精讲 (Grammar Master)", """
+                        ### 1. 名词所有格 (Possessive Nouns)
+                        表示“……的”物理所属关系。
+                        - **【单数形式】**：名词 + **'s**。 *Tom's pen*.
+                        - **【复数形式】**：
+                          - 以s结尾的复数名词只加 **'**。 *students' books*.
+                          - 不以s结尾的复数名词加 **'s**。 *women's day*.
+                        
+                        ### 2. have/has 的“磁力场”用法
+                        表达物理拥有或关系归属。
+                        - **have**：用于第一、二人称及复数。 *I have a sister.*
+                        - **has**：用于第三人称单数。 *She has a big dog.*
+                    """.trimIndent()),
+                    UnitDetailSection("📚 核心句式深度解析", """
+                        - **Who is she?** (询问身份) -> *She is my aunt.*
+                        - **This is a photo of my family.** (介绍照片内容)
+                        - **What is your father's job?** (询问职业的另一种表达)
+                    """.trimIndent()),
+                    UnitDetailSection("📝 写作专项：My Family (家庭介绍)", """
+                        - **【必背句型】**：
+                          - *There are ... people in my family.*
+                          - *My father is a/an ...*
+                          - *I love my family.*
+                        - **【范文片段】**：*I have a big family. My parents are both teachers. I often spend time playing games with my brother...*
                     """.trimIndent())
                 )
             ),
@@ -148,20 +168,30 @@ object Grade7Up {
                 "g7up_u3", "Unit 3", "My School",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        *   **核心内容**：描述校园设施及其物理方位。
-                        *   **关键词**：`dining hall`, `gym`, `whiteboard`, `across from`.
+                        ### 1. 核心主题
+                        *   **内容**：描述校园建筑设施及其方位。
+                        *   **重点**：*There be* 句型；方位介词；祈使句引导路径。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精析 (Grammar)", """
-                        #### 1. "There be" 句型 (存留物理场)
-                        - 表达“某处有某物”。
-                        - **就近原则**：*There is a whiteboard and two desks.*
+                    UnitDetailSection("🔤 核心词汇金牌解析", """
+                        #### ① **across from** (在……对面)
+                        - **【物理方位】**：指在街道、走廊等空间的另一侧。
+                        - **【例句】**：*The library is across from the teachers' office.*
                         
-                        #### 2. 方位介词 (Prepositions of Place)
-                        - *in front of, behind, across from, near*.
+                        #### ② **between... and...** (在两者之间)
+                        - **【逻辑点】**：必须连接的是两个具体的物理坐标点。
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式", """
-                        - *The library is across from the classroom.*
-                        - *There is a sports field behind the building.*
+                    UnitDetailSection("⚙️ 单元语法精析", """
+                        ### 1. There be 句型的“就近原则”
+                        表示“在某处存在某物”。
+                        - **结构**：*There is (单数/不可数) / There are (复数) ...*
+                        - **核心点**：当并列多个主语时，be 动词形式由离它**最近**的那个名词决定。
+                          - *There **is** a desk and two chairs.*
+                          - *There **are** two chairs and a desk.*
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句式详解", """
+                        - **Where is the sports field?** (询问具体地点)
+                        - **How many classrooms are there in your school?** (询问数量)
+                        - **Go down the hallway and turn left.** (路径指引)
                     """.trimIndent())
                 )
             ),
@@ -169,17 +199,28 @@ object Grade7Up {
                 "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        *   **核心内容**：学科偏好、理由表达及逻辑因果。
-                        *   **关键词**：`subject`, `geography`, `biology`, `P.E.`, `reason`.
+                        ### 1. 核心话题
+                        *   **领域**：学科选择与个人理由。
+                        *   **考点**：Why 疑问句及其逻辑答语；表心理感受的形容词辨析。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法点精析 (Grammar)", """
-                        #### "Why" 与 "Because" 的逻辑锚定
-                        - *Why* 提问，*Because* 回答。
-                        - *Why do you like maths? — Because it's useful.*
+                    UnitDetailSection("🔤 词汇深度剖析", """
+                        #### ① **favourite** (adj. 最喜爱的)
+                        - **【用法】**：通常放在名词前。 *favourite subject*.
+                        - **【等价转换】**：*like ... best*.
+                        
+                        #### ② **interesting vs boring** (有趣 vs 乏味)
+                        - **【物理控制】**：描述客观事物的性质，赋予事物“吸引力”或“枯燥性”。
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式", """
-                        - *What's your favourite subject?*
-                        - *Biology is my favourite because it's interesting.*
+                    UnitDetailSection("⚙️ 单元语法精讲", """
+                        ### Why 与 Because 的逻辑因果锚定
+                        - **Why** 引导特殊疑问句，探究原因。
+                        - **Because** 引导陈述句，给出理由。
+                        - **【考场禁忌】**：在同一个句子中，**Because** 和 **So** 绝对不能同时出现（逻辑重叠）。
+                    """.trimIndent()),
+                    UnitDetailSection("📚 核心句式解析", """
+                        - **What's your favourite subject?** (询问最喜欢的学科)
+                        - **Why do you like geography? — Because it's useful.** (因果连横)
+                        - **When is your maths lesson?** (询问课程时间)
                     """.trimIndent())
                 )
             ),
@@ -187,18 +228,30 @@ object Grade7Up {
                 "g7up_u5", "Unit 5", "Fun Clubs",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        *   **核心内容**：社团活动、才艺展示与能力评估。
-                        *   **关键词**：`chess club`, `act`, `paint`, `guitar`, `stories`.
+                        ### 1. 主题情境
+                        *   **内容**：各色社团招新，个人才艺展示。
+                        *   **重点**：情态动词 can 表达能力；want to 句型表达意愿。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法点精析 (Grammar)", """
-                        #### 情态动词 "can" (物理常力场)
-                        - 表示能力 (Ability)。
-                        - **物性特征**：无谓数/人称变化，后接动词原形。
-                        - *I can play chess.* / *Can you join us?*
+                    UnitDetailSection("🔤 核心词汇详析", """
+                        #### ① **join** (参加; 加入)
+                        - **【用法】**：指加入某个社团或组织。 *join the art club*.
+                        
+                        #### ② **be good at** (擅长)
+                        - **【固定搭配】**：后接动词需用 **-ing** 形式。 *be good at drawing*.
+                        - **【同义转换】**：*do well in*.
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式", """
-                        - *I am good at drawing.* (我擅长画画)。
-                        - *Welcome to the music club!*
+                    UnitDetailSection("⚙️ 单元语法精讲", """
+                        ### 情态动词 "can" 的能力立场
+                        - **【物理属性】**：
+                          1. 无人称和数的变化 (He can, I can, They can)。
+                          2. 后面必须接**动词原形**。
+                        - **【否定形式】**：*cannot / can't*.
+                        - **【疑问形式】**：*Can you ...?*
+                    """.trimIndent()),
+                    UnitDetailSection("📚 高频句式解析", """
+                        - **What club do you want to join?** (询问加入意图)
+                        - **I can sing and dance.** (个人能力陈述)
+                        - **Please help us with the music festival!** (请求协助)
                     """.trimIndent())
                 )
             ),
@@ -206,28 +259,30 @@ object Grade7Up {
                 "g7up_u6", "Unit 6", "A Day in the Life",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 主题情境透视
-                        *   **核心内容**：描述作息规律 (Routine) 与精准时间表达。
-                        *   **考察点**：时间表达法逻辑转换；频率副词。
+                        *   **核心内容**：时间表达法（精准制导）与作息规律描述。
+                        *   **语法重点**：频率副词的物理分布；时间介词 (at, on, in)。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇知识详解 (Vocabulary Focus)", """
-                        #### ① **get up / go to school / go to bed**
-                        *   **[固定搭配]**：日常动作短语，注意 **go to bed** 中不加 *the* (指睡觉这种物理状态)。
+                    UnitDetailSection("🔤 词汇金牌解析", """
+                        #### ① **usually / often / sometimes** (频率副词)
+                        - **【频率梯度】**：*always (100%) > usually (80%) > often (60%) > sometimes (30%) > never (0%)*。
                         
-                        #### ② **past / to** (时间物理路径)
-                        *   **past**：表示“过”。 *8:10 -> ten past eight*。
-                        *   **to**：表示“差”。 *9:50 -> ten to ten*。
+                        #### ② **time expressions** (时间表达)
+                        - **quarter** (刻钟; 15分钟)；**half** (一半; 30分钟)。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法点精析 (Grammar)", """
-                        #### 1. 时间表达法的双重逻辑
-                        1. **直接读法**：*7:05 (seven five)*。
-                        2. **逆向读法**：
-                          - 分钟 ≤ 30，用 **past**。
-                          - 分钟 > 30，用 **to** (差……分钟到……点)。
+                    UnitDetailSection("⚙️ 单元语法精析", """
+                        ### 1. 时间表达法的双重逻辑
+                        1. **顺读法**：先小时后分钟。 *8:15 -> eight fifteen*.
+                        2. **逆读法**：
+                           - 分钟 ≤ 30，用 **past** (过)。 *8:20 -> twenty past eight*.
+                           - 分钟 > 30，用 **to** (差)。 *8:50 -> ten to nine*.
                         
-                        #### 2. 频率副词 (Frequency Adverbs)
-                        - **always > usually > often > sometimes > never**.
-                        - **物理位置**：行前 be 后。
+                        ### 2. 频率副词的“行前 be 后”位置
+                        - *I **usually** get up at 6:30.* (动词前)
+                        - *He **is** always happy.* (be动词后)
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句式详解", """
+                        - **What time do you usually go to bed?** (询问具体作息)
+                        - **It's time for breakfast.** (该做某事的时间了)
                     """.trimIndent())
                 )
             ),
@@ -235,24 +290,31 @@ object Grade7Up {
                 "g7up_u7", "Unit 7", "Happy Birthday!",
                 listOf(
                     UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 核心话题
-                        *   **主题语境**：月份、日期与生日活动。
-                        *   **重点语法**：序数词 (Ordinal Numbers)；日期表达法。
+                        ### 1. 主题情境
+                        *   **内容**：月份、日期、生日派对及价格询问。
+                        *   **重点**：序数词的构建与缩写；介词在日期中的精准应用。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇知识详解 (Vocabulary Focus)", """
-                        #### ① **months** (12个月份全掌握)
-                        *   **[背诵技巧]**：January, February 特殊记；September, October, November, December 规律性后缀。
+                    UnitDetailSection("🔤 核心词汇详析", """
+                        #### ① **months** (十二个月份)
+                        - **【注意】**：月份单词的首字母**必须大写**。
                         
-                        #### ② **date** (n. 日期)
-                        - *What is the date today?* (今天是几号？)。
+                        #### ② **price / how much**
+                        - **【金牌词句】**：*What is the price of this pen?* = *How much is this pen?*
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法点精析 (Grammar)", """
-                        #### 1. 序数词 (Ordinal Numbers) 物理缩写守则
-                        *   **1st (first), 2nd (second), 3rd (third)**。
-                        *   **[口诀]**：八去 t，九去 e (eighth, ninth)；ve 要用 f 替 (fifth, twelfth)；ty 变成 tie (twenty -> twentieth)。
+                    UnitDetailSection("⚙️ 单元语法点精析", """
+                        ### 1. 序数词 (Ordinal Numbers) 的构建逻辑
+                        用于表示物理顺序或日期。
+                        - **【必背口诀】**：一二三，特殊记 (first, second, third)；八去 t，九去 e (eighth, ninth)；ve 要用 f 替 (fifth, twelfth)；ty 变成 tie (twenty -> twentieth)；以上若遇几十几，只变个位就可以。
                         
-                        #### 2. 日期表达法 (Date format)
-                        *   **[结构]**：Month + Day (序数词)。 *October 1st* (10月1日)。
+                        ### 2. 日期表达中的“介词守则”
+                        - **at**：用于具体的时间时刻。 *at 7 o'clock*.
+                        - **on**：用于具体的一天或日期。 *on May 1st*.
+                        - **in**：用于月份、季节、年份等大时间段。 *in June*.
+                    """.trimIndent()),
+                    UnitDetailSection("📚 高频句式解析", """
+                        - **When is your birthday?** (询问生日)
+                        - **My birthday is on October 10th.** (回答具体日期)
+                        - **How old are you?** (询问年龄)
                     """.trimIndent())
                 )
             )
