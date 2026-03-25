@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.Color
 import com.example.insight.data.model.Textbook
 import com.example.insight.data.model.TextbookUnit
 import com.example.insight.data.model.UnitDetailSection
+import kotlin.collections.listOf
+import kotlin.text.trimIndent
 
 object Grade8Up {
     val data = Textbook(
