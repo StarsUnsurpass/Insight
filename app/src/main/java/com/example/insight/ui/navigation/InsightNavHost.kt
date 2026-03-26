@@ -254,6 +254,7 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 onDarkModeToggle = { viewModel.updateDarkMode(it) },
                 onThemeStyleChange = { viewModel.updateThemeStyle(it) },
                 onHapticToggle = { viewModel.updateHapticFeedback(it) },
+                onHapticIntensityChange = { viewModel.updateHapticIntensity(it) },
                 onDeepSeekApiKeyChange = { viewModel.updateDeepSeekApiKey(it) }
             )
         }

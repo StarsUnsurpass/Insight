@@ -26,6 +26,7 @@ class InsightRepository @Inject constructor(
     suspend fun updateDarkMode(enabled: Boolean) = preferenceManager.updateDarkMode(enabled)
     suspend fun updateThemeStyle(style: ThemeStyle) = preferenceManager.updateThemeStyle(style)
     suspend fun updateHapticFeedback(enabled: Boolean) = preferenceManager.updateHapticFeedback(enabled)
+    suspend fun updateHapticIntensity(intensity: HapticIntensity) = preferenceManager.updateHapticIntensity(intensity)
     suspend fun updateDeepSeekApiKey(apiKey: String) = preferenceManager.updateDeepSeekApiKey(apiKey)
     suspend fun updateKnowledgeStatus(nodeId: String, status: KnowledgeStatus) = preferenceManager.updateKnowledgeStatus(nodeId, status)
 

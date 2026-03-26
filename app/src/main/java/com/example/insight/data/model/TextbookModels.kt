@@ -8,6 +8,7 @@ data class Textbook(
     val grade: String,
     val term: String, 
     val coverColor: Color,
+    val coverImageUrl: String = "",
     val units: List<TextbookUnit>
 )
 

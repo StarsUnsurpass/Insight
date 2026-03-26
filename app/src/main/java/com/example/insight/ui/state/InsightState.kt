@@ -76,6 +76,10 @@ data class ReportConfig(
     val handwritingConfig: HandwritingConfig = HandwritingConfig()
 )
 
+enum class HapticIntensity {
+    WEAK, MEDIUM, STRONG
+}
+
 data class UserPreferences(
     val username: String = "用户",
     val className: String = "一年级一班",
@@ -83,6 +87,7 @@ data class UserPreferences(
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
     val hapticEnabled: Boolean = true,
+    val hapticIntensity: HapticIntensity = HapticIntensity.MEDIUM,
     val deepSeekApiKey: String = "sk-83c0282197994bbd8fa34948f7872ebf",
     val knowledgeStatuses: Map<String, KnowledgeStatus> = emptyMap()
 )

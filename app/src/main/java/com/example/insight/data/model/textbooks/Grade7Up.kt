@@ -13,6 +13,7 @@ object Grade7Up {
         grade = "七年级",
         term = "上册",
         coverColor = Color(0xFFE3F2FD),
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc7s_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
                 "g7up_u1", "Unit 1", "You and Me",

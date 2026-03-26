@@ -34,12 +34,14 @@ fun SettingsScreen(
     onDarkModeToggle: (Boolean) -> Unit,
     onThemeStyleChange: (ThemeStyle) -> Unit,
     onHapticToggle: (Boolean) -> Unit,
+    onHapticIntensityChange: (com.example.insight.ui.state.HapticIntensity) -> Unit,
     onDeepSeekApiKeyChange: (String) -> Unit
 ) {
     var showNameDialog by remember { mutableStateOf(false) }
     var showClassDialog by remember { mutableStateOf(false) }
     var showRoleDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showHapticDialog by remember { mutableStateOf(false) }
     var showApiKeyDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -136,6 +138,21 @@ fun SettingsScreen(
                 )
             }
 
+            if (preferences.hapticEnabled) {
+                item {
+                    SettingItem(
+                        icon = Icons.Default.Tune,
+                        title = "震感强度",
+                        subtitle = when(preferences.hapticIntensity) {
+                            com.example.insight.ui.state.HapticIntensity.WEAK -> "弱 (轻微触碰)"
+                            com.example.insight.ui.state.HapticIntensity.MEDIUM -> "中 (系统默认)"
+                            com.example.insight.ui.state.HapticIntensity.STRONG -> "强 (强烈反馈)"
+                        },
+                        onClick = { showHapticDialog = true }
+                    )
+                }
+            }
+
             item {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("高级配置", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
@@ -171,6 +188,17 @@ fun SettingsScreen(
                 showNameDialog = false 
             },
             onDismiss = { showNameDialog = false }
+        )
+    }
+
+    if (showHapticDialog) {
+        HapticIntensityDialog(
+            currentIntensity = preferences.hapticIntensity,
+            onSelect = {
+                onHapticIntensityChange(it)
+                showHapticDialog = false
+            },
+            onDismiss = { showHapticDialog = false }
         )
     }
 
@@ -302,6 +330,44 @@ fun ClassEditDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) }
+        }
+    )
+}
+
+@Composable
+fun HapticIntensityDialog(
+    currentIntensity: com.example.insight.ui.state.HapticIntensity,
+    onSelect: (com.example.insight.ui.state.HapticIntensity) -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("选择震感强度") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                com.example.insight.ui.state.HapticIntensity.entries.forEach { intensity ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onSelect(intensity) }
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = intensity == currentIntensity, onClick = null)
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = when(intensity) {
+                                com.example.insight.ui.state.HapticIntensity.WEAK -> "弱 (轻微触碰)"
+                                com.example.insight.ui.state.HapticIntensity.MEDIUM -> "中 (系统默认)"
+                                com.example.insight.ui.state.HapticIntensity.STRONG -> "强 (强烈反馈)"
+                            }
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text("关闭", color = SageGreen) }
         }
     )
 }

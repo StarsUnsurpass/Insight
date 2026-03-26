@@ -12,7 +12,8 @@ object Grade7Down {
         id = "g7_down",
         grade = "七年级",
         term = "下册",
-        coverColor = Color(0xFFC8E6C9),
+        coverColor = Color(0xFFF1F8E9),
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc7x_2025/coverbig.jpg",
         units = listOf(
             TextbookUnit("g7d_u1", "Unit 1", "Can you play the guitar?", listOf(
                 UnitDetailSection("📖 单元导读 (Unit Overview)", """
@@ -109,7 +110,8 @@ object Grade8Down {
         id = "g8_down",
         grade = "八年级",
         term = "下册",
-        coverColor = Color(0xFFFFCCBC),
+        coverColor = Color(0xFFFFF3E0),
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc8x_2026/coverbig.jpg",
         units = listOf(
             TextbookUnit("g8d_u1", "Unit 1", "What's the matter?", listOf(
                 UnitDetailSection("📖 单元导读 (Unit Overview)", """

@@ -23,6 +23,7 @@ class PreferenceManager(private val context: Context) {
         val DARK_MODE = booleanPreferencesKey("is_dark_mode")
         val THEME_STYLE = stringPreferencesKey("theme_style")
         val HAPTIC_ENABLED = booleanPreferencesKey("haptic_enabled")
+        val HAPTIC_INTENSITY = stringPreferencesKey("haptic_intensity")
         val DEEPSEEK_API_KEY = stringPreferencesKey("deepseek_api_key")
         val KNOWLEDGE_STATUSES = stringPreferencesKey("knowledge_statuses")
     }
@@ -43,6 +44,9 @@ class PreferenceManager(private val context: Context) {
                 isDarkMode = preferences[Keys.DARK_MODE] ?: false,
                 themeStyle = ThemeStyle.valueOf(preferences[Keys.THEME_STYLE] ?: ThemeStyle.Default.name),
                 hapticEnabled = preferences[Keys.HAPTIC_ENABLED] ?: true,
+                hapticIntensity = com.example.insight.ui.state.HapticIntensity.valueOf(
+                    preferences[Keys.HAPTIC_INTENSITY] ?: com.example.insight.ui.state.HapticIntensity.MEDIUM.name
+                ),
                 deepSeekApiKey = preferences[Keys.DEEPSEEK_API_KEY] ?: "sk-83c0282197994bbd8fa34948f7872ebf",
                 knowledgeStatuses = parseKnowledgeStatuses(preferences[Keys.KNOWLEDGE_STATUSES] ?: "")
             )
@@ -82,6 +86,10 @@ class PreferenceManager(private val context: Context) {
 
     suspend fun updateHapticFeedback(enabled: Boolean) {
         context.dataStore.edit { it[Keys.HAPTIC_ENABLED] = enabled }
+    }
+
+    suspend fun updateHapticIntensity(intensity: com.example.insight.ui.state.HapticIntensity) {
+        context.dataStore.edit { it[Keys.HAPTIC_INTENSITY] = intensity.name }
     }
 
     suspend fun updateDeepSeekApiKey(apiKey: String) {

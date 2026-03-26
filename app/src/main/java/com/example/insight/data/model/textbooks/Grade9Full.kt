@@ -12,7 +12,8 @@ object Grade9Full {
         id = "g9_full",
         grade = "九年级",
         term = "全一册",
-        coverColor = Color(0xFFFFB74D),
+        coverColor = Color(0xFFE8F5E9),
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc9q/coverbig.jpg",
         units = listOf(
             TextbookUnit("g9_u1", "Unit 1", "How can we become good learners?", listOf(
                 UnitDetailSection("📖 单元导读 (Unit Overview)", """

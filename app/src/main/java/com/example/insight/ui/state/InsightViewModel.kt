@@ -463,6 +463,10 @@ class InsightViewModel @Inject constructor(
         viewModelScope.launch { repository.updateHapticFeedback(enabled) }
     }
 
+    fun updateHapticIntensity(intensity: HapticIntensity) {
+        viewModelScope.launch { repository.updateHapticIntensity(intensity) }
+    }
+
     fun setCurrentScanStudent(studentId: String) {
         _currentScanStudentId.value = studentId
     }

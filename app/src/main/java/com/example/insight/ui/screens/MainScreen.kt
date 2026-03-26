@@ -43,6 +43,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -71,6 +72,9 @@ import com.example.insight.data.model.sampleLessonPlans
 import com.example.insight.data.model.LessonPlanSample
 import com.example.insight.data.model.KnowledgeProvider
 import kotlin.collections.*
+import coil.compose.AsyncImage
+import androidx.compose.ui.layout.ContentScale
+
 
 enum class InsightTab(
     val title: String,
@@ -102,7 +106,7 @@ fun MainScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val preferences = uiState.preferences
-    val haptic = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     var selectedTab by rememberSaveable { mutableStateOf(InsightTab.Home) }
     var isDockVisible by remember { mutableStateOf(true) }
@@ -199,7 +203,7 @@ fun MainScreen(
                         preferences = preferences,
                         onTabSelected = { selectedTab = it },
                         onCameraClick = { 
-                            triggerHaptic(preferences, haptic)
+                            triggerHaptic(preferences, context)
                             isRevealing = true 
                         }
                     )
@@ -304,7 +308,7 @@ fun BoxScope.TabIconFluid(
     preferences: UserPreferences,
     onTabSelected: (InsightTab) -> Unit
 ) {
-    val haptic = LocalHapticFeedback.current
+    val context = androidx.compose.ui.platform.LocalContext.current
     val isSelected = selectedTab == tab
     val primaryColor = MaterialTheme.colorScheme.primary
     val xOffset = slotWidth * tab.bias
@@ -325,7 +329,7 @@ fun BoxScope.TabIconFluid(
                     indication = null,
                     onClick = {
                         if (!isSelected) {
-                            triggerHaptic(preferences, haptic)
+                            triggerHaptic(preferences, context)
                             onTabSelected(tab)
                         }
                     }
@@ -599,13 +603,58 @@ fun TextbookSyncView(onNavigateToTextbookDetail: (String) -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
         
         Card(
-            modifier = Modifier.fillMaxWidth().height(140.dp).padding(horizontal = 4.dp),
+            modifier = Modifier.fillMaxWidth().height(180.dp).padding(horizontal = 4.dp),
             colors = CardDefaults.cardColors(containerColor = currentTextbook.coverColor),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             shape = RoundedCornerShape(16.dp)
         ) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("${currentTextbook.grade}英语 ${currentTextbook.term}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
+            Box(modifier = Modifier.fillMaxSize()) {
+                if (currentTextbook.coverImageUrl.isNotEmpty()) {
+                    AsyncImage(
+                        model = currentTextbook.coverImageUrl,
+                        contentDescription = "Textbook Cover",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop,
+                        placeholder = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_gallery),
+                        error = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_report_image)
+                    )
+                    // Optional subtle overlay for text readability if we still want text
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.3f))
+                                )
+                            )
+                    )
+                }
+                
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    if (currentTextbook.coverImageUrl.isEmpty()) {
+                        Text(
+                            "${currentTextbook.grade}英语 ${currentTextbook.term}", 
+                            style = MaterialTheme.typography.headlineMedium, 
+                            fontWeight = FontWeight.ExtraBold, 
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    } else {
+                        // Small tag for the grade/term name over the image
+                        Surface(
+                            color = Color.Black.copy(alpha = 0.6f),
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.align(Alignment.BottomEnd).padding(12.dp)
+                        ) {
+                            Text(
+                                text = "${currentTextbook.grade} ${currentTextbook.term}",
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
             }
         }
         
