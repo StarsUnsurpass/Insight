@@ -338,34 +338,188 @@ object Grade7Up {
             TextbookUnit(
                 "g7up_u3", "Unit 3", "My School",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 核心主题
-                        *   **内容**：描述校园建筑设施及其方位。
-                        *   **重点**：*There be* 句型；方位介词；祈使句引导路径。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self) / 人与社会 (Man and Society)
+                        *   **主题群**：学校、人际关系与校园生活 (School life)
+                        *   **子主题**：描述校园建筑设施，辨识方位，介绍学校环境，培养爱校意识 (Describing school layout)。
+
+                        ### 2. 单元主题内容
+                        本单元以“My School (我的学校)”为主题，重点学习如何描述校园内的建筑设施（如 classroom building, library, sports field 等）及其空间方位。通过学习 `There be` 句型和方位介词（如 across from, between...and... 等），学生能够清晰、准确地向他人介绍自己的学习环境。本单元不仅锻炼学生的空间逻辑表达能力，还引导学生发现校园之美，增强对学校的归属感和自豪感。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇金牌解析", """
-                        #### ① **across from** (在……对面)
-                        - **【物理方位】**：指在街道、走廊等空间的另一侧。
-                        - **【例句】**：*The library is across from the teachers' office.*
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **校园设施**：building (建筑物), classroom (教室), library (图书馆), office (办公室), hall (礼堂), playground/sports field (操场), dining hall (食堂), gym (体育馆).
+                        - **方位介词/短语**：behind (在...后面), in front of (在...前面), across from (在...对面), between...and... (在...之间), next to (在...旁边), on the left/right (在左/右边).
+                        - **核心动词**：show (出示; 给...看), spend (花时间), raise (举起; 筹集).
+                        - **高频短语**：show sb. around (带某人参观), classroom building (教学楼), computer room (电脑室), teachers' office (老师办公室).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问地点**：Where is the library? / Is there a gym in your school?
+                        2.  **描述存在**：There is a big library. / There are many classrooms.
+                        3.  **描述方位**：The gym is behind the classroom building. / It's across from the sports field.
+                        4.  **感叹赞美**：How beautiful our school is!
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **There be 句型**（一般现在时）的肯定、否定、疑问形式及其“就近原则”。
+                        - **方位介词**的精准应用与区分。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **between... and...** (在两者之间)
-                        - **【逻辑点】**：必须连接的是两个具体的物理坐标点。
+                        **Fu Xing**: Welcome to our school, Peter!
+                        
+                        **Peter**: Thanks, Fu Xing. Your school is very big. Where is your classroom?
+                        
+                        **Fu Xing**: It's in that building. It's on the second floor.
+                        
+                        **Peter**: Is there a library here?
+                        
+                        **Fu Xing**: Yes, there is. It's behind the office building.
+                        
+                        **Peter**: And what's that building across from the library?
+                        
+                        **Fu Xing**: That's the dining hall. Let's go and have a look.
+
+                        **【译文】**
+                        
+                        **复兴**：欢迎来到我们的学校，彼得！
+                        
+                        **彼得**：谢谢，复兴。你们学校很大。你的教室在哪里？
+                        
+                        **复兴**：就在那栋楼里。它在二楼。
+                        
+                        **彼得**：这儿有图书馆吗？
+                        
+                        **复兴**：是的，有。它在办公楼后面。
+                        
+                        **彼得**：图书馆对面的那栋建筑是什么？
+                        
+                        **复兴**：那是食堂。让我们去看看吧。
+
+                        ### Section B (Reading) 阅读文段：Our Beautiful School
+                        **【原文】**
+                        
+                        Hi, I am Li Hua. I want to show you around my school. My school is not very big but it is very beautiful. In the middle of the school, there is a large sports field. We often play football there. Behind the sports field, there are two classroom buildings. My classroom is in Building A. There is also a small garden next to the library. We like reading books there. I love my school very much.
+
+                        **【译文】**
+                        
+                        嗨，我是李华。我想带你参观我的学校。我的学校不是很大，但是它很漂亮。在学校中间，有一个大型操场。我们经常在那里踢足球。在操场后面，有两栋教学楼。我的教室在A号楼。图书馆旁边还有一个小花园。我们喜欢在那里读书。我非常热爱我的学校。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精析", """
-                        ### 1. There be 句型的“就近原则”
-                        表示“在某处存在某物”。
-                        - **结构**：*There is (单数/不可数) / There are (复数) ...*
-                        - **核心点**：当并列多个主语时，be 动词形式由离它**最近**的那个名词决定。
-                          - *There **is** a desk and two chairs.*
-                          - *There **are** two chairs and a desk.*
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. Where is your classroom? (你的教室在哪里？)
+                        - **【句式剖析】**：`Where` 引导的特殊疑问句，用来询问地点。
+                        - **【用法拓展】**：回答方位时，常配合 `It's in/on/behind...` 等介词短语。
+                        
+                        #### 2. Is there a library here? (这儿有图书馆吗？)
+                        - **【句式剖析】**：`There be` 句型的一般疑问句形式。
+                        - **【答语】**：肯定回答：`Yes, there is.`；否定回答：`No, there isn't.`
+                        
+                        #### 3. It's across from the office building. (它在办公楼对面。)
+                        - **【要点精讲】**：`across from` 意为“在...对面”，强调两者之间隔着街道、走廊或空地。
+                        
+                        #### 4. I want to show you around my school. (我想带你参观我的学校。)
+                        - **【词块归纳】**：`show sb. around...` 意为“带某人参观...”。
                     """.trimIndent()),
-                    UnitDetailSection("📚 重点句式详解", """
-                        - **Where is the sports field?** (询问具体地点)
-                        - **How many classrooms are there in your school?** (询问数量)
-                        - **Go down the hallway and turn left.** (路径指引)
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① building (n. 建筑物；楼房)
+                        - **【词汇梳理】**：来自动词 `build` (建设)。复数形式为 `buildings`。
+                        - **【例题】**：
+                        
+                        *There are many tall ________ in the city.*
+                        A. build   B. building   C. buildings   D. builds
+                        
+                        **[解析]**：many 后面接名词复数，选 **C**。
+
+                        #### ② in front of (在...前面) vs in the front of (在...前部)
+                        - **【辨析】**：
+                            *   `in front of` 指在某个物体外部的前面。
+                            *   `in the front of` 指在某个物体内部的前部。
+                        - **【中考真题/例题】**：
+                        
+                        *The driver sits ________ the bus.*
+                        A. in front of   B. in the front of   C. behind   D. next to
+                        
+                        **[解析]**：司机坐在公交车“内部”的前头，选 **B**。
+
+                        #### ③ between...and... (在...和...之间)
+                        - **【用法总结】**：连接两个并列的成分。
+                        - **【例题】**：
+                        
+                        *The library is ________ the gym ________ the dining hall.*
+                        A. among; and   B. between; and   C. from; to   D. next; to
+                        
+                        **[解析]**：两者之间用 between...and...，选 **B**。
+
+                        #### ④ show (v. 出示; 给...看)
+                        - **【常用短语】**：
+                            *   `show sth. to sb.` = `show sb. sth.` (给某人看某物)
+                            *   `on show` (在展览中)
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心一：There be 句型 (The "There be" Structure)
+                        表示“某处存在某人/某物”。
+                        **1. 基本结构**
+                        *   **There is + 单数可数名词/不可数名词 + 地点状语.**
+                        *   **There are + 复数名词 + 地点状语.**
+
+                        **2. 就近原则 (The Principle of Proximity)**
+                        当 be 动词后接两个或多个并列主语时，be 的形式由**离它最近**的那个主语决定。
+                        - *There **is** a pen and two books on the desk.* (pen 是单数)
+                        - *There **are** two books and a pen on the desk.* (books 是复数)
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·安徽中考)* *There ________ some water and two apples on the table.*
+                        A. am   B. is   C. are   D. be
+                        
+                        **[解析]**：离 be 动词最近的主语是 some water (不可数名词)，用 is，选 **B**。
+
+                        ---
+
+                        ### 语法核心二：常用方位介词 (Prepositions of Place)
+                        **1. 常见介词一览**
+                        *   `on` (在...上面 - 接触)
+                        *   `in` (在...里面)
+                        *   `behind` (在...后面)
+                        *   `under` (在...正下方)
+                        *   `next to` (在...旁边)
+                        *   `across from` (在...对面)
+
+                        **2. 中考真题特训**
+                        
+                        *(2023·湖北中考)* *The cinema is ________ the supermarket and the library.*
+                        A. in   B. behind   C. between   D. among
+                        
+                        **[解析]**：提示词 and 连接了两个地点，表示“在两者之间”，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My School (我的学校)
+                        #### 1. 写作要点 (Key Points)
+                        *   **总述**：评价学校（大小、美丑）。
+                        *   **分述**：介绍主要建筑及其位置。
+                        *   **活动**：在这些场所进行的活动（如在操场踢球）。
+                        *   **总结**：表达对学校的喜爱之情。
+
+                        #### 2. 满分范文赏析 (Model Essay)
+                        **Welcome to My School**
+                        
+                        My school is a beautiful place. Let me tell you something about it.
+                        
+                        In our school, **there is** a modern library. It is **next to** the classroom building. We like reading books there. In the middle of the school, **there is** a big playground. Many students play sports there after school. **Across from** the playground is our dining hall. The food there is very delicious.
+                        
+                        I like my school very much. Welcome to visit my school!
                     """.trimIndent())
                 )
             ),
+
             TextbookUnit(
                 "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(

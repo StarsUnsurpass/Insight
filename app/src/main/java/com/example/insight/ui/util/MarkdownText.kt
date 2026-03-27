@@ -4,7 +4,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
-import android.text.style.LineBackgroundSpan
 import android.text.style.ReplacementSpan
 import android.view.Gravity
 import android.widget.TextView
@@ -25,9 +24,9 @@ import io.noties.markwon.html.HtmlPlugin
 import org.commonmark.node.StrongEmphasis
 
 /**
- * 自定义荧光笔高亮 Span
- * 1. 颜色鲜艳
- * 2. 高度略窄于行高，防止上下行粘连
+ * 极致优化的荧光笔 Span
+ * 1. 窄幅设计：高度进一步压缩，绝对防止行间粘连
+ * 2. 颜色清新：采用薄荷绿，视觉舒适度更高
  */
 class VividMarkerSpan(private val color: Int) : ReplacementSpan() {
     override fun getSize(paint: Paint, text: CharSequence, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int {
@@ -38,9 +37,9 @@ class VividMarkerSpan(private val color: Int) : ReplacementSpan() {
         val width = paint.measureText(text, start, end)
         val rect = RectF()
         
-        // 关键：控制高亮高度，顶部和底部留出 2dp 的空白，防止粘连
-        val padding = 4f 
-        rect.set(x, top.toFloat() + padding, x + width, bottom.toFloat() - padding)
+        // 极致收窄高度：垂直方向留出 8px (约 3dp) 的空白，确保高亮带像一条细细的彩带穿过文字中心
+        val verticalPadding = 8f 
+        rect.set(x, top.toFloat() + verticalPadding, x + width, bottom.toFloat() - verticalPadding)
         
         val oldColor = paint.color
         paint.color = color
@@ -64,7 +63,7 @@ fun MarkdownText(
     textAlign: Int = Gravity.START,
     textEffect: Int = 0,
     isHighlightBold: Boolean = false,
-    highlightColor: Color = Color(0xFFFFEA00) // 默认使用更鲜艳的荧光黄
+    highlightColor: Color = Color(0xFFA7FFEB) // 清新薄荷绿，既鲜艳又美观
 ) {
     val context = LocalContext.current
     val hColor = highlightColor.toArgb()
@@ -88,7 +87,6 @@ fun MarkdownText(
                                         spans.add(original)
                                     }
                                 }
-                                // 使用自定义的窄幅高光 Span
                                 spans.add(VividMarkerSpan(hColor))
                                 spans.toTypedArray()
                             }
@@ -134,25 +132,9 @@ fun MarkdownText(
                 
                 val lines = cleanMarkdown.split("\n")
                 val processedLines = mutableListOf<String>()
-                var inTable = false
                 
                 for (line in lines) {
-                    val trimmed = line.trim()
-                    if (trimmed.startsWith("|")) {
-                        if (!inTable) {
-                            if (processedLines.isNotEmpty() && processedLines.last().isNotBlank()) {
-                                processedLines.add("")
-                            }
-                            inTable = true
-                        }
-                        processedLines.add(trimmed)
-                    } else if (trimmed.isEmpty()) {
-                        inTable = false
-                        processedLines.add("")
-                    } else {
-                        inTable = false
-                        processedLines.add(trimmed)
-                    }
+                    processedLines.add(line.trim())
                 }
                 cleanMarkdown = processedLines.joinToString("\n")
                 markwon.setMarkdown(view, cleanMarkdown)
