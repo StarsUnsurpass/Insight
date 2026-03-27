@@ -149,8 +149,6 @@ object Grade7Up {
                     """.trimIndent())
                 )
             ),
-
-
             TextbookUnit(
                 "g7up_u2", "Unit 2", "We're Family!",
                 listOf(
@@ -249,7 +247,7 @@ object Grade7Up {
                         *I have two ________ of my sisters.*
                         A. photoes   B. photo   C. photos   D. a photo
                         
-                        **[解析]**：two 后面接名词复数，photo 的复数是 photos，选 **C**。
+                        **[解析]**：two 后面接名词复数， photo 的复数是 photos，选 **C**。
 
                         #### ② parents (n. 父母)
                         - **【用法总结】**：
@@ -334,7 +332,6 @@ object Grade7Up {
                     """.trimIndent())
                 )
             ),
-
             TextbookUnit(
                 "g7up_u3", "Unit 3", "My School",
                 listOf(
@@ -519,130 +516,574 @@ object Grade7Up {
                     """.trimIndent())
                 )
             ),
-
             TextbookUnit(
                 "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 核心话题
-                        *   **领域**：学科选择与个人理由。
-                        *   **考点**：Why 疑问句及其逻辑答语；表心理感受的形容词辨析。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：学校、人际关系与校园生活 (School life)
+                        *   **子主题**：学科选择与个人喜好，学习计划与理由陈述 (Subject preferences and reasons)。
+
+                        ### 2. 单元主题内容
+                        本单元以“My Favourite Subject (我最喜欢的学科)”为主题，引导学生讨论各门学科及其魅力。通过学习 Why 引导的特殊疑问句和 because 引导的理由陈述，学生能够清晰地表达自己对不同学科的情感态度（如 interesting, useful, difficult 等）。本单元旨在帮助学生审视自己的学习生活，发现不同学科的价值，培养均衡发展的学习意识。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 词汇深度剖析", """
-                        #### ① **favourite** (adj. 最喜爱的)
-                        - **【用法】**：通常放在名词前。 *favourite subject*.
-                        - **【等价转换】**：*like ... best*.
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **学科名词**：maths (数学), English (英语), Chinese (语文), history (历史), geography (地理), science (科学), IT (信息技术), PE (体育), art (艺术), music (音乐).
+                        - **描述性形容词**：interesting (有趣的), useful (有用的), important (重要的), difficult (困难的), easy (容易的), exciting (令人兴奋的).
+                        - **高频短语**：favourite subject (最喜欢的学科), next week (下周), from... to... (从...到...), have lessons (上课).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问喜好**：What's your favourite subject?
+                        2.  **陈述理由**：Why do you like geography? — Because it's useful.
+                        3.  **询问课程时间**：When is your maths lesson? — It's at 9:00 on Monday.
+                        4.  **评价学科**：I think history is very interesting.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **Why 引导的特殊疑问句**及其回答（Because 句型）。
+                        - **时间介词 at, on, in** 在课程表述中的精准应用。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **interesting vs boring** (有趣 vs 乏味)
-                        - **【物理控制】**：描述客观事物的性质，赋予事物“吸引力”或“枯燥性”。
+                        **Han Mei**: What's your favourite subject, Tom?
+                        
+                        **Tom**: My favourite subject is science.
+                        
+                        **Han Mei**: Why do you like science?
+                        
+                        **Tom**: Because it's very interesting. I like doing experiments.
+                        
+                        **Han Mei**: When do you have science?
+                        
+                        **Tom**: We have science on Wednesday and Friday.
+
+                        **【译文】**
+                        
+                        **韩梅**：你最喜欢的学科是什么，汤姆？
+                        
+                        **汤姆**：我最喜欢的学科是科学。
+                        
+                        **韩梅**：你为什么喜欢科学？
+                        
+                        **汤姆**：因为它很有趣。我喜欢做实验。
+                        
+                        **韩梅**：你什么时候上科学课？
+                        
+                        **汤姆**：我们在周三和周五上科学课。
+
+                        ### Section B (Reading) 阅读文段：My School Day
+                        **【原文】**
+                        
+                        I'm very busy but happy today. At 8:00, I have Chinese. It's my favourite subject because I love Chinese stories. Then at 9:00, I have maths. It's difficult but useful. At 11:00, I have PE. I like PE because it's exciting. In the afternoon, I have an art lesson. I think art is easy. I have a great time at school.
+
+                        **【译文】**
+                        
+                        今天我很忙但也很快乐。在8点钟，我上语文课。它是我最喜欢的学科，因为我热爱中国故事。然后在9点钟，我上数学课。它很难但是很有用。在11点钟，我上体育课。我喜欢体育，因为它令人兴奋。在下午，我有一节艺术课。我认为艺术很轻松。我在学校过得很愉快。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精讲", """
-                        ### Why 与 Because 的逻辑因果锚定
-                        - **Why** 引导特殊疑问句，探究原因。
-                        - **Because** 引导陈述句，给出理由。
-                        - **【考场禁忌】**：在同一个句子中，**Because** 和 **So** 绝对不能同时出现（逻辑重叠）。
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What's your favourite subject? (你最喜欢的学科是什么？)
+                        - **【句式剖析】**：`favourite` 作形容词修饰 `subject`。
+                        - **【同义转换】**：`What subject do you like best?`
+                        
+                        #### 2. Why do you like science? (你为什么喜欢科学？)
+                        - **【句式剖析】**：`Why` 引导特殊疑问句询问原因，助动词 `do` 随人称变化。
+                        
+                        #### 3. Because it's very interesting. (因为它非常有意思。)
+                        - **【要点精讲】**：在英语中，`Because` (因为) 和 `So` (所以) 不能在同一个句子中同时出现。
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式解析", """
-                        - **What's your favourite subject?** (询问最喜欢的学科)
-                        - **Why do you like geography? — Because it's useful.** (因果连横)
-                        - **When is your maths lesson?** (询问课程时间)
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① favourite (adj. 最喜爱的)
+                        - **【用法总结】**：前面常接物主代词。*my favourite book*。
+                        - **【例题】**：
+                        
+                        *Which subject do you like ________?*
+                        A. good   B. better   C. best   D. well
+                        
+                        **[解析]**：like ... best 相当于 favourite，选 **C**。
+
+                        #### ② interesting (有趣的) vs interested (感兴趣的)
+                        - **【辨析】**：
+                            *   `interesting` 修饰“物”，表示事物本身的性质。
+                            *   `interested` 修饰“人”，表示人的主观感受。*be interested in sth.*
+                        - **【中考真题/例题】**：
+                        
+                        *I think the movie is very ________. I am ________ in it.*
+                        A. interesting; interesting   B. interested; interested   C. interesting; interested   D. interested; interesting
+                        
+                        **[解析]**：第一空修饰 movie (物)，第二空修饰 I (人)，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：Why 疑问句与 Because 因果连横
+                        **1. 结构分析**
+                        - 问句：Why + 助动词 (do/does) + 主语 + 动词原形 + 其他?
+                        - 答句：Because + 主语 + 谓语 + 其他.
+
+                        **2. 时间介词 at, on, in 的区分**
+                        - **at**：用于具体的时间点 (at 8:00)。
+                        - **on**：用于具体的某一天或星期 (on Monday, on May 1st)。
+                        - **in**：用于大的时间段，如上午/下午、月份、年份 (in the morning, in June)。
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·天津中考)* *— ________ don't you go to the party? — ________ I have too much homework to do.*
+                        A. Why; Because   B. Why; So   C. How; Because   D. How; So
+                        
+                        **[解析]**：问句询问原因，答句给出理由，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My School Day (我的学校生活)
+                        #### 1. 必备句式
+                        *   *My favourite subject is... because it's...*
+                        *   *We have ... on ...*
+                        *   *I think ... is useful/easy.*
+                        *   *I have a busy and happy day.*
+
+                        #### 2. 满分范文赏析
+                        **My School Day**
+                        
+                        I have a busy but interesting school day on Monday.
+                        
+                        At 8:30, I have my first lesson, Chinese. It is **favourite subject** because I like the teacher. At 10:00, I have maths. It's a bit **difficult** for me, but it is **useful**. In the afternoon, we have music and PE. Music is very **relaxing**. 
+                        
+                        I like my school day very much.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u5", "Unit 5", "Fun Clubs",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 主题情境
-                        *   **内容**：各色社团招新，个人才艺展示。
-                        *   **重点**：情态动词 can 表达能力；want to 句型表达意愿。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：人际关系与社会交往 (Social communication)
+                        *   **子主题**：个人兴趣爱好，社团活动，特长展示 (Hobbies and clubs)。
+
+                        ### 2. 单元主题内容
+                        本单元以“Fun Clubs (趣味社团)”为核心，引导学生探索并介绍自己的兴趣特长。通过学习情态动词 `can` 的用法，学生能够表达自己“能做什么”和“擅长做什么”。本单元模拟了校园社团招新的真实情境，旨在鼓励学生积极参与课外活动，在交流与合作中发展特长，建立自信并结识志趣相投的朋友。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇详析", """
-                        #### ① **join** (参加; 加入)
-                        - **【用法】**：指加入某个社团或组织。 *join the art club*.
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **社团名称**：music club, art club, English club, chess club, swimming club, sports club.
+                        - **特长动词**：sing (唱), dance (跳舞), swim (游泳), draw (画画), speak (说), play (弹奏; 玩).
+                        - **核心名词**：ability (能力), member (成员), student (学生).
+                        - **高频短语**：be good at (擅长), help sb. with sth. (在某方面帮助某人), want to join (想加入).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问能力**：Can you sing? / What can you do?
+                        2.  **表达能力**：I can dance. / He can't speak English.
+                        3.  **询问意愿**：What club do you want to join? — I want to join the art club.
+                        4.  **展示特长**：I'm good at playing the guitar.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **情态动词 can** 的肯定句、否定句、一般疑问句及其回答。
+                        - **want to do sth.** 表达意愿的用法。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **be good at** (擅长)
-                        - **【固定搭配】**：后接动词需用 **-ing** 形式。 *be good at drawing*.
-                        - **【同义转换】**：*do well in*.
+                        **Teacher**: What club do you want to join, Li Hua?
+                        
+                        **Li Hua**: I want to join the music club.
+                        
+                        **Teacher**: Can you sing or dance?
+                        
+                        **Li Hua**: I can sing well, but I can't dance.
+                        
+                        **Teacher**: That's great! We need help for the music festival.
+                        
+                        **Li Hua**: I'd love to help!
+
+                        **【译文】**
+                        
+                        **老师**：李华，你想加入什么社团？
+                        
+                        **李华**：我想加入音乐社团。
+                        
+                        **老师**：你会唱歌还是跳舞？
+                        
+                        **李华**：我唱歌很好，但我不会跳舞。
+                        
+                        **老师**：那太棒了！我们的音乐节需要人帮忙。
+                        
+                        **李华**：我很乐意帮忙！
+
+                        ### Section B (Reading) 阅读文段：Clubs Recruitment
+                        **【原文】**
+                        
+                        Welcome to our school clubs! Can you speak English? Join the English club. Are you good at sports? Come to the basketball club. We also have a chess club. It is very fun. If you like music, you can join the music club. We need members for the school band. Come and show us what you can do!
+
+                        **【译文】**
+                        
+                        欢迎来到我们的学校社团！你会说英语吗？加入英语社团吧。你擅长体育吗？来篮球社团吧。我们还有一个象棋社团。它非常有趣。如果你喜欢音乐，你可以加入音乐社团。我们的校乐队需要成员。快来展示你的才艺吧！
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精讲", """
-                        ### 情态动词 "can" 的能力立场
-                        - **【物理属性】**：
-                          1. 无人称和数的变化 (He can, I can, They can)。
-                          2. 后面必须接**动词原形**。
-                        - **【否定形式】**：*cannot / can't*.
-                        - **【疑问形式】**：*Can you ...?*
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What club do you want to join? (你想加入什么社团？)
+                        - **【句式剖析】**：`want to join` 意为“想要加入”。`join` 指加入某个组织或群体。
+                        
+                        #### 2. I'm good at playing the guitar. (我擅长弹吉他。)
+                        - **【要点精讲】**：`be good at` 后面接动词时，必须用 **-ing** 形式。
+                        - **【词块归纳】**：`play the guitar` (弹吉他)。注意：西洋乐器前必须加定冠词 **the**。
+                        
+                        #### 3. Help us with the music festival! (帮我们举办音乐节吧！)
+                        - **【词块归纳】**：`help sb. with sth.` 在某事上帮助某人。
                     """.trimIndent()),
-                    UnitDetailSection("📚 高频句式解析", """
-                        - **What club do you want to join?** (询问加入意图)
-                        - **I can sing and dance.** (个人能力陈述)
-                        - **Please help us with the music festival!** (请求协助)
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① can (modal v. 能; 会)
+                        - **【用法总结】**：
+                            *   后接动词原形。
+                            *   否定形式为 `cannot` 或 `can't`。
+                        - **【例题】**：
+                        
+                        *He can ________ the violin very well.*
+                        A. playing   B. plays   C. play   D. to play
+                        
+                        **[解析]**：can 后面接动词原形，选 **C**。
+
+                        #### ② join (加入) vs take part in (参加)
+                        - **【辨析】**：
+                            *   `join` 指加入组织、团体，并成为其中一员。
+                            *   `take part in` 指参加某项活动或比赛。
+                        - **【中考真题/例题】**：
+                        
+                        *My brother wants to ________ the army.*
+                        A. join   B. join in   C. take part in   D. join to
+                        
+                        **[解析]**：army (参军) 是加入组织，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：情态动词 can 的“能力”立场
+                        **1. 句型构成**
+                        - 肯定句：主语 + can + 动词原形.
+                        - 否定句：主语 + can't + 动词原形.
+                        - 疑问句：Can + 主语 + 动词原形?
+                        - 简略回答：Yes, 主语 + can. / No, 主语 + can't.
+
+                        **2. 核心短语 -ing 形式变换**
+                        - be good at **drawing** (擅长画画)
+                        - be good at **swimming** (注意双写m)
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·北京中考)* *— ________ you play the piano? — Yes, but I ________ play it very well.*
+                        A. Can; can't   B. Can; can   C. Do; don't   D. Do; can't
+                        
+                        **[解析]**：第一空询问能力，第二空根据 but 引导的转折关系可知是“不能/不太好”，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：Club Application (社团申请/自荐信)
+                        #### 1. 写作要点
+                        *   **目的**：我想加入XX社团。
+                        *   **特长**：我会做... 我擅长...
+                        *   **联系方式**：请拨打电话... 找我。
+
+                        #### 2. 满分范文赏析
+                        **Join the Music Club**
+                        
+                        My name is Li Hua and I want to **join the music club**. 
+                        
+                        I love music very much. **I can** sing many English songs and **I am good at** playing the piano. I can also help my classmates with their music lessons. I think I can be a good member of the club. 
+                        
+                        Please call me at 668-9988. Thank you!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u6", "Unit 6", "A Day in the Life",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        *   **核心内容**：时间表达法（精准制导）与作息规律描述。
-                        *   **语法重点**：频率副词的物理分布；时间介词 (at, on, in)。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：个人作息，时间管理，日常生活规律 (Daily routines)。
+
+                        ### 2. 单元主题内容
+                        本单元以“A Day in the Life (生活中的一天)”为主题，重点学习时间的表达及日常活动的描述。通过学习 get up, have breakfast, go to school 等动作短语，以及 always, usually, often 等频率副词，学生能够有条理地介绍自己或他人的作息时间表。本单元旨在培养学生良好的生活习惯，学会科学合理地规划时间。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 词汇金牌解析", """
-                        #### ① **usually / often / sometimes** (频率副词)
-                        - **【频率梯度】**：*always (100%) > usually (80%) > often (60%) > sometimes (30%) > never (0%)*。
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **日常动作**：get up (起床), brush teeth (刷牙), eat breakfast (吃早餐), go to school (上学), do homework (做作业), go to bed (睡觉).
+                        - **时间副词**：always (总是), usually (通常), often (经常), sometimes (有时), never (从不).
+                        - **核心名词**：time (时间), shower (淋浴), station (站; 所).
+                        - **高频短语**：take a shower (洗澡), brush my teeth (刷我的牙), go home (回家), on weekends (在周末).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问时间**：What time is it? / What's the time?
+                        2.  **询问作息**：What time do you usually get up?
+                        3.  **描述规律**：I usually get up at 6:30. / He never goes to school late.
+                        4.  **固定句型**：It's time for breakfast. (该吃早餐了。)
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **时间表达法**（顺读法与逆读法）。
+                        - **频率副词**在句子中的位置（行前 be 后）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **time expressions** (时间表达)
-                        - **quarter** (刻钟; 15分钟)；**half** (一半; 30分钟)。
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精析", """
-                        ### 1. 时间表达法的双重逻辑
-                        1. **顺读法**：先小时后分钟。 *8:15 -> eight fifteen*.
-                        2. **逆读法**：
-                           - 分钟 ≤ 30，用 **past** (过)。 *8:20 -> twenty past eight*.
-                           - 分钟 > 30，用 **to** (差)。 *8:50 -> ten to nine*.
+                        **Rick**: Hi, Scott. What time do you usually get up on school days?
                         
-                        ### 2. 频率副词的“行前 be 后”位置
-                        - *I **usually** get up at 6:30.* (动词前)
-                        - *He **is** always happy.* (be动词后)
+                        **Scott**: I usually get up at six o'clock.
+                        
+                        **Rick**: That's early! And what time do you go to school?
+                        
+                        **Scott**: I go to school at seven thirty. I'm never late for school.
+                        
+                        **Rick**: Do you have a shower in the morning?
+                        
+                        **Scott**: No, I always have a shower in the evening before bed.
+
+                        **【译文】**
+                        
+                        **里克**：嗨，斯科特。在上学日你通常几点起床？
+                        
+                        **斯科特**：我通常六点钟起床。
+                        
+                        **里克**：那真早！那你几点去上学？
+                        
+                        **斯科特**：我七点半去上学。我上学从不迟到。
+                        
+                        **里克**：你早晨洗澡吗？
+                        
+                        **斯科特**：不，我总是在晚上睡觉前洗澡。
+
+                        ### Section B (Reading) 阅读文段：My Daily Routine
+                        **【原文】**
+                        
+                        My name is Li Hua. I have a healthy life. I always get up at 6:15. I brush my teeth and then have a good breakfast. I go to school at 7:10. Lessons start at 8:00. After school, I play basketball with my friends. I do my homework at 7:00 in the evening. At 9:30, I go to bed. I feel very good every day.
+
+                        **【译文】**
+                        
+                        我的名字是李华。我有着健康的生活。我总是6:15起床。我刷牙，然后吃一顿丰盛的早餐。我7:10去上学。课程8:00开始。放学后，我和朋友们打篮球。我晚上7:00做作业。9:30的时候，我上床睡觉。我每天都感觉很好。
                     """.trimIndent()),
-                    UnitDetailSection("📚 重点句式详解", """
-                        - **What time do you usually go to bed?** (询问具体作息)
-                        - **It's time for breakfast.** (该做某事的时间了)
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What time is it? (几点了？)
+                        - **【用法拓展】**：同义句为 `What's the time?` 常用 `It's...` 回答。
+                        
+                        #### 2. I'm never late for school. (我上学从不迟到。)
+                        - **【词块归纳】**：`be late for...` 意为“做...迟到”。
+                        - **【语法点】**：频率副词 `never` 放在 be 动词 `am` 之后。
+                        
+                        #### 3. It's time for breakfast. (该吃早餐了。)
+                        - **【用法拓展】**：`It's time for + 名词` = `It's time to do + 动词原形`。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① time (n. 时间)
+                        - **【常见搭配】**：`on time` (准时)；`in time` (及时)。
+                        - **【例题】**：
+                        
+                        *We should go to school ________.*
+                        A. in time   B. at time   C. on time   D. for time
+                        
+                        **[解析]**：上学应该准时，选 **C**。
+
+                        #### ② eat / have (吃)
+                        - **【用法总结】**：表示“吃三餐”时，餐名前**不加**冠词。*have breakfast* (吃早餐)。
+                        - **【例题】**：
+                        
+                        *It's eight o'clock. Let's have ________ breakfast.*
+                        A. a   B. an   C. the   D. /
+                        
+                        **[解析]**：have breakfast 固定短语，选 **D**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心一：时间表达法的“双轨制”
+                        **1. 顺读法 (小时 + 分钟)**
+                        - 6:10 -> six ten
+                        - 7:30 -> seven thirty
+
+                        **2. 逆读法 (分钟 + past/to + 小时)**
+                        - **past (过)**：分钟 ≤ 30。 8:20 -> twenty past eight.
+                        - **to (差)**：分钟 > 30。 9:50 -> ten to ten (十点差十分).
+                        - **特殊词**：quarter (15分钟), half (30分钟)。
+
+                        ### 语法核心二：频率副词的“排位赛”
+                        - **位置**：行为动词前，be 动词后。
+                        - **频度排序**：always (100%) > usually (80%) > often (60%) > sometimes (30%) > never (0%).
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·江苏中考)* *I ________ play football after school, but today I have to go home early.*
+                        A. always   B. never   C. usually   D. sometimes
+                        
+                        **[解析]**：根据 but 后的转折可知，平时“通常”踢球，但今天例外，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My Daily Routine (我的作息时间)
+                        #### 1. 写作逻辑 (Logic)
+                        - **Morning**：get up, have breakfast, go to school.
+                        - **Afternoon**：have lessons, play sports.
+                        - **Evening**：do homework, go to bed.
+
+                        #### 2. 满分范文赏析
+                        **My Busy Day**
+                        
+                        I have a busy day from Monday to Friday. 
+                        
+                        **I usually get up at** 6:30. Then I brush my teeth and have a quick breakfast. At 7:15, I **go to school** by bus. Lessons begin at 8:00. In the afternoon, I **often play** ping-pong with my classmates. It's very fun. In the evening, I **always do my homework** first. I go to bed at 9:45. 
+                        
+                        This is my day. It's busy but I am happy.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u7", "Unit 7", "Happy Birthday!",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 主题情境
-                        *   **内容**：月份、日期、生日派对及价格询问。
-                        *   **重点**：序数词的构建与缩写；介词在日期中的精准应用。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与社会 (Man and Society)
+                        *   **主题群**：人际关系与社会交往 (Social communication)
+                        *   **子主题**：生日庆祝，日期表达，购物体验 (Birthday celebrations)。
+
+                        ### 2. 单元主题内容
+                        本单元围绕“Happy Birthday (生日快乐)”这一温馨话题，学习月份、日期的表达以及如何谈论价格。学生将掌握序数词的构建规则，并学会询问他人的生日（When is your birthday?）和年龄（How old are you?）。此外，单元还涉及了简单的购物情境（How much is it?）。本单元旨在培养学生关爱他人、分享快乐的社交习惯，并初步具备在生活中进行简单交易的能力。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇详析", """
-                        #### ① **months** (十二个月份)
-                        - **【注意】**：月份单词的首字母**必须大写**。
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **十二个月份**：January, February, March, April, May, June, July, August, September, October, November, December. (注意：首字母必须大写)。
+                        - **序数词**：first, second, third, fourth, fifth... twentieth...
+                        - **核心名词**：birthday (生日), date (日期), party (派对), price (价格), dollar (美元).
+                        - **高频短语**：birthday party (生日派对), have a party (举办派对), how old (多大岁数), how much (多少钱).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问日期**：When is your birthday? — My birthday is on October 10th.
+                        2.  **询问年龄**：How old are you? — I am 13.
+                        3.  **询问价格**：How much is this sweater? — It's nine dollars.
+                        4.  **祝福用语**：Happy birthday to you!
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **序数词**的变换规则及其在日期中的应用。
+                        - **How much** 引导的价格疑问句。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **price / how much**
-                        - **【金牌词句】**：*What is the price of this pen?* = *How much is this pen?*
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法点精析", """
-                        ### 1. 序数词 (Ordinal Numbers) 的构建逻辑
-                        用于表示物理顺序或日期。
-                        - **【必背口诀】**：一二三，特殊记 (first, second, third)；八去 t，九去 e (eighth, ninth)；ve 要用 f 替 (fifth, twelfth)；ty 变成 tie (twenty -> twentieth)；以上若遇几十几，只变个位就可以。
+                        **Alice**: When is your birthday, Jack?
                         
-                        ### 2. 日期表达中的“介词守则”
-                        - **at**：用于具体的时间时刻。 *at 7 o'clock*.
-                        - **on**：用于具体的一天或日期。 *on May 1st*.
-                        - **in**：用于月份、季节、年份等大时间段。 *in June*.
+                        **Jack**: My birthday is on August 2nd. When is yours?
+                        
+                        **Alice**: It's on January 5th. 
+                        
+                        **Jack**: Are you having a party this year?
+                        
+                        **Alice**: Yes, I am. Can you come to my party?
+                        
+                        **Jack**: I'd love to! How old will you be?
+                        
+                        **Alice**: I will be thirteen.
+
+                        **【译文】**
+                        
+                        **艾丽丝**：杰克，你的生日是什么时候？
+                        
+                        **杰克**：我的生日是在8月2日。你的呢？
+                        
+                        **艾丽丝**：在1月5日。
+                        
+                        **杰克**：你今年要举办派对吗？
+                        
+                        **艾丽丝**：是的。你能来参加我的派对吗？
+                        
+                        **杰克**：我很乐意！你到时多大了？
+                        
+                        **艾丽丝**：我就十三岁了。
+
+                        ### Section B (Reading) 阅读文段：Birthday Sale
+                        **【原文】**
+                        
+                        Welcome to Mr. Cool's Clothes Store! We have a great sale for your birthday. How much is the red sweater? It's only 15 dollars. The black trousers are 20 dollars. For girls, we have beautiful skirts for 12 dollars. Come to our store and buy clothes for your party!
+
+                        **【译文】**
+                        
+                        欢迎来到库尔先生的服装店！我们为你的生日准备了大促销。这件红毛衣多少钱？只要15美元。这条黑裤子20美元。对于女孩们，我们有12美元的漂亮裙子。快来我们的商店为你的派对买衣服吧！
                     """.trimIndent()),
-                    UnitDetailSection("📚 高频句式解析", """
-                        - **When is your birthday?** (询问生日)
-                        - **My birthday is on October 10th.** (回答具体日期)
-                        - **How old are you?** (询问年龄)
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. When is your birthday? (你的生日是什么时候？)
+                        - **【用法拓展】**：回答日期时，介词必须用 `on`。
+                        
+                        #### 2. How much is this sweater? (这件毛衣多少钱？)
+                        - **【要点精讲】**：询问单数物品价格用 `is`，复数物品用 `are`。
+                        
+                        #### 3. Happy birthday to you! (祝你生日快乐！)
+                        - **【常识】**：接受祝福后要礼貌地说 `Thank you!`
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① Months (月份)
+                        - **【记忆口诀】**：一月二月衔接难，Jan. Feb. 记心间；三月四月桃花开，Mar. Apr. 春天来；五月六月过初夏，May Jun. 最繁华；七月八月放暑假，Jul. Aug. 乐开花；九十十一十二月，Sep. Oct. Nov. Dec.。
+                        
+                        #### ② How old (多大) vs How much (多少)
+                        - **【辨析】**：`How old` 问年龄；`How much` 问价格（或不可数名词数量）。
+                        - **【中考真题/例题】**：
+                        
+                        *— ________ is the blue hat? — It's five dollars.*
+                        A. How old   B. How much   C. How many   D. How long
+                        
+                        **[解析]**：回答是价格，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心一：序数词 (Ordinal Numbers) 的“变身术”
+                        **1. 变化口诀**
+                        一二三，特殊记 (first, second, third)；八去 t，九去 e (eighth, ninth)；ve 要用 f 替 (fifth, twelfth)；ty 变成 tie (twenty -> twentieth)；以上若遇几十几，只变个位就可以。
+
+                        **2. 句式变换**
+                        - 询问价格：How much + be + 物品?
+                        - 询问日期：When is the + 活动?
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·广东中考)* *My daughter's ________ birthday is coming. I will buy a gift for her.*
+                        A. nine   B. ninth   C. the nine   D. the ninth
+                        
+                        **[解析]**：表示“第九个生日”，序数词前有形容词性物主代词时不再加 the，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：A Birthday Party Invitation (生日派对邀请函)
+                        #### 1. 写作要素
+                        - **Who** (谁的生日)
+                        - **When** (什么日期和时间)
+                        - **Where** (在什么地点)
+                        - **What** (活动内容)
+
+                        #### 2. 满分范文赏析
+                        **An Invitation**
+                        
+                        Hi, my friends!
+                        
+                        Next Friday, **January 15th**, is my 13th birthday. I am going to **have a party** at my home. The party starts at 6:00 p.m. We will eat birthday cake and play games. I will be very happy if you can come!
+                        
+                        See you then!
                     """.trimIndent())
                 )
             )
+
         )
     )
 }
