@@ -41,285 +41,179 @@ fun SplashScreen(onAnimationFinished: () -> Unit) {
     val screenWidthPx = with(density) { configuration.screenWidthDp.dp.toPx() }
     val screenHeightPx = with(density) { configuration.screenHeightDp.dp.toPx() }
     
-    // 【拟物风核心色彩系统】
-    // 采用高亮霓虹青作为基底，配合深度青色和纯白高光，构建 3D 体积感
-    val primaryNeon = Color(0xFF00E5FF) 
-    val depthNeon = Color(0xFF0097A7)
-    val highlightNeon = Color.White.copy(alpha = 0.9f)
+    // 【拟物色彩系统】
+    val neonCyan = Color(0xFF00E5FF)      
+    val deepCyan = Color(0xFF00D1E5)      
+    val thicknessColor = Color(0xFF00796B) 
+    val glossWhite = Color.White.copy(alpha = 0.6f) 
     
     val textStyle = TextStyle(
         fontSize = 72.sp,
         fontWeight = FontWeight.Bold,
         fontStyle = FontStyle.Italic,
         fontFamily = FontFamily.Serif,
-        letterSpacing = 1.sp
+        letterSpacing = 2.sp
     )
     
-    val textLayoutResult = remember(textStyle) { textMeasurer.measure("nsight", textStyle) }
+    val iLayout = remember(textStyle) { textMeasurer.measure("i", textStyle) }
+    val nsightLayout = remember(textStyle) { textMeasurer.measure("nsight", textStyle) }
     
     val baseY = screenHeightPx / 2f + with(density) { 30.dp.toPx() }
-    val wordStartX = (screenWidthPx - textLayoutResult.size.width) / 2f + with(density){ 8.dp.toPx() }
+    val charGap = with(density) { 6.dp.toPx() } 
+    val totalWidth = iLayout.size.width + charGap + nsightLayout.size.width
+    val startX = (screenWidthPx - totalWidth) / 2f
     
-    // 几何参数：点线同轴数学模型
-    val iStemX = wordStartX - with(density) { 14.dp.toPx() } 
-    val iStemHeight = with(density) { 36.dp.toPx() } 
-    val italicSlantOffset = with(density) { 6.dp.toPx() } 
-    val slantRate = italicSlantOffset / iStemHeight 
-    val iStemTopY = baseY - iStemHeight
-    val dotRadius = with(density) { 5.dp.toPx() }
-    val stemWidth = with(density) { 10.dp.toPx() }
+    val iX = startX
+    val nsightX = iX + iLayout.size.width + charGap
     
+    val iTopLeft = Offset(iX, baseY - iLayout.firstBaseline)
+    val nsightTopLeft = Offset(nsightX, baseY - nsightLayout.firstBaseline)
+
+    val thickOff = with(density) { 1.2.dp.toPx() }
+    val rimOff = with(density) { 0.8.dp.toPx() }
+    
+    // 动画状态
     val dotY = remember { Animatable(baseY - 600f) }
-    val dotX = remember { Animatable(iStemX - 150f) }
+    val dotX = remember { Animatable(iX - 120f) }
     val squashX = remember { Animatable(1f) }
     val squashY = remember { Animatable(1f) }
     
-    var isPinned by remember { mutableStateOf(false) } 
-    val traceProgress = remember { Animatable(0f) }
-    
-    val stemBend = remember { Animatable(0f) }
-    val dotBounce = remember { Animatable(0f) }
+    // 【关键】竖线的弹性高度因子
+    val stemScaleY = remember { Animatable(0f) }
+    val nsightAlpha = remember { Animatable(0f) }
     val shimmerProgress = remember { Animatable(0f) }
+    
+    var isPinned by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        launch { dotX.animateTo(iStemX, tween(650, easing = LinearOutSlowInEasing)) }
-        dotY.animateTo(baseY, tween(650, easing = CubicBezierEasing(0.42f, 0f, 1f, 1f)))
+        // 第一幕：坠落撞击
+        launch { dotX.animateTo(iX, tween(700, easing = LinearOutSlowInEasing)) }
+        dotY.animateTo(baseY, tween(700, easing = CubicBezierEasing(0.42f, 0f, 1f, 1f)))
         haptic.performHapticFeedback(HapticFeedbackType.LongPress) 
         
-        launch { squashX.animateTo(2.4f, tween(100, easing = FastOutSlowInEasing)) }
-        squashY.animateTo(0.25f, tween(100, easing = FastOutSlowInEasing))
+        // 【冲击瞬间】竖线以压缩状态“弹出”，并与圆点同步挤压
+        launch {
+            stemScaleY.snapTo(0.1f) // 被砸扁的初始状态
+            // 随圆点弹起而进行弹性回弹
+            delay(100)
+            stemScaleY.animateTo(1f, spring(dampingRatio = 0.45f, stiffness = Spring.StiffnessLow))
+        }
+
+        launch { squashX.animateTo(2.2f, tween(100)) }
+        squashY.animateTo(0.3f, tween(100))
+        launch { squashX.animateTo(1f, spring(dampingRatio = 0.5f)) }
+        squashY.animateTo(1f, spring(dampingRatio = 0.5f))
         
-        launch { squashX.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f)) }
-        squashY.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 400f))
-        
-        val apexY = iStemTopY - with(density){ 140.dp.toPx() }
+        // 第二幕：点回弹
+        val apexY = iTopLeft.y - with(density){ 40.dp.toPx() }
         launch {
             delay(200)
-            traceProgress.animateTo(1f, tween(1200, easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)))
+            nsightAlpha.animateTo(1f, tween(1000))
         }
-        launch {
-            dotX.animateTo(iStemX + italicSlantOffset * 0.5f, tween(900, easing = LinearOutSlowInEasing))
-        }
-        dotY.animateTo(apexY, tween(900, easing = CubicBezierEasing(0.2f, 0f, 0.2f, 1f)))
+        dotY.animateTo(apexY, tween(800, easing = LinearOutSlowInEasing))
         
-        val perfectDotY = iStemTopY - with(density) { 12.dp.toPx() } 
-        dotY.animateTo(perfectDotY, tween(900, easing = CubicBezierEasing(0.5f, 0f, 1f, 1f)))
+        // 第三幕：归位
+        dotY.animateTo(iTopLeft.y, tween(800, easing = BounceInterpolator().asEasing()))
         isPinned = true
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         
-        launch {
-            stemBend.snapTo(with(density) { 14.dp.toPx() }) 
-            stemBend.animateTo(0f, spring(dampingRatio = 0.2f, stiffness = 140f)) 
-        }
-        launch {
-            dotBounce.snapTo(with(density) { 8.dp.toPx() }) 
-            dotBounce.animateTo(0f, spring(dampingRatio = 0.3f, stiffness = 180f)) 
-        }
-        
-        delay(500) 
-        shimmerProgress.animateTo(1f, tween(800, easing = FastOutSlowInEasing))
-        delay(50)
+        delay(300)
+        shimmerProgress.animateTo(1f, tween(1200))
         onAnimationFinished()
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF001212)) 
-    ) {
-        fun DrawScope.drawSkeuomorphicObject(
-            drawBlock: DrawScope.(Brush) -> Unit,
-            isReflection: Boolean,
-            alpha: Float = 1f
+    Box(modifier = Modifier.fillMaxSize().background(Color(0xFF000808))) {
+        fun DrawScope.drawSkeuomorphicText(
+            layout: TextLayoutResult,
+            topLeft: Offset,
+            alpha: Float = 1f,
+            clipRect: Rect? = null
         ) {
-            val reflectionAlpha = if (isReflection) 0.12f else 1f
-            val finalAlpha = alpha * reflectionAlpha
-            
-            // 1. 基底填充：深色边缘，增加厚度感
-            val baseBrush = Brush.verticalGradient(
-                colors = listOf(primaryNeon.copy(alpha = finalAlpha), depthNeon.copy(alpha = finalAlpha)),
-                startY = iStemTopY,
+            val mainBrush = Brush.verticalGradient(
+                colors = listOf(neonCyan.copy(alpha = alpha), deepCyan.copy(alpha = alpha)),
+                startY = iTopLeft.y,
                 endY = baseY
             )
-            drawBlock(baseBrush)
             
-            // 2. 拟物高光层：左上角光源模拟
-            if (!isReflection) {
-                val highlightBrush = Brush.linearGradient(
-                    0.0f to highlightNeon.copy(alpha = 0.8f * finalAlpha),
-                    0.2f to Color.Transparent,
-                    0.8f to Color.Transparent,
-                    1.0f to Color.Black.copy(alpha = 0.2f * finalAlpha),
-                    start = Offset(0f, 0f),
-                    end = Offset(100f, 100f) // 模拟一个斜向光源
-                )
-                // 使用 BlendMode.Overlay 或直接叠加来增强拟物感
-                drawBlock(highlightBrush)
+            fun drawLayers() {
+                drawText(layout, topLeft = topLeft + Offset(thickOff, thickOff), color = thicknessColor.copy(alpha = alpha))
+                drawText(layout, topLeft = topLeft, brush = mainBrush)
+                drawText(layout, topLeft = topLeft - Offset(rimOff, rimOff), color = glossWhite.copy(alpha = 0.45f * alpha))
+                drawText(layout, topLeft = topLeft, brush = Brush.radialGradient(listOf(neonCyan.copy(alpha = 0.35f * alpha), Color.Transparent), center = Offset(layout.size.width/2f, layout.size.height/2f), radius = layout.size.width.toFloat()), blendMode = BlendMode.Plus)
+            }
+
+            if (clipRect != null) {
+                clipRect(left = clipRect.left, top = clipRect.top, right = clipRect.right, bottom = clipRect.bottom) {
+                    drawLayers()
+                }
+            } else {
+                drawLayers()
             }
         }
 
-        fun DrawScope.drawScene(isReflection: Boolean) {
-            val reflectionAlpha = if (isReflection) 0.12f else 1f
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val relativeSplitY = iLayout.size.height * 0.32f
+            val absoluteSplitY = iTopLeft.y + relativeSplitY
             
-            // ─── 1. i 竖线 ───
-            val drawnStemLength = (baseY - dotY.value).coerceIn(0f, iStemHeight)
-            val slantProgress = (drawnStemLength / iStemHeight).coerceIn(0f, 1f)
-            val currentSlantX = italicSlantOffset * slantProgress
-            val currentStemTopX = iStemX + currentSlantX + (if(!isPinned) stemBend.value else 0f)
-            val currentStemTopY = baseY - drawnStemLength
-            
-            if (drawnStemLength > 0f) {
-                val stemPath = Path().apply {
-                    moveTo(iStemX, baseY)
-                    if (isPinned) {
-                        quadraticBezierTo(
-                            x1 = iStemX + italicSlantOffset * 0.5f + stemBend.value * 1.5f, 
-                            y1 = baseY - iStemHeight / 2f, 
-                            x2 = iStemX + italicSlantOffset + stemBend.value, 
-                            y2 = iStemTopY
-                        )
-                    } else {
-                        lineTo(currentStemTopX, currentStemTopY)
-                    }
-                }
-                
-                // 统一应用拟物笔触
-                val stemBrush = Brush.verticalGradient(
-                    colors = listOf(primaryNeon.copy(alpha = reflectionAlpha), depthNeon.copy(alpha = reflectionAlpha)),
-                    startY = iStemTopY,
-                    endY = baseY
-                )
-                drawPath(path = stemPath, brush = stemBrush, style = Stroke(width = stemWidth, cap = StrokeCap.Round))
-                
-                if (!isReflection) {
-                    // 叠加一条极细的高亮白线，模拟金属边缘反光
-                    drawPath(path = stemPath, color = Color.White.copy(alpha = 0.4f), style = Stroke(width = 2.dp.toPx(), cap = StrokeCap.Round))
-                }
-            }
-            
-            // ─── 2. "nsight" 文本 ───
-            if (traceProgress.value > 0f) {
-                clipRect(
-                    left = wordStartX - 20f,
-                    top = 0f, 
-                    right = wordStartX + (textLayoutResult.size.width * traceProgress.value),
-                    bottom = screenHeightPx * 2.5f 
-                ) {
-                    val textBrush = Brush.verticalGradient(
-                        colors = listOf(primaryNeon.copy(alpha = reflectionAlpha), depthNeon.copy(alpha = reflectionAlpha)),
-                        startY = iStemTopY,
-                        endY = baseY
-                    )
-                    
-                    // 绘制主体
-                    drawText(
-                        textMeasurer = textMeasurer,
-                        text = "nsight",
-                        topLeft = Offset(wordStartX, baseY - textLayoutResult.firstBaseline),
-                        style = textStyle.copy(brush = textBrush)
-                    )
-                    
-                    if (!isReflection) {
-                        // 绘制文字顶部的“拟物高光”层
-                        // 使用较浅的颜色稍微偏移绘制，模拟厚度和 3D 效果
-                        drawText(
-                            textMeasurer = textMeasurer,
-                            text = "nsight",
-                            topLeft = Offset(wordStartX - 0.5.dp.toPx(), baseY - textLayoutResult.firstBaseline - 0.5.dp.toPx()),
-                            style = textStyle.copy(color = Color.White.copy(alpha = 0.4f))
-                        )
-                    }
-                }
-            }
-            
-            // ─── 3. 圆点 ───
-            val finalDotY = if (isPinned) dotY.value + dotBounce.value else dotY.value
-            val finalDotX = if (isPinned) {
-                iStemX + (baseY - finalDotY) * slantRate + stemBend.value
-            } else {
-                dotX.value
-            }
-            
-            withTransform({
-                translate(finalDotX, finalDotY)
-                if (!isReflection && !isPinned && dotY.value >= baseY - 5f) {
-                    scale(squashX.value, squashY.value, pivot = Offset(0f, dotRadius))
-                }
-            }) {
-                val dotBrush = Brush.verticalGradient(
-                    colors = listOf(primaryNeon.copy(alpha = reflectionAlpha), depthNeon.copy(alpha = reflectionAlpha)),
-                    startY = -dotRadius,
-                    endY = dotRadius
-                )
-                drawCircle(brush = dotBrush, radius = dotRadius, center = Offset.Zero)
-                
-                if (!isReflection) {
-                    // 球面拟物高光层：确保和 nsight 字母的光源逻辑一致
-                    drawCircle(
-                        brush = Brush.radialGradient(
-                            colors = listOf(Color.White.copy(alpha = 0.9f), Color.Transparent),
-                            center = Offset(-dotRadius * 0.4f, -dotRadius * 0.4f),
-                            radius = dotRadius
-                        ),
-                        radius = dotRadius,
-                        center = Offset.Zero
-                    )
-                }
-            }
-            
-            // ─── 4. 扫描高光带 ───
-            if (!isReflection && shimmerProgress.value > 0f) {
-                val glowX = iStemX - 200f + shimmerProgress.value * (textLayoutResult.size.width + 500f)
+            // ─── 1. 第一个 i 的竖线 (物理弹性压缩回弹) ───
+            if (stemScaleY.value > 0.01f) {
                 withTransform({
-                    translate(glowX, baseY - iStemHeight * 1.5f)
+                    // 以底部基线为中心进行垂直缩放，实现“压缩感”
+                    scale(1f, stemScaleY.value, pivot = Offset(iX + iLayout.size.width/2, baseY))
+                }) {
+                    drawSkeuomorphicText(
+                        layout = iLayout,
+                        topLeft = iTopLeft,
+                        clipRect = Rect(0f, absoluteSplitY, screenWidthPx, baseY + 20f) // 固定裁剪区，通过缩放实现生长
+                    )
+                }
+            }
+            
+            // ─── 2. 第一个 i 的圆点 (点从天而降) ───
+            val currentDotTopLeft = if (isPinned) iTopLeft else Offset(iX, dotY.value)
+            drawSkeuomorphicText(
+                layout = iLayout,
+                topLeft = currentDotTopLeft,
+                clipRect = Rect(
+                    left = 0f, 
+                    top = currentDotTopLeft.y - 50f, 
+                    right = screenWidthPx, 
+                    bottom = currentDotTopLeft.y + relativeSplitY
+                )
+            )
+
+            // ─── 3. 后续 "nsight" 文本 ───
+            if (nsightAlpha.value > 0f) {
+                drawSkeuomorphicText(
+                    layout = nsightLayout, 
+                    topLeft = nsightTopLeft, 
+                    alpha = nsightAlpha.value
+                )
+            }
+            
+            // ─── 4. 扫描高光 ───
+            if (shimmerProgress.value > 0f) {
+                val shimmerX = startX - 250f + shimmerProgress.value * (totalWidth + 500f)
+                withTransform({
+                    translate(shimmerX, baseY - iLayout.size.height/2)
                     rotate(25f)
                 }) {
                     drawRect(
-                        brush = Brush.horizontalGradient(
-                            0f to Color.Transparent, 0.5f to Color.White.copy(alpha = 0.6f), 1f to Color.Transparent
-                        ),
-                        topLeft = Offset(-50f, -100f),
-                        size = Size(100f, 400f)
+                        brush = Brush.horizontalGradient(listOf(Color.Transparent, Color.White.copy(alpha = 0.4f), Color.Transparent)),
+                        topLeft = Offset(-35f, -160f),
+                        size = Size(70f, 320f)
                     )
                 }
             }
         }
+    }
+}
 
-        // 反射层（保持低透明度和模糊，但颜色基准已同步）
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize()
-                .graphicsLayer {
-                    translationY = with(density){ 16.dp.toPx() } 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        renderEffect = android.graphics.RenderEffect.createBlurEffect(
-                            16f, 16f, android.graphics.Shader.TileMode.DECAL
-                        ).asComposeRenderEffect()
-                    }
-                }
-        ) {
-            clipRect(top = baseY) {
-                withTransform({
-                    scale(1f, -1f, pivot = Offset(0f, baseY))
-                }) {
-                    val fadeBrush = Brush.verticalGradient(
-                        colors = listOf(Color.White, Color.Transparent), 
-                        startY = baseY,
-                        endY = baseY - with(density){ 40.dp.toPx() } 
-                    )
-                    val rect = Rect(0f, 0f, size.width, size.height)
-                    val paint = Paint()
-                    drawContext.canvas.saveLayer(rect, paint)
-                    drawScene(isReflection = true)
-                    drawRect(brush = fadeBrush, blendMode = BlendMode.DstIn)
-                    drawContext.canvas.restore()
-                }
-            }
-        }
-        
-        // 主场景：应用 3D 拟物绘制
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            drawScene(isReflection = false)
-        }
+class BounceInterpolator {
+    fun asEasing() = Easing { t ->
+        if (t < 0.3636f) 7.5625f * t * t
+        else if (t < 0.7272f) 7.5625f * (t - 0.5454f) * (t - 0.5454f) + 0.75f
+        else if (t < 0.9090f) 7.5625f * (t - 0.8181f) * (t - 0.8181f) + 0.9375f
+        else 7.5625f * (t - 0.9545f) * (t - 0.9545f) + 0.984375f
     }
 }
