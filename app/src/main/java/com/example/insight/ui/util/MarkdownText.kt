@@ -1,12 +1,19 @@
 package com.example.insight.ui.util
 
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.Typeface
-import android.text.style.BackgroundColorSpan
+import android.text.style.LineBackgroundSpan
+import android.text.style.ReplacementSpan
 import android.view.Gravity
 import android.widget.TextView
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import io.noties.markwon.AbstractMarkwonPlugin
@@ -17,14 +24,32 @@ import io.noties.markwon.ext.tables.TablePlugin
 import io.noties.markwon.html.HtmlPlugin
 import org.commonmark.node.StrongEmphasis
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-
 /**
- * A custom span for highlighting. 
+ * 自定义荧光笔高亮 Span
+ * 1. 颜色鲜艳
+ * 2. 高度略窄于行高，防止上下行粘连
  */
-class TallHighlightSpan(val color: Int) : BackgroundColorSpan(color)
+class VividMarkerSpan(private val color: Int) : ReplacementSpan() {
+    override fun getSize(paint: Paint, text: CharSequence, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int {
+        return paint.measureText(text, start, end).toInt()
+    }
+
+    override fun draw(canvas: Canvas, text: CharSequence, start: Int, end: Int, x: Float, top: Int, y: Int, bottom: Int, paint: Paint) {
+        val width = paint.measureText(text, start, end)
+        val rect = RectF()
+        
+        // 关键：控制高亮高度，顶部和底部留出 2dp 的空白，防止粘连
+        val padding = 4f 
+        rect.set(x, top.toFloat() + padding, x + width, bottom.toFloat() - padding)
+        
+        val oldColor = paint.color
+        paint.color = color
+        canvas.drawRect(rect, paint)
+        
+        paint.color = oldColor
+        canvas.drawText(text, start, end, x, y.toFloat(), paint)
+    }
+}
 
 @Composable
 fun MarkdownText(
@@ -37,9 +62,9 @@ fun MarkdownText(
     wordSpacing: Float? = null,
     typeface: Typeface? = null,
     textAlign: Int = Gravity.START,
-    textEffect: Int = 0, // 0=None, 1=Shadow, 2=Scan
+    textEffect: Int = 0,
     isHighlightBold: Boolean = false,
-    highlightColor: Color = Color(0xFFFFEB3B).copy(alpha = 0.6f) 
+    highlightColor: Color = Color(0xFFFFEA00) // 默认使用更鲜艳的荧光黄
 ) {
     val context = LocalContext.current
     val hColor = highlightColor.toArgb()
@@ -63,7 +88,8 @@ fun MarkdownText(
                                         spans.add(original)
                                     }
                                 }
-                                spans.add(TallHighlightSpan(hColor))
+                                // 使用自定义的窄幅高光 Span
+                                spans.add(VividMarkerSpan(hColor))
                                 spans.toTypedArray()
                             }
                         }
@@ -91,7 +117,6 @@ fun MarkdownText(
             view.textSize = textSize
             view.setLineSpacing(0f, lineSpacingMultiplier)
             
-            // 重新实现 textEffect 逻辑
             when (textEffect) {
                 1 -> view.setShadowLayer(5f, 2f, 2f, android.graphics.Color.parseColor("#66000000"))
                 2 -> view.setShadowLayer(4f, 0f, 0f, android.graphics.Color.parseColor("#44333333"))
@@ -104,22 +129,16 @@ fun MarkdownText(
             letterSpacing?.let { view.letterSpacing = it }
 
             try {
-                // 预处理：修复换行符
                 var cleanMarkdown = markdown.replace("\\n", "\n")
-                
-                // 移除冗余标题（增强正则表达式）
                 cleanMarkdown = cleanMarkdown.replace(Regex("(?m)^###.*核心概念详解.*$"), "").trim()
                 
-                // 核心修复：处理每一行的缩进
                 val lines = cleanMarkdown.split("\n")
                 val processedLines = mutableListOf<String>()
                 var inTable = false
                 
                 for (line in lines) {
                     val trimmed = line.trim()
-                    
                     if (trimmed.startsWith("|")) {
-                        // 表格行必须顶格，且上方确保有空行
                         if (!inTable) {
                             if (processedLines.isNotEmpty() && processedLines.last().isNotBlank()) {
                                 processedLines.add("")
@@ -132,17 +151,10 @@ fun MarkdownText(
                         processedLines.add("")
                     } else {
                         inTable = false
-                        // 关键修复：除了显式的列表项或引用，其余行统一去除首位空格
-                        // 这样可以防止 Markwon 将其识别为 indented code block (4个空格以上)
-                        if (trimmed.startsWith("* ") || trimmed.startsWith("- ") || trimmed.startsWith(">") || Regex("^\\d+\\.").containsMatchIn(trimmed)) {
-                            processedLines.add(trimmed)
-                        } else {
-                            processedLines.add(trimmed)
-                        }
+                        processedLines.add(trimmed)
                     }
                 }
                 cleanMarkdown = processedLines.joinToString("\n")
-                
                 markwon.setMarkdown(view, cleanMarkdown)
             } catch (e: Exception) {
                 view.text = markdown

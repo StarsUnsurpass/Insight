@@ -49,234 +49,292 @@ object Grade7Up {
                     UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
                         ### Section A (1a-2d) 核心对话
                         **【原文】**
+                        
                         **Teng Fei**: Hello! I'm Teng Fei. What's your name?
+                        
                         **Peter**: Hi, Teng Fei. My name is Peter Brown.
+                        
                         **Teng Fei**: Nice to meet you, Peter.
+                        
                         **Peter**: Nice to meet you too. Where are you from?
+                        
                         **Teng Fei**: I'm from Beijing, China. And you?
+                        
                         **Peter**: I'm from London, the UK.
+                        
                         **Teng Fei**: Oh, we are in the same class! We are in Class 1, Grade 7.
+                        
                         **Peter**: Yes! Let's be friends.
 
                         **【译文】**
+                        
                         **腾飞**：你好！我是腾飞。你叫什么名字？
+                        
                         **彼得**：嗨，腾飞。我的名字是彼得·布朗。
+                        
                         **腾飞**：很高兴认识你，彼得。
+                        
                         **彼得**：我也很高兴认识你。你来自哪里？
+                        
                         **腾飞**：我来自中国北京。你呢？
+                        
                         **彼得**：我来自英国伦敦。
+                        
                         **腾飞**：哦，我们在同一个班！我们在七年级一班。
+                        
                         **彼得**：是的！让我们做朋友吧。
 
                         ### Section B (Reading) 阅读文段
                         **【原文】**
+                        
                         Hi, everyone! I am a new student here. My full name is Chen Jiaqi. You can call me Jiaqi. I am 13 years old. I am from Chengdu. I like music and I can play the guitar well. I also like sports. My favourite sport is tennis. I usually play tennis with my friends on weekends. I want to make friends with all of you. We can help each other and learn together.
 
                         **【译文】**
+                        
                         大家好！我是这里的一名新生。我的全名是陈家琪。你们可以叫我家琪。我13岁了。我来自成都。我喜欢音乐并且我吉他弹得很好。我也喜欢运动。我最喜欢的运动是网球。我通常在周末和朋友们打网球。我想和你们所有人都交朋友。我们可以互相帮助，共同学习。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译 (Key Sentences Deep Dive)", """
+                    UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. What's your name? (你叫什么名字？)
                         - **【句式剖析】**：What's 是 What is 的缩写。用来询问对方的姓名。
-                        - **【用法拓展】**：
-                            *   回答时可用：`My name is...` 或 `I am / I'm...` 或直接说出名字。
-                            *   如果询问第三人称的名字：`What's his/her name?` (他/她叫什么名字？)
+                        - **【用法拓展】**：回答时可用：`My name is...` 或 `I am / I'm...` 或直接说出名字。
                         
                         #### 2. Nice to meet you. (很高兴认识你。)
                         - **【句式剖析】**：初次见面时的标准问候语。meet 意为“遇见；相识”。
-                        - **【用法拓展】**：回答时通常在句末加 too（也），即 `Nice to meet you, too.`（认识你我也很高兴）。注意 too 前面一般有逗号。如果在非初次见面时打招呼，常用 `Nice to see you.`
-
-                        #### 3. Where are you from? (你来自哪里？)
-                        - **【句式剖析】**：询问某人的国籍或籍贯。from 是介词，意为“来自...”。
-                        - **【同义转换】**：`Where do you come from?` (此处 come 是实义动词，所以借用助动词 do)。
-                        - **【答语】**：`I am from...` 或 `I come from...` (不能说 I am come from...)。
-                        
-                        #### 4. We are in the same class. (我们在同一个班。)
-                        - **【句式剖析】**：in the same class 在同一个班。
-                        - **【要点精讲】**：`same` (相同的) 前面必须加定冠词 `the`。其反义词是 `different` (不同的)，常用于 `be different from...` (与...不同)。
+                        - **【用法拓展】**：回答时通常在句末加 too（也），即 `Nice to meet you, too.`
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题 (Vocabulary Deep Dive)", """
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① full (adj. 完整的；满的)
-                        - **【词汇梳理】**：读音 /fʊl/。反义词为 empty (空的)。
-                        - **【词块归纳】**：
-                            *   **full name** 全名 (由 First name 名 + Last/Family name 姓 组成)。
-                            *   **be full of** 充满... (相当于 be filled with)。
-                        - **【用法总结】**：作定语时修饰名词，如 a full box；作表语时接 of，如 The room is full of students.
+                        - **【词块归纳】**：**full name** 全名；**be full of** 充满...。
                         - **【中考真题/例题】**：
-                            *The glass is ________ water. You can drink it.*
-                            A. fill with   B. full of   C. full with   D. fill of
-                            **[解析]**：be full of = be filled with，意为“充满”，选 **B**。
+                        
+                        *The glass is ________ water. You can drink it.*
+                        A. fill with   B. full of   C. full with   D. fill of
+                        
+                        **[解析]**：be full of = be filled with，意为“充满”，选 **B**。
 
                         #### ② grade (n. 年级；成绩)
-                        - **【词汇梳理】**：读音 /ɡreɪd/。名词。
-                        - **【词块归纳】**：
-                            *   **in Grade 7** 在七年级。
-                            *   **get good grades** 取得好成绩。
-                        - **【用法总结】**：表示“在几年级几班”时，先说班级，后说年级，且首字母必须大写。如：in Class 1, Grade 7 (在七年级一班)。
+                        - **【词块归纳】**：**in Grade 7** 在七年级；**get good grades** 取得好成绩。
                         - **【中考真题/例题】**：
-                            *Tom is a new student. He is in ________.*
-                            A. class 1, grade 7   B. Grade 7, Class 1   C. Class 1, Grade 7   D. grade 7, class 1
-                            **[解析]**：英语中单位从小到大排列，且首字母需大写，选 **C**。
-
-                        #### ③ make friends (交朋友)
-                        - **【词汇梳理】**：friend 朋友 -> friendly (adj. 友好的) -> friendship (n. 友谊)。
-                        - **【词块归纳】**：
-                            *   **make friends with sb.** 和某人交朋友。
-                            *   **be friendly to sb.** 对某人友好。
-                        - **【用法总结】**：由于“交朋友”至少是两个人之间的事，所以 friend 必须用复数形式 friends。
-                        - **【中考真题/例题】**：
-                            *I want to make ________ with you. Are you willing?*
-                            A. a friend   B. friend   C. friends   D. friendly
-                            **[解析]**：固定搭配 make friends with，选 **C**。
-
-                        #### ④ each other (互相；彼此)
-                        - **【词汇梳理】**：代词短语，通常在句中作动词或介词的宾语。
-                        - **【用法总结】**：
-                            *   `help each other` 互相帮助
-                            *   `learn from each other` 互相学习
-                        - **【辨析】**：each other 通常指两者之间的互相；one another 通常指三者或三者以上的互相（但在现代英语中两者常可互换）。
-
-                        #### ⑤ country (n. 国家)
-                        - **【词汇梳理】**：读音 /ˈkʌntri/。复数形式为 **countries**。
-                        - **【词块归纳】**：
-                            *   **in the country** 在乡下 / 在国内。
-                        - **【相关词汇】**：China, the UK, the US, Canada, Australia (国家名称首字母需大写)。
-
-                        #### ⑥ classmate (n. 同班同学)
-                        - **【词块归纳】**：class (班级) + mate (伙伴; 伴侣) = classmate。
-                        - **【拓展】**：roommate (室友), schoolmate (校友), teammate (队友)。
+                        
+                        *Tom is a new student. He is in ________.*
+                        A. class 1, grade 7   B. Grade 7, Class 1   C. Class 1, Grade 7   D. grade 7, class 1
+                        
+                        **[解析]**：英语中单位从小到大排列，且首字母需大写，选 **C**。
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
                         ### 语法核心一：系动词 be (am, is, are) 的全能用法
                         **1. 基本用法总结与口诀**
-                        be 动词意为“是”，在一般现在时中有三种形式：am, is, are。其使用取决于句子的主语。
                         *   **【必背口诀】**：我 (I) 用 am，你 (you) 用 are，is 连着他 (he)、她 (she)、它 (it)。单数名词用 is，复数名词全用 are。
 
-                        **2. 句型结构大盘点**
-                        *   **【肯定句】**：主语 + be + 表语 (名词/形容词等).
-                            *   *I am a student.* (我是一个学生。)
-                            *   *He is tall.* (他很高。)
-                        *   **【否定句】**：主语 + be + not + 表语.
-                            *   *I am not (I'm not) a teacher.*
-                            *   *She is not (isn't) from the UK.*
-                        *   **【一般疑问句及简略回答】**：Be + 主语 + 表语?
-                            *   *— Are you English?* (你是英国人吗？)
-                            *   *— Yes, I am. / No, I'm not.* (注意：Yes 回答时，I am 不能缩写)
-                            *   *— Is he your brother?*
-                            *   *— Yes, he is. / No, he isn't.*
-
-                        **3. 缩写形式 (Contractions)**
-                        *   I am = I'm
-                        *   You are = You're
-                        *   He is = He's / She is = She's / It is = It's
-                        *   is not = isn't / are not = aren't (注意：am not 没有连写的缩写形式，只能是 I'm not)
-
-                        **4. 中考真题特训**
-                        *   *(2023·北京中考)* *— Where ________ your pen pal from? — He ________ from Australia.*
-                            A. is; is   B. are; is   C. is; are   D. are; are
-                            **[解析]**：第一空主语 your pen pal (你的笔友) 是第三人称单数，用 is；第二空主语 He 也是单数，用 is。选 **A**。
-
-                        ---
-
-                        ### 语法核心二：人称代词与物主代词的归宿
-                        **1. 人称代词（主格）**
-                        *   用于在句子中作主语，通常放在句首或动词前。
-                        *   单数：I (我), You (你), He (他), She (她), It (它)
-                        *   复数：We (我们), You (你们), They (他/她/它们)
-
-                        **2. 形容词性物主代词**
-                        *   表示“某人的”，**相当于一个形容词，后面必须紧跟名词**，绝对不能单独使用！
-                        *   单数：my (我的), your (你的), his (他的), her (她的), its (它的)
-                        *   复数：our (我们的), your (你们的), their (他/她/它们的)
+                        **2. 中考真题特训**
                         
-                        **【黄金易错法则】**：
-                        看见名词在后头，前面必选物主代词（my/your/his...）；若在句首做主语，果断选主格（I/you/he...）。
-
-                        **3. 中考真题特训**
-                        *   *(2024·山东中考)* *This is my new friend. ________ name is Tom and ________ is a nice boy.*
-                            A. His; his   B. His; he   C. He; his   D. He; he
-                            **[解析]**：第一空修饰名词 name，需用形容词性物主代词 His (他的)；第二空在句子中作主语，需用人称代词主格 he (他)。选 **B**。
+                        *(2023·北京中考)* *— Where ________ your pen pal from? — He ________ from Australia.*
+                        A. is; is   B. are; is   C. is; are   D. are; are
+                        
+                        **[解析]**：第一空主语 your pen pal 是第三人称单数，用 is；第二空主语 He 也是单数，用 is。选 **A**。
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
                         ### 写作主题：Introducing yourself (自我介绍)
-                        本单元的写作核心是能够在新学期向同学或朋友书面介绍自己的基本信息（姓名、年龄、国籍、班级、喜好等），并表达结交朋友的愿望。
-
-                        #### 1. 写作思路导图 (Mind Map)
-                        *   **Opening (开篇问候)**：Hello / Hi everyone!
-                        *   **Basic Info (基本信息)**：Name, Age, Country/City, Grade/Class.
-                        *   **Hobbies (兴趣爱好)**：I like... / My favourite... is... / I am good at...
-                        *   **Closing (结尾期望)**：I want to make friends with you. / Nice to meet you.
-
-                        #### 2. 必备高级词汇与佳句 (Golden Sentences)
-                        *   *Let me introduce myself to you.* (让我向你们介绍一下我自己。)
-                        *   *I am an outgoing and friendly boy/girl.* (我是一个外向且友好的男孩/女孩。)
-                        *   *In my free time, I usually...* (在我的空闲时间，我通常...)
-                        *   *I hope we can be good friends and help each other.* (我希望我们能成为好朋友并互相帮助。)
-
-                        #### 3. 满分范文赏析 (High-Score Model Essay)
                         **Hello, everyone!**
+                        
                         Let me introduce myself. **My full name is** Zhang Yuhang, and you can call me Yuhang. **I am 13 years old.** **I am from** Shanghai, China. Now, **I am a middle school student in Class 3, Grade 7.** 
+                        
                         I am an active boy. **I like** sports very much, and **my favourite sport is** basketball. I often play it with my classmates after school. I am also **good at** English. 
+                        
                         I am very happy to be here. **I hope I can make friends with all of you.** We can learn and play together. **Thank you!**
-
-                        **【名师点评】**：
-                        这篇自我介绍逻辑清晰，分段合理。第一段交代了姓名、年龄、籍贯和班级等硬指标；第二段补充了性格、爱好和特长，使人物形象立体丰满；第三段表达了交友的良好意愿。运用了 "be good at", "make friends with" 等核心短语，完全符合七年级上册 Unit 1 的大纲要求！
                     """.trimIndent())
                 )
             ),
+
 
             TextbookUnit(
                 "g7up_u2", "Unit 2", "We're Family!",
                 listOf(
-                    UnitDetailSection("📖 单元导读 (Unit Overview)", """
-                        ### 1. 主题情境透义
-                        *   **核心内容**：介绍家庭成员关系，描述家庭合影。
-                        *   **主题范畴**：人与自我 —— 家庭生活与和谐氛围。
-                        *   **考点分布**：名词所有格；物主代词的进阶应用；have/has 的拥有逻辑。
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：家庭与家庭生活 (Family life)
+                        *   **子主题**：向他人介绍家庭成员，描述家庭照片，体会家庭温暖 (Introducing family members)。
+
+                        ### 2. 单元主题内容
+                        本单元以“We're Family! (我们是一家人！)”为主题，旨在引导学生学习如何介绍家庭成员及描述人际关系。通过辨认照片中的人物、讨论家庭成员的职业和爱好，学生不仅能掌握亲属称谓（如 grandfather, aunt, cousin 等），还能学会使用名词所有格和 have/has 来表达所属关系。本单元强调家庭在个人成长中的重要性，鼓励学生关爱家人，构建和谐的家庭氛围。
                     """.trimIndent()),
-                    UnitDetailSection("🔤 核心词汇知识详解 (Vocabulary)", """
-                        #### ① **spend time** (花时间; 度过时光)
-                        - **【结构锚定】**：**spend time (in) doing sth.** (花时间做某事) / **spend time with sb.** (和某人共度时光)。
-                        - **【对比】**：*It takes sb. some time to do sth.* (固定搭配对比)。
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **亲属称谓**：grandfather (祖父), grandmother (祖母), parents (父母), uncle (伯/叔/舅), aunt (伯母/婶母/姨母), cousin (堂/表兄弟姊妹), son (儿子), daughter (女儿).
+                        - **核心动词**：have/has (有), spend (花时间), cook (烹饪), go (去), watch (看).
+                        - **核心名词/形容词**：photo (照片), job (工作), heart (心), beautiful (美丽的), pink (粉红色的).
+                        - **高频短语**：a photo of... (一张...的照片), spend time with... (和...度过时光), play chess (下棋), in the middle (在中间), family tree (家谱).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问身份**：Who's he/she? / Who are they?
+                        2.  **介绍成员**：This is my father. / These are my grandparents.
+                        3.  **描述所属**：I have a big family. / She has a sister. / This is my father's bike.
+                        4.  **表达感受**：I love my family. / They are very kind.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **名词所有格**（'s 所有格）的构成与用法。
+                        - **动词 have/has** 的一般现在时用法及其在人称变化下的切换。
+                        - **复数名词**的规则与不规则变化（如 photo -> photos, man -> men）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
                         
-                        #### ② **photo** /ˈfəʊtəʊ/ (n. 照片)
-                        - **【复数】**：**photos** (直接加s)。
-                        - **【词组】**：*a photo of my family* (一张我的全家福)。
+                        **Teng Fei**: Who's the boy in the photo?
                         
-                        #### ③ **play chess** (下国际象棋)
-                        - **【语法点】**：棋类、球类运动名词前**不加**冠词 *the*。
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 单元语法精讲 (Grammar Master)", """
-                        ### 1. 名词所有格 (Possessive Nouns)
-                        表示“……的”物理所属关系。
-                        - **【单数形式】**：名词 + **'s**。 *Tom's pen*.
-                        - **【复数形式】**：
-                          - 以s结尾的复数名词只加 **'**。 *students' books*.
-                          - 不以s结尾的复数名词加 **'s**。 *women's day*.
+                        **Fu Xing**: He's my cousin. His name is Li Ming.
                         
-                        ### 2. have/has 的“磁力场”用法
-                        表达物理拥有或关系归属。
-                        - **have**：用于第一、二人称及复数。 *I have a sister.*
-                        - **has**：用于第三人称单数。 *She has a big dog.*
+                        **Teng Fei**: Is this your aunt?
+                        
+                        **Fu Xing**: Yes, it is. Her name is Li Hua. She is a teacher.
+                        
+                        **Teng Fei**: What's your father's job?
+                        
+                        **Fu Xing**: He is a doctor. He is very busy but he often spends time with us.
+
+                        **【译文】**
+                        
+                        **腾飞**：照片里的那个男孩是谁？
+                        
+                        **复兴**：他是我表弟。他的名字叫李明。
+                        
+                        **腾飞**：这是你姨妈吗？
+                        
+                        **复兴**：是的。她的名字叫李华。她是一名老师。
+                        
+                        **腾飞**：你爸爸的工作是什么？
+                        
+                        **复兴**：他是一名医生。他很忙，但他经常和我们在一起。
+
+                        ### Section B (Reading) 阅读文段：My Family
+                        **【原文】**
+                        
+                        Look at this photo. This is my family. My grandparents are in the middle. They are very old but very healthy. My father is standing on the left. He is tall. He likes playing football. My mother is next to him. She is beautiful and she cooks very well. I have a little brother. He is only 5 years old. We love each other. I am very happy in my family.
+
+                        **【译文】**
+                        
+                        看这张照片。这是我的家人。我的爷爷奶奶在中间。他们虽然年纪大了，但非常健康。我爸爸站在左边。他很高。他喜欢踢足球。我妈妈在他旁边。她很漂亮，而且做饭非常好吃。我有一个小弟弟。他才5岁。我们彼此相爱。我在我的家庭里非常幸福。
                     """.trimIndent()),
-                    UnitDetailSection("📚 核心句式深度解析", """
-                        - **Who is she?** (询问身份) -> *She is my aunt.*
-                        - **This is a photo of my family.** (介绍照片内容)
-                        - **What is your father's job?** (询问职业的另一种表达)
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. Who's the boy in the photo? (照片里的男孩是谁？)
+                        - **【句式剖析】**：`Who's` 是 `Who is` 的缩写。`in the photo` 是介词短语作定语，修饰 `the boy`。
+                        - **【用法拓展】**：询问人的身份时用 `Who`。回答通常用 `He/She is...` 或 `They are...`
+                        
+                        #### 2. He often spends time with us. (他经常花时间和我们在一起。)
+                        - **【句式剖析】**：`spend time with sb.` 意为“和某人度过时光”。
+                        - **【用法拓展】**：`spend` 的主语必须是人。
+                            *   `spend ... on sth.` (在某事上花时间/钱)
+                            *   `spend ... (in) doing sth.` (花时间/钱做某事)
+                        
+                        #### 3. My mother is next to him. (我妈妈在他旁边。)
+                        - **【句式剖析】**：`next to` 意为“紧邻；在...旁边”，相当于 `beside`。
+                        
+                        #### 4. This is a photo of my family. (这是一张我的全家福。)
+                        - **【要点精讲】**：`a photo of...` 意为“一张...的照片”。注意区分 `my family photo` (我的家庭照片) 和 `a photo of my family`。
                     """.trimIndent()),
-                    UnitDetailSection("📝 写作专项：My Family (家庭介绍)", """
-                        - **【必背句型】**：
-                          - *There are ... people in my family.*
-                          - *My father is a/an ...*
-                          - *I love my family.*
-                        - **【范文片段】**：*I have a big family. My parents are both teachers. I often spend time playing games with my brother...*
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① photo (n. 照片)
+                        - **【词汇梳理】**：复数形式为 **photos** (直接加s)。
+                        - **【例题】**：
+                        
+                        *I have two ________ of my sisters.*
+                        A. photoes   B. photo   C. photos   D. a photo
+                        
+                        **[解析]**：two 后面接名词复数，photo 的复数是 photos，选 **C**。
+
+                        #### ② parents (n. 父母)
+                        - **【用法总结】**：
+                            *   `parent` 指父亲或母亲其中一人。
+                            *   `parents` 指父亲和母亲两人。
+                        - **【中考真题/例题】**：
+                        
+                        *Both of my ________ are doctors.*
+                        A. parent   B. parents   C. father   D. mother
+                        
+                        **[解析]**：both (两者都) 提示需用复数，选 **B**。
+
+                        #### ③ job (n. 工作) vs work (v./n. 工作)
+                        - **【辨析】**：`job` 是可数名词，指具体职业；`work` 常用作不可数名词，指抽象的劳动。
+                        - **【中考真题/例题】**：
+                        
+                        *My father has a good ________ in a big bank.*
+                        A. work   B. jobs   C. job   D. worker
+                        
+                        **[解析]**：a 提示用单数可数名词，选 **C**。
+
+                        #### ④ look at (看...)
+                        - **【用法总结】**：`look` 是不及物动词，接宾语必须加 `at`。
+                        - **【辨析】**：`look` (看过程/动作)；`see` (看结果/看见)；`watch` (注视/观看动态事物，如电视)。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心一：名词所有格 ('s)
+                        表示人或物的所有关系（“...的”）。
+                        **1. 构成规则**
+                        *   **【单数名词】**：直接加 `'s`。如：*Tom's book*。
+                        *   **【以s结尾的复数名词】**：只加 `'`。如：*the teachers' office*。
+                        *   **【不以s结尾的复数名词】**：加 `'s`。如：*Children's Day*。
+                        *   **【共同所有与分别所有】**：
+                            - *A and B's...* (两人共有)
+                            - *A's and B's...* (两人各自所有)
+
+                        **2. 中考真题特训**
+                        
+                        *(2024·江苏中考)* *This is ________ room. It is very big and clean.*
+                        A. Lily and Lucy's   B. Lily's and Lucy's   C. Lily's and Lucy   D. Lily and Lucy
+                        
+                        **[解析]**：由 room 为单数可知是两人共有，选 **A**。
+
+                        ---
+
+                        ### 语法核心二：have 与 has 的用法
+                        **1. 基本用法**
+                        表示“有；拥有”。
+                        *   **have**：用于第一、二人称 (I, you) 及复数主语 (we, they, the boys)。
+                        *   **has**：用于第三人称单数 (he, she, it, Tom, my sister)。
+
+                        **2. 句式变换**
+                        *   **否定句**：主语 + `don't / doesn't` + `have`... (注意：doesn't 后用 have 原形)。
+                        *   **疑问句**：`Do / Does` + 主语 + `have`...?
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·广东中考)* *— ________ your sister ________ an English dictionary? — Yes, she ________.*
+                        A. Does; has; does   B. Does; have; does   C. Do; have; do   D. Do; have; does
+                        
+                        **[解析]**：主语 your sister 是单数，助动词用 Does，后面动词恢复原形 have；肯定回答用 Yes, she does。选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My Family (介绍我的家庭)
+                        #### 1. 写作模板 (Template)
+                        *   **第一步：总体介绍**。`I have a ... family. There are ... people in my family.`
+                        *   **第二步：逐一介绍成员**。介绍职业 (`My father is a...`)、爱好 (`He likes...`)、性格或外貌。
+                        *   **第三步：总结情感**。`I love my family / my parents very much.`
+
+                        #### 2. 满分范文赏析 (Model Essay)
+                        **My Big and Happy Family**
+                        
+                        I have a big and happy family. There are five people in my family: my grandparents, my parents and me.
+                        
+                        My grandfather is 65 years old. He likes **playing chess**. My grandmother **is good at cooking**. She often cooks delicious food for us. 
+                        
+                        My father is a doctor. He is very tall. In his free time, he likes **spending time with** me. My mother is a teacher. She is very kind. 
+                        
+                        I love my family very much. We always help each other.
                     """.trimIndent())
                 )
             ),
+
             TextbookUnit(
                 "g7up_u3", "Unit 3", "My School",
                 listOf(
