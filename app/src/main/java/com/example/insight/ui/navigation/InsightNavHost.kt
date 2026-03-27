@@ -201,7 +201,8 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                     viewModel.onImageCaptured(bitmap)
                     navController.navigate(Route.Solution.path)
                 },
-                onError = { /* Handle error */ }
+                onError = { /* Handle error */ },
+                preferences = uiState.preferences
             )
         }
 

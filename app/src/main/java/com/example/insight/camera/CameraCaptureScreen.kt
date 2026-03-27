@@ -1,9 +1,14 @@
 package com.example.insight.camera
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.util.Log
 import androidx.camera.core.*
 import androidx.camera.core.ImageCapture.OnImageCapturedCallback
@@ -11,50 +16,55 @@ import androidx.camera.view.PreviewView
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.*
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.FlashOn
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.insight.ui.state.UserPreferences
+import com.example.insight.util.triggerHaptic
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import kotlin.math.atan2
 
-enum class CaptureMode { CAPTURING, EDITING }
+enum class CaptureStep { VIEWFINDER, CAPTURED_SHRINK, SCANNING, RESULT_REVEAL, EDIT_CROP }
 
 @SuppressLint("UnsafeOptInUsageError")
 @Composable
 fun CameraCaptureScreen(
     onBack: () -> Unit,
     onImageCaptured: (Bitmap) -> Unit,
-    onError: (ImageCaptureException) -> Unit
+    onError: (ImageCaptureException) -> Unit,
+    preferences: UserPreferences = UserPreferences()
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -64,16 +74,51 @@ fun CameraCaptureScreen(
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
+    val recognizer = remember { TextRecognition.getClient(ChineseTextRecognizerOptions.Builder().build()) }
 
     // UI States
-    var mode by remember { mutableStateOf(CaptureMode.CAPTURING) }
+    var step by remember { mutableStateOf(CaptureStep.VIEWFINDER) }
     var capturedBitmap by remember { mutableStateOf<Bitmap?>(null) }
-    var screenRect by remember { mutableStateOf(Rect.Zero) }
-    var cropRect by remember { mutableStateOf(Rect.Zero) } 
-    var isInitialized by remember { mutableStateOf(false) }
-    var rotationDegrees by remember { mutableIntStateOf(0) }
+    var detectedTextBlocks by remember { mutableStateOf<List<Text.TextBlock>>(emptyList()) }
     var isProcessing by remember { mutableStateOf(false) }
-    var activeHandle by remember { mutableStateOf<Handle?>(null) }
+    
+    // Leveler State
+    var roll by remember { mutableFloatStateOf(0f) }
+    val sensorManager = remember { context.getSystemService(Context.SENSOR_SERVICE) as SensorManager }
+    val accelerometer = remember { sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) }
+
+    // Animations
+    val shrinkScale by animateFloatAsState(
+        targetValue = if (step == CaptureStep.VIEWFINDER) 1f else 0.94f,
+        animationSpec = spring(dampingRatio = 0.7f, stiffness = Spring.StiffnessLow),
+        label = "shrinkScale"
+    )
+    val scanProgress = remember { Animatable(0f) }
+    val auraAlpha = remember { Animatable(0f) }
+    
+    // Flowing Aura Animation
+    val auraFlow = rememberInfiniteTransition(label = "auraFlow").animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing)),
+        label = "auraFlow"
+    )
+
+    // Sensor Listener for Leveler
+    DisposableEffect(Unit) {
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent) {
+                if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+                    val x = event.values[0]
+                    val y = event.values[1]
+                    roll = Math.toDegrees(atan2(x.toDouble(), y.toDouble())).toFloat()
+                }
+            }
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
+        sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI)
+        onDispose { sensorManager.unregisterListener(listener) }
+    }
 
     LaunchedEffect(Unit) {
         val cameraProviderFuture = androidx.camera.lifecycle.ProcessCameraProvider.getInstance(context)
@@ -91,225 +136,287 @@ fun CameraCaptureScreen(
         }, context.mainExecutor)
     }
 
-    BoxWithConstraints(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        val fullWidth = constraints.maxWidth.toFloat()
-        val fullHeight = constraints.maxHeight.toFloat()
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+    ) {
+        val primaryColor = MaterialTheme.colorScheme.primary
 
-        if (!isInitialized && fullWidth > 0) {
-            val rectWidth = fullWidth * 0.85f
-            val rectHeight = fullHeight * 0.35f
-            val left = (fullWidth - rectWidth) / 2
-            val top = (fullHeight - rectHeight) / 2
-            cropRect = Rect(left, top, left + rectWidth, top + rectHeight)
-            screenRect = Rect(0f, 0f, fullWidth, fullHeight)
-            isInitialized = true
-        }
-
-        // 1. Viewfinder Layer
-        if (mode == CaptureMode.CAPTURING) {
-            AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize())
-        } else {
-            capturedBitmap?.let { bitmap ->
-                Image(
-                    bitmap = bitmap.asImageBitmap(),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
-
-        // 2. Interactive Overlay
-        Canvas(
+        // 1. Immersive Layer (Viewfinder or Shrunk Preview)
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .pointerInput(mode) {
-                    if (mode == CaptureMode.EDITING) {
-                        detectDragGestures(
-                            onDragStart = { offset -> activeHandle = hitTest(offset, cropRect) },
-                            onDrag = { change, dragAmount ->
-                                change.consume()
-                                cropRect = applyDelta(cropRect, dragAmount, activeHandle, screenRect)
-                            },
-                            onDragEnd = { activeHandle = null }
-                        )
-                    }
-                }
+                .scale(shrinkScale)
+                .clip(RoundedCornerShape(if (step == CaptureStep.VIEWFINDER) 0.dp else 24.dp))
+                .background(Color.DarkGray)
         ) {
-            if (isInitialized) {
-                val cutPath = Path.combine(
-                    PathOperation.Difference,
-                    Path().apply { addRect(screenRect) },
-                    Path().apply { addRoundRect(RoundRect(cropRect, CornerRadius(12.dp.toPx()))) }
-                )
-                drawPath(cutPath, color = Color.Black.copy(alpha = 0.6f))
-
-                drawRoundRect(
-                    color = Color.White,
-                    topLeft = cropRect.topLeft,
-                    size = cropRect.size,
-                    cornerRadius = CornerRadius(12.dp.toPx()),
-                    style = Stroke(width = 2.dp.toPx())
-                )
-
-                if (mode == CaptureMode.EDITING) {
-                    drawEnhancedEditCorners(cropRect, 24.dp.toPx(), 4.dp.toPx())
+            if (step == CaptureStep.VIEWFINDER) {
+                AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize())
+            } else {
+                capturedBitmap?.let { bitmap ->
+                    Image(
+                        bitmap = bitmap.asImageBitmap(),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop,
+                        colorFilter = if (step == CaptureStep.RESULT_REVEAL || step == CaptureStep.EDIT_CROP) 
+                            ColorFilter.tint(Color.Black.copy(alpha = 0.4f), BlendMode.Darken) else null
+                    )
                 }
             }
         }
 
-        // 3. Header Controls
+        // 2. Volumetric Scan Animation Layer
+        if (step == CaptureStep.SCANNING) {
+            Canvas(modifier = Modifier.fillMaxSize().scale(shrinkScale).clip(RoundedCornerShape(24.dp))) {
+                val y = scanProgress.value * size.height
+                val sweepHeight = 160.dp.toPx()
+                
+                // Holographic sweep (Volumetric Light)
+                drawRect(
+                    brush = Brush.verticalGradient(
+                        0f to Color.Transparent,
+                        0.6f to primaryColor.copy(alpha = 0.2f),
+                        0.95f to primaryColor.copy(alpha = 0.5f),
+                        1f to Color.White.copy(alpha = 0.8f)
+                    ),
+                    topLeft = Offset(0f, y - sweepHeight),
+                    size = Size(size.width, sweepHeight)
+                )
+                
+                // Sharp Light Blade
+                drawLine(
+                    color = Color.White,
+                    start = Offset(0f, y),
+                    end = Offset(size.width, y),
+                    strokeWidth = 2.dp.toPx()
+                )
+            }
+        }
+
+        // 3. Flowing Aura Layer (Text Reveal)
+        if (step == CaptureStep.RESULT_REVEAL || step == CaptureStep.EDIT_CROP) {
+            Canvas(modifier = Modifier.fillMaxSize().scale(shrinkScale).clip(RoundedCornerShape(24.dp))) {
+                detectedTextBlocks.forEach { block ->
+                    val rect = block.boundingBox?.toComposeRect() ?: return@forEach
+                    
+                    // coordinate mapping (simple version for full screen crop)
+                    val scaleX = size.width / (capturedBitmap?.width ?: 1)
+                    val scaleY = size.height / (capturedBitmap?.height ?: 1)
+                    val mappedRect = Rect(
+                        rect.left * scaleX, rect.top * scaleY,
+                        rect.right * scaleX, rect.bottom * scaleY
+                    ).inflate(6.dp.toPx())
+
+                    val path = Path().apply { addRoundRect(RoundRect(mappedRect, CornerRadius(8.dp.toPx()))) }
+                    
+                    // 1. Background Glow
+                    drawPath(
+                        path = path,
+                        color = primaryColor.copy(alpha = 0.15f * auraAlpha.value),
+                        style = Stroke(width = 8.dp.toPx())
+                    )
+                    
+                    // 2. Flowing Path (Aura)
+                    val pathMeasure = android.graphics.PathMeasure(path.asAndroidPath(), false)
+                    val length = pathMeasure.length
+                    val segmentLength = length * 0.4f
+                    val currentPos = length * auraFlow.value
+                    
+                    val segmentPath = android.graphics.Path()
+                    pathMeasure.getSegment(currentPos, (currentPos + segmentLength) % length, segmentPath, true)
+                    if (currentPos + segmentLength > length) {
+                        pathMeasure.getSegment(0f, (currentPos + segmentLength) % length, segmentPath, true)
+                    }
+
+                    drawPath(
+                        path = segmentPath.asComposePath(),
+                        brush = Brush.linearGradient(
+                            listOf(primaryColor.copy(alpha = 0f), primaryColor, Color.White, primaryColor, primaryColor.copy(alpha = 0f)),
+                            start = Offset(mappedRect.left, mappedRect.top),
+                            end = Offset(mappedRect.right, mappedRect.bottom)
+                        ),
+                        style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
+                    )
+                    
+                    // 3. Highlight text area
+                    drawRoundRect(
+                        color = Color.White.copy(alpha = 0.05f * auraAlpha.value),
+                        topLeft = mappedRect.topLeft,
+                        size = mappedRect.size,
+                        cornerRadius = CornerRadius(8.dp.toPx()),
+                        blendMode = BlendMode.Screen
+                    )
+                }
+            }
+        }
+
+        // 4. Smart Leveler
+        if (step == CaptureStep.VIEWFINDER) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Canvas(modifier = Modifier.size(180.dp)) {
+                    val isLevel = abs(roll) < 0.8f || abs(roll - 180) < 0.8f || abs(roll + 180) < 0.8f
+                    val color = if (isLevel) Color(0xFF81C784) else Color.White.copy(alpha = 0.4f)
+                    
+                    // Crosshair
+                    drawLine(color, Offset(size.width/2 - 15, size.height/2), Offset(size.width/2 + 15, size.height/2), 1.5.dp.toPx())
+                    drawLine(color, Offset(size.width/2, size.height/2 - 15), Offset(size.width/2, size.height/2 + 15), 1.5.dp.toPx())
+                    
+                    // Level Line
+                    withTransform({
+                        rotate(degrees = -roll, pivot = center)
+                    }) {
+                        drawLine(color, Offset(size.width/2 - 50, size.height/2), Offset(size.width/2 + 50, size.height/2), 2.dp.toPx())
+                    }
+                    
+                    if (isLevel) {
+                        drawCircle(color.copy(alpha = 0.1f), radius = 30.dp.toPx(), center = center)
+                    }
+                }
+            }
+        }
+
+        // 5. Header (Glassmorphism)
         Row(
-            modifier = Modifier.statusBarsPadding().padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .statusBarsPadding()
+                .padding(16.dp)
+                .fillMaxWidth()
+                .height(56.dp)
+                .clip(RoundedCornerShape(28.dp))
+                .background(Color.White.copy(alpha = 0.1f))
+                .border(0.5.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(28.dp))
+                .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBack) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+                Icon(Icons.Default.ArrowBack, null, tint = Color.White)
             }
-            if (mode == CaptureMode.EDITING) {
-                Text("调整选区", color = Color.White, fontWeight = FontWeight.Bold)
-                IconButton(onClick = { mode = CaptureMode.CAPTURING; capturedBitmap = null }) {
-                    Icon(imageVector = Icons.Default.Refresh, contentDescription = "Retake", tint = Color.White)
-                }
+            Text(
+                text = when(step) {
+                    CaptureStep.VIEWFINDER -> "准备拍摄"
+                    CaptureStep.SCANNING -> "智能解析中"
+                    else -> "识别完成"
+                },
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp
+            )
+            IconButton(onClick = { /* Flash control could go here */ }) {
+                Icon(Icons.Default.FlashOn, null, tint = Color.White)
             }
         }
 
-        // 4. Footer Console
-        Box(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 48.dp).fillMaxWidth()) {
-            if (mode == CaptureMode.CAPTURING) {
-                Surface(
-                    onClick = {
-                        if (isProcessing) return@Surface
-                        isProcessing = true
-                        imageCapture.takePicture(cameraExecutor, object : OnImageCapturedCallback() {
-                            override fun onCaptureSuccess(image: ImageProxy) {
-                                scope.launch {
-                                    val original = image.toBitmapCompat()
-                                    rotationDegrees = image.imageInfo.rotationDegrees
-                                    capturedBitmap = rotateBitmap(original, rotationDegrees)
-                                    image.close()
-                                    mode = CaptureMode.EDITING
+        // 6. Footer Controls
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 60.dp)
+                .fillMaxWidth()
+        ) {
+            if (step == CaptureStep.VIEWFINDER) {
+                // Professional Bionic Shutter
+                Box(
+                    modifier = Modifier
+                        .size(88.dp)
+                        .align(Alignment.Center)
+                        .clickable {
+                            if (isProcessing) return@clickable
+                            isProcessing = true
+                            triggerHaptic(preferences, context)
+                            
+                            imageCapture.takePicture(cameraExecutor, object : OnImageCapturedCallback() {
+                                override fun onCaptureSuccess(image: ImageProxy) {
+                                    scope.launch {
+                                        val original = image.toBitmapCompat()
+                                        capturedBitmap = rotateBitmap(original, image.imageInfo.rotationDegrees)
+                                        image.close()
+                                        step = CaptureStep.CAPTURED_SHRINK
+                                        delay(400)
+                                        
+                                        // Start Scanning Animation
+                                        step = CaptureStep.SCANNING
+                                        scanProgress.animateTo(1f, tween(1800, easing = LinearOutSlowInEasing))
+                                        
+                                        // Run AI Recognition
+                                        val inputImage = InputImage.fromBitmap(capturedBitmap!!, 0)
+                                        recognizer.process(inputImage)
+                                            .addOnSuccessListener { visionText ->
+                                                detectedTextBlocks = visionText.textBlocks
+                                                step = CaptureStep.RESULT_REVEAL
+                                                scope.launch {
+                                                    // Haptic sequence for "awakening"
+                                                    repeat(3) {
+                                                        triggerHaptic(preferences, context)
+                                                        delay(100)
+                                                    }
+                                                    auraAlpha.animateTo(1f, tween(800))
+                                                }
+                                            }
+                                        isProcessing = false
+                                    }
+                                }
+                                override fun onError(exception: ImageCaptureException) {
+                                    onError(exception)
                                     isProcessing = false
                                 }
-                            }
-                            override fun onError(exception: ImageCaptureException) {
-                                onError(exception)
-                                isProcessing = false
-                            }
-                        })
-                    },
-                    modifier = Modifier.size(80.dp).align(Alignment.Center),
-                    shape = CircleShape,
-                    color = Color.White
+                            })
+                        }
                 ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        if (isProcessing) CircularProgressIndicator(color = Color.Black)
-                        else Box(modifier = Modifier.size(60.dp).border(2.dp, Color.Black, CircleShape))
+                    Canvas(modifier = Modifier.fillMaxSize()) {
+                        drawCircle(Color.White.copy(alpha = 0.2f), radius = size.minDimension / 2)
+                        drawCircle(Color.White, radius = size.minDimension / 2 - 4.dp.toPx(), style = Stroke(2.dp.toPx()))
+                        drawCircle(primaryColor, radius = size.minDimension / 2 - 12.dp.toPx())
                     }
                 }
-            } else {
-                ExtendedFloatingActionButton(
-                    onClick = {
-                        scope.launch {
-                            isProcessing = true
-                            capturedBitmap?.let { bitmap ->
-                                val cropped = performCropDirect(bitmap, cropRect, screenRect)
-                                onImageCaptured(cropped)
-                            }
-                        }
-                    },
-                    modifier = Modifier.align(Alignment.Center),
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = Color.White,
-                    shape = RoundedCornerShape(32.dp)
+            } else if (step == CaptureStep.RESULT_REVEAL) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(Icons.Default.Check, null)
-                    @Suppress("DEPRECATION")
-                    Spacer(Modifier.width(8.dp))
-                    Text("确认识别", fontWeight = FontWeight.Bold)
+                    Button(
+                        onClick = { 
+                            step = CaptureStep.VIEWFINDER
+                            capturedBitmap = null
+                            scope.launch { scanProgress.snapTo(0f); auraAlpha.snapTo(0f) }
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.15f)),
+                        shape = RoundedCornerShape(24.dp),
+                        modifier = Modifier.height(48.dp).weight(1f)
+                    ) {
+                        Icon(Icons.Default.Refresh, null, tint = Color.White)
+                        Spacer(Modifier.width(8.dp))
+                        Text("重拍", color = Color.White)
+                    }
+                    
+                    Spacer(Modifier.width(16.dp))
+                    
+                    Button(
+                        onClick = { capturedBitmap?.let { onImageCaptured(it) } },
+                        colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                        shape = RoundedCornerShape(24.dp),
+                        modifier = Modifier.height(48.dp).weight(1f),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp)
+                    ) {
+                        Icon(Icons.Default.Check, null)
+                        Spacer(Modifier.width(8.dp))
+                        Text("确认文字", fontWeight = FontWeight.Bold)
+                    }
                 }
             }
         }
     }
 }
 
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawEnhancedEditCorners(rect: Rect, len: Float, thickness: Float) {
-    val color = Color.White
-    // Corners
-    drawPath(Path().apply {
-        moveTo(rect.left, rect.top + len); lineTo(rect.left, rect.top); lineTo(rect.left + len, rect.top)
-    }, color, style = Stroke(width = thickness, cap = StrokeCap.Round))
-    drawPath(Path().apply {
-        moveTo(rect.right, rect.top + len); lineTo(rect.right, rect.top); lineTo(rect.right - len, rect.top)
-    }, color, style = Stroke(width = thickness, cap = StrokeCap.Round))
-    drawPath(Path().apply {
-        moveTo(rect.left, rect.bottom - len); lineTo(rect.left, rect.bottom); lineTo(rect.left + len, rect.bottom)
-    }, color, style = Stroke(width = thickness, cap = StrokeCap.Round))
-    drawPath(Path().apply {
-        moveTo(rect.right, rect.bottom - len); lineTo(rect.right, rect.bottom); lineTo(rect.right - len, rect.bottom)
-    }, color, style = Stroke(width = thickness, cap = StrokeCap.Round))
-    
-    // Edge Indicators (Minimalist lines in the middle of edges)
-    val midLen = 16.dp.toPx()
-    drawLine(color, Offset(rect.left, rect.center.y - midLen), Offset(rect.left, rect.center.y + midLen), thickness, StrokeCap.Round)
-    drawLine(color, Offset(rect.right, rect.center.y - midLen), Offset(rect.right, rect.center.y + midLen), thickness, StrokeCap.Round)
-    drawLine(color, Offset(rect.center.x - midLen, rect.top), Offset(rect.center.x + midLen, rect.top), thickness, StrokeCap.Round)
-    drawLine(color, Offset(rect.center.x - midLen, rect.bottom), Offset(rect.center.x + midLen, rect.bottom), thickness, StrokeCap.Round)
-}
-
-enum class Handle { LEFT, TOP, RIGHT, BOTTOM, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER }
-
-private fun hitTest(offset: Offset, rect: Rect): Handle? {
-    val threshold = 40.dp.value
-    return when {
-        // Corners first (higher priority)
-        abs(offset.x - rect.left) < threshold && abs(offset.y - rect.top) < threshold -> Handle.TOP_LEFT
-        abs(offset.x - rect.right) < threshold && abs(offset.y - rect.top) < threshold -> Handle.TOP_RIGHT
-        abs(offset.x - rect.left) < threshold && abs(offset.y - rect.bottom) < threshold -> Handle.BOTTOM_LEFT
-        abs(offset.x - rect.right) < threshold && abs(offset.y - rect.bottom) < threshold -> Handle.BOTTOM_RIGHT
-        // Edges
-        abs(offset.x - rect.left) < threshold && offset.y in rect.top..rect.bottom -> Handle.LEFT
-        abs(offset.x - rect.right) < threshold && offset.y in rect.top..rect.bottom -> Handle.RIGHT
-        abs(offset.y - rect.top) < threshold && offset.x in rect.left..rect.right -> Handle.TOP
-        abs(offset.y - rect.bottom) < threshold && offset.x in rect.left..rect.right -> Handle.BOTTOM
-        // Center
-        rect.contains(offset) -> Handle.CENTER
-        else -> null
-    }
-}
-
-private fun applyDelta(rect: Rect, delta: Offset, handle: Handle?, screen: Rect): Rect {
-    if (handle == null) return rect
-    val minSize = 150f
-    return when (handle) {
-        Handle.LEFT -> rect.copy(left = (rect.left + delta.x).coerceIn(0f, rect.right - minSize))
-        Handle.TOP -> rect.copy(top = (rect.top + delta.y).coerceIn(0f, rect.bottom - minSize))
-        Handle.RIGHT -> rect.copy(right = (rect.right + delta.x).coerceIn(rect.left + minSize, screen.right))
-        Handle.BOTTOM -> rect.copy(bottom = (rect.bottom + delta.y).coerceIn(rect.top + minSize, screen.bottom))
-        Handle.TOP_LEFT -> rect.copy(left = (rect.left + delta.x).coerceIn(0f, rect.right - minSize), top = (rect.top + delta.y).coerceIn(0f, rect.bottom - minSize))
-        Handle.TOP_RIGHT -> rect.copy(right = (rect.right + delta.x).coerceIn(rect.left + minSize, screen.right), top = (rect.top + delta.y).coerceIn(0f, rect.bottom - minSize))
-        Handle.BOTTOM_LEFT -> rect.copy(left = (rect.left + delta.x).coerceIn(0f, rect.right - minSize), bottom = (rect.bottom + delta.y).coerceIn(rect.top + minSize, screen.bottom))
-        Handle.BOTTOM_RIGHT -> rect.copy(right = (rect.right + delta.x).coerceIn(rect.left + minSize, screen.right), bottom = (rect.bottom + delta.y).coerceIn(rect.top + minSize, screen.bottom))
-        Handle.CENTER -> {
-            val newRect = rect.translate(delta)
-            if (screen.contains(newRect.topLeft) && screen.contains(newRect.bottomRight)) newRect else rect
-        }
-    }
+private fun android.graphics.Rect.toComposeRect(): Rect {
+    return Rect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat())
 }
 
 private fun rotateBitmap(source: Bitmap, angle: Int): Bitmap {
     val matrix = Matrix().apply { postRotate(angle.toFloat()) }
     return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
-}
-
-private suspend fun performCropDirect(bitmap: Bitmap, cropRect: Rect, screenRect: Rect): Bitmap = withContext(Dispatchers.Default) {
-    val scaleX = bitmap.width.toFloat() / screenRect.width
-    val scaleY = bitmap.height.toFloat() / screenRect.height
-    val left = (cropRect.left * scaleX).toInt().coerceAtLeast(0)
-    val top = (cropRect.top * scaleY).toInt().coerceAtLeast(0)
-    val width = (cropRect.width * scaleX).toInt().coerceAtMost(bitmap.width - left)
-    val height = (cropRect.height * scaleY).toInt().coerceAtMost(bitmap.height - top)
-    Bitmap.createBitmap(bitmap, left, top, width, height)
 }
 
 private fun ImageProxy.toBitmapCompat(): Bitmap {
