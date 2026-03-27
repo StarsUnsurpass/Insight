@@ -55,6 +55,7 @@ private fun performVibration(context: Context, intensity: HapticIntensity) {
     }
 
     val (duration, amplitude) = when (intensity) {
+        HapticIntensity.NONE -> return // No vibration
         HapticIntensity.WEAK -> 15L to 40
         HapticIntensity.MEDIUM -> 30L to 150
         HapticIntensity.STRONG -> 60L to 255

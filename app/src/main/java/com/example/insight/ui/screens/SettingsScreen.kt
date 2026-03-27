@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.insight.ui.state.HapticIntensity
 import com.example.insight.ui.state.ThemeStyle
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.ui.state.UserRole
@@ -33,15 +34,13 @@ fun SettingsScreen(
     onRoleChange: (UserRole) -> Unit,
     onDarkModeToggle: (Boolean) -> Unit,
     onThemeStyleChange: (ThemeStyle) -> Unit,
-    onHapticToggle: (Boolean) -> Unit,
-    onHapticIntensityChange: (com.example.insight.ui.state.HapticIntensity) -> Unit,
+    onHapticIntensityChange: (HapticIntensity) -> Unit,
     onDeepSeekApiKeyChange: (String) -> Unit
 ) {
     var showNameDialog by remember { mutableStateOf(false) }
     var showClassDialog by remember { mutableStateOf(false) }
     var showRoleDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
-    var showHapticDialog by remember { mutableStateOf(false) }
     var showApiKeyDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -130,27 +129,10 @@ fun SettingsScreen(
             }
 
             item {
-                SettingSwitchItem(
-                    icon = Icons.Default.Vibration,
-                    title = "震感反馈",
-                    checked = preferences.hapticEnabled,
-                    onCheckedChange = onHapticToggle
+                HapticSliderItem(
+                    currentIntensity = preferences.hapticIntensity,
+                    onIntensityChange = onHapticIntensityChange
                 )
-            }
-
-            if (preferences.hapticEnabled) {
-                item {
-                    SettingItem(
-                        icon = Icons.Default.Tune,
-                        title = "震感强度",
-                        subtitle = when(preferences.hapticIntensity) {
-                            com.example.insight.ui.state.HapticIntensity.WEAK -> "弱 (轻微触碰)"
-                            com.example.insight.ui.state.HapticIntensity.MEDIUM -> "中 (系统默认)"
-                            com.example.insight.ui.state.HapticIntensity.STRONG -> "强 (强烈反馈)"
-                        },
-                        onClick = { showHapticDialog = true }
-                    )
-                }
             }
 
             item {
@@ -191,16 +173,6 @@ fun SettingsScreen(
         )
     }
 
-    if (showHapticDialog) {
-        HapticIntensityDialog(
-            currentIntensity = preferences.hapticIntensity,
-            onSelect = {
-                onHapticIntensityChange(it)
-                showHapticDialog = false
-            },
-            onDismiss = { showHapticDialog = false }
-        )
-    }
 
     if (showThemeDialog) {
         ThemeSelectionDialog(
@@ -335,42 +307,76 @@ fun ClassEditDialog(
 }
 
 @Composable
-fun HapticIntensityDialog(
-    currentIntensity: com.example.insight.ui.state.HapticIntensity,
-    onSelect: (com.example.insight.ui.state.HapticIntensity) -> Unit,
-    onDismiss: () -> Unit
+fun HapticSliderItem(
+    currentIntensity: HapticIntensity,
+    onIntensityChange: (HapticIntensity) -> Unit
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("选择震感强度") },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                com.example.insight.ui.state.HapticIntensity.entries.forEach { intensity ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onSelect(intensity) }
-                            .padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(selected = intensity == currentIntensity, onClick = null)
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Text(
-                            text = when(intensity) {
-                                com.example.insight.ui.state.HapticIntensity.WEAK -> "弱 (轻微触碰)"
-                                com.example.insight.ui.state.HapticIntensity.MEDIUM -> "中 (系统默认)"
-                                com.example.insight.ui.state.HapticIntensity.STRONG -> "强 (强烈反馈)"
-                            }
-                        )
-                    }
+    val levels = listOf(HapticIntensity.NONE, HapticIntensity.WEAK, HapticIntensity.MEDIUM, HapticIntensity.STRONG)
+    val currentIndex = levels.indexOf(currentIntensity).coerceAtLeast(0)
+    val labels = listOf("关闭", "弱", "中等", "强")
+    val subtitles = listOf("无震感", "轻微触碰", "系统默认", "强烈反馈")
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier.size(36.dp).background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(Icons.Default.Vibration, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text("震感反馈", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
+                    Text(
+                        "${labels[currentIndex]} · ${subtitles[currentIndex]}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
                 }
             }
-        },
-        confirmButton = {
-            TextButton(onClick = onDismiss) { Text("关闭", color = SageGreen) }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Slider(
+                value = currentIndex.toFloat(),
+                onValueChange = { newVal ->
+                    val idx = newVal.toInt().coerceIn(0, levels.lastIndex)
+                    onIntensityChange(levels[idx])
+                },
+                valueRange = 0f..3f,
+                steps = 2,
+                modifier = Modifier.fillMaxWidth(),
+                colors = SliderDefaults.colors(
+                    thumbColor = MaterialTheme.colorScheme.primary,
+                    activeTrackColor = MaterialTheme.colorScheme.primary,
+                    inactiveTrackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+                    activeTickColor = MaterialTheme.colorScheme.primary,
+                    inactiveTickColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                )
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                labels.forEach { label ->
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    )
+                }
+            }
         }
-    )
+    }
 }
+
 
 @Composable
 fun ThemeSelectionDialog(

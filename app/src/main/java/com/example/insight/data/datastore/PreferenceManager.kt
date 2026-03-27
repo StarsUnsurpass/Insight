@@ -37,16 +37,23 @@ class PreferenceManager(private val context: Context) {
             }
         }
         .map { preferences ->
+            val intensity = com.example.insight.ui.state.HapticIntensity.valueOf(
+                preferences[Keys.HAPTIC_INTENSITY] ?: com.example.insight.ui.state.HapticIntensity.MEDIUM.name
+            )
+            // Backward compat: if old hapticEnabled was false, treat as NONE
+            val hapticWasEnabled = preferences[Keys.HAPTIC_ENABLED] ?: true
+            val resolvedIntensity = if (!hapticWasEnabled && intensity != com.example.insight.ui.state.HapticIntensity.NONE) {
+                com.example.insight.ui.state.HapticIntensity.NONE
+            } else {
+                intensity
+            }
             UserPreferences(
                 username = preferences[Keys.USERNAME] ?: "用户",
                 className = preferences[Keys.CLASS_NAME] ?: "一年级一班",
                 role = UserRole.valueOf(preferences[Keys.ROLE] ?: UserRole.Teacher.name),
                 isDarkMode = preferences[Keys.DARK_MODE] ?: false,
                 themeStyle = ThemeStyle.valueOf(preferences[Keys.THEME_STYLE] ?: ThemeStyle.Default.name),
-                hapticEnabled = preferences[Keys.HAPTIC_ENABLED] ?: true,
-                hapticIntensity = com.example.insight.ui.state.HapticIntensity.valueOf(
-                    preferences[Keys.HAPTIC_INTENSITY] ?: com.example.insight.ui.state.HapticIntensity.MEDIUM.name
-                ),
+                hapticIntensity = resolvedIntensity,
                 deepSeekApiKey = preferences[Keys.DEEPSEEK_API_KEY] ?: "sk-83c0282197994bbd8fa34948f7872ebf",
                 knowledgeStatuses = parseKnowledgeStatuses(preferences[Keys.KNOWLEDGE_STATUSES] ?: "")
             )

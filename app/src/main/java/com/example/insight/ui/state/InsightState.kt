@@ -77,7 +77,7 @@ data class ReportConfig(
 )
 
 enum class HapticIntensity {
-    WEAK, MEDIUM, STRONG
+    NONE, WEAK, MEDIUM, STRONG
 }
 
 data class UserPreferences(
@@ -86,11 +86,13 @@ data class UserPreferences(
     val role: UserRole = UserRole.Teacher,
     val isDarkMode: Boolean = false,
     val themeStyle: ThemeStyle = ThemeStyle.Default,
-    val hapticEnabled: Boolean = true,
     val hapticIntensity: HapticIntensity = HapticIntensity.MEDIUM,
     val deepSeekApiKey: String = "sk-83c0282197994bbd8fa34948f7872ebf",
     val knowledgeStatuses: Map<String, KnowledgeStatus> = emptyMap()
-)
+) {
+    val hapticEnabled: Boolean get() = hapticIntensity != HapticIntensity.NONE
+}
+
 
 data class InsightUiState(
     val screen: ScreenState = ScreenState.Scanning,
