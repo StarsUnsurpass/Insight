@@ -16,6 +16,7 @@ data class AnalyticsState(
     val stratification: StratificationData = StratificationData(),
     val studentList: List<StudentEntity> = emptyList(),
     val selectedClass: String = "初三 (2) 班",
+    val classScoreDistribution: List<ScoreStageCount> = emptyList(),
 
     // --- 🔬 个体诊断 (Individual Diagnosis) ---
     val selectedStudent: StudentEntity? = null,

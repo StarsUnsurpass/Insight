@@ -36,11 +36,23 @@ class InsightRepository @Inject constructor(
     suspend fun saveScanResult(record: ScanRecordEntity) = scanDao.insertScanRecord(record)
     fun getScanCount(): Flow<Int> = scanDao.getScanCountFlow()
     fun getMasteredCount(): Flow<Int> = scanDao.getMasteredCountFlow()
+    
+    // Diagnostic Aggregations (Scans)
+    fun getErrorCategoryStats(studentId: String) = scanDao.getErrorCategoryStats(studentId)
+    fun getRealWeakNodeCounts(studentId: String) = scanDao.getRealWeakNodeCounts(studentId)
+    fun getQuestionTypeFailureStats(studentId: String) = scanDao.getQuestionTypeFailureStats(studentId)
+    fun getLearningRhythm(studentId: String, since: Long) = scanDao.getLearningRhythm(studentId, since)
 
     // Knowledge Graph
     fun getAllNodes(): Flow<List<KnowledgeNodeEntity>> = knowledgeDao.getAllNodes()
     fun getAllEdges(): Flow<List<KnowledgeEdgeEntity>> = knowledgeDao.getAllEdges()
     fun getStudentMastery(studentId: String): Flow<List<StudentMasteryEntity>> = knowledgeDao.getStudentMastery(studentId)
+    
+    // Diagnostic Aggregations (Knowledge)
+    fun getSkillDimensionStats(studentId: String) = knowledgeDao.getSkillDimensionStats(studentId)
+    fun getHighFrequencyVulnerabilities(studentId: String) = knowledgeDao.getHighFrequencyVulnerabilities(studentId)
+    fun getPrerequisiteGapAlerts(studentId: String) = knowledgeDao.getPrerequisiteGapAlerts(studentId)
+    fun getClassScoreDistribution() = knowledgeDao.getClassScoreDistribution()
     
     suspend fun getPrerequisites(nodeId: String): List<KnowledgeNodeEntity> = knowledgeDao.getPrerequisites(nodeId)
     fun getAncestors(nodeId: String): Flow<List<KnowledgeNodeEntity>> = knowledgeDao.getAncestors(nodeId)
