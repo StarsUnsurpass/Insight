@@ -460,7 +460,6 @@ object Grade8Down {
                     """.trimIndent())
                 )
             ),
-        ,
             TextbookUnit(
                 "g8down_u9", "Unit 9", "Have you ever been to a museum?",
                 listOf(
@@ -713,6 +712,253 @@ object Grade8Down {
                 )
             )
 
+        ,
+            TextbookUnit(
+                "g8down_u11", "Unit 11", "How was your school trip?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：研学经历，校外实践，自然观察 (School trips)。
+
+                        ### 2. 单元主题内容
+                        本单元以“学校郊游”为话题，深入学习一般过去时的应用。通过描述去农场、博物馆、天文馆等地的经历，学生学会如何使用过去式动词（如 milked, fed, took, saw 等）来串联事件。单元强调了“在体验中学习”的教育理念，引导学生走进自然、走进科学，培养其观察力、好奇心和分享个人经历的社交能力。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **出游活动**：milked a cow (挤牛奶), fed chickens (喂鸡), took photos (照相), went for a walk (散步).
+                        - **场所/物品**：farm, museum, robot, gift, shark, aquarium.
+                        - **核心形容词**：interesting, exciting, lovely, expensive, cheap.
+                        - **高频短语**：all in all (总的来说), quite a lot (许多), guide (导游), learn about (了解).
+
+                        ### 2. 核心句式
+                        1.  **询问感受**：How was your school trip? — It was excellent!
+                        2.  **询问活动**：What did you see? — I saw some robots.
+                        3.  **确认经历**：Did you go to the zoo? — No, I didn't.
+                        4.  **总结评价**：All in all, the trip was very educational.
+
+                        ### 3. 重点语法
+                        - **一般过去时** 的不规则动词变化（feed -> fed, ride -> rode, eat -> ate）。
+                        - **形容词评价语** 的逻辑分类。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Eric**: Hi, Carol. How was your school trip?
+                        
+                        **Carol**: It was great! We went to a farm.
+                        
+                        **Eric**: Did you see any cows?
+                        
+                        **Carol**: Yes, I did. I even milked a cow. 
+                        
+                        **Eric**: Did you ride a horse? 
+                        
+                        **Carol**: No, I didn't. But I fed some chickens. It was so much fun!
+
+                        **【译文】**
+                        
+                        **埃里克**：嗨，卡罗尔。你的学校郊游怎么样？
+                        
+                        **卡罗尔**：太棒了！我们去了一个农场。
+                        
+                        **埃里克**：你看到牛了吗？
+                        
+                        **卡罗尔**：看到了。我甚至还挤了牛奶。
+                        
+                        **埃里克**：你骑马了吗？
+                        
+                        **卡罗尔**：没骑。但我喂了一些鸡。真的很有趣！
+
+                        ### Section B (Reading) 阅读文段：A School Trip to the Museum
+                        **【原文】**
+                        
+                        Yesterday we went to the Science Museum. First, we saw some robots. They were very cool! Then we went to the gift shop and bought some lovely gifts. The weather was a bit rainy, but it didn't stop us. All in all, the trip was very educational and I learned quite a lot about science.
+
+                        **【译文】**
+                        
+                        昨天我们去了科学博物馆。首先，我们看到了一些机器人。它们非常酷！然后我们去了礼品店，买了一些可爱的礼物。天气有点下雨，但这并没有阻碍我们。总的来说，这次旅行非常有教育意义，我学到了不少关于科学的知识。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. How was your school trip? (你的学校郊游怎么样？)
+                        - **【用法拓展】**：这里的 `was` 是 `is` 的过去式。
+                        
+                        #### 2. I learned quite a lot about science. (我学到了很多关于科学的知识。)
+                        - **【词块归纳】**：`quite a lot` 意为“很多/相当多”。
+                        
+                        #### 3. All in all, it was a great day. (总的来说，这是伟大的一天。)
+                        - **【要点精讲】**：`all in all` 常用于文章末尾进行总结。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① ride -> rode (过去式)
+                        - **【词块归纳】**：`ride a bike`, `ride a horse`。
+                        
+                        #### ② exciting vs excited
+                        - **【辨析】**：`exciting` 修饰物；`excited` 修饰人。
+                        - **【例题】**：
+                        
+                        *The children were very ________ when they saw the sharks.*
+                        A. exciting   B. excited   C. excite   D. to excite
+                        
+                        **[解析]**：修饰人，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：一般过去时的评价表达
+                        **1. 积极评价**
+                        excellent, great, exciting, lovely, wonderful.
+                        
+                        **2. 消极评价**
+                        terrible, boring, expensive, noisy.
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·北京中考)* *— How ________ your trip to London last month? — It ________ wonderful!*
+                        A. is; is   B. was; was   C. is; was   D. was; is
+                        
+                        **[解析]**：last month 提示全用过去时，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My School Trip (我的学校郊游)
+                        **I went to the Science Museum for my school trip.** 
+                        
+                        The weather was **sunny**. First, we **saw many robots**. They could **talk to** people. I thought they were **very cool**. Then we **bought some gifts**. **All in all**, it was an **exciting** day. I **learned a lot** about science. I want to go there again!
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8down_u12", "Unit 12", "What did you do last weekend?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：周末活动，个人经历分享 (Weekend stories)。
+
+                        ### 2. 单元主题内容
+                        作为八年级下册的总结单元，本单元旨在巩固和拓展一般过去时的叙事能力。通过描述周末的活动（如 camping, visiting relatives 等）以及遇到的意外事件（如 seeing a snake），学生能够更有条理地讲述生活中的小故事。单元鼓励学生分享真实的感触，培养其对生活细节的观察力和乐观的社交态度。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **日常活动**：went camping, played badminton, did homework, went boating.
+                        - **核心名词**：weekend, mouse, snake, forest, fire.
+                        - **描述形容词**：scary, high, tired, surprised.
+                        - **高频短语**：stay up late, run away, wake up, in the middle of (在...中间).
+
+                        ### 2. 核心句式
+                        1.  **询问过去**：What did you do last weekend? — I went camping.
+                        2.  **描述状态**：How was your weekend? — It was scary.
+                        3.  **叙述意外**：Suddenly, I saw a big snake in my tent!
+                        4.  **表达感叹**：What an exciting weekend!
+
+                        ### 3. 重点语法
+                        - **一般过去时** 的综合巩固（特殊疑问句与一般疑问句）。
+                        - **不规则动词过去式** 集中记忆。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Lucy**: Hi, Alice. What did you do last weekend?
+                        
+                        **Alice**: I stayed at home and did my homework. 
+                        
+                        **Lucy**: Was it boring?
+                        
+                        **Alice**: No, it wasn't. It was busy but I learned a lot. 
+                        
+                        **Lucy**: I went camping with my friends. We sat by the fire and told stories. 
+                        
+                        **Alice**: That sounds like a lot of fun!
+
+                        **【译文】**
+                        
+                        **露西**：嗨，艾丽丝。你上周末做什么了？
+                        
+                        **艾丽丝**：我待在家里做作业了。
+                        
+                        **露西**：无聊吗？
+                        
+                        **艾丽丝**：不，不无聊。虽然很忙但我学到了很多。
+                        
+                        **露西**：我和朋友们去露营了。我们坐在火堆旁讲故事。
+                        
+                        **艾丽丝**：那听起来非常有趣！
+
+                        ### Section B (Reading) 阅读文段：A Scary Weekend
+                        **【原文】**
+                        
+                        Last weekend, my brother and I went to the forest. We put up our tent and started a fire. We were very happy. But in the middle of the night, we woke up because we heard a strange sound. Suddenly, a big snake came into our tent! We were so scared that we ran away quickly. It was a very scary weekend.
+
+                        **【译文】**
+                        
+                        上周末，我和我弟弟去了森林。我们搭起帐篷并生了火。我们很快乐。但在半夜，我们醒了，因为我们听到了奇怪的声音。突然，一条大蛇爬进了我们的帐篷！我们太害怕了，飞快地跑开了。那是一个非常惊险的周末。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What did you do last weekend? (你上周末做什么了？)
+                        - **【用法拓展】**：询问过去动作的标准句型。
+                        
+                        #### 2. I saw a big snake in the tent. (我在帐篷里看到一条大蛇。)
+                        - **【词块归纳】**：`saw` 是 `see` 的过去式。
+                        
+                        #### 3. We were so scared that we ran away. (我们如此害怕以至于跑开了。)
+                        - **【句式金牌】**：`so + adj. + that + 从句`。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① stay up late (熬夜)
+                        - **【注意】**：stay up 表示“不睡觉”。
+                        
+                        #### ② run away (跑掉; 逃跑)
+                        - **【例题】**：
+                        
+                        *When the thief saw the police, he ________ quickly.*
+                        A. ran away   B. ran into   C. ran after   D. ran out
+                        
+                        **[解析]**：看到警察后“跑掉”，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：一般过去时的终极巩固
+                        **1. 助动词 did 的统治地位**
+                        只要句子中有 did，后面的动词必须恢复原形。
+                        - *Did you go?* (不说 Did you went?)
+                        
+                        **2. 动词过去式的读音**
+                        - [t]：清辅音结尾 (helped).
+                        - [d]：浊辅音或元音结尾 (played).
+                        - [id]：t 或 d 结尾 (needed).
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·山东中考)* *— ________ you ________ to the movies last Saturday? — Yes, I did.*
+                        A. Do; go   B. Did; went   C. Did; go   D. Do; went
+                        
+                        **[解析]**：过去时疑问句 Did ... go ...，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My Weekend Story (我的周末故事)
+                        **My weekend was interesting.** 
+                        
+                        On Saturday, I **did my homework**. On Sunday morning, I **went camping** with my parents. We **put up a tent** near a lake. It was **exciting**. But then, I **heard a strange sound**. It was just a little **mouse**. We laughed and had a good time. It was a weekend **I will never forget**.
+                    """.trimIndent())
+                )
+            )
+
+
         )
+
         )
+
         }
