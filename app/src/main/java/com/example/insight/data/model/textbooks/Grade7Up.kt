@@ -16,775 +16,485 @@ object Grade7Up {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/sc7x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g7up_u1", "Unit 1", "Making New Friends",
+                "g7up_s1", "Starter Unit 1", "Hello!",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 结交新朋友与问候。
+                        *   **深层意义**：作为初中英语的起点，本单元通过最基础的问候语，引导学生跨出社交的第一步，培养礼貌交往的意识。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **unit** /'juːnɪt/ n. 单元
+                        **starter** /'stɑːtə(r)/ n. 第一步；开端
+                        **starter unit** 过渡单元
+                        **section** /'sekʃn/ n. 部分；地区
+                        **greet** /ɡriːt/ v. 招呼；问候
+                        **everyone** /'evriwʌn/ pron. 每人；所有人
+                        **start** /stɑːt/ v. 开始；着手
+                        **conversation** /ˌkɒnvə'seɪʃn/ n. 谈话；交谈
+                        **spell** /spel/ v. 用字母拼；拼写
+                        **oh** /əʊ/ interj. 哦；啊
+                        **bell** /bel/ n. 铃（声）；钟（声）
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲与核心考点", """
+                        *   **greet**：常用结构 *greet sb. with a smile*。
+                        *   **everyone**：复合不定代词，谓语用单数。
+                        *   **拼写句型**：*How do you spell your name?*
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7up_s2", "Starter Unit 2", "Keep Tidy!",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 生活习惯（整洁）。
+                        *   **深层意义**：引导学生学会整理个人物品，养成良好的生活自理习惯。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **bottle** /'bɒtl/ n. 瓶子
+                        **eraser** /ɪ'reɪzə(r)/ n. 橡皮
+                        **key** /kiː/ n. 钥匙；关键
+                        **thing** /θɪŋ/ n. 东西；事情
+                        **need** /niːd/ v. & n. 需要
+                        **You're welcome.** 别客气；不用谢。
+                        **tidy** /'taɪdi/ adj. 整洁的；整齐的
+                        **where** /weə(r)/ adv. 在哪里
+                        **can** /kæn/ modal v. 能；会
+                        **find** /faɪnd/ v. 找到；发现
+                        **lost** /lɒst/ adj. 丢失的
+                        **found** /faʊnd/ v. (find的过去式)
+                        **lost and found** 失物招领（处）
+                        **please** /pliːz/ interj. 请
+                        **schoolbag** /'skuːlbæɡ/ n. 书包
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲与核心考点", """
+                        *   **There be 句型**：初步接触物体的存在表达。
+                        *   **Where 引导的疑问句**：询问位置。
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7up_s3", "Starter Unit 3", "Welcome!",
+                listOf(
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **fun** /fʌn/ n. 乐趣；快乐
+                        **yard** /jɑːd/ n. 院子；园圃
+                        **carrot** /'kærət/ n. 胡萝卜
+                        **goose** /ɡuːs/ n. 鹅
+                        **geese** /ɡiːs/ n. (goose的复数)
+                        **count** /kaʊnt/ v. 数数
+                        **another** /ə'nʌðə(r)/ adj. & pron. 另一；又一
+                        **else** /els/ adv. 其他的；别的
+                        **look** /lʊk/ v. 看；瞧
+                        **look at** 看；瞧
+                        **circle** /'sɜːkl/ v. 圈出 n. 圆形
+                        **welcome** /'welkəm/ adj. & v. 欢迎
+                        **tomato** /tə'mɑːtəʊ/ n. 西红柿
+                        **potato** /pə'teɪtəʊ/ n. 马铃薯；土豆
+                        **animal** /'ænɪml/ n. 动物
+                        **many** /'meni/ adj. & pron. 许多
+                        **how many** 多少
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7up_u1", "Unit 1", "You and Me",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境与价值导向
-                        *   **主题语境**：人与自我 —— 结交新朋友。
-                        *   **深层意义**：作为初中英语的第一课，本单元不仅是语言的起点，更是社交礼仪的启蒙。通过学习问候语、自我介绍和询问姓名，引导学生建立积极的人际关系，培养自信、礼貌的沟通品格。
-                        
-                        ### 2. 知识能力目标
-                        - **语言能力**：掌握 26 个字母的正确读音与书写；掌握 be 动词的一般现在时陈述与疑问用法；熟练运用问候及自我介绍句型。
-                        - **思维品质**：理解中西方姓名文化差异（姓在前与姓在后）。
+                        *   **主题语境**：人与自我 —— 个人爱好与特长。
+                        *   **深层意义**：本单元旨在引导学生发现自身潜能，建立自信。通过社团招新的情境，培养学生的社会参与意识与团队协作精神。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类记忆
-                        - **问候/介绍**：hello (你好), hi (你好), good (好的), morning (早晨), afternoon (下午), evening (晚上), name (名字), nice (令人愉快的), meet (遇见)。
-                        - **代词核心**：I (我), my (我的), you (你), your (你的), he (他), his (他的), she (她), her (她的)。
-                        - **数字 0-9**：zero, one, two, three, four, five, six, seven, eight, nine.
-                        - **姓名构成**：first name (名字), last name (姓), family name (姓)。
-
-                        ### 2. 核心短语金牌储备
-                        - `good morning/afternoon/evening` 早上/下午/晚上好
-                        - `nice to meet you` 见到你很高兴
-                        - `my/his/her name` 我的/他的/她的名字
-                        - `telephone number` 电话号码
-                        - `ID card` 身份证
-                        - `first name` 名字 (Givien name)
-                        - `last name / family name` 姓氏 (Surname)
-                        - `in English` 用英语
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **make** /meɪk/ v. 制造；做
+                        **friend** /frend/ n. 朋友
+                        **make friends** 交朋友
+                        **get** /ɡet/ v. 得到；买；到达
+                        **know** /nəʊ/ v. 知道；了解
+                        **get to know** 认识；了解
+                        **each** /iːtʃ/ adj. & pron. 每个；各自
+                        **other** /'ʌðə(r)/ pron. 另外的人（或物）
+                        **each other** 互相；彼此
+                        **full** /fʊl/ adj. 满的；完整的
+                        **full name** 全名
+                        **grade** /ɡreɪd/ n. 年级；等级
+                        **last** /lɑːst/ adj. 最后的；末尾的
+                        **last name** 姓
+                        **classmate** /'klɑːsmeɪt/ n. 同班同学
+                        **teacher** /'tiːtʃə(r)/ n. 老师
+                        **class teacher** 班主任
+                        **first** /fɜːst/ adj. 第一的
+                        **first name** 名字
+                        **mistake** /mɪ'steɪk/ n. 错误；失误
+                        **country** /'kʌntri/ n. 国家
+                        **same** /seɪm/ adj. 相同的
+                        **twin** /twɪn/ n. 双胞胎之一
+                        **both** /bəʊθ/ adj. & pron. 两个；两个都
+                        **band** /bænd/ n. 乐队
+                        **pot** /pɒt/ n. 锅
+                        **a lot** 很；非常
+                        **tofu** /'təʊfuː/ n. 豆腐
+                        **parrot** /'pærət/ n. 鹦鹉
+                        **guitar** /ɡɪ'tɑː(r)/ n. 吉他
+                        **tennis** /'tenɪs/ n. 网球
+                        **post** /pəʊst/ v. 邮寄；发布 n. 帖子
+                        **even** /'iːvn/ adv. 甚至；连
+                        **hey** /heɪ/ interj. 嘿；喂
+                        **play the guitar** 弹吉他
+                        **would** /wʊd/ modal v. (will的过去式) 意愿
+                        **would like to** 愿意；想要
+                        **information** /ˌɪnfə'meɪʃn/ n. 信息；消息
+                        **hobby** /'hɒbi/ n. 业余爱好
                     """.trimIndent()),
-
                     UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. What's your name? (你叫什么名字？)
-                        - **【考点详解】**：`What's` 是 `What is` 的缩写。`your` 是形容词性物主代词，后接名词。
-                        - **【回答方式】**：`My name is...` 或 `I am...`。
+                        #### 1. What club do you want to join? (你想加入什么社团？)
+                        - **【结构剖析】**：`want to do sth.` 想要做某事。`join` 指加入某个组织或团体。
                         
-                        #### 2. Nice to meet you! (见到你很高兴！)
-                        - **【社交礼仪】**：初次见面时的正式问候语。对方通常回答：`Nice to meet you, too!`。
-                        
-                        #### 3. What's his/her telephone number? (他的/她的电话号码是多少？)
-                        - **【结构剖析】**：`What's` 引导询问信息的特殊疑问句。注意 `his` (男) 与 `her` (女) 的区分。
-                        
-                        #### 4. Gina is her first name. (吉娜是她的名字。)
-                        - **【文化避坑】**：英语国家人名通常是“名在前，姓在后”。例如：*Jim Green* 中，*Jim* 是 first name，*Green* 是 last name。
+                        #### 2. Are you good with kids? (你善于和孩子们相处吗？)
+                        - **【词法精辨】**：
+                            *   `be good at`：擅长...
+                            *   `be good with`：善于对待.../与...相处得好。
                     """.trimIndent()),
-
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：be 动词的一般现在时 (I)
-                        **1. 对应关系**：
-                        - I + **am**
-                        - You / We / They + **are**
-                        - He / She / It / 单数名词 + **is**
-                        
-                        **2. 缩写形式**：
-                        - I'm, You're, He's, She's, It's, What's, Name's.
-                        - **注意**：this is 不能缩写。
-
-                        ### 核心语法二：形容词性物主代词
-                        **规律**：必须放在名词前，表示“...的”。
-                        - *my book* (我的书)
-                        - *your friend* (你的朋友)
-                        - *his name* (他的名字)
-                        - *her ID card* (她的身份证)
+                        ### 核心语法：情态动词 can
+                        **1. 基本用法**
+                        *   表示能力 (Ability)：*I can swim.*
+                        **2. 句式结构**
+                        - **肯定句**：主语 + can + 动词原形.
+                        - **否定句**：主语 + can't + 动词原形.
 
                         ### 中考真题特训
-                        
-                        *(2024·天津中考)* *— What's ________ telephone number? — ________ telephone number is 123-456.*
-                        A. he; He   B. his; His   C. him; His   D. his; He
-                        
-                        **[解析]**：询问“他的”号码，修饰名词用形容词性物主代词 his，选 **B**。
-
-                        *(2023·北京中考)* *Nice ________ you. My name ________ Mike.*
-                        A. meet; is   B. to meet; is   C. meeting; is   D. to meet; am
-                        
-                        **[解析]**：固定搭配 Nice to meet you；My name 是第三人称单数，用 is，选 **B**。
+                        *(2024·南京中考)* *— ________ you play the violin? — Yes, I ________.*
+                        A. Can; can   B. Do; do   C. Must; must   D. Should; should
+                        **[解析]**：询问能力，选 **A**。
                     """.trimIndent()),
-
                     UnitDetailSection("✍️ 单元写作专项指导", """
                         ### 写作主题：自我介绍 (Self-introduction)
-                        #### 1. 写作要素
-                        - **问候语**：Hello! / Good morning!
-                        - **姓名**：My name is... / I am...
-                        - **联系方式**：My phone number is...
-                        - **结语**：Nice to meet you!
-
-                        #### 2. 高分句式
-                        - *I am a student in Middle School.* (我是一中学生。)
-                        - *My first name is Jim and my last name is Brown.* (我名叫吉姆，姓布朗。)
-                        - *You can call me at 123456.* (你可以拨打123456联系我。)
-
-                        #### 3. 满分范文
-                        **Hello, Everyone!**
-                        
-                        Good morning! My name is Li Hua. My first name is Hua and my last name is Li. I am 13 years old. My telephone number is 138-0000. Nice to meet you all! I hope we can be good friends.
+                        **满分范文**：
+                        Hello, everyone! My name is Li Hua. I am 13 years old. I am in Grade 7. My first name is Hua and my last name is Li. I like music very much and I can play the guitar. My hobby is playing tennis. I want to make friends with you.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u2", "Unit 2", "This is my sister.",
+                "g7up_u2", "Unit 2", "We're Family!",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
-                        *   **主题语境**：人与社会 —— 家庭成员。
-                        *   **深层意义**：本单元围绕“介绍家人及指认人物”展开。旨在引导学生感受家庭温暖，增进对家庭成员的了解。通过绘制家庭树（Family Tree），培养学生的逻辑归类能力和对家庭责任的认同感。
-
-                        ### 2. 知识能力目标
-                        - **语言能力**：掌握指示代词 `this, that, these, those` 的空间距离感；熟练运用名词复数形式；掌握询问身份的句型。
+                        *   **主题语境**：人与社会 —— 家庭成员与亲情。
+                        *   **深层意义**：引导学生学会关爱家人，增进家庭和谐。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **家庭成员**：father (父亲), mother (母亲), parents (父母), brother (兄弟), sister (姐/妹), grandfather (祖父), grandmother (祖母), grandparents (祖父母), cousin (堂/表兄弟姐妹), uncle (舅/叔/伯), aunt (姨/婶/姑), son (儿子), daughter (女儿)。
-                        - **指示代词**：this (这), that (那), these (这些), those (那些)。
-                        - **其他**：friend (朋友), picture (照片), photo (照片), girl (女孩), boy (男孩)。
-
-                        ### 2. 核心短语金牌储备
-                        - `my family` 我的家庭
-                        - `family tree` 家谱/家庭树
-                        - `a photo of my family` 一张全家福
-                        - `in the first photo` 在第一张照片里
-                        - `have a good day` 过得愉快
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **grandchild** /'ɡræntʃaɪld/ n. (外)孙子；(外)孙女
+                        **son** /sʌn/ n. 儿子
+                        **hike** /haɪk/ v. & n. 远足；徒步旅行
+                        **go hiking** 去远足
+                        **funny** /'fʌni/ adj. 好笑的；奇怪的
+                        **laugh** /lɑːf/ v. 笑；发笑
+                        **different** /'dɪfrənt/ adj. 不同的
+                        **violin** /ˌvaɪə'lɪn/ n. 小提琴
+                        **play the violin** 拉小提琴
+                        **have fun** 玩得开心
+                        **hat** /hæt/ n. 帽子
+                        **handsome** /'hænsəm/ adj. 英俊的
+                        **knee** /niː/ n. 膝；膝盖
+                        **as** /æz/ prep. 如同；作为
+                        **AM** /ˌeɪ 'em/ 上午
+                        **PM** /ˌpiː 'em/ 下午
+                        **French** /frentʃ/ n. 法语 adj. 法国的
+                        **excellent** /'eksələnt/ adj. 优秀的；极好的
+                        **instrument** /'ɪnstrəmənt/ n. 乐器；工具
+                        **relative** /'relətɪv/ n. 亲戚
+                        **father** /'fɑːðə(r)/ n. 父亲
+                        **mother** /'mʌðə(r)/ n. 母亲
+                        **parents** /'peərənts/ n. 父母
+                        **brother** /'brʌðə(r)/ n. 兄弟
+                        **sister** /'sɪstə(r)/ n. 姐；妹
+                        **grandfather** /'ɡrænfɑːðə(r)/ n. 祖父；外祖父
+                        **grandmother** /'ɡrænmʌðə(r)/ n. 祖母；外祖母
+                        **grandparents** /'ɡrænpeərənts/ n. 祖父母；外祖父母
+                        **uncle** /'ʌŋkl/ n. 叔；伯；舅
+                        **aunt** /'ɑːnt/ n. 姨；婶；姑
+                        **cousin** /'kʌzn/ n. 堂(表)兄弟姐妹
+                        **family tree** 家谱
+                        **really** /'rɪəli/ adv. 真正地；确实
+                        **pink** /'rɪŋk/ adj. & n. 粉红色
                     """.trimIndent()),
-
                     UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. This is my sister. (这是我的妹妹。)
-                        - **【考点详解】**：`This is...` 用于介绍近处或单数的人物。
-                        
-                        #### 2. These are my parents. (这些是我的父母。)
-                        - **【结构剖析】**：`These are...` 后接名词复数。注意 `parents` 指双亲（父和母）。
-                        
-                        #### 3. Who's he? (他是谁？)
-                        - **【语法核心】**：`Who's` 是 `Who is` 的缩写。用于询问身份。
-                        
-                        #### 4. Are those your grandparents? (那些是你的祖父母吗？)
-                        - **【回答方式】**：`Yes, they are.` / `No, they aren't.`。 (**注意：回答指示代词引导的疑问句，主语统一用 they**)
+                        #### 1. These are my parents. (这些是我的父母。)
+                        - **【结构剖析】**：`These are...` 后接名词复数。注意 `parents` 指双亲。
                     """.trimIndent()),
-
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：指示代词 (this, that, these, those)
-                        - **单数**：`this` (近), `that` (远)。
-                        - **复数**：`these` (近), `those` (远)。
-                        - **口诀**：单变复，is 变 are，this 变 these，that 变 those。
-
-                        ### 核心语法二：名词变复数的规则
-                        1.  直接加 s：*brother -> brothers*。
-                        2.  以 s, x, ch, sh 结尾加 es：*bus -> buses, watch -> watches*。
-                        3.  以“辅音+y”结尾，变 y 为 i 加 es：*family -> families*。
-                        4.  不规则变化：*child -> children*。
-
-                        ### 中考真题特训
-                        
-                        *(2024·南京中考)* *— Who are ________ boys over there? — They are my classmates.*
-                        A. this   B. that   C. these   D. those
-                        
-                        **[解析]**：over there 提示距离远，且 boys 为复数，选 **D**。
-
-                        *(2023·上海中考)* *— Is this your photo? — Yes, ________ is. And ________ are my sisters.*
-                        A. it; these   B. this; those   C. it; those   D. this; these
-                        
-                        **[解析]**：回答 this 引导的问句用 it 代替；后句介绍近处人物复数用 these，选 **A**。
+                        ### 核心语法：名词所有格
+                        - 单数后加 *'s*：*father's book*。
+                        - 以 s 结尾的复数后只加 *'*：*parents' room*。
                     """.trimIndent()),
-
                     UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：介绍我的家人 (Introduce My Family)
-                        #### 1. 写作思路
-                        - **总述**：Here is a photo of my family. / I have a happy family.
-                        - **具体介绍**：依次介绍祖父母、父母和兄弟姐妹。
-                        - **情感评价**：I love my family.
-
-                        #### 2. 高分句式
-                        - *These are my grandparents.*
-                        - *The man in the photo is my father.*
-                        - *My sister is a student. She is 10 years old.*
-
-                        #### 3. 满分范文
-                        **My Family**
-                        
-                        Hi! I am Li Hua. Here is a photo of my family. These are my grandparents. They are very kind. This is my father. He is a teacher. This is my mother. She is a doctor. Who is the little girl? She is my sister, Li Mei. I love my family very much!
+                        ### 写作主题：全家福介绍
+                        **满分范文**：
+                        Look at this photo! This is my family. These are my grandparents. They are very healthy. This handsome man is my father. He is a teacher. This is my mother. She is excellent at cooking. The girl next to me is my sister. We often have fun playing the violin together. I love my family!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u3", "Unit 3", "Where is my schoolbag?",
+                "g7up_u3", "Unit 3", "My School",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 生活习惯（物品陈列）。
-                        *   **深层意义**：本单元聚焦“物品的位置与归纳”。旨在引导学生学会整理自己的生活用品（如书包、钥匙、课本），培养良好的生活习惯和自理能力。通过描述凌乱与整洁房间的对比，理解有序生活的重要性。
+                        *   **主题语境**：人与社会 —— 校园环境与设施。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **学习用品**：schoolbag (书包), pencil (铅笔), pen (钢笔), book (书), notebook (笔记本), dictionary (词典), map (地图)。
-                        - **家居用品**：bed (床), table (桌子), chair (椅子), desk (书桌), sofa (沙发), keys (钥匙)。
-                        - **方位介词**：in (在...里), on (在...上), under (在...下)。
-                        - **其他词汇**：where (在哪里), everywhere (到处), tidy (整洁的), messy (乱的)。
-
-                        ### 2. 核心短语金牌储备
-                        - `in the schoolbag` 在书包里
-                        - `on the desk` 在桌子上
-                        - `under the bed` 在床底下
-                        - `in the room` 在房间里
-                        - `come on` 快点；加油
-                        - `a set of keys` 一串钥匙 (**必考：谓语用单数**)
-                        - `be tidy` 保持整洁
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **important** /ɪm'pɔːtnt/ adj. 重要的
+                        **notice** /'nəʊtɪs/ n. 通知；公告 v. 注意到
+                        **locker** /'lɒkə(r)/ n. 储物柜
+                        **drawer** /drɔː(r)/ n. 抽屉
+                        **back** /bæk/ n. 后面；背部
+                        **at the back (of)** 在……后面
+                        **corner** /'kɔːnə(r)/ n. 角落；拐角
+                        **bookcase** /'bʊkkeɪs/ n. 书柜；书架
+                        **screen** /skriːn/ n. 屏幕；银幕
+                        **school** /skuːl/ n. 学校
+                        **at school** 在学校
+                        **modern** /'mɒdn/ adj. 现代的；时髦的
+                        **exercise** /'eksəsaɪz/ n. & v. 练习；运动
+                        **do exercises** 做运动；做操
+                        **special** /'speʃl/ adj. 特别的；特殊的
+                        **smart** /smɑːt/ adj. 智能的；聪明的
+                        **whiteboard** /'waɪtbɔːd/ n. 白板
+                        **put** /pʊt/ v. 放
+                        **up** /ʌp/ adv. 向上
+                        **put up** 张贴；搭建
+                        **classroom** /'klɑːsruːm/ n. 教室
+                        **library** /'laɪbrəri/ n. 图书馆
+                        **playground** /'plaɪɡraʊnd/ n. 操场
+                        **hall** /hɔːl/ n. 大厅；会堂
+                        **dining** /'daɪnɪŋ/ n. 进餐
+                        **dining hall** 餐厅
+                        **gym** /dʒɪm/ n. 体育馆
+                        **building** /'bɪldɪŋ/ n. 建筑物
+                        **science** /'saɪəns/ n. 科学
+                        **lab** /læb/ n. 实验室
+                        **science lab** 科学实验室
+                        **office** /'ɒfɪs/ n. 办公室
+                        **behind** /bɪ'haɪnd/ prep. 在...后面
+                        **between** /bɪ'twiːn/ prep. 在...之间
+                        **front** /frʌnt/ n. 前面
+                        **in front of** 在...前面
+                        **across** /ə'krɒs/ adv. & prep. 穿过
+                        **across from** 在...对面
+                        **next** /nekst/ adj. 下一个的
+                        **next to** 紧挨着
+                        **large** /lɑːdʒ/ adj. 大的
+                        **wall** /wɔːl/ n. 墙
                     """.trimIndent()),
-
                     UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. Where's my schoolbag? (我的书包在哪？)
-                        - **【考点详解】**：`Where` 询问地点。回答用 `It's on/in/under...`。
-                        
-                        #### 2. It's under the table. (它在桌子底下。)
-                        - **【结构剖析】**：`It` 指代前面的单数名词 `schoolbag`。
-                        
-                        #### 3. Where are my keys? (我的钥匙在哪？)
+                        #### 1. Where are my keys? (我的钥匙在哪？)
                         - **【语法核心】**：复数名词提问，助动词用 `are`。回答用 `They're...`。
-                        
-                        #### 4. The keys are on the sofa. (钥匙在沙发上。)
-                        - **【避坑指南】**：注意 `keys` 是复数，谓语动词用 `are`。
                     """.trimIndent()),
-
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：Where 引导的特殊疑问句
-                        - **单数提问**：`Where is + 名词单数?` -> 回答：`It is + 介词短语.`
-                        - **复数提问**：`Where are + 名词复数?` -> 回答：`They are + 介词短语.`
-
-                        ### 核心语法二：方位介词 (in, on, under)
-                        - **in**：表示在内部。
-                        - **on**：表示在物体表面，且有接触。
-                        - **under**：表示在正下方。
-
-                        ### 中考真题特训
-                        
-                        *(2024·天津中考)* *— Where ________ my glasses? — ________ on the sofa.*
-                        A. is; It's   B. are; They're   C. is; They're   D. are; It's
-                        
-                        **[解析]**：glasses (眼镜) 永远是复数形式，选 **B**。
-
-                        *(2023·河北中考)* *I can't find my dictionary. It isn't ________ my schoolbag.*
-                        A. on   B. under   C. in   D. to
-                        
-                        **[解析]**：在书包“里面”，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：介绍我的房间 (My Room)
-                        #### 1. 写作要点
-                        - **方位描写**：由远及近，或从左到右。
-                        - **物品分布**：使用 There be 结构或 `A is on/in B`。
-                        - **评价总结**：I think my room is very tidy.
-
-                        #### 2. 高分句式
-                        - *This is my room. It is not big but tidy.*
-                        - *My bed is in the room. My quilt is on the bed.*
-                        - *Where is my desk? It's near the window.*
-
-                        #### 3. 满分范文
-                        **My Tidy Room**
-                        
-                        Hello! Welcome to my room. It is small but very tidy. My bed is in the middle of the room. My blue quilt is on it. Under the bed is my schoolbag. I have a big desk. My books and notebooks are in the desk. My computer is on the desk. I love my room very much!
+                        ### 核心语法：There be 结构
+                        **1. 含义**：表示“某地有某物”。
+                        **2. 主谓一致**：遵循“就近原则”。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u4", "Unit 4", "Do you have a soccer ball?",
+                "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 兴趣与运动。
-                        *   **深层意义**：本单元围绕“运动器材的所有权及运动喜好”展开。旨在引导学生热爱体育运动，培养健康的生活方式和团队合作意识。通过对比不同运动的评价（interesting, boring, difficult），学会表达主观感受并尊重他人的选择。
+                        *   **主题语境**：人与自我 —— 学校生活与学科偏好。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **运动器材**：soccer ball (足球), basketball (篮球), volleyball (排球), tennis (网球), ping-pong (乒乓球), bat (球棒)。
-                        - **评价形容词**：interesting (有趣的), boring (无聊的), difficult (困难的), easy (容易的), relaxing (放松的)。
-                        - **核心动词**：have (有), play (玩/打), watch (看), let (让)。
-                        - **其他**：us (我们), them (他们), class (班级), same (相同的)。
-
-                        ### 2. 核心短语金牌储备
-                        - `play basketball/soccer/tennis` 打篮球/足球/网球 (**必考：球类运动前不加冠词**)
-                        - `watch TV` 看电视
-                        - `watch sports on TV` 在电视上看体育比赛
-                        - `on TV` 在电视上
-                        - `at school` 在学校
-                        - `be late` 迟到
-                        - `play sports` 做运动
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **subject** /'sʌbdʒɪkt/ n. 学科；科目
+                        **biology** /baɪ'ɒlədʒi/ n. 生物学
+                        **IT** /ˌaɪ 'tiː/ n. 信息技术 (Information Technology)
+                        **history** /'hɪstri/ n. 历史
+                        **geography** /dʒi'ɒɡrəfi/ n. 地理
+                        **PE** /ˌpiː 'iː/ n. 体育 (Physical Education)
+                        **art** /ɑːt/ n. 艺术；美术
+                        **music** /'mjuːzɪk/ n. 音乐
+                        **math** /mæθ/ n. 数学
+                        **Chinese** /ˌtʃaɪ'niːz/ n. 语文；汉语
+                        **English** /'ɪŋɡlɪʃ/ n. 英语
+                        **because** /bɪ'kɒz/ conj. 因为
+                        **interesting** /'ɪntrəstɪŋ/ adj. 有趣的
+                        **fun** /fʌn/ adj. 有趣的；n. 乐趣
+                        **relaxing** /rɪ'læksɪŋ/ adj. 令人放松的
+                        **difficult** /'dɪfɪkəlt/ adj. 困难的
+                        **boring** /'bɔːrɪŋ/ adj. 乏味的；无聊的
+                        **easy** /'iːzi/ adj. 容易的
+                        **Monday** /'mʌndeɪ/ n. 星期一
+                        **Tuesday** /'tjuːzdeɪ/ n. 星期二
+                        **Wednesday** /'wenzdeɪ/ n. 星期三
+                        **Thursday** /'θɜːzdeɪ/ n. 星期四
+                        **Friday** /'fraɪdeɪ/ n. 星期五
+                        **Saturday** /'sætədeɪ/ n. 星期六
+                        **Sunday** /'sʌndeɪ/ n. 星期日
+                        **week** /wiːk/ n. 星期；周
+                        **day** /deɪ/ n. 一天；白昼
+                        **time** /taɪm/ n. 时间
+                        **schedule** /'ʃedjuːl/ n. 日程表；时刻表
+                        **lesson** /'lesn/ n. 课；教训
+                        **class** /klɑːs/ n. 班级；课
+                        **why** /waɪ/ adv. 为什么
+                        **when** /wen/ adv. 什么时候
+                        **start** /stɑːt/ v. 开始
+                        **finish** /'fɪnɪʃ/ v. 完成；结束
+                        **past** /pɑːst/ prep. 晚于；过
+                        **quarter** /'kwɔːtə(r)/ n. 一刻钟
+                        **half** /hɑːf/ n. 一半
                     """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. Do you have a soccer ball? (你有足球吗？)
-                        - **【考点详解】**：一般现在时含有实义动词 `have` 的疑问句。需借用助动词 `do`。
-                        
-                        #### 2. Does he have a tennis bat? (他有网球拍吗？)
-                        - **【结构剖析】**：第三人称单数提问，助动词用 `does`。注意：`does` 后面动词还原为 `have`。
-                        
-                        #### 3. Let's play basketball. (让我们打篮球吧。)
-                        - **【语法核心】**：`Let's` 引导的祈使句表示建议。后接动词原形。
-                        
-                        #### 4. I don't have a volleyball, but my brother has one. (我没有排球，但我哥哥有一个。)
-                        - **【避坑指南】**：`one` 用来替代前面提到的同类不特定事物。
-                    """.trimIndent()),
-
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：have / has 的用法
-                        - **肯定句**：I/You/We/They **have**...; He/She/It **has**...
-                        - **否定句**：`don't have` / `doesn't have`。
-                        - **疑问句**：`Do you have...?` / `Does he have...?`
-
-                        ### 核心语法二：祈使句建议 (Let's)
-                        - **结构**：`Let's + 动词原形.`
-                        - **回答**：Yes, let's. / That sounds good.
-
-                        ### 中考真题特训
-                        
-                        *(2024·南京中考)* *— ________ your sister ________ a computer? — No, she ________.*
-                        A. Do; have; don't   B. Does; has; doesn't   C. Does; have; doesn't   D. Do; has; don't
-                        
-                        **[解析]**：主语 sister 是三单，疑问句借 does 动词还原 have，选 **C**。
-
-                        *(2023·北京中考)* *— Let's play soccer after school. — That ________ like a good idea.*
-                        A. sound   B. sounds   C. sounding   D. to sound
-                        
-                        **[解析]**：That 指代前面这件事，是单数，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：我的运动习惯 (My Sports)
-                        #### 1. 写作要点
-                        - **器材拥有情况**：I have a... / I don't have a...
-                        - **喜欢的运动**：I like... because...
-                        - **运动频率**：I play sports every day.
-
-                        #### 2. 高分句式
-                        - *I like sports very much.*
-                        - *I have a collection of soccer balls.*
-                        - *Playing basketball is very interesting for me.*
-                        - *Let's go and play sports together!*
-
-                        #### 3. 满分范文
-                        **My Favorite Sport**
-                        
-                        I love sports. I have a basketball and two soccer balls. My favorite sport is basketball because it's very interesting and relaxing. I often play basketball with my classmates after school. I don't like volleyball because I think it's difficult. Sports are good for our health. Let's play together!
+                        ### 核心语法：Why 与 Because 的因果链
+                        - *— **Why** do you like math? — **Because** it's interesting.*
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u5", "Unit 5", "Do you have a soccer ball?",
+                "g7up_u5", "Unit 5", "Fun Clubs",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 兴趣与运动。
-                        *   **深层意义**：本单元围绕“运动器材的所有权及运动喜好”展开。旨在引导学生热爱体育运动，培养健康的生活方式和团队合作意识。通过对比不同运动的评价（interesting, boring, difficult），学会表达主观感受并尊重他人的选择。
+                        *   **主题语境**：人与自我 —— 个人爱好与特长。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **运动器材**：soccer ball (足球), basketball (篮球), volleyball (排球), tennis (网球), ping-pong (乒乓球), bat (球棒)。
-                        - **评价形容词**：interesting (有趣的), boring (无聊的), difficult (困难的), easy (容易的), relaxing (放松的)。
-                        - **核心动词**：have (有), play (玩/打), watch (看), let (让)。
-                        - **其他**：us (我们), them (他们), class (班级), same (相同的)。
-
-                        ### 2. 核心短语金牌储备
-                        - `play basketball/soccer/tennis` 打篮球/足球/网球 (**必考：球类运动前不加冠词**)
-                        - `watch TV` 看电视
-                        - `watch sports on TV` 在电视上看体育比赛
-                        - `on TV` 在电视上
-                        - `at school` 在学校
-                        - `be late` 迟到
-                        - `play sports` 做运动
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. Do you have a soccer ball? (你有足球吗？)
-                        - **【考点详解】**：一般现在时含有实义动词 `have` 的疑问句。需借用助动词 `do`。
-                        
-                        #### 2. Does he have a tennis bat? (他有网球拍吗？)
-                        - **【结构剖析】**：第三人称单数提问，助动词用 `does`。注意：`does` 后面动词还原为 `have`。
-                        
-                        #### 3. Let's play basketball. (让我们打篮球吧。)
-                        - **【语法核心】**：`Let's` 引导的祈使句表示建议。后接动词原形。
-                        
-                        #### 4. I don't have a volleyball, but my brother has one. (我没有排球，但我哥哥有一个。)
-                        - **【避坑指南】**：`one` 用来替代前面提到的同类不特定事物。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：have / has 的用法
-                        - **肯定句**：I/You/We/They **have**...; He/She/It **has**...
-                        - **否定句**：`don't have` / `doesn't have`。
-                        - **疑问句**：`Do you have...?` / `Does he have...?`
-
-                        ### 核心语法二：祈使句建议 (Let's)
-                        - **结构**：`Let's + 动词原形.`
-                        - **回答**：Yes, let's. / That sounds good.
-
-                        ### 中考真题特训
-                        
-                        *(2024·南京中考)* *— ________ your sister ________ a computer? — No, she ________.*
-                        A. Do; have; don't   B. Does; has; doesn't   C. Does; have; doesn't   D. Do; has; don't
-                        
-                        **[解析]**：主语 sister 是三单，疑问句借 does 动词还原 have，选 **C**。
-
-                        *(2023·北京中考)* *— Let's play soccer after school. — That ________ like a good idea.*
-                        A. sound   B. sounds   C. sounding   D. to sound
-                        
-                        **[解析]**：That 指代前面这件事，是单数，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：我的运动习惯 (My Sports)
-                        #### 1. 写作要点
-                        - **器材拥有情况**：I have a... / I don't have a...
-                        - **喜欢的运动**：I like... because...
-                        - **运动频率**：I play sports every day.
-
-                        #### 2. 高分句式
-                        - *I like sports very much.*
-                        - *I have a collection of soccer balls.*
-                        - *Playing basketball is very interesting for me.*
-                        - *Let's go and play sports together!*
-
-                        #### 3. 满分范文
-                        **My Favorite Sport**
-                        
-                        I love sports. I have a basketball and two soccer balls. My favorite sport is basketball because it's very interesting and relaxing. I often play basketball with my classmates after school. I don't like volleyball because I think it's difficult. Sports are good for our health. Let's play together!
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **club** /klʌb/ n. 俱乐部；社团
+                        **join** /dʒɔɪn/ v. 参加；加入
+                        **choose** /tʃuːz/ v. 选择；挑选
+                        **drama** /'drɑːmə/ n. 戏剧；戏剧表演
+                        **chess** /tʃes/ n. 象棋
+                        **play Chinese chess** 下中国象棋
+                        **feeling** /'fiːlɪŋ/ n. 感觉；情感
+                        **news** /njuːz/ n. 消息；新闻
+                        **musical** /'mjuːzɪkl/ adj. 音乐的；有音乐天赋的
+                        **instrument** /'ɪnstrəmənt/ n. 乐器；工具
+                        **musical instrument** 乐器
+                        **exactly** /ɪɡ'zæktli/ adv. 正是如此；准确地
+                        **drum** /drʌm/ n. 鼓
+                        **ability** /ə'bɪləti/ n. 能力；才能
+                        **paint** /peɪnt/ v. 用颜料画；n. 油漆
+                        **climb** /klaɪm/ v. 攀登；爬
+                        **more** /mɔː(r)/ adj. & pron. 更多（的）
+                        **act** /ækt/ v. 扮演；行动
+                        **act out** 表演；将……表演出来
+                        **home** /həʊm/ n. & adv. 家
+                        **at home** 在家里
+                        **interested** /'ɪntrəstɪd/ adj. 感兴趣的
+                        **interested in** 对……感兴趣
+                        **nature** /'neɪtʃə(r)/ n. 自然界；大自然
+                        **beef** /biːf/ n. 牛肉
+                        **soon** /suːn/ adv. 不久；很快
+                        **than** /ðən/ prep. & conj. 比
+                        **more than** 多于；超过
+                        **mind** /maɪnd/ n. 头脑；心思
+                        **fall** /fɔːl/ v. & n. 进入；落下；秋天
+                        **fall in love with** 爱上
+                        **photo** /'fəʊtəʊ/ n. 照片
+                        **take photos** 拍照
+                        **collect** /kə'lekt/ v. 收集；采集
+                        **insect** /'ɪnsekt/ n. 昆虫
+                        **discover** /dɪ'skʌvə(r)/ v. 发现；发觉
+                        **wildlife** /'waɪldlaɪf/ n. 野生动物
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u6", "Unit 6", "Do you like bananas?",
+                "g7up_u6", "Unit 6", "A Day in the Life",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与社会 —— 饮食与健康。
-                        *   **深层意义**：本单元围绕“饮食喜好与健康饮食”展开。旨在引导学生认识各种食物的名称，学会表达自己和他人的饮食偏好。更重要的是，通过区分健康食品与垃圾食品，培养学生养成均衡饮食的良好习惯，树立健康第一的生活理念。
+                        *   **主题语境**：人与自我 —— 生活习惯与日常作息。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **水果类**：banana (香蕉), apple (苹果), orange (橘子), strawberry (草莓), pear (梨)。
-                        - **蔬菜类**：tomato (西红柿), potato (土豆), carrot (胡萝卜), vegetable (蔬菜)。
-                        - **主食/肉类**：hamburger (汉堡包), bread (面包), rice (米饭), chicken (鸡肉)。
-                        - **饮品/零食**：milk (牛奶), salad (沙拉), ice-cream (冰淇淋)。
-                        - **形容词**：healthy (健康的), right (正确的), fat (胖的)。
-
-                        ### 2. 核心短语金牌储备
-                        - `think about` 思考；考虑
-                        - `eating habits` 饮食习惯
-                        - `ask sb. about sth.` 询问某人关于某事
-                        - `healthy food` 健康食品
-                        - `one last question` 最后一个问题
-                        - `after dinner` 晚饭后
-                        - `want to be fat` 想变胖
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. Do you like bananas? (你喜欢香蕉吗？)
-                        - **【考点详解】**：`like` 作实义动词，表示“喜欢”。询问喜好用一般疑问句 `Do/Does + 主语 + like...?`。
-                        - **【用法拓展】**：表示一类事物时，可数名词要用复数（如 bananas），不可数名词用原形（如 milk）。
-                        
-                        #### 2. He doesn't like salad. (他不喜欢沙拉。)
-                        - **【结构剖析】**：第三人称单数否定句。`doesn't` 后面接动词原形 `like`。
-                        
-                        #### 3. Let's have strawberries and apples. (让我们吃草莓和苹果吧。)
-                        - **【避坑指南】**：`have` 在这里意为“吃/喝”，等同于 eat 或 drink。
-                        
-                        #### 4. I don't want to be fat. (我不想变胖。)
-                        - **【语法延伸】**：`want to be + 形容词/名词` 表示“想成为/想变得...”。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：可数名词与不可数名词 (入门)
-                        - **可数名词**：可以论个算。有复数形式（加 -s/-es）。如：*apples, tomatoes*。
-                        - **不可数名词**：不能论个算。没有复数形式。如：*milk, rice, bread*。
-                        - **既可数又不可数**：*chicken* (作小鸡可数，作鸡肉不可数)；*salad* (作沙拉酱不可数，作一盘沙拉可数)；*ice-cream*。
-
-                        ### 核心语法二：一般现在时的肯定、否定与疑问
-                        - I like apples. -> I **don't** like apples. -> **Do** you like apples?
-                        - He likes apples. -> He **doesn't** like apples. -> **Does** he like apples?
-
-                        ### 中考真题特训
-                        
-                        *(2024·广东中考)* *I like eating ________ and ________.*
-                        A. potato; chicken   B. potatoes; chicken   C. potatoes; chickens   D. potato; chickens
-                        
-                        **[解析]**：土豆是可数名词，表示一类用复数 potatoes；鸡肉是不可数名词，用原形，选 **B**。
-
-                        *(2023·上海中考)* *My sister usually ________ an egg and some milk for breakfast.*
-                        A. have   B. has   C. having   D. to have
-                        
-                        **[解析]**：主语 sister 是三单，谓语动词用 has，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：我的饮食习惯 (My Eating Habits)
-                        #### 1. 写作逻辑
-                        - **总述**：I have a healthy eating habit.
-                        - **三餐描写**：分别描述早、中、晚三餐吃什么（For breakfast/lunch/dinner, I have...）。
-                        - **喜好与原因**：I like... because... / I don't like...
-                        - **总结**：Healthy food makes me strong.
-
-                        #### 2. 高分句式
-                        - *For breakfast, I always have some bread and a glass of milk.*
-                        - *I like vegetables because they are good for my health.*
-                        - *I don't eat ice-cream because I don't want to be fat.*
-
-                        #### 3. 满分范文
-                        **My Healthy Diet**
-                        
-                        Hello, I am Li Ming. I have good eating habits. For breakfast, I usually eat an egg and drink some milk. For lunch, I like rice, chicken and tomatoes. I think chicken is very delicious. For dinner, I eat vegetables and fruit. I like strawberries and apples very much. I don't eat hamburgers or ice-cream because they are not healthy and I don't want to be fat. Healthy food makes me strong and happy.
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **use** /juːz/ v. 使用；利用
+                        **make use of** 使用；利用
+                        **shower** /'ʃaʊə(r)/ n. 淋浴；v. 洗淋浴
+                        **take a shower** 淋浴
+                        **dress** /dres/ v. 穿衣服 n. 连衣裙
+                        **get dressed** 穿衣服
+                        **brush** /brʌʃ/ v. 刷；n. 刷子
+                        **tooth** /tuːθ/ n. 牙齿
+                        **teeth** /tiːθ/ n. (tooth的复数) 牙齿
+                        **duty** /'djuːti/ n. 值班；职责
+                        **on duty** 值班
+                        **usually** /'juːʒuəli/ adv. 通常地；一般地
+                        **up** /ʌp/ adv. 向上
+                        **get up** 起床
+                        **reporter** /rɪ'pɔːtə(r)/ n. 记者
+                        **around** /ə'raʊnd/ prep. & adv. 大约；环绕
+                        **homework** /'həʊmwɜːk/ n. 家庭作业
+                        **bed** /bed/ n. 床
+                        **go to bed** 上床睡觉
+                        **saying** /'saying/ n. 谚语；格言
+                        **rise** /raɪz/ v. 起床；升起；增长
+                        **stay** /steɪ/ v. 停留；待
+                        **routine** /ruː'tiːn/ n. 常规
+                        **restaurant** /'restrɒnt/ n. 餐馆；餐厅
+                        **housework** /'haʊswɜːk/ n. 家务劳动
+                        **while** /waɪl/ n. 一段时间；conj. 当……的时候
+                        **weekend** /ˌwiːk'end/ n. 周末
+                        **at weekends** 在周末
+                        **daily** /'deɪli/ adj. 每日的；日常的
+                        **daily routine** 日常生活
+                        **only** /'əʊnli/ adv. 只；仅
+                        **break** /breɪk/ n. 休息；间断
+                        **already** /ɔːl'redi/ adv. 已经；早已
+                        **dark** /dɑːk/ adj. 昏暗的；深色的
+                        **outside** /ˌaʊt'saɪd/ adv. & prep. 在……外面
+                        **part** /pɑːt/ n. 部分
+                        **everyday** /'evrideɪ/ adj. 每天的；日常的
+                        **prepare** /prɪ'peə(r)/ v. 准备
+                        **begin** /bɪ'ɡɪn/ v. 开始
+                        **dinner** /'dɪnə(r)/ n. 正餐；主餐
+                        **early** /'ɜːli/ adj. 早的；adv. 提前
+                        **ask** /ɑːsk/ v. 询问；请求
+                        **lunch** /lʌntʃ/ n. 午餐
+                        **film** /fɪlm/ n. 电影
+                        **o'clock** /ə'klɒk/ adv. ……点钟
+                        **breakfast** /'brekfəst/ n. 早餐
+                        **before** /bɪ'fɔː(r)/ prep. & conj. 在……以前
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u7", "Unit 7", "How much are these socks?",
+                "g7up_u7", "Unit 7", "Happy Birthday!",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与社会 —— 购物与消费。
-                        *   **深层意义**：本单元围绕“服装与购物”展开。旨在引导学生掌握购物时的交际用语，包括询问价格、颜色、尺码以及表达购买意愿。通过认识货币单位和商品价格，培养学生的理财意识和理性消费观念。
+                        *   **主题语境**：人与社会 —— 个人庆典与人际交往。
                     """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **服装鞋帽**：T-shirt (T恤衫), sweater (毛衣), skirt (裙子), socks (短袜), shoes (鞋), shorts (短裤), trousers (长裤)。
-                        - **颜色形容词**：black (黑), white (白), red (红), green (绿), blue (蓝), yellow (黄)。
-                        - **购物相关**：price (价格), dollar (美元), Yuan (元), sale (特卖), store (商店)。
-                        - **形容词**：big (大), small (小), short (短), long (长)。
-
-                        ### 2. 核心短语金牌储备
-                        - `how much` 多少钱
-                        - `Can I help you?` 我能帮您吗？
-                        - `I'll take it.` 我买了。
-                        - `Here you are.` 给你。
-                        - `have a look at...` 看一看...
-                        - `at a very good price` 以非常好的价格
-                        - `on sale` 特价销售
-                        - `for boys/girls` 给男孩/女孩们的
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. How much is this T-shirt? (这件T恤衫多少钱？)
-                        - **【考点详解】**：`How much + be + 主语?` 用于询问价格。回答用 `It is / They are + 价格.`。
-                        - **【语法延伸】**：`how much` 还可以修饰不可数名词，询问数量。*How much water do you need?*
-                        
-                        #### 2. What color do you want? (你想要什么颜色的？)
-                        - **【结构剖析】**：`What color` 引导特殊疑问句询问颜色。
-                        
-                        #### 3. We have sweaters at a very good price. (我们的毛衣价格很实惠。)
-                        - **【避坑指南】**：表示“以...的价格”，介词必须用 `at`。
-                        
-                        #### 4. I'll take it. (我买了。)
-                        - **【社交礼仪】**：购物时决定购买某物的地道表达。`take` 这里意为“买下”。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：How much 问价格
-                        - 单数：`How much is the hat?` -> `It's five dollars.`
-                        - 复数：`How much are the shoes?` -> `They're ten dollars.` (注意：成双成对的衣物如 shoes, socks, trousers 都是复数)。
-
-                        ### 核心语法二：基数词 (10-30)
-                        - 11-19：eleven, twelve, thirteen, fourteen, fifteen... (注意 13, 15, 18 的拼写)。
-                        - 整十：twenty, thirty.
-
-                        ### 中考真题特训
-                        
-                        *(2024·四川中考)* *— ________ are these red socks? — They are 10 yuan.*
-                        A. How much   B. How many   C. How long   D. How often
-                        
-                        **[解析]**：根据答语 10 yuan 可知是问价格，选 **A**。
-
-                        *(2023·江苏中考)* *This pair of shoes ________ very nice. I'll ________ them.*
-                        A. look; buy   B. looks; take   C. look; take   D. looks; have
-                        
-                        **[解析]**：This pair of 作主语，谓语动词用单数 looks；决定买下用 take，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：商店促销海报 (A Sale Poster)
-                        #### 1. 写作要素
-                        - **吸引顾客**：Come and buy your clothes at...
-                        - **商品与价格**：We have... for only...
-                        - **颜色与人群**：... in red, green and white for girls/boys.
-                        - **联系方式/地址**：Come to our store now!
-
-                        #### 2. 高分句式
-                        - *Welcome to Mr. Cool's Clothes Store!*
-                        - *We sell all our clothes at very good prices.*
-                        - *Do you need sweaters for school?*
-                        - *Anybody can afford our prices!*
-
-                        #### 3. 满分范文
-                        **Huaxing Clothes Store Sale!**
-                        
-                        Come and buy your clothes at Huaxing's great sale! We sell all our clothes at very good prices. Do you need sweaters for the winter? We have warm sweaters for only $15. Do you like sports? We have great sports shoes for only $20. For girls, we have beautiful skirts in red, green and white for only $12. And socks are only $2 for three pairs! Come to Huaxing Clothes Store now!
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7up_u8", "Unit 8", "When is your birthday?",
-                listOf(
-                    UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与社会 —— 时间与节日。
-                        *   **深层意义**：本单元围绕“日期、月份与生日”展开。旨在引导学生学会用英语表达具体日期，关注自己和他人的生日及重要节日。通过举办生日派对等活动，增进同学间的友谊，培养感恩之心和时间规划能力。
-                    """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **十二个月份**：January, February, March, April, May, June, July, August, September, October, November, December。
-                        - **序数词**：first (第一), second (第二), third (第三), fifth (第五), eighth (第八), ninth (第九), twelfth (第十二), twentieth (第二十)。
-                        - **节日/活动**：birthday (生日), party (派对), festival (节日), test (测试), trip (旅行), art (艺术)。
-                        - **其他**：month (月), old (老的), term (学期), time (时间), busy (忙碌的)。
-
-                        ### 2. 核心短语金牌储备
-                        - `Happy birthday!` 生日快乐！
-                        - `how old` 多大年纪
-                        - `School Day` 学校开放日
-                        - `sports meet` 运动会
-                        - `art festival` 艺术节
-                        - `English test` 英语测试
-                        - `have a good time` 玩得开心
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. When is your birthday? (你的生日是什么时候？)
-                        - **【考点详解】**：`When` 引导特殊疑问句询问日期或时间。
-                        
-                        #### 2. My birthday is on May 2nd. (我的生日在五月二日。)
-                        - **【介词用法】**：在具体的某一天（如某月某日），介词用 `on`。如果只有月份，介词用 `in`（如 *in May*）。
-                        
-                        #### 3. How old are you? (你多大了？)
-                        - **【结构剖析】**：询问年龄的固定句型。回答用 `I'm + 数字 (+ years old).`
-                        
-                        #### 4. We have an English test on November 15th. (我们在11月15日有一次英语测验。)
-                        - **【避坑指南】**：`have a test` 意为“举行测验/参加测验”。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：序数词的构成规律
-                        **口诀**：
-                        一二三，特殊记 (first, second, third)；
-                        从四开始加 -th (fourth)；
-                        八去 t，九去 e (eighth, ninth)；
-                        ve 要用 f 替 (fifth, twelfth)；
-                        整十把 y 变 ie，再加 -th (twentieth)；
-                        几十几，只变个位就可以 (twenty-first)。
-
-                        ### 核心语法二：日期的表达
-                        - **写法**：Month + Date, Year. (May 2nd, 2024)
-                        - **读法**：May the second, two thousand and twenty-four.
-
-                        ### 中考真题特训
-                        
-                        *(2024·安徽中考)* *— When is Teachers' Day in China? — It's on ________.*
-                        A. September 10th   B. October 1st   C. March 8th   D. June 1st
-                        
-                        **[解析]**：常识题，教师节在9月10日，选 **A**。
-
-                        *(2023·广东中考)* *Today is my sister's ________ birthday. I will buy her a gift.*
-                        A. twelve   B. twelfth   C. the twelfth   D. twelveth
-                        
-                        **[解析]**：表示“第十二个”生日，用序数词 twelfth，且前面已有形容词性物主代词 sister's，不能再加 the，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：学校活动日程安排 (School Activities)
-                        #### 1. 写作思路
-                        - **总述**：We have some interesting and fun things for you this term.
-                        - **分述**：按时间顺序列出各项活动（On + 日期, we have...）。
-                        - **结语**：This is a really busy term!
-
-                        #### 2. 高分句式
-                        - *On September 21st, we have a school trip in the afternoon.*
-                        - *October is a great month.*
-                        - *We have an art festival on November 3rd.*
-                        - *Your parents can come to our school.*
-
-                        #### 3. 满分范文
-                        **Our School Calendar**
-                        
-                        Dear students, we have some interesting and fun things for you this term. On September 21st, we have a school trip. In October, we have a great festival. It's the sports meet on October 12th. Next, we have an art festival. It is on November 3rd. We have an English test on November 30th. On December 15th, we have a book sale in the school library. This is a really busy but happy term!
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7up_u9", "Unit 9", "My favorite subject is science.",
-                listOf(
-                    UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 学习科目与时间表。
-                        *   **深层意义**：本单元围绕“学校科目及喜好原因”展开。旨在引导学生全面了解各学科的特点，发现自己的兴趣所在。通过讨论科目和安排时间表，培养学生的学习规划能力和对不同知识领域的探索精神。
-                    """.trimIndent()),
-
-                    UnitDetailSection("💡 词汇短语全方位解析", """
-                        ### 1. 重点单词分类
-                        - **学科名称**：subject (学科), science (科学), P.E. (体育), music (音乐), math (数学), Chinese (语文), geography (地理), history (历史)。
-                        - **星期名词**：Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday。
-                        - **形容词**：favorite (最喜爱的), free (空闲的), cool (酷的), useful (有用的), strict (严格的)。
-                        - **其他**：why (为什么), because (因为), finish (完成), lesson (课)。
-
-                        ### 2. 核心短语金牌储备
-                        - `favorite subject` 最喜欢的科目
-                        - `play games with sb.` 和某人玩游戏
-                        - `the next day` 第二天
-                        - `for sure` 肯定地；确切地
-                        - `from ... to ...` 从...到...
-                        - `after that` 在那之后
-                        - `be strict with sb.` 对某人要求严格
-                        - `have P.E.` 上体育课
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子深度解剖", """
-                        #### 1. What's your favorite subject? (你最喜欢的科目是什么？)
-                        - **【考点详解】**：`favorite` 意为“最喜爱的”，可作形容词或名词。相当于 `What subject do you like best?`。
-                        
-                        #### 2. Why do you like P.E.? (你为什么喜欢体育？)
-                        - **【结构剖析】**：`Why` 引导特殊疑问句询问原因。
-                        
-                        #### 3. Because it's fun. (因为它很有趣。)
-                        - **【考点详解】**：回答 `Why` 提问，必须用 `Because` 引导原因状语从句。
-                        
-                        #### 4. I am very busy from Monday to Friday. (我从周一到周五都很忙。)
-                        - **【语法延伸】**：`from ... to ...` 表示时间或空间的起点和终点。星期前面不用加冠词。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：特殊疑问词的综合运用
-                        - **What** 问内容 (What's your favorite...?)
-                        - **Why** 问原因 (Why do you like...?)
-                        - **Who** 问人物 (Who is your science teacher?)
-                        - **When** 问时间 (When is your math class?)
-
-                        ### 核心语法二：表时间的介词 (in, on, at)
-                        - **in**：加年、月、季节、泛指的上下午晚上。 (*in 2024, in May, in the morning*)
-                        - **on**：加具体的某一天、星期几、或特定的一天的上下午。 (*on Monday, on May 1st, on Sunday morning*)
-                        - **at**：加具体的时间点。 (*at 8:00*)
-
-                        ### 中考真题特训
-                        
-                        *(2024·天津中考)* *— ________ is your English teacher? — Ms. Clark. She is very kind.*
-                        A. What   B. Who   C. Where   D. How
-                        
-                        **[解析]**：根据回答是人名，可知问的是“谁”，选 **B**。
-
-                        *(2023·广东中考)* *My favorite subject is history ________ it's very interesting.*
-                        A. so   B. but   C. because   D. or
-                        
-                        **[解析]**：前后是因果关系，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作专项指导", """
-                        ### 写作主题：我最喜欢的一天/科目 (My Favorite Day/Subject)
-                        #### 1. 写作要点
-                        - **点题**：点出最喜欢哪一天或哪个科目。
-                        - **原因**：为什么喜欢？（有趣、老师好、有自己喜欢的课）。
-                        - **日程安排**：列举这一天的具体课程或活动。
-                        - **感受评价**：This day is busy but happy.
-
-                        #### 2. 高分句式
-                        - *My favorite day of the week is Friday.*
-                        - *I like science because it is difficult but interesting.*
-                        - *Mr. Wang is my math teacher and his classes are great.*
-                        - *After school, I play sports with my friends.*
-
-                        #### 3. 满分范文
-                        **My Favorite Day**
-                        
-                        My favorite day is Friday because I have my favorite subjects. In the morning, I have Chinese and math. Math is difficult but I think it's useful. Then at 10:00, I have history. Mr. Smith is our history teacher. He is very funny and his classes are interesting. In the afternoon, I have P.E. from 2:00 to 3:00. I love P.E. because I can play soccer with my friends. After that, school finishes. I am always very happy on Friday.
+                    UnitDetailSection("📖 课本同步单词表 (完全一致)", """
+                        **birthday** /'bɜːθdeɪ/ n. 生日
+                        **month** /mʌnθ/ n. 月份
+                        **date** /deɪt/ n. 日期
+                        **gift** /ɡɪft/ n. 礼物
+                        **party** /'pɑːti/ n. 聚会
+                        **buy** /baɪ/ v. 买
+                        **store** /stɔː(r)/ n. 商店
+                        **shop** /ʃɒp/ n. 商店；v. 逛商店
+                        **woman** /'wʊmən/ n. 女人
+                        **women** /'wɪmɪn/ n. (woman的复数) 女人
+                        **celebrate** /'selɪbreɪt/ v. 庆祝；庆贺
+                        **surprise** /sə'praɪz/ n. 惊奇；v. 使感到意外
+                        **meaningful** /'miːnɪŋfl/ adj. 有意义的
+                        **wish** /wɪʃ/ n. & v. 愿望；希望
+                        **make a wish** 许愿
+                        **celebration** /ˌselɪ'breɪʃn/ n. 庆祝活动
+                        **post** /pəʊst/ n. 帖子；v. 邮寄；发布
+                        **contact** /'kɒntækt/ v. & n. 联系
+                        **symbol** /'sɪmbl/ n. 象征；符号
+                        **village** /'vɪlɪdʒ/ n. 村庄
+                        **grow** /ɡrəʊ/ v. 生长；成长
+                        **blow** /bləʊ/ v. 吹
+                        **blow out** 吹灭
+                        **enjoy** /ɪn'dʒɔɪ/ v. 享受；喜爱
+                        **height** /haɪt/ n. 高度
+                        **later** /'leɪtə(r)/ adv. 后来；以后
+                        **next time** 下次
+                        **noodles** /'nuːdlz/ n. 面条
+                        **eat birthday noodles** 吃长寿面
+                        **open** /'əʊpən/ v. 打开
+                        **open birthday gifts** 拆生日礼物
+                        **cake** /keɪk/ n. 蛋糕
+                        **have a birthday cake** 吃生日蛋糕
+                        **song** /sɒŋ/ n. 歌曲
+                        **hear the "Happy Birthday" song** 听《祝你生日快乐》歌
                     """.trimIndent())
                 )
             )
