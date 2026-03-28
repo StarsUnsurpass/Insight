@@ -33,6 +33,16 @@ interface ScanDao {
     """)
     fun getErrorCategoryStats(studentId: String): Flow<List<CategoryCount>>
 
+    // 诊断级查询：真实错误频率统计
+    @Query("""
+        SELECT coreKnowledgeId as label, COUNT(*) as count 
+        FROM scan_record_table 
+        WHERE studentId = :studentId AND isMastered = 0
+        GROUP BY coreKnowledgeId
+        ORDER BY count DESC LIMIT 5
+    """)
+    fun getRealWeakNodeCounts(studentId: String): Flow<List<CategoryCount>>
+
     // 诊断级查询：题型失分率
     @Query("""
         SELECT questionType as label, 
@@ -90,6 +100,26 @@ interface KnowledgeDao {
         LIMIT 3
     """)
     fun getPrerequisiteGapAlerts(studentId: String): Flow<List<KnowledgeNodeEntity>>
+
+    // 诊断级查询：全班成绩区间分布 (基于 120 分制)
+    @Query("""
+        SELECT 
+            CASE 
+                WHEN avg_score < 72 THEN '不及格'
+                WHEN avg_score < 84 THEN '及格'
+                WHEN avg_score < 96 THEN '中等'
+                WHEN avg_score < 108 THEN '良好'
+                ELSE '优秀'
+            END as stage,
+            COUNT(*) as count
+        FROM (
+            SELECT studentId, AVG(masteryScore * 1.2) as avg_score 
+            FROM student_mastery 
+            GROUP BY studentId
+        )
+        GROUP BY stage
+    """)
+    fun getClassScoreDistribution(): Flow<List<ScoreStageCount>>
     
     @Query("SELECT * FROM knowledge_edges")
     fun getAllEdges(): Flow<List<KnowledgeEdgeEntity>>

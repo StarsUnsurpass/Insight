@@ -25,6 +25,14 @@ data class DailyActivityData(
 )
 
 /**
+ * 成绩区间分布辅助类
+ */
+data class ScoreStageCount(
+    val stage: String, // 不及格, 及格, 中等, 良好, 优秀
+    val count: Int
+)
+
+/**
  * 能力维度分值辅助类
  */
 data class SkillDimensionScore(

@@ -1,6 +1,8 @@
 package com.example.insight.ui.state
 
 import androidx.compose.ui.graphics.Color
+import com.example.insight.data.local.entities.CategoryPercentage
+import com.example.insight.data.local.entities.ScoreStageCount
 
 data class AnalyticsState(
     val selectedView: AnalyticsViewType = AnalyticsViewType.INDIVIDUAL,
@@ -8,34 +10,35 @@ data class AnalyticsState(
     val aiSummary: String = "正在深度解析本周学情...",
     val studentName: String = "张三",
     
-    // 一、 宏观概览 (Executive Overview)
-    val overallMastery: Int = 0,               // 综合得分
+    // 一、 宏观概览
+    val overallMastery: Int = 0,
     val curriculumProgress: String = "人教版八年级下册", 
-    val progressPercentage: Float = 0.85f,     // 进度百分比
+    val progressPercentage: Float = 0.85f,
     val throughput: ThroughputMetrics = ThroughputMetrics(),
-    val focusRhythm: String = "上午第一节课",     // 效率热区
+    val focusRhythm: String = "上午第一节课",
     
-    // 二、 五维能力 (Skill Assessment)
+    // 二、 五维能力
     val cognitiveDimensions: Map<String, Float> = emptyMap(),
     
-    // 三、 知识图谱诊断 (KG Diagnostics)
+    // 三、 知识图谱诊断
     val topWeakNodes: List<KnowledgePointInfo> = emptyList(),
     val prerequisiteGapAlerts: List<PrerequisiteAlert> = emptyList(),
     val forgottenNodesCount: Int = 0,
     
-    // 四、 错因分析 (Error Pathology)
+    // 四、 错因分析
     val errorCauses: List<ErrorCause> = emptyList(),
     val questionTypePerformance: List<CategoryPercentage> = emptyList(),
     
-    // 五、 中考对标 (Exam Benchmark)
+    // 五、 中考对标
     val highFrequencyIssuesCount: Int = 0,
     val predictedScoreRange: Pair<Int, Int> = 90 to 105,
+    val classScoreDistribution: List<ScoreStageCount> = emptyList(), 
     
-    // 六、 智能化处方 (Prescriptions)
+    // 六、 智能化处方
     val targetedPath: String = "优先攻克【状语从句】",
     val syncAdvice: String = "建议精读 八年级下册 Unit 8 Grammar Focus",
     
-    // 节律数据 (Heatmap)
+    // 节律数据
     val heatmapData: List<DailyActivity> = emptyList(),
     val streakCount: Int = 0
 )
@@ -61,4 +64,3 @@ enum class AnalyticsViewType { INDIVIDUAL, CLASS }
 
 data class ErrorCause(val label: String, val percentage: Float, val color: Color)
 data class DailyActivity(val timestamp: Long, val intensity: Int)
-data class CategoryPercentage(val label: String, val percentage: Float)
