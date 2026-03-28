@@ -36,154 +36,116 @@ fun LearningAnalyticsScreen(
     onViewChange: (AnalyticsViewType) -> Unit,
     onNavigateToDetail: (String, String) -> Unit
 ) {
-    // 这里的背景色保持透明或继承主题色，防止产生“面板”感
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+    // 直接使用透明背景或继承自父容器，确保与主题色完全一致
+    // 移除所有 Column 顶部的白色 Box 和 Divider
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        // 严格对齐首页 Padding (24, 24, 24)
+        contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 40.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        // --- 1. 顶部白色分界区 ---
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = Color.White // 分界线上方为白色
-        ) {
-            Column {
-                // 仅作为颜色占位，不使用 statusBarsPadding 避免高度冲突，由 MainScreen 统一处理
-                HorizontalDivider(color = Color.Black.copy(alpha = 0.08f), thickness = 0.5.dp)
-            }
-        }
-
-        // --- 2. 核心滚动内容区 ---
-        // 背景颜色与主题颜色完全一致，不再有“覆盖白色”的感觉
-        LazyColumn(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth(),
-            // 严格对齐首页的 Padding: start=24, end=24, top=24
-            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            // 标题：与首页“您好”位置完全对齐，位于左上角
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+        // 1. 标题项目：直接作为 LazyColumn 的第一个 item，实现滚动联动
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "学情分析",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                
+                Surface(
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(
-                        text = "学情分析",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                    
-                    Surface(
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(12.dp)
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF4CAF50)))
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text("实时同步中", fontSize = 10.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                        }
+                        Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF4CAF50)))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("实时同步中", fontSize = 10.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                     }
                 }
             }
+        }
 
-            // 模式切换
-            item {
-                AnalyticsSegmentedControl(
-                    selectedView = state.selectedView,
-                    onViewChange = onViewChange
+        // 2. 模式切换
+        item {
+            AnalyticsSegmentedControl(
+                selectedView = state.selectedView,
+                onViewChange = onViewChange
+            )
+        }
+
+        // 3. AI 核心诊断
+        item { AiSummaryCard(summary = state.aiSummary) }
+
+        // 4. 核心指标卡片（阴影增强）
+        item {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                ScorePredictCardWithShadow(
+                    title = "综合健康度",
+                    value = "${state.overallMastery}",
+                    subValue = "基于记录统计",
+                    onClick = { onNavigateToDetail("综合健康度", "诊断报告内容...") },
+                    color = Color(0xFF5C6BC0),
+                    modifier = Modifier.weight(1f)
+                )
+                ScorePredictCardWithShadow(
+                    title = "预估中考分",
+                    value = "${state.predictedScoreRange.first}-${state.predictedScoreRange.second}",
+                    subValue = "120 分制模拟",
+                    onClick = { onNavigateToDetail("中考预测分", "预测报告内容...") },
+                    color = Color(0xFF26A69A),
+                    modifier = Modifier.weight(1f)
                 )
             }
+        }
 
-            // AI 核心诊断
-            item { AiSummaryCard(summary = state.aiSummary) }
-
-            // 核心指标
+        // 5. 班级群像
+        if (state.selectedView == AnalyticsViewType.CLASS) {
             item {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    ScorePredictCardWithShadow(
-                        title = "综合健康度",
-                        value = "${state.overallMastery}",
-                        subValue = "基于真实数据",
-                        onClick = { onNavigateToDetail("综合健康度", "诊断报告内容...") },
-                        color = Color(0xFF5C6BC0),
-                        modifier = Modifier.weight(1f)
+                DashboardCard(title = "全班成绩区间分布") {
+                    ClassScoreDistributionChart(
+                        distribution = state.classScoreDistribution,
+                        onItemClick = { stage -> onNavigateToDetail("${stage}阶段统计", "详情数据...") }
                     )
-                    ScorePredictCardWithShadow(
-                        title = "预估中考分",
-                        value = "${state.predictedScoreRange.first}-${state.predictedScoreRange.second}",
-                        subValue = "120 分制模拟",
-                        onClick = { onNavigateToDetail("中考预测分", "预测报告内容...") },
-                        color = Color(0xFF26A69A),
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-
-            // 班级分布（按需显示）
-            if (state.selectedView == AnalyticsViewType.CLASS) {
-                item {
-                    DashboardCard(title = "全班成绩区间分布") {
-                        ClassScoreDistributionChart(
-                            distribution = state.classScoreDistribution,
-                            onItemClick = { stage -> onNavigateToDetail("${stage}阶段统计", "详情...") }
-                        )
-                    }
-                }
-            }
-
-            // 五维模型
-            item {
-                DashboardCard(title = "英语能力五维细分模型") {
-                    Box(modifier = Modifier.fillMaxWidth().clickable { onNavigateToDetail("能力五维模型", "分析...") }) {
-                        CognitiveRadar(dimensions = state.cognitiveDimensions, modifier = Modifier.fillMaxWidth().height(260.dp))
-                    }
-                }
-            }
-
-            // 知识图谱诊断
-            item {
-                DashboardCard(title = "知识图谱深度诊断") {
-                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        state.topWeakNodes.forEach { node ->
-                            WeakNodeRow(node.title, node.errorCount) { onNavigateToDetail("知识点诊断", "...") }
-                        }
-                    }
-                }
-            }
-
-            // 行动指南
-            item {
-                Column {
-                    Text("智能化行动指南", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
-                    Spacer(modifier = Modifier.height(16.dp))
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        item { PrescriptionCard("靶向路径", state.targetedPath, Icons.AutoMirrored.Filled.DirectionsRun, Color(0xFF5C6BC0)) }
-                        item { PrescriptionCard("教材建议", state.syncAdvice, Icons.AutoMirrored.Filled.MenuBook, Color(0xFF26A69A)) }
-                    }
                 }
             }
         }
 
-        // --- 3. 底部白色分界区（Dock 上方） ---
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = Color.White // 分界线下方为白色
-        ) {
+        // 6. 五维模型
+        item {
+            DashboardCard(title = "英语能力五维细分模型") {
+                Box(modifier = Modifier.fillMaxWidth().clickable { onNavigateToDetail("能力五维模型", "深度解析报告...") }) {
+                    CognitiveRadar(dimensions = state.cognitiveDimensions, modifier = Modifier.fillMaxWidth().height(260.dp))
+                }
+            }
+        }
+
+        // 7. 行动指南
+        item {
             Column {
-                HorizontalDivider(color = Color.Black.copy(alpha = 0.08f), thickness = 0.5.dp)
-                // 预留 Dock 空间，由于在 MainScreen 中已存在 padding，这里仅作为视觉延伸
-                Spacer(modifier = Modifier.height(100.dp)) 
+                Text("智能化行动指南", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    item { PrescriptionCard("靶向路径", state.targetedPath, Icons.AutoMirrored.Filled.DirectionsRun, Color(0xFF5C6BC0)) }
+                    item { PrescriptionCard("教材建议", state.syncAdvice, Icons.AutoMirrored.Filled.MenuBook, Color(0xFF26A69A)) }
+                }
             }
         }
+        
+        // 8. 底部占位，由 MainScreen 统一管理，此处仅作为内容留白
+        item { Spacer(modifier = Modifier.height(100.dp)) }
     }
 }
+
+// --- 卡片组件定义 ---
 
 @Composable
 fun ScorePredictCardWithShadow(
@@ -210,7 +172,7 @@ fun ScorePredictCardWithShadow(
             Column {
                 Text(title, fontSize = 12.sp, color = color.copy(alpha = 0.8f))
                 Text(value, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = color)
-                Text(subValue, fontSize = 10.sp, color = Color.Gray)
+                Text(subValue, fontSize = 10.sp, color = Color.Gray, maxLines = 1)
             }
         }
     }
@@ -272,26 +234,6 @@ fun PrescriptionCard(title: String, desc: String, icon: ImageVector, color: Colo
                 Text(desc, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, lineHeight = 14.sp)
             }
         }
-    }
-}
-
-@Composable
-fun WeakNodeRow(title: String, count: Int, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable { onClick() }
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFFE53935)))
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(title, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-        }
-        Text("$count 次错误", fontSize = 12.sp, color = Color.Gray)
     }
 }
 
