@@ -41,6 +41,9 @@ sealed class Route(val path: String) {
         fun createRoute(id: String) = "textbook_detail/$id"
     }
     object Schedule : Route("schedule")
+    object AnalyticsDetail : Route("analytics_detail/{title}/{content}") {
+        fun createRoute(title: String, content: String) = "analytics_detail/${java.net.URLEncoder.encode(title, "UTF-8")}/${java.net.URLEncoder.encode(content, "UTF-8")}"
+    }
 }
 
 @Composable
@@ -87,8 +90,23 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 },
                 onNavigateToSchedule = {
                     navController.navigate(Route.Schedule.path)
+                },
+                onNavigateToAnalyticsDetail = { title, content ->
+                    navController.navigate(Route.AnalyticsDetail.createRoute(title, content))
                 }
             )
+        }
+
+        composable(
+            route = Route.AnalyticsDetail.path,
+            arguments = listOf(
+                androidx.navigation.navArgument("title") { type = androidx.navigation.NavType.StringType },
+                androidx.navigation.navArgument("content") { type = androidx.navigation.NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val title = java.net.URLDecoder.decode(backStackEntry.arguments?.getString("title") ?: "", "UTF-8")
+            val content = java.net.URLDecoder.decode(backStackEntry.arguments?.getString("content") ?: "", "UTF-8")
+            AnalyticsDetailScreen(title, content) { navController.popBackStack() }
         }
 
         composable(

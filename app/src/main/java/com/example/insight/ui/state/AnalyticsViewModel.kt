@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.insight.data.local.dao.*
 import com.example.insight.data.local.entities.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import java.text.SimpleDateFormat
@@ -19,33 +20,45 @@ class AnalyticsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _viewType = MutableStateFlow(AnalyticsViewType.INDIVIDUAL)
-    
-    // 动态获取当前选中的学生 ID (如果没有则使用 DEFAULT)
+    private val sdf = SimpleDateFormat("MM-dd HH:mm", Locale.CHINA)
+
+    // 动态获取当前活动的学生
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val activeStudentId = studentDao.getAllStudentsFlow()
         .map { it.firstOrNull()?.studentId ?: "DEFAULT_STUDENT" }
         .distinctUntilChanged()
 
+    // 结构化组合知识图谱统计，避免 vararg combine 导致的类型丢失
+    private fun getKnowledgeStatsFlow(studentId: String) = combine(
+        knowledgeDao.getSkillDimensionStats(studentId),
+        knowledgeDao.getHighFrequencyVulnerabilities(studentId),
+        knowledgeDao.getPrerequisiteGapAlerts(studentId),
+        knowledgeDao.getClassScoreDistribution()
+    ) { skills, highFreq, gaps, classDist ->
+        KnowledgeStats(skills, highFreq, gaps, classDist)
+    }
+
+    // 结构化组合错题统计
+    private fun getErrorStatsFlow(studentId: String) = combine(
+        scanDao.getErrorCategoryStats(studentId),
+        scanDao.getRealWeakNodeCounts(studentId),
+        scanDao.getLearningRhythm(studentId, System.currentTimeMillis() - 35L * 86400000)
+    ) { errors, weakCounts, rhythm ->
+        Triple(errors, weakCounts, rhythm)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<AnalyticsState> = activeStudentId.flatMapLatest { studentId ->
         combine(
             _viewType,
-            knowledgeDao.getSkillDimensionStats(studentId),
-            knowledgeDao.getHighFrequencyVulnerabilities(studentId),
-            knowledgeDao.getPrerequisiteGapAlerts(studentId),
-            knowledgeDao.getClassScoreDistribution(),
-            scanDao.getErrorCategoryStats(studentId),
-            scanDao.getRealWeakNodeCounts(studentId),
-            scanDao.getLearningRhythm(studentId, System.currentTimeMillis() - 35L * 86400000)
-        ) { params ->
-            val viewType = params[0] as AnalyticsViewType
-            val skills = params[1] as List<SkillDimensionScore>
-            val highFreq = params[2] as List<KnowledgeNodeEntity>
-            val gaps = params[3] as List<KnowledgeNodeEntity>
-            val classDist = params[4] as List<ScoreStageCount>
-            val errorStats = params[5] as List<CategoryCount>
-            val weakCounts = params[6] as List<CategoryCount>
-            val rhythm = params[7] as List<DailyActivityData>
+            getKnowledgeStatsFlow(studentId),
+            getErrorStatsFlow(studentId)
+        ) { viewType, kStats, eStats ->
+            
+            val (errorStats, weakCounts, rhythm) = eStats
+            val skills = kStats.skills
 
-            // 1. 五维能力 (真实百分比)
+            // 1. 五维能力映射
             val dimensionMap = mapOf(
                 "词法储备" to (skills.find { it.categoryId == 1 }?.score ?: 0f) / 100f,
                 "语法重构" to (skills.find { it.categoryId == 2 }?.score ?: 0f) / 100f,
@@ -54,18 +67,18 @@ class AnalyticsViewModel @Inject constructor(
                 "词形变异" to (skills.find { it.categoryId == 5 }?.score ?: 0f) / 100f
             )
 
-            // 2. 真实薄弱点 (Top 5)
+            // 2. 真实薄弱点
             val topWeakNodes = weakCounts.map { 
                 KnowledgePointInfo(it.label, it.count, "最近出错") 
             }
 
-            // 3. 错因分布 (真实计数)
+            // 3. 错因分布
             val totalErrors = errorStats.sumOf { it.count }.coerceAtLeast(1)
             val causes = errorStats.map { 
                 ErrorCause(mapErrorLabel(it.label), it.count.toFloat() / totalErrors, getErrorColor(it.label))
             }
 
-            // 4. 预测分 (真实转换)
+            // 4. 预测分逻辑
             val avgMastery = if (skills.isEmpty()) 0f else skills.map { it.score }.average().toFloat()
             val scoreBase = (avgMastery * 1.2f).toInt().coerceIn(0, 120)
 
@@ -76,11 +89,11 @@ class AnalyticsViewModel @Inject constructor(
                 cognitiveDimensions = dimensionMap,
                 errorCauses = causes,
                 heatmapData = rhythm.map { DailyActivity(it.timestamp, it.intensity) },
-                highFrequencyIssuesCount = highFreq.size,
-                prerequisiteGapAlerts = gaps.map { PrerequisiteAlert(it.title, "基础前置", 40) },
+                highFrequencyIssuesCount = kStats.highFreq.size,
+                prerequisiteGapAlerts = kStats.gaps.map { PrerequisiteAlert(it.title, "前置基础", 40) },
                 topWeakNodes = topWeakNodes,
-                classScoreDistribution = sortClassDistribution(classDist),
-                aiSummary = generateRealDataSummary(highFreq.size, gaps.size, totalErrors)
+                classScoreDistribution = sortClassDistribution(kStats.classDist),
+                aiSummary = generateRealDataSummary(topWeakNodes.firstOrNull()?.title, kStats.highFreq.size, kStats.gaps.size, totalErrors)
             )
         }
     }.stateIn(
@@ -109,11 +122,19 @@ class AnalyticsViewModel @Inject constructor(
         else -> Color(0xFFFFB74D)
     }
 
-    private fun generateRealDataSummary(highFreqCount: Int, gapCount: Int, totalError: Int): String {
-        return "【真实诊断】数据库记录显示该生共有 $totalError 处错题。其中 $highFreqCount 处属于中考高频。系统检测到 $gapCount 处显著认知链路断层，建议降维复习。"
+    private fun generateRealDataSummary(mainWeakness: String?, highFreqCount: Int, gapCount: Int, totalError: Int): String {
+        val weaknessText = if (mainWeakness != null) "核心症结集中在【$mainWeakness】。" else "近期表现较为均衡。"
+        return "数据库真实记录：累计扫描错题 $totalError 道。$weaknessText 其中 $highFreqCount 项为中考高频考点。系统在图谱中定位到 $gapCount 个由于前置不牢导致的认知断层。建议针对性强化。"
     }
 
     fun updateView(viewType: AnalyticsViewType) {
         _viewType.value = viewType
     }
 }
+
+data class KnowledgeStats(
+    val skills: List<SkillDimensionScore>,
+    val highFreq: List<KnowledgeNodeEntity>,
+    val gaps: List<KnowledgeNodeEntity>,
+    val classDist: List<ScoreStageCount>
+)

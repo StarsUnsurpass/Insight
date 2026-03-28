@@ -54,6 +54,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.insight.ui.state.AnalyticsViewModel
+import com.example.insight.ui.screens.analytics.LearningAnalyticsScreen
 import com.example.insight.ui.state.InsightViewModel
 import com.example.insight.ui.state.UserPreferences
 import com.example.insight.ui.state.UserRole
@@ -92,6 +94,7 @@ enum class InsightTab(
 @Composable
 fun MainScreen(
     viewModel: InsightViewModel,
+    analyticsViewModel: AnalyticsViewModel = hiltViewModel(),
     onNavigateToScanner: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToExport: () -> Unit,
@@ -102,9 +105,11 @@ fun MainScreen(
     onNavigateToLessonPlanSample: (String) -> Unit,
     onNavigateToKnowledgeDetail: (String) -> Unit,
     onNavigateToTextbookDetail: (String) -> Unit,
-    onNavigateToSchedule: () -> Unit
+    onNavigateToSchedule: () -> Unit,
+    onNavigateToAnalyticsDetail: (String, String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val analyticsState by analyticsViewModel.uiState.collectAsState()
     val preferences = uiState.preferences
     val context = LocalContext.current
 
@@ -161,8 +166,10 @@ fun MainScreen(
                                 onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
                             )
                             InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
-                            InsightTab.Analysis -> AnalysisTab(
-                                students = uiState.students
+                            InsightTab.Analysis -> LearningAnalyticsScreen(
+                                state = analyticsState,
+                                onViewChange = { analyticsViewModel.updateView(it) },
+                                onNavigateToDetail = onNavigateToAnalyticsDetail
                             )
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
@@ -749,155 +756,6 @@ fun HistoryCardByPoint(
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun AnalysisTab(
-    students: List<com.example.insight.data.local.entities.StudentEntity>
-) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    
-    // 模拟班级多维度数据
-    val capabilityScores = listOf(0.75f, 0.62f, 0.88f, 0.55f, 0.82f, 0.68f)
-    val learningProgress = listOf(0.4f, 0.45f, 0.55f, 0.52f, 0.65f, 0.72f, 0.78f)
-    val scoreDistribution = listOf(2, 5, 12, 8, 3) // 对应 0-60, 60-70, 70-80, 80-90, 90-100
-
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 120.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        item {
-            Column {
-                Text("学情 Kanban", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
-                Text(text = "深度追踪全班 42 个核心考点认知链路", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
-            }
-        }
-
-        // 1. 核心战报 (更丰富的 Stat Cards)
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    StatCardSmall(label = "班级平均分", value = "84.5", icon = Icons.Default.Assessment, color = primaryColor, modifier = Modifier.weight(1f))
-                    StatCardSmall(label = "周进步率", value = "+12.4%", icon = Icons.AutoMirrored.Filled.TrendingUp, color = Color(0xFF4DB6AC), modifier = Modifier.weight(1f))
-                }
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    StatCardSmall(label = "人均扫描", value = "18.2次", icon = Icons.Default.CameraAlt, color = Color(0xFF7986CB), modifier = Modifier.weight(1f))
-                    StatCardSmall(label = "活跃考点", value = "32个", icon = Icons.Default.Hub, color = Color(0xFFBA68C8), modifier = Modifier.weight(1f))
-                }
-            }
-        }
-
-        // 2. 成绩分布透视 (新增加密分布图)
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(32.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
-            ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.BarChart, null, tint = primaryColor, modifier = Modifier.size(20.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("全班成绩区间分布", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
-                    ScoreDistributionChart(
-                        data = scoreDistribution,
-                        modifier = Modifier.fillMaxWidth().height(140.dp)
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        listOf("不及格", "合格", "中等", "良好", "优秀").forEach {
-                            Text(it, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                        }
-                    }
-                }
-            }
-        }
-
-        // 3. 能力雷达分析
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(32.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
-            ) {
-                Column(modifier = Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("核心素养多维模型", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.align(Alignment.Start))
-                    Spacer(modifier = Modifier.height(16.dp))
-                    CapabilityRadarChart(
-                        scores = capabilityScores,
-                        modifier = Modifier.fillMaxWidth().height(280.dp)
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    // 增加横向对比项
-                    HorizontalComparisonBar("当前班级 vs 年级平均", 0.78f, 0.65f, modifier = Modifier.fillMaxWidth())
-                }
-            }
-        }
-
-        // 4. AI 智能诊断建议
-        item {
-            Column {
-                Text("AI 教学决策辅助", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                AIDiagnosticCard(
-                    title = "薄弱环节：虚拟语气",
-                    content = "全班在该考点的辨析正确率仅为 42%，主要错误集中在“if 条件句”的不对称时态应用。",
-                    icon = Icons.Default.Warning,
-                    color = Color(0xFFFF8A65)
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                AIDiagnosticCard(
-                    title = "重点关注：长难句拆解",
-                    content = "建议加强对定语从句先行词的逻辑识别练习，这是目前影响阅读理解得分的关键因子。",
-                    icon = Icons.Default.Psychology,
-                    color = Color(0xFF4DB6AC)
-                )
-            }
-        }
-
-        // 5. 学习参与度与投入
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(32.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
-            ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Text("学习参与度趋势", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(24.dp))
-                    LearningCurveChart(
-                        points = learningProgress,
-                        modifier = Modifier.fillMaxWidth().height(100.dp)
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                        MasteryProgressCircle(0.85f, "在线时长")
-                        MasteryProgressCircle(0.62f, "互动频率")
-                        MasteryProgressCircle(0.74f, "错题回顾")
-                    }
-                }
-            }
-        }
-
-        item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
-                Text("学术成长领航员", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.ExtraBold)
-                Text("查看完整榜单", style = MaterialTheme.typography.labelSmall, color = Color.Gray, textDecoration = TextDecoration.Underline)
-            }
-        }
-
-        items(students.sortedByDescending { it.latestScore }.take(3)) { student ->
-            StudentRankCard(student = student, primaryColor = primaryColor)
         }
     }
 }
