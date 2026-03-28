@@ -388,7 +388,7 @@ object Grade9Full {
                         *   **子主题**：个人成长与变化，克服弱点 (Personal growth)。
 
                         ### 2. 单元主题内容
-                        本单元围绕“成长与变化”展开，重点学习 `used to` 结构的用法。通过描述自己在性格（outgoing / quiet）、外貌（tall / short）、爱好（sports / music）以及恐惧（dark / spiders）等方面的过去与现状，引导学生审视自己的成长轨迹。单元强调了“坚持与努力”在个人蜕变中的作用，培养学生积极面对自我、不断追求进步的人生态度。
+                        本单元围绕“成长与变化”展开，重点学习 `used to` 结构的用法. 通过描述自己在性格（outgoing / quiet）、外貌（tall / short）、爱好（sports / music）以及恐惧（dark / spiders）等方面的过去与现状，引导学生审视自己的成长轨迹. 单元强调了“坚持与努力”在个人蜕变中的作用，培养学生积极面对自我、不断追求进步的人生态度.
                     """.trimIndent()),
 
                     UnitDetailSection("💡 单元新知预览", """
@@ -404,7 +404,7 @@ object Grade9Full {
                         4.  **处理困难**：It's difficult to deal with these problems.
 
                         ### 3. 重点语法
-                        - **used to do sth.** 表示过去的习惯或状态。
+                        - **used to do sth.** 表示过去的习惯或状态.
                     """.trimIndent()),
 
                     UnitDetailSection("📝 教材原文与译文", """
@@ -449,35 +449,35 @@ object Grade9Full {
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. I used to be afraid of the dark. (我以前怕黑。)
-                        - **【句式剖析】**：`used to be + adj.` 过去是...样的状态。
+                        - **【句式剖析】**：`used to be + adj.` 过去是...样的状态.
                         
                         #### 2. Did you use to wear glasses? (你以前戴眼镜吗？)
-                        - **【注意】**：疑问句中要借用 `Did`，且 `used` 要恢复原形 `use`。
+                        - **【注意】**：疑问句中要借用 `Did`，且 `used` 要恢复原形 `use`.
                         
                         #### 3. He took up singing to deal with his shyness. (他开始从事唱歌来应对他的害羞。)
-                        - **【词块归纳】**：`take up` (开始做某事)；`deal with` (处理；应对)。
+                        - **【词块归纳】**：`take up` (开始做某事)；`deal with` (处理；应对).
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① used to do vs be used to doing
                         - **【辨析】**：
-                            *   `used to do`：过去常常做某事（现在不做了）。
-                            *   `be used to doing`：习惯于做某事。
+                            *   `used to do`：过去常常做某事（现在不做了）.
+                            *   `be used to doing`：习惯于做某事.
                         - **【例题】**：
                         
                         *I ________ early, but now I ________ getting up at six.*
                         A. used to get up; am used to   B. am used to; used to   C. used to getting up; am used to   D. used to get up; used to
                         
-                        **[解析]**：第一空指过去习惯，第二空指现在习惯，选 **A**。
+                        **[解析]**：第一空指过去习惯，第二空指现在习惯，选 **A**.
 
                         #### ② be proud of (为...骄傲)
-                        - **【同义词】**：`take pride in`。
+                        - **【同义词】**：`take pride in`.
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
                         ### 语法核心：used to 的“前世今生”
                         **1. 基本用法**
-                        表示过去经常发生的动作或存在的状态（暗示现在已改变）。
+                        表示过去经常发生的动作或存在的状态（暗示现在已改变）.
                         
                         **2. 句式变换**
                         - 否定：I **didn't use to** smoke.
@@ -489,7 +489,7 @@ object Grade9Full {
                         *(2024·江苏中考)* *My uncle ________ live in the countryside, but now he works in the city.*
                         A. is used to   B. used to   C. used to be   D. was used to
                         
-                        **[解析]**：表示过去住在乡下，选 **B**。
+                        **[解析]**：表示过去住在乡下，选 **B**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -499,8 +499,7 @@ object Grade9Full {
                         I **used to be** a shy girl and I was **afraid of speaking** in public. But now, I am **more outgoing** and brave. I **used to spend** much time playing games, but now I **study very hard**. My teachers and parents are **proud of** me. I think I am **growing up**.
                     """.trimIndent())
                 )
-            )
-        ,
+            ),
             TextbookUnit(
                 "g9full_u5", "Unit 5", "What is it made of?",
                 listOf(
@@ -581,17 +580,17 @@ object Grade9Full {
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① be made of vs be made from
                         - **【辨析】**：
-                            *   `be made of`：物理变化（如桌子由木头制成）。
-                            *   `be made from`：化学变化（如纸由木头制成）。
+                            *   `be made of`：物理变化（如桌子由木头制成）.
+                            *   `be made from`：化学变化（如纸由木头制成）.
                         - **【例题】**：
                         
                         *The paper is made ________ wood, and the chair is made ________ wood.*
                         A. of; from   B. from; of   C. in; of   D. from; in
                         
-                        **[解析]**：纸看不出木头选 from，椅子看得出木头选 of，选 **B**。
+                        **[解析]**：纸看不出木头选 from，椅子看得出木头选 of，选 **B**.
 
                         #### ② be known for (以...闻名)
-                        - **【近义】**：`be famous for`。
+                        - **【近义】**：`be famous for`.
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
@@ -611,7 +610,7 @@ object Grade9Full {
                         *(2024·安徽中考)* *Many trees ________ on the hill every spring.*
                         A. plant   B. planted   C. are planted   D. are planting
                         
-                        **[解析]**：树是被种的，且 every spring 提示一般现在时，选 **C**。
+                        **[解析]**：树是被种的，且 every spring 提示一般现在时，选 **C**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -684,31 +683,31 @@ object Grade9Full {
 
                         **【译文】**
                         
-                        你知道薯片是错误地被发明的吗？1853年，一位名叫乔治·克拉姆的厨师制作了它们。一位顾客认为土豆太厚了。乔治生气了，把它们切得非常薄。然后他炸了它们直到它们变得酥脆。顾客非常喜欢！最后，它们成为了最受欢迎的零食。
+                        你知道薯片是错误地被发明的吗？1853年，一位名叫乔治·克拉姆的厨师制作了它们。一位顾客认为土豆太厚了。乔治生气了，把它们切得非常薄. 然后他炸了它们直到它们变得酥脆. 顾客非常喜欢！最后，它们成为了最受欢迎的零食.
                     """.trimIndent()),
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. When was it invented? (它是何时被发明的？)
-                        - **【用法拓展】**：`was + p.p.` 表示过去发生的被动动作。
+                        - **【用法拓展】**：`was + p.p.` 表示过去发生的被动动作.
                         
                         #### 2. What is it used for? (它被用来做什么？)
-                        - **【要点精讲】**：`be used for + v.-ing` 强调用途；`be used to do` 强调目的。
+                        - **【要点精讲】**：`be used for + v.-ing` 强调用途；`be used to do` 强调目的.
                         
                         #### 3. It was discovered by accident. (它是被偶然发现的。)
-                        - **【词块归纳】**：`by accident` = `by mistake` 意为“偶然地；无意中”。
+                        - **【词块归纳】**：`by accident` = `by mistake` 意为“偶然地；无意中”.
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① invent (v. 发明) vs discover (v. 发现)
                         - **【辨析】**：
-                            *   `invent`：创造出原本不存在的东西。
-                            *   `discover`：找到原本已存在但未被发现的东西。
+                            *   `invent`：创造出原本不存在的东西.
+                            *   `discover`：找到原本已存在但未被发现的东西.
                         - **【例题】**：
                         
                         *Edison ________ the light bulb, and Columbus ________ America.*
                         A. invented; discovered   B. discovered; invented   C. created; found   D. made; saw
                         
-                        **[解析]**：灯泡是创造的，美洲是本来就有的，选 **A**。
+                        **[解析]**：灯泡是创造的，美洲是本来就有的，选 **A**.
 
                         #### ② divide ... into ... (把...分成...)
                         - **【例题】**：
@@ -716,7 +715,7 @@ object Grade9Full {
                         *The cake was ________ four pieces.*
                         A. divided into   B. made of   C. used for   D. looked for
                         
-                        **[解析]**：被分成四块，选 **A**。
+                        **[解析]**：被分成四块，选 **A**.
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
@@ -733,7 +732,7 @@ object Grade9Full {
                         *(2023·北京中考)* *The first airplane ________ by the Wright brothers in 1903.*
                         A. invented   B. is invented   C. was invented   D. will be invented
                         
-                        **[解析]**：1903 提示过去时，飞机是被发明的，选 **C**。
+                        **[解析]**：1903 提示过去时，飞机是被发明的，选 **C**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -806,18 +805,18 @@ object Grade9Full {
 
                         **【译文】**
                         
-                        当我还是个小男孩时，我妈妈告诉我该做什么。现在我是一个青少年了，我想自己做决定。我想和朋友们待在一起，选择自己的衣服。但我妈妈总是说，“我这是为了你好。”我知道她爱我，但我希望我能被允许以我自己的方式成长。
+                        当我还是个小男孩时，我妈妈告诉我该做什么. 现在我是一个青少年了，我想自己做决定. 我想和朋友们待在一起，选择自己的衣服. 但我妈妈总是说，“我这是为了你好。”我知道她爱我，但我希望我能被允许以我自己的方式成长.
                     """.trimIndent()),
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. Teenagers should be allowed to do ... (青少年应该被允许做...)
-                        - **【句式剖析】**：`should be + p.p.` 是情态动词被动语态的标准形式。
+                        - **【句式剖析】**：`should be + p.p.` 是情态动词被动语态的标准形式.
                         
                         #### 2. Six-year-olds should be kept away from danger. (六岁大的孩子应远离危险。)
-                        - **【用法拓展】**：`数字-year-old` 作形容词或名词（加s），表示年龄。
+                        - **【用法拓展】**：`数字-year-old` 作形容词或名词（加s），表示年龄.
                         
                         #### 3. It's not for your own good. (这不仅仅是为了你好。)
-                        - **【词块归纳】**：`for one's own good` 为了某人好。
+                        - **【词块归纳】**：`for one's own good` 为了某人好.
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
@@ -828,10 +827,10 @@ object Grade9Full {
                         *Our teacher doesn't allow ________ in class.*
                         A. sleep   B. to sleep   C. sleeping   D. slept
                         
-                        **[解析]**：allow doing sth. (允许做某事)，此处无 sb.，选 **C**。
+                        **[解析]**：allow doing sth. (允许做某事)，此处无 sb.，选 **C**.
 
                         #### ② enough (足够的)
-                        - **【位置】**：修饰名词在前 (*enough money*)；修饰形容词在后 (*old enough*)。
+                        - **【位置】**：修饰名词在前 (*enough money*)；修饰形容词在后 (*old enough*).
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
@@ -848,7 +847,7 @@ object Grade9Full {
                         *(2024·天津中考)* *Waste paper ________ into the dustbin.*
                         A. should throw   B. should be throw   C. should be thrown   D. was thrown
                         
-                        **[解析]**：废纸“应该被扔”，含有情态动词的被动语态，选 **C**。
+                        **[解析]**：废纸“应该被扔”，含有情态动词的被动语态，选 **C**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -922,51 +921,51 @@ object Grade9Full {
 
                         **【译文】**
                         
-                        巨石阵是世界上最伟大的谜团之一。谁建造了它？为什么要建造它？有些人认为它是一座神庙。另一些人相信它是一种日历。那些石头如此沉重，以至于移动它们一定非常困难。即使是今天，科学家们仍在努力寻找关于它的真相。
+                        巨石阵是世界上最伟大的谜团之一. 谁建造了它？为什么要建造它？有些人认为它是一座神庙. 另一些人相信它是一种日历. 那些石头如此沉重，以至于移动它们一定非常困难. 即使是今天，科学家们仍在努力寻找关于它的真相.
                     """.trimIndent()),
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. It must belong to Carla. (它一定属于卡拉。)
-                        - **【用法拓展】**：`belong to` 意为“属于”，不用于被动语态，也不用于进行时。
+                        - **【用法拓展】**：`belong to` 意为“属于”，不用于被动语态，也不用于进行时.
                         
                         #### 2. It can't be hers. (它不可能是她的。)
-                        - **【要点精讲】**：`can't` 表示有把握的否定推测。
+                        - **【要点精讲】**：`can't` 表示有把握的否定推测.
                         
                         #### 3. I saw him running after a bus. (我看到他正在追一辆公交车。)
-                        - **【词块归纳】**：`see sb. doing sth.` 看到某人正在做某事。
+                        - **【词块归纳】**：`see sb. doing sth.` 看到某人正在做某事.
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① belong to (属于)
-                        - **【注意】**：to 是介词，后接名词或人称代词宾格。
+                        - **【注意】**：to 是介词，后接名词或人称代词宾格.
                         - **【例题】**：
                         
                         *The beautiful bike belongs to ________.*
                         A. I   B. me   C. my   D. mine
                         
-                        **[解析]**：belong to 后用宾格，选 **B**。
+                        **[解析]**：belong to 后用宾格，选 **B**.
 
                         #### ② valuable (adj. 宝贵的)
-                        - **【词汇梳理】**：`value` (价值) + `able` (后缀) = `valuable`。
+                        - **【词汇梳理】**：`value` (价值) + `able` (后缀) = `valuable`.
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
                         ### 语法核心：情态动词推测“三兄弟”
                         **1. must (肯定)**
-                        意为“一定”，语气最强，用于肯定推测。
+                        意为“一定”，语气最强，用于肯定推测.
                         
                         **2. might / could (可能)**
-                        意为“可能”，语气较弱，用于不确定的推测。
+                        意为“可能”，语气较弱，用于不确定的推测.
                         
                         **3. can't (否定)**
-                        意为“不可能”，语气最强，用于否定推测。
+                        意为“不可能”，语气最强，用于否定推测.
 
                         **4. 中考真题特训**
                         
                         *(2024·江苏中考)* *— Is that Mr. Black? — No, it ________ be him. He is in London now.*
                         A. must   B. may   C. can't   D. shouldn't
                         
-                        **[解析]**：根据“他在伦敦”可知“不可能是他”，选 **C**。
+                        **[解析]**：根据“他在伦敦”可知“不可能是他”，选 **C**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -976,9 +975,500 @@ object Grade9Full {
                         It **must belong to** a student. There are some **valuable** books in it. It **might be** Li Hua's because I saw him **running** there. But it **can't be** Tom's because his backpack is blue. I will **take it to** the teachers' office. I hope the owner **will find** it soon.
                     """.trimIndent())
                 )
-            )
+            ),
+            TextbookUnit(
+                "g9full_u9", "Unit 9", "I like music that I can dance to.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与社会 (Man and Society)
+                        *   **主题群**：文学、艺术与体育 (Literature and art)
+                        *   **子主题**：音乐与电影喜好，个人审美，文化生活 (Arts and preferences)。
 
-        ,
+                        ### 2. 单元主题内容
+                        本单元以“音乐与电影”为话题，重点学习定语从句（Relative Clauses）。通过表达自己对不同艺术形式的偏好（如 I like music that... / I prefer movies which...），学生能够运用关系代词 that, which, who 引导的从句进行更复杂的语义表达。单元旨在培养学生的审美情趣，引导其在欣赏多元艺术的过程中形成独立的思考与品味。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **艺术词汇**：lyrics (歌词), director (导演), documentary (纪录片), drama (戏剧), Australian.
+                        - **核心动词/形容词**：prefer (更喜欢), electronic (电子的), smooth (平滑的), spare (空闲的).
+                        - **高频短语**：stick to (坚持), down (悲哀), plenty of (大量的), shut off (关闭), in total (总共).
+
+                        ### 2. 核心句式
+                        1.  **表达喜好**：I like music that I can dance to.
+                        2.  **选择偏好**：I prefer movies that can give me something to think about.
+                        3.  **描述特征**：She is the musician who plays the piano beautifully.
+                        4.  **建议与动作**：What do you do in your spare time?
+
+                        ### 3. 重点语法
+                        - **定语从句**（关系代词 that, which, who 的用法）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Tony**: What kind of music do you like, Betty? 
+                        
+                        **Betty**: I like music that has great lyrics. What about you? 
+                        
+                        **Tony**: I prefer music that I can dance to. 
+                        
+                        **Betty**: Do you like smooth music? 
+                        
+                        **Tony**: No, I think it's too quiet. I like loud music that makes me feel energetic.
+
+                        **【译文】**
+                        
+                        **托尼**：贝蒂，你喜欢哪种音乐？
+                        
+                        **贝蒂**：我喜欢歌词写得好的音乐。你呢？
+                        
+                        **托尼**：我更喜欢能跟着跳舞的音乐。
+                        
+                        **贝蒂**：你喜欢悦耳柔和的音乐吗？
+                        
+                        **托尼**：不，我觉得那太安静了。我喜欢能让我感到精力充沛的大声音乐。
+
+                        ### Section B (Reading) 阅读文段：Abing's Music
+                        **【原文】**
+                        
+                        Erhu music is very famous in China. One of the greatest Erhu musicians was Abing. His music, like "Erquan Yingyue", is very moving. It tells a story of sadness and pain. Abing was blind, but he could "see" the world through music. People can feel his deep love for life when they listen to his songs. It is a masterpiece that everyone should hear.
+
+                        **【译文】**
+                        
+                        二胡音乐在中国非常著名. 最伟大的二胡音乐家之一是阿炳. 他的音乐，如《二泉映月》，非常动人. 它讲述了一个忧伤和痛苦的故事. 阿炳失明了，但他能通过音乐“看”世界. 人们听他的歌时能感受到他对他对生活深沉的爱. 这是一部每个人都应该听的杰作.
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. I like music that has great lyrics. (我喜欢歌词很棒的音乐。)
+                        - **【句式剖析】**：`that` 是关系代词，在从句中充当主语，修饰先行词 `music`.
+                        
+                        #### 2. I prefer movies which are interesting. (我更喜欢有趣的电影。)
+                        - **【要点精讲】**：`prefer` 意为“更喜欢”. 常用 `prefer A to B` 表示“比起B更喜欢A”.
+                        
+                        #### 3. He is the person who taught me English. (他是那个教我英语的人。)
+                        - **【词块归纳】**：先行词是“人”时，引导词用 `who` 或 `that`.
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① prefer (v. 更喜欢)
+                        - **【用法总结】**：
+                            *   `prefer A to B`：比起B更喜欢A.
+                            *   `prefer doing A to doing B`：比起做B更喜欢做A.
+                            *   `prefer to do sth.`：宁愿做某事.
+                        - **【例题】**：
+                        
+                        *I prefer ________ at home to ________ outside.*
+                        A. stay; go   B. staying; going   C. to stay; go   D. staying; go
+                        
+                        **[解析]**：prefer doing to doing，选 **B**.
+
+                        #### ② stick to (坚持; 粘住)
+                        - **【搭配】**：`stick to one's promise` (坚持承诺).
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：定语从句 (Relative Clauses)
+                        **1. 引导词的选择**
+                        - **that**：既可指人也可指物.
+                        - **which**：只能指物.
+                        - **who**：只能指人.
+                        
+                        **2. 谓语一致性**
+                        从句的谓语动词在人称和数上必须与先行词保持一致.
+                        - *The boy who **is** (单数) talking is my friend.*
+                        - *The boys who **are** (复数) talking are my friends.*
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·天津中考)* *I like the teacher ________ is always kind to students.*
+                        A. which   B. who   C. whose   D. what
+                        
+                        **[解析]**：先行词是 teacher (人)，引导词用 who，选 **B**.
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My Favourite Art (我最喜欢的艺术形式)
+                        **Music is an important part of my life.** 
+                        
+                        I like **music that** has a beautiful melody. It makes me **feel relaxed** after a busy day. I also **prefer movies which** are educational. I think **documentaries** are great because they teach me **plenty of** knowledge. Art makes our life **colorful**.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g9full_u10", "Unit 10", "You're supposed to shake hands.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与社会 (Man and Society)
+                        *   **主题群**：人际关系与社会交往 (Communication)
+                        *   **子主题**：各国社交礼仪，文化差异，得体行为 (Customs and manners)。
+
+                        ### 2. 单元主题内容
+                        本单元以“社交礼仪”为核心，重点学习 `be supposed to` 结构的用法。通过探讨不同国家在初次见面、用餐、聚会等场合下的习俗差异（如 shaking hands, bowing, arriving on time 等），引导学生学会尊重文化多元性。单元强调了“入乡随俗（When in Rome, do as the Romans do）”的重要性，培养学生的国际视野和跨文化沟通的敏感度。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **礼仪词汇**：custom, bow (鞠躬), kiss, handshake, greet.
+                        - **餐桌礼仪**：chopsticks, spoon, napkin, fork, manner.
+                        - **核心形容词/动词**：relaxed, basic, behave (表现), except (除...之外).
+                        - **高频短语**：be supposed to (被要求...), shake hands (握手), for the first time, drop by (顺便拜访), pointing at (指向).
+
+                        ### 2. 核心句式
+                        1.  **描述惯例**：You're supposed to shake hands.
+                        2.  **表达禁止/不当**：You're not supposed to eat with your hands.
+                        3.  **询问习俗**：What are you supposed to do if you're invited to a party?
+                        4.  **描述感受**：I was a bit relaxed about time.
+
+                        ### 3. 重点语法
+                        - **be supposed to do sth.** 的用法.
+                        - **It is + adj. + to do sth.** 的应用.
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Maria**: Hi, Katie. How was the party last night? 
+                        
+                        **Katie**: It was OK, but I made a mistake. 
+                        
+                        **Maria**: What happened? 
+                        
+                        **Katie**: I arrived at seven, but the party was supposed to start at eight. 
+                        
+                        **Maria**: Oh, in America, people are supposed to arrive a bit late for parties. 
+                        
+                        **Katie**: I see. Next time I'll be more careful.
+
+                        **【译文】**
+                        
+                        **玛丽亚**：嗨，凯蒂。昨晚的聚会怎么样？
+                        
+                        **凯蒂**：还好，但我犯了个错误。
+                        
+                        **玛丽亚**：发生什么了？
+                        
+                        **凯蒂**：我七点到的，但聚会本应该八点开始。
+                        
+                        **玛丽亚**：哦，在美国，人们参加聚会应该是要晚到一会儿的。
+                        
+                        **凯蒂**：我明白了。下次我会更小心的。
+
+                        ### Section B (Reading) 阅读文段：Table Manners in France
+                        **【原文】**
+                        
+                        Table manners are very important in France. First, you are not supposed to start eating until everyone is ready. Second, you should keep your hands on the table, but not your elbows. Also, it is rude to cut your bread with a knife. You should break it with your hands. If you follow these rules, you will have a great dinner with your French friends.
+
+                        **【译文】**
+                        
+                        在法国餐桌礼仪非常重要. 首先，在每个人准备好之前你不应该开始吃. 第二，你应该把手放在桌子上，但不要把肘部放上去. 此外，用刀切面包是不礼貌的. 你应该用手掰开它. 如果你遵守这些规则，你将和你的法国朋友们度过一个愉快的晚餐.
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. You're supposed to shake hands. (你应该握手。)
+                        - **【句式剖析】**：`be supposed to` 意为“应当；被期望”，通常用来表达社会习惯、惯例或规则.
+                        
+                        #### 2. It's polite to arrive on time. (准时到达是有礼貌的。)
+                        - **【用法拓展】**：`It is + adj. + to do sth.` 这里的 `It` 是形式主语.
+                        
+                        #### 3. We are relaxed about time. (我们对时间比较随意。)
+                        - **【词块归纳】**：`be relaxed about sth.` 对某事感到放松/随意.
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① except (prep. 除...之外)
+                        - **【辨析】**：
+                            *   `except`：除...之外（不包括在内）.
+                            *   `besides`：除...之外（包括在内，还有）.
+                        - **【例题】**：
+                        
+                        *Everyone is here ________ Tom. He is ill.*
+                        A. except   B. besides   C. including   D. but
+                        
+                        **[解析]**：汤姆没来，不包括他在内，选 **A**.
+
+                        #### ② shake hands (握手)
+                        - **【注意】**：hands 必须用复数. `shake hands with sb.` 与某人握手.
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：be supposed to 的“社交”语义
+                        **1. 含义**
+                        表达根据习俗、规则、约定等“应该...”或“被要求...”.
+                        
+                        **2. 时态变化**
+                        - *was/were supposed to*：表示“本应该...（但没做）”.
+                        
+                        **3. 句式注意点**
+                        - 否定：be not supposed to (不应该).
+
+                        **4. 中考真题特训**
+                        
+                        *(2023·广东中考)* *You are ________ to bring a gift when you visit a friend.*
+                        A. supposed   B. needed   C. let   D. asked
+                        
+                        **[解析]**：根据社交礼仪，选 **A**.
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：Customs in My Country (介绍家乡习俗)
+                        **China has a long history and many special customs.** 
+                        
+                        When you visit a Chinese home, you **are supposed to** take off your shoes. It is **polite** to bring some fruit as a gift. When having dinner, the older people **are supposed to** start eating first. You should never **point at** others with your chopsticks. I hope you will **enjoy your stay** in China.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g9full_u11", "Unit 11", "Sad movies make me cry.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：自我认识与自我管理 (Self-management)
+                        *   **子主题**：情绪表达，环境对人的影响，友谊与快乐 (Emotions)。
+
+                        ### 2. 单元主题内容
+                        本单元聚焦“情绪与感受”，重点学习使役动词 `make` 的用法。通过探讨环境（如 background music, colors）、电影、天气及人际关系对个人心情的影响，引导学生认识并管理自己的情绪。单元强调了“友谊与责任比金钱更珍贵”的主题（如 The Shirt of a Happy Man），旨在培养学生积极乐观的心态，学会在压力中寻找快乐。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **情绪形容词**：sad, excited, uncomfortable, nervous, disappointed.
+                        - **核心动词**：examine, kick, nod, shoulder, weight.
+                        - **高频短语**：make sb. do sth. (使某人做某事), make sb. + adj., drive sb. crazy (使某人发疯), wait for (等待), the more ... the more ... (越...越...).
+
+                        ### 2. 核心句式
+                        1.  **表达影响**：Sad movies make me cry. / Loud music makes me nervous.
+                        2.  **比较感受**：The more I study, the more I know.
+                        3.  **描述状态**：I'd rather stay at home than go out.
+                        4.  **哲理陈述**：Neither wealth nor power can bring you happiness.
+
+                        ### 3. 重点语法
+                        - **使役动词 make** 的两种主要用法（接省 to 不定式或接形容词）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Tina**: Let's go to the Blue Lagoon restaurant. 
+                        
+                        **Amy**: No, I'd rather go to the Rockin' Restaurant. 
+                        
+                        **Tina**: Why? 
+                        
+                        **Amy**: The soft music at Blue Lagoon makes me sleepy. 
+                        
+                        **Tina**: Well, loud music at Rockin' Restaurant makes me want to leave! 
+                        
+                        **Amy**: But the food is great there!
+
+                        **【译文】**
+                        
+                        **蒂娜**：我们去蓝湖餐厅吧。
+                        
+                        **艾米**：不，我宁愿去摇滚餐厅。
+                        
+                        **蒂娜**：为什么？
+                        
+                        **艾米**：蓝湖餐厅轻柔的音乐让我昏昏欲睡。
+                        
+                        **蒂娜**：嗯，摇滚餐厅大声的音乐让我很想离开！
+                        
+                        **艾米**：但那里的食物很棒啊！
+
+                        ### Section B (Reading) 阅读文段：The Shirt of a Happy Man
+                        **【原文】**
+                        
+                        A king was very sad and ill. A doctor told him that he needed the shirt of a happy man to get well. The king sent his generals to find a happy man. They found a poor prime minister, but he wasn't happy. Finally, they met a beggar who was very happy. But the beggar didn't have a shirt at all! The king realized that happiness doesn't come from things.
+
+                        **【译文】**
+                        
+                        一位国王非常忧郁且病重. 一位医生告诉他，他需要穿上一个快乐的人的衬衫才能痊愈. 国王派他的将军们去找一个快乐的人. 他们找到了一个贫穷的首相，但他不快乐. 最后，他们遇到一个非常快乐的乞丐. 但那个乞丐根本没有衬衫！国王意识到快乐并不来源于物质.
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. Sad movies make me cry. (悲伤的电影让我哭泣。)
+                        - **【句式剖析】**：`make` 是使役动词，后接宾语 `me`，再接宾语补足语（省略 to 的不定式 `cry`）.
+                        
+                        #### 2. I'd rather stay at home. (我宁愿待在家里。)
+                        - **【要点精讲】**：`would rather do sth.` 宁愿做某事. 否定形式为 `would rather not do`.
+                        
+                        #### 3. Neither wealth nor power can bring you happiness. (财富和权力都不能带给你快乐。)
+                        - **【词块归纳】**：`neither ... nor ...` 既不...也不... 遵循“就近原则”.
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① make (使役动词)
+                        - **【用法总结】**：
+                            *   `make sb. do sth.` (让某人做某事 - 省 to).
+                            *   `make sb. + adj.` (使某人感到...).
+                        - **【例题】**：
+                        
+                        *The funny movie made us ________ for a long time.*
+                        A. laugh   B. to laugh   C. laughing   D. laughed
+                        
+                        **[解析]**：make sb. do，选 **A**.
+
+                        #### ② drive sb. crazy (使某人发狂/受不了)
+                        - **【近义词】**：`drive sb. mad`.
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：make 的“变幻莫测”
+                        **1. make + 宾语 + 形容词**
+                        - *The news made him happy.*
+                        
+                        **2. make + 宾语 + 动词原形**
+                        - *The teacher made us finish the work.*
+                        
+                        **3. 被动语态注意点**
+                        当 make 用于被动语态时，原来省略的 **to** 必须还原.
+                        - *We were made **to** clean the room.* (我们被要求打扫房间)
+
+                        **4. 中考真题特训**
+                        
+                        *(2024·天津中考)* *Doing sports can make us ________ and ________.*
+                        A. healthy; strong   B. health; strength   C. healthy; strength   D. health; strong
+                        
+                        **[解析]**：make sb. + adj.，选 **A**.
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My Emotions (我的情绪变化)
+                        **Last week, I felt very disappointed.** 
+                        
+                        Because I failed the math test. The result **made me feel** sad. My mother **made me** talk to her about it. She said that **failure** was not the end. Her words **made me** feel much better. Now, I study **even harder**. I believe **persistence** will **make me** successful.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g9full_u12", "Unit 12", "Life is full of the unexpected.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：意外事件，生活中的变数，时间管理 (Past events)。
+
+                        ### 2. 单元主题内容
+                        本单元以“生活中的意外”为话题，正式引入过去完成时（Past Perfect Tense）。通过讲述由于起晚、迟到、错过公交或遇到地震等突发事件（如 9/11 幸存者故事），学生能够运用 `had + p.p.` 来表达“过去的过去”。单元旨在引导学生学会从意外中吸取教训，培养积极应对挑战的心态，并强调珍惜生命与时间的重要性。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **核心动词**：oversleep (睡过头), rush (冲), realize (意识到), ring (响), disappear (消失).
+                        - **核心名词**：airport, backpack, backpack, earthquake, survivor.
+                        - **高频短语**：by the time (到...时候为止), give sb. a lift (捎某人一程), show up (赶到), in line with (排队等候), staring in disbelief (难以置信地盯着).
+
+                        ### 2. 核心句式
+                        1.  **描述过去先后**：By the time I got up, my brother had already gone to school.
+                        2.  **表达意识到**：I realized that I had left my keys at home.
+                        3.  **询问经历**：What happened to you this morning?
+                        4.  **状态感叹**：How lucky I was!
+
+                        ### 3. 重点语法
+                        - **过去完成时** (had + 动词的过去分词)。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Mary**: Why were you late for school, Matt? 
+                        
+                        **Matt**: I overslept. By the time I woke up, my father had already left. 
+                        
+                        **Mary**: Oh, no! What did you do? 
+                        
+                        **Matt**: I ran to the bus stop, but the bus had already gone. 
+                        
+                        **Mary**: That's terrible. How did you get here? 
+                        
+                        **Matt**: My neighbor gave me a lift.
+
+                        **【译文】**
+                        
+                        **玛丽**：马特，你上学为什么迟到了？
+                        
+                        **马特**：我睡过头了。等我醒来的时候，我爸爸已经出发了。
+                        
+                        **玛丽**：噢，不！你怎么办的？
+                        
+                        **马特**：我跑向公交站，但公交车已经走了。
+                        
+                        **玛丽**：那太糟了。你是怎么到这儿的？
+                        
+                        **马特**：我的邻居捎了我一程。
+
+                        ### Section B (Reading) 阅读文段：Unexpected Events in History
+                        **【原文】**
+                        
+                        On September 11, 2001, many people had unexpected experiences. One man, for example, stayed at home because he had lost his keys. This saved his life. Another lady was late for work because she had forgotten to set her alarm. When the planes hit the buildings, she hadn't arrived yet. Life is indeed full of the unexpected.
+
+                        **【译文】**
+                        
+                        2001年9月11日，许多人都有意想不到的经历. 例如，一位男士因为丢了钥匙而待在家里. 这救了他的命. 另一位女士因为忘了设闹钟上班迟到了. 当飞机撞击大楼时，她还没赶到. 生活确实充满了意外.
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. By the time I arrived, the meeting had started. (当我到达时，会议已经开始了。)
+                        - **【句式剖析】**：`by the time` 引导的时间状语从句用一般过去时，主句通常用过去完成时.
+                        
+                        #### 2. I realized that I had left my backpack at home. (我意识到我把背包忘在家里了。)
+                        - **【要点精讲】**：`realize` 之后接宾语从句，“忘在家里”发生在“意识到”之前，故用过去完成时.
+                        
+                        #### 3. My neighbor gave me a lift. (我的邻居载了我一程。)
+                        - **【词块归纳】**：`give sb. a lift` 捎某人一程.
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① leave (v. 遗忘; 离开)
+                        - **【辨析】**：
+                            *   `leave`：把某物忘在某地. *leave sth. at ...*
+                            *   `forget`：忘记某事. *forget to do sth.*
+                        - **【例题】**：
+                        
+                        *Oh, I ________ my umbrella on the bus.*
+                        A. forgot   B. left   C. lost   D. missed
+                        
+                        **[解析]**：把物忘在特定地点用 leave，选 **B**.
+
+                        #### ② show up (赶到; 露面)
+                        - **【近义词】**：`arrive` / `appear`.
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：过去完成时 (Past Perfect)
+                        **1. 定义**
+                        表示“过去的过去”，即在过去某一动作或时间之前已经发生或完成的动作.
+                        
+                        **2. 构成**
+                        had + 动词的过去分词 (p.p.).
+                        
+                        **3. 标志词**
+                        by the time ..., when ..., before ..., already, by the end of ...
+
+                        **4. 中考真题特训**
+                        
+                        *(2024·安徽中考)* *When I got to the station, the train ________ for ten minutes.*
+                        A. left   B. has left   C. had been away   D. had left
+                        
+                        **[解析]**：get 是过去式，离开发生在之前，且持续了十分钟需用延续性短语 be away，选 **C**.
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：An Unexpected Day (意外的一天)
+                        **Yesterday was an unexpected day for me.** 
+                        
+                        I **overslept** in the morning. **By the time** I got to the bus stop, the bus **had already gone**. I had to **walk to** school. When I got to class, I **realized** that I **had forgotten** my homework. Luckily, my teacher **was not angry** with me. What an **unlucky** day!
+                    """.trimIndent())
+                )
+            ),
             TextbookUnit(
                 "g9full_u13", "Unit 13", "We're trying to save the earth!",
                 listOf(
@@ -1041,32 +1531,32 @@ object Grade9Full {
 
                         **【译文】**
                         
-                        世界充满了废弃物。但你知道其中很多是可以再利用的吗？例如，英国的一位艺术家用废旧金属制作美丽的雕塑。中国的一位女士用塑料瓶制作包。这些人向我们展示了我们应该重新审视我们扔掉的东西。通过回收和再利用，我们可以节约资源并保护环境。
+                        世界充满了废弃物. 但你知道其中很多是可以再利用的吗？例如，英国的一位艺术家用废旧金属制作美丽的雕塑. 中国的一位女士用塑料瓶制作包. 这些人向我们展示了我们应该重新审视我们扔掉的东西. 通过回收和再利用，我们可以节约资源并保护环境.
                     """.trimIndent()),
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. We're trying to save the earth! (我们正在努力拯救地球！)
-                        - **【句式剖析】**：`try to do sth.` 努力做某事。
+                        - **【句式剖析】**：`try to do sth.` 努力做某事.
                         
                         #### 2. The river used to be clean. (这条河过去很干净。)
-                        - **【要点精讲】**：`used to be` 描述过去的某种状态。
+                        - **【要点精讲】**：`used to be` 描述过去的某种状态.
                         
                         #### 3. It's crucial to stop using plastic bags. (停止使用塑料袋是至关重要的。)
-                        - **【词块归纳】**：`crucial` 意为“至关重要的；关键的”。
+                        - **【词块归纳】**：`crucial` 意为“至关重要的；关键的”.
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① throw away (扔掉; 抛弃)
-                        - **【用法】**：动副短语。代词放中间。
+                        - **【用法】**：动副短语. 代词放中间.
                         - **【例题】**：
                         
                         *Don't ________ the old books. We can give them to the library.*
                         A. throw away   B. throw it away   C. throw away them   D. throw them away
                         
-                        **[解析]**：books 为复数，代词用 them 并放中间，选 **D**。
+                        **[解析]**：books 为复数，代词用 them 并放中间，选 **D**.
 
                         #### ② make a difference (起作用; 产生影响)
-                        - **【拓展】**：`make a difference to...`。
+                        - **【拓展】**：`make a difference to...`.
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
@@ -1084,7 +1574,7 @@ object Grade9Full {
                         *(2024·安徽中考)* *Everyone should ________ the lights when they leave the room.*
                         A. turn off   B. turn on   C. turn up   D. turn down
                         
-                        **[解析]**：离开房间应“关掉”灯，节约能源，选 **A**。
+                        **[解析]**：离开房间应“关掉”灯，节约能源，选 **A**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -1157,52 +1647,52 @@ object Grade9Full {
 
                         **【译文】**
                         
-                        今天是我们的毕业典礼。回顾过去的三年，我们遇到了很多挑战。我们为考试努力学习，有时感到压力很大。但我们也度过了许多快乐的时光。我们应该感谢老师们的耐心和父母们的爱。未来就在我们面前。让我们出发，去追逐梦想吧！
+                        今天是我们的毕业典礼. 回顾过去的三年，我们遇到了很多挑战. 我们为考试努力学习，有时感到压力很大. 但我们也度过了许多快乐的时光. 我们应该感谢老师们的耐心和父母们的爱. 未来就在我们面前. 让我们出发，去追逐梦想吧！
                     """.trimIndent()),
 
                     UnitDetailSection("📚 重点句子详解与翻译", """
                         #### 1. I remember meeting all of you. (我记得见过你们大家。)
-                        - **【句式剖析】**：`remember doing sth.` 记得做过某事（已发生）。
+                        - **【句式剖析】**：`remember doing sth.` 记得做过某事（已发生）.
                         
                         #### 2. I'm looking forward to high school. (我期待着高中。)
-                        - **【用法拓展】**：`look forward to` 后面接名词或 **动词-ing**。
+                        - **【用法拓展】**：`look forward to` 后面接名词或 **动词-ing**.
                         
                         #### 3. It's time to say goodbye. (该说再见了。)
-                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了。
+                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了.
                     """.trimIndent()),
 
                     UnitDetailSection("🔑 重点单词短语详解与例题", """
                         #### ① remember to do vs remember doing
                         - **【辨析】**：
-                            *   `remember to do`：记得要做某事（未做）。
-                            *   `remember doing`：记得做过某事（已做）。
+                            *   `remember to do`：记得要做某事（未做）.
+                            *   `remember doing`：记得做过某事（已做）.
                         - **【例题】**：
                         
                         *Please ________ the window when you leave.*
                         A. remember to close   B. remember closing   C. remember close   D. remembering to close
                         
-                        **[解析]**：提醒将来要做的事，用 to do，选 **A**。
+                        **[解析]**：提醒将来要做的事，用 to do，选 **A**.
 
                         #### ② look back at (回顾; 回头看)
-                        - **【反义词】**：`look forward to` (展望; 期待)。
+                        - **【反义词】**：`look forward to` (展望; 期待).
                     """.trimIndent()),
 
                     UnitDetailSection("⚙️ 语法精讲精练", """
                         ### 语法核心：非谓语动词的“分水岭”
                         **1. remember / forget / stop**
-                        - + to do：去做（未发生）。
-                        - + doing：做了（已发生）。
+                        - + to do：去做（未发生）.
+                        - + doing：做了（已发生）.
                         
                         **2. need / want**
-                        - `need to do` (主语是人)。
-                        - `need doing` (主语是物，表示被动)。
+                        - `need to do` (主语是人).
+                        - `need doing` (主语是物，表示被动).
 
                         **3. 中考真题特训**
                         
                         *(2024·江苏中考)* *I will never forget ________ the beautiful sunset with you last summer.*
                         A. to see   B. seeing   C. see   D. seen
                         
-                        **[解析]**：last summer 提示是已经发生过的经历，用 forget doing，选 **B**。
+                        **[解析]**：last summer 提示是已经发生过的经历，用 forget doing，选 **B**.
                     """.trimIndent()),
 
                     UnitDetailSection("✍️ 单元写作微技能", """
@@ -1213,10 +1703,6 @@ object Grade9Full {
                     """.trimIndent())
                 )
             )
-
-
         )
-
-        )
-
-        }
+    )
+}

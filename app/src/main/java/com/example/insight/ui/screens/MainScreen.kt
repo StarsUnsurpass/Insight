@@ -760,7 +760,13 @@ fun AnalysisTab(
     students: List<com.example.insight.data.local.entities.StudentEntity>
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
+    val surfaceColor = MaterialTheme.colorScheme.surface
     
+    // 模拟班级多维度数据
+    val capabilityScores = listOf(0.75f, 0.62f, 0.88f, 0.55f, 0.82f, 0.68f)
+    val learningProgress = listOf(0.4f, 0.45f, 0.55f, 0.52f, 0.65f, 0.72f, 0.78f)
+    val scoreDistribution = listOf(2, 5, 12, 8, 3) // 对应 0-60, 60-70, 70-80, 80-90, 90-100
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 120.dp),
@@ -768,76 +774,210 @@ fun AnalysisTab(
     ) {
         item {
             Column {
-                Text("学情分析", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-                Text(text = "实时掌握学生的认知状态与成长趋势", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
+                Text("学情 Kanban", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
+                Text(text = "深度追踪全班 42 个核心考点认知链路", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
             }
         }
 
+        // 1. 核心战报 (更丰富的 Stat Cards)
         item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                StatCard(
-                    preferences = preferences,
-                    label = "班级平均分", 
-                    value = if (students.isEmpty()) "0" else (students.map { it.latestScore }.average().toInt()).toString(), 
-                    modifier = Modifier.weight(1f)
-                )
-                StatCard(
-                    preferences = preferences,
-                    label = "活跃考点数", 
-                    value = "24", 
-                    modifier = Modifier.weight(1f)
-                )
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    StatCardSmall(label = "班级平均分", value = "84.5", icon = Icons.Default.Assessment, color = primaryColor, modifier = Modifier.weight(1f))
+                    StatCardSmall(label = "周进步率", value = "+12.4%", icon = Icons.Default.TrendingUp, color = Color(0xFF4DB6AC), modifier = Modifier.weight(1f))
+                }
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    StatCardSmall(label = "人均扫描", value = "18.2次", icon = Icons.Default.CameraAlt, color = Color(0xFF7986CB), modifier = Modifier.weight(1f))
+                    StatCardSmall(label = "活跃考点", value = "32个", icon = Icons.Default.Hub, color = Color(0xFFBA68C8), modifier = Modifier.weight(1f))
+                }
             }
         }
 
+        // 2. 成绩分布透视 (新增加密分布图)
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                shape = RoundedCornerShape(32.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
             ) {
-                Column(modifier = Modifier.padding(20.dp)) {
+                Column(modifier = Modifier.padding(24.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.AutoMirrored.Filled.TrendingUp, null, tint = primaryColor)
+                        Icon(Icons.Default.BarChart, null, tint = primaryColor, modifier = Modifier.size(20.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("全班掌握度概览", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("全班成绩区间分布", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Box(modifier = Modifier.fillMaxWidth().height(200.dp).background(primaryColor.copy(alpha = 0.05f), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
-                        Text("近期全班考点掌握度趋于稳定，从句法模块有显著提升", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                    Spacer(modifier = Modifier.height(24.dp))
+                    ScoreDistributionChart(
+                        data = scoreDistribution,
+                        modifier = Modifier.fillMaxWidth().height(140.dp)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        listOf("不及格", "合格", "中等", "良好", "优秀").forEach {
+                            Text(it, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                        }
+                    }
+                }
+            }
+        }
+
+        // 3. 能力雷达分析
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(32.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
+            ) {
+                Column(modifier = Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("核心素养多维模型", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.align(Alignment.Start))
+                    Spacer(modifier = Modifier.height(16.dp))
+                    CapabilityRadarChart(
+                        scores = capabilityScores,
+                        modifier = Modifier.fillMaxWidth().height(280.dp)
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    // 增加横向对比项
+                    HorizontalComparisonBar("当前班级 vs 年级平均", 0.78f, 0.65f, modifier = Modifier.fillMaxWidth())
+                }
+            }
+        }
+
+        // 4. AI 智能诊断建议
+        item {
+            Column {
+                Text("AI 教学决策辅助", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                AIDiagnosticCard(
+                    title = "薄弱环节：虚拟语气",
+                    content = "全班在该考点的辨析正确率仅为 42%，主要错误集中在“if 条件句”的不对称时态应用。",
+                    icon = Icons.Default.Warning,
+                    color = Color(0xFFFF8A65)
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                AIDiagnosticCard(
+                    title = "重点关注：长难句拆解",
+                    content = "建议加强对定语从句先行词的逻辑识别练习，这是目前影响阅读理解得分的关键因子。",
+                    icon = Icons.Default.Psychology,
+                    color = Color(0xFF4DB6AC)
+                )
+            }
+        }
+
+        // 5. 学习参与度与投入
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(32.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
+            ) {
+                Column(modifier = Modifier.padding(24.dp)) {
+                    Text("学习参与度趋势", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(24.dp))
+                    LearningCurveChart(
+                        points = learningProgress,
+                        modifier = Modifier.fillMaxWidth().height(100.dp)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                        MasteryProgressCircle(0.85f, "在线时长")
+                        MasteryProgressCircle(0.62f, "互动频率")
+                        MasteryProgressCircle(0.74f, "错题回顾")
                     }
                 }
             }
         }
 
         item {
-            Text("按掌握度查看学生", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
+                Text("学术成长领航员", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.ExtraBold)
+                Text("查看完整榜单", style = MaterialTheme.typography.labelSmall, color = Color.Gray, textDecoration = TextDecoration.Underline)
+            }
         }
 
-        items(students.sortedByDescending { it.latestScore }.take(5)) { student ->
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-            ) {
-                Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                        Text(student.name.take(1), fontWeight = FontWeight.Bold, color = primaryColor)
-                    }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(student.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                        Text(student.className, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                    }
-                    Text("${student.latestScore.toInt()}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Black, color = primaryColor)
-                }
+        items(students.sortedByDescending { it.latestScore }.take(3)) { student ->
+            StudentRankCard(student = student, primaryColor = primaryColor)
+        }
+    }
+}
+
+@Composable
+fun StatCardSmall(label: String, value: String, icon: ImageVector, color: Color, modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.03f))
+    ) {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(modifier = Modifier.size(32.dp).background(color.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                Icon(icon, null, tint = color, modifier = Modifier.size(16.dp))
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
         }
     }
 }
+
+@Composable
+fun StudentRankCard(student: com.example.insight.data.local.entities.StudentEntity, primaryColor: Color) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.03f))
+    ) {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                Text(student.name.take(1), fontWeight = FontWeight.Bold, color = primaryColor)
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(student.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                LinearProgressIndicator(
+                    progress = student.latestScore / 100f,
+                    modifier = Modifier.fillMaxWidth(0.7f).height(4.dp).clip(CircleShape),
+                    color = primaryColor,
+                    trackColor = primaryColor.copy(alpha = 0.1f)
+                )
+            }
+            Column(horizontalAlignment = Alignment.End) {
+                Text("${student.latestScore.toInt()}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Black, color = primaryColor)
+                Text("综合指数", style = MaterialTheme.typography.labelSmall, color = Color.Gray.copy(alpha = 0.5f))
+            }
+        }
+    }
+}
+
+
+@Composable
+fun AIDiagnosticCard(title: String, content: String, icon: ImageVector, color: Color) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.08f)),
+        border = BorderStroke(1.dp, color.copy(alpha = 0.2f))
+    ) {
+        Row(modifier = Modifier.padding(16.dp)) {
+            Icon(imageVector = icon, contentDescription = null, tint = color, modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(title, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold, color = color)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(content, style = MaterialTheme.typography.bodySmall, color = Color.DarkGray, lineHeight = 18.sp)
+            }
+        }
+    }
+}
+
 
 @Composable
 fun ProfileTab(
