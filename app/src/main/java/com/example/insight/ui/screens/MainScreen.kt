@@ -168,8 +168,10 @@ fun MainScreen(
                             InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
                             InsightTab.Analysis -> LearningAnalyticsScreen(
                                 state = analyticsState,
+                                preferences = preferences,
                                 onViewChange = { analyticsViewModel.updateView(it) },
-                                onNavigateToDetail = onNavigateToAnalyticsDetail
+                                onNavigateToDetail = onNavigateToAnalyticsDetail,
+                                onSelectStudent = { analyticsViewModel.selectStudent(it) }
                             )
                             InsightTab.Profile -> ProfileTab(
                                 preferences = preferences,
@@ -379,7 +381,7 @@ fun HomeTab(
                     focusManager.clearFocus()
                 })
             },
-        contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 120.dp),
+        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 120.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
@@ -398,7 +400,7 @@ fun HomeTab(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = "您好，${preferences.username}${if (preferences.role == UserRole.Teacher) "老师" else "学生"}",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )

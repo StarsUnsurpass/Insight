@@ -104,8 +104,8 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                 androidx.navigation.navArgument("content") { type = androidx.navigation.NavType.StringType }
             )
         ) { backStackEntry ->
-            val title = java.net.URLDecoder.decode(backStackEntry.arguments?.getString("title") ?: "", "UTF-8")
-            val content = java.net.URLDecoder.decode(backStackEntry.arguments?.getString("content") ?: "", "UTF-8")
+            val title = backStackEntry.arguments?.getString("title") ?: ""
+            val content = backStackEntry.arguments?.getString("content") ?: ""
             AnalyticsDetailScreen(title, content) { navController.popBackStack() }
         }
 

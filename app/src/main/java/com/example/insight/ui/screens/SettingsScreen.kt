@@ -1,9 +1,12 @@
 package com.example.insight.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -187,6 +190,7 @@ fun SettingsScreen(
 
     if (showClassDialog) {
         ClassEditDialog(
+            preferences = preferences,
             initialClass = preferences.className,
             onConfirm = {
                 onClassNameChange(it)
@@ -280,28 +284,104 @@ fun RoleSelectionDialog(
 
 @Composable
 fun ClassEditDialog(
+    preferences: UserPreferences,
     initialClass: String,
     onConfirm: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var text by remember { mutableStateOf(initialClass) }
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val grades = listOf("一", "二", "三", "四", "五", "六", "七", "八", "九")
+    
+    // 尝试解析初始值，例如 "三（2）班"
+    val initialGrade = grades.find { initialClass.startsWith(it) } ?: "一"
+    val initialNum = initialClass.filter { it.isDigit() }
+    
+    var selectedGrade by remember { mutableStateOf(initialGrade) }
+    var classNum by remember { mutableStateOf(initialNum) }
+
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("修改班级") },
+        title = { Text("设置班级", fontWeight = FontWeight.Bold) },
         text = {
-            OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+                Column {
+                    Text("选择年级", style = MaterialTheme.typography.labelMedium, color = Color.Gray)
+                    Spacer(modifier = Modifier.height(12.dp))
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(horizontal = 4.dp)
+                    ) {
+                        items(grades) { grade ->
+                            val isSelected = selectedGrade == grade
+                            Surface(
+                                onClick = { 
+                                    if (selectedGrade != grade) {
+                                        com.example.insight.util.triggerHaptic(preferences, context)
+                                        selectedGrade = grade 
+                                    }
+                                },
+                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                                shape = RoundedCornerShape(12.dp),
+                                border = if (isSelected) null else BorderStroke(1.dp, Color.LightGray.copy(alpha = 0.5f))
+                            ) {
+                                Box(
+                                    modifier = Modifier.size(48.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = grade,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isSelected) Color.White else Color.Black
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Column {
+                    Text("填写班级 (数字)", style = MaterialTheme.typography.labelMedium, color = Color.Gray)
+                    Spacer(modifier = Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = classNum,
+                        onValueChange = { if (it.all { char -> char.isDigit() }) classNum = it },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        placeholder = { Text("例如：1") },
+                        trailingIcon = { Text("班", modifier = Modifier.padding(end = 12.dp)) },
+                        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
+                            keyboardType = androidx.compose.ui.text.input.KeyboardType.Number
+                        ),
+                        singleLine = true
+                    )
+                }
+                
+                // 预览
+                Surface(
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "预览：${selectedGrade}（${classNum.ifEmpty { "?" }}）班",
+                        modifier = Modifier.padding(12.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
         },
         confirmButton = {
-            TextButton(onClick = { onConfirm(text) }) { Text("确认", color = SageGreen) }
+            TextButton(
+                onClick = { 
+                    com.example.insight.util.triggerHaptic(preferences, context)
+                    onConfirm("${selectedGrade}（${classNum}）班") 
+                },
+                enabled = classNum.isNotEmpty()
+            ) { Text("确认", color = SageGreen, fontWeight = FontWeight.Bold) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) }
+            TextButton(onClick = onDismiss) { Text("取消", color = Color.Gray) }
         }
     )
 }
