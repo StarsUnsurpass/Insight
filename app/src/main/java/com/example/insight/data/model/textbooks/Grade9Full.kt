@@ -978,6 +978,245 @@ object Grade9Full {
                 )
             )
 
+        ,
+            TextbookUnit(
+                "g9full_u13", "Unit 13", "We're trying to save the earth!",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自然 (Man and Nature)
+                        *   **主题群**：环境保护 (Environmental protection)
+                        *   **子主题**：污染现状，环保行动，可持续生活 (Saving the planet)。
+
+                        ### 2. 单元主题内容
+                        本单元聚焦“环境保护”，重点复习多种时态（现在进行时、现在完成时、被动语态、used to 等）在环保话题下的综合应用。通过探讨污染问题（如 air pollution, water pollution）及环保措施（如 recycling, reducing plastic），引导学生树立危机意识。单元强调了“垃圾是放错地方的资源”（如 Rethink, Reuse, Recycle），鼓励学生从身边小事做起，共同守护地球家园。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **环保词汇**：litter, rubbish, pollution, ocean, planet, reusable.
+                        - **核心动词**：recycle (回收), reduce (减少), reuse (再利用), afford (负担得起), transport (运输).
+                        - **高频短语**：throw away (扔掉), take part in (参加), turn off (关掉), pay for (付款), make a difference (产生影响).
+
+                        ### 2. 核心句式
+                        1.  **描述现状**：The river used to be clean, but now it's very dirty.
+                        2.  **呼吁行动**：We're trying to save the earth!
+                        3.  **表达必要性**：It's crucial to stop using plastic bags.
+                        4.  **提供方法**：We should recycle paper and glass.
+
+                        ### 3. 重点语法
+                        - **多种时态的综合应用**（描述环保情境）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Mark**: Look at the river! It's full of rubbish. 
+                        
+                        **Sarah**: Yes, it used to be so clean. 
+                        
+                        **Mark**: We should do something to clean it up. 
+                        
+                        **Sarah**: I agree. We can take part in the city's cleanup day. 
+                        
+                        **Mark**: Good idea! We should also tell people to stop throwing litter into it.
+
+                        **【译文】**
+                        
+                        **马克**：看那条河！到处都是垃圾。
+                        
+                        **莎拉**：是的，它过去非常干净。
+                        
+                        **马克**：我们应该做点什么来清理它。
+                        
+                        **莎拉**：我同意。我们可以参加城市的清理日活动。
+                        
+                        **马克**：好主意！我们也应该告诉人们停止往河里扔垃圾。
+
+                        ### Section B (Reading) 阅读文段：Rethink, Reuse, Recycle!
+                        **【原文】**
+                        
+                        The world is full of waste. But did you know that much of it can be reused? For example, an artist in the UK makes beautiful sculptures from old metal. A woman in China makes bags from plastic bottles. These people show us that we should rethink what we throw away. By recycling and reusing, we can save resources and protect our environment.
+
+                        **【译文】**
+                        
+                        世界充满了废弃物。但你知道其中很多是可以再利用的吗？例如，英国的一位艺术家用废旧金属制作美丽的雕塑。中国的一位女士用塑料瓶制作包。这些人向我们展示了我们应该重新审视我们扔掉的东西。通过回收和再利用，我们可以节约资源并保护环境。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. We're trying to save the earth! (我们正在努力拯救地球！)
+                        - **【句式剖析】**：`try to do sth.` 努力做某事。
+                        
+                        #### 2. The river used to be clean. (这条河过去很干净。)
+                        - **【要点精讲】**：`used to be` 描述过去的某种状态。
+                        
+                        #### 3. It's crucial to stop using plastic bags. (停止使用塑料袋是至关重要的。)
+                        - **【词块归纳】**：`crucial` 意为“至关重要的；关键的”。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① throw away (扔掉; 抛弃)
+                        - **【用法】**：动副短语。代词放中间。
+                        - **【例题】**：
+                        
+                        *Don't ________ the old books. We can give them to the library.*
+                        A. throw away   B. throw it away   C. throw away them   D. throw them away
+                        
+                        **[解析]**：books 为复数，代词用 them 并放中间，选 **D**。
+
+                        #### ② make a difference (起作用; 产生影响)
+                        - **【拓展】**：`make a difference to...`。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：环保话题下的综合语法
+                        **1. used to 与 be used to**
+                        - *I used to litter.* (过去常扔垃圾)
+                        - *I am used to recycling.* (现在习惯于回收)
+                        
+                        **2. 被动语态的环保应用**
+                        - *Paper should be recycled.* (纸应该被回收)
+                        - *The trees are being cut down.* (树正在被砍伐)
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·安徽中考)* *Everyone should ________ the lights when they leave the room.*
+                        A. turn off   B. turn on   C. turn up   D. turn down
+                        
+                        **[解析]**：离开房间应“关掉”灯，节约能源，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：How to Protect the Environment (如何环保)
+                        **Our earth is in danger, so we must protect it.** 
+                        
+                        First, we should **stop using** plastic bags. We can take a cloth bag when shopping. Second, we should **recycle** waste paper and bottles. Third, it's a good habit to **turn off the lights** when we leave. If **everyone** makes an effort, our world will **be more beautiful**.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g9full_u14", "Unit 14", "I remember meeting all of you in Grade 7.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：个人成长 (Personal growth)
+                        *   **子主题**：毕业回忆，感恩，未来展望 (Graduation and memories)。
+
+                        ### 2. 单元主题内容
+                        作为初中阶段的最后一个单元，本单元以“毕业与回忆”为主题。学生通过回顾从七年级到九年级的点点滴滴（如 meeting friends, winning competitions, dealing with pressure），表达对老师、同学的感激之情。单元重点复习了非谓语动词（remember doing/to do）及各种时态的综合运用。旨在引导学生在离别之际珍藏回忆，树立远大理想，勇敢奔赴未来。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **回忆词汇**：memory, survey, standard, degree, manager.
+                        - **核心动词**：graduate (毕业), congratulate (祝贺), thirst (渴望), overcome (克服).
+                        - **高频短语**：remember doing (记得做过), look back at (回顾), keep one's cool (沉住气), prepare for (准备), ahead of (在...前面).
+
+                        ### 2. 核心句式
+                        1.  **美好回忆**：I remember meeting all of you in Grade 7.
+                        2.  **表达收获**：I've learned a lot from my teachers and friends.
+                        3.  **未来愿望**：I hope to achieve my dreams in the future.
+                        4.  **感恩寄语**：Thank you for your help and support.
+
+                        ### 3. 重点语法
+                        - **非谓语动词**（remember, forget, stop 后接 to do 与 doing 的区别）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Teacher**: How do you feel about leaving school, Lily? 
+                        
+                        **Lily**: I'm a bit sad. I remember meeting everyone for the first time in Grade 7. 
+                        
+                        **Teacher**: What about you, Ken? 
+                        
+                        **Ken**: I'm excited about high school, but I'll miss my friends. 
+                        
+                        **Teacher**: You've all grown up a lot. Good luck to everyone!
+
+                        **【译文】**
+                        
+                        **老师**：丽作，对于毕业你有什么感受？
+                        
+                        **丽丽**：我有点难过。我记得七年级第一次见到大家的情景。
+                        
+                        **老师**：你呢，肯？
+                        
+                        **肯**：我对高中感到兴奋，但我会想念我的朋友们。
+                        
+                        **老师**：你们都长大了许多。祝大家好运！
+
+                        ### Section B (Reading) 阅读文段：A Graduation Speech
+                        **【原文】**
+                        
+                        Today is our graduation day. Looking back at the last three years, we have had many challenges. We worked hard for exams and sometimes we felt stressed. But we also had many happy times. We should thank our teachers for their patience and our parents for their love. The future is ahead of us. Let's go forth and follow our dreams!
+
+                        **【译文】**
+                        
+                        今天是我们的毕业典礼。回顾过去的三年，我们遇到了很多挑战。我们为考试努力学习，有时感到压力很大。但我们也度过了许多快乐的时光。我们应该感谢老师们的耐心和父母们的爱。未来就在我们面前。让我们出发，去追逐梦想吧！
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. I remember meeting all of you. (我记得见过你们大家。)
+                        - **【句式剖析】**：`remember doing sth.` 记得做过某事（已发生）。
+                        
+                        #### 2. I'm looking forward to high school. (我期待着高中。)
+                        - **【用法拓展】**：`look forward to` 后面接名词或 **动词-ing**。
+                        
+                        #### 3. It's time to say goodbye. (该说再见了。)
+                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① remember to do vs remember doing
+                        - **【辨析】**：
+                            *   `remember to do`：记得要做某事（未做）。
+                            *   `remember doing`：记得做过某事（已做）。
+                        - **【例题】**：
+                        
+                        *Please ________ the window when you leave.*
+                        A. remember to close   B. remember closing   C. remember close   D. remembering to close
+                        
+                        **[解析]**：提醒将来要做的事，用 to do，选 **A**。
+
+                        #### ② look back at (回顾; 回头看)
+                        - **【反义词】**：`look forward to` (展望; 期待)。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：非谓语动词的“分水岭”
+                        **1. remember / forget / stop**
+                        - + to do：去做（未发生）。
+                        - + doing：做了（已发生）。
+                        
+                        **2. need / want**
+                        - `need to do` (主语是人)。
+                        - `need doing` (主语是物，表示被动)。
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·江苏中考)* *I will never forget ________ the beautiful sunset with you last summer.*
+                        A. to see   B. seeing   C. see   D. seen
+                        
+                        **[解析]**：last summer 提示是已经发生过的经历，用 forget doing，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My Junior High Memories (我的初中回忆)
+                        **Three years have passed quickly.** 
+                        
+                        I still **remember my first day** in this school. I was very **shy** at that time. But now, I have **many friends**. I want to **thank my teachers** because they helped me **overcome difficulties**. I will **miss** my school life. I'm **ready for** the next part of my life!
+                    """.trimIndent())
+                )
+            )
+
+
         )
+
         )
+
         }
