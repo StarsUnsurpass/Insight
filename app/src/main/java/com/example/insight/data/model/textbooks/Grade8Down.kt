@@ -460,6 +460,259 @@ object Grade8Down {
                     """.trimIndent())
                 )
             ),
+        ,
+            TextbookUnit(
+                "g8down_u9", "Unit 9", "Have you ever been to a museum?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self) / 人与社会 (Man and Society)
+                        *   **主题群**：世界与环境 (The world and environment)
+                        *   **子主题**：旅游经历，名胜古迹，文化场馆参观 (Traveling and museums)。
+
+                        ### 2. 单元主题内容
+                        本单元以“游历与名胜”为主题，重点进阶学习现在完成时（Present Perfect Tense）。通过讨论曾经去过的博物馆、太空站、游乐园等场所，学生学会如何表达个人的人生经历。单元还涉及了新加坡等地的多元文化介绍，引导学生开阔国际视野，尊重多元文化，培养其作为全球公民的文化素养和分享意识。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **场馆词汇**：museum, planetarium, aquarium, zoo, amusement park.
+                        - **核心动词/形容词**：invent (发明), explore (探索), unbelievable (难以置信的), unusual (不寻常的).
+                        - **高频短语**：have been to (去过), have gone to (去了), thousands of (数以千计的), encourage sb. to do sth. (鼓励某人做某事), take a subway (乘地铁).
+
+                        ### 2. 核心句式
+                        1.  **询问经历**：Have you ever been to a science museum? — Yes, I have. / No, I haven't.
+                        2.  **表达感叹**：I've never been to a water park.
+                        3.  **数量表达**：There are thousands of students in the school.
+                        4.  **因果逻辑**：It's so beautiful that I want to visit it again.
+
+                        ### 3. 重点语法
+                        - **现在完成时** 的进阶用法（ever, never）。
+                        - **have been to** 与 **have gone to** 的深度辨析。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Sarah**: Have you ever been to the space museum, Leo? 
+                        
+                        **Leo**: No, I haven't. How about you? 
+                        
+                        **Sarah**: I went there last year. It was fantastic! 
+                        
+                        **Leo**: Have you been to the art museum? 
+                        
+                        **Sarah**: No, I've never been there. Is it good? 
+                        
+                        **Leo**: Yes, it is. I've been there many times.
+
+                        **【译文】**
+                        
+                        **莎拉**：利奥，你去过太空博物馆吗？
+                        
+                        **利奥**：不，我没去过。你呢？
+                        
+                        **莎拉**：我去年去了。那儿太棒了！
+                        
+                        **利奥**：你去过艺术博物馆吗？
+                        
+                        **莎拉**：没，我从没去过那儿。那儿好吗？
+                        
+                        **利奥**：是的，很好。我去过那里很多次了。
+
+                        ### Section B (Reading) 阅读文段：Singapore — A Place You Will Never Forget
+                        **【原文】**
+                        
+                        Singapore is an island in Southeast Asia. It is a great place to take a vacation. On the one hand, more than three quarters of the population are Chinese, so you can speak Chinese. On the other hand, it's an English-speaking country. You can find food from all over the world. The Night Safari is the most exciting place. It's a place you will never forget!
+
+                        **【译文】**
+                        
+                        新加坡是东南亚的一个岛国。它是一个度假的好地方。一方面，超过四分之三的人口是华人，所以你可以说中文。另一方面，它是一个说英语的国家。你可以找到来自世界各地的美食。夜间野生动物园是最令人兴奋的地方。这是一个你永远不会忘记的地方！
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. Have you ever been to ...? (你曾经去过...吗？)
+                        - **【用法拓展】**：用于询问某人的经历。`ever` 意为“曾经”，常放于 have/has 之后。
+                        
+                        #### 2. On the one hand ... on the other hand ... (一方面...另一方面...)
+                        - **【要点精讲】**：用于表达两个不同的方面，常作连接词。
+                        
+                        #### 3. It's a good way to practice your English. (这是练习英语的一个好方法。)
+                        - **【词块归纳】**：`a good way to do sth.` 做某事的好方法。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① have been to vs have gone to
+                        - **【辨析】**：
+                            *   `have been to`：去过某地（已回来）。强调经历。
+                            *   `have gone to`：去了某地（未回来）。强调状态。
+                        - **【例题】**：
+                        
+                        *— Where is Tom? — He ________ the library.*
+                        A. has been to   B. has gone to   C. goes   D. went
+                        
+                        **[解析]**：根据问句询问人在哪，可知人去了还没回来，选 **B**。
+
+                        #### ② population (n. 人口)
+                        - **【注意】**：谓语动词用单数。询问人口多少用 `How large`。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：现在完成时之“人生经历”
+                        **1. 常用时间状语**
+                        - ever (曾经), never (从不), before (以前), many times (多次).
+                        
+                        **2. 句式注意点**
+                        - 肯定句：I have been there before.
+                        - 疑问句：Have you ever been there?
+                        - 否定句：I have never been there.
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·重庆中考)* *My father ________ to Beijing twice. He loves the city very much.*
+                        A. has gone   B. has been   C. went   D. will go
+                        
+                        **[解析]**：twice 表示经历，且人现在在这说话（已回来），选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：My Travel Experience (我的旅行经历)
+                        **I love traveling. I have been to many interesting places.**
+                        
+                        Last summer, I **went to Beijing** with my parents. I **have been to** the Great Wall twice. It is **fantastic**! I also **visited** the Palace Museum. I **have learned** a lot about Chinese history. TRAVELING is a **good way** to see the world. I hope to **visit** more places in the future.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8down_u10", "Unit 10", "I've had this bike for three years.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self) / 人与社会 (Man and Society)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：个人物品，童年回忆，城乡变迁 (Memories and changes)。
+
+                        ### 2. 单元主题内容
+                        本单元围绕“旧物与回忆”展开，重点学习现在完成时（延续性用法）。通过讨论捐赠旧物（如 bike, toy, book 等）以及家乡的变迁（如 Hometown 故事），引导学生学会珍惜当下，感恩过去。单元强调了“断舍离”的极简生活态度以及社会慈善意识，培养学生的人文情怀和对社会发展的深度思考。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览", """
+                        ### 1. 重点单词短语
+                        - **旧物名词**：yard, sweet, soft toy, board game, scarf.
+                        - **核心动词/形容词**：own (拥有), part (离开; 分开), honest (诚实的), certain (某些).
+                        - **高频短语**：for three years (三年了), since I was five (自从五岁起), yard sale (庭院拍卖), part with (放弃), check out (查看).
+
+                        ### 2. 核心句式
+                        1.  **询问持续时长**：How long have you had that bike? — For three years.
+                        2.  **表达所有权**：I've had this toy since I was a baby.
+                        3.  **描述变化**：My hometown has changed a lot in the last few years.
+                        4.  **捐赠建议**：We can give these things to the children in need.
+
+                        ### 3. 重点语法
+                        - **现在完成时** 的延续性用法（for 与 since 的搭配）。
+                        - **短暂性动词与延续性动词** 的转换。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Amy**: What's that, Jeff? 
+                        
+                        **Jeff**: It's my old bike. I've had it for three years. 
+                        
+                        **Amy**: Are you going to sell it at the yard sale? 
+                        
+                        **Jeff**: Yes. I don't use it anymore. But I want to part with my old books. 
+                        
+                        **Amy**: Why? 
+                        
+                        **Jeff**: Because they've brought me so much joy. I want to give them to someone who needs them.
+
+                        **【译文】**
+                        
+                        **艾米**：那是什么，杰夫？
+                        
+                        **杰夫**：是我的旧自行车。我已经买了三年了。
+                        
+                        **艾米**：你打算在庭院拍卖会上卖掉它吗？
+                        
+                        **杰夫**：是的。我不怎么用它了。但我还想舍弃我的旧书。
+                        
+                        **艾米**：为什么？
+                        
+                        **杰夫**：因为它们给我带来了很多快乐。我想把它们给需要它们的人。
+
+                        ### Section B (Reading) 阅读文段：Hometown Feelings
+                        **【原文】**
+                        
+                        Many people in China have left their hometowns to find work in the cities. Zhong Wei is one of them. He has lived in Wenzhou for ten years. But he still misses his hometown. He remembers the big tree and the small river. He says, "Hometown is a part of me. I will go back one day."
+
+                        **【译文】**
+                        
+                        中国有很多人离开家乡去城市找工作。钟伟就是其中之一。他在温州已经住了十年了。但他依然思念家乡。他记得那棵大树和那条小河。他说：“家乡是我的一部分。总有一天我会回去的。”
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. How long have you had that bike? (你买那辆自行车多久了？)
+                        - **【用法拓展】**：询问某状态持续了多久。回答常用 `for + 一段时间` 或 `since + 时间点`。
+                        
+                        #### 2. I've had it since I was five. (自从我五岁起我就拥有它了。)
+                        - **【要点精讲】**：`since` 后面可以接具体的时间点，也可以接一个一般过去时的从句。
+                        
+                        #### 3. It's hard to part with these things. (舍弃这些东西很难。)
+                        - **【词块归纳】**：`part with` 意为“舍弃；放弃；与...分开”。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① for vs since
+                        - **【辨析】**：
+                            *   `for` + 时间段 (three years, a long time)。
+                            *   `since` + 时间点 (2010, last year, he came here)。
+                        - **【例题】**：
+                        
+                        *I have studied English ________ five years ago.*
+                        A. for   B. since   C. in   D. during
+                        
+                        **[解析]**：five years ago 是时间点，选 **B**。
+
+                        #### ② 短暂性动词变延续性动词
+                        - buy -> have
+                        - borrow -> keep
+                        - come -> be here
+                        - join -> be in / be a member of
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 语法核心：现在完成时之“持续状态”
+                        **1. for 与 since 的转换**
+                        - `since + 过去的时间点`
+                        - `for + 时间段`
+                        - *I have been a teacher since 2015.* = *I have been a teacher for 9 years.*
+                        
+                        **2. 延续性法则**
+                        现在完成时与 for/since 连用时，动词必须是**延续性动词**。
+                        - 错误：I have bought the book for two days. (buy是瞬间动作)
+                        - 正确：I have **had** the book for two days.
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·天津中考)* *I ________ this book since I ________ ten years old.*
+                        A. have had; was   B. have had; am   C. have; was   D. had; was
+                        
+                        **[解析]**：since 引导从句用过去时，主句用完成时，且 have 需变延续性 had，选 **A**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能", """
+                        ### 写作主题：Changes in My Hometown (家乡的变化)
+                        **My hometown has changed a lot in the last few years.**
+                        
+                        There **used to be** old houses and narrow roads. But now, there are **many tall buildings**. I **have lived** here **for twelve years**, and I love it. The river **is cleaner** than before. Many people **have moved** into new apartments. I think our life **is getting better and better**.
+                    """.trimIndent())
+                )
+            )
+
         )
-    )
-}
+        )
+        }
