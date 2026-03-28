@@ -12,1694 +12,1311 @@ object Grade9Full {
         id = "g9_full",
         grade = "九年级",
         term = "全一册",
-        coverColor = Color(0xFFE1F5FE),
-        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc9q_2024/coverbig.jpg",
+        coverColor = Color(0xFFFFCCBC),
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/qc9x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g9full_u1", "Unit 1", "How can we become good learners?",
+                "g9_u1", "Unit 1", "How can we become good learners?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：学习与生活 (Learning and life)
-                        *   **子主题**：学习方法，终身学习，克服困难 (Learning strategies)。
-
-                        ### 2. 单元主题内容
-                        作为九年级的开篇，本单元聚焦“学习策略”。通过探讨不同的英语学习方法（如 watching English movies, making word cards, asking the teacher 等），引导学生找到最适合自己的学习路径。单元强调了学习中的情感因素（如 interest, persistence），鼓励学生面对困难不退缩，培养高效学习的能力和终身学习的意识。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 学习策略与方法。
+                        *   **深层意义**：作为九年级的开篇，本单元聚焦于“如何学习”。旨在通过探讨各种高效的学习技巧（如看英语电影、查字典、小组合作），引导学生反思自己的学习习惯。强调终身学习的理念和面对困难时的毅力（patience），为冲刺中考打下心理和方法论基础。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **学习动作**：pronounce (发音), memorize (记忆), repeat (重复), note (笔记), discover (发现).
-                        - **核心名词**：expression (表达方式), grammar (语法), physics (物理), chemistry (化学), secret (秘密).
-                        - **高频短语**：by doing sth. (通过做某事), word by word (逐字地), fall in love with (爱上), look up (查阅), pay attention to (注意).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类记忆
+                        - **学习动作**：repeat (重复), note (笔记), pronounce (发音), memorize (记忆), review (复习), discover (发现)。
+                        - **核心名词**：expression (表达), textbook (教科书), conversation (交际), grammar (语法), brain (大脑), knowledge (知识)。
+                        - **抽象词汇**：patience (耐心), ability (能力), secret (秘密), chemistry (化学), physics (物理)。
+                        - **形容词/副词**：wise (明智的), active (积极的), secret (秘密的), overnight (一夜之间)。
 
-                        ### 2. 核心句式
-                        1.  **询问方法**：How do you study for a test? — I study by working with a group.
-                        2.  **表达困难**：It's too hard to understand spoken English.
-                        3.  **给出建议**：Why don't you read aloud to practice pronunciation?
-                        4.  **描述过程**：The more you read, the faster you'll be.
-
-                        ### 3. 重点语法
-                        - **by + v.-ing** 结构表达方式、手段。
+                        ### 2. 核心短语金牌储备
+                        - `by doing sth.` 通过做某事 (**本单元语法核心**)
+                        - `work with friends` 与朋友合作
+                        - `listen to tapes` 听录音
+                        - `ask sb. for help` 向某人寻求帮助
+                        - `look up` 查阅（词典等）
+                        - `take notes` 做笔记
+                        - `pay attention to` 注意
+                        - `connect ... with ...` 把...与...联系起来
+                        - `be afraid to do sth.` 害怕做某事
+                        - `fall in love with` 爱上
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. How do you study for a test? — I study by working with a group. (你如何准备考试？—— 我通过小组合作学习。)
+                        - **【考点详解】**：`by + v.-ing` 结构表示手段、方式或方法。对该结构提问用 `How`。
                         
-                        **Jack**: How do you study for a test, Annie? 
+                        #### 2. The more you read, the faster you'll be. (你读得越多，你就变得越快。)
+                        - **【结构剖析】**：`The + 比较级, the + 比较级` 表示“越...就越...”。
                         
-                        **Annie**: I study by making word cards. It really helps. 
+                        #### 3. I sometimes don't understand what people are saying. (我有时听不懂人们在说什么。)
+                        - **【语法核心】**：`what` 引导的宾语从句。从句使用陈述语序。
                         
-                        **Jack**: Have you ever studied with a group? 
-                        
-                        **Annie**: Yes, I have. I've learned a lot that way. 
-                        
-                        **Jack**: What about listening to tapes? 
-                        
-                        **Annie**: Oh, it's too hard to understand the voices. 
-
-                        **【译文】**
-                        
-                        **杰克**：安妮，你如何为考试复习？
-                        
-                        **安妮**：我通过制作单词卡片来学习。这很有帮助。
-                        
-                        **杰克**：你曾经参加过小组学习吗？
-                        
-                        **安妮**：是的，参加过。那样我学到了很多。
-                        
-                        **杰克**：听录音带怎么样？
-                        
-                        **安妮**：噢，要听懂那些声音太难了。
-
-                        ### Section B (Reading) 阅读文段：How I Learned to Learn English
-                        **【原文】**
-                        
-                        Last year, I did not like my English class. Every class was like a bad dream. But one day, I watched an English movie called Toy Story. I fell in love with the characters. I started to listen to the expressions and look them up in a dictionary. Now, I find that the secret to good learning is interest. If you enjoy it, you will learn well.
-
-                        **【译文】**
-                        
-                        去年，我不喜欢英语课。每一节课都像场噩梦。但有一天，我看了部名叫《玩具总动员》的英语电影。我爱上了其中的角色。我开始倾听那些表达方式并查阅词典。现在，我发现学好英语的秘诀是兴趣。如果你乐在其中，你就能学好。
+                        #### 4. It's too hard to understand spoken English. (听懂英语口语太难了。)
+                        - **【用法拓展】**：`It is + adj. + to do sth.` 重点考查 `it` 作形式主语。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. How can we become good learners? (我们怎样才能成为优秀的学习者？)
-                        - **【句式剖析】**：`How` 引导特殊疑问句询问手段或方式。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：by + 动名词 (v.-ing)
+                        **1. 功能**：表示通过某种方式、手段达到目的。
+                        **2. 句式**：
+                        - *I learn English **by watching** movies.*
+                        **3. 特别注意**：对 `by...` 短语提问，必须用 `How`。
+                        *   *— **How** do you improve your speaking? — **By talking** with foreigners.*
+
+                        ### 核心语法二：宾语从句 (初步接触)
+                        **1. 语序**：永远使用**陈述句语序**（主语在前，谓语在后）。
+                        **2. 时态一致**：主句若是一般现在时，从句时态根据需要而定。
+
+                        ### 中考真题特训
                         
-                        #### 2. I study by listening to English songs. (我通过听英文歌学习。)
-                        - **【要点精讲】**：`by + v.-ing` 是本单元的核心语法，表示“通过...方式”。
+                        *(2024·南京中考)* *— ________ do you know so much about the Silk Road? — By reading books and surfing the Internet.*
+                        A. Why   B. How   C. Where   D. When
                         
-                        #### 3. It's too hard to understand the voices. (要听懂那些声音太难了。)
-                        - **【词块归纳】**：`It is + adj. + to do sth.` 做某事是...的。
+                        **[解析]**：答语是由 by 引导的方式状语，提问用 How，选 **B**。
+
+                        *(2023·北京中考)* *I've learned that ________ you practice, ________ you will be.*
+                        A. more; better   B. the more; the better   C. most; best   D. the most; the best
+                        
+                        **[解析]**：考查“the+比较级，the+比较级”结构，表示“越...越...”，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① look up (查阅; 抬头看)
-                        - **【用法】**：动副短语。名词放中间或后，代词放中间。
-                        - **【例题】**：
-                        
-                        *If you don't know the word, you can ________ in the dictionary.*
-                        A. look it up   B. look up it   C. look for it   D. look at it
-                        
-                        **[解析]**：查阅单词用 look up，代词 it 放中间，选 **A**。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的英语学习建议 (Advice on Learning English)
+                        #### 1. 写作要点
+                        - **存在的问题**：I have some problems with...
+                        - **解决方法 (使用 by doing)**：First, you can learn by... Second, ...
+                        - **态度与鼓励**：Don't be afraid. Believe in yourself.
 
-                        #### ② the more ... the more ... (越...就越...)
-                        - **【用法】**：表示一方随另一方的程度增加而增加。
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Many students think English is difficult.*
+                        - *The best way to improve is by listening to tapes.*
+                        - *You should not be afraid of making mistakes.*
+                        - *As for grammar, you can learn it by taking notes.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：by + 动名词的“万能”用法
-                        **1. 含义**
-                        表示通过某种手段、方式或方法。
+                        #### 3. 满分范文
+                        **How to Learn English Well**
                         
-                        **2. 常见场景**
-                        - *How do you go to school? — By bus.* (乘车)
-                        - *How did you do that? — By working hard.* (通过努力)
-
-                        **3. 中考真题特训**
+                        Many students think learning English is a big challenge. Here is some advice for you. 
                         
-                        *(2024·天津中考)* *You can improve your English ________ reading more books.*
-                        A. in   B. by   C. with   D. for
+                        First, listening is very important. You can improve it by listening to English songs or watching English movies. Second, don't be afraid to speak. You can practice your speaking by having conversations with your friends. Third, reading a lot is a good way to build your vocabulary. If you meet new words, you can look them up in a dictionary. Finally, remember that "Practice makes perfect." 
                         
-                        **[解析]**：通过读书来提高英语，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Advice on Learning English (我的英语学习建议)
-                        **Many students think learning English is difficult.**
-                        
-                        In my opinion, the best way is **by watching English movies**. It's very interesting. You can also **practice speaking** by **talking with friends**. Don't be afraid of **making mistakes**. The **secret** to success is **interest and practice**. I hope my advice will help you.
+                        I believe you can become a good English learner if you follow these methods.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u2", "Unit 2", "I think that mooncakes are delicious!",
+                "g9_u2", "Unit 2", "I think that mooncakes are delicious!",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：历史、社会与文化 (History and culture)
-                        *   **子主题**：国内外传统节日，习俗与传统 (Festivals and traditions)。
-
-                        ### 2. 单元主题内容
-                        本单元以“节日与文化”为主题，重点学习宾语从句（Objective Clauses）。通过探讨中国的传统节日（如 Mid-Autumn Festival, Dragon Boat Festival）以及西方的节日（如 Halloween, Christmas），学生能够运用 `that`, `whether/if` 引导的从句来表达个人观点和客观事实。单元旨在培养学生的文化意识，学会在跨文化交流中自信地传播中华文化。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 历史、社会与文化（传统节日）。
+                        *   **深层意义**：本单元围绕“中外传统节日”展开（如中秋节、端午节、泼水节、圣诞节、万圣节）。旨在引导学生用英语讲述节日传说（如嫦娥奔月），理解不同节日背后的文化内涵。通过对比，增强文化理解力，学会客观地评价和传播中华文化。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **节日名词**：mooncake, lantern, stranger, relative (亲戚), pound (磅).
-                        - **核心动词/形容词**：steal (偷), lay (放置), admire (欣赏), haunted (闹鬼的).
-                        - **高频短语**：the Lantern Festival, the Dragon Boat Festival, shoot down (射下), put on (增加重量), lay out (摆开).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类记忆
+                        - **节日名词**：lantern (灯笼), stranger (陌生人), relative (亲戚), goddess (女神), ghost (鬼魂), ancestor (祖先)。
+                        - **动作与庆祝**：celebrate (庆祝), admire (欣赏), tie (捆绑), spread (传播), punish (惩罚), steal (偷)。
+                        - **节日食物**：mooncake (月饼), dessert (甜点), zongzi (粽子)。
+                        - **形容词/副词**：haunted (有鬼魂出没的), scary (吓人的), crowded (拥挤的)。
 
-                        ### 2. 核心句式
-                        1.  **陈述观点**：I think that mooncakes are delicious.
-                        2.  **表达感受**：I wonder whether they'll have a race again next year.
-                        3.  **描述节日**：What a fun festival it is!
-                        4.  **感叹句**：How beautifully the lanterns shine!
-
-                        ### 3. 重点语法
-                        - **宾语从句**（由 that, if/whether 引导）。
-                        - **感叹句**（How 与 What 引导）。
+                        ### 2. 核心短语金牌储备
+                        - `put on weight` 发胖；增加体重
+                        - `lay out` 摆开；布置
+                        - `give out` 分发
+                        - `end up` 最终成为；最后处于
+                        - `shoot down` 射下
+                        - `shout out` 大声喊出
+                        - `care about` 关心；在意
+                        - `remind sb. of sth.` 使某人想起某事
+                        - `the Water Festival` 泼水节
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. I think that mooncakes are delicious! (我认为月饼很美味！)
+                        - **【考点详解】**：`that` 引导的宾语从句。在口语中 `that` 常省略。
                         
-                        **Bill**: Did you know that the Mid-Autumn Festival is coming? 
+                        #### 2. I wonder if they'll have the races again next year. (我不知道明年他们是否还会举行比赛。)
+                        - **【结构剖析】**：`if / whether` 引导的宾语从句，意为“是否”。
                         
-                        **Lin Tao**: Yes, I think that mooncakes are really delicious. 
+                        #### 3. What a great day! (多么棒的一天啊！)
+                        - **【语法核心】**：`What` 引导的感叹句。结构：`What + a/an + adj. + n. + 主语 + 谓语!`。
                         
-                        **Bill**: I agree. I wonder if there will be a full moon tonight. 
-                        
-                        **Lin Tao**: I hope so. People like to admire the moon with their families. 
-                        
-                        **Bill**: What a beautiful tradition!
-
-                        **【译文】**
-                        
-                        **比尔**：你知道中秋节快到了吗？
-                        
-                        **林涛**：知道，我觉得月饼真的很好吃。
-                        
-                        **比尔**：我同意。我想知道今晚是否会有圆月。
-                        
-                        **林涛**：我希望如此。人们喜欢和家人一起赏月。
-                        
-                        **比尔**：多么优美的传统啊！
-
-                        ### Section B (Reading) 阅读文段：The Spirit of Christmas
-                        **【原文】**
-                        
-                        Christmas is an important festival in Western countries. Many people think that it's just about gifts and food. But the true spirit of Christmas is sharing and giving. Charles Dickens' story, A Christmas Carol, tells us about this. Scrooge, a mean man, changes his life after seeing three ghosts. He realizes that helping others makes him happy.
-
-                        **【译文】**
-                        
-                        圣诞节是西方国家的一个重要节日。许多人认为它仅仅关乎礼物和美食。但圣诞节真正的精神是分享和给予。查尔斯·狄更斯的故事《圣诞颂歌》告诉了我们这一点。守财奴斯克鲁奇在见到三个幽灵后改变了他的生活。他意识到帮助他人让他快乐。
+                        #### 4. How special the story is! (这个故事多么特别啊！)
+                        - **【语法核心】**：`How` 引导的感叹句。结构：`How + adj./adv. + 主语 + 谓语!`。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. I think that mooncakes are delicious. (我觉得月饼很好吃。)
-                        - **【句式剖析】**：`that` 引导宾语从句，在口语中经常省略。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：宾语从句 (I) - that, if/whether 引导
+                        **1. that 引导**：连接陈述句，that 无意义，常省略。
+                        **2. if / whether 引导**：连接一般疑问句，意为“是否”。
+                        - **注意**：宾语从句必须使用陈述句语序。
+
+                        ### 核心语法二：感叹句 (Exclamatory Sentences)
+                        - **What 型**：
+                          1. *What + a/an + adj. + 可数名词单数 (+ 主谓)!*
+                          2. *What + adj. + 名词复数/不可数名词 (+ 主谓)!*
+                        - **How 型**：
+                          *How + adj./adv. (+ 主谓)!*
+
+                        ### 中考真题特训
                         
-                        #### 2. What a fun festival! (多么有趣的节日啊！)
-                        - **【要点精讲】**：`What` 引导感叹句，中心词是名词 `festival`。
+                        *(2024·天津中考)* *I'm not sure ________ there will be a film tonight.*
+                        A. what   B. that   C. whether   D. which
                         
-                        #### 3. I wonder whether they'll have a race. (我想知道他们是否会举行比赛。)
-                        - **【词块归纳】**：`whether` 引导宾语从句，意为“是否”。
+                        **[解析]**：根据 I'm not sure，表示不确定，应用 whether (是否)，选 **C**。
+
+                        *(2023·河北中考)* *________ great fun we had playing games yesterday!*
+                        A. What   B. What a   C. How   D. How a
+                        
+                        **[解析]**：fun 是不可数名词，用 What 修饰，且不加 a，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① put on (增加; 穿上; 上演)
-                        - **【用法】**：在本单元指“体重增加”。*put on weight*。
-                        
-                        #### ② admire (v. 欣赏; 崇拜)
-                        - **【搭配】**：`admire the moon` (赏月)。
-                        
-                        #### ③ How vs What (感叹句)
-                        - **【中考真题/例题】**：
-                        
-                        *________ exciting news it is! We will have a long holiday.*
-                        A. What   B. What an   C. How   D. How an
-                        
-                        **[解析]**：news 是不可数名词，不能加 an，选 **A**。
-                    """.trimIndent()),
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍一个中国传统节日 (Chinese Traditional Festival)
+                        #### 1. 写作逻辑
+                        - **名称与时间**：... is a traditional festival in China. It's on...
+                        - **习俗与食物**：People usually... They eat...
+                        - **意义与感受**：It's a time for family. We feel...
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：宾语从句与感叹句
-                        **1. 宾语从句三要素**
-                        - **引导词**：陈述句用 that；一般疑问句用 if/whether。
-                        - **语序**：必须用**陈述语序**（主语在前，谓语在后）。
-                        - **时态**：主句现在，从句随意；主句过去，从句必过；真理永现。
+                        #### 2. 高分句式
+                        - *The Dragon Boat Festival is one of the most popular festivals.*
+                        - *People celebrate it to remember Qu Yuan.*
+                        - *The most exciting part is the dragon boat races.*
+                        - *What a meaningful festival it is!*
 
-                        **2. 感叹句口诀**
-                        - **What** 名，**How** 形副。
-                        - *What a tall boy!*
-                        - *How tall the boy is!*
-
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **The Mid-Autumn Festival**
                         
-                        *(2024·重庆中考)* *I don't know ________ the train will arrive on time.*
-                        A. that   B. if   C. what   D. which
+                        The Mid-Autumn Festival is a traditional Chinese festival. It falls on the 15th day of the 8th lunar month.
                         
-                        **[解析]**：表达“是否”准时到达，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Favourite Festival (我最喜欢的节日)
-                        **The Spring Festival is my favourite festival.**
+                        On this day, the moon is round and bright. Family members usually get together and have a big dinner. We eat mooncakes and admire the full moon in the open air. Mooncakes are round, like the moon. They are a symbol of reunion. My grandmother often tells us the story of Chang'e. 
                         
-                        I think **that** it is the most important festival in China. During the festival, I **believe that** family members should stay together. We usually **eat dumplings** and **get lucky money**. **What a** happy time it is! I like it because it means a new beginning.
+                        I love this festival because it makes me feel warm and happy. How wonderful it is to spend time with my family!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u3", "Unit 3", "Could you please tell me where the restrooms are?",
+                "g9_u3", "Unit 3", "Could you please tell me where the restrooms are?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：询问信息，礼貌沟通，公共场所交流 (Inquiring about information)。
-
-                        ### 2. 单元主题内容
-                        本单元聚焦“礼貌询问”，重点学习特殊疑问词引导的宾语从句。通过模拟在商场、游乐园、街头询问地点的场景，引导学生理解在不同场合下使用得体语言（Polite Language）的重要性。单元强调了“间接引语”比“直接引语”更具礼貌感，培养学生的社交情商和跨文化交际技巧。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 社区服务与礼貌交际。
+                        *   **深层意义**：本单元围绕“问路、咨询及公共场所交际”展开。旨在引导学生学会礼貌地向他人请求帮助。通过对比直接提问（Where is...?）与间接提问（Could you tell me where...?），理解语用差异，培养得体、文明的社交素养。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **公共设施**：restroom, bookstore, post office, mall, bank.
-                        - **核心词汇**：suggest (建议), staff (员工), grape (葡萄), direction (方向), central (中央的).
-                        - **高频短语**：pass by (路过), pardon me (抱歉/请再说一遍), depend on (取决于), on one's way to (在去...的路上).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **地点名词**：restroom (洗手间), mall (购物中心), museum (博物馆), bookstore (书店), post office (邮局)。
+                        - **指示与动作**：rush (仓促), suggest (建议), direct (直接的/指引), central (中央的)。
+                        - **形容词/副词**：convenient (便利的), fascinating (迷人的), expensive (昂贵的), polite (礼貌的)。
+                        - **其他词汇**：staff (职员), clerk (职员), request (要求), choice (选择)。
 
-                        ### 2. 核心句式
-                        1.  **礼貌询问地点**：Could you please tell me where the restrooms are?
-                        2.  **询问时间**：Do you know when the bookstore closes?
-                        3.  **描述位置**：Go past the bank and then turn left.
-                        4.  **委婉建议**：I suggest that you go to the supermarket.
-
-                        ### 3. 重点语法
-                        - **宾语从句** 的特殊疑问句转换（陈述语序）。
-                        - **礼貌语气的表达** (Could, would, please)。
+                        ### 2. 核心短语金牌储备
+                        - `pardon me` 抱歉；请再说一遍
+                        - `pass by` 路过；经过
+                        - `on one's way to` 在去...的路上
+                        - `suggest doing sth.` 建议做某事 (**必考：不能接 to do**)
+                        - `look forward to` 期待
+                        - `between A and B` 在A与B之间
+                        - `turn left/right` 向左/右转
+                        - `go past` 经过
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Could you please tell me where the restrooms are? (请问你能告诉我在哪儿吗？)
+                        - **【考点详解】**：宾语从句的高级形式。从句语序必须陈述（where + 主语 + are）。
                         
-                        **Tourist**: Excuse me, could you tell me where I can buy some stamps? 
+                        #### 2. Do you know when the bookstore closes today? (你知道书店今天什么时候关门吗？)
+                        - **【结构剖析】**：`when` 引导的宾语从句。
                         
-                        **Girl**: Sure. There's a post office on Center Street. 
+                        #### 3. I wonder where I should go next. (我不知道接下来该去哪儿。)
+                        - **【用法拓展】**：`wonder` 意为“想知道”，常接宾语从句。
                         
-                        **Tourist**: Could you please tell me how to get there? 
-                        
-                        **Girl**: Go past the bank and turn right. It's next to the library. 
-                        
-                        **Tourist**: Thank you very much!
-
-                        **【译文】**
-                        
-                        **游客**：打扰了，你能告诉我哪儿能买到邮票吗？
-                        
-                        **女孩**：当然。中心街有一个邮局。
-                        
-                        **游客**：你能告诉我怎么走吗？
-                        
-                        **女孩**：经过银行，然后右转。它就在图书馆旁边。
-                        
-                        **游客**：非常感谢！
-
-                        ### Section B (Reading) 阅读文段：Polite Language
-                        **【原文】**
-                        
-                        When we ask for help, we should use polite language. Sometimes it's not enough to just be correct. For example, "Where are the restrooms?" is correct but may sound rude. Instead, we should say, "Could you please tell me where the restrooms are?" This sounds much more polite. Using polite language shows respect to others and helps us communicate better.
-
-                        **【译文】**
-                        
-                        当我们请求帮助时，我们应该使用礼貌用语。有时仅仅做到正确是不够的。例如，“洗手间在哪儿？”是正确的，但听起来可能没礼貌。相反，我们应该说，“请问你能告诉我洗手间在哪儿吗？”这听起来要有礼貌得多。使用礼貌用语体现了对他人的尊重，并帮助我们更好地沟通。
+                        #### 4. To be polite, we often use indirect questions. (为了表现礼貌，我们常使用间接提问。)
+                        - **【语法核心】**：`to be polite` 是动词不定式作目的状语。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. Could you please tell me where the restrooms are? (请问你能告诉我洗手间在哪儿吗？)
-                        - **【句式剖析】**：`where` 引导的从句作 `tell` 的宾语，从句中 `the restrooms` 是主语，`are` 是谓语（陈述语序）。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：宾语从句 (II) - 特殊疑问词引导
+                        **1. 引导词**：what, where, when, how, who, which 等。
+                        **2. 核心原则：语序必须陈述！**
+                        - *Where is the bank?* (直接提问)
+                        - -> *Can you tell me **where the bank is**?* (宾语从句)
+                        **3. 标点符号**：取决于主句。如果主句是疑问句，句末用问号；主句是陈述句，用句号。
+
+                        ### 核心语法二：suggest 的用法
+                        - `suggest sth. to sb.` (向某人建议某事)
+                        - `suggest doing sth.` (建议做某事)
+                        - **注意**：千万不能说 *suggest sb. to do sth.*。
+
+                        ### 中考真题特训
                         
-                        #### 2. Do you know when the bookstore closes? (你知道书店什么时候关门吗？)
-                        - **【注意】**：不能说 *when does the bookstore close?*
+                        *(2024·南京中考)* *— Excuse me, do you know ________? — Sure. It's next to the library.*
+                        A. where is the post office   B. where the post office is   C. when does the post office open   D. when the post office opens
                         
-                        #### 3. It depends on who you are talking to. (这取决于你在和谁说话。)
-                        - **【词块归纳】**：`depend on` 意为“取决于；依靠”。
+                        **[解析]**：宾语从句用陈述语序，根据回答“在图书馆旁边”可知问的是地点，选 **B**。
+
+                        *(2023·上海中考)* *I suggest ________ to the park this afternoon.*
+                        A. to go   B. go   C. going   D. goes
+                        
+                        **[解析]**：suggest doing sth.，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① suggest (v. 建议)
-                        - **【用法总结】**：
-                            *   `suggest doing sth.` 建议做某事。
-                            *   `suggest + that 从句` (从句用 should + 动词原形，should 可省略)。
-                        - **【例题】**：
-                        
-                        *My teacher suggested ________ more English books.*
-                        A. read   B. to read   C. reading   D. reads
-                        
-                        **[解析]**：suggest doing 选 **C**。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：礼貌询问与指路 (Asking for Help Politely)
+                        #### 1. 写作要点
+                        - **礼貌开头**：Excuse me. / Pardon me.
+                        - **间接询问**：使用 Could you tell me...? / I wonder...
+                        - **清晰指路**：Go straight, turn left, it's on your right.
+                        - **感谢**：Thank you very much.
 
-                        #### ② go past (经过)
-                        - **【近义词】**：`pass` (v.)。
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Excuse me, I'm new here.*
+                        - *Could you please tell me how I can get to...?*
+                        - *Is it a long way from here?*
+                        - *It's very kind of you.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：特殊疑问句变宾语从句
-                        **1. 变序原则**
-                        无论主句是疑问句还是陈述句，从句一律用**陈述语序**（主 + 谓）。
-                        - *Where is he?* -> *I don't know **where he is**.*
+                        #### 3. 满分范文
+                        **Asking the Way**
                         
-                        **2. 连接词**
-                        原来的疑问词 (when, where, how, why, who, what) 即为连接词。
-
-                        **3. 中考真题特训**
-                        
-                        *(2024·天津中考)* *Could you tell me ________?*
-                        A. where is the library   B. where the library is   C. where the library was   D. where was the library
-                        
-                        **[解析]**：陈述语序排除 A/D，且主句 Could 只是委婉语气并非过去式，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Asking for Directions (问路与指路)
-                        #### 1. 必备佳句
-                        *   *Excuse me, do you know where ... is?*
-                        *   *Can you tell me the way to ...?*
-                        *   *Go straight and turn left at the first crossing.*
-                        *   *It's on your right.*
-
-                        #### 2. 满分范文
-                        **Excuse me.** Could you please tell me **how I can get to** the People's Park? Go **straight** along this street and **turn left** at the bank. **Go past** a bookstore, and you will see the park **on your right**. It's not far from here. **Thank you for your help!**
+                        A: Excuse me. Could you please tell me where the nearest bookstore is?
+                        B: Sure. It's on Central Street. 
+                        A: I wonder if it is a long way from here.
+                        B: No, it's about 10 minutes' walk. Just go straight and turn right at the first crossing. Then go past a bank, and you'll see the bookstore on your left.
+                        A: I see. Thank you very much!
+                        B: You're welcome.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u4", "Unit 4", "I used to be afraid of the dark.",
+                "g9_u4", "Unit 4", "I used to be afraid of the dark.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：自我认识与自我管理 (Self-management)
-                        *   **子主题**：个人成长与变化，克服弱点 (Personal growth)。
-
-                        ### 2. 单元主题内容
-                        本单元围绕“成长与变化”展开，重点学习 `used to` 结构的用法. 通过描述自己在性格（outgoing / quiet）、外貌（tall / short）、爱好（sports / music）以及恐惧（dark / spiders）等方面的过去与现状，引导学生审视自己的成长轨迹. 单元强调了“坚持与努力”在个人蜕变中的作用，培养学生积极面对自我、不断追求进步的人生态度.
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 成长与变化。
+                        *   **深层意义**：本单元围绕“个人的过去与现状”展开。通过学习 `used to` 结构，引导学生对比自己在外貌、性格、爱好等方面的变化。旨在培养学生积极乐观的成长观，学会接受并拥抱变化，理解成长是一个不断克服恐惧、完善自我的过程。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **性格形容词**：humorous, silent, helpful, brave, shy.
-                        - **核心名词/动词**：background (背景), speech (演说), ant (蚂蚁), insect (昆虫), guard (守卫).
-                        - **高频短语**：used to do (过去常常), be proud of (为...自豪), take up (开始从事), deal with (处理), in public (公开地).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **性格特征**：humorous (幽默的), silent (沉默的), helpful (有帮助的), brave (勇敢的), shy (害羞的)。
+                        - **外貌描述**：curly (卷曲的), straight (直的), weight (重量), height (高度)。
+                        - **动作与状态**：absent (缺席), fail (失败), influence (影响), dare (敢于), require (要求), pride (骄傲)。
+                        - **其他名词**：background (背景), speech (演讲), insect (昆虫), guard (卫兵)。
 
-                        ### 2. 核心句式
-                        1.  **描述过去**：I used to be shy. / He used to play soccer.
-                        2.  **询问变化**：Did you use to wear glasses? — Yes, I did.
-                        3.  **表达自豪**：My parents are proud of me.
-                        4.  **处理困难**：It's difficult to deal with these problems.
-
-                        ### 3. 重点语法
-                        - **used to do sth.** 表示过去的习惯或状态.
+                        ### 2. 核心短语金牌储备
+                        - `used to` 过去常常 (**本单元核心**)
+                        - `be afraid of` 害怕
+                        - `deal with` 处理；对付
+                        - `take pride in` 为...感到自豪
+                        - `be proud of` 为...感到骄傲
+                        - `in person` 亲身；亲自
+                        - `give up` 放弃
+                        - `from time to time` 时常
+                        - `take up` 开始从事
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. I used to be afraid of the dark. (我以前害怕黑暗。)
+                        - **【考点详解】**：`used to + 动词原形` 表示过去常常做某事，而现在不再做了。
                         
-                        **Bob**: Mario, you look different! 
+                        #### 2. Did you use to be shy? (你以前很害羞吗？)
+                        - **【结构剖析】**：疑问句：`Did + 主语 + use to do...?`。否定句：`didn't use to`。
                         
-                        **Mario**: Really? How? 
+                        #### 3. He is now one of the most helpful students in our class. (他现在是班上最有帮助的学生之一。)
+                        - **【用法拓展】**：`one of + 名词复数`。
                         
-                        **Bob**: Well, you used to be short, but now you are very tall. 
-                        
-                        **Mario**: That's true. And I used to wear glasses. 
-                        
-                        **Bob**: Did you use to be quiet? 
-                        
-                        **Mario**: Yes, I did. But now I'm more outgoing.
-
-                        **【译文】**
-                        
-                        **鲍勃**：马里奥，你看起来不一样了！
-                        
-                        **马里奥**：真的吗？哪儿变了？
-                        
-                        **鲍勃**：嗯，你过去很矮，但现在你很高。
-                        
-                        **马里奥**：那是事实。而且我以前戴眼镜。
-                        
-                        **鲍勃**：你以前很文静吗？
-                        
-                        **马里奥**：是的。但现在我更外向了。
-
-                        ### Section B (Reading) 阅读文段：He Studied Harder
-                        **【原文】**
-                        
-                        Li Wen used to be a problem child. He didn't like school and often fought with others. His parents were worried. Then his teacher talked to him and helped him. Li Wen realized that his parents worked very hard for him. He started to study harder. Now, he is one of the best students in his class. He changed himself through hard work.
-
-                        **【译文】**
-                        
-                        李文过去是个问题少年。他不喜欢上学，经常和别人打架。他的父母很担心。后来他的老师找他谈话并帮助了他。李文意识到父母为他辛勤工作。他开始更加努力学习。现在，他是班里最好的学生之一。他通过努力改变了自己。
+                        #### 4. It's been five years since I last saw her. (自从我上次见到她已经五年了。)
+                        - **【语法核心】**：`It's been + 时间 + since + 过去时的从句`。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. I used to be afraid of the dark. (我以前怕黑。)
-                        - **【句式剖析】**：`used to be + adj.` 过去是...样的状态.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：used to do sth.
+                        **1. 含义**：表示过去经常发生的动作或存在的状态，但现在已不再。
+                        **2. 句式**：
+                        - 肯定：I used to play basketball.
+                        - 否定：I **didn't use to** play...
+                        - 疑问：**Did** you **use to** play...?
+                        **3. 辨析 (必考)**：
+                        - `used to do` (过去常常做)
+                        - `be/get used to doing` (习惯于做某事)
+                        - `be used to do` (被用来做某事)
+
+                        ### 核心语法二：宾语从句的时态
+                        主句是一般过去时，从句必须用**过去时态的某种形式**（如一般过去时、过去进行时、过去将来时）。
+
+                        ### 中考真题特训
                         
-                        #### 2. Did you use to wear glasses? (你以前戴眼镜吗？)
-                        - **【注意】**：疑问句中要借用 `Did`，且 `used` 要恢复原形 `use`.
+                        *(2024·广东中考)* *I ________ silent in class, but now I am active.*
+                        A. used to be   B. am used to being   C. was used to be   D. use to be
                         
-                        #### 3. He took up singing to deal with his shyness. (他开始从事唱歌来应对他的害羞。)
-                        - **【词块归纳】**：`take up` (开始做某事)；`deal with` (处理；应对).
+                        **[解析]**：表达过去的状态，选 **A**。
+
+                        *(2023·北京中考)* *Paper ________ making books in ancient China.*
+                        A. used to   B. is used to   C. is used for   D. use to
+                        
+                        **[解析]**：纸被用来做书，表用途用 be used for doing 或 be used to do，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① used to do vs be used to doing
-                        - **【辨析】**：
-                            *   `used to do`：过去常常做某事（现在不做了）.
-                            *   `be used to doing`：习惯于做某事.
-                        - **【例题】**：
-                        
-                        *I ________ early, but now I ________ getting up at six.*
-                        A. used to get up; am used to   B. am used to; used to   C. used to getting up; am used to   D. used to get up; used to
-                        
-                        **[解析]**：第一空指过去习惯，第二空指现在习惯，选 **A**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的变化 (My Changes)
+                        #### 1. 写作逻辑
+                        - **过去 (Past)**：I used to be... I used to like...
+                        - **转折 (Change)**：However, something happened...
+                        - **现在 (Now)**：Now I am... My favorite hobby is...
+                        - **感悟**：Change is good for me.
 
-                        #### ② be proud of (为...骄傲)
-                        - **【同义词】**：`take pride in`.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *I have changed a lot in the last three years.*
+                        - *I used to be short and thin, but now I am tall and strong.*
+                        - *I didn't use to like English, but now I love it.*
+                        - *My parents take pride in my growth.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：used to 的“前世今生”
-                        **1. 基本用法**
-                        表示过去经常发生的动作或存在的状态（暗示现在已改变）.
+                        #### 3. 满分范文
+                        **Great Changes in My Life**
                         
-                        **2. 句式变换**
-                        - 否定：I **didn't use to** smoke.
-                        - 疑问：**Did** you **use to** have long hair?
-                        - 反义疑问句：He used to be tall, **didn't he**?
-
-                        **3. 中考真题特训**
+                        I have changed a lot since I came to middle school. 
                         
-                        *(2024·江苏中考)* *My uncle ________ live in the countryside, but now he works in the city.*
-                        A. is used to   B. used to   C. used to be   D. was used to
+                        I used to be very shy and quiet. I was afraid to speak in front of many people. I also used to be short and a little heavy. I didn't like sports and spent most of my time playing computer games. 
                         
-                        **[解析]**：表示过去住在乡下，选 **B**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Changes (我的变化)
-                        **I have changed a lot in the last three years.**
-                        
-                        I **used to be** a shy girl and I was **afraid of speaking** in public. But now, I am **more outgoing** and brave. I **used to spend** much time playing games, but now I **study very hard**. My teachers and parents are **proud of** me. I think I am **growing up**.
+                        However, I am quite different now. I have become much more outgoing. I like making friends and sharing ideas. Also, I have taken up running. Now I am tall and strong. These changes have made me more confident. I think everyone should embrace changes to become a better person.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u5", "Unit 5", "What is it made of?",
+                "g9_u5", "Unit 5", "What is it made of?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：科学与技术 (Science and technology)
-                        *   **子主题**：物品制造，传统艺术，中国制造的影响力 (Manufacturing and crafts)。
-
-                        ### 2. 单元主题内容
-                        本单元以“产品与制造”为核心，重点学习一般现在时的被动语态（Passive Voice）。通过探讨日常用品（如 shirts, tea, chopsticks）的产地及原材料，以及中国传统艺术（如 sky lanterns, paper cutting, clay art），学生能够运用英语描述生产过程。单元旨在培养学生的民族自豪感，通过“中国制造”和“传统手工艺”的话题，增强文化传承意识。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 科学技术与物品制造。
+                        *   **深层意义**：本单元聚焦“物品的原材料、产地及传统工艺”（如风筝、剪纸、陶瓷）。旨在引导学生了解世界贸易与中国制造（Made in China）。通过介绍中国传统手工艺术，培养民族自豪感，理解在全球化背景下，如何传承和发扬传统文化。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **原材料词汇**：cotton, steel, silver, glass, leaf.
-                        - **核心动词**：produce (生产), process (处理), pack (包装), avoid (避免).
-                        - **传统艺术**：sky lantern, paper cutting, clay art, fairy tale.
-                        - **高频短语**：be made of (由...制成 - 看出原料), be made from (由...制成 - 看不出原料), be known for (因...闻名), by hand (手工地), no matter (无论).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **材料名词**：glass (玻璃), cotton (棉花), steel (钢), silver (银), silk (丝绸), wood (木头)。
+                        - **农业与产品**：tea (茶), product (产品), brand (品牌), handbag (手提包), glove (手套)。
+                        - **传统艺术**：kite (风筝), clay (黏土), paper cutting (剪纸), fairy tale (神话/童话)。
+                        - **动词**：produce (生产), process (处理), chop (砍), pack (包装), avoid (避免), polish (擦亮)。
 
-                        ### 2. 核心句式
-                        1.  **询问构成**：What is it made of? — It's made of silk.
-                        2.  **询问产地**：Where is tea produced? — It's produced in Anxi.
-                        3.  **描述工艺**：The pieces of paper are cut by hand.
-                        4.  **让步表达**：No matter what you do, you should try your best.
-
-                        ### 3. 重点语法
-                        - **一般现在时的被动语态** (am/is/are + p.p.)。
+                        ### 2. 核心短语金牌储备
+                        - `be made of` 由...制成 (**物理变化：看得出原材料**)
+                        - `be made from` 由...制成 (**化学变化：看不出原材料**)
+                        - `be known for` 以...闻名
+                        - `be produced in` 在...生产
+                        - `as far as I know` 据我所知
+                        - `no matter` 不管；无论
+                        - `turn into` 变成
+                        - `according to` 根据
+                        - `Made in China` 中国制造
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What is it made of? — It's made of silk. (它是由什么制成的？—— 由丝绸制成。)
+                        - **【考点详解】**：一般现在时被动语态的特殊疑问句。
                         
-                        **Alice**: This shirt is very beautiful. What is it made of? 
+                        #### 2. Tea is produced in many different areas of China. (茶叶在中国很多不同地区都有生产。)
+                        - **【结构剖析】**：`is + 过去分词` 构成被动语态。
                         
-                        **Li Hua**: It's made of cotton. It's produced in Xinjiang. 
+                        #### 3. No matter what you may buy, you might find they were made in China. (无论你买什么，你可能发现它们是中国制造的。)
+                        - **【用法拓展】**：`no matter what` 引导让步状语从句。
                         
-                        **Alice**: Xinjiang is known for its high-quality cotton. 
-                        
-                        **Li Hua**: Yes. It's picked by hand and then processed into cloth. 
-                        
-                        **Alice**: That's interesting!
-
-                        **【译文】**
-                        
-                        **艾丽丝**：这件衬衫很漂亮。它是用什么做的？
-                        
-                        **李华**：它是棉做的。产自新疆。
-                        
-                        **艾丽丝**：新疆以其高质量的棉花而闻名。
-                        
-                        **李华**：是的。它是手工采摘，然后加工成布料的。
-                        
-                        **艾丽丝**：那很有意思！
-
-                        ### Section B (Reading) 阅读文段：The Art of Paper Cutting
-                        **【原文】**
-                        
-                        Paper cutting has been around for over 1,500 years. These art pieces are made of bright red paper. During the Spring Festival, they are put on windows and doors. They are usually symbols of good luck and health. No matter how difficult it is, people like to learn this traditional art to keep the culture alive.
-
-                        **【译文】**
-                        
-                        剪纸已经存在超过1500年了。这些艺术品是用大红纸做成的。春节期间，它们被贴在门窗上。它们通常是好运和健康的象征。无论多么困难，人们都喜欢学习这种传统艺术，以保持文化的生命力。
+                        #### 4. Kites were used for sending messages in the past. (过去风筝被用来传递信息。)
+                        - **【语法核心】**：`be used for doing sth.` 被用来做某事。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. What is it made of? (它是用什么做的？)
-                        - **【用法拓展】**：`be made of` 侧重于物理变化，能看出原材料。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：一般现在时的被动语态 (Passive Voice)
+                        **1. 功能**：强调动作的承受者，或者不知道动作的执行者是谁。
+                        **2. 构成**：`am / is / are + 动词的过去分词 (v.-ed)`。
+                        **3. 句式变换**：
+                        - 肯定：*English **is spoken** by many people.*
+                        - 否定：*The room **is not cleaned** every day.*
+                        - 疑问：***Is** tea **grown** in South China?*
+
+                        ### 辨析 (中考必考)
+                        - **be made of**：看不出原料 (错，是**看得出**) -> *The table is made of wood.*
+                        - **be made from**：**看不出**原料 -> *Paper is made from wood.*
+                        - **be made in**：产地。
+                        - **be made by**：生产者。
+
+                        ### 中考真题特训
                         
-                        #### 2. Tea is produced in China. (茶产自中国。)
-                        - **【要点精讲】**：被动语态结构：`助动词 be + 动词的过去分词`。
+                        *(2024·四川中考)* *Many beautiful kites ________ in Weifang every year.*
+                        A. make   B. made   C. are made   D. are making
                         
-                        #### 3. No matter what happens, stay calm. (无论发生什么，保持冷静。)
-                        - **【词块归纳】**：`no matter + 疑问词` 引导让步状语从句。
+                        **[解析]**：主语 kites 与 make 之间是被动关系，且有 every year 提示用一般现在时，选 **C**。
+
+                        *(2023·北京中考)* *Cheese is made ________ milk.*
+                        A. of   B. from   C. in   D. by
+                        
+                        **[解析]**：芝士由牛奶制成，看不出牛奶的原样，属于化学变化，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① be made of vs be made from
-                        - **【辨析】**：
-                            *   `be made of`：物理变化（如桌子由木头制成）.
-                            *   `be made from`：化学变化（如纸由木头制成）.
-                        - **【例题】**：
-                        
-                        *The paper is made ________ wood, and the chair is made ________ wood.*
-                        A. of; from   B. from; of   C. in; of   D. from; in
-                        
-                        **[解析]**：纸看不出木头选 from，椅子看得出木头选 of，选 **B**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍一种中国传统工艺品 (A Traditional Chinese Product)
+                        #### 1. 写作逻辑
+                        - **名称与地位**：... is a famous traditional product in China.
+                        - **制作材料与过程**：It is made of... It is produced in...
+                        - **功能与文化**：It is used for... People think it is a symbol of...
 
-                        #### ② be known for (以...闻名)
-                        - **【近义】**：`be famous for`.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *... has a long history in China.*
+                        - *It is widely known for its beauty.*
+                        - *It is produced by hand.*
+                        - *No matter where you go, you can see it.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：一般现在时的被动语态
-                        **1. 构成**
-                        主语 + am / is / are + 动词的过去分词 (p.p.).
+                        #### 3. 满分范文
+                        **The Beauty of Paper Cutting**
                         
-                        **2. 适用场景**
-                        不知道动作发出者，或强调动作的承受者。
-                        - *English is spoken around the world.*
+                        Paper cutting is one of the most popular traditional arts in China. 
                         
-                        **3. 变被动步骤**
-                        宾变主，谓变 be + p.p.，原主变 by 宾。
-
-                        **4. 中考真题特训**
+                        It has a history of more than 1,500 years. Paper cutting is usually made of red paper. It is produced in many parts of China. When people celebrate festivals, especially the Spring Festival, they like to put paper cuttings on windows or doors. They are symbols of luck and happiness. They are often made into the shapes of flowers, animals or characters. 
                         
-                        *(2024·安徽中考)* *Many trees ________ on the hill every spring.*
-                        A. plant   B. planted   C. are planted   D. are planting
-                        
-                        **[解析]**：树是被种的，且 every spring 提示一般现在时，选 **C**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：A Local Product (介绍当地特产)
-                        **Tea is a famous product in my hometown.** 
-                        
-                        It **is produced** in the mountains. It **is known for** its special taste. To make it, the leaves **are picked** by hand and then **dried** in the sun. It **is loved by** many people. I think **no matter** where you are, you will like it.
+                        Paper cutting is a great part of Chinese culture. We should do something to keep this traditional art alive.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u6", "Unit 6", "When was it invented?",
+                "g9_u6", "Unit 6", "When was it invented?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：科学与技术 (Science and technology)
-                        *   **子主题**：伟大发明，历史变迁，创新的意义 (Inventions)。
-
-                        ### 2. 单元主题内容
-                        本单元以“发明与创造”为话题，重点学习一般过去时的被动语态（Passive Voice in Past Tense）。通过了解电话、拉链、薯片、茶等日常用品的起源故事，引导学生思考科学技术如何改变人类生活。单元强调了“意外的发现（Accidental Inventions）”，激发学生的好奇心和探索精神，培养其创新思维。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 科学技术与人类文明（发明的历史）。
+                        *   **深层意义**：本单元聚焦“伟大发明的起源及其影响”（如电话、电灯、拉链、薯片、茶）。旨在引导学生客观地看待科技进步，理解偶然发现（Accidental Inventions）背后的必然逻辑。通过探索发明背后的故事，激发学生的创新意识和探究精神，培养其对人类智慧文明的尊重。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **发明名词**：invention, telephone, zipper, light bulb, refrigerator.
-                        - **核心动词/形容词**：invent (发明), discover (发现), accidental (意外的), salty (咸的).
-                        - **高频短语**：be used for (被用来...), by mistake (错误地), in the end (最后), divide ... into ... (把...分成...).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类记忆
+                        - **发明与创造**：invent (发明), discovery (发现), create (创造), designer (设计师), pioneer (先驱)。
+                        - **物品名词**：telephone (电话), bell (铃铛), zipper (拉链), refrigerator (冰箱), earthquake (地震)。
+                        - **生活与美食**：potato chips (薯片), tea (茶), salt (盐), vinegar (醋), sweet (甜的), sour (酸的), crispy (脆的)。
+                        - **抽象词汇**：mistake (错误), customer (顾客), pleasure (愉快), accident (事故/意外), style (风格)。
 
-                        ### 2. 核心句式
-                        1.  **询问时间**：When was it invented? — It was invented in 1876.
-                        2.  **询问发明者**：Who was it invented by? — It was invented by Bell.
-                        3.  **描述用途**：What is it used for? — It's used for taking photos.
-                        4.  **历史叙述**：Tea was first drunk by accident.
-
-                        ### 3. 重点语法
-                        - **一般过去时的被动语态** (was/were + p.p.)。
+                        ### 2. 核心短语金牌储备
+                        - `be used for (doing) sth.` 被用来（做）某事
+                        - `by accident` 偶然地；无意中
+                        - `take place` 发生 (**不及物，无被动**)
+                        - `without doubt` 毫无疑问
+                        - `all of a sudden` 突然地
+                        - `divide ... into ...` 把...分开
+                        - `look up to` 钦佩；仰慕
+                        - `at a high/low price` 以高/低价
+                        - `the history of ...` ...的历史
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. When was the telephone invented? — It was invented in 1876. (电话是什么时候发明的？—— 1876年。)
+                        - **【考点详解】**：一般过去时被动语态的特殊疑问句。强调动作发生的时间。
                         
-                        **Boy**: Look at this old telephone! When was it invented? 
+                        #### 2. Tea was brought to Korea and Japan during the 6th and 7th centuries. (茶在6、7世纪被带到了朝鲜和日本。)
+                        - **【结构剖析】**：`was + v.-ed` 构成被动语态。
                         
-                        **Girl**: It was invented in 1876. 
+                        #### 3. Potato chips were invented by mistake. (薯片是无意中被发明的。)
+                        - **【用法拓展】**：`by mistake` 意为“错误地；无意中”。
                         
-                        **Boy**: Who was it invented by? 
-                        
-                        **Girl**: It was invented by Alexander Graham Bell. 
-                        
-                        **Boy**: What a great invention! It changed the way people communicate.
-
-                        **【译文】**
-                        
-                        **男孩**：看这个旧电话！它是什么时候被发明的？
-                        
-                        **女孩**：它是在1876年被发明的。
-                        
-                        **男孩**：它是由谁发明的？
-                        
-                        **女孩**：它是由亚历山大·格拉汉姆·贝尔发明的。
-                        
-                        **男孩**：多么伟大的发明啊！它改变了人们交流的方式。
-
-                        ### Section B (Reading) 阅读文段：The History of Potato Chips
-                        **【原文】**
-                        
-                        Did you know that potato chips were invented by mistake? In 1853, a cook named George Crum made them. A customer thought the potatoes were too thick. George got angry and cut them very thin. Then he fried them until they were crispy. The customer loved them! In the end, they became the most popular snack.
-
-                        **【译文】**
-                        
-                        你知道薯片是错误地被发明的吗？1853年，一位名叫乔治·克拉姆的厨师制作了它们。一位顾客认为土豆太厚了。乔治生气了，把它们切得非常薄. 然后他炸了它们直到它们变得酥脆. 顾客非常喜欢！最后，它们成为了最受欢迎的零食.
+                        #### 4. People believed that the earth was flat. (人们过去相信地球是平的。)
+                        - **【语法核心】**：`that` 引导的宾语从句。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. When was it invented? (它是何时被发明的？)
-                        - **【用法拓展】**：`was + p.p.` 表示过去发生的被动动作.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：一般过去时的被动语态 (Passive Voice)
+                        **1. 功能**：描述过去发生的动作，且主语是动作的承受者。
+                        **2. 构成**：`was / were + 动词的过去分词 (v.-ed)`。
+                        **3. 句式变换**：
+                        - 肯定：*The bridge **was built** ten years ago.*
+                        - 否定：*The letter **was not sent**.*
+                        - 疑问：***Were** these photos **taken** in Beijing?*
+
+                        ### 辨析：take place vs happen (中考常考)
+                        - **take place**：常指“举行”，通常指事先安排好的活动。
+                        - **happen**：常指“发生”，多指偶然发生或突发事件。
+                        - **共同点**：都是**不及物动词**，都没有被动语态！ (*It was happened* 错误)
+
+                        ### 中考真题特训
                         
-                        #### 2. What is it used for? (它被用来做什么？)
-                        - **【要点精讲】**：`be used for + v.-ing` 强调用途；`be used to do` 强调目的.
+                        *(2024·天津中考)* *The 19th Asian Games ________ in Hangzhou in 2023.*
+                        A. held   B. were held   C. are held   D. was held
                         
-                        #### 3. It was discovered by accident. (它是被偶然发现的。)
-                        - **【词块归纳】**：`by accident` = `by mistake` 意为“偶然地；无意中”.
+                        **[解析]**：亚运会与举办之间是被动关系，且是2023年的事，主语是复数 Games，选 **B**。
+
+                        *(2023·河北中考)* *Telephone ________ by Alexander Graham Bell in 1876.*
+                        A. invented   B. was invented   C. is invented   D. invents
+                        
+                        **[解析]**：考察一般过去时的被动语态，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① invent (v. 发明) vs discover (v. 发现)
-                        - **【辨析】**：
-                            *   `invent`：创造出原本不存在的东西.
-                            *   `discover`：找到原本已存在但未被发现的东西.
-                        - **【例题】**：
-                        
-                        *Edison ________ the light bulb, and Columbus ________ America.*
-                        A. invented; discovered   B. discovered; invented   C. created; found   D. made; saw
-                        
-                        **[解析]**：灯泡是创造的，美洲是本来就有的，选 **A**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍一项伟大的发明 (A Great Invention)
+                        #### 1. 写作要点
+                        - **基本信息**：What is it? Who invented it? When was it invented?
+                        - **发明过程**：Was it an accidental invention?
+                        - **影响与意义**：How does it change our lives?
 
-                        #### ② divide ... into ... (把...分成...)
-                        - **【例题】**：
-                        
-                        *The cake was ________ four pieces.*
-                        A. divided into   B. made of   C. used for   D. looked for
-                        
-                        **[解析]**：被分成四块，选 **A**.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *I think ... is one of the most useful inventions.*
+                        - *It was invented by ... in ...*
+                        - *It is used for ... in our daily life.*
+                        - *Without it, our lives would be very different.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：一般过去时的被动语态
-                        **1. 构成**
-                        主语 + was / were + 动词的过去分词 (p.p.).
+                        #### 3. 满分范文
+                        **The Invention of Tea**
                         
-                        **2. 句式变换**
-                        - 否定：was / were + not + p.p.
-                        - 疑问：Was / Were + 主语 + p.p. ...?
-
-                        **3. 中考真题特训**
+                        Tea is one of the most popular drinks in the world. But do you know how it was invented?
                         
-                        *(2023·北京中考)* *The first airplane ________ by the Wright brothers in 1903.*
-                        A. invented   B. is invented   C. was invented   D. will be invented
+                        It is believed that tea was first discovered by the Chinese emperor Shen Nong about 5,000 years ago. One day, he was boiling water under a tree. All of a sudden, some leaves from the tree fell into the water. After he drank it, he found it was very delicious. That's how tea was invented by accident. 
                         
-                        **[解析]**：1903 提示过去时，飞机是被发明的，选 **C**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Favourite Invention (我最喜欢的发明)
-                        **The computer is my favourite invention.** 
-                        
-                        It **was invented** many years ago. It **is used for** many things, such as studying and working. I think it **has changed** our lives a lot. We can **find out** information easily. I **believe that** more and more useful things **will be invented** in the future.
+                        Today, tea is produced in many countries. It is healthy and can help people relax. I think it is a great invention that has made a big difference to the world.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u7", "Unit 7", "Teenagers should be allowed to choose their own clothes.",
+                "g9_u7", "Unit 7", "Teenagers should be allowed to choose their own clothes.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：人际关系与社会交往 (Communication)
-                        *   **子主题**：家规校规，自我管理，亲子沟通 (Rules and choices)。
-
-                        ### 2. 单元主题内容
-                        本单元围绕“规矩与自由”展开，重点学习含有情态动词的被动语态。通过探讨青少年是否应该被允许选择自己的衣服、穿耳洞、做兼职等话题，引导学生辩证地看待规则与个人意愿之间的关系。单元强调了父母与子女之间沟通的必要性（如 Mom Knows Best），旨在培养学生的独立思考能力和对他人的理解力。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活与学习（青少年的规则与自由）。
+                        *   **深层意义**：本单元围绕“校规、家规及青少年的自主权”展开。旨在引导学生在规则与个人自由之间寻找平衡。通过讨论是否应被允许“打耳洞、染发、选择衣服”，培养学生的辩证思维和社交沟通能力。强调责任（Responsibility）是拥有自由的前提，鼓励学生与家长、老师进行深度对话。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **规则动词**：allow (允许), permit (许可), smoke (抽烟), pierce (穿透).
-                        - **核心名词**：teenager, license (执照), safety (安全), community (社区).
-                        - **高频短语**：be allowed to (被允许...), get one's ears pierced (穿耳洞), stay up (熬夜), clean up (打扫), keep ... away from (使...远离).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **规则与允许**：allow (允许), license (执照/许可证), safety (安全), smoke (吸烟), part-time (兼职的)。
+                        - **情绪与态度**：regret (后悔), poem (诗), community (社区), field (田野), support (支持)。
+                        - **动作词汇**：pierce (刺穿), flash (闪光), hug (拥抱), lift (举起), educate (教育), manage (管理)。
+                        - **形容词/副词**：awful (极坏的), tiny (极小的), serious (严肃的), sleepy (困倦的)。
 
-                        ### 2. 核心句式
-                        1.  **表达被动允许**：Teenagers should be allowed to choose their own clothes.
-                        2.  **表达禁止**：I don't think sixteen-year-olds should be allowed to drive.
-                        3.  **询问看法**：Do you think teenagers should be allowed to work at night?
-                        4.  **因果表达**：They are not old enough to make their own decisions.
-
-                        ### 3. 重点语法
-                        - **含有情态动词的被动语态** (should/can + be + p.p.)。
+                        ### 2. 核心短语金牌储备
+                        - `be allowed to do sth.` 被允许做某事 (**语法核心**)
+                        - `choose one's own ...` 选择某人自己的...
+                        - `get one's ears pierced` 打耳洞
+                        - `stay up` 熬夜
+                        - `stop sb. from doing sth.` 阻止某人做某事
+                        - `get a part-time job` 找一份兼职工作
+                        - `keep ... away from` 远离
+                        - `make one's own decision` 自己做决定
+                        - `take care of` 照顾
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Teenagers should be allowed to choose their own clothes. (青少年应该被允许选择他们自己的衣服。)
+                        - **【考点详解】**：含情态动词的被动语态。结构：`should be + v.-ed`。
                         
-                        **Anna**: I want to get my ears pierced. 
+                        #### 2. I think sixteen-year-olds should be allowed to get a driver's license. (我认为16岁的青少年应该被允许考驾照。)
+                        - **【结构剖析】**：`sixteen-year-olds` 表示“16岁的人”，作名词用。
                         
-                        **Mom**: I don't think teenagers should be allowed to do that. It's not safe. 
+                        #### 3. I regret talking back to my mom. (我后悔跟我妈顶嘴了。)
+                        - **【用法拓展】**：`regret doing sth.` 后悔做了某事。对比 `regret to do sth.` 遗憾要做某事。
                         
-                        **Anna**: But many of my friends have done it! 
-                        
-                        **Mom**: Well, they should be allowed to do it when they are older. 
-                        
-                        **Anna**: I think I should be allowed to choose my own style.
-
-                        **【译文】**
-                        
-                        **安娜**：我想去打耳洞。
-                        
-                        **妈妈**：我觉得青少年不应该被允许那样做。那不安全。
-                        
-                        **安娜**：但我很多朋友都打了！
-                        
-                        **妈妈**：嗯，他们应该在长大点后再被允许去做。
-                        
-                        **安娜**：我觉得我应该被允许选择自己的风格。
-
-                        ### Section B (Reading) 阅读文段：Mom Knows Best?
-                        **【原文】**
-                        
-                        When I was a little boy, my mom told me what to do. Now I'm a teenager and I want to make my own decisions. I want to spend time with my friends and choose my own clothes. But my mom always says, "I'm doing this for your own good." I know she loves me, but I hope I can be allowed to grow up in my own way.
-
-                        **【译文】**
-                        
-                        当我还是个小男孩时，我妈妈告诉我该做什么. 现在我是一个青少年了，我想自己做决定. 我想和朋友们待在一起，选择自己的衣服. 但我妈妈总是说，“我这是为了你好。”我知道她爱我，但我希望我能被允许以我自己的方式成长.
+                        #### 4. My parents are very strict with me. (我父母对我非常严厉。)
+                        - **【语法核心】**：`be strict with sb.` 对某人严厉。`be strict in sth.` 对某事严格。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. Teenagers should be allowed to do ... (青少年应该被允许做...)
-                        - **【句式剖析】**：`should be + p.p.` 是情态动词被动语态的标准形式.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：含情态动词的被动语态
+                        **1. 功能**：表示某种主观建议、必要性或可能性的被动动作。
+                        **2. 构成**：`情态动词 (can/must/should/may) + be + 过去分词`。
+                        - *The work **can be finished** in two days.*
+                        - *Rules **must be followed**.*
                         
-                        #### 2. Six-year-olds should be kept away from danger. (六岁大的孩子应远离危险。)
-                        - **【用法拓展】**：`数字-year-old` 作形容词或名词（加s），表示年龄.
+                        ### 辨析：stop / prevent / keep ... from doing (中考必考)
+                        - `stop sb. (from) doing` (from可省)
+                        - `prevent sb. (from) doing` (from可省)
+                        - `keep sb. from doing` (**from不可省！**)
+
+                        ### 中考真题特训
                         
-                        #### 3. It's not for your own good. (这不仅仅是为了你好。)
-                        - **【词块归纳】**：`for one's own good` 为了某人好.
+                        *(2024·南京中考)* *Teenagers ________ not ________ to smoke. It's bad for their health.*
+                        A. should; allow   B. should; be allowed   C. must; allow   D. must; be allowed
+                        
+                        **[解析]**：主语是 Teenagers，与 allow 是被动关系，用 should be allowed 的否定形式，选 **B**。
+
+                        *(2023·北京中考)* *We should do what we can ________ the pollution.*
+                        A. to stop   B. stop   C. stopping   D. stopped
+                        
+                        **[解析]**：此处 to stop 作目的状语，注意 can 后面的动词省略了（如 do），不要误以为是 can stop，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① allow sb. to do sth. (允许某人做某事)
-                        - **【被动式】**：`sb. be allowed to do sth.`
-                        - **【例题】**：
-                        
-                        *Our teacher doesn't allow ________ in class.*
-                        A. sleep   B. to sleep   C. sleeping   D. slept
-                        
-                        **[解析]**：allow doing sth. (允许做某事)，此处无 sb.，选 **C**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：关于校规/家规的看法 (Rules and Freedom)
+                        #### 1. 写作逻辑
+                        - **现状描述**：What rules do you have?
+                        - **观点表达**：Do you agree with them? Why or why not? (使用 should be allowed)。
+                        - **建设性建议**：What changes would you like to see?
 
-                        #### ② enough (足够的)
-                        - **【位置】**：修饰名词在前 (*enough money*)；修饰形容词在后 (*old enough*).
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *In my opinion, some rules are necessary.*
+                        - *I agree that we should wear school uniforms.*
+                        - *On the other hand, I don't think we should be stopped from...*
+                        - *I believe that communication can help solve problems.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：含情态动词的被动语态
-                        **1. 结构**
-                        主语 + 情态动词 (can/should/must/may) + be + 动词的过去分词 (p.p.).
+                        #### 3. 满分范文
+                        **Should Students Be Allowed to Bring Mobiles to School?**
                         
-                        **2. 句式变换**
-                        - 否定：情态动词 + not + be + p.p.
-                        - 疑问：情态动词 + 主语 + be + p.p. ...?
-
-                        **3. 中考真题特训**
+                        Nowadays, many students bring mobile phones to school. In my opinion, students should not be allowed to use mobile phones in class.
                         
-                        *(2024·天津中考)* *Waste paper ________ into the dustbin.*
-                        A. should throw   B. should be throw   C. should be thrown   D. was thrown
+                        First, mobile phones can be very distracting. If students play games or text friends in class, they won't focus on their studies. Second, it's unfair to other students. However, I think we should be allowed to use them after school for safety reasons. For example, we can call our parents if we are late. 
                         
-                        **[解析]**：废纸“应该被扔”，含有情态动词的被动语态，选 **C**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Rules at School (谈论校规)
-                        **Every school has its own rules.** 
-                        
-                        In our school, we **should be allowed to** wear our own clothes on Fridays. I think it's good for our **creativity**. However, we **mustn't be allowed to** use mobile phones in class because it **interferes with** our study. Rules are **important**, and we should follow them.
+                        In a word, rules are important. We should follow the school rules while enjoying some freedom properly.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u8", "Unit 8", "It must belong to Carla.",
+                "g9_u8", "Unit 8", "It must belong to Carla.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：社会服务与人际沟通 (Social services)
-                        *   **子主题**：物品所属推测，逻辑推理，科学解释 (Inferences)。
-
-                        ### 2. 单元主题内容
-                        本单元以“逻辑推测”为核心，学习情态动词 `must, might, could, can't` 表示推测的用法。通过寻找遗失物品的主人、解释奇怪的现象（如 Stonehenge 的秘密），学生能够运用英语进行严密的逻辑分析。单元旨在培养学生的观察力、分析能力和对未知世界的好奇心，引导学生学会根据已有证据做出合理解释。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活中的推测与推断。
+                        *   **深层意义**：本单元围绕“根据线索进行逻辑推断”展开。通过寻找遗失物品的主人、解释奇怪的噪音（Stonehenge）等情境，引导学生学会运用逻辑思维解决问题。旨在培养学生的观察力（Observation）和分析力，鼓励学生不仅看表面现象，更要深入挖掘背后的逻辑。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **推理词汇**：must (肯定), might/could (可能), can't (不可能).
-                        - **物品词汇**：folder, truck, picnic, laboratory, jewelry.
-                        - **核心动词/形容词**：belong (属于), attend (参加), valuable (宝贵的), pink (粉红色的).
-                        - **高频短语**：belong to (属于), run after (追逐), at the same time (同时), make up (编造; 化妆).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **推测词汇**：must (肯定), might (可能), could (可能), can't (绝对不)。
+                        - **物品名词**：truck (卡车), picnic (野餐), rabbit (兔子), laboratory (实验室), vest (背心), suit (西服)。
+                        - **神秘与自然**：mystery (奥秘), Stonehenge (巨石阵), alien (外星人), creature (生物), circle (圆圈)。
+                        - **动作词汇**：attend (参加), land (着陆), receive (收到), smell (闻到), chase (追逐)。
 
-                        ### 2. 核心句式
-                        1.  **肯定推测**：It must belong to Carla. She has a guitar.
-                        2.  **可能推测**：It could be a present for her mother.
-                        3.  **否定推测**：It can't be a dog. It's too big.
-                        4.  **科学猜测**：The stones must have been moved by many people.
-
-                        ### 3. 重点语法
-                        - **情态动词表推测** 的肯定、否定与可能性。
+                        ### 2. 核心短语金牌储备
+                        - `belong to` 属于 (**无被动，无进行时**)
+                        - `make up` 编造；化妆；组成
+                        - `use up` 用完；耗尽
+                        - `be uneasy` 心神不安
+                        - `run after` 追逐
+                        - `have no idea` 不知道
+                        - `at the same time` 同时
+                        - `in charge of` 负责；掌管
+                        - `communicate with` 交流
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Linda**: Look! Someone left a book on the bench. 
-                        
-                        **Jack**: It must belong to Carla. Her name is on it. 
-                        
-                        **Linda**: What about this hair band? 
-                        
-                        **Jack**: It could be Linda's. She likes the color pink. 
-                        
-                        **Linda**: No, it can't be hers. She's wearing hers right now.
-
-                        **【译文】**
-                        
-                        **琳达**：看！有人把书落在长凳上了。
-                        
-                        **杰克**：它一定属于卡拉。她的名字在上面。
-                        
-                        **琳达**：那这个发带呢？
-                        
-                        **杰克**：可能是琳达的。她喜欢粉色。
-                        
-                        **琳达**：不，不可能是她的。她现在正戴着她的呢。
-
-                        ### Section B (Reading) 阅读文段：Stonehenge
-                        **【原文】**
-                        
-                        Stonehenge is one of the world's greatest mysteries. Who built it? Why was it built? Some people think it was a temple. Others believe it was a kind of calendar. The stones are so heavy that it must have been very hard to move them. Even today, scientists are still trying to find the truth about it.
-
-                        **【译文】**
-                        
-                        巨石阵是世界上最伟大的谜团之一. 谁建造了它？为什么要建造它？有些人认为它是一座神庙. 另一些人相信它是一种日历. 那些石头如此沉重，以至于移动它们一定非常困难. 即使是今天，科学家们仍在努力寻找关于它的真相.
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                    UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. It must belong to Carla. (它一定属于卡拉。)
-                        - **【用法拓展】**：`belong to` 意为“属于”，不用于被动语态，也不用于进行时.
+                        - **【考点详解】**：`must` 表示有把握的肯定推测。`belong to` 固定搭配。
                         
-                        #### 2. It can't be hers. (它不可能是她的。)
-                        - **【要点精讲】**：`can't` 表示有把握的否定推测.
+                        #### 2. It might/could be Linda's. (它可能是琳达的。)
+                        - **【结构剖析】**：`might / could` 表示不太有把握的推测。
                         
-                        #### 3. I saw him running after a bus. (我看到他正在追一辆公交车。)
-                        - **【词块归纳】**：`see sb. doing sth.` 看到某人正在做某事.
+                        #### 3. It can't be a dog. It's too big. (它不可能是狗。它太大了。)
+                        - **【语法核心】**：`can't` 表示有把握的否定推测（不可能是）。
+                        
+                        #### 4. I have no idea what it is. (我不知道它是什么。)
+                        - **【用法拓展】**：`what it is` 是宾语从句作 idea 的同位语（或宾语），语序为陈述语序。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① belong to (属于)
-                        - **【注意】**：to 是介词，后接名词或人称代词宾格.
-                        - **【例题】**：
-                        
-                        *The beautiful bike belongs to ________.*
-                        A. I   B. me   C. my   D. mine
-                        
-                        **[解析]**：belong to 后用宾格，选 **B**.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：情态动词表推测
+                        **1. 肯定推测**：
+                        - `must`：100% 确定（一定...）。
+                        - `could / might`：20-50% 确定（可能...）。
+                        **2. 否定推测**：
+                        - `can't`：100% 确定（不可能...）。
+                        - `couldn't / might not`：可能不...。
+                        **3. 疑问推测**：常用 `can`。
+                        - *Can it be true?* (这可能是真的吗？)
 
-                        #### ② valuable (adj. 宝贵的)
-                        - **【词汇梳理】**：`value` (价值) + `able` (后缀) = `valuable`.
+                        ### 辨析：belong to vs one's (中考必考)
+                        - `That book belongs to me.` (正确)
+                        - `That book is mine.` (正确)
+                        - `That book is belonged to me.` (错误！没有被动语态)
+
+                        ### 中考真题特训
+                        
+                        *(2024·广东中考)* *— Whose dictionary is this? — It ________ be Li Hua's. Look, his name is on it.*
+                        A. might   B. can't   C. must   D. could
+                        
+                        **[解析]**：根据后文“名字在上面”，可知是有把握的肯定推测，选 **C**。
+
+                        *(2023·上海中考)* *The man ________ be our teacher. He has gone to Beijing.*
+                        A. mustn't   B. can't   C. shouldn't   D. needn't
+                        
+                        **[解析]**：根据“他去北京了”，可知“不可能是”，否定推测用 can't，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：情态动词推测“三兄弟”
-                        **1. must (肯定)**
-                        意为“一定”，语气最强，用于肯定推测.
-                        
-                        **2. might / could (可能)**
-                        意为“可能”，语气较弱，用于不确定的推测.
-                        
-                        **3. can't (否定)**
-                        意为“不可能”，语气最强，用于否定推测.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：解开谜团 (Solving a Mystery)
+                        #### 1. 写作逻辑
+                        - **现状描述**：What happened? What did you see/hear?
+                        - **线索分析**：Use clues (What are the facts?).
+                        - **推测结论**：Use must, might, can't to explain your ideas.
 
-                        **4. 中考真题特训**
-                        
-                        *(2024·江苏中考)* *— Is that Mr. Black? — No, it ________ be him. He is in London now.*
-                        A. must   B. may   C. can't   D. shouldn't
-                        
-                        **[解析]**：根据“他在伦敦”可知“不可能是他”，选 **C**.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Something strange happened in our neighborhood.*
+                        - *It could be ... because ...*
+                        - *It can't be ... because ...*
+                        - *The most likely explanation is that ...*
 
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Mystery at School (校园里的推测)
-                        **There is a backpack on the playground.** 
+                        #### 3. 满分范文
+                        **The Strange Noise**
                         
-                        It **must belong to** a student. There are some **valuable** books in it. It **might be** Li Hua's because I saw him **running** there. But it **can't be** Tom's because his backpack is blue. I will **take it to** the teachers' office. I hope the owner **will find** it soon.
+                        Last night, I heard a strange noise outside my window. It was a loud "thump". 
+                        
+                        First, I thought it might be a thief. But then I saw no one there. It couldn't be a thief because the yard gate was locked. Could it be a big bird? No, it couldn't be. The noise was too heavy for a bird. Finally, I went out with a flashlight. I found a big football under the tree. It must belong to my little brother. He must have left it there yesterday afternoon, and it just fell down from the chair. 
+                        
+                        Now the mystery is solved!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u9", "Unit 9", "I like music that I can dance to.",
+                "g9_u9", "Unit 9", "I like music that I can dance to.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：文学、艺术与体育 (Literature and art)
-                        *   **子主题**：音乐与电影喜好，个人审美，文化生活 (Arts and preferences)。
-
-                        ### 2. 单元主题内容
-                        本单元以“音乐与电影”为话题，重点学习定语从句（Relative Clauses）。通过表达自己对不同艺术形式的偏好（如 I like music that... / I prefer movies which...），学生能够运用关系代词 that, which, who 引导的从句进行更复杂的语义表达。单元旨在培养学生的审美情趣，引导其在欣赏多元艺术的过程中形成独立的思考与品味。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 文化、艺术与个人审美（音乐与电影）。
+                        *   **深层意义**：本单元聚焦“个人喜好与审美取向”。通过学习定语从句，引导学生更加精确地描述自己喜欢的音乐类型、电影风格及艺术家（如阿炳的《二泉映月》）。旨在提升学生的艺术鉴赏力，学会用英语表达深刻的情感体验，理解艺术背后的灵魂与生命力。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **艺术词汇**：lyrics (歌词), director (导演), documentary (纪录片), drama (戏剧), Australian.
-                        - **核心动词/形容词**：prefer (更喜欢), electronic (电子的), smooth (平滑的), spare (空闲的).
-                        - **高频短语**：stick to (坚持), down (悲哀), plenty of (大量的), shut off (关闭), in total (总共).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **艺术与媒体**：music (音乐), movie (电影), director (导演), document (记录), drama (剧本/戏), dialogue (对话)。
+                        - **乐器与名作**：guitar (吉他), Erhu (二胡), masterpiece (杰作), string (弦)。
+                        - **形容词/感受**：smooth (悦耳的), lyrics (歌词), electronic (电子的), moving (动人的), painful (痛苦的)。
+                        - **动作词汇**：dance (跳舞), suppose (推断), stick (坚持), prefer (更喜欢), sense (感觉到), pity (遗憾)。
 
-                        ### 2. 核心句式
-                        1.  **表达喜好**：I like music that I can dance to.
-                        2.  **选择偏好**：I prefer movies that can give me something to think about.
-                        3.  **描述特征**：She is the musician who plays the piano beautifully.
-                        4.  **建议与动作**：What do you do in your spare time?
-
-                        ### 3. 重点语法
-                        - **定语从句**（关系代词 that, which, who 的用法）。
+                        ### 2. 核心短语金牌储备
+                        - `prefer ... to ...` 相比...更喜欢...
+                        - `dance to` 随着...跳舞
+                        - `sing along with` 跟着...唱
+                        - `stick to` 坚持；固守
+                        - `be down` 悲伤；沮丧
+                        - `in total` 总共
+                        - `plenty of` 许多
+                        - `shut off` 关闭；停止
+                        - `once in a while` 偶尔地
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. I like music that I can dance to. (我喜欢我可以随之跳舞的音乐。)
+                        - **【考点详解】**：`that` 引导的定语从句，修饰 music。
                         
-                        **Tony**: What kind of music do you like, Betty? 
+                        #### 2. I prefer movies that/which are scary. (我更喜欢恐怖电影。)
+                        - **【结构剖析】**：`prefer ... that ...` 结构。注意 `that` 在从句中作主语。
                         
-                        **Betty**: I like music that has great lyrics. What about you? 
+                        #### 3. He is the musician who/that wrote Erquan Yingyue. (他就是写了《二泉映月》的那个音乐家。)
+                        - **【语法核心】**：先行词是人（musician），引导词用 `who` 或 `that`。
                         
-                        **Tony**: I prefer music that I can dance to. 
-                        
-                        **Betty**: Do you like smooth music? 
-                        
-                        **Tony**: No, I think it's too quiet. I like loud music that makes me feel energetic.
-
-                        **【译文】**
-                        
-                        **托尼**：贝蒂，你喜欢哪种音乐？
-                        
-                        **贝蒂**：我喜欢歌词写得好的音乐。你呢？
-                        
-                        **托尼**：我更喜欢能跟着跳舞的音乐。
-                        
-                        **贝蒂**：你喜欢悦耳柔和的音乐吗？
-                        
-                        **托尼**：不，我觉得那太安静了。我喜欢能让我感到精力充沛的大声音乐。
-
-                        ### Section B (Reading) 阅读文段：Abing's Music
-                        **【原文】**
-                        
-                        Erhu music is very famous in China. One of the greatest Erhu musicians was Abing. His music, like "Erquan Yingyue", is very moving. It tells a story of sadness and pain. Abing was blind, but he could "see" the world through music. People can feel his deep love for life when they listen to his songs. It is a masterpiece that everyone should hear.
-
-                        **【译文】**
-                        
-                        二胡音乐在中国非常著名. 最伟大的二胡音乐家之一是阿炳. 他的音乐，如《二泉映月》，非常动人. 它讲述了一个忧伤和痛苦的故事. 阿炳失明了，但他能通过音乐“看”世界. 人们听他的歌时能感受到他对他对生活深沉的爱. 这是一部每个人都应该听的杰作.
+                        #### 4. What a pity that you missed the concert! (你错过了音乐会，多么遗憾啊！)
+                        - **【用法拓展】**：`It is a pity that ...` 结构的感叹句形式。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. I like music that has great lyrics. (我喜欢歌词很棒的音乐。)
-                        - **【句式剖析】**：`that` 是关系代词，在从句中充当主语，修饰先行词 `music`.
-                        
-                        #### 2. I prefer movies which are interesting. (我更喜欢有趣的电影。)
-                        - **【要点精讲】**：`prefer` 意为“更喜欢”. 常用 `prefer A to B` 表示“比起B更喜欢A”.
-                        
-                        #### 3. He is the person who taught me English. (他是那个教我英语的人。)
-                        - **【词块归纳】**：先行词是“人”时，引导词用 `who` 或 `that`.
-                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：定语从句 (I) - that, which, who 引导
+                        **1. 先行词 (Antecedent)**：被修饰的名词或代词。
+                        **2. 引导词 (Relative Pronouns)**：
+                        - **人**：用 `who` 或 `that`。
+                        - **物**：用 `which` 或 `that`。
+                        **3. 只能用 that 的情况 (必考)**：
+                        - 先行词被序数词或最高级修饰时。 (*the first book that...*)
+                        - 先行词被 all, any, few, little, no, every 等修饰时。
+                        - 先行词既有人又有物时。
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① prefer (v. 更喜欢)
-                        - **【用法总结】**：
-                            *   `prefer A to B`：比起B更喜欢A.
-                            *   `prefer doing A to doing B`：比起做B更喜欢做A.
-                            *   `prefer to do sth.`：宁愿做某事.
-                        - **【例题】**：
-                        
-                        *I prefer ________ at home to ________ outside.*
-                        A. stay; go   B. staying; going   C. to stay; go   D. staying; go
-                        
-                        **[解析]**：prefer doing to doing，选 **B**.
+                        ### 辨析：prefer 的常用结构 (中考常考)
+                        - `prefer A to B` (相比B更喜欢A)
+                        - `prefer doing A to doing B`
+                        - `prefer to do A rather than do B`
 
-                        #### ② stick to (坚持; 粘住)
-                        - **【搭配】**：`stick to one's promise` (坚持承诺).
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：定语从句 (Relative Clauses)
-                        **1. 引导词的选择**
-                        - **that**：既可指人也可指物.
-                        - **which**：只能指物.
-                        - **who**：只能指人.
+                        ### 中考真题特训
                         
-                        **2. 谓语一致性**
-                        从句的谓语动词在人称和数上必须与先行词保持一致.
-                        - *The boy who **is** (单数) talking is my friend.*
-                        - *The boys who **are** (复数) talking are my friends.*
-
-                        **3. 中考真题特训**
+                        *(2024·天津中考)* *I love movies ________ have happy endings.*
+                        A. who   B. whom   C. which   D. what
                         
-                        *(2024·天津中考)* *I like the teacher ________ is always kind to students.*
+                        **[解析]**：先行词是 movies (物)，引导词用 which 或 that，选 **C**。
+
+                        *(2023·北京中考)* *The teacher ________ teaches us English is very kind.*
                         A. which   B. who   C. whose   D. what
                         
-                        **[解析]**：先行词是 teacher (人)，引导词用 who，选 **B**.
+                        **[解析]**：先行词是 teacher (人)，引导词用 who 或 that，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Favourite Art (我最喜欢的艺术形式)
-                        **Music is an important part of my life.** 
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我最喜欢的音乐/电影 (My Favorite Music/Movie)
+                        #### 1. 写作要点
+                        - **类型描述**：What kind of music/movie do you like? (使用定语从句)。
+                        - **特点分析**：Why do you like it? (Lyrics, melody, plot).
+                        - **情感连接**：How do you feel when you listen to/watch it?
+
+                        #### 2. 高分句式
+                        - *I like music that has great lyrics.*
+                        - *I prefer movies that can make me laugh.*
+                        - *When I am down, I listen to ... to cheer myself up.*
+                        - *It is the most moving story that I have ever heard.*
+
+                        #### 3. 满分范文
+                        **My Favorite Movie**
                         
-                        I like **music that** has a beautiful melody. It makes me **feel relaxed** after a busy day. I also **prefer movies which** are educational. I think **documentaries** are great because they teach me **plenty of** knowledge. Art makes our life **colorful**.
+                        I love watching movies in my free time. Among all the movies, my favorite is "The Lion King". 
+                        
+                        It is a cartoon movie that was made by Disney. I like it because it has a very moving plot and beautiful songs. The story is about a young lion who learns to be a brave king. It tells us that we should be responsible for our lives. Every time I watch it, I feel very encouraged. I prefer movies that can teach me something important about life. 
+                        
+                        I think "The Lion King" is a masterpiece that everyone should see.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u10", "Unit 10", "You're supposed to shake hands.",
+                "g9_u10", "Unit 10", "You're supposed to shake hands.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：人际关系与社会交往 (Communication)
-                        *   **子主题**：各国社交礼仪，文化差异，得体行为 (Customs and manners)。
-
-                        ### 2. 单元主题内容
-                        本单元以“社交礼仪”为核心，重点学习 `be supposed to` 结构的用法。通过探讨不同国家在初次见面、用餐、聚会等场合下的习俗差异（如 shaking hands, bowing, arriving on time 等），引导学生学会尊重文化多元性。单元强调了“入乡随俗（When in Rome, do as the Romans do）”的重要性，培养学生的国际视野和跨文化沟通的敏感度。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 礼仪与习俗（跨文化交际）。
+                        *   **深层意义**：本单元围绕“不同国家的礼仪习俗”展开（如见面礼、用餐礼仪、守时观念）。通过学习 `be supposed to` 结构，引导学生理解文化多样性。旨在培养学生的跨文化交际意识（Cross-cultural Awareness），教导学生在异国他乡如何表现得体，尊重他人的文化禁忌，成为文明的“世界公民”。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **礼仪词汇**：custom, bow (鞠躬), kiss, handshake, greet.
-                        - **餐桌礼仪**：chopsticks, spoon, napkin, fork, manner.
-                        - **核心形容词/动词**：relaxed, basic, behave (表现), except (除...之外).
-                        - **高频短语**：be supposed to (被要求...), shake hands (握手), for the first time, drop by (顺便拜访), pointing at (指向).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **社交动作**：shake (握手), bow (鞠躬), kiss (亲吻), greet (问候), relax (放松)。
+                        - **餐桌礼仪**：chopsticks (筷子), fork (叉子), spoon (勺子), knife (刀), napkins (餐巾)。
+                        - **国家名词**：Brazil (巴西), Mexico (墨西哥), Japan (日本), Korea (朝鲜/韩国), Switzerland (瑞士)。
+                        - **描述与态度**：relaxed (放松的), strict (严格的), polite (礼貌的), rude (无礼的), basic (基本的)。
 
-                        ### 2. 核心句式
-                        1.  **描述惯例**：You're supposed to shake hands.
-                        2.  **表达禁止/不当**：You're not supposed to eat with your hands.
-                        3.  **询问习俗**：What are you supposed to do if you're invited to a party?
-                        4.  **描述感受**：I was a bit relaxed about time.
-
-                        ### 3. 重点语法
-                        - **be supposed to do sth.** 的用法.
-                        - **It is + adj. + to do sth.** 的应用.
+                        ### 2. 核心短语金牌储备
+                        - `be supposed to do sth.` 应该做某事 (**语法核心**)
+                        - `shake hands` 握手
+                        - `for the first time` 第一次
+                        - `as soon as` 一...就...
+                        - `to one's surprise` 令某人惊讶的是
+                        - `drop by` 顺便拜访
+                        - `make an effort` 努力
+                        - `clean out` 清理
+                        - `go out of one's way` 特地；费力
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Maria**: Hi, Katie. How was the party last night? 
-                        
-                        **Katie**: It was OK, but I made a mistake. 
-                        
-                        **Maria**: What happened? 
-                        
-                        **Katie**: I arrived at seven, but the party was supposed to start at eight. 
-                        
-                        **Maria**: Oh, in America, people are supposed to arrive a bit late for parties. 
-                        
-                        **Katie**: I see. Next time I'll be more careful.
-
-                        **【译文】**
-                        
-                        **玛丽亚**：嗨，凯蒂。昨晚的聚会怎么样？
-                        
-                        **凯蒂**：还好，但我犯了个错误。
-                        
-                        **玛丽亚**：发生什么了？
-                        
-                        **凯蒂**：我七点到的，但聚会本应该八点开始。
-                        
-                        **玛丽亚**：哦，在美国，人们参加聚会应该是要晚到一会儿的。
-                        
-                        **凯蒂**：我明白了。下次我会更小心的。
-
-                        ### Section B (Reading) 阅读文段：Table Manners in France
-                        **【原文】**
-                        
-                        Table manners are very important in France. First, you are not supposed to start eating until everyone is ready. Second, you should keep your hands on the table, but not your elbows. Also, it is rude to cut your bread with a knife. You should break it with your hands. If you follow these rules, you will have a great dinner with your French friends.
-
-                        **【译文】**
-                        
-                        在法国餐桌礼仪非常重要. 首先，在每个人准备好之前你不应该开始吃. 第二，你应该把手放在桌子上，但不要把肘部放上去. 此外，用刀切面包是不礼貌的. 你应该用手掰开它. 如果你遵守这些规则，你将和你的法国朋友们度过一个愉快的晚餐.
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                    UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. You're supposed to shake hands. (你应该握手。)
-                        - **【句式剖析】**：`be supposed to` 意为“应当；被期望”，通常用来表达社会习惯、惯例或规则.
+                        - **【考点详解】**：`be supposed to do` 表示“被期望做...；应该做...”，语气比 must 委婉。
                         
-                        #### 2. It's polite to arrive on time. (准时到达是有礼貌的。)
-                        - **【用法拓展】**：`It is + adj. + to do sth.` 这里的 `It` 是形式主语.
+                        #### 2. In Japan, you're expected to bow when you meet someone for the first time. (在日本，当你第一次见到某人时，你应该鞠躬。)
+                        - **【结构剖析】**：`be expected to do` 相当于 `be supposed to do`。
                         
-                        #### 3. We are relaxed about time. (我们对时间比较随意。)
-                        - **【词块归纳】**：`be relaxed about sth.` 对某事感到放松/随意.
+                        #### 3. It's very important to be on time. (准时非常重要。)
+                        - **【用法拓展】**：`on time` 准时；`in time` 及时。
+                        
+                        #### 4. You shouldn't point with your chopsticks. (你不应该用筷子指人。)
+                        - **【语法核心】**：餐桌礼仪中的禁忌表达。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① except (prep. 除...之外)
-                        - **【辨析】**：
-                            *   `except`：除...之外（不包括在内）.
-                            *   `besides`：除...之外（包括在内，还有）.
-                        - **【例题】**：
-                        
-                        *Everyone is here ________ Tom. He is ill.*
-                        A. except   B. besides   C. including   D. but
-                        
-                        **[解析]**：汤姆没来，不包括他在内，选 **A**.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：be supposed to do sth.
+                        **1. 含义**：表示根据规定、习俗、安排等“应该”做某事。
+                        **2. 句式**：
+                        - 肯定：*You **are supposed to** arrive at 7:00.*
+                        - 否定：*You **are not supposed to** talk loudly.* (不应该/不准)
+                        **3. 辨析：be supposed to vs should**：
+                        - `be supposed to` 侧重于外界的期望或要求。
+                        - `should` 侧重于说话人的主观建议。
 
-                        #### ② shake hands (握手)
-                        - **【注意】**：hands 必须用复数. `shake hands with sb.` 与某人握手.
+                        ### 核心语法二：it 作形式主语
+                        `It is + adj. + (for sb.) + to do sth.`
+                        - *It is polite to greet people.*
+
+                        ### 中考真题特训
+                        
+                        *(2024·南京中考)* *In China, children ________ to take off their shoes before entering a house.*
+                        A. are supposed   B. suppose   C. are supposing   D. supposed
+                        
+                        **[解析]**：考查 be supposed to 结构，选 **A**。
+
+                        *(2023·北京中考)* *It's rude ________ loudly in the library.*
+                        A. talk   B. talking   C. to talk   D. talked
+                        
+                        **[解析]**：It is + adj. + to do sth.，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：be supposed to 的“社交”语义
-                        **1. 含义**
-                        表达根据习俗、规则、约定等“应该...”或“被要求...”.
-                        
-                        **2. 时态变化**
-                        - *was/were supposed to*：表示“本应该...（但没做）”.
-                        
-                        **3. 句式注意点**
-                        - 否定：be not supposed to (不应该).
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍中国的礼仪习俗 (Table Manners in China)
+                        #### 1. 写作要点
+                        - **见面礼仪**：How to greet people?
+                        - **用餐礼仪 (重点)**：Use chopsticks, Dos and Don'ts.
+                        - **作客礼仪**：Be on time, bring a gift.
 
-                        **4. 中考真题特训**
-                        
-                        *(2023·广东中考)* *You are ________ to bring a gift when you visit a friend.*
-                        A. supposed   B. needed   C. let   D. asked
-                        
-                        **[解析]**：根据社交礼仪，选 **A**.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *When you are in China, you should know some basic manners.*
+                        - *You are supposed to greet the oldest person first.*
+                        - *It is impolite to stick your chopsticks into your food.*
+                        - *You are not expected to eat with your hands.*
 
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Customs in My Country (介绍家乡习俗)
-                        **China has a long history and many special customs.** 
+                        #### 3. 满分范文
+                        **Table Manners in China**
                         
-                        When you visit a Chinese home, you **are supposed to** take off your shoes. It is **polite** to bring some fruit as a gift. When having dinner, the older people **are supposed to** start eating first. You should never **point at** others with your chopsticks. I hope you will **enjoy your stay** in China.
+                        If you are invited to a dinner in China, you should follow some table manners. 
+                        
+                        First, you are supposed to wait for the elders to start eating first. It shows your respect. Second, you are not supposed to point at others with your chopsticks. It is very rude. Also, you shouldn't make too much noise while eating soup. Third, when you want to take food from a dish, you'd better take the piece that is closest to you. 
+                        
+                        In a word, "When in Rome, do as the Romans do." Following these rules will help you have a pleasant dinner with your Chinese friends.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u11", "Unit 11", "Sad movies make me cry.",
+                "g9_u11", "Unit 11", "Sad movies make me cry.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：自我认识与自我管理 (Self-management)
-                        *   **子主题**：情绪表达，环境对人的影响，友谊与快乐 (Emotions)。
-
-                        ### 2. 单元主题内容
-                        本单元聚焦“情绪与感受”，重点学习使役动词 `make` 的用法。通过探讨环境（如 background music, colors）、电影、天气及人际关系对个人心情的影响，引导学生认识并管理自己的情绪。单元强调了“友谊与责任比金钱更珍贵”的主题（如 The Shirt of a Happy Man），旨在培养学生积极乐观的心态，学会在压力中寻找快乐。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 情感、心态与健康。
+                        *   **深层意义**：本单元聚焦于“事物对情绪的影响”。通过探讨音乐、天气、颜色、电影、广告及他人的言行如何左右我们的感受，引导学生建立情感自觉。旨在教导学生如何管理负面情绪，在竞争中保持平常心（如足球比赛、金钱与快乐的关系），树立正确的金钱观和价值观。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **情绪形容词**：sad, excited, uncomfortable, nervous, disappointed.
-                        - **核心动词**：examine, kick, nod, shoulder, weight.
-                        - **高频短语**：make sb. do sth. (使某人做某事), make sb. + adj., drive sb. crazy (使某人发疯), wait for (等待), the more ... the more ... (越...越...).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **情感与感觉**：comfortable (舒适的), uncomfortable (不舒服的), nervous (紧张的), relieved (放心的), jealous (嫉妒的), crazy (疯狂的)。
+                        - **动作词汇**：examine (检查), skip (跳过), kick (踢), nod (点头), disappointed (失望的)。
+                        - **抽象词汇**：friendship (友谊), goal (目标/得分), power (权力), wealth (财富), courage (勇气), shame (羞耻)。
+                        - **其他**：lemon (柠檬), concert (音乐会), grey (灰色的), neither (也不)。
 
-                        ### 2. 核心句式
-                        1.  **表达影响**：Sad movies make me cry. / Loud music makes me nervous.
-                        2.  **比较感受**：The more I study, the more I know.
-                        3.  **描述状态**：I'd rather stay at home than go out.
-                        4.  **哲理陈述**：Neither wealth nor power can bring you happiness.
-
-                        ### 3. 重点语法
-                        - **使役动词 make** 的两种主要用法（接省 to 不定式或接形容词）。
+                        ### 2. 核心短语金牌储备
+                        - `make sb. + adj.` 使某人... (**语法核心**)
+                        - `make sb. do sth.` 使某人做某事 (**语法核心**)
+                        - `rather than` 而不是
+                        - `leave out` 忽略；遗漏
+                        - `be hard on sb.` 对某人严厉
+                        - `let sb. down` 使某人失望
+                        - `kick sb. off` 把某人开除
+                        - `be friends with sb.` 与某人交朋友
+                        - `to start with` 起初；开始时
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Sad movies make me cry. (悲伤的电影使我哭泣。)
+                        - **【考点详解】**：`make sb. do sth.` 结构中，`make` 是使役动词，后接省略 to 的不定式作宾语补足语。
                         
-                        **Tina**: Let's go to the Blue Lagoon restaurant. 
+                        #### 2. Waiting for her made me angry. (等她使我很生气。)
+                        - **【结构剖析】**：`make sb. + adj.` 结构。`Waiting for her` 是动名词短语作主语。
                         
-                        **Amy**: No, I'd rather go to the Rockin' Restaurant. 
+                        #### 3. The loud music makes me want to leave. (响亮的音乐使我想离开。)
+                        - **【用法拓展】**：`make sb. do sth.` 的变体，宾补是一个含有不定式的短语。
                         
-                        **Tina**: Why? 
-                        
-                        **Amy**: The soft music at Blue Lagoon makes me sleepy. 
-                        
-                        **Tina**: Well, loud music at Rockin' Restaurant makes me want to leave! 
-                        
-                        **Amy**: But the food is great there!
-
-                        **【译文】**
-                        
-                        **蒂娜**：我们去蓝湖餐厅吧。
-                        
-                        **艾米**：不，我宁愿去摇滚餐厅。
-                        
-                        **蒂娜**：为什么？
-                        
-                        **艾米**：蓝湖餐厅轻柔的音乐让我昏昏欲睡。
-                        
-                        **蒂娜**：嗯，摇滚餐厅大声的音乐让我很想离开！
-                        
-                        **艾米**：但那里的食物很棒啊！
-
-                        ### Section B (Reading) 阅读文段：The Shirt of a Happy Man
-                        **【原文】**
-                        
-                        A king was very sad and ill. A doctor told him that he needed the shirt of a happy man to get well. The king sent his generals to find a happy man. They found a poor prime minister, but he wasn't happy. Finally, they met a beggar who was very happy. But the beggar didn't have a shirt at all! The king realized that happiness doesn't come from things.
-
-                        **【译文】**
-                        
-                        一位国王非常忧郁且病重. 一位医生告诉他，他需要穿上一个快乐的人的衬衫才能痊愈. 国王派他的将军们去找一个快乐的人. 他们找到了一个贫穷的首相，但他不快乐. 最后，他们遇到一个非常快乐的乞丐. 但那个乞丐根本没有衬衫！国王意识到快乐并不来源于物质.
+                        #### 4. Neither money nor power can give you true happiness. (金钱和权力都不能给你真正的幸福。)
+                        - **【语法核心】**：`neither ... nor ...` 连接并列成分，作主语时谓语遵循“就近原则”。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. Sad movies make me cry. (悲伤的电影让我哭泣。)
-                        - **【句式剖析】**：`make` 是使役动词，后接宾语 `me`，再接宾语补足语（省略 to 的不定式 `cry`）.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：make 的用法汇总
+                        **1. make sb. + adj.**：使某人处于某种状态。
+                        - *Winning the game made us **happy**.*
+                        **2. make sb. do sth.**：使某人做某事。
+                        - *My boss made me **work** ten hours a day.*
+                        **3. 特别注意：被动语态中 to 要还原！**
+                        - *I **was made to work** ten hours a day.* (中考高频考点)
+
+                        ### 核心语法二：neither ... nor ...
+                        - **含义**：既不...也不...。
+                        - **就近原则**：*Neither you nor **he is** wrong.*
+
+                        ### 中考真题特训
                         
-                        #### 2. I'd rather stay at home. (我宁愿待在家里。)
-                        - **【要点精讲】**：`would rather do sth.` 宁愿做某事. 否定形式为 `would rather not do`.
+                        *(2024·天津中考)* *The teacher made the students ________ the words ten times.*
+                        A. write   B. to write   C. writing   D. wrote
                         
-                        #### 3. Neither wealth nor power can bring you happiness. (财富和权力都不能带给你快乐。)
-                        - **【词块归纳】**：`neither ... nor ...` 既不...也不... 遵循“就近原则”.
+                        **[解析]**：make sb. do sth.，选 **A**。
+
+                        *(2023·广东中考)* *I was made ________ the piano for two hours every day when I was a child.*
+                        A. play   B. to play   C. playing   D. played
+                        
+                        **[解析]**：make sb. do sth. 变为被动语态，不定式符号 to 必须还原，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① make (使役动词)
-                        - **【用法总结】**：
-                            *   `make sb. do sth.` (让某人做某事 - 省 to).
-                            *   `make sb. + adj.` (使某人感到...).
-                        - **【例题】**：
-                        
-                        *The funny movie made us ________ for a long time.*
-                        A. laugh   B. to laugh   C. laughing   D. laughed
-                        
-                        **[解析]**：make sb. do，选 **A**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：谈谈颜色/音乐对你的影响 (Effects of Colors/Music)
+                        #### 1. 写作要点
+                        - **点题**：Different things make me have different feelings.
+                        - **具体阐述**：Music/Colors make me feel... (使用 make 句型)。
+                        - **总结建议**：How to keep a good mood.
 
-                        #### ② drive sb. crazy (使某人发狂/受不了)
-                        - **【近义词】**：`drive sb. mad`.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Music has a great effect on my feelings.*
+                        - *Soft music makes me feel relaxed after a busy day.*
+                        - *Loud music, however, makes me want to cover my ears.*
+                        - *I prefer bright colors because they make me feel energetic.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：make 的“变幻莫测”
-                        **1. make + 宾语 + 形容词**
-                        - *The news made him happy.*
+                        #### 3. 满分范文
+                        **How Music Affects Me**
                         
-                        **2. make + 宾语 + 动词原形**
-                        - *The teacher made us finish the work.*
+                        Music is a part of my life. Different kinds of music can make me have different feelings.
                         
-                        **3. 被动语态注意点**
-                        当 make 用于被动语态时，原来省略的 **to** 必须还原.
-                        - *We were made **to** clean the room.* (我们被要求打扫房间)
-
-                        **4. 中考真题特训**
+                        When I feel stressed or tired, I like to listen to soft and quiet music. It makes me feel relaxed and peaceful. It can even help me fall asleep quickly. On the other hand, fast and loud music always makes me feel energetic. When I exercise, I prefer this kind of music. It makes me want to move and never give up. 
                         
-                        *(2024·天津中考)* *Doing sports can make us ________ and ________.*
-                        A. healthy; strong   B. health; strength   C. healthy; strength   D. health; strong
-                        
-                        **[解析]**：make sb. + adj.，选 **A**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Emotions (我的情绪变化)
-                        **Last week, I felt very disappointed.** 
-                        
-                        Because I failed the math test. The result **made me feel** sad. My mother **made me** talk to her about it. She said that **failure** was not the end. Her words **made me** feel much better. Now, I study **even harder**. I believe **persistence** will **make me** successful.
+                        In a word, music can influence my mood a lot. I think it is a great way to help us manage our emotions.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u12", "Unit 12", "Life is full of the unexpected.",
+                "g9_u12", "Unit 12", "Life is full of the unexpected.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：意外事件，生活中的变数，时间管理 (Past events)。
-
-                        ### 2. 单元主题内容
-                        本单元以“生活中的意外”为话题，正式引入过去完成时（Past Perfect Tense）。通过讲述由于起晚、迟到、错过公交或遇到地震等突发事件（如 9/11 幸存者故事），学生能够运用 `had + p.p.` 来表达“过去的过去”。单元旨在引导学生学会从意外中吸取教训，培养积极应对挑战的心态，并强调珍惜生命与时间的重要性。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活中的意外与遗憾。
+                        *   **深层意义**：本单元围绕“过去发生的意外事件”展开。通过描述错过早班车、忘记带钥匙、甚至重大的历史事件（如911事件中的幸存者），学习过去完成时。旨在引导学生学会客观地叙述过去，反思生活中的不确定性，培养面对挫折时的乐观心态和对时间的规划意识。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **核心动词**：oversleep (睡过头), rush (冲), realize (意识到), ring (响), disappear (消失).
-                        - **核心名词**：airport, backpack, backpack, earthquake, survivor.
-                        - **高频短语**：by the time (到...时候为止), give sb. a lift (捎某人一程), show up (赶到), in line with (排队等候), staring in disbelief (难以置信地盯着).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **生活琐事**：backpack (背包), overshoot (超载), block (街区), worker (工人), stair (楼梯)。
+                        - **动作词汇**：oversleep (睡过头), ring (响), burn (燃烧), stare (凝视), disappear (消失), discover (发现)。
+                        - **形容词/状态**：unexpected (出乎意料的), alive (活着的), cream (奶油色的), empty (空的), embarrassed (尴尬的)。
+                        - **其他**：airport (机场), market (市场), bean (豆), officer (官员)。
 
-                        ### 2. 核心句式
-                        1.  **描述过去先后**：By the time I got up, my brother had already gone to school.
-                        2.  **表达意识到**：I realized that I had left my keys at home.
-                        3.  **询问经历**：What happened to you this morning?
-                        4.  **状态感叹**：How lucky I was!
-
-                        ### 3. 重点语法
-                        - **过去完成时** (had + 动词的过去分词)。
+                        ### 2. 核心短语金牌储备
+                        - `by the time ...` 到...的时候为止 (**语法标志词**)
+                        - `go off` (闹钟) 发出响声
+                        - `show up` 出现；露面
+                        - `run off` 跑掉；迅速离开
+                        - `on time` 准时
+                        - `in line with` 与...成一排
+                        - `stare at` 凝视；盯着看
+                        - `take off` (飞机) 起飞；脱下
+                        - `get a ride` 乘便车
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. By the time I got up, my brother had already gone into the shower. (到我起床的时候，我哥哥已经进浴室冲凉了。)
+                        - **【考点详解】**：过去完成时的标准用法。`got up` 发生在过去，`gone into` 发生在“过去的过去”。
                         
-                        **Mary**: Why were you late for school, Matt? 
+                        #### 2. When I got to school, I realized I had left my backpack at home. (当我到达学校时，我意识到我把书包落在家里了。)
+                        - **【结构剖析】**：`realized` 是过去时，`had left` 是在意识到之前发生的动作。
                         
-                        **Matt**: I overslept. By the time I woke up, my father had already left. 
+                        #### 3. I was about to go up when I decided to get a coffee first. (我正要上去，这时我决定先买杯咖啡。)
+                        - **【用法拓展】**：`be about to do sth. when ...` 正要做某事，就在这时...
                         
-                        **Mary**: Oh, no! What did you do? 
-                        
-                        **Matt**: I ran to the bus stop, but the bus had already gone. 
-                        
-                        **Mary**: That's terrible. How did you get here? 
-                        
-                        **Matt**: My neighbor gave me a lift.
-
-                        **【译文】**
-                        
-                        **玛丽**：马特，你上学为什么迟到了？
-                        
-                        **马特**：我睡过头了。等我醒来的时候，我爸爸已经出发了。
-                        
-                        **玛丽**：噢，不！你怎么办的？
-                        
-                        **马特**：我跑向公交站，但公交车已经走了。
-                        
-                        **玛丽**：那太糟了。你是怎么到这儿的？
-                        
-                        **马特**：我的邻居捎了我一程。
-
-                        ### Section B (Reading) 阅读文段：Unexpected Events in History
-                        **【原文】**
-                        
-                        On September 11, 2001, many people had unexpected experiences. One man, for example, stayed at home because he had lost his keys. This saved his life. Another lady was late for work because she had forgotten to set her alarm. When the planes hit the buildings, she hadn't arrived yet. Life is indeed full of the unexpected.
-
-                        **【译文】**
-                        
-                        2001年9月11日，许多人都有意想不到的经历. 例如，一位男士因为丢了钥匙而待在家里. 这救了他的命. 另一位女士因为忘了设闹钟上班迟到了. 当飞机撞击大楼时，她还没赶到. 生活确实充满了意外.
+                        #### 4. I was so lucky that I stayed alive. (我很幸运，我活了下来。)
+                        - **【语法核心】**：`so ... that ...` 结构。`alive` 是表语形容词，不能作定语修饰名词。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. By the time I arrived, the meeting had started. (当我到达时，会议已经开始了。)
-                        - **【句式剖析】**：`by the time` 引导的时间状语从句用一般过去时，主句通常用过去完成时.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：过去完成时 (Past Perfect Tense)
+                        **1. 功能**：表示在过去某一时间或动作之前已经发生或完成的动作（即“过去的过去”）。
+                        **2. 构成**：`had + 动词的过去分词 (v.-ed)`。
+                        **3. 标志词 (中考眼位)**：
+                        - `By the time + 一般过去时的从句`
+                        - `When / Before / After + 动作对比`
+                        - `Already / yet` 在过去语境中的应用。
+
+                        ### 辨析：leave vs forget (中考常考)
+                        - **leave**：指把某物遗留在某地。`leave sth. + 地点`。
+                        - **forget**：指忘记某事或某物，通常不接具体地点。
+
+                        ### 中考真题特训
                         
-                        #### 2. I realized that I had left my backpack at home. (我意识到我把背包忘在家里了。)
-                        - **【要点精讲】**：`realize` 之后接宾语从句，“忘在家里”发生在“意识到”之前，故用过去完成时.
+                        *(2024·南京中考)* *When I arrived at the cinema, the movie ________ for ten minutes.*
+                        A. had begun   B. had been on   C. began   D. was beginning
                         
-                        #### 3. My neighbor gave me a lift. (我的邻居载了我一程。)
-                        - **【词块归纳】**：`give sb. a lift` 捎某人一程.
+                        **[解析]**：arrived 是过去，电影开始在 arrived 之前，且 for ten minutes 要求延续性动词，选 **B**。
+
+                        *(2023·北京中考)* *By the time we got to the station, the train ________.*
+                        A. left   B. has left   C. had left   D. was leaving
+                        
+                        **[解析]**：By the time 引导从句用过去时，主句用过去完成时，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① leave (v. 遗忘; 离开)
-                        - **【辨析】**：
-                            *   `leave`：把某物忘在某地. *leave sth. at ...*
-                            *   `forget`：忘记某事. *forget to do sth.*
-                        - **【例题】**：
-                        
-                        *Oh, I ________ my umbrella on the bus.*
-                        A. forgot   B. left   C. lost   D. missed
-                        
-                        **[解析]**：把物忘在特定地点用 leave，选 **B**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：一个倒霉/难忘的一天 (An Unexpected Day)
+                        #### 1. 写作要素
+                        - **起因**：What happened first? (Overslept, forgot something).
+                        - **经过**：The sequence of events (使用 By the time, when, had done)。
+                        - **结果**：How did it end?
+                        - **感悟**：What did you learn?
 
-                        #### ② show up (赶到; 露面)
-                        - **【近义词】**：`arrive` / `appear`.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *It was the most unexpected day I have ever had.*
+                        - *By the time I woke up, it was already 8:00 a.m.*
+                        - *I had just finished breakfast when I realized...*
+                        - *Luckily, things didn't go too bad in the end.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：过去完成时 (Past Perfect)
-                        **1. 定义**
-                        表示“过去的过去”，即在过去某一动作或时间之前已经发生或完成的动作.
+                        #### 3. 满分范文
+                        **A Bad Morning**
                         
-                        **2. 构成**
-                        had + 动词的过去分词 (p.p.).
+                        Yesterday was a terrible day for me. Everything went wrong.
                         
-                        **3. 标志词**
-                        by the time ..., when ..., before ..., already, by the end of ...
-
-                        **4. 中考真题特训**
+                        First, my alarm clock didn't go off, so I overslept. By the time I woke up, it was already 7:30 a.m. I rushed to the bathroom, but my brother had already gone in. After a quick breakfast, I ran to the bus stop. However, the bus had already left. I had to walk to school. When I finally got to the classroom, I realized that I had left my math book at home. 
                         
-                        *(2024·安徽中考)* *When I got to the station, the train ________ for ten minutes.*
-                        A. left   B. has left   C. had been away   D. had left
-                        
-                        **[解析]**：get 是过去式，离开发生在之前，且持续了十分钟需用延续性短语 be away，选 **C**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：An Unexpected Day (意外的一天)
-                        **Yesterday was an unexpected day for me.** 
-                        
-                        I **overslept** in the morning. **By the time** I got to the bus stop, the bus **had already gone**. I had to **walk to** school. When I got to class, I **realized** that I **had forgotten** my homework. Luckily, my teacher **was not angry** with me. What an **unlucky** day!
+                        What a bad morning! From this experience, I learned that I should prepare everything the night before.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u13", "Unit 13", "We're trying to save the earth!",
+                "g9_u13", "Unit 13", "We're trying to save the earth!",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自然 (Man and Nature)
-                        *   **主题群**：环境保护 (Environmental protection)
-                        *   **子主题**：污染现状，环保行动，可持续生活 (Saving the planet)。
-
-                        ### 2. 单元主题内容
-                        本单元聚焦“环境保护”，重点复习多种时态（现在进行时、现在完成时、被动语态、used to 等）在环保话题下的综合应用。通过探讨污染问题（如 air pollution, water pollution）及环保措施（如 recycling, reducing plastic），引导学生树立危机意识。单元强调了“垃圾是放错地方的资源”（如 Rethink, Reuse, Recycle），鼓励学生从身边小事做起，共同守护地球家园。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自然 —— 环境保护与可持续发展。
+                        *   **深层意义**：本单元聚焦“环境污染现状及环保行动”。通过讨论空气、水、土地污染及濒危动物保护，学习“Reduce, Reuse, Recycle (3Rs)”理念。旨在引导学生从我做起，从小事做起（如不用塑料袋、骑自行车、废物利用），培养全球公民的环保责任感。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **环保词汇**：litter, rubbish, pollution, ocean, planet, reusable.
-                        - **核心动词**：recycle (回收), reduce (减少), reuse (再利用), afford (负担得起), transport (运输).
-                        - **高频短语**：throw away (扔掉), take part in (参加), turn off (关掉), pay for (付款), make a difference (产生影响).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **污染与环境**：pollution (污染), environment (环境), litter (垃圾), garbage (垃圾), waste (浪费/废弃物)。
+                        - **资源与工业**：fuel (燃料), coal (煤), oil (石油), industry (工业), metal (金属), plastic (塑料)。
+                        - **动作词汇**：recycle (回收), reuse (再利用), reduce (减少), transport (运输), afford (支付得起)。
+                        - **形容词**：harmful (有害的), cruel (残忍的), scientific (科学的), effective (有效的)。
 
-                        ### 2. 核心句式
-                        1.  **描述现状**：The river used to be clean, but now it's very dirty.
-                        2.  **呼吁行动**：We're trying to save the earth!
-                        3.  **表达必要性**：It's crucial to stop using plastic bags.
-                        4.  **提供方法**：We should recycle paper and glass.
-
-                        ### 3. 重点语法
-                        - **多种时态的综合应用**（描述环保情境）。
+                        ### 2. 核心短语金牌储备
+                        - `be harmful to` 对...有害
+                        - `at the top of` 在...顶部
+                        - `take part in` 参加；参与
+                        - `pay for` 付费
+                        - `take action` 采取行动
+                        - `throw away` 扔掉
+                        - `put ... to good use` 充分利用...
+                        - `make a difference` 产生影响
+                        - `stop sb. from doing sth.` 阻止某人做某事
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Mark**: Look at the river! It's full of rubbish. 
-                        
-                        **Sarah**: Yes, it used to be so clean. 
-                        
-                        **Mark**: We should do something to clean it up. 
-                        
-                        **Sarah**: I agree. We can take part in the city's cleanup day. 
-                        
-                        **Mark**: Good idea! We should also tell people to stop throwing litter into it.
-
-                        **【译文】**
-                        
-                        **马克**：看那条河！到处都是垃圾。
-                        
-                        **莎拉**：是的，它过去非常干净。
-                        
-                        **马克**：我们应该做点什么来清理它。
-                        
-                        **莎拉**：我同意。我们可以参加城市的清理日活动。
-                        
-                        **马克**：好主意！我们也应该告诉人们停止往河里扔垃圾。
-
-                        ### Section B (Reading) 阅读文段：Rethink, Reuse, Recycle!
-                        **【原文】**
-                        
-                        The world is full of waste. But did you know that much of it can be reused? For example, an artist in the UK makes beautiful sculptures from old metal. A woman in China makes bags from plastic bottles. These people show us that we should rethink what we throw away. By recycling and reusing, we can save resources and protect our environment.
-
-                        **【译文】**
-                        
-                        世界充满了废弃物. 但你知道其中很多是可以再利用的吗？例如，英国的一位艺术家用废旧金属制作美丽的雕塑. 中国的一位女士用塑料瓶制作包. 这些人向我们展示了我们应该重新审视我们扔掉的东西. 通过回收和再利用，我们可以节约资源并保护环境.
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                    UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. We're trying to save the earth! (我们正在努力拯救地球！)
-                        - **【句式剖析】**：`try to do sth.` 努力做某事.
+                        - **【考点详解】**：现在进行时强调正在进行的环保努力。
                         
-                        #### 2. The river used to be clean. (这条河过去很干净。)
-                        - **【要点精讲】**：`used to be` 描述过去的某种状态.
+                        #### 2. The air is badly polluted. (空气被严重污染了。)
+                        - **【结构剖析】**：被动语态。`badly` 是副词，修饰过去分词 polluted。
                         
-                        #### 3. It's crucial to stop using plastic bags. (停止使用塑料袋是至关重要的。)
-                        - **【词块归纳】**：`crucial` 意为“至关重要的；关键的”.
+                        #### 3. We should use public transport instead of driving. (我们应该使用公共交通而不是开车。)
+                        - **【用法拓展】**：`instead of` 后面接名词、代词或动名词。
+                        
+                        #### 4. It's our duty to protect the environment. (保护环境是我们的责任。)
+                        - **【语法核心】**：`It's one's duty to do sth.` 重点考查形式主语 it。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① throw away (扔掉; 抛弃)
-                        - **【用法】**：动副短语. 代词放中间.
-                        - **【例题】**：
-                        
-                        *Don't ________ the old books. We can give them to the library.*
-                        A. throw away   B. throw it away   C. throw away them   D. throw them away
-                        
-                        **[解析]**：books 为复数，代词用 them 并放中间，选 **D**.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：时态语态大综合
+                        九年级下学期要求学生能在环保这一宏大主题下灵活运用：
+                        - 现在进行时：描述正在进行的污染或保护。
+                        - 被动语态：描述环境被破坏的现状。
+                        - 情态动词：提出环保建议 (should, must)。
+                        - 现在完成时：描述已经造成的环境影响。
 
-                        #### ② make a difference (起作用; 产生影响)
-                        - **【拓展】**：`make a difference to...`.
+                        ### 核心语法二：used to, be used to, get used to (终极辨析)
+                        - `used to do`：过去常常。
+                        - `be used to do`：被用来做。
+                        - `be used to doing`：习惯于。
+
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *We should stop people from ________ trees to protect the environment.*
+                        A. cut down   B. to cut down   C. cutting down   D. cuts down
+                        
+                        **[解析]**：stop sb. from doing sth.，选 **C**。
+
+                        *(2023·上海中考)* *More and more trees ________ on the mountains every year.*
+                        A. plant   B. planted   C. are planted   D. are planting
+                        
+                        **[解析]**：树与种之间是被动关系，且有 every year，用一般现在时的被动语态，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：环保话题下的综合语法
-                        **1. used to 与 be used to**
-                        - *I used to litter.* (过去常扔垃圾)
-                        - *I am used to recycling.* (现在习惯于回收)
-                        
-                        **2. 被动语态的环保应用**
-                        - *Paper should be recycled.* (纸应该被回收)
-                        - *The trees are being cut down.* (树正在被砍伐)
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：如何保护环境 (How to Protect the Environment)
+                        #### 1. 写作逻辑
+                        - **现状描述**：Pollution is serious now.
+                        - **具体措施**：What can we do in daily life? (3Rs, public transport).
+                        - **呼吁总结**：Let's work together to save the earth.
 
-                        **3. 中考真题特训**
-                        
-                        *(2024·安徽中考)* *Everyone should ________ the lights when they leave the room.*
-                        A. turn off   B. turn on   C. turn up   D. turn down
-                        
-                        **[解析]**：离开房间应“关掉”灯，节约能源，选 **A**.
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *The environment is becoming worse and worse.*
+                        - *To protect our home, we should take action right now.*
+                        - *It's a good idea to recycle paper and bottles.*
+                        - *Even a small action can make a big difference.*
 
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：How to Protect the Environment (如何环保)
-                        **Our earth is in danger, so we must protect it.** 
+                        #### 3. 满分范文
+                        **Save Our Earth**
                         
-                        First, we should **stop using** plastic bags. We can take a cloth bag when shopping. Second, we should **recycle** waste paper and bottles. Third, it's a good habit to **turn off the lights** when we leave. If **everyone** makes an effort, our world will **be more beautiful**.
+                        Environmental protection is very important for everyone. Our earth is in danger because of pollution. What can we do to save it?
+                        
+                        First, we should follow the "3Rs" — reduce, reuse and recycle. For example, we can reuse shopping bags instead of using plastic ones. Second, we should save energy. We are supposed to turn off the lights when we leave a room. Third, it's better to go to school by bike or on foot. This can reduce air pollution. Finally, we should stop people from littering. 
+                        
+                        If everyone makes an effort, our world will become more and more beautiful.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g9full_u14", "Unit 14", "I remember meeting all of you in Grade 7.",
+                "g9_u14", "Unit 14", "I remember meeting all of you in Grade 7.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：个人成长 (Personal growth)
-                        *   **子主题**：毕业回忆，感恩，未来展望 (Graduation and memories)。
-
-                        ### 2. 单元主题内容
-                        作为初中阶段的最后一个单元，本单元以“毕业与回忆”为主题。学生通过回顾从七年级到九年级的点点滴滴（如 meeting friends, winning competitions, dealing with pressure），表达对老师、同学的感激之情。单元重点复习了非谓语动词（remember doing/to do）及各种时态的综合运用。旨在引导学生在离别之际珍藏回忆，树立远大理想，勇敢奔赴未来。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 毕业、回忆与未来。
+                        *   **深层意义**：作为初中阶段的最后一个单元，本单元聚焦于“毕业感怀”。通过回顾三年的校园生活（如军训、运动会、老师的教导、同学的友谊），表达对母校的眷恋。旨在引导学生学会感恩（Gratitude），在毕业之际对未来做出庄严承诺，展示青少年积极向上的精神风貌。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **回忆词汇**：memory, survey, standard, degree, manager.
-                        - **核心动词**：graduate (毕业), congratulate (祝贺), thirst (渴望), overcome (克服).
-                        - **高频短语**：remember doing (记得做过), look back at (回顾), keep one's cool (沉住气), prepare for (准备), ahead of (在...前面).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **回顾与情感**：remember (记得), overcome (克服), proud (自豪的), thankful (感激的), graduate (毕业)。
+                        - **动作词汇**：congratulate (祝贺), thirst (口渴/渴望), level (水平), double (双倍)。
+                        - **抽象词汇**：survey (调查), standard (标准), method (方法), instruction (教导/说明)。
+                        - **地点与身份**：senior high (高中), keyboard (键盘), manager (经理)。
 
-                        ### 2. 核心句式
-                        1.  **美好回忆**：I remember meeting all of you in Grade 7.
-                        2.  **表达收获**：I've learned a lot from my teachers and friends.
-                        3.  **未来愿望**：I hope to achieve my dreams in the future.
-                        4.  **感恩寄语**：Thank you for your help and support.
-
-                        ### 3. 重点语法
-                        - **非谓语动词**（remember, forget, stop 后接 to do 与 doing 的区别）。
+                        ### 2. 核心短语金牌储备
+                        - `remember doing sth.` 记得做过某事 (**语法标志词**)
+                        - `win a prize` 获奖
+                        - `make a mess` 弄得一团糟
+                        - `keep one's cool` 保持冷静
+                        - `be thirsty for` 渴望
+                        - `be proud of` 为...自豪
+                        - `set out` 出发；启程
+                        - `go one's separate ways` 分道扬镳
+                        - `believe in oneself` 相信自己
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. I remember meeting all of you in Grade 7. (我记得初一见到你们大家的情景。)
+                        - **【考点详解】**：`remember doing sth.` 记得做过某事（已发生）。对比 `remember to do sth.` 记得要做某事（未发生）。
                         
-                        **Teacher**: How do you feel about leaving school, Lily? 
+                        #### 2. I have learned to be more independent. (我已经学会了更加独立。)
+                        - **【结构剖析】**：现在完成时强调三年的学习结果。
                         
-                        **Lily**: I'm a bit sad. I remember meeting everyone for the first time in Grade 7. 
+                        #### 3. We have overcome many difficulties together. (我们已经一起克服了许多困难。)
+                        - **【用法拓展】**：`overcome` 是不规则动词，过去分词仍为 `overcome`。
                         
-                        **Teacher**: What about you, Ken? 
-                        
-                        **Ken**: I'm excited about high school, but I'll miss my friends. 
-                        
-                        **Teacher**: You've all grown up a lot. Good luck to everyone!
-
-                        **【译文】**
-                        
-                        **老师**：丽作，对于毕业你有什么感受？
-                        
-                        **丽丽**：我有点难过。我记得七年级第一次见到大家的情景。
-                        
-                        **老师**：你呢，肯？
-                        
-                        **肯**：我对高中感到兴奋，但我会想念我的朋友们。
-                        
-                        **老师**：你们都长大了许多。祝大家好运！
-
-                        ### Section B (Reading) 阅读文段：A Graduation Speech
-                        **【原文】**
-                        
-                        Today is our graduation day. Looking back at the last three years, we have had many challenges. We worked hard for exams and sometimes we felt stressed. But we also had many happy times. We should thank our teachers for their patience and our parents for their love. The future is ahead of us. Let's go forth and follow our dreams!
-
-                        **【译文】**
-                        
-                        今天是我们的毕业典礼. 回顾过去的三年，我们遇到了很多挑战. 我们为考试努力学习，有时感到压力很大. 但我们也度过了许多快乐的时光. 我们应该感谢老师们的耐心和父母们的爱. 未来就在我们面前. 让我们出发，去追逐梦想吧！
+                        #### 4. I am looking forward to senior high school. (我正期待着高中生活。)
+                        - **【语法核心】**：`look forward to` 后面接名词或动名词。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. I remember meeting all of you. (我记得见过你们大家。)
-                        - **【句式剖析】**：`remember doing sth.` 记得做过某事（已发生）.
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：初中英语全时态/全语态总复习
+                        本单元作为收官之作，要求学生能在毕业演讲的情境下熟练运用：
+                        - 一般过去时：回忆过去的趣事。
+                        - 现在完成时：总结三年的收获。
+                        - 一般将来时：展望未来的高中生活。
+
+                        ### 辨析：remember / forget / regret (doing vs to do)
+                        - `doing`：事情已经发生 (记得做过/忘记做过/后悔做过)。
+                        - `to do`：事情还未发生 (记得要做/忘记要做/遗憾要做)。
+
+                        ### 中考真题特训
                         
-                        #### 2. I'm looking forward to high school. (我期待着高中。)
-                        - **【用法拓展】**：`look forward to` 后面接名词或 **动词-ing**.
+                        *(2024·天津中考)* *I will never forget ________ the tree with my classmates three years ago.*
+                        A. plant   B. to plant   C. planting   D. plants
                         
-                        #### 3. It's time to say goodbye. (该说再见了。)
-                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了.
+                        **[解析]**：forget doing sth. 忘记做过某事，根据 three years ago 可知事情已发生，选 **C**。
+
+                        *(2023·河北中考)* *Congratulations ________ you on your graduation!*
+                        A. to   B. for   C. with   D. at
+                        
+                        **[解析]**：Congratulations to sb. on sth. 固定搭配，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① remember to do vs remember doing
-                        - **【辨析】**：
-                            *   `remember to do`：记得要做某事（未做）.
-                            *   `remember doing`：记得做过某事（已做）.
-                        - **【例题】**：
-                        
-                        *Please ________ the window when you leave.*
-                        A. remember to close   B. remember closing   C. remember close   D. remembering to close
-                        
-                        **[解析]**：提醒将来要做的事，用 to do，选 **A**.
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：毕业演讲稿 (A Graduation Speech)
+                        #### 1. 写作逻辑
+                        - **开场白**：Greetings and purpose.
+                        - **回忆往事**：Memory of Grade 7/8/9.
+                        - **表达感谢**：Thank teachers, parents and friends.
+                        - **展望未来**：Future plans and wishes.
 
-                        #### ② look back at (回顾; 回头看)
-                        - **【反义词】**：`look forward to` (展望; 期待).
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Time flies! It has been three years since...*
+                        - *I will never forget the time we spent together.*
+                        - *Thanks to my teachers, I have learned a lot.*
+                        - *I believe that our future will be bright.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：非谓语动词的“分水岭”
-                        **1. remember / forget / stop**
-                        - + to do：去做（未发生）.
-                        - + doing：做了（已发生）.
+                        #### 3. 满分范文
+                        **A Graduation Speech**
                         
-                        **2. need / want**
-                        - `need to do` (主语是人).
-                        - `need doing` (主语是物，表示被动).
-
-                        **3. 中考真题特训**
+                        Good morning, teachers and fellow students!
                         
-                        *(2024·江苏中考)* *I will never forget ________ the beautiful sunset with you last summer.*
-                        A. to see   B. seeing   C. see   D. seen
+                        It is a great honor for me to stand here. Time flies! Three years have passed since we first met in Grade 7. I still remember the first day I came to this school. I was so shy and quiet at that time. 
                         
-                        **[解析]**：last summer 提示是已经发生过的经历，用 forget doing，选 **B**.
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Junior High Memories (我的初中回忆)
-                        **Three years have passed quickly.** 
+                        During these three years, we have learned many things and made many friends. We have also overcome many difficulties together. I want to say thanks to our teachers. You have taught us so much and helped us grow up. I also want to thank my friends for your support. 
                         
-                        I still **remember my first day** in this school. I was very **shy** at that time. But now, I have **many friends**. I want to **thank my teachers** because they helped me **overcome difficulties**. I will **miss** my school life. I'm **ready for** the next part of my life!
+                        Now we are going to set out on a new journey. I hope all of us can try our best in senior high school. Believe in ourselves, and our dreams will come true. 
+                        
+                        Thank you!
                     """.trimIndent())
                 )
             )

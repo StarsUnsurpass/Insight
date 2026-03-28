@@ -18,1563 +18,1117 @@ object Grade7Down {
             TextbookUnit(
                 "g7down_u1", "Unit 1", "Can you play the guitar?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：个人特长、爱好与社团选择 (Interests and clubs)。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境与价值导向
+                        *   **主题语境**：人与自我 —— 个人爱好与特长。
+                        *   **深层意义**：本单元不仅要求学生掌握“能力”的表达，更旨在引导学生发现自身潜能，建立自信。通过社团招新的情境，培养学生的社会参与意识与团队协作精神，学会根据自身优势进行合理的社交选择。
 
-                        ### 2. 单元主题内容
-                        本单元围绕“社团招新”这一校园社交情境，重点学习情态动词 can 询问和表达能力。学生将学会如何用英语介绍自己的特长（如 sing, dance, play chess 等），并学习如何根据自身优势选择合适的学校社团。本单元旨在培养学生的自信心，鼓励其积极参与校园活动，发现并展示自我价值。
+                        ### 2. 知识能力目标
+                        - **语言能力**：熟练运用情态动词 `can` 询问及陈述能力；掌握社团招聘广告的阅读与写作。
+                        - **文化意识**：了解西方校园社团文化（Clubs culture），对比中西课外活动的异同。
+                        - **思维品质**：通过对自己特长的评估，提升自我认知及逻辑分类能力。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **特长动词**：sing (唱), dance (跳舞), swim (游泳), draw (画), speak (说), join (参加).
-                        - **乐器/运动**：guitar (吉他), chess (国际象棋), piano (钢琴), drums (鼓), violin (小提琴).
-                        - **核心名词**：club (社团), story (故事), show (演出), musician (音乐家).
-                        - **高频短语**：play the guitar (弹吉他), play chess (下象棋), speak English (说英语), be good at (擅长), help ... with ... (帮助某人做某事).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类记忆
+                        - **乐器类 (The)**：guitar (吉他), piano (钢琴), drums (鼓), violin (小提琴)。
+                        - **特长动作类**：sing (唱), dance (跳舞), swim (游泳), draw (画), speak (说), write (写), tell (讲)。
+                        - **身份与场所**：musician (音乐家), club (社团), home (家/家乡)。
+                        - **修饰语**：well (好地), also (也)。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问能力**：Can you sing? — Yes, I can. / No, I can't.
-                        2.  **询问意图**：What club do you want to join? — I want to join the art club.
-                        3.  **陈述特长**：I can speak English but I can't speak Chinese.
-                        4.  **招聘/招聘建议**：We need help for the school show. / Can you help kids with swimming?
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **情态动词 can** 表示能力的用法。
-                        - **what 引导的特殊疑问句** 询问个人意向。
+                        ### 2. 核心短语金牌储备
+                        - `play the guitar/piano/violin` 弹奏吉他/钢琴/小提琴 (**必考：乐器前加the**)
+                        - `play chess/basketball` 下象棋/打篮球 (**必考：球类、棋类前不加冠词**)
+                        - `speak English/Chinese` 说英语/汉语
+                        - `join the music/art club` 加入音乐/美术社团
+                        - `be good at (doing) sth.` 擅长（做）某事
+                        - `be good with sb.` 善于与某人相处
+                        - `tell stories` 讲故事
+                        - `make friends with sb.` 与某人交朋友
+                        - `help sb. with sth.` 在某方面帮助某人
+                        - `on the weekend / at the weekend` 在周末
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Can you play the guitar? (你会弹吉他吗？)
+                        - **【考点详解】**：`can` 为情态动词，后接动词原形。疑问句将 `can` 提至句首。
+                        - **【语法延伸】**：注意 `play` 的用法。`play + the + 乐器`；`play + 球类/棋类`。
                         
-                        **Teacher**: Hi, I am the music teacher. What club do you want to join?
+                        #### 2. What club do you want to join? (你想加入什么社团？)
+                        - **【结构剖析】**：`want to do sth.` 想要做某事。`join` 指加入某个组织或团体。
+                        - **【中考避坑】**：`join` (加入团体) vs `join in` (参加活动) vs `take part in` (参加大型活动/会议)。
                         
-                        **Li Hua**: I want to join the music club.
+                        #### 3. I can speak English but I can't speak Chinese. (我会说英语，但我不会说汉语。)
+                        - **【逻辑连接】**：`but` 连接两个表示转折关系的分句。
                         
-                        **Teacher**: Can you sing?
-                        
-                        **Li Hua**: Yes, I can. I can also dance well.
-                        
-                        **Teacher**: Great! We need you for the school concert.
-                        
-                        **Li Hua**: Thank you, I'd love to come!
-
-                        **【译文】**
-                        
-                        **老师**：你好，我是音乐老师。你想加入什么社团？
-                        
-                        **李华**：我想加入音乐社团。
-                        
-                        **老师**：你会唱歌吗？
-                        
-                        **李华**：是的，我会。我舞也跳得很好。
-                        
-                        **老师**：太棒了！我们的校音乐会需要你。
-                        
-                        **李华**：谢谢，我很乐意去！
-
-                        ### Section B (Reading) 阅读文段：Wanted: Help for Old People's Home
-                        **【原文】**
-                        
-                        Are you good with old people? Do you have time on weekends? We need help at the old people's home. Can you talk to them? Can you play games with them? They can tell you stories and you can make friends with them. Please call us at 689-7729.
-
-                        **【译文】**
-                        
-                        你善于与老人相处吗？你在周末有时间吗？我们在老人院需要帮助。你能和他们聊天吗？你能和他们一起玩游戏吗？他们能给你讲故事，而你可以和他们交朋友。请拨打电话 689-7729 联系我们。
+                        #### 4. Are you good with kids? (你善于和孩子们相处吗？)
+                        - **【词法精辨】**：
+                            *   `be good at`：擅长... (后接名词、代词或动词-ing)。
+                            *   `be good with`：善于对待.../与...相处得好。
+                            *   `be good for`：对...有好处。
+                            *   `be good to`：对...友好。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. What club do you want to join? (你想加入什么社团？)
-                        - **【句式剖析】**：`want to do sth.` 意为“想要做某事”。`join` 指加入一个组织。
-                        
-                        #### 2. Can you play the guitar? (你会弹吉他吗？)
-                        - **【要点精讲】**：在西洋乐器名词前必须加定冠词 **the**。
-                        - **【对比】**：在球类运动名词前**不加**冠词。*play basketball* (打篮球)。
-                        
-                        #### 3. Be good with kids. (善于与孩子们相处。)
-                        - **【辨析】**：`be good at` (擅长于...) vs `be good with` (善于与...相处)。
-                    """.trimIndent()),
-
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① speak (v. 说; 讲)
-                        - **【辨析】**：
-                            *   `speak`：讲某种语言。*speak English*。
-                            *   `say`：强调说话的内容。*say hello*。
-                            *   `talk`：强调交谈、谈话。*talk to sb.*
-                            *   `tell`：告诉、讲述故事/笑话。*tell a story*。
-                        - **【中考真题/例题】**：
-                        
-                        *Jack can ________ English very well.*
-                        A. say   B. speak   C. talk   D. tell
-                        
-                        **[解析]**：讲某种语言用 speak，选 **B**。
-
-                        #### ② musician (n. 音乐家)
-                        - **【词汇梳理】**：`music` (音乐) + `ian` (后缀) = `musician`。
-                        - **【拓展】**：`artist` (艺术家), `scientist` (科学家)。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：情态动词 can 的“能力”与“请求”
-                        **1. 语法特征**
-                        *   无人称和数的变化（I can, He can, They can）。
-                        *   后接动词原形。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：情态动词 can
+                        **1. 基本用法**
+                        *   表示能力 (Ability)：*I can swim.*
+                        *   表示许可 (Permission)：*Can I sit here?*
+                        *   表示请求 (Request)：*Can you help me?*
 
                         **2. 句式结构**
-                        - 肯定：I can dance.
-                        - 否定：I can't (cannot) dance.
-                        - 疑问：Can you dance? — Yes, I can. / No, I can't.
+                        - **肯定句**：主语 + can + 动词原形.
+                        - **否定句**：主语 + can't (cannot) + 动词原形.
+                        - **疑问句**：Can + 主语 + 动词原形 ...?
+                        - **回答**：Yes, 主语 + can. / No, 主语 + can't.
 
                         **3. 中考真题特训**
                         
-                        *(2024·河北中考)* *— ________ you swim? — Yes, I ________.*
+                        *(2024·南京中考)* *— Is that boy your brother? — No, it ________ be him. He is in the library now.*
+                        A. mustn't   B. can't   C. shouldn't   D. needn't
+                        
+                        **[解析]**：根据“他在图书馆”可知，这里表示有把握的否定推测“不可能是”，选 **B**。 (注：can 的推测用法是中考高阶考点)。
+
+                        *(2023·北京中考)* *— ________ you play the violin? — Yes, I ________. I want to join the music club.*
                         A. Can; can   B. Do; do   C. Must; must   D. Should; should
                         
-                        **[解析]**：询问能力用 Can，回答也用 can，选 **A**。
+                        **[解析]**：询问能力及回答，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：Ad for a Club (社团招新广告)
-                        #### 1. 写作模板
-                        - **Wanted** (招聘/招人)
-                        - **Requirements** (要求/特长)
-                        - **Contact** (联系方式)
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：社团招新广告 (Ad for a Club)
+                        #### 1. 结构布局
+                        - **第一步：吸引注意**。使用 Wanted, Help Wanted 或 Are you...? 等开头。
+                        - **第二步：说明需求**。明确社团名称及所需人才。
+                        - **第三步：列出要求**。使用 Can you...? 或 You need to...。
+                        - **第四步：联系方式**。Please call... / Email us at...。
 
-                        #### 2. 满分范文
+                        #### 2. 高分句式
+                        - *Are you a music lover?* (你是个音乐爱好者吗？)
+                        - *We need help for our school show.* (我们的学校演出需要帮助。)
+                        - *Can you sing or dance?* (你会唱歌或跳舞吗？)
+                        - *Come and join us!* (快来加入我们吧！)
+
+                        #### 3. 满分范文
                         **Wanted: Music Club**
                         
-                        Are you a music lover? Can you sing or dance? We need you for our school band. **I am good at** playing the piano, and I can help you with your music. Come and join us! Please call Li Hua at 123-4567. 
+                        Are you good at music? Can you sing or dance? Do you want to be a musician? Then come and join the Music Club! We need help for the school concert. If you can play the guitar, the piano or the drums, please call David at 123-4567. Join us now!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7down_u2", "Unit 2", "What time do you go to school?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：个人日常作息，良好的生活习惯 (Daily routines)。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活与学习。
+                        *   **深层意义**：本单元聚焦“时间管理”与“健康习惯”。通过学习作息安排，引导学生建立时间观念，识别健康与不健康的生活方式。不仅是语言的学习，更是对学生生活态度的塑造，教育学生科学作息、珍爱健康。
 
-                        ### 2. 单元主题内容
-                        本单元以“日常作息”为话题，重点学习如何询问和表达时间，以及描述一天中不同时间段进行的活动（如 get up, eat breakfast, go to school 等）。通过对比健康与不健康的作息，引导学生反思自己的生活方式，学会科学地安排时间，养成早睡早起、规律饮食的良好习惯。
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握时间的多种表达法；熟练运用特殊疑问句 `What time/When` 询问作息；理解频度副词的语义程度。
+                        - **核心素养**：能够制定合理的个人日程表，并对他人的作息给出建议。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **动作短语**：get up (起床), brush teeth (刷牙), take a shower (洗澡), go to school (去上学), eat breakfast (吃早餐), do homework (做作业), go to bed (睡觉).
-                        - **频率副词**：usually (通常), always (总是), never (从不), sometimes (有时).
-                        - **时间短语**：early (早), late (迟), at night (在晚上), on school days (在上学日).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **日常动作**：get up (起床), dress (穿衣), brush (刷/刷净), wash (洗/洗涤), shower (淋浴), eat (吃)。
+                        - **频度副词**：always (总是), usually (通常), often (经常), sometimes (有时), never (从不)。
+                        - **时间/状态**：early (早的/地), late (晚的/地), quickly (很快地), funny (奇怪的/滑稽的)。
+                        - **其他名词**：job (工作), station (电视台/车站), teeth (牙齿), life (生活)。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问作息**：What time do you usually get up? — I usually get up at 6:30.
-                        2.  **询问时间**：What time is it? / What's the time?
-                        3.  **描述习惯**：I'm never late for school. / He has a very healthy life.
-                        4.  **表达感受**：That's a funny time for breakfast!
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **What time / When 引导的疑问句** 询问动作发生的时间。
-                        - **频率副词的位置**（行前 be 后）。
+                        ### 2. 核心短语金牌储备
+                        - `get dressed` 穿上衣服
+                        - `brush teeth` 刷牙 (**必考：tooth的复数是teeth**)
+                        - `take a shower` 洗淋浴
+                        - `go to school` 去上学
+                        - `eat breakfast/lunch/dinner` 吃早/中/晚饭 (**必考：三餐前通常不加冠词**)
+                        - `do one's homework` 做作业
+                        - `go to bed` 去睡觉
+                        - `on school days` 在上学日
+                        - `be late for` 做某事迟到
+                        - `at night` 在晚上
+                        - `from ... to ...` 从...到...
+                        - `a healthy life` 健康的生活
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What time do you usually get up? (你通常几点起床？)
+                        - **【考点详解】**：`What time` 询问具体时间点。`usually` 放在行为动词之前。
                         
-                        **Rick**: Hi, Scott. What time do you go to school?
+                        #### 2. When does Scott go to work? (斯科特什么时候去上班？)
+                        - **【结构剖析】**：`When` 询问时间，范围比 `What time` 更广。
                         
-                        **Scott**: I usually go to school at seven thirty.
+                        #### 3. I'm never late for school. (我上学从不迟到。)
+                        - **【词法精辨】**：`be late for` 固定搭配。`never` 是频度副词，放在 `be` 动词之后。
                         
-                        **Rick**: That's early! What time do you get up?
-                        
-                        **Scott**: I get up at six o'clock every morning.
-                        
-                        **Rick**: Wow, you have a very healthy life!
-
-                        **【译文】**
-                        
-                        **里克**：嗨，斯科特。你几点去上学？
-                        
-                        **斯科特**：我通常在七点半去上学。
-                        
-                        **里克**：那真早！你几点起床？
-                        
-                        **斯科特**：我每天早晨六点钟起床。
-                        
-                        **里克**：哇，你的生活方式非常健康！
-
-                        ### Section B (Reading) 阅读文段：A Healthy Life
-                        **【原文】**
-                        
-                        My name is Tony. I have a healthy life. I always get up early. I eat a good breakfast. After school, I often play basketball. I do my homework in the evening. I go to bed at 9:30. My sister has an unhealthy life. She always gets up late and she never eats breakfast. She needs to change her habits.
-
-                        **【译文】**
-                        
-                        我的名字叫托尼。我有着健康的生活。我总是起得很早。我吃一顿丰盛的早餐。放学后，我经常打篮球。我在晚上做作业。我9:30睡觉。我妹妹的生活方式不健康。她总是起得很晚，而且从不吃早餐。她需要改变她的习惯。
+                        #### 4. That's a funny time for breakfast! (那是个奇怪的吃早餐时间！)
+                        - **【用法拓展】**：`funny` 既可以指“好笑的”，也可以指“古怪的/奇怪的”。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. What time is it? (几点了？)
-                        - **【用法拓展】**：常用 `It's + 时间` 来回答。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：时间表达法 (Telling Time)
+                        **1. 顺读法**：直接读数字。*6:10 -> six ten*; *8:30 -> eight thirty*。
+                        **2. 逆读法**：
+                        *   **分钟 <= 30**：`分钟 + past + 点钟`。 *7:10 -> ten past seven*。
+                        *   **分钟 > 30**：`(60-分钟) + to + (点钟+1)`。 *8:50 -> ten to nine* (差十分九点)。
+                        *   **特殊点**：15分钟 -> `a quarter`; 30分钟 -> `half`。
+
+                        ### 核心语法二：频度副词的位置
+                        **口诀**：行前 be 后。
+                        *   行为动词前：*I **usually** run.*
+                        *   be 动词后：*He **is** always late.*
+
+                        ### 中考真题特训
                         
-                        #### 2. I'm never late for school. (我上学从不迟到。)
-                        - **【要点精讲】**：`be late for...` 意为“做某事迟到”。
-                        - **【位置法则】**：频率副词 `never` 放在系动词 `am` 之后。
+                        *(2024·四川中考)* *— ________ do you go to bed? — At ten o'clock.*
+                        A. How   B. Why   C. What time   D. Where
                         
-                        #### 3. She needs to change her habits. (她需要改变她的习惯。)
-                        - **【词块归纳】**：`need to do sth.` 需要做某事。
+                        **[解析]**：询问具体时间点，选 **C**。
+
+                        *(2023·广东中考)* *Linda ________ goes to school by bus. She thinks it's convenient.*
+                        A. never   B. seldom   C. sometimes   D. always
+                        
+                        **[解析]**：根据“觉得方便”可知，应是“总是”或“经常”，选 **D**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① usually (adv. 通常)
-                        - **【频度辨析】**：*always (100%) > usually (80%) > often (60%) > sometimes (30%) > never (0%)*。
-                        - **【中考真题/例题】**：
-                        
-                        *I ________ go to bed late, because I want to be healthy.*
-                        A. always   B. usually   C. never   D. often
-                        
-                        **[解析]**：为了健康，“从不”晚睡，选 **C**。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的作息时间 (My Daily Routine)
+                        #### 1. 写作要素
+                        - **时间顺序**：使用 First, Next, After that, Then, Finally 等连接词。
+                        - **具体动作**：使用本单元学习的动词短语。
+                        - **感受评价**：My life is busy but healthy.
 
-                        #### ② take a shower (洗澡)
-                        - **【用法总结】**：等同于 `have a shower`。
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *I usually get up at six thirty in the morning.*
+                        - *I think I have a very healthy life.*
+                        - *My school starts at eight o'clock.*
+                        - *I don't have much time for games.*
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：When 与 What time 的异同
-                        **1. 联系**
-                        两者都可以询问时间点。
-                        
-                        **2. 区别**
-                        *   `What time`：询问具体的时间刻度（几点几分）。
-                        *   `When`：范围更广，可以询问具体日期、月份、季节等。
-
-                        **3. 频率副词的“排位法”**
-                        - **be 动词后**：*He **is** always happy.*
-                        - **行为动词前**：*I **usually** get up at 6.*
-
-                        **4. 中考真题特训**
-                        
-                        *(2023·广东中考)* *— ________ do you visit your grandparents? — Once a week.*
-                        A. How often   B. When   C. What time   D. How long
-                        
-                        **[解析]**：回答是频率，选 **A**。 (注意：本单元重点是 When/What time，但常与频率副词考察)。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My Daily Routine (我的作息表)
-                        #### 1. 写作佳句
-                        *   *I usually ... at ...*
-                        *   *From ... to ..., I ...*
-                        *   *In my free time, I like ...*
-                        *   *I have a busy but happy day.*
-
-                        #### 2. 满分范文
+                        #### 3. 满分范文
                         **My School Day**
                         
-                        I have a regular daily routine. **I always get up at** 6:30. After a quick breakfast, I **go to school** at 7:15. Lessons start at 8:00. I have lunch at school. In the afternoon, I **often play** sports. I **do my homework** at 7:00 p.m. and go to bed at 10:00 p.m. I think my life is very healthy. 
+                        I have a busy school day. I always get up early, at about 6:00 a.m. I brush my teeth and take a shower quickly. Then I eat a healthy breakfast. I go to school at 7:15. Lessons start at 8:00. After school, I often play basketball with my friends. I usually do my homework at 7:00 p.m. and go to bed at 10:00 p.m. I feel tired but happy.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7down_u3", "Unit 3", "How do you get to school?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：交通与通讯 (Transport and communication)
-                        *   **子主题**：交通方式，出行计划，地理空间意识 (Getting around)。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 交通与出行。
+                        *   **深层意义**：本单元探讨“出行方式”与“空间距离”。通过讨论不同地理环境下的学生如何上学（如 Crossing the River to School），不仅学习交通词汇，更培养学生对社会现实的关注，建立跨文化地理意识，理解人类如何克服自然困难追求教育。
 
-                        ### 2. 单元主题内容
-                        本单元以“交通出行”为核心，重点学习如何表达交通方式（如 take the bus, ride a bike, walk 等）以及询问距离（How far）和耗时（How long）。通过讨论不同国家学生上学方式的差异（如 Crossing the River to School），培养学生的跨文化意识和对社会民生的关注。本单元旨在增强学生的逻辑规划能力，学会选择最高效的出行方案。
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握各类交通工具及动作表达；熟练运用 `How long`, `How far` 询问时间与距离；掌握 `It takes...` 句型。
+                        - **思维能力**：能够对比不同交通方式的优缺点（Fast, cheap, safe etc.）。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **交通工具**：train (火车), bus (公交), subway (地铁), bike (自行车), boat (小船).
-                        - **动词短语**：ride a bike (骑车), take the subway (乘地铁), walk (步行), drive (开车).
-                        - **核心名词/副词**：kilometer (千米), mile (英里), bridge (桥), village (村庄), afraid (害怕).
-                        - **高频短语**：get to school (到达学校), how far (多远), how long (多久), every day (每天), cross the river (过河).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **交通工具**：train (火车), bus (公交), subway (地铁), bike (自行车), boat (小船)。
+                        - **动词短语核心**：ride (骑), take (乘坐), walk (步行), drive (驾驶), fly (飞)。
+                        - **度量与方位**：kilometer (千米), mile (英里), bridge (桥), village (村庄), river (河)。
+                        - **形容词/副词**：afraid (害怕), true (真的), many (许多)。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问方式**：How do you get to school? — I take the bus.
-                        2.  **询问距离**：How far is it from your home to school? — It's about 10 kilometers.
-                        3.  **询问耗时**：How long does it take? — It takes 20 minutes.
-                        4.  **结构用法**：It takes sb. some time to do sth.
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **How 引导的特殊疑问句** 询问方式、距离、耗时。
-                        - **It takes... 的固定句型**。
+                        ### 2. 核心短语金牌储备
+                        - `get to school` 到达学校 (**注意：get home, get there/here 无 to**)
+                        - `take the subway/bus/train` 乘地铁/公交/火车
+                        - `ride a bike` 骑自行车
+                        - `every day` 每天
+                        - `how far` 多远（问距离）
+                        - `how long` 多久（问时间）
+                        - `between ... and ...` 在...和...之间
+                        - `come true` 实现
+                        - `cross the river` 过河
+                        - `one 11-year-old boy` 一个11岁的男孩 (**必考：连字符结构中名词用单数**)
+                        - `be afraid of (doing) sth.` 害怕（做）某事
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Mary**: How do you get to school, Bob?
-                        
-                        **Bob**: I usually take the subway.
-                        
-                        **Mary**: How far is it from your home?
-                        
-                        **Bob**: It's about 5 kilometers.
-                        
-                        **Mary**: How long does it take?
-                        
-                        **Bob**: It takes about 15 minutes.
-
-                        **【译文】**
-                        
-                        **玛丽**：鲍勃，你平时怎么去上学？
-                        
-                        **鲍勃**：我通常乘地铁。
-                        
-                        **玛丽**：从你家走有多远？
-                        
-                        **鲍勃**：大约5千米。
-                        
-                        **玛丽**：要花多长时间？
-                        
-                        **鲍勃**：大约花15分钟。
-
-                        ### Section B (Reading) 阅读文段：Crossing the River to School
-                        **【原文】**
-                        
-                        For many students, it is easy to get to school. But for the students in one small village, it is difficult. There is a big river between their home and the school. There is no bridge. So they go on a ropeway to cross the river. One 11-year-old boy, Liangliang, says he is not afraid. He loves school and wants to see his friends.
-
-                        **【译文】**
-                        
-                        对于许多学生来说，上学很容易。但对于一个小村庄的学生来说，这很困难。在他们的家和学校之间有一条大河。没有桥。所以他们系着溜索过河。一个11岁的男孩，亮亮，说他不害怕。他热爱学校，想见他的朋友们。
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                    UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. How do you get to school? (你如何到达学校？)
-                        - **【用法拓展】**：`get to` 意为“到达”。注意：如果后面跟 `home`, `here`, `there` 等副词，要省去 `to`。如：*get home*。
+                        - **【考点详解】**：`How` 询问方式。回答通常用 `I take the bus.` 或 `By bus.`。
                         
-                        #### 2. How far is it from A to B? (从A地到B地有多远？)
-                        - **【要点精讲】**：用来询问“距离”。回答用 `It's ... kilometers/meters.`
+                        #### 2. How far is it from your home to school? (从你家到学校有多远？)
+                        - **【结构剖析】**：`How far` 问距离。常用结构 `It is ... (kilometers) from A to B.`。
                         
-                        #### 3. It takes about 20 minutes. (大约花费20分钟。)
-                        - **【句式金牌】**：`It takes sb. some time to do sth.` 做某事花费某人多少时间。
+                        #### 3. How long does it take? (要花多长时间？)
+                        - **【语法核心】**：`How long` 问时间长度。注意助动词 `does`。
+                        
+                        #### 4. It takes me 20 minutes to get to school. (到学校花了我20分钟。)
+                        - **【句式金牌】**：`It takes sb. some time to do sth.` 重点考查 `it` 作形式主语，真正主语是后面的不定式。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① ride (v. 骑)
-                        - **【搭配】**：`ride a bike` (骑自行车), `ride a horse` (骑马)。
-                        - **【例题】**：
-                        
-                        *It is good exercise to ________ a bike to work.*
-                        A. take   B. drive   C. ride   D. sit
-                        
-                        **[解析]**：骑车用 ride，选 **C**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：交通方式的三种表达法
+                        **1. 动词短语作谓语**：`主语 + take the + 交通工具 + to ...`。
+                        *   *I **take the bus** to school.*
+                        **2. 介词短语作状语**：`主语 + go to ... + by + 交通工具`。 (**by后不加冠词**)
+                        *   *I go to school **by bus**.*
+                        **3. 特殊方式**：`walk to ...` (步行); `ride a bike to ...` (骑车)。
 
-                        #### ② how long (多久) vs how far (多远)
-                        - **【辨析】**：
-                            *   `how long`：问时间长度或物体长度。
-                            *   `how far`：问物理距离。
-                        - **【中考真题/例题】**：
+                        ### 核心语法二：How 家族疑问词
+                        - **How far**：问距离。 *— How far is it? — 5 kilometers.*
+                        - **How long**：问时间长短。 *— How long does it take? — 10 minutes.*
+                        - **How often**：问频率。 *— How often do you swim? — Twice a week.*
+
+                        ### 中考真题特训
                         
-                        *— ________ is it from the airport? — About half an hour's drive.*
-                        A. How far   B. How long   C. How soon   D. How much
+                        *(2024·河北中考)* *It ________ me two hours to finish the work yesterday.*
+                        A. takes   B. taking   C. took   D. will take
                         
-                        **[解析]**：回答是“开车半小时的路程”，表示距离，选 **A**。
+                        **[解析]**：yesterday 提示用过去时，固定句型 It takes/took sb. time to do sth.，选 **C**。
+
+                        *(2023·江苏中考)* *— ________ is it from your home to the library? — About ten minutes' walk.*
+                        A. How long   B. How often   C. How far   D. How much
+                        
+                        **[解析]**：虽然回答是“步行十分钟”，但本质是描述距离，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：交通方式的三种表达法
-                        **1. 动词短语 (作谓语)**
-                        - *I **take the bus** to school.*
-                        - *He **rides his bike** to work.*
-
-                        **2. by + 交通工具 (作状语)**
-                        - *I go to school **by bus**.* (注意：by后不加冠词)
-                        - *He goes to work **by bike**.*
-
-                        **3. on/in + 冠词/物主代词 + 交通工具 (作状语)**
-                        - *I go to school **on a bus**.*
-                        - *He goes to work **on his bike**.*
-
-                        **4. 中考真题特训**
-                        
-                        *(2024·江苏中考)* *It ________ me half an hour ________ my homework yesterday.*
-                        A. took; to do   B. takes; doing   C. took; doing   D. takes; to do
-                        
-                        **[解析]**：固定句型 It takes/took sb. time to do sth.，且发生在昨天用过去时，选 **A**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My Trip to School (我的上学之路)
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的上学之路 (How I get to school)
                         #### 1. 写作要点
-                        - **How** (方式)
-                        - **Distance** (距离)
-                        - **Time** (耗时)
-                        - **Feeling** (感受)
+                        - **开头**：点明地点及大致距离。
+                        - **过程**：详细描述交通方式及耗时。
+                        - **感受**：对这种交通方式的看法（Fast, green, healthy...）。
 
-                        #### 2. 满分范文
-                        I live far from my school. Every morning, I **get up at** 6:00. I usually **go to school by subway**. It is about **15 kilometers** from my home. It **takes me 30 minutes to get there**. I like the subway because it is very fast. 
+                        #### 2. 高分句式
+                        - *My home is far from school, about 8 kilometers.*
+                        - *I usually go to school by subway.*
+                        - *It takes me about 20 minutes to get there.*
+                        - *I think riding a bike is good for my health.*
+
+                        #### 3. 满分范文
+                        I live in a beautiful village. It is about 5 kilometers from my home to school. Every morning, I get up at 6:30. I usually ride my bike to school. It takes me about 25 minutes. Sometimes, when it rains, I take the bus. It's faster than riding a bike but not as interesting. I love riding because I can see many flowers on the way.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7down_u4", "Unit 4", "Don't eat in class.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：社会服务与人际沟通 (Social services and communication)
-                        *   **子主题**：规则与准则，社会责任，文明行为 (Rules and regulations)。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 规则与准则。
+                        *   **深层意义**：本单元围绕“校规、家规、社会规则”展开。旨在引导学生理解“规则”的社会功能——规则不是束缚，而是对他人的尊重及对社会秩序的维护。培养学生的自律精神、责任感和契约意识，引导其成为文明、有教养的社会公民。
 
-                        ### 2. 单元主题内容
-                        本单元围绕“规矩与准则”展开，涉及校规、家规以及公共场所的各种限制。通过学习祈使句（Imperatives）和情态动词 must, have to，学生学会如何表达命令、禁止、责任与义务。本单元旨在引导学生理解规则存在的意义——不是为了束缚自由，而是为了保障集体的高效与安全，培养学生成为遵纪守法、有责任感的社会公民。
+                        ### 2. 知识能力目标
+                        - **语言能力**：熟练运用祈使句（Imperatives）发布指令或禁令；区分 `must` 与 `have to` 的语用差异。
+                        - **社交素养**：能够客观、有礼貌地讨论及制定规则。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **规则动词**：listen (听), fight (打架), follow (遵守), arrive (到达), relax (放松).
-                        - **核心名词**：rule (规则), hallway (走廊), uniform (制服), kitchen (厨房), hair (头发).
-                        - **描述词/短语**：strict (严厉的), noisy (吵闹的), terrible (糟糕的), dirty (脏的).
-                        - **高频短语**：on time (准时), listen to (听...), wear the school uniform (穿校服), make the bed (整理床铺), be strict with sb. (对某人严厉).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **规则动词**：listen (听), fight (打架), follow (遵守/跟随), arrive (到达), relax (放松), remember (记住)。
+                        - **核心名词**：rule (规则), hallway (走廊), uniform (制服), kitchen (厨房), hair (头发), luck (运气)。
+                        - **修饰语**：strict (严厉的), noisy (吵闹的), terrible (糟糕的), dirty (脏的), important (重要的)。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **表达禁止**：Don't eat in class. / Don't run in the hallways.
-                        2.  **表达义务**：We must arrive on time. / We have to wear the school uniform.
-                        3.  **询问规则**：What are the rules at your school?
-                        4.  **描述约束**：I can't go out on school nights.
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **祈使句**（肯定与否定形式）。
-                        - **情态动词 must 与 have to** 的区分与用法。
+                        ### 2. 核心短语金牌储备
+                        - `school rules` 校规
+                        - `in class` 在课堂上
+                        - `on time` 准时 (**对比：in time 及时**)
+                        - `listen to` 听...
+                        - `wear the school uniform` 穿校服
+                        - `be strict with sb.` 对某人严厉
+                        - `be strict in sth.` 对某事严格
+                        - `make one's bed` 整理床铺
+                        - `follow the rules` 遵守规则
+                        - `keep one's hair short` 留短发
+                        - `learn to do sth.` 学会做某事
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Don't eat in class. (不要在教室吃东西。)
+                        - **【考点详解】**：否定祈使句。以 `Don't` 开头，后接动词原形。
                         
-                        **Teacher**: Hi, Peter. You are late. 
+                        #### 2. We must arrive on time. (我们必须准时到达。)
+                        - **【结构剖析】**：`must` 强调主观上的“必须”。
                         
-                        **Peter**: Sorry, Mr. Smith.
+                        #### 3. I have to help my mom make dinner. (我不得不帮我妈妈做晚饭。)
+                        - **【词法精辨】**：`have to` 强调客观环境的“不得不”。
                         
-                        **Teacher**: Don't be late for class next time. Remember the school rules.
-                        
-                        **Peter**: What are the rules?
-                        
-                        **Teacher**: We must be on time. We can't eat in class. And don't run in the hallways.
-                        
-                        **Peter**: I see. I will follow the rules.
-
-                        **【译文】**
-                        
-                        **老师**：嗨，彼得。你迟到了。
-                        
-                        **彼得**：对不起，史密斯先生。
-                        
-                        **老师**：下次上课不要迟到。记住校规。
-                        
-                        **彼得**：规则都有哪些？
-                        
-                        **老师**：我们必须准时。我们不能在教室吃东西。而且不要在走廊奔跑。
-                        
-                        **彼得**：我明白了。我会遵守规则的。
-
-                        ### Section B (Reading) 阅读文段：Rules at Home
-                        **【原文】**
-                        
-                        Molly has too many rules at home. She can't play with her friends on school nights. She must do her homework after school. She has to help her mom in the kitchen and make her bed every morning. She can't watch TV on school days. She feels terrible because she doesn't have any fun.
-
-                        **【译文】**
-                        
-                        莫莉家里的规矩太多了。在上学日的晚上她不能和朋友们玩。放学后她必须做作业。她每天早晨不得不帮妈妈做家务并且整理床铺。在上学日她不能看电视。她感觉很糟糕，因为她一点乐趣也没有。
+                        #### 4. There are too many rules. (规则太多了。)
+                        - **【辨析】**：`too many` + 可数名词复数；`too much` + 不可数名词。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. Don't eat in class. (不要在课堂上吃东西。)
-                        - **【句式剖析】**：否定祈使句结构：`Don't + 动词原形`。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：祈使句 (Imperatives)
+                        **1. 肯定形式**：动词原形开头。 *Stand up!*
+                        **2. 否定形式**：`Don't + 动词原形`。 *Don't run!*
+                        **3. 特殊点**：`Be + 形容词`。 *Be quiet! / Don't be late!*
+
+                        ### 核心语法二：must 与 have to 的区别
+                        - **must**：说话人的主观要求。“我必须...”
+                        - **have to**：客观因素导致。“我不得不...” (有三单、时态变化)
+                        - **否定区别**：
+                            *   `mustn't`：禁止、千万不能。
+                            *   `don't have to`：不必（相当于 needn't）。
+
+                        ### 中考真题特训
                         
-                        #### 2. We have to wear the school uniform. (我们不得不穿校服。)
-                        - **【用法拓展】**：`have to` 强调客观需求；`must` 强调主观意愿。
+                        *(2024·天津中考)* *— Must I finish the homework now? — No, you ________. You can do it tomorrow.*
+                        A. mustn't   B. can't   C. needn't   D. shouldn't
                         
-                        #### 3. Be strict with sb. (对某人要求严格。)
-                        - **【辨析】**：`be strict with sb.` (对人严厉) vs `be strict in sth.` (对事严谨)。
+                        **[解析]**：对 must 的一般疑问句做否定回答，用 needn't 或 don't have to，选 **C**。
+
+                        *(2023·北京中考)* *________ in the hallways. It's dangerous.*
+                        A. Not run   B. No run   C. Don't run   D. Doesn't run
+                        
+                        **[解析]**：否定祈使句，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① arrive (v. 到达)
-                        - **【用法总结】**：
-                            *   `arrive in` + 大地点 (城市、国家)。
-                            *   `arrive at` + 小地点 (车站、学校)。
-                        - **【例题】**：
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：校规/家规介绍 (Our Rules)
+                        #### 1. 常用连接词
+                        - Firstly / Secondly / Finally
+                        - Besides / Also
+                        - However (表示对规则的看法)
+
+                        #### 2. 高分句式
+                        - *We have too many rules in our school.*
+                        - *We can't arrive late for class.*
+                        - *We have to wear the school uniform every day.*
+                        - *I think these rules are good for our study.*
+
+                        #### 3. 满分范文
+                        **Rules at My Home**
                         
-                        *When did you ________ at the airport?*
-                        A. reach   B. get   C. arrive   D. come
-                        
-                        **[解析]**：reach是及物动词，get需加to，arrive接小地点加at，选 **C**。
-
-                        #### ② listen to (听...)
-                        - **【注意】**：`listen` 是不及物动词，接宾语必须加 `to`。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心一：祈使句 (Imperatives)
-                        用于表达请求、命令、劝告或禁止。
-                        **1. 结构**
-                        *   肯定：动词原形 + 其他. (*Keep quiet!*)
-                        *   否定：Don't + 动词原形 + 其他. (*Don't fight!*)
-
-                        ### 语法核心二：must 与 have to
-                        - **must**：主观意愿上的“必须”。 (*I must study hard.*)
-                        - **have to**：客观环境迫使的“不得不”。 (*It's raining, I have to stay here.*)
-
-                        **3. 中考真题特训**
-                        
-                        *(2024·安徽中考)* *________ in the hallways. It's dangerous.*
-                        A. Not run   B. Don't run   C. Doesn't run   D. Not to run
-                        
-                        **[解析]**：否定祈使句用 Don't 开头，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：School Rules (我们的校规)
-                        #### 1. 写作佳句
-                        *   *There are many rules in our school.*
-                        *   *First, we must ...*
-                        *   *We can't ... in the ...*
-                        *   *I think the rules are good for us.*
-
-                        #### 2. 满分范文
-                        **Our School Rules**
-                        
-                        We have many rules at school. We must **arrive at school on time**. We **can't eat** in the classroom. We **have to wear the school uniform** every day. In the library, we **must keep quiet**. I think these rules help us learn well and keep us safe. 
+                        I have a lot of rules at home. Firstly, I must get up before 7:00 every morning. Secondly, I can't play computer games on school nights. I have to do my homework first after school. Also, I must help my mother do the dishes after dinner. On weekends, I can't go out with my friends until I finish my homework. I think some rules are strict, but they help me develop good habits.
                     """.trimIndent())
                 )
             ),
-       
             TextbookUnit(
-                "g7down_u5", "Unit 5", "What are you doing?",
+                "g7down_u5", "Unit 5", "Why do you like pandas?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：正在发生的活动，电话交流，日常社交礼仪 (Ongoing activities)。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自然 —— 自然界中的动物。
+                        *   **深层意义**：本单元围绕“喜爱动物及其原因”展开。通过学习动物的特征形容词，引导学生学会多角度评价事物。更重要的是，通过介绍大象、熊猫等濒危动物的现状，激发学生的环保意识，培养尊重生命、人与自然和谐共生的价值观。
 
-                        ### 2. 单元主题内容
-                        本单元以“正在进行的活动”为核心，重点学习现在进行时（Present Progressive Tense）。通过描述家庭成员、朋友在不同场景下的实时动作（如 reading, cleaning, watching TV 等），学生能够准确捕捉并表达当下的状态。本单元还涉及了电话交际用语，引导学生在交流中表现出礼貌与关怀，增强观察生活的能力。
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握描述性格与特征的形容词；熟练运用 `Why` 与 `Because` 进行因果表达。
+                        - **情感态度**：能够描述并撰写关于动物保护的短文。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **实时动作**：reading (读), cleaning (打扫), washing (洗), watching TV (看电视), exercising (锻炼), cooking (做饭).
-                        - **场所地点**：house (房子), apartment (公寓), supermarket (超市), library (图书馆), pool (游泳池).
-                        - **核心动词**：shop (购物), study (学习), sleep (睡觉), drink (喝).
-                        - **高频短语**：do homework (做作业), go to the movies (去看电影), listen to a CD (听唱片), talk on the phone (讲电话).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **动物类**：panda (熊猫), elephant (大象), lion (狮子), tiger (老虎), giraffe (长颈鹿), koala (树袋熊), cat (猫), dog (狗)。
+                        - **描述词**：cute (可爱的), lazy (懒散的), smart (聪明的), beautiful (美丽的), scary (吓人的), shy (害羞的), friendly (友好的)。
+                        - **程度副词**：very (很), really (真地), kind of (有一点)。
+                        - **其他**：Africa (非洲), Thailand (泰国), flag (旗帜), place (地点), save (救助)。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问动作**：What are you doing? — I'm reading a book.
-                        2.  **询问他人**：What is he doing? — He's cleaning his room.
-                        3.  **确认动作**：Are they swimming? — Yes, they are. / No, they aren't.
-                        4.  **电话用语**：Hello! This is Jenny. Is Laura there?
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **现在进行时**的结构：am/is/are + 动词-ing。
-                        - **动词-ing形式**的四种变化规则。
+                        ### 2. 核心短语金牌储备
+                        - `kind of` 有一点；稍微
+                        - `be friendly to sb.` 对某人友好
+                        - `get lost` 迷路
+                        - `be in (great) danger` 处于（极大）危险中
+                        - `cut down` 砍倒
+                        - `made of` 由...制成 (**对比：made from**)
+                        - `one of ...` ...之一 (**必考：后接复数名词**)
+                        - `symbol of ...` ...的象征
+                        - `all day` 一整天
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Why do you like pandas? (你为什么喜欢熊猫？)
+                        - **【考点详解】**：`Why` 引导的疑问句询问原因。回答必用 `Because`。
                         
-                        **Jenny**: Hello! This is Jenny.
+                        #### 2. Because they're kind of interesting. (因为它们有点意思。)
+                        - **【结构剖析】**：`kind of` 修饰形容词。
                         
-                        **Laura**: Hi, Jenny. It's Laura. What are you doing?
+                        #### 3. Where are they from? (它们来自哪里？)
+                        - **【同义句】**：`Where do they come from?`。
                         
-                        **Jenny**: I'm watching TV. What about you?
-                        
-                        **Laura**: I'm cleaning my room. My brother is exercising in the yard.
-                        
-                        **Jenny**: Is your mom cooking?
-                        
-                        **Laura**: No, she isn't. She is shopping at the supermarket.
-
-                        **【译文】**
-                        
-                        **珍妮**：喂！我是珍妮。
-                        
-                        **劳拉**：嗨，珍妮。我是劳拉。你在做什么？
-                        
-                        **珍妮**：我在看电视。你呢？
-                        
-                        **劳拉**：我在打扫房间。我哥哥正在院子里锻炼。
-                        
-                        **珍妮**：你妈妈正在做饭吗？
-                        
-                        **劳拉**：不，她没在做。她正在超市购物。
-
-                        ### Section B (Reading) 阅读文段：A Letter from China
-                        **【原文】**
-                        
-                        Dear Mom and Dad, I'm having a great time in China. Now I'm sitting in a tea house with my Chinese friends. We are drinking tea and talking. My friend Zhu Hui is showing me some old photos. People here are very friendly. I miss you! See you soon. Love, Alice.
-
-                        **【译文】**
-                        
-                        亲爱的爸爸妈妈，我在中国过得很愉快。现在我和我的中国朋友们正坐在一家茶馆里。我们正在喝茶聊天。我的朋友朱辉正在给我看一些旧照片。这里的人们非常友好。我思念你们！期待很快见到你们。爱您的，艾丽丝。
+                        #### 4. We must save the trees and not buy things made of ivory. (我们必须拯救树木，不买象牙制品。)
+                        - **【语法重点】**：`made of ivory` 是过去分词短语作后置定语，修饰 `things`。
                     """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：Why 引导的原因状语从句
+                        **1. 问句**：`Why + 一般疑问句?`
+                        **2. 答句**：`Because + 句子.` (注意：在英语中 because 和 so 不能同时出现在一个句子中)。
+
+                        ### 核心语法二：形容词的语序
+                        **规律**：程度副词 + 形容词。
+                        *   *They are **really smart**.*
+                        *   *He is **a little shy**.*
+
+                        ### 中考真题特训
+                        
+                        *(2024·南京中考)* *— ________ don't you go to the zoo? — Because I have too much work to do.*
+                        A. When   B. Where   C. Why   D. How
+                        
+                        **[解析]**：根据答语 because 可知，提问用 why，选 **C**。
+
+                        *(2023·北京中考)* *Pandas are in danger ________ people cut down too many bamboo forests.*
+                        A. but   B. so   C. because   D. although
+                        
+                        **[解析]**：后面是前面现象产生的原因，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我最喜欢的动物 (My Favorite Animal)
+                        #### 1. 写作模板
+                        - **Appearance**：What does it look like? (Size, color)
+                        - **Personality**：What is it like? (Smart, lazy, shy)
+                        - **Reason**：Why do you like it?
+                        - **Protection**：How can we save it?
+
+                        #### 2. 高分句式
+                        - *My favorite animal is the panda.*
+                        - *They are from China.*
+                        - *They are black and white, and they look very cute.*
+                        - *We should protect them because they are our friends.*
+
+                        #### 3. 满分范文
+                        **The Elephant**
+                        
+                        My favorite animal is the elephant. They are from Africa and Thailand. Elephants are very big and strong. They have long noses and big ears. I like them because they are very smart. They can play music and draw. They can also remember places with food and water. But now, elephants are in great danger. People kill them for their ivory. We must save the elephants and not buy ivory products.
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u6", "Unit 6", "I'm watching TV.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 日常生活。
+                        *   **深层意义**：本单元聚焦“当下发生的活动”。通过描述家庭成员和朋友正在做的事情，学习现在进行时。旨在培养学生细致观察生活的能力，学会与他人分享实时状态，并在跨文化语境中（如龙舟节）通过描述活动场景，感受中外文化习俗。
+
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握现在进行时（Present Continuous）的构成及用法；掌握动词 `-ing` 的变化规则；熟悉电话交际用语。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **实时动作**：read (读), clean (打扫), wash (洗), watch (看), exercise (锻炼), cook (做饭), swim (游泳), shop (购物), sleep (睡觉)。
+                        - **场所**：house (房子), apartment (公寓), supermarket (超市), library (图书馆), pool (游泳池)。
+                        - **时间/状态**：now (现在), right now (此刻)。
+                        - **节日/文化**：Dragon Boat Festival (端午节), zongzi (粽子)。
+
+                        ### 2. 核心短语金牌储备
+                        - `watch TV` 看电视
+                        - `read a book` 看书
+                        - `clean the house` 打扫房子
+                        - `do homework` 做作业
+                        - `make soup` 做汤
+                        - `talk on the phone` 通电话
+                        - `listen to a CD` 听唱片
+                        - `go to the movies` 去看电影
+                        - `wash the dishes` 洗碗
+                        - `wish to do sth.` 希望做某事
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. What are you doing? (你在干什么？)
-                        - **【句式剖析】**：现在进行时的特殊疑问句。`What + be + 主语 + doing?`
+                        - **【考点详解】**：现在进行时的特殊疑问句。`be + 主语 + v.-ing`。
                         
-                        #### 2. This is Jenny. (我是珍妮。)
-                        - **【电话礼仪】**：在电话中介绍自己用 `This is...`，询问对方是谁用 `Who's that?` 或 `Is that...?`。不能用 I am... 或 Who are you?
+                        #### 2. I'm watching TV. (我正在看电视。)
+                        - **【结构剖析】**：`am/is/are + v.-ing`。
                         
-                        #### 3. What about you? (你呢？)
-                        - **【用法拓展】**：相当于 `How about you?` 用于询问对方的情况或征求意见。后面接名词、代词或动词-ing形式。
+                        #### 3. This is Jenny. (我是珍妮。)
+                        - **【电话用语】**：在电话中指代自己用 `This is...`，询问对方用 `Is that ...?` 或 `Who's that?`。
+                        
+                        #### 4. I miss my family. (我想念我的家人。)
+                        - **【用法拓展】**：`miss` 既可以表示“思念”，也可以表示“错过”。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① shop (v. 购物; n. 商店)
-                        - **【用法总结】**：
-                            *   作动词时，现在分词双写p，即 **shopping**。
-                            *   `go shopping` 去购物。
-                        - **【例题】**：
-                        
-                        *Look! My mother ________ at the mall.*
-                        A. shops   B. is shopping   C. shoping   D. shopping
-                        
-                        **[解析]**：Look! 提示动作正在进行，且分词需双写p，选 **B**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：现在进行时 (Present Continuous)
+                        **1. 功能**：表示现在或现阶段正在进行的动作。
+                        **2. 构成**：`am / is / are + 动词的现在分词 (v.-ing)`。
+                        **3. v.-ing 变化规则**：
+                        *   直接加 ing：*reading, watching*。
+                        *   去不发音e加 ing：*making, writing*。
+                        *   双写末尾辅音加 ing (重读闭音节)：*swimming, running, shopping, sitting*。
+                        **4. 标志词**：`now`, `right now`, `Look!`, `Listen!`。
 
-                        #### ② exercise (v./n. 锻炼; 练习)
-                        - **【辨析】**：
-                            *   指“锻炼”时，通常为不可数名词。*do exercise*。
-                            *   指“体操；练习题”时，为可数名词。*do morning exercises*。
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *— Where is your father? — He ________ the car in the yard.*
+                        A. wash   B. washes   C. is washing   D. washed
+                        
+                        **[解析]**：根据语境“他在哪”可知是在问“正在做什么”，选 **C**。
+
+                        *(2023·北京中考)* *Listen! The birds ________ in the trees.*
+                        A. sing   B. sang   C. are singing   D. will sing
+                        
+                        **[解析]**：Listen! 提示用现在进行时，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：现在进行时 (Present Progressive)
-                        表示现在或现阶段正在进行的动作。
-                        **1. 构成：主语 + be (am/is/are) + v.-ing.**
-                        
-                        **2. v.-ing 变化规则**
-                        *   直接加 ing：*read -> reading*。
-                        *   去不发音的e加 ing：*write -> writing*。
-                        *   双写结尾辅音加 ing (重读闭音节)：*run -> running, swim -> swimming, shop -> shopping*。
-                        *   ie 变 y 加 ing：*die -> dying*。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：实时场景描述 (What is everyone doing?)
+                        #### 1. 写作思路
+                        - **时间背景**：It is 8:00 p.m. now.
+                        - **人物活动**：依次描述爸爸、妈妈、哥哥和我正在做什么。
+                        - **氛围评价**：We are all busy. / We are having fun.
 
-                        **3. 中考真题特训**
-                        
-                        *(2024·江苏中考)* *Listen! The birds ________ in the trees.*
-                        A. sing   B. sings   C. are singing   D. will sing
-                        
-                        **[解析]**：Listen! 是现在进行时的标志词，选 **C**。
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *Look! My family are all busy at home.*
+                        - *My mother is cooking in the kitchen.*
+                        - *My brother and I are doing our homework.*
+                        - *We are all enjoying our evening.*
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：A Scene at the Moment (描述实时场景)
-                        #### 1. 写作佳句
-                        *   *It's a beautiful Sunday afternoon.*
-                        *   *Look! Everyone is busy.*
-                        *   *My father is reading a newspaper.*
-                        *   *We are having a good time.*
+                        #### 3. 满分范文
+                        I'ts a beautiful Sunday morning. My family are all at home. Look! My father is reading a newspaper on the sofa. My mother is washing the clothes in the bathroom. What about my brother? He is playing with his toy car. I am cleaning my room. Our dog is sleeping under the table. We are all busy but we are having a great time.
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u7", "Unit 7", "It's raining!",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自然 —— 天气与人类活动。
+                        *   **深层意义**：本单元围绕“天气状况及人们在不同天气下的活动”展开。旨在引导学生观察自然现象，理解气候对人类生活方式的影响。通过对比全球不同地点的天气（如多伦多的寒冷与悉尼的阳光），培养学生的全球意识和对地理空间的认知。
 
-                        #### 2. 满分范文
-                        It's 8:00 p.m. now. My family members **are all at home**. My father **is watching** news on TV. My mother **is cleaning** the kitchen. What about me? **I am doing** my homework in my room. My little dog **is sleeping** under the desk. We are all busy but happy.
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u6", "Unit 6", "It's raining!",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自然 (Man and Nature)
-                        *   **主题群**：自然现象与环境保护 (Natural phenomena)
-                        *   **子主题**：天气状况，不同天气的活动，季节感受 (Weather and activities)。
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握描述天气的形容词及动词；熟练运用 `How's the weather?` 与 `What's the weather like?`；掌握现在进行时在描述实时天气活动中的进阶应用。
+                        - **文化意识**：了解不同地区的代表性季节景观。
+                        """.trimIndent()),
 
-                        ### 2. 单元主题内容
-                        本单元以“天气”为中心，学习描述各种天气状况（如 sunny, cloudy, raining 等）以及在特定天气下人们进行的活动。通过对全球不同城市天气的对比，培养学生观察自然、适应环境的能力。本单元进一步巩固了现在进行时的用法，并引入了如何询问及表达“近况如何（How's it going?）”的社交用语。
-                    """.trimIndent()),
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **天气形容词 (名词+y)**：rainy (下雨的), snowy (下雪的), cloudy (多云的), sunny (晴朗的), windy (多风的)。
+                        - **气温形容词**：hot (热), cold (冷), warm (暖和), cool (凉爽)。
+                        - **天气动词**：rain (下雨), snow (下雪)。
+                        - **描述状态**：dry (干的), humid (潮湿的), bad (坏的), terrible (糟糕的)。
+                        - **地点与物品**：mountain (山), vacation (假期), postcard (明信片)。
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **天气形容词**：sunny (晴朗的), cloudy (多云的), windy (有风的), rainy (下雨的), snowy (下雪的).
-                        - **天气动词**：rain (下雨), snow (下雪).
-                        - **状态形容词**：hot (热的), cold (冷的), cool (凉爽的), warm (温暖的), dry (干燥的), humid (潮湿的).
-                        - **高频短语**：How's it going? (最近怎么样?), take a photo (照相), on vacation (在度假), right now (此刻).
+                        ### 2. 核心短语金牌储备
+                        - `on vacation` 在度假
+                        - `take a photo / take photos` 拍照
+                        - `have a good time` 玩得开心 (同义: have fun / enjoy oneself)
+                        - `write a postcard to sb.` 给某人写明信片
+                        - `by the pool` 在游泳池旁
+                        - `talk on the phone` 通电话
+                        - `How's it going?` 最近怎么样？
+                        - `just so-so` 普普通通
+                        - `right now` 此刻；现在
+                        - `sit by the fire` 坐在火炉旁
+                        """.trimIndent()),
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问天气**：How's the weather in Beijing? / What's the weather like?
-                        2.  **表达天气**：It's sunny and warm. / It's raining right now.
-                        3.  **询问近况**：How's it going? — Great! / Not bad. / Terrible.
-                        4.  **描述假期**：I'm having a great time on vacation.
+                        UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. How's the weather in Beijing? (北京的天气怎么样？)
+                        - **【考点详解】**：`How's` 是 `How is` 的缩写。用于询问天气状况。
+                        - **【同义转换】**：`What's the weather like in Beijing?` (**必考：like是介词，不能丢**)
 
-                        ### 3. 重点语法 (Key Grammar)
-                        - **询问天气的两种方式** (How vs What)。
-                        - **形容词后缀 -y** 的构词法（名词变形容词）。
-                    """.trimIndent()),
+                        #### 2. How's it going? (最近怎么样？)
+                        - **【用法拓展】**：社交常用问候语。回答常用：`Great!`, `Not bad.`, `Terrible!`, `Just so-so.`。
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Tom**: Hi, Rick! How's it going?
-                        
-                        **Rick**: Not bad. How's the weather in Shanghai?
-                        
-                        **Tom**: It's terrible! It's raining right now. 
-                        
-                        **Rick**: That's too bad. What are you doing?
-                        
-                        **Tom**: I'm just staying at home and reading. What's the weather like in London?
-                        
-                        **Rick**: It's sunny and cool. I'm playing soccer with my friends.
+                        #### 3. I'm having a great time visiting my aunt. (我正在探望姑姑，过得很愉快。)
+                        - **【句式剖析】**：`have a great time (in) doing sth.` 做某事过得愉快。
 
-                        **【译文】**
-                        
-                        **汤姆**：嗨，里克！最近怎么样？
-                        
-                        **里克**：不错。上海的天气怎么样？
-                        
-                        **汤姆**：糟糕透了！现在正在下雨。
-                        
-                        **里克**：那太糟了。你在做什么？
-                        
-                        **汤姆**：我只是待在家里读书。伦敦的天气怎么样？
-                        
-                        **里克**：天气晴朗且凉爽。我正在和朋友们踢足球。
+                        #### 4. It's windy and cold. (天气又刮风又冷。)
+                        - **【语法延伸】**：在描述天气时，`it` 是非人称代词，不指代具体事物。
+                        """.trimIndent()),
 
-                        ### Section B (Reading) 阅读文段：A Vacation Postcard
-                        **【原文】**
-                        
-                        Hi, Jane! I'm on vacation in Canada. The weather is snowy and cold, but it's beautiful. Everyone is having a good time. Some people are skating on the lake. My brother is taking photos. I'm sitting by the fire and writing postcards. See you next month! Love, Su Lin.
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：询问天气的表达法
+                        **1. 结构对比**：
+                        - `How is the weather?`
+                        - `What is the weather like?`
 
-                        **【译文】**
-                        
-                        嗨，简！我在加拿大度假。天气阴冷且有雪，但很美。每个人都过得很开心。一些人正在湖面上滑冰。我哥哥正在拍照。我正坐在火炉旁写明信片。下个月见！爱你的，苏琳。
-                    """.trimIndent()),
+                        ### 核心语法二：名词变形容词的 -y 后缀
+                        **构词规则**：
+                        - 直接加 y：*rain -> rainy, cloud -> cloudy, wind -> windy*。
+                        - 双写加 y：*sun -> sunny, fog -> foggy*。
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. How's the weather? (天气怎么样？)
-                        - **【同义句】**：`What's the weather like?` (like 是介词，意为“像”)。
-                        
-                        #### 2. How's it going? (情况怎么样？/最近好吗？)
-                        - **【常见答语】**：`Great!`, `Not bad.`, `Just so-so.`, `Terrible!`.
-                        
-                        #### 3. I'm on vacation. (我在度假。)
-                        - **【词块归纳】**：`be on vacation` 在度假中；`take a vacation` 去度假。
-                    """.trimIndent()),
+                        ### 中考真题特训
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① sunny / rainy / windy (天气形容词)
-                        - **【词汇梳理】**：名词 + y = 形容词。
-                            *   sun (双写n) -> sunny
-                            *   rain -> rainy
-                            *   cloud -> cloudy
-                        - **【例题】**：
-                        
-                        *The wind is strong. It is a ________ day.*
-                        A. wind   B. windy   C. winddy   D. winds
-                        
-                        **[解析]**：修饰名词 day 用形容词，且不用双写，选 **B**。
+                        *(2024·南京中考)* *— ________ the weather like in Kunming? — It's always like spring.*
+                        A. How's   B. What's   C. Where's   D. Why's
 
-                        #### ② take a photo (拍照)
-                        - **【用法总结】**：复数为 `take photos`。
-                    """.trimIndent()),
+                        **[解析]**：结尾有 like，提问用 What's，选 **B**。
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：询问天气的固定结构
-                        **1. 结构对比**
-                        - **How** is the weather?
-                        - **What** is the weather **like**? (千万不要漏掉 like!)
+                        *(2023·河北中考)* *Look! It's ________ outside. Let's go out and make a snowman.*
+                        A. raining   B. snowing   C. blowing   D. shining
 
-                        **2. 状态与动作的区分**
-                        - It's rainy. (它是多雨的 - 状态)
-                        - It's raining. (它正在下雨 - 动作)
+                        **[解析]**：根据“堆雪人”可知是在下雪，选 **B**。
+                        """.trimIndent()),
 
-                        **3. 中考真题特训**
-                        
-                        *(2023·北京中考)* *— ________ the weather in your hometown? — It's often windy in spring.*
-                        A. What's   B. How   C. How's   D. What
-                        
-                        **[解析]**：由问句结尾无 like 可知，选用 How's，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：A Vacation Diary (旅游日记)
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：旅游日记/明信片 (A Postcard/Diary)
                         #### 1. 写作框架
-                        - **Place & Weather** (地点与天气)
-                        - **Activities** (正在进行的活动)
-                        - **Feeling** (心情感受)
+                        - **第一部分：交代地点与天气**。 (I'm in... now. The weather is...)
+                        - **第二部分：描述正在进行的活动**。 (Many people are... My family is...)
+                        - **第三部分：抒发情感**。 (I'm having a good time. I miss you.)
 
-                        #### 2. 满分范文
-                        July 15th, Sunday. Sunny.
-                        
-                        I am in Sanya with my family today. The weather is **sunny and hot**. We are **on vacation** here. Look! Many people **are swimming** in the blue sea. My father **is lying** on the beach. I **am eating** a big ice-cream. We are having a wonderful time! 
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u7", "Unit 7", "What does he look like?",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：自我认识与他人评价 (Self and others)
-                        *   **子主题**：外貌特征描述，人物识别，审美意识 (Describing people)。
+                        #### 2. 高分句式
+                        - *The weather here is warm and sunny.*
+                        - *I am sitting on the beach and drinking orange juice.*
+                        - *Some people are taking photos by the lake.*
+                        - *Wish you were here!*
 
-                        ### 2. 单元主题内容
-                        本单元以“外貌特征”为核心，学习如何从身高、体型、发型及其他特征（如胡须、眼镜）来描述一个人。通过学习 short, tall, thin, heavy, long hair 等词汇，学生能够清晰地描绘人物形象。本单元旨在引导学生发现他人的闪光点，学会在描述中尊重差异，不以貌取人，建立健康的审美观。
-                    """.trimIndent()),
+                        #### 3. 满分范文
+                        **A Postcard to a Friend**
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **身高体型**：short (矮的), tall (高的), thin (瘦的), heavy (重的), medium build (中等身材), medium height (中等身高).
-                        - **头发特征**：straight hair (直发), curly hair (卷发), long hair (长发), short hair (短发), blonde hair (金发).
-                        - **其他特征**：glasses (眼镜), beard (胡须), uniform (制服), artist (艺术家).
-                        - **高频短语**：look like (看起来像), a little bit (一点点), in the end (最后), be of medium build (中等身材).
+                        Dear Jane,
+                        I am on vacation in Sanya now. The weather is sunny and hot. I am sitting by the pool and drinking a cold drink. My parents are swimming in the pool. Many people are taking photos on the beach. Everyone is having a great time. I miss you and I want to buy some gifts for you. See you soon!
+                        Love, Li Hua
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u8", "Unit 8", "Is there a post office near here?",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 社区生活。
+                        *   **深层意义**：本单元聚焦“社区环境与问路”。通过学习社区场所名词及方位介词，引导学生关注生活环境，培养空间规划能力。更重要的是培养学生助人为乐的精神和在公共场所礼貌交流的社交能力，增强社会责任感。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问外貌**：What does he look like? — He is tall and has short hair.
-                        2.  **描述发型**：She has long straight black hair.
-                        3.  **询问身高**：Is he tall or short? — He is of medium height.
-                        4.  **辨认人物**：The girl with glasses is my sister.
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握 `There be` 结构；熟练使用方位介词（next to, across from, between...and...）；掌握礼貌问路及指路。
+                        """.trimIndent()),
 
-                        ### 3. 重点语法 (Key Grammar)
-                        - **描述外貌的两大动词**：be (描述整体状态) 与 have/has (描述局部特征)。
-                        - **多个形容词修饰名词的顺序**。
-                    """.trimIndent()),
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **社区场所**：post office (邮局), police station (警察局), hotel (旅馆), restaurant (餐馆), bank (银行), hospital (医院), street (街道), park (公园)。
+                        - **方位介词**：near (在...附近), behind (在...后面), front (前面), across (穿过), between (在...之间)。
+                        - **其他**：town (城镇), forest (森林), money (钱), pay (付费)。
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Mike**: Do you know the new student, David?
-                        
-                        **Li Hua**: Yes, I do. 
-                        
-                        **Mike**: What does he look like?
-                        
-                        **Li Hua**: He's very tall. He has short curly brown hair.
-                        
-                        **Mike**: Does he wear glasses?
-                        
-                        **Li Hua**: No, he doesn't. But he always wears a blue school uniform.
+                        ### 2. 核心短语金牌储备
+                        - `in front of` 在...（外部）的前面 (**对比: in the front of 在内部的前面**)
+                        - `next to` 紧挨着
+                        - `across from` 在...对面
+                        - `between ... and ...` 在...和...之间
+                        - `turn left/right` 向左/右转
+                        - `go straight` 直走
+                        - `on the right/left` 在右边/左边
+                        - `pay phone` 公用电话
+                        - `post office` 邮局
+                        """.trimIndent()),
 
-                        **【译文】**
-                        
-                        **迈克**：你认识那个新生大卫吗？
-                        
-                        **李华**：是的，我认识。
-                        
-                        **迈克**：他长什么样？
-                        
-                        **李华**：他很高。他留着棕色的短卷发。
-                        
-                        **迈克**：他戴眼镜吗？
-                        
-                        **李华**：不，他不戴。但他总是穿着蓝色的校服。
+                        UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Is there a post office near here? (这附近有邮局吗？)
+                        - **【考点详解】**：`There be` 结构的一般疑问句。`Is/Are there ...?`。
 
-                        ### Section B (Reading) 阅读文段：An Artist
-                        **【原文】**
-                        
-                        Joe is an artist. He draws pictures of people. Many people tell him what the criminal looks like. Then Joe draws a picture. He says, "The criminal is of medium height. He has a big nose and small eyes. He is a little bit thin." Joe's pictures help the police find the criminals. He is a great helper.
+                        #### 2. The bank is across from the library. (银行在图书馆对面。)
+                        - **【结构剖析】**：方位介词 `across from` 用于描述两个建筑物的相对位置。
 
-                        **【译文】**
-                        
-                        乔是一名艺术家。他画人物肖像。许多人告诉他罪犯长什么样。然后乔画出一张图。他说：“罪犯中等身材。他有一个大鼻子和小眼睛。他有一点点瘦。”乔的画帮助警察找到了罪犯。他是一个伟大的助手。
-                    """.trimIndent()),
+                        #### 3. Go straight and turn left at the first crossing. (直走，在第一个十字路口左转。)
+                        - **【指路核心】**：祈使句指路。注意 `at the first crossing` 这个时间点状语。
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. What does he look like? (他长什么样？)
-                        - **【用法拓展】**：用于询问人的外貌。注意区分 `What is he like?` (他性格怎么样/他是个怎样的人？)。
-                        
-                        #### 2. She has long straight black hair. (她留着黑色的长直发。)
-                        - **【要点精讲】**：多个形容词修饰名词顺序：**长短 + 形状 + 颜色 + 名词**。
-                        
-                        #### 3. He is of medium height. (他是中等身高。)
-                        - **【句式剖析】**：`be of + 特征名词` 表示“具有...特征”。
-                    """.trimIndent()),
+                        #### 4. I love to watch the monkeys climbing around. (我喜欢看猴子到处爬。)
+                        - **【语法延伸】**：`watch sb. doing sth.` 强调看某人正在做某事。
+                        """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① look like (看起来像)
-                        - **【注意】**：`like` 这里是介词，后接名词或代词。
-                        - **【例题】**：
-                        
-                        *The cloud ________ a big white rabbit.*
-                        A. look   B. looks like   C. looks   D. looking like
-                        
-                        **[解析]**：主语是单数，后面接宾语需加 like，选 **B**。
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：There be 结构
+                        **1. 功能**：表示“某地存在某物”。
+                        **2. 主谓一致（就近原则）**：`There is a pen and two books.` / `There are two books and a pen.`
+                        **3. 否定/疑问**：`There isn't/aren't...` / `Is/Are there...?`
 
-                        #### ② a little bit (一点儿)
-                        - **【用法总结】**：后面直接接形容词。等于 `a little` 或 `a bit`。
-                    """.trimIndent()),
+                        ### 核心语法二：方位介词辨析
+                        - **in front of**：在物体外部的前面。
+                        - **in the front of**：在物体内部的前面。
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：外貌描述的“动词分工”
-                        **1. be 动词组 (主语 + be + 形容词)**
-                        用于描述：身高 (tall/short)、体型 (thin/heavy)、年龄 (young/old)。
-                        - *He **is** heavy.*
-                        
-                        **2. have/has 动词组 (主语 + have/has + 名词)**
-                        用于描述：发型、五官特征、配饰。
-                        - *She **has** curly hair.*
-                        - *He **has** a beard.*
+                        ### 中考真题特训
 
-                        **3. 中考真题特训**
-                        
-                        *(2024·天津中考)* *My sister ________ short and ________ big eyes.*
-                        A. has; is   B. is; has   C. is; is   D. has; has
-                        
-                        **[解析]**：身高用 is，眼睛特征用 has，选 **B**。
-                    """.trimIndent()),
+                        *(2024·天津中考)* *— ________ a bank near the supermarket? — Yes, it's just across from it.*
+                        A. Is it   B. Is there   C. Are there   D. Are they
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My Best Friend (我的好朋友)
+                        **[解析]**：询问“某处有某物吗”，选 **B**。
+
+                        *(2023·广东中考)* *There ________ a meeting tomorrow afternoon.*
+                        A. is going to be   B. will have   C. is going to have   D. will be have
+
+                        **[解析]**：There be 的将来时结构为 There is/are going to be 或 There will be，选 **A**。
+                        """.trimIndent()),
+
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍我的社区 (My Neighborhood)
                         #### 1. 写作要点
-                        - **Name & Age** (姓名年龄)
-                        - **Body & Height** (身材身高)
-                        - **Hair & Face** (头发五官)
-                        - **Clothes & Hobbies** (着装爱好)
+                        - **总述**：My neighborhood is very beautiful and quiet.
+                        - **布局描述**：使用 There be 和方位介词描述场所位置。
+                        - **活动描述**：我们在公园做什么，在图书馆做什么。
+                        - **情感表达**：I like my neighborhood.
 
-                        #### 2. 满分范文
-                        I have a best friend. Her name is Lily. She is 13 years old. Lily is **of medium height** and she is **a little bit thin**. She **has long straight black hair** and **big blue eyes**. She always **wears glasses**. Lily is very kind and we often study together. I like her very much.
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u8", "Unit 8", "I'd like some noodles.",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：饮食与健康，订餐服务，中外饮食文化 (Food and ordering)。
+                        #### 2. 高分句式
+                        - *There is a big supermarket across from my home.*
+                        - *Next to the bank, there is a small library.*
+                        - *My house is between the park and the post office.*
+                        - *I enjoy spending time there with my friends.*
 
-                        ### ### 2. 单元主题内容
-                        本单元以“订餐”为核心情境，学习各种食物名称（如 beef, mutton, noodles, cabbage 等）以及如何表达需求（would like）。通过模拟餐馆点餐，学生不仅掌握了数量与规格的表达（如 large, medium, small），还学习了中国传统美食文化（如生日面、饺子）。本单元旨在培养学生的社会实践能力，学会在公共服务场所进行得体、清晰的沟通。
-                    """.trimIndent()),
+                        #### 3. 满分范文
+                        **My Neighborhood**
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **肉类蔬菜**：beef (牛肉), mutton (羊肉), chicken (鸡肉), cabbage (卷心菜), potato (土豆), tomato (西红柿), carrot (胡萝卜).
-                        - **主食饮品**：noodles (面条), rice (米饭), pancake (薄烤饼), porridge (粥), soup (汤), juice (果汁).
-                        - **规格数量**：size (尺寸), large (大号的), medium (中号的), small (小号的), bowl (碗).
-                        - **高频短语**：would like (想要), take one's order (点菜), what size (什么规格), birthday noodles (长寿面).
+                        I live in a very convenient neighborhood. There is a big supermarket and a bank near my house. Across from the supermarket, there is a beautiful park. I often go for a walk there after dinner. Next to the park, there is a library. It is quiet and I like reading books there. My house is between the post office and a restaurant. The people here are very friendly. I love living here.
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u9", "Unit 9", "What does he look like?",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 个人特征描述。
+                        *   **深层意义**：本单元围绕“外貌描述”展开。旨在引导学生学会客观、细致地观察并描述人物形象。教育价值在于通过讨论外貌，引导学生建立正确的审美观，理解“不以貌取人”的重要性，同时在描述他人时表现出尊重和礼貌。
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **表达想要**：I'd like a large bowl of beef noodles.
-                        2.  **询问点餐**：May I take your order? / What would you like to eat?
-                        3.  **询问规格**：What size bowl of noodles would you like?
-                        4.  **描述传统**：In China, people eat long noodles for their birthdays.
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握描述身高、体型、发型的形容词；熟练区分 `be` 动词（描述整体）与 `have/has`（描述局部特征）的用法。
+                        """.trimIndent()),
 
-                        ### 3. 重点语法 (Key Grammar)
-                        - **would like** 的各种句式变换。
-                        - **可数名词与不可数名词**的分类及其数量表达（a bowl of...）。
-                    """.trimIndent()),
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **身高/体型**：tall (高), short (矮), thin (瘦), heavy (重), medium (中等的), build (身材), height (高度)。
+                        - **头发特征**：straight (直的), curly (卷的), long (长的), short (短的), blonde (金发的), brown (棕色的)。
+                        - **其他特征**：glasses (眼镜), beard (胡须), uniform (制服), face (脸), eye (眼睛), nose (鼻子)。
+                        - **描述词**：handsome (英俊的), beautiful (美丽的), cute (可爱的)。
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Waiter**: Hello! May I take your order?
-                        
-                        **Boy**: Yes. I'd like some noodles, please.
-                        
-                        **Waiter**: What kind of noodles would you like?
-                        
-                        **Boy**: I'd like beef and tomato noodles.
-                        
-                        **Waiter**: And what size would you like?
-                        
-                        **Boy**: A medium bowl, please.
+                        ### 2. 核心短语金牌储备
+                        - `be of medium build` 中等身材
+                        - `be of medium height` 中等身高
+                        - `straight hair` 直发
+                        - `curly hair` 卷发
+                        - `wear glasses` 戴眼镜
+                        - `go to the movies` 看电影
+                        - `look like` 看起来像
+                        - `a little bit` 一点点；稍微
+                        - `at the end` 在最后
+                        - `the same as` 与...一样
+                        """.trimIndent()),
 
-                        **【译文】**
-                        
-                        **服务员**：您好！可以点餐了吗？
-                        
-                        **男孩**：是的。请给我来点面条。
-                        
-                        **服务员**：您想要哪种面条？
-                        
-                        **男孩**：我想要牛肉西红柿面。
-                        
-                        **服务员**：那您想要多大碗的？
-                        
-                        **男孩**：请给我来个中碗的。
+                        UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What does he look like? (他长什么样？)
+                        - **【考点详解】**：询问外貌的标准句型。
+                        - **【辨析必备】**：
+                            *   `What does he look like?` (外貌)
+                            *   `What is he like?` (性格/品质)
+                            *   `What does he like?` (喜好)
 
-                        ### Section B (Reading) 阅读文段：Birthday Food Around the World
-                        **【原文】**
-                        
-                        What do people eat on their birthdays? In many countries, people have a cake with candles. But in China, it's different. People often eat long noodles. They think long noodles mean a long life. In some places, people also eat red eggs. They are a symbol of good luck. What about you? What do you like to eat on your birthday?
+                        #### 2. She has long straight black hair. (她留着黑色的长直发。)
+                        - **【考点详解】**：多个形容词修饰名词顺序。**长短 + 形状 + 颜色 + 头发**。
 
-                        **【译文】**
-                        
-                        人们在生日那天吃什么？在许多国家，人们吃带蜡烛的蛋糕。但在中国，情况有所不同。人们经常吃长寿面。他们认为长寿面意味着长寿。在一些地方，人们也吃红鸡蛋。它们是好运的象征。你呢？你在生日那天喜欢吃什么？
-                    """.trimIndent()),
+                        #### 3. He is of medium height. (他是中等身高。)
+                        - **【结构剖析】**：`be of + 特征名词` 结构。
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 4. The person with glasses is my teacher. (那个戴眼镜的人是我的老师。)
+                        - **【语法延伸】**：`with glasses` 是介词短语作后置定语。
+                        """.trimIndent()),
+
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：描述外貌的动词分工
+                        **1. be 动词组**：描述身高、体型。
+                        *   *He **is** tall/short/thin/heavy.*
+                        **2. have/has 动词组**：描述发型、五官、配饰。
+                        *   *She **has** long hair / big eyes.*
+                        *   *He **has** a beard.*
+
+                        ### 核心语法二：形容词排序
+                        **口诀**：长短、形状、颜色。
+                        *   *a long(长短) straight(形状) black(颜色) hair.*
+
+                        ### 中考真题特训
+
+                        *(2024·南京中考)* *My sister ________ short and ________ big eyes.*
+                        A. is; is   B. has; has   C. is; has   D. has; is
+
+                        **[解析]**：身高用 is，眼睛特征用 has，选 **C**。
+
+                        *(2023·河北中考)* *— Who is the girl ________ long hair? — She is my cousin.*
+                        A. with   B. in   C. of   D. for
+
+                        **[解析]**：with 表示“具有...特征”，选 **A**。
+                        """.trimIndent()),
+
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：描述我的一位朋友 (My Friend)
+                        #### 1. 写作逻辑
+                        - **基本信息**：Name, age, job.
+                        - **整体外貌**：Height and build.
+                        - **细节特征**：Hair, eyes, glasses.
+                        - **性格/穿着**：Character and clothes.
+
+                        #### 2. 高分句式
+                        - *He is a 13-year-old boy.*
+                        - *He is of medium height and a little bit heavy.*
+                        - *He has short curly brown hair.*
+                        - *He always wears a red T-shirt and blue jeans.*
+
+                        #### 3. 满分范文
+                        **My Best Friend**
+
+                        My best friend is Li Hua. He is 14 years old. He is a handsome boy. Li Hua is very tall and he is of medium build. He has short straight black hair and big eyes. He doesn't wear glasses. He always wears a white school uniform. Li Hua is very friendly and smart. We often play basketball together after school. Everyone likes him very much.
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u10", "Unit 10", "I'd like some noodles.",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 饮食与健康。
+                        *   **深层意义**：本单元围绕“订餐”与“食物喜好”展开。旨在引导学生掌握在公共服务场所（餐厅）的交际技能。通过对比中西饮食文化（如生日面与生日蛋糕），增强文化包容性。同时引导学生形成健康的饮食习惯，理解均衡营养的重要性。
+
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握食物名词（含可数与不可数）；熟练运用 `would like` 表达意愿；掌握餐厅订餐的典型交际用语。
+                        """.trimIndent()),
+
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **肉类/蛋类**：mutton (羊肉), beef (牛肉), chicken (鸡肉), egg (鸡蛋)。
+                        - **蔬菜类**：cabbage (卷心菜), potato (土豆), tomato (西红柿), carrot (胡萝卜), onion (洋葱)。
+                        - **主食/饮品**：noodles (面条), rice (米饭), porridge (粥), soup (汤), pancake (薄烤饼), juice (果汁)。
+                        - **规格/描述**：size (尺寸), bowl (碗), large (大号), medium (中号), small (小号), special (特色菜)。
+
+                        ### 2. 核心短语金牌储备
+                        - `would like` 想要
+                        - `what kind of ...` 哪种...
+                        - `take one's order` 点菜
+                        - `a bowl of ...` 一碗...
+                        - `around the world` 全世界
+                        - `be a symbol of ...` 是...的象征
+                        - `make a wish` 许愿
+                        - `cut up` 切碎
+                        - `come true` 实现
+                        - `birthday noodles` 长寿面
+                        """.trimIndent()),
+
+                        UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. I'd like some noodles. (我想要点面条。)
-                        - **【句式剖析】**：`I'd like` 是 `I would like` 的缩写。比 `I want` 更委婉、更有礼貌。
-                        
+                        - **【考点详解】**：`I'd like` 是 `I would like` 的缩写。
+                        - **【用法拓展】**：
+                            *   `would like sth.` (想要某物)
+                            *   `would like to do sth.` (想要做某事)
+
                         #### 2. What kind of noodles would you like? (你想要哪种面条？)
-                        - **【词块归纳】**：`what kind of...` 意为“哪种/哪类...”。
-                        
-                        #### 3. It is a symbol of good luck. (它是好运的象征。)
-                        - **【要点精讲】**：`a symbol of...` ...的象征。
-                    """.trimIndent()),
+                        - **【考点详解】**：`what kind of` 询问种类。
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① would like (想要)
-                        - **【用法总结】**：
-                            *   `would like sth.` 想要某物。
-                            *   `would like to do sth.` 想要做某事。
-                        - **【例题】**：
-                        
-                        *Would you like ________ some orange juice?*
-                        A. drinking   B. drinks   C. to drink   D. drink
-                        
-                        **[解析]**：would like to do 固定搭配，选 **C**。
+                        #### 3. What size bowl of noodles would you like? (你想要多大碗的面条？)
+                        - **【结构剖析】**：`what size` 询问规格。
 
-                        #### ② potato / tomato (名词复数)
-                        - **【记忆口诀】**：英雄(hero)爱吃土豆(potato)和西红柿(tomato)，复数后面直接加 -es。
-                    """.trimIndent()),
+                        #### 4. The number of people is increasing. (人数正在增加。)
+                        - **【语法延伸】**：`the number of ...` ( ...的数量) 谓语用单数。对比 `a number of ...` (许多) 谓语用复数。
+                        """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：数量的“精细化”表达
-                        **1. 可数与不可数的界限**
-                        *   可数：noodles (常用复数), potatoes, carrots.
-                        *   不可数：beef, mutton, rice, water, juice.
-                        
-                        **2. 不可数名词的数量表达**
-                        公式：`数词 + 容器/量词 + of + 不可数名词`。
-                        - *a bowl of rice* (一碗米饭)
-                        - *two glasses of juice* (两杯果汁)
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：would like 的句式变换
+                        - **肯定句**：I'd like a large bowl.
+                        - **疑问句**：`Would you like some tea?` (注意：表示请求/邀请时，用 some 而非 any)。
+                        - **回答**：Yes, please. / No, thanks.
 
-                        **3. 中考真题特训**
-                        
-                        *(2023·广东中考)* *I'm hungry. I'd like ________ and ________.*
-                        A. two bowl of noodle; some beef   B. two bowls of noodles; some beef   C. two bowl of noodles; some beefs   D. two bowls of noodle; some beefs
-                        
-                        **[解析]**：bowl 和 noodle 需用复数，beef 为不可数无复数，选 **B**。
-                    """.trimIndent()),
+                        ### 核心语法二：可数与不可数名词
+                        - **不可数**：beef, mutton, meat, rice, juice, porridge. (数量表达：`a glass of...`)
+                        - **可数**：potato(es), tomato(es), egg(s), pancake(s). (复数规律：土豆西红柿加 -es)。
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：Menu & Ordering (设计菜单与模拟订餐)
-                        #### 1. 常用句式
-                        *   *Can I help you? / May I take your order?*
-                        *   *I'd like ... bowl of ...*
-                        *   *What size would you like?*
-                        *   *Wait a minute, please.*
+                        ### 中考真题特训
 
-                        #### 2. 满分范文
-                        Welcome to our restaurant! We have many kinds of food. For meat lovers, we have **beef and mutton**. For vegetables, we have **cabbages and potatoes**. **What would you like?** If you want noodles, we have **large, medium and small** bowls. We also have delicious **strawberry pancakes**. Please come and have a taste!
-                    """.trimIndent())
-                )
-            )
-        ,
-            TextbookUnit(
-                "g7down_u9", "Unit 9", "What did you do last weekend?",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：周末活动，闲暇生活，个人经历分享 (Past activities)。
+                        *(2024·上海中考)* *Would you like ________ to eat?*
+                        A. something healthy   B. healthy something   C. anything healthy   D. healthy anything
 
-                        ### 2. 单元主题内容
-                        本单元以“周末活动”为核心，正式引入一般过去时（Simple Past Tense）。学生将学习如何描述过去发生的动作或状态，包括规则动词与不规则动词的变化。通过分享周末的趣事或忙碌生活，引导学生学会合理安排业余时间，培养积极向上的生活态度，并增进同学间的相互了解。
-                    """.trimIndent()),
+                        **[解析]**：would you like 引导的请求句用 something，且形容词后置，选 **A**。
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **周末活动**：did homework, went to the cinema, played badminton, went boating, camped by the lake.
-                        - **不规则动词**：do -> did, go -> went, see -> saw, sit -> sat, eat -> ate, spend -> spent.
-                        - **核心名词**：weekend (周末), mountain (山), beach (海滩), fire (火), mouse (老鼠).
-                        - **高频短语**：last weekend, go camping (去野营), stay up late (熬夜), shout at (对...大声叫嚷).
+                        *(2023·广东中考)* *— I'd like two ________ of apple juice. — Here you are.*
+                        A. glass   B. cup   C. glasses   D. bowl
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问过去活动**：What did you do last weekend? — I went to the movies.
-                        2.  **询问感受**：How was your weekend? — It was great/boring.
-                        3.  **询问他人**：Did he go to the beach? — Yes, he did. / No, he didn't.
-                        4.  **描述经历**：I saw a big snake in the forest.
+                        **[解析]**：量词修饰不可数名词，数词 two 后接复数，选 **C**。
+                        """.trimIndent()),
 
-                        ### 3. 重点语法 (Key Grammar)
-                        - **一般过去时** 的构成、疑问句及回答。
-                        - **动词过去式** 的变化规则（规则与不规则）。
-                    """.trimIndent()),
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：介绍中国传统美食 (Chinese Traditional Food)
+                        #### 1. 写作思路
+                        - **名称与食材**：Name of the food and ingredients.
+                        - **制作/吃法**：How to make/eat it.
+                        - **文化寓意**：What does it mean? (Symbol of good luck/long life).
+                        - **情感**：I like it very much.
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Lucy**: Hi, Alice. What did you do last weekend?
-                        
-                        **Alice**: I went to the cinema with my family. We saw a very funny movie.
-                        
-                        **Lucy**: How was it?
-                        
-                        **Alice**: It was great! What about you?
-                        
-                        **Lucy**: I stayed at home and did my homework. It was kind of boring.
+                        #### 2. 高分句式
+                        - *In China, people often eat dumplings during festivals.*
+                        - *Dumplings are made of flour, meat and vegetables.*
+                        - *They are a symbol of luck and wealth.*
+                        - *I hope everyone can have a taste of Chinese food.*
 
-                        **【译文】**
-                        
-                        **露西**：嗨，艾丽丝。你上周末做什么了？
-                        
-                        **艾丽丝**：我和家人一起去了电影院。我们看了一部非常有意思的电影。
-                        
-                        **露西**：怎么样？
-                        
-                        **艾丽丝**：太棒了！你呢？
-                        
-                        **露西**：我待在家里做作业了。有点无聊。
+                        #### 3. 满分范文
+                        **Zongzi**
 
-                        ### Section B (Reading) 阅读文段：A Busy Weekend
-                        **【原文】**
-                        
-                        Last weekend was very busy for my family. On Saturday morning, I cleaned my room. In the afternoon, I played soccer. My parents went shopping. On Sunday, we went to the countryside. We had a picnic near a small river. We saw many flowers and birds. We were tired but we had a lot of fun.
+                        Zongzi is a traditional Chinese food. People always eat it during the Dragon Boat Festival. It is made of sticky rice and different fillings like meat, beans or nuts. They are wrapped in bamboo or reed leaves. In my hometown, people think Zongzi is a symbol of luck. I like eating Zongzi because it is very delicious and healthy. If you come to China, you must have a taste!
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u11", "Unit 11", "How was your school trip?",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 过往经历。
+                        *   **深层意义**：本单元聚焦“学校远足与科学探索”。通过描述参观农场、博物馆等经历，学习一般过去时。旨在引导学生走出课堂，探索自然与科学的奥秘。培养学生记录生活、分享快乐的能力，同时在总结行程中提升批判性思维（评价好坏及其原因）。
 
-                        **【译文】**
-                        
-                        上周末对我们家来说非常忙碌。在周六上午，我打扫了房间。在下午，我踢了足球。我的父母去购物了。在周日，我们去了乡下。我们在一条小河边野餐。我们看到了许多花和鸟。我们很累但是玩得很开心。
-                    """.trimIndent()),
+                        ### 2. 知识能力目标
+                        - **语言能力**：掌握一般过去时（Simple Past Tense）的基本构成；熟练掌握 `be` 动词及部分常用动词的过去式变化；掌握评价性形容词。
+                        """.trimIndent()),
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. What did you do last weekend? (你上周末做什么了？)
-                        - **【句式剖析】**：`did` 是助动词，用来辅助构成过去时的疑问句。后面的 `do` 必须用原形。
-                        
-                        #### 2. I went boating. (我去划船了。)
-                        - **【用法拓展】**：`go + v.-ing` 表示去从事某项活动。*go camping* (去野营)。
-                        
-                        #### 3. It was time to go to bed. (该睡觉了。)
-                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了。
-                    """.trimIndent()),
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **过去式核心动词**：milked (挤奶), farmed (务农), fed (喂养), rode (骑), saw (看见), went (去), took (拿)。
+                        - **场所**：farm (农场), museum (博物馆), fire station (消防站), gift shop (礼品店)。
+                        - **评价词**：excellent (极好的), exciting (令人兴奋的), interesting (有趣的), expensive (昂贵的), cheap (便宜的), slow (慢的), fast (快的)。
+                        - **自然物**：sun (太阳), flower (花), robot (机器人), guide (导游)。
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① stay up late (熬夜)
-                        - **【例题】**：
-                        
-                        *Don't ________ too late. It is bad for your health.*
-                        A. stay up   B. sit up   C. stand up   D. get up
-                        
-                        **[解析]**：stay up late 熬夜，选 **A**。
+                        ### 2. 核心短语金牌储备
+                        - `go for a walk` 去散步
+                        - `milk a cow` 挤牛奶
+                        - `ride a horse` 骑马
+                        - `feed chickens` 喂鸡
+                        - `take photos` 拍照
+                        - `quite a lot` 许多
+                        - `all in all` 总的来说
+                        - `be interested in ...` 对...感兴趣
+                        - `learn a lot about ...` 学到很多关于...
+                        - `fire station` 消防站
+                        """.trimIndent()),
 
-                        #### ② shout at (大声叫嚷)
-                        - **【辨析】**：`shout at` (因愤怒而大声呵斥)；`shout to` (因距离远而大声呼喊)。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：一般过去时 (Simple Past Tense)
-                        表示过去某个时间发生的动作或存在的状态。
-                        **1. 动词过去式的变化规则**
-                        *   直接加 ed：*work -> worked*。
-                        *   去e加 d：*love -> loved*。
-                        *   辅音+y变i加ed：*study -> studied*。
-                        *   双写末尾辅音加ed：*stop -> stopped*。
-                        *   不规则变化：*go -> went, have -> had, is -> was*。
-
-                        **2. 句式结构**
-                        - 肯定：主语 + 动词过去式 + 其他.
-                        - 否定：主语 + **didn't** + 动词原形.
-                        - 疑问：**Did** + 主语 + 动词原形 ...?
-
-                        **3. 中考真题特训**
-                        
-                        *(2024·天津中考)* *I ________ a beautiful kite with my father yesterday.*
-                        A. make   B. made   C. am making   D. will make
-                        
-                        **[解析]**：yesterday 提示用过去式，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My Last Weekend (我的上周末)
-                        **Last weekend, I had a very happy time.**
-                        
-                        On Saturday morning, I **did my homework**. It was a bit difficult but I finished it. In the afternoon, I **went to the park** with my friends. We **played basketball** together. On Sunday, I **stayed at home** and read an interesting book. My mother **cooked** a delicious dinner for us. 
-                        
-                        I felt very relaxed. What about your weekend?
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u10", "Unit 10", "I'd like some noodles.",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：饮食与健康，订餐服务，中外饮食文化 (Food and ordering)。
-
-                        ### 2. 单元主题内容
-                        本单元以“订餐”为核心情境，学习各种食物名称（如 beef, mutton, noodles, cabbage 等）以及如何表达需求（would like）。通过模拟餐馆点餐，学生不仅掌握了数量与规格的表达（如 large, medium, small），还学习了中国传统美食文化（如生日面、饺子）。本单元旨在培养学生的社会实践能力，学会在公共服务场所进行得体、清晰的沟通。
-                    """.trimIndent()),
-
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **肉类蔬菜**：beef (牛肉), mutton (羊肉), chicken (鸡肉), cabbage (卷心菜), potato (土豆), tomato (西红柿), carrot (胡萝卜).
-                        - **主食饮品**：noodles (面条), rice (米饭), pancake (薄烤饼), porridge (粥), soup (汤), juice (果汁).
-                        - **规格数量**：size (尺寸), large (大号的), medium (中号的), small (小号的), bowl (碗).
-                        - **高频短语**：would like (想要), take one's order (点菜), what size (什么规格), birthday noodles (长寿面).
-
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **表达想要**：I'd like a large bowl of beef noodles.
-                        2.  **询问点餐**：May I take your order? / What would you like to eat?
-                        3.  **询问规格**：What size bowl of noodles would you like?
-                        4.  **描述传统**：In China, people eat long noodles for their birthdays.
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **would like** 的各种句式变换。
-                        - **可数名词与不可数名词**的分类及其数量表达（a bowl of...）。
-                    """.trimIndent()),
-
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Waiter**: Hello! May I take your order?
-                        
-                        **Boy**: Yes. I'd like some noodles, please.
-                        
-                        **Waiter**: What kind of noodles would you like?
-                        
-                        **Boy**: I'd like beef and tomato noodles.
-                        
-                        **Waiter**: And what size would you like?
-                        
-                        **Boy**: A medium bowl, please.
-
-                        **【译文】**
-                        
-                        **服务员**：您好！可以点餐了吗？
-                        
-                        **男孩**：是的。请给我来点面条。
-                        
-                        **服务员**：您想要哪种面条？
-                        
-                        **男孩**：我想要牛肉西红柿面。
-                        
-                        **服务员**：那您想要多大碗的？
-                        
-                        **男孩**：请给我来个中碗的。
-
-                        ### Section B (Reading) 阅读文段：Birthday Food Around the World
-                        **【原文】**
-                        
-                        What do people eat on their birthdays? In many countries, people have a cake with candles. But in China, it's different. People often eat long noodles. They think long noodles mean a long life. In some places, people also eat red eggs. They are a symbol of good luck. What about you? What do you like to eat on your birthday?
-
-                        **【译文】**
-                        
-                        人们在生日那天吃什么？在许多国家，人们吃带蜡烛的蛋糕。但在中国，情况有所不同。人们经常吃长寿面。他们认为长寿面意味着长寿。在一些地方，人们也吃红鸡蛋。它们是好运的象征。你呢？你在生日那天喜欢吃什么？
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
-                        #### 1. I'd like some noodles. (我想要点面条。)
-                        - **【句式剖析】**：`I'd like` 是 `I would like` 的缩写。比 `I want` 更委婉、更有礼貌。
-                        
-                        #### 2. What kind of noodles would you like? (你想要哪种面条？)
-                        - **【词块归纳】**：`what kind of...` 意为“哪种/哪类...”。
-                        
-                        #### 3. It is a symbol of good luck. (它是好运的象征。)
-                        - **【要点精讲】**：`a symbol of...` ...的象征。
-                    """.trimIndent()),
-
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① would like (想要)
-                        - **【用法总结】**：
-                            *   `would like sth.` 想要某物。
-                            *   `would like to do sth.` 想要做某事。
-                        - **【例题】**：
-                        
-                        *Would you like ________ some orange juice?*
-                        A. drinking   B. drinks   C. to drink   D. drink
-                        
-                        **[解析]**：would like to do 固定搭配，选 **C**。
-
-                        #### ② potato / tomato (名词复数)
-                        - **【记忆口诀】**：英雄(hero)爱吃土豆(potato)和西红柿(tomato)，复数后面直接加 -es。
-                    """.trimIndent()),
-
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：数量的“精细化”表达
-                        **1. 可数与不可数的界限**
-                        *   可数：noodles (常用复数), potatoes, carrots.
-                        *   不可数：beef, mutton, rice, water, juice.
-                        
-                        **2. 不可数名词的数量表达**
-                        公式：`数词 + 容器/量词 + of + 不可数名词`。
-                        - *a bowl of rice* (一碗米饭)
-                        - *two glasses of juice* (两杯果汁)
-
-                        **3. 中考真题特训**
-                        
-                        *(2023·广东中考)* *I'm hungry. I'd like ________ and ________.*
-                        A. two bowl of noodle; some beef   B. two bowls of noodles; some beef   C. two bowl of noodles; some beefs   D. two bowls of noodle; some beefs
-                        
-                        **[解析]**：bowl 和 noodle 需用复数，beef 为不可数无复数，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：Menu & Ordering (设计菜单与模拟订餐)
-                        #### 1. 常用句式
-                        *   *Can I help you? / May I take your order?*
-                        *   *I'd like ... bowl of ...*
-                        *   *What size would you like?*
-                        *   *Wait a minute, please.*
-
-                        #### 2. 满分范文
-                        Welcome to our restaurant! We have many kinds of food. For meat lovers, we have **beef and mutton**. For vegetables, we have **cabbages and potatoes**. **What would you like?** If you want noodles, we have **large, medium and small** bowls. We also have delicious **strawberry pancakes**. Please come and have a taste!
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u11", "Unit 11", "How was your school trip?",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：学校组织的出游，研学经历，自然与科学观察 (School trips)。
-
-                        ### 2. 单元主题内容
-                        本单元以“学校组织的出游”为主题，深入学习一般过去时的进阶用法。通过描述农场参观、博物馆研学等经历，学生能够运用过去时态描述一连串的动作（如 milked a cow, rode a horse, saw some robots 等）并表达对这些经历的评价。本单元旨在引导学生走进自然、走进科学，在实践中学习，培养其观察力、好奇心和分享经历的社交能力。
-                    """.trimIndent()),
-
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **出游活动**：milked a cow (挤牛奶), rode a horse (骑马), fed chickens (喂鸡), took photos (照相), went for a walk (散步).
-                        - **场所/物品**：farm (农场), museum (博物馆), robot (机器人), gift (礼物), sun (太阳).
-                        - **评价形容词**：interesting (有趣的), exciting (令人兴奋的), lovely (可爱的), expensive (昂贵的), cheap (便宜的).
-                        - **高频短语**：all in all (总的来说), quite a lot (许多), fire station (消防站).
-
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问出游感受**：How was your school trip? — It was excellent!
-                        2.  **询问具体活动**：What did you see? — I saw some robots.
-                        3.  **询问过程**：Did you go to the zoo? — No, I didn't.
-                        4.  **总结评价**：All in all, it was an exciting day.
-
-                        ### 3. 重点语法 (Key Grammar)
-                        - **一般过去时** 的不规则动词变化进阶（feed -> fed, ride -> rode, eat -> ate）。
-                        - **形容词评价语** 的丰富表达。
-                    """.trimIndent()),
-
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Eric**: Hi, Carol. How was your school trip?
-                        
-                        **Carol**: It was great! We went to a farm.
-                        
-                        **Eric**: Did you see any cows?
-                        
-                        **Carol**: Yes, I did. I even milked a cow. 
-                        
-                        **Eric**: Did you ride a horse? 
-                        
-                        **Carol**: No, I didn't. But I fed some chickens. It was so much fun!
-
-                        **【译文】**
-                        
-                        **埃里克**：嗨，卡罗尔。你的学校郊游怎么样？
-                        
-                        **卡罗尔**：太棒了！我们去了一个农场。
-                        
-                        **埃里克**：你看到牛了吗？
-                        
-                        **卡罗尔**：看到了。我甚至还挤了牛奶。
-                        
-                        **埃里克**：你骑马了吗？
-                        
-                        **卡罗尔**：没骑。但我喂了一些鸡。真的很有趣！
-
-                        ### Section B (Reading) 阅读文段：A School Trip to the Museum
-                        **【原文】**
-                        
-                        Yesterday we went to the Science Museum. First, we saw some robots. They were very cool! Then we went to the gift shop and bought some lovely gifts. The weather was a bit rainy, but it didn't stop us. All in all, the trip was very educational and I learned quite a lot about science.
-
-                        **【译文】**
-                        
-                        昨天我们去了科学博物馆。首先，我们看到了一些机器人。它们非常酷！然后我们去了礼品店，买了一些可爱的礼物。天气有点下雨，但这并没有阻碍我们。总的来说，这次旅行非常有教育意义，我学到了不少关于科学的知识。
-                    """.trimIndent()),
-
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. How was your school trip? (你的学校郊游怎么样？)
-                        - **【用法拓展】**：这里的 `was` 是 `is` 的过去式。
-                        
-                        #### 2. I learned quite a lot about science. (我学到了很多关于科学的知识。)
-                        - **【词块归纳】**：`quite a lot` 意为“很多/相当多”。
-                        
-                        #### 3. All in all, it was a great day. (总的来说，这是伟大的一天。)
-                        - **【要点精讲】**：`all in all` 常用于文章末尾进行总结。
-                    """.trimIndent()),
+                        - **【考点详解】**：`was` 是 `is` 的过去式。用于询问过去的感受。
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① ride (v. 骑) -> rode (过去式)
-                        - **【词块归纳】**：`ride a bike` (骑自行车), `ride a horse` (骑马)。
-                        - **【例题】**：
-                        
-                        *Last Sunday, my brother ________ a horse on the farm.*
-                        A. ride   B. rides   C. riding   D. rode
-                        
-                        **[解析]**：Last Sunday 提示用过去时，选 **D**。
+                        #### 2. Did you see any cows? (你看到牛了吗？)
+                        - **【考点详解】**：一般过去时的一般疑问句。助动词 `Did` 提至句首，谓语动词变原形。
 
-                        #### ② exciting (令人兴奋的) vs excited (感到兴奋的)
-                        - **【辨析】**：`exciting` 修饰事物；`excited` 修饰人。
-                    """.trimIndent()),
+                        #### 3. It was so much fun! (那真是太有趣了！)
+                        - **【用法拓展】**：`fun` 是不可数名词，前接 `so much`。
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：一般过去时的评价与描述
-                        **1. 动词 be 的过去式**
-                        - I/He/She/It was ...
-                        - We/You/They were ...
-                        
-                        **2. 评价词的逻辑**
-                        - 积极评价：excellent, great, exciting, lovely.
-                        - 消极评价：terrible, boring, expensive.
+                        #### 4. I learned quite a lot about science. (我学到了许多关于科学的知识。)
+                        - **【结构剖析】**：`quite a lot` 相当于 `very much` 或 `a lot`。
+                        """.trimIndent()),
 
-                        **3. 中考真题特训**
-                        
-                        *(2023·北京中考)* *— How ________ your trip to London last month? — It ________ wonderful!*
-                        A. is; is   B. was; was   C. is; was   D. was; is
-                        
-                        **[解析]**：last month 提示全用过去时，选 **B**。
-                    """.trimIndent()),
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：一般过去时 (Simple Past Tense) - be 动词
+                        **1. 构成**：
+                        - I/He/She/It + **was**
+                        - We/You/They + **were**
+                        **2. 句式变化**：
+                        - 否定：`wasn't / weren't`
+                        - 疑问：`Was / Were` 提前。
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My School Trip (我的学校出游)
-                        **I went to the zoo for my school trip last Friday.**
-                        
-                        The weather was **sunny and warm**. First, we **saw many animals** like lions and elephants. They were **very lovely**. Then we **had lunch** together in the park. In the afternoon, we **took quite a lot of photos**. **All in all**, it was an **exciting** trip. I really enjoyed it!
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u12", "Unit 12", "What did you do last weekend?",
-                listOf(
-                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：周末活动，个人经历，意外事件 (Weekend stories)。
+                        ### 核心语法二：实义动词的过去式
+                        - **规则变化**：直接加 ed。 (*milked, farmed*)
+                        - **不规则变化**：(*ride -> rode, see -> saw, go -> went, feed -> fed, take -> took*)。
 
-                        ### 2. 单元主题内容
-                        本单元作为七年级下册的收尾，是对一般过去时态的全面巩固与总结。通过描述学生周末的各种经历（如做作业、露营、甚至是遇到蛇等意外事件），旨在提高学生在真实语境中运用过去时态进行叙事的能力。单元通过“由忙碌到意外”的情节安排，鼓励学生勇于分享生活中的起伏，培养其乐观、幽默的沟通品格。
-                    """.trimIndent()),
+                        ### 中考真题特训
 
-                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
-                        ### 1. 重点单词短语 (Key Words & Phrases)
-                        - **日常活动**：did homework, went camping, played badminton, went boating.
-                        - **核心名词**：weekend (周末), mouse (老鼠), baby (婴儿), snake (蛇), forest (森林).
-                        - **核心动词/形容词**：shout (呼喊), fly (飞), scary (吓人的), high (高的).
-                        - **高频短语**：stay up late (熬夜), run away (跑掉), shout at (对...大声叫嚷), wake up (醒来).
+                        *(2024·河北中考)* *— ________ your trip to the Science Museum? — It was great!*
+                        A. How's   B. How was   C. What's   D. What was
 
-                        ### 2. 核心句式 (Key Sentences)
-                        1.  **询问过去**：What did you do last weekend? — I stayed at home.
-                        2.  **描述状态**：How was your weekend? — It was kind of busy.
-                        3.  **叙述事件**：Suddenly, I saw a big snake in the forest.
-                        4.  **表达惊讶**：That was a very scary weekend!
+                        **[解析]**：答语是过去时，问句也要用过去时，选 **B**。
 
-                        ### 3. 重点语法 (Key Grammar)
-                        - **一般过去时** 的综合应用（特殊疑问句、一般疑问句及否定句）。
-                        - **不规则动词** 的集中巩固（fly -> flew, feel -> felt, wake -> woke）。
-                    """.trimIndent()),
+                        *(2023·北京中考)* *Last Sunday, we ________ to the farm and picked some apples.*
+                        A. go   B. goes   C. went   D. will go
 
-                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
-                        
-                        **Lucy**: Hi, Alice. What did you do last weekend?
-                        
-                        **Alice**: I stayed at home and did my homework. 
-                        
-                        **Lucy**: Was it boring?
-                        
-                        **Alice**: No, it wasn't. It was busy but I learned a lot. 
-                        
-                        **Lucy**: I went camping with my friends. We sat by the fire and told stories. 
-                        
-                        **Alice**: That sounds like a lot of fun!
+                        **[解析]**：Last Sunday 是明确的过去时间标志，且 pick 用了过去式，选 **C**。
+                        """.trimIndent()),
 
-                        **【译文】**
-                        
-                        **露西**：嗨，艾丽丝。你上周末做什么了？
-                        
-                        **艾丽丝**：我待在家里做作业了。
-                        
-                        **露西**：无聊吗？
-                        
-                        **艾丽丝**：不，不无聊。虽然很忙但我学到了很多。
-                        
-                        **露西**：我和朋友们去露营了。我们坐在火堆旁讲故事。
-                        
-                        **艾丽丝**：那听起来非常有趣！
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的学校出游记 (My School Trip)
+                        #### 1. 写作三部曲
+                        - **When & Where**：什么时候去的，去了哪里。
+                        - **What did you do?**：按顺序描述所做的事情（使用 First, Then, After that）。
+                        - **Feeling**：对这次旅行的总体评价。
 
-                        ### Section B (Reading) 阅读文段：A Scary Weekend
-                        **【原文】**
-                        
-                        Last weekend, my brother and I went to the forest. We put up our tent and started a fire. We were very happy. But in the middle of the night, we woke up because we heard a strange sound. Suddenly, a big snake came into our tent! We were so scared that we ran away quickly. It was a very scary weekend.
+                        #### 2. 高分句式
+                        - *Last Friday, we went to the farm for our school trip.*
+                        - *The weather was sunny and warm.*
+                        - *First, the farmer showed us around.*
+                        - *The best part was feeding the animals.*
+                        - *All in all, it was an exciting and educational trip.*
 
-                        **【译文】**
-                        
-                        上周末，我和我弟弟去了森林。我们搭起帐篷并生了火。我们很快乐。但在半夜，我们醒了，因为我们听到了奇怪的声音。突然，一条大蛇爬进了我们的帐篷！我们太害怕了，飞快地跑开了。那是一个非常惊险的周末。
-                    """.trimIndent()),
+                        #### 3. 满分范文
+                        **A Trip to the Science Museum**
 
-                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        Yesterday, our school organized a trip to the Science Museum. We arrived there at 9:00 a.m. First, we saw some amazing robots. They could talk and dance. Then, our teacher showed us some old inventions. I learned a lot about science history. After that, we went to the gift shop and I bought a robot toy. All in all, the trip was excellent. It was not only interesting but also educational. I had a great time!
+                        """.trimIndent())
+                        )
+                        ),
+                        TextbookUnit(
+                        "g7down_u12", "Unit 12", "What did you do last weekend?",
+                        listOf(
+                        UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 周末生活与意外事件。
+                        *   **深层意义**：作为本册书的最后一个单元，它对“一般过去时”进行了全面的整合。除了常规活动，还引入了“探险与意外”情境（如在帐篷里遇到蛇）。旨在引导学生学会用英语叙述完整的故事，培养面对意外时的冷静心态，以及热爱生活、敢于探索的精神。
+
+                        ### 2. 知识能力目标
+                        - **语言能力**：全面掌握一般过去时的各种句式；熟记更多不规则动词的过去式；能够运用逻辑连接词（Suddenly, so...that...）叙述故事。
+                        """.trimIndent()),
+
+                        UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **活动词汇**：camp (露营), boat (划船), badminton (羽毛球), sheep (绵羊)。
+                        - **动物/自然**：butterfly (蝴蝶), mouse (老鼠), baby (婴儿), snake (蛇), forest (森林), moon (月亮)。
+                        - **核心动词/形容词**：shout (呼喊), jump (跳), wake (醒), stay (停留), scary (吓人的)。
+                        - **其他**：language (语言), surprise (惊讶)。
+
+                        ### 2. 核心短语金牌储备
+                        - `stay up late` 熬夜
+                        - `go camping` 去露营
+                        - `go boating` 去划船
+                        - `run away` 逃跑；跑掉
+                        - `shout at sb.` 对某人大声喊叫
+                        - `wake up` 醒来
+                        - `put up` 搭起；举起
+                        - `make a fire` 生火
+                        - `each other` 互相
+                        - `so ... that ...` 如此...以至于...
+                        """.trimIndent()),
+
+                        UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. What did you do last weekend? (你上周末做什么了？)
-                        - **【用法拓展】**：询问过去动作的标准句型。
-                        
-                        #### 2. I saw a big snake in the tent. (我在帐篷里看到一条大蛇。)
-                        - **【词块归纳】**：`saw` 是 `see` 的过去式。
-                        
-                        #### 3. We were so scared that we ran away. (我们如此害怕以至于跑开了。)
-                        - **【句式金牌】**：`so + 形容词 + that + 从句` (如此...以至于...)。
-                    """.trimIndent()),
+                        - **【考点详解】**：一般过去时的特殊疑问句，询问过去发生的具体动作。
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① stay up late (熬夜)
-                        - **【注意】**：stay up 表示“不睡觉”。
-                        
-                        #### ② run away (跑掉; 逃跑)
-                        - **【例题】**：
-                        
-                        *When the thief saw the police, he ________ quickly.*
-                        A. ran away   B. ran into   C. ran after   D. ran out
-                        
-                        **[解析]**：看到警察后“跑掉”，选 **A**。
+                        #### 2. How was your weekend? (你的周末过得怎么样？)
+                        - **【考点详解】**：询问过去状态的常用句型。
 
-                        #### ③ shout at vs shout to
-                        - **【辨析】**：`shout at` 往往带有生气的情绪；`shout to` 只是大声呼喊。
-                    """.trimIndent()),
+                        #### 3. We were so scared that we couldn't move. (我们如此害怕以至于动弹不得。)
+                        - **【句式金牌】**：`so + adj. + that + 句子` 引导结果状语从句。
 
-                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
-                        ### 语法核心：一般过去时的终极巩固
-                        **1. 助动词 did 的统治地位**
-                        只要句子中有 did，后面的动词必须恢复原形。
-                        - *Did you go?* (不说 Did you went?)
-                        - *I didn't see.* (不说 I didn't saw?)
-                        
-                        **2. 动词过去式的三种读音**
-                        - [t]：清辅音结尾 (helped, washed).
-                        - [d]：浊辅音或元音结尾 (played, stayed).
-                        - [id]：t 或 d 结尾 (wanted, needed).
+                        #### 4. I saw a big snake looking at me. (我看到一条大蛇正盯着我看。)
+                        - **【语法延伸】**：`see sb. doing sth.` 强调看见某人正在做某事。
+                        """.trimIndent()),
 
-                        **3. 中考真题特训**
-                        
-                        *(2024·山东中考)* *— ________ you ________ to the movies last Saturday? — Yes, I did.*
-                        A. Do; go   B. Did; went   C. Did; go   D. Do; went
-                        
-                        **[解析]**：过去时疑问句 Did ... go ...，选 **C**。
-                    """.trimIndent()),
+                        UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：一般过去时的终极总结
+                        **1. 常见标志词**：`yesterday`, `last weekend/year`, `... ago`, `just now`。
+                        **2. 句式汇总**：
+                        - 肯定句：主语 + v.-ed.
+                        - 否定句：`主语 + didn't + v. (原形)`。
+                        - 疑问句：`Did + 主语 + v. (原形) ...?`
+                        **3. 读音规律**：
+                        - [t]：清辅音结尾 (*looked*)。
+                        - [d]：浊辅音/元音结尾 (*stayed*)。
+                        - [id]：t/d 结尾 (*wanted, shouted*)。
 
-                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
-                        ### 写作主题：My Weekend Story (我的周末故事)
-                        **My weekend was interesting.** 
-                        
-                        On Saturday, I **did my homework**. On Sunday morning, I **went camping** with my parents. We **put up a tent** near a lake. It was **exciting**. But then, my little brother **fell into** the water! Luckily, my father **caught** him. It was a weekend **I will never forget**.
-                    """.trimIndent())
-                )
-            )
+                        ### 中考真题特训
 
-        )
-        )
-        }
+                        *(2024·天津中考)* *I ________ a letter to my friend last night.*
+                        A. write   B. writes   C. wrote   D. will write
+
+                        **[解析]**：last night 提示过去时，write 的过去式是 wrote，选 **C**。
+
+                        *(2023·江苏中考)* *— Did you go to the zoo yesterday? — No, I ________. I ________ at home.*
+                        A. didn't; stay   B. don't; stay   C. didn't; stayed   D. don't; stayed
+
+                        **[解析]**：问句是过去时，答句否定用 didn't，陈述过去事实用 stayed，选 **C**。
+                        """.trimIndent()),
+
+                        UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：一个难忘的周末 (A Memorable Weekend)
+                        #### 1. 写作要素
+                        - **六要素**：Who, When, Where, What, Why, How.
+                        - **故事情节**：起因 -> 经过 -> 高潮（意外） -> 结果。
+                        - **细节描写**：使用形容词描述感受。
+
+                        #### 2. 高分句式
+                        - *Last weekend was the most exciting one I ever had.*
+                        - *Suddenly, something unexpected happened.*
+                        - *I was so surprised that I couldn't say a word.*
+                        - *From this experience, I learned that...*
+
+                        #### 3. 满分范文
+                        **An Unexpected Weekend**
+
+                        Last weekend, I went camping in the forest with my brother. On Saturday afternoon, we put up our tent and made a fire. We were very happy. However, in the middle of the night, I woke up because I heard a strange sound. I saw a big snake coming into our tent! We were so scared that we ran away quickly and shouted for help. Luckily, my father came and helped us. It was a scary but unforgettable weekend. I will never forget it!
+                        """.trimIndent())
+                        )
+                        )
+                        )
+                        )
+                        }

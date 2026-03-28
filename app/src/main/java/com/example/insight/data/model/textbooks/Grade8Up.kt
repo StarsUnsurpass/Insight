@@ -13,1179 +13,927 @@ object Grade8Up {
         grade = "八年级",
         term = "上册",
         coverColor = Color(0xFFE8F5E9),
-        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc8s_2024/coverbig.jpg",
+        coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/sc8x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
                 "g8up_u1", "Unit 1", "Where did you go on vacation?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：暑假生活，旅游经历，分享与感受 (Vacation experiences)。
-
-                        ### 2. 单元主题内容
-                        本单元以“暑假旅游”为核心，重点复习并进阶学习一般过去时（Simple Past Tense）。学生将学会如何描述过去的行程（Where did you go?）、见闻（What did you see?）及个人感受（How was the food?）。通过对比不同人的度假经历，引导学生热爱自然，热爱生活，培养在社交场合中倾听并分享个人经历的能力。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活与学习 (旅游与度假)。
+                        *   **深层意义**：本单元复习并深化了一般过去时的应用。通过分享假期旅行经历，引导学生走出家门，开阔眼界。在此过程中，培养学生对不同地域文化的包容性，学会撰写旅行日记，记录生活中的美好瞬间，同时反思旅行中的得与失。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **不定代词**：anyone, someone, everyone, anything, something, everything, nothing.
-                        - **核心动词**：stay (停留), decide (决定), try (尝试), wonder (想知道), feel (感觉).
-                        - **地点/物品**：museum (博物馆), mountain (山), umbrella (雨伞), hill (小山).
-                        - **高频短语**：go on vacation (去度假), take photos (照相), buy something special (买特别的东西), of course (当然), enjoy oneself (玩得开心).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类记忆
+                        - **复合不定代词**：anyone (任何人), anywhere (任何地方), anything (任何事物), someone (某人), everyone (每个人), nothing (没什么)。
+                        - **假期活动**：camp (扎营), study (学习), buy (买), taste (尝起来)。
+                        - **评价形容词**：wonderful (精彩的), boring (无聊的), delicious (美味的), exciting (令人兴奋的)。
+                        - **名词**：diary (日记), activity (活动), difference (差异), top (顶部)。
 
-                        ### 2. 核心句式
-                        1.  **询问去向**：Where did you go on vacation? — I went to the mountains.
-                        2.  **询问同伴**：Did you go with anyone? — No, I went with my family.
-                        3.  **询问感受**：How was the weather? — It was hot and humid.
-                        4.  **描述经历**：Everything was so beautiful!
-
-                        ### 3. 重点语法
-                        - **一般过去时** 的特殊疑问句与一般疑问句。
-                        - **复合不定代词** (someone, anything等) 的用法及形容词后置规则。
+                        ### 2. 核心短语金牌储备
+                        - `go on vacation` 去度假
+                        - `go to the mountains` 去爬山
+                        - `stay at home` 待在家里
+                        - `quite a few` 相当多 (**必考：修饰可数名词复数**)
+                        - `take photos` 拍照
+                        - `most of the time` 大部分时间
+                        - `feel like` 感觉像...
+                        - `because of` 因为 (**对比：because + 句子**)
+                        - `keep a diary` 记日记
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Where did you go on vacation? (你去哪里度假了？)
+                        - **【考点详解】**：特殊疑问词 `Where` + 一般过去时疑问句（助动词 `did` 提至主语前，谓语动词用原形）。
                         
-                        **Grace**: Hi, Kevin. Long time no see. Where did you go on vacation?
+                        #### 2. Did you buy anything special? (你买了什么特别的东西吗？)
+                        - **【结构剖析】**：形容词修饰复合不定代词（如 anything, someone）时，**形容词必须后置**。
                         
-                        **Kevin**: I went to the beach. 
+                        #### 3. We decided to take the train. (我们决定乘火车。)
+                        - **【用法拓展】**：`decide to do sth.` 决定做某事。
                         
-                        **Grace**: Oh, did you go with anyone?
-                        
-                        **Kevin**: Yes, I went with my parents.
-                        
-                        **Grace**: How was the weather?
-                        
-                        **Kevin**: It was sunny and hot. We had a great time there.
-
-                        **【译文】**
-                        
-                        **格蕾丝**：嗨，凯文。好久不见。你暑假去哪儿度假了？
-                        
-                        **凯文**：我去了海边。
-                        
-                        **格蕾丝**：噢，你和谁一起去的吗？
-                        
-                        **凯文**：是的，我和我的父母一起去的。
-                        
-                        **格蕾丝**：天气怎么样？
-                        
-                        **凯文**：天气晴朗且炎热。我们在那儿玩得很开心。
-
-                        ### Section B (Reading) 阅读文段：My Diary in Penang
-                        **【原文】**
-                        
-                        Monday, July 15th. It arrived in Penang today. The weather was hot and sunny. We decided to go to the beach. I tried paragliding. It was so exciting! For lunch, we had something very special — Penang Laksa. It tasted delicious. I feel very tired now but very happy.
-
-                        **【译文】**
-                        
-                        7月15日，周一。今天到达了槟城。天气炎热且晴朗。我们决定去海边。我尝试了滑翔伞。它太令人兴奋了！午餐我们吃了一些非常特别的东西——槟城叻沙。它吃起来味道很美。我现在感觉很累，但是很快乐。
+                        #### 4. I felt like I was a bird. (我感觉自己像一只鸟。)
+                        - **【语法延伸】**：`feel like` 后面可接名词、代词、动词-ing或从句。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① try (v. 尝试; 努力)
-                        - **【用法总结】**：
-                            *   `try to do sth.` 尽力做某事（强调努力的过程）。
-                            *   `try doing sth.` 尝试做某事（强调尝试某种方法）。
-                        - **【例题】**：
-                        
-                        *You should ________ talking to him. Maybe he will agree.*
-                        A. try to   B. try   C. try doing   D. trying
-                        
-                        **[解析]**：强调尝试某种方式，用 try doing，选 **C**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：一般过去时的进阶
+                        - **标志词强化**：`yesterday`, `last night/week`, `in 2019`, `two days ago`, `just now`。
+                        - **不规则动词**：重点记忆 *buy-bought, find-found, see-saw, go-went, take-took*。
 
-                        #### ② enjoy oneself (玩得开心)
-                        - **【同义转换】**：`have a good time` / `have fun`.
-                        - **【用法】**：oneself 需随主语变化。*We enjoyed ourselves.*
+                        ### 核心语法二：复合不定代词的用法
+                        1.  **some类 vs any类**：`some-` 常用于肯定句；`any-` 常用于否定句和疑问句。（但在表示请求、建议的疑问句中，用 some-）。
+                        2.  **谓语动词**：复合不定代词作主语时，谓语动词一律用**单数**。
+                        3.  **形容词定语**：形容词必须放在不定代词之后。*something interesting*。
+
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *Is there ________ in today's newspaper?*
+                        A. something new   B. new something   C. anything new   D. new anything
+                        
+                        **[解析]**：疑问句中用 anything，且形容词 new 要后置，选 **C**。
+
+                        *(2023·广东中考)* *— Why didn't you buy the sweater? — Because there was ________ wrong with it.*
+                        A. anything   B. nothing   C. something   D. everything
+                        
+                        **[解析]**：因为衣服“有毛病”所以没买。肯定句中用 something，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：复合不定代词的“三大法宝”
-                        **1. 修饰语后置**
-                        形容词修饰不定代词时，必须放在不定代词之后。
-                        - *something interesting* (有趣的事)
-                        - *anything special* (特别的东西)
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的假期日记 (My Vacation Diary)
+                        #### 1. 写作要点
+                        - **日期与天气**：Tuesday, July 15th. Sunny.
+                        - **行程与活动**：使用一般过去时叙述（First we went to... Then we...）。
+                        - **见闻与感受**：运用不定代词和评价性形容词（We saw something interesting. The food was delicious.）。
 
-                        **2. 肯定与否定的分工**
-                        - **some-** 系列通常用于肯定句。
-                        - **any-** 系列通常用于否定句或疑问句。
+                        #### 2. 高分句式
+                        - *I went to Beijing on vacation with my family.*
+                        - *We decided to visit the Great Wall.*
+                        - *There were quite a few people there.*
+                        - *I felt very tired, but I really enjoyed it.*
 
-                        **3. 谓语动词单数**
-                        复合不定代词作主语时，谓语动词用单数。
-                        - *Everything **is** ready.*
-
-                        **4. 中考真题特训**
+                        #### 3. 满分范文
+                        **A Great Vacation**
                         
-                        *(2024·山东中考)* *I'm hungry. Is there ________ to eat in the fridge?*
-                        A. something   B. anything   C. everything   D. nothing
+                        Monday, August 12th
                         
-                        **[解析]**：疑问句中询问是否有东西，用 anything，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：A Vacation Diary (旅游日记)
-                        **Monday, August 12th. Sunny.**
-                        
-                        Today I went to **Mount Tai** with my friends. We started at 6:00 a.m. The weather was **sunny and cool**, very good for climbing. On the way to the top, we saw many **beautiful flowers**. **Everything** was so fresh. We felt very tired, but when we saw the sunrise, we were very **excited**. It was **something special** in my life.
+                        Today I went to the Great Wall with my parents. It was sunny and hot. We went there by bus. There were quite a few people on the bus. When we arrived, we walked up the wall. It was very high. We took a lot of beautiful photos. For lunch, we ate something delicious in a restaurant. In the afternoon, we bought some special gifts for my friends. Although we were very tired, we had a great time!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u2", "Unit 2", "How often do you exercise?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：生活方式，运动习惯，饮食健康 (Healthy habits)。
-
-                        ### 2. 单元主题内容
-                        本单元以“生活习惯”为话题，重点学习询问频率的特殊疑问句 `How often` 及各类频度副词。通过对比不同频率的活动（如 exercise, watch TV, drink milk 等），引导学生分析自己的生活方式是否健康。本单元旨在培养学生良好的作息习惯，增强自我健康管理意识。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活习惯与健康。
+                        *   **深层意义**：本单元聚焦“活动的频率与生活习惯”。通过调查和统计个人做某事的频率（如锻炼、上网、喝牛奶），引导学生反思自己的生活方式，建立数据意识，并最终树立“自律即自由”的健康生活理念。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **频度副词**：always, usually, often, sometimes, hardly ever, never.
-                        - **频度短语**：once a week, twice a month, three times a day.
-                        - **健康词汇**：exercise (锻炼), diet (饮食), health (健康), junk food (垃圾食品), habit (习惯).
-                        - **高频短语**：be good for (对...有好处), keep healthy (保持健康), help with (在某方面提供帮助).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **频率副词**：always (总是), usually (通常), often (经常), sometimes (有时), hardly ever (几乎不), never (从不)。
+                        - **活动词汇**：exercise (锻炼), skateboard (滑板), surf (冲浪), Internet (互联网)。
+                        - **健康/身体**：health (健康), mind (头脑), body (身体), tooth/teeth (牙齿)。
+                        - **数量与百分比**：percent (百分之...), result (结果)。
 
-                        ### 2. 核心句式
-                        1.  **询问频率**：How often do you exercise? — Once a week.
-                        2.  **询问百分比**：What do students do in their free time?
-                        3.  **陈述习惯**：I hardly ever watch TV. / She eats junk food once a month.
-                        4.  **给出建议**：You should eat more vegetables.
-
-                        ### 3. 重点语法
-                        - **How often** 引导的特殊疑问句。
-                        - **频度副词** 的语义程度排序。
+                        ### 2. 核心短语金牌储备
+                        - `how often` 多久一次
+                        - `hardly ever` 几乎从不
+                        - `once a week` 一周一次
+                        - `twice a month` 一月两次
+                        - `go online` 上网
+                        - `at least` 至少
+                        - `such as` 例如
+                        - `be good for` 对...有好处
+                        - `junk food` 垃圾食品
+                        - `more than` 多于
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. How often do you exercise? (你多久锻炼一次？)
+                        - **【考点详解】**：`How often` 询问频率。回答通常用：频率副词（usually等）或“次数+时间段”（twice a week等）。
                         
-                        **Teacher**: How often do you exercise, Claire?
+                        #### 2. He hardly ever watches TV. (他几乎从不看电视。)
+                        - **【结构剖析】**：`hardly ever` 相当于半否定词，位于实义动词之前。
                         
-                        **Claire**: I exercise every day.
+                        #### 3. Twenty percent of the students do not exercise at all. (20%的学生根本不锻炼。)
+                        - **【语法核心】**：`not... at all` 意为“根本不；完全不”。
                         
-                        **Teacher**: And how often do you eat vegetables?
-                        
-                        **Claire**: I eat them twice a day. It's good for my health.
-                        
-                        **Teacher**: What about you, Jack?
-                        
-                        **Jack**: I hardly ever exercise. And I like eating junk food.
-                        
-                        **Teacher**: Oh, you should change your habits!
-
-                        **【译文】**
-                        
-                        **老师**：克莱尔，你多久锻炼一次？
-                        
-                        **克莱尔**：我每天都锻炼。
-                        
-                        **老师**：那你多久吃一次蔬菜？
-                        
-                        **克莱尔**：我每天吃两次。这对我的健康有好处。
-                        
-                        **老师**：你呢，杰克？
-                        
-                        **杰克**：我几乎不锻炼。而且我喜欢吃垃圾食品。
-                        
-                        **老师**：哦，你应该改变你的习惯！
-
-                        ### Section B (Reading) 阅读文段：What Do No. 5 High School Students Do?
-                        **【原文】**
-                        
-                        We asked our students what they do in their free time. The results were interesting. 90% of students exercise every day. 80% of students watch TV twice a week. But only 15% of students drink milk every day. We hope all students can have a healthy lifestyle.
-
-                        **【译文】**
-                        
-                        我们询问了学生们在业余时间做什么。结果很有趣。90%的学生每天锻炼。80%的学生每周看两次电视。但只有15%的学生每天喝牛奶。我们希望所有的学生都能拥有健康的生活方式。
+                        #### 4. It is good to relax by using the Internet or watching game shows. (通过上网或看游戏节目来放松是很好的。)
+                        - **【避坑指南】**：`by + doing sth.` 表示“通过...的方式”。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① how often (多久一次)
-                        - **【辨析】**：
-                            *   `how often`：问频率。*Once a week.*
-                            *   `how long`：问时长。*For two hours.*
-                            *   `how soon`：问多久以后。*In three days.*
-                        - **【中考真题/例题】**：
-                        
-                        *— ________ do you go to the cinema? — Once a month.*
-                        A. How often   B. How many   C. How long   D. How much
-                        
-                        **[解析]**：根据回答 Once a month 可知问频率，选 **A**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：频率的表达方式
+                        1.  **百分比频率副词**：always(100%) > usually(80%) > often(60%) > sometimes(30%) > hardly ever(5%) > never(0%)。
+                        2.  **具体次数表达**：`次数 + a/an + 时间段`。
+                            *   一次：`once`
+                            *   两次：`twice`
+                            *   三次及以上：`基数词 + times` (如 *three times a week*)
 
-                        #### ② be good for (对...有好处)
-                        - **【对比】**：
-                            *   `be good for`：对...有益。
-                            *   `be good at`：擅长于...。
-                            *   `be good with`：善于与...相处。
+                        ### 核心语法二：How 疑问词组辨析
+                        - `How often`：多久一次（问频率）。
+                        - `How long`：多久（问时间段）。
+                        - `How soon`：多久以后（常用于将来时）。
+                        - `How far`：多远（问距离）。
+
+                        ### 中考真题特训
+                        
+                        *(2024·江苏中考)* *— ________ do you go to the library? — Twice a month.*
+                        A. How long   B. How often   C. How much   D. How soon
+                        
+                        **[解析]**：答语是频率，提问用 How often，选 **B**。
+
+                        *(2023·北京中考)* *My grandparents live in the countryside. I visit them ________.*
+                        A. once a month   B. one a month   C. a month once   D. month once
+                        
+                        **[解析]**：表达“一个月一次”，次数在前，时间在后，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：频度副词与频率表达
-                        **1. 频度副词百分比**
-                        always (100%) > usually (80%) > often (60%) > sometimes (40%) > hardly ever (10%) > never (0%).
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：关于生活习惯的调查报告 (A Report on Habits)
+                        #### 1. 写作要点
+                        - **引言**：交代调查对象和内容（Here are the results of the student activity survey at...）。
+                        - **数据展示**：使用百分比和比例表达（Most students..., ... percent of the students...）。
+                        - **结论与建议**：给出健康建议（I think students should...）。
 
-                        **2. 具体的频率表达**
-                        - *Once a week* (一周一次)
-                        - *Twice a month* (一月两次)
-                        - *Three times a year* (一年三次)
+                        #### 2. 高分句式
+                        - *We asked fifty students about their exercise habits.*
+                        - *Only ten percent of the students exercise every day.*
+                        - *Some students often go online, but it is bad for their eyes.*
+                        - *In a word, we should exercise more to keep healthy.*
 
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **Our Exercise Habits**
                         
-                        *(2023·北京中考)* *— How ________ do you help with housework? — Every day.*
-                        A. long   B. soon   C. often   D. far
+                        Last week, we asked 50 students in our class about their exercise habits. Here are the results.
                         
-                        **[解析]**：回答是频率，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Healthy Lifestyle (我的健康生活方式)
-                        **Hello! My name is Li Hua.**
+                        Most students are active. Twenty percent of the students exercise every day. They often play basketball or run. Fifty percent of the students exercise three to four times a week. However, twenty percent of the students exercise only once or twice a week. And ten percent of the students hardly ever exercise. They only watch TV or play computer games.
                         
-                        I think I have a **healthy lifestyle**. I **exercise every day** to keep fit. I **usually eat** vegetables and fruit. I **hardly ever eat** junk food because it is **bad for** my health. I **often drink** milk before I go to bed. I **usually sleep** eight hours every night. 
-                        
-                        What about you? Do you have a healthy life?
+                        I think students should do more exercise. It is very important to keep healthy.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u3", "Unit 3", "I'm more outgoing than my sister.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：个人特征对比，朋友的选择与相处 (Friends and personality)。
-
-                        ### 2. 单元主题内容
-                        本单元以“性格与外貌对比”为核心，重点学习形容词和副词的比较级（Comparative Degree）。通过对比兄弟姐妹或朋友之间的差异（如 taller, more outgoing 等），学生学会如何进行多维度的客观描述。同时，单元探讨了“什么样的朋友才是好朋友”，引导学生建立正确的友谊观，学会在差异中欣赏他人。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 自我认识与他人。
+                        *   **深层意义**：本单元探讨“人物特征的比较与友谊”。通过学习形容词的比较级，引导学生客观地对比自己与他人的异同。同时，在讨论“怎样才是一个好朋友”时，帮助学生树立正确的交友观：朋友不需要一模一样，互补的性格也能成为好朋友。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **描述词**：outgoing (外向的), serious (严肃的), hard-working (勤奋的), talented (有天赋的), athletic (擅长运动的).
-                        - **核心名词**：competition (比赛), mirror (镜子), difference (差异), grade (成绩).
-                        - **程度副词**：much, even, a little, a bit (修饰比较级).
-                        - **高频短语**：as ... as ... (和...一样), both ... and ... (两者都), be different from (与...不同), reach for (伸手去够).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **性格形容词**：outgoing (外向的), hard-working (勤奋的), serious (严肃的), quiet (安静的), funny (滑稽的)。
+                        - **评价形容词**：fantastic (极好的), clearly (清晰地), loudly (大声地)。
+                        - **名词**：competition (比赛), mirror (镜子), kid (小孩), grade (成绩)。
+                        - **动词**：win (赢), care (关心), touch (触摸), break (打碎)。
 
-                        ### 2. 核心句式
-                        1.  **直接对比**：I'm taller than my sister. / He's more outgoing than me.
-                        2.  **同级比较**：She's as serious as my mother.
-                        3.  **程度修饰**：Sam is a little bit more athletic than Tom.
-                        4.  **友谊观点**：A good friend is like a mirror.
-
-                        ### 3. 重点语法
-                        - **形容词/副词比较级** 的构成规则（-er 与 more）。
-                        - **比较级句型**：A + be/v. + 比较级 + than + B。
+                        ### 2. 核心短语金牌储备
+                        - `more outgoing` 更外向的
+                        - `as ... as ...` 和...一样...
+                        - `the singing competition` 歌咏比赛
+                        - `be similar to` 与...相似
+                        - `the same as` 和...一样
+                        - `be different from` 与...不同
+                        - `bring out` 使显现；使表现出
+                        - `in fact` 事实上
+                        - `make friends` 交朋友
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. I'm more outgoing than my sister. (我比我妹妹更外向。)
+                        - **【考点详解】**：`than` 是比较级的标志词。`outgoing` 是多音节词，比较级在前面加 `more`。
                         
-                        **Tina**: Is that your sister, Tara?
+                        #### 2. Tara works as hard as Tina. (塔拉和蒂娜工作一样努力。)
+                        - **【结构剖析】**：`as + adj./adv.原级 + as` 表示“和...一样”。否定形式为 `not as/so ... as`。
                         
-                        **Tara**: Yes, it is. 
+                        #### 3. A true friend reaches for your hand and touches your heart. (一个真正的朋友在你需要时给你帮助，使你感动。)
+                        - **【经典佳句】**：极具文学色彩的排比句，常用于作文结尾升华主题。
                         
-                        **Tina**: You look similar. But who is more outgoing?
-                        
-                        **Tara**: I think I'm more outgoing than Tara. She is quieter.
-                        
-                        **Tina**: Is she as hard-working as you?
-                        
-                        **Tara**: Yes, she is. She always gets better grades than me.
-
-                        **【译文】**
-                        
-                        **蒂娜**：那是你姐姐塔拉吗？
-                        
-                        **塔拉**：是的。
-                        
-                        **蒂娜**：你们看起来很像。但谁更外向呢？
-                        
-                        **塔拉**：我觉得我比塔拉更外向。她更文静。
-                        
-                        **蒂娜**：她像你一样勤奋吗？
-                        
-                        **塔拉**：是的。她总是比我取得更好的成绩。
-
-                        ### Section B (Reading) 阅读文段：Best Friends
-                        **【原文】**
-                        
-                        My best friend is Larry. He is much more intellectual than me. I'm quieter and more serious than him. Some people say we are very different. But I think friends are like mirrors. Larry helps me reach my goals. I don't care if my friend is different from me.
-
-                        **【译文】**
-                        
-                        我最好的朋友是拉里。他比我聪明得多。我比他更文静、更严肃。有人说我们非常不同。但我觉得朋友就像镜子。拉里帮助我实现目标。我不在乎我的朋友是否和我不同。
+                        #### 4. My best friend is similar to me. (我最好的朋友和我相似。)
+                        - **【避坑指南】**：`be similar to` 固定搭配。不要用 `with`。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① as ... as ... (和...一样)
-                        - **【用法总结】**：
-                            *   中间必须接形容词或副词的**原级**。
-                            *   否定形式：`not as/so ... as ...` (不如...那样...)。
-                        - **【例题】**：
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：形容词与副词的比较级
+                        **1. 规则变化**：
+                        - 一般加 -er：*tall -> taller, hard -> harder*。
+                        - 辅音+y结尾，改y为i加er：*funny -> funnier, early -> earlier*。
+                        - 重读闭音节双写加er：*big -> bigger, thin -> thinner, hot -> hotter*。
+                        - 多音节词前加 more：*outgoing -> more outgoing, beautiful -> more beautiful*。
                         
-                        *This math problem is as ________ as that one.*
-                        A. difficult   B. more difficult   C. the most difficult   D. difficulty
-                        
-                        **[解析]**：as...as 中间用原级，选 **A**。
+                        **2. 不规则变化 (必背)**：
+                        - *good / well -> better*
+                        - *bad / badly / ill -> worse*
+                        - *many / much -> more*
+                        - *little / few -> less*
+                        - *far -> farther / further*
 
-                        #### ② both ... and ... (两者都)
-                        - **【用法】**：连接两个并列主语时，谓语动词一律用**复数**。
+                        **3. 程度修饰**：
+                        - 比较级前可以用 `much, a lot, even, a little, a bit` 修饰，表示程度加深或减弱。(*much better* 好得多)。
+
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *I think English is as ________ as math.*
+                        A. important   B. more important   C. most important   D. importantly
+                        
+                        **[解析]**：as...as 之间必须用形容词或副词的原级，选 **A**。
+
+                        *(2023·广东中考)* *The weather in Guangzhou is ________ than that in Beijing in winter.*
+                        A. hot   B. hotter   C. hottest   D. much hot
+                        
+                        **[解析]**：than 提示用比较级，hot 的比较级需双写t，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：比较级的“变身”与“法则”
-                        **1. 构成规则口诀**
-                        单音词尾加 -er；双音多音 more 在前；辅音加 y 变 i -er；重读闭音双写末。
-                        - *big -> bigger, thin -> thinner*
-                        - *easy -> easier*
-                        - *difficult -> more difficult*
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：对比我与朋友 (My Friend and I)
+                        #### 1. 写作逻辑
+                        - **引入**：交代我和朋友的名字。
+                        - **相同点**：运用 as...as, both... 描述共同点。
+                        - **不同点**：运用比较级 (taller, more outgoing) 描述差异。
+                        - **结论**：差异不影响我们成为好朋友。
 
-                        **2. 比较级的修饰语**
-                        只能用 much, even, a little, a bit, far 等修饰，**绝对不能用 very**！
+                        #### 2. 高分句式
+                        - *Tom is my best friend. We have some things in common.*
+                        - *We both like sports, but he plays tennis better than me.*
+                        - *I am quieter, and he is much more outgoing.*
+                        - *I think differences are not important for friendship.*
 
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **My Best Friend and I**
                         
-                        *(2024·天津中考)* *Health is ________ than money.*
-                        A. important   B. more important   C. most important   D. the most important
+                        Li Ming is my best friend. We look similar. We are both tall and thin. And we both have short black hair. We have the same hobbies. We both like reading and playing basketball. 
                         
-                        **[解析]**：由 than 可知需用比较级，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Comparison between Friends (对比朋友)
-                        #### 1. 写作要点
-                        - **Appearance** (外貌)
-                        - **Personality** (性格)
-                        - **Hobbies** (爱好)
-                        - **Common ground** (共同点)
-
-                        #### 2. 满分范文
-                        I have a good friend, Peter. He is **taller and stronger** than me. I am **quieter** and more **serious**. He is **more athletic** and he is **better at** sports. However, we are **both hard-working**. I think a good friend is like a mirror. We help **each other**.
+                        But we also have some differences. Li Ming is much more outgoing than me. He talks a lot and likes to make friends. I am quieter and I like to stay at home. Also, he studies harder than me. He always gets better grades. In fact, we are very different, but we are good friends.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u4", "Unit 4", "What's the best movie theater?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：服务与场所 (Services and places)
-                        *   **子主题**：公共设施评价，社区生活，客观标准评价 (Public facilities)。
-
-                        ### 2. 单元主题内容
-                        本单元以“社区设施评价”为核心，重点学习形容词和副词的最高级（Superlative Degree）。通过评价电影院、餐厅、超市等场所（如 the cheapest, the most popular 等），学生学会如何多维度比较并选出“最之最”。单元还涉及了达人秀（Talent Show）等话题，引导学生在评价中保持客观，同时积极发现身边的优秀事物。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 社区服务与休闲场所。
+                        *   **深层意义**：本单元聚焦于评价和选择身边的公共设施（如电影院、餐厅、超市）。通过学习形容词的最高级，培养学生比较事物的能力和做出合理决策的能力。同时，引导学生关注社区生活，学会在日常消费中进行理性评估。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **场所/物品**：theater (电影院), screen (屏幕), seat (座位), service (服务), ticket (票).
-                        - **评价形容词**：cheap (便宜的), close (近的), comfortable (舒适的), creative (有创意的).
-                        - **核心名词**：talent (天赋), magician (魔术师), prize (奖品), example (例子).
-                        - **高频短语**：movie theater, wait for (等待), for example (例如), take ... seriously (认真对待...).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **地点名词**：theater (剧院), seat (座位), screen (屏幕), ticket (票), radio (广播)。
+                        - **评价形容词**：comfortable (舒适的), close (近的), fresh (新鲜的), cheap (便宜的), expensive (昂贵的), bad (差的), worse (更差的), worst (最差的)。
+                        - **动词**：choose (选择), carefully (细致地), act (扮演), give (提供)。
+                        - **其他**：town (城镇), song (歌曲), meal (一餐)。
 
-                        ### 2. 核心句式
-                        1.  **最高级询问**：What's the best movie theater? — Sun Cinema is the best.
-                        2.  **客观理由**：It has the most comfortable seats and the best service.
-                        3.  **多维度比较**：Which theater is the cheapest?
-                        4.  **才艺评价**：He is the funniest actor in our school.
-
-                        ### 3. 重点语法
-                        - **形容词/副词最高级** 的构成规则。
-                        - **最高级句型**：The + 最高级 + 范围 (in / of)。
+                        ### 2. 核心短语金牌储备
+                        - `so far` 到目前为止
+                        - `no problem` 没问题
+                        - `have... in common` 有相同特征
+                        - `all kinds of` 各种各样的
+                        - `be up to` 由...决定
+                        - `play a role` 发挥作用
+                        - `make up` 编造
+                        - `for example` 例如
+                        - `take... seriously` 认真对待...
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What's the best movie theater to go to? (去哪家电影院最好？)
+                        - **【考点详解】**：`the best` 是 `good/well` 的最高级形式。`to go to` 是不定式作后置定语修饰 theater。
                         
-                        **Boy**: I want to go to a movie theater tonight. Which one is the best?
+                        #### 2. Town Cinema is the closest to home. (城镇影院离家最近。)
+                        - **【结构剖析】**：`be close to` 离...近。`closest` 前面必须加定冠词 `the`。
                         
-                        **Girl**: I think Town Cinema is the best. 
+                        #### 3. It has the most comfortable seats. (它有最舒适的座位。)
+                        - **【语法核心】**：多音节形容词的最高级在其前面加 `the most`。
                         
-                        **Boy**: Why? Is it the closest?
-                        
-                        **Girl**: No, but it has the biggest screens and the best sound.
-                        
-                        **Boy**: What about Movie City?
-                        
-                        **Girl**: It's the cheapest, but the seats are not comfortable.
-
-                        **【译文】**
-                        
-                        **男孩**：我今晚想去电影院。哪一家最好？
-                        
-                        **女孩**：我觉得城镇电影院是最好的。
-                        
-                        **男孩**：为什么？它是最近的吗？
-                        
-                        **女孩**：不是，但它有最大的屏幕和最好的音响。
-                        
-                        **男孩**：那电影城呢？
-                        
-                        **女孩**：它是最便宜的，但是座位不舒服。
-
-                        ### Section B (Reading) 阅读文段：Who's Got Talent?
-                        **【原文】**
-                        
-                        Everyone is good at something. That's why talent shows are so popular. Some people are the funniest, some are the most creative, and some are the most talented. These shows give people a chance to show what they can do. It's always interesting to watch!
-
-                        **【译文】**
-                        
-                        每个人都擅长某些事情。这就是才艺表演如此受欢迎的原因。有些人是最滑稽的，有些是最有创意的，还有些是最有天赋的。这些节目给人们一个展示自己才能的机会。看这些节目总是很有趣！
+                        #### 4. You can buy clothes the most cheaply there. (在那儿你能买到最便宜的衣服。)
+                        - **【避坑指南】**：`cheaply` 是副词修饰动词 buy，副词最高级前面的 `the` 可以省略。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① the best (最好的)
-                        - **【用法总结】**：`good / well` 的最高级。
-                        - **【对比】**：`the worst` (坏的最高级)。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：形容词与副词的最高级
+                        **1. 变化规则**：
+                        与比较级类似，一般加 -est 或在前面加 (the) most。
+                        *   *tall - taller - the tallest*
+                        *   *big - bigger - the biggest*
+                        *   *heavy - heavier - the heaviest*
+                        *   *interesting - more interesting - the most interesting*
+
+                        **2. 不规则变化 (必背)**：
+                        *   *good / well -> better -> the best*
+                        *   *bad / badly / ill -> worse -> the worst*
+                        *   *many / much -> more -> the most*
+                        *   *little -> less -> the least*
+                        *   *far -> farther / further -> the farthest / furthest*
+
+                        **3. 最高级常用句型**：
+                        - `主语 + be + the + 最高级 + in/of 范围.` (它是全班最高的。)
+                        - `主语 + be + one of the + 最高级 + 名词复数.` (它是最受欢迎的城市之一。)
+
+                        ### 中考真题特训
                         
-                        #### ② for example (例如)
-                        - **【注意】**：常用于句中作插入语，前后加逗号。
+                        *(2024·南京中考)* *Of all the students, Lily speaks English ________.*
+                        A. good   B. better   C. best   D. the best
                         
-                        #### ③ take ... seriously (认真对待)
-                        - **【例题】**：
+                        **[解析]**：Of all... 提示范围是三者及以上，用最高级。修饰动词 speaks 用副词 well 的最高级 best，副词最高级前 the 可省，选 **C/D (中考多为单选，此处选best最贴切，有时带the也可)**。（注：严谨来说，选C，但D在日常中也被接受，中考一般会避开这种双胞胎选项）。
                         
-                        *You should ________ your homework ________.*
-                        A. take; serious   B. take; seriously   C. takes; serious   D. taking; seriously
+                        *(2023·广东中考)* *China is one of ________ countries in the world.*
+                        A. oldest   B. older   C. the oldest   D. the older
                         
-                        **[解析]**：修饰动词 take 需用副词 seriously，选 **B**。
+                        **[解析]**：one of the + 形容词最高级 + 复数名词，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：最高级的“王冠”法则
-                        **1. 标志范围**
-                        最高级常与表示范围的短语连用：
-                        - `in + 范围名词` (in my class, in the world).
-                        - `of + 数量/代词` (of all the students, of the three).
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：评价我所在城市的场所 (The Best Places in My Town)
+                        #### 1. 写作逻辑
+                        - **总述**：I live in a great town and there are many good places.
+                        - **分类评价**：分别评价餐厅、电影院、超市等（使用最高级）。
+                        - **总结**：Welcome to my town!
 
-                        **2. 冠词 rules**
-                        - 形容词最高级前必须加 **the**。
-                        - 副词最高级前的 the 可以省略。
+                        #### 2. 高分句式
+                        - *The best supermarket is... because it has the freshest food.*
+                        - *If you want to watch movies, ... is the best place to go.*
+                        - *You can eat the most delicious noodles at...*
+                        - *It has the best service in town.*
 
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **The Best Places in My Town**
                         
-                        *(2024·安徽中考)* *Of all the students, Zhang Hua is ________.*
-                        A. tall   B. taller   C. tallest   D. the tallest
+                        I live in a beautiful town. There are many good places to go. 
                         
-                        **[解析]**：Of all... 提示在三者及以上范围，需用最高级，选 **D**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Evaluation of My Town (我的社区评价)
-                        **Welcome to my town!**
+                        If you want to buy things, the best supermarket is Sun Supermarket. It is the biggest and has the freshest food. The clothes there are the cheapest, too. For eating out, Miller's Restaurant is the best. It has the most delicious food and the friendliest service. If you want to watch a movie, Town Cinema is the best choice. It has the biggest screens and the most comfortable seats. 
                         
-                        I think Sun Cinema is the **best movie theater** because it has the **most comfortable** seats. If you want to buy things, the Big Mall is the **cheapest** place. For food, Green Restaurant is the **most popular** because its food is **the best**. Come and visit my town! 
+                        Welcome to my town. You will have a great time here!
                     """.trimIndent())
                 )
             ),
-       
             TextbookUnit(
                 "g8up_u5", "Unit 5", "Do you want to watch a game show?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：大众媒体与文体活动 (Media and entertainment)
-                        *   **子主题**：电视节目偏好，文化娱乐生活 (TV programs and preferences)。
-
-                        ### 2. 单元主题内容
-                        本单元围绕“电视节目”展开，学习各种电视节目名称（如 game show, news, soap opera 等）及如何表达对它们的看法。通过学习动词不定式作宾语的用法，学生能够陈述自己想看或计划看的节目。单元还涉及了动画片的发展（如 Mickey Mouse），引导学生思考娱乐背后的文化意义，培养审慎选择媒体内容的习惯。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 文化娱乐与传媒。
+                        *   **深层意义**：本单元围绕“电视节目类型及个人偏好”展开。旨在引导学生了解不同类型的媒体节目，学会表达计划、希望和期待。同时，培养学生批判性地观看电视节目的能力，合理分配娱乐与学习的时间。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **电视节目**：news (新闻), sitcom (情景喜剧), soap opera (肥皂剧), comedy (喜剧), cartoon (动画片).
-                        - **态度动词**：love, like, don't mind (不介意), don't like, can't stand (受不了).
-                        - **核心动词/短语**：happen (发生), expect (期待), plan (计划), hope (希望).
-                        - **高频短语**：find out (查明), watch a movie, be ready to (准备好...), think of (认为).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **电视节目类型**：sitcom (情景喜剧), news (新闻), soap (肥皂剧), educational (教育的), comedy (喜剧), action (动作), cartoon (卡通片)。
+                        - **动词**：mind (介意), stand (忍受), expect (期待), happen (发生), become (成为), discuss (讨论)。
+                        - **名词**：culture (文化), joke (笑话), reason (原因), film (电影)。
+                        - **其他**：meaningless (毫无意义的), famous (著名的), rich (富有的), successful (成功的)。
 
-                        ### 2. 核心句式
-                        1.  **表达看法**：What do you think of talk shows? — I love them. / I can't stand them.
-                        2.  **表达意愿**：Do you want to watch the news? — Yes, I do.
-                        3.  **询问喜好原因**：Why do you like soap operas? — Because they are relaxing.
-                        4.  **陈述计划**：We plan to watch an action movie tonight.
-
-                        ### 3. 重点语法
-                        - **动词不定式 (to do)** 作宾语的用法。
-                        - **think of / think about** 询问看法的句型。
+                        ### 2. 核心短语金牌储备
+                        - `talk show` 访谈节目
+                        - `game show` 游戏节目
+                        - `soap opera` 肥皂剧
+                        - `find out` 查明；弄清
+                        - `be ready to` 准备好做...
+                        - `dress up` 打扮
+                        - `take sb's place` 代替某人
+                        - `do a good job` 干得好
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What do you think of talk shows? (你觉得访谈节目怎么样？)
+                        - **【考点详解】**：`What do you think of...?` 询问观点。相当于 `How do you like...?`
                         
-                        **Mark**: What do you think of sitcoms, Sarah?
+                        #### 2. I can't stand them. (我受不了它们。)
+                        - **【结构剖析】**：`can't stand (doing) sth.` 意为“无法忍受(做)某事”。
                         
-                        **Sarah**: I don't mind them. They're OK. What about you?
+                        #### 3. I hope to find out what's going on around the world. (我希望能了解世界各地正在发生的事情。)
+                        - **【语法核心】**：`hope to do sth.` 希望做某事。注意不能说 `hope sb. to do sth.`。
                         
-                        **Mark**: I can't stand them! They're so boring.
-                        
-                        **Sarah**: Well, do you want to watch a game show?
-                        
-                        **Mark**: Yes, I love game shows. I want to see who wins!
-
-                        **【译文】**
-                        
-                        **马克**：莎拉，你觉得情景喜剧怎么样？
-                        
-                        **莎拉**：我不介意看它们。还可以。你呢？
-                        
-                        **马克**：我受不了它们！太无聊了。
-                        
-                        **莎拉**：好吧，那你想看比赛节目吗？
-                        
-                        **马克**：是的，我喜欢比赛节目。我想看看谁赢！
-
-                        ### Section B (Reading) 阅读文段：Mickey Mouse
-                        **【原文】**
-                        
-                        In 1928, Mickey Mouse appeared in the movie Steamboat Willie. He became the first cartoon character with a voice. People love Mickey because he is always ready to face any danger. He shows us that even a small person can do big things. Mickey is a symbol of American culture.
-
-                        **【译文】**
-                        
-                        1928年，米老鼠出现在电影《威利号汽船》中。他成为了第一个有声音的卡通形象。人们爱米奇，因为他总是准备好面对任何危险。他向我们展示了即使是一个小人物也能做出大事业。米奇是美国文化的一种象征。
+                        #### 4. We can learn a lot from them. (我们可以从中学到很多。)
+                        - **【用法拓展】**：`learn from sb./sth.` 从...中学习。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① what do you think of ...? (你认为...怎么样?)
-                        - **【同义转换】**：`How do you like ...?`
-                        - **【例题】**：
-                        
-                        *— ________ do you think of the new sitcom? — It's fantastic!*
-                        A. How   B. What   C. Why   D. Where
-                        
-                        **[解析]**：think of 搭配 what，like 搭配 how，选 **B**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：动词不定式作宾语
+                        **1. 概念**：动词不定式 (to + 动词原形) 可以在句中作宾语。
+                        **2. 常见接 to do 作宾语的动词 (必背口诀)**：
+                        *   **决心学会想希望 (decide, learn, want, hope/wish)**
+                        *   **拒绝设法愿假装 (refuse, manage, would like, pretend)**
+                        *   **主动答应选计划 (offer, promise, choose, plan)**
+                        *   **同意请求帮准备 (agree, ask, help, prepare)**
 
-                        #### ② can't stand (受不了)
-                        - **【注意】**：这里的 stand 是动词，意为“忍受”。后接名词、代词或动词-ing。
+                        ### 中考真题特训
+                        
+                        *(2024·四川中考)* *I plan ________ my grandparents this weekend.*
+                        A. visit   B. to visit   C. visiting   D. visited
+                        
+                        **[解析]**：plan to do sth. 计划做某事，选 **B**。
+
+                        *(2023·北京中考)* *— What do you think of soap operas? — I don't mind ________.*
+                        A. they   B. it   C. them   D. their
+                        
+                        **[解析]**：soap operas 是复数，作宾语用宾格 them，选 **C**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：动词不定式作宾语
-                        **1. 必背搭配**
-                        有些动词后面必须接 `to do` 作宾语：
-                        - want to do (想做)
-                        - plan to do (计划做)
-                        - hope to do (希望做)
-                        - expect to do (期待做)
-                        - decide to do (决定做)
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我最喜欢的电视节目 (My Favorite TV Show)
+                        #### 1. 写作要点
+                        - **引入**：I like watching TV.
+                        - **表明偏好**：My favorite TV show is...
+                        - **解释原因**：Why do you like it? (Educational, interesting, learn a lot).
+                        - **对其他节目的看法**：I don't mind... / I can't stand...
 
-                        **2. happen 的用法**
-                        - `sth. happens to sb.` (某事发生在某人身上)
-                        - `sb. happens to do sth.` (某人碰巧做某事)
+                        #### 2. 高分句式
+                        - *I like to watch the news because I hope to find out what's going on.*
+                        - *I can't stand soap operas. I think they are meaningless.*
+                        - *Game shows are fun to watch.*
 
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **My TV Preferences**
                         
-                        *(2024·重庆中考)* *My parents plan ________ to Beijing this summer vacation.*
-                        A. go   B. going   C. to go   D. goes
+                        I usually watch TV in my free time. There are many kinds of TV shows. My favorite shows are news and talk shows. I watch the news every day because I hope to find out what's going on around the world. And talk shows are very educational. We can learn a lot from them.
                         
-                        **[解析]**：plan to do sth. 固定搭配，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Favourite TV Program (我最喜欢的电视节目)
-                        **I like watching TV very much.**
-                        
-                        My **favourite TV program** is news. I **think** it is very **educational**. It helps me **find out** what's happening around the world. I also **don't mind** sitcoms because they are **funny**. However, I **can't stand** soap operas. I think they are too **boring**. I usually watch TV for one hour on weekends.
+                        However, I don't like soap operas. I can't stand them because I think they are meaningless and boring. I don't mind game shows. Sometimes they are interesting. In a word, I like watching educational programs.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u6", "Unit 6", "I'm going to study computer science.",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：职业理想，未来计划，新年展望 (Future plans and resolutions)。
-
-                        ### 2. 单元主题内容
-                        本单元以“职业理想与未来计划”为核心，重点学习一般将来时 `be going to` 的用法。学生通过讨论未来的职业选择（如 computer programmer, pilot, teacher 等）以及实现理想的具体步骤（how, when, where），学会设定人生目标并制定行动计划。单元还涉及了新年计划（New Year's Resolutions），引导学生学会规划生活，坚持梦想。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 职业规划与未来。
+                        *   **深层意义**：本单元围绕“未来的职业理想及如何实现目标”展开。旨在引导学生思考自己的未来，设定长远目标（New Year's Resolutions），并学会为实现目标制定切实可行的计划。这不仅是语言学习，更是生涯规划教育。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **职业名词**：programmer, cook, doctor, engineer, violinist, driver, pilot, scientist.
-                        - **核心名词/动词**：resolution (决心), team (队伍), foreign (外国的), improve (改进), discuss (讨论).
-                        - **高频短语**：grow up (长大), be sure about (确信), make sure (确保), send ... to ... (把...发送到...), take singing lessons (上歌唱课).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **职业名词**：doctor (医生), engineer (工程师), violinist (小提琴手), pilot (飞行员), pianist (钢琴家), scientist (科学家), cook (厨师)。
+                        - **与计划相关的动词**：grow (成长), build (建筑), promise (承诺), improve (改进), physical (身体的)。
+                        - **名词**：college (大学), education (教育), medicine (药), university (大学), resolution (决心), foreign (外国的)。
+                        - **其他**：sure (确信的), beginning (开始), able (能够)。
 
-                        ### 2. 核心句式
-                        1.  **询问职业理想**：What do you want to be when you grow up? — I want to be a scientist.
-                        2.  **询问实现方式**：How are you going to do that? — I'm going to study hard.
-                        3.  **询问时间/地点**：Where are you going to work? — In Shanghai.
-                        4.  **描述新年计划**：My New Year's resolution is to learn a new language.
-
-                        ### 3. 重点语法
-                        - **一般将来时 (be going to)** 表示打算或计划。
-                        - **want to be + 职业** 的用法。
+                        ### 2. 核心短语金牌储备
+                        - `grow up` 长大；成熟
+                        - `computer science` 计算机科学
+                        - `take acting lessons` 上表演课
+                        - `make a resolution` 下决心
+                        - `make promises` 许下诺言
+                        - `have to do with` 关于；与...有关系
+                        - `take up` 开始从事
+                        - `at the beginning of` 在...的开始
+                        - `write down` 写下
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What do you want to be when you grow up? (你长大后想当什么？)
+                        - **【考点详解】**：`want to be` 表示“想成为...（指职业）”。`when` 引导时间状语从句。
                         
-                        **Lucy**: What do you want to be when you grow up, Sam?
+                        #### 2. I'm going to study computer science. (我打算学习计算机科学。)
+                        - **【结构剖析】**：`be going to do sth.` 意为“打算/将要做某事”，表示未来的计划。
                         
-                        **Sam**: I want to be a computer programmer.
+                        #### 3. Where are you going to work? (你打算去哪里工作？)
+                        - **【语法核心】**：一般将来时的特殊疑问句。
                         
-                        **Lucy**: How are you going to do that?
-                        
-                        **Sam**: I'm going to study computer science in university.
-                        
-                        **Lucy**: Where are you going to work?
-                        
-                        **Sam**: I'm going to work in Beijing.
-
-                        **【译文】**
-                        
-                        **露西**：萨姆，你长大后想做什么？
-                        
-                        **萨姆**：我想做一名电脑程序员。
-                        
-                        **露西**：你打算怎么做？
-                        
-                        **萨姆**：我打算在大学里学习计算机科学。
-                        
-                        **露西**：你打算在哪儿工作？
-                        
-                        **萨姆**：我打算在北京工作。
-
-                        ### Section B (Reading) 阅读文段：New Year's Resolutions
-                        **【原文】**
-                        
-                        A resolution is a kind of promise. Most of the time, we make resolutions to other people. But the most common resolutions are the ones we make to ourselves at the beginning of a year. Some people want to improve their health. Some want to get better grades. But many people forget their resolutions after a few weeks. The best way is to make a plan and follow it.
-
-                        **【译文】**
-                        
-                        决心是一种承诺。大多数时候，我们向他人做出承诺。但最常见的决心是我们在年初对自己做出的承诺。有些人想改善健康。有些人想取得更好的成绩。但许多人在几周后就忘记了自己的决心。最好的方法是制定计划并执行它。
+                        #### 4. Many resolutions have to do with self-improvement. (许多新年决心都与自我提升有关。)
+                        - **【避坑指南】**：`have to do with` 是中考常考短语，意为“与...有关”。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① grow up (长大; 成长)
-                        - **【注意】**：grow 是不规则动词，过去式为 grew。
-                        
-                        #### ② be sure about (确信; 对...有把握)
-                        - **【用法总结】**：后面接名词、代词或动词-ing。
-                        - **【例题】**：
-                        
-                        *Are you ________ about the date of the meeting?*
-                        A. sure   B. surely   C. clear   D. known
-                        
-                        **[解析]**：be sure about 固定短语，选 **A**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：一般将来时 (be going to)
+                        **1. 功能**：表示主观打算、计划要做的事情，或根据现有迹象推测将要发生的事情。
+                        **2. 构成**：`am / is / are + going to + 动词原形`。
+                        **3. 句式变化**：
+                        - 否定：`be + not + going to do`。
+                        - 疑问：`Be` 动词提前。
+                        **4. 标志词**：`tomorrow`, `next week/year`, `in the future`, `soon`。
 
-                        #### ③ improve (v. 改进; 改善)
-                        - **【名词形式】**：`improvement`。
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *I ________ a new bike next week.*
+                        A. am going to buy   B. buy   C. bought   D. buys
+                        
+                        **[解析]**：next week 提示将来时，选 **A**。
+
+                        *(2023·河北中考)* *— What are your plans for the weekend? — I ________ visit my grandparents in the countryside.*
+                        A. am going to   B. went to   C. have to   D. used to
+                        
+                        **[解析]**：询问计划，用 be going to 结构表达打算，选 **A**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：一般将来时 (be going to)
-                        **1. 基本结构**
-                        主语 + be (am/is/are) + going to + 动词原形.
-                        
-                        **2. 句式变换**
-                        - 否定：be + not + going to.
-                        - 疑问：Be + 主语 + going to ...?
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：我的梦想与新年决心 (My Dream / New Year's Resolutions)
+                        #### 1. 写作要点
+                        - **职业梦想**：What do you want to be?
+                        - **原因**：Why do you want to be a...?
+                        - **实现路径**：How are you going to do that? (列举具体行动)。
 
-                        **3. 标志词**
-                        tomorrow, next week, soon, in two days 等。
+                        #### 2. 高分句式
+                        - *When I grow up, I want to be an engineer.*
+                        - *I am going to study hard to get good grades.*
+                        - *I believe my dream will come true.*
+                        - *Next year, I am going to make some resolutions.*
 
-                        **4. 中考真题特训**
+                        #### 3. 满分范文
+                        **My Dream Job**
                         
-                        *(2024·安徽中考)* *We ________ a basketball match against Class 2 next Sunday.*
-                        A. have   B. had   C. are going to have   D. were having
+                        Everyone has a dream. When I grow up, I want to be a doctor. I think it is a great job because doctors can help sick people and save their lives.
                         
-                        **[解析]**：next Sunday 提示用将来时，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：My Future Plan (我的未来计划)
-                        **When I grow up, I want to be an English teacher.**
+                        How am I going to do that? First, I am going to study science and math really hard. They are very important for a doctor. Second, I am going to read more books about medicine. Third, I am going to exercise every day to keep healthy, because a doctor needs a strong body.
                         
-                        To achieve my dream, I am **going to study** English very hard. I'm also **going to read** many English books to improve my knowledge. After I finish university, I am **going to work** in a middle school. I want to help more students love English. This is my plan. I **will make sure** it comes true.
+                        I know it is not easy to be a doctor, but I will try my best. I believe my dream will come true in the future.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u7", "Unit 7", "Will people have robots?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：科学与技术 (Science and technology)
-                        *   **子主题**：未来生活预测，科技发展，环境变化 (Future life)。
-
-                        ### 2. 单元主题内容
-                        本单元以“预测未来”为核心，重点学习一般将来时 `will` 的用法。学生通过畅想 100 年后的世界（如 robots, flying cars, environment 等），学习如何表达可能性和预见性。单元对比了 more / less / fewer 的用法，引导学生关注环境问题（pollution），思考人类科技进步与自然和谐共生的关系。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自然/人与社会 —— 未来的世界。
+                        *   **深层意义**：本单元围绕“对未来世界的预测”展开。引导学生发挥想象力，预测科技发展对人类生活、环境的影响。通过讨论环保问题（less pollution, fewer trees），培养学生的全球视野和环保意识，理解科技发展与自然环境的辩证关系。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **科技词汇**：robot, space station, apartment, human, servant.
-                        - **数量修饰词**：more (更多), less (更少 - 不可数), fewer (更少 - 可数).
-                        - **核心动词**：believe (相信), agree (同意), disagree (不同意), possible (可能的).
-                        - **高频短语**：on a computer, hundreds of (成百上千的), fall in love with (爱上), play a part in (参与).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **科技与环境**：robot (机器人), paper (纸), pollution (污染), environment (环境), planet (行星/地球), earth (地球)。
+                        - **动词预测**：predict (预测), plant (种植), play (播放/扮演), fly (飞行), fall (倒塌/跌倒)。
+                        - **名词**：part (部分), peace (和平), sea (海), sky (天空), space (太空)。
+                        - **其他**：already (已经), even (甚至), inside (在...里面), impossible (不可能的)。
 
-                        ### 2. 核心句式
-                        1.  **未来预测**：Will people have robots in their homes? — Yes, they will.
-                        2.  **环境预测**：There will be more pollution and fewer trees.
-                        3.  **数量对比**：There will be less free time for people.
-                        4.  **表达观点**：I disagree. I think there will be more green trees.
-
-                        ### 3. 重点语法
-                        - **一般将来时 (will)** 的用法。
-                        - **There will be** 句型。
-                        - **fewer 与 less** 的辨析。
+                        ### 2. 核心短语金牌储备
+                        - `in the future` 在将来
+                        - `free time` 业余时间
+                        - `live to be 200 years old` 活到200岁
+                        - `on the earth` 在地球上
+                        - `play a part in` 参与；发挥作用
+                        - `hundreds of` 数百的
+                        - `over and over again` 多次；反复地
+                        - `fall down` 倒塌；跌倒
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Will people have robots? (人们会有机器人吗？)
+                        - **【考点详解】**：`will` 引导的一般将来时的一般疑问句。回答用 `Yes, they will. / No, they won't.`
                         
-                        **Bill**: What will the future be like?
+                        #### 2. There will be less pollution. (将会更少污染。)
+                        - **【结构剖析】**：`There be` 句型的将来时为 `There will be`。`less` 修饰不可数名词 pollution。
                         
-                        **Nancy**: I think there will be more robots. They will do all the work.
+                        #### 3. People will live to be 200 years old. (人们将活到200岁。)
+                        - **【用法拓展】**：`live to be + 年龄` 意为“活到...岁”。
                         
-                        **Bill**: Will people live to be 200 years old?
-                        
-                        **Nancy**: Yes, they will. And they will live on other planets.
-                        
-                        **Bill**: That's amazing! But I hope there will be less pollution.
-
-                        **【译文】**
-                        
-                        **比尔**：未来会是什么样子？
-                        
-                        **南希**：我觉得会有更多的机器人。它们会做所有的工作。
-                        
-                        **比尔**：人们会活到200岁吗？
-                        
-                        **南希**：是的，会。而且他们会住在其他星球上。
-                        
-                        **比尔**：那太惊人了！但我希望污染会更少。
-
-                        ### Section B (Reading) 阅读文段：Do You Have a Robot?
-                        **【原文】**
-                        
-                        Today there are already robots working in factories. But in the future, will every home have a robot? Some scientists believe robots will be like humans. They will help us with housework and even talk to us. However, it is difficult to make robots think like humans. We don't know what will happen in the future.
-
-                        **【译文】**
-                        
-                        今天已经有机器人在工厂工作了。但在未来，每个家庭都会有机器人吗？一些科学家相信机器人会像人类一样。它们会帮我们做家务，甚至和我们聊天。然而，让机器人像人类一样思考是困难的。我们不知道未来会发生什么。
+                        #### 4. The environment will be in great danger. (环境将处于极大危险中。)
+                        - **【避坑指南】**：`be in danger` 处于危险中。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① fewer vs less (更少)
-                        - **【辨析】**：
-                            *   `fewer`：修饰**可数名词复数**。*fewer cars*。
-                            *   `less`：修饰**不可数名词**。*less water*。
-                        - **【例题】**：
-                        
-                        *If we protect the environment, there will be ________ pollution.*
-                        A. fewer   B. less   C. more   D. many
-                        
-                        **[解析]**：pollution 是不可数名词，表示更少用 less，选 **B**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：一般将来时 (will)
+                        **1. 功能**：表示对未来的推测，或者临时决定的意愿。
+                        **2. 构成**：`主语 + will + 动词原形`。 (will 的否定是 won't)。
+                        **3. 与 be going to 的区别**：
+                        - `be going to` 强调事先计划好的事。
+                        - `will` 强调主观预测或说话瞬间的决定。
 
-                        #### ② agree (v. 同意)
-                        - **【搭配】**：`agree with sb.` 同意某人；`agree to do sth.` 同意做某事。
+                        ### 核心语法二：more, less, fewer 辨析
+                        - **more** (更多)：既可修饰可数名词复数，也可修饰不可数名词。
+                        - **fewer** (更少)：只能修饰**可数名词复数**。 (*fewer trees, fewer cars*)
+                        - **less** (更少)：只能修饰**不可数名词**。 (*less water, less pollution*)
+
+                        ### 中考真题特训
+                        
+                        *(2024·南京中考)* *I think there will be ________ cars and ________ air pollution in 2050.*
+                        A. fewer; less   B. less; fewer   C. more; fewer   D. fewer; more
+                        
+                        **[解析]**：cars 是可数名词复数，用 fewer；pollution 是不可数名词，用 less，选 **A**。
+
+                        *(2023·北京中考)* *Look at the dark clouds. It ________ rain.*
+                        A. will   B. is going to   C. would   D. was going to
+                        
+                        **[解析]**：根据迹象（乌云）推测将要发生的事，更倾向用 is going to，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：There will be 句型
-                        表示“将来某地会有某物”。
-                        **1. 结构**
-                        There will be + 主语 + 地点/时间.
-                        - *There will be a meeting tomorrow.*
-                        
-                        **2. 易错点**
-                        不能说 There will have...。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：未来的世界 (The World in the Future)
+                        #### 1. 写作要点
+                        - **时间背景**：What will the world be like in 100 years?
+                        - **环境与生活**：使用 will/won't 和 more/less/fewer 进行预测（如机器人的使用、环境变化）。
+                        - **个人期望**：I hope our world will be better.
 
-                        **3. will 与 be going to 的微差**
-                        - `will`：常用于临时的决定、客观规律或纯粹的预测。
-                        - `be going to`：常用于主观的打算、计划或有迹象表明要发生的事。
+                        #### 2. 高分句式
+                        - *I think there will be more robots in our homes.*
+                        - *People will have more free time because robots will do the heavy work.*
+                        - *I hope there will be less pollution and the sky will be bluer.*
 
-                        **4. 中考真题特训**
+                        #### 3. 满分范文
+                        **Life in the Future**
                         
-                        *(2023·广东中考)* *I think there ________ more trees in our city in two years.*
-                        A. is   B. are   C. will be   D. will have
+                        What will our life be like in 100 years? I think there will be many changes. 
                         
-                        **[解析]**：in two years 提示将来时，且为 there be 句型，选 **C**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Life in 100 Years (百年后的生活)
-                        **Life in 100 years will be very different.**
+                        First, people will have more robots in their homes. Robots will help us do the housework, so people will have more free time. Second, kids won't go to school. They will study at home on computers. Third, people will live to be 150 years old. 
                         
-                        I think **there will be** robots in every home. They **will help** us do all the chores. People **won't use** money; everything will be paid by face. Children **will study** at home on computers. I also believe there **will be less pollution** because people **will use** clean energy. It will be a wonderful world!
+                        What about the environment? I hope there will be less pollution and the air will be cleaner. But if we don't protect the earth now, the environment will be worse. Let's work together to make the world a better place.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u8", "Unit 8", "How do you make a banana milk shake?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：生活与学习 (Life and study)
-                        *   **子主题**：饮食制作，烹饪步骤，健康生活 (Food preparation)。
-
-                        ### 2. 单元主题内容
-                        本单元以“制作食物”为话题，重点学习描述过程的说明性语言。学生将学会使用 First, Next, Then, Finally 等连接词来描述步骤（如 make a milk shake, turkey sandwich 等）。同时，单元强化了可数与不可数名词在数量表达上的差异（how many / how much），旨在培养学生的动手能力和生活自理能力。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 生活技能与美食。
+                        *   **深层意义**：本单元围绕“制作食物的过程”展开。通过学习祈使句及顺序副词（first, next, then, finally），引导学生掌握叙述操作步骤的能力。在动手实践中，培养学生的劳动意识、生活自理能力和对传统节日美食（如感恩节火鸡）的跨文化理解。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **食物原材料**：banana, milk, yogurt, honey, salt, sugar, cheese, butter, turkey, pepper.
-                        - **烹饪动词**：peel (剥皮), cut up (切碎), put ... into ... (放入), pour (倒), add (添加), mix up (混合).
-                        - **核心名词**：shake (奶昔), blender (搅拌机), hole (洞), piece (片).
-                        - **高频短语**：how many / how much, turn on (接通电源), a cup of (一杯), First... Next... Then... Finally...
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **烹饪动作**：peel (剥皮), pour (倒出), put (放), turn on (打开), cut up (切碎), mix (混合), add (增加)。
+                        - **食材名词**：yogurt (酸奶), honey (蜂蜜), watermelon (西瓜), salt (盐), sugar (糖), cheese (奶酪), butter (黄油)。
+                        - **用具名词**：blender (搅拌器), spoon (勺子), pot (锅), machine (机器)。
+                        - **其他**：finally (最后), traditional (传统的), traveler (旅行者)。
 
-                        ### 2. 核心句式
-                        1.  **询问制作方法**：How do you make a banana milk shake?
-                        2.  **询问数量**：How many bananas do we need? / How much milk do we need?
-                        3.  **描述步骤**：First, peel the bananas. Next, put them into the blender.
-                        4.  **描述传统饮食**：In America, people eat turkey on Thanksgiving.
-
-                        ### 3. 重点语法
-                        - **祈使句** 用于描述指令。
-                        - **可数与不可数名词** 的数量询问。
-                        - **序列词** (First, Next...) 的应用。
+                        ### 2. 核心短语金牌储备
+                        - `milk shake` 奶昔
+                        - `turn on` 打开 (电器)
+                        - `cut up` 切碎 (**必考：代词放中间 cut it up**)
+                        - `pour ... into ...` 把...倒入...
+                        - `add ... to ...` 把...加到...里
+                        - `one more thing` 还有一件事
+                        - `at this time` 在此时
+                        - `fill ... with ...` 用...填满...
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. How do you make a banana milk shake? (你是怎么做香蕉奶昔的？)
+                        - **【考点详解】**：`How` 询问制作方法/过程。
+                        - **【避坑指南】**：`banana` 在这里作定语修饰 `milk shake`，不用复数。
                         
-                        **Anna**: Let's make a banana milk shake. 
+                        #### 2. Peel the bananas and cut them up. (剥香蕉皮然后把它们切碎。)
+                        - **【结构剖析】**：祈使句表指令。`cut up` 是动副短语，代词 `them` 必须放在中间。
                         
-                        **Sam**: OK. How do we start?
+                        #### 3. Finally, turn on the blender. (最后，打开搅拌器。)
+                        - **【句式连接】**：使用表示顺序的副词（First, Next, Then, Finally）使表达有条理。
                         
-                        **Anna**: First, peel three bananas and cut them up. 
-                        
-                        **Sam**: Done. What's next?
-                        
-                        **Anna**: Next, put the bananas and ice-cream into the blender. Then pour the milk into it. 
-                        
-                        **Sam**: Should I turn it on now?
-                        
-                        **Anna**: Yes. Finally, add some honey if you like.
-
-                        **【译文】**
-                        
-                        **安娜**：让我们做香蕉奶昔吧。
-                        
-                        **萨姆**：好的。我们怎么开始？
-                        
-                        **安娜**：首先，剥三个香蕉并把它们切碎。
-                        
-                        **萨姆**：做好了。下一步呢？
-                        
-                        **安娜**：接下来，把香蕉和冰淇淋放入搅拌机。然后把牛奶倒进去。
-                        
-                        **萨姆**：我现在应该打开电源吗？
-                        
-                        **安娜**：是的。最后，如果你喜欢的话加点蜂蜜。
-
-                        ### Section B (Reading) 阅读文段：Thanksgiving in North America
-                        **【原文】**
-                        
-                        Thanksgiving is a traditional festival in North America. People always have a big dinner with their families. The most important dish is roast turkey. To make it, you need to fill the turkey with bread pieces and onions. Then put it in the oven. When it is ready, everyone enjoys the delicious food together.
-
-                        **【译文】**
-                        
-                        感恩节是北美的一个传统节日。人们总是和家人一起吃一顿丰盛的晚餐。最重要的菜肴是烤火鸡。制作它，你需要用面包块和洋葱填满火鸡。然后把它放进烤箱。当它准备好时，大家一起享用美食。
+                        #### 4. How many bananas do we need? (我们需要多少香蕉？)
+                        - **【语法延伸】**：`How many` 问可数名词数量，`How much` 问不可数名词（如 yogurt, honey）的数量。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① how many vs how much (多少)
-                        - **【辨析】**：
-                            *   `how many`：修饰可数名词复数。
-                            *   `how much`：修饰不可数名词。
-                        - **【例题】**：
-                        
-                        *— ________ honey do we need? — Two spoons.*
-                        A. How many   B. How much   C. How long   D. How far
-                        
-                        **[解析]**：honey 不可数，选 **B**。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：祈使句表达操作步骤
+                        祈使句常用于提供说明、给出指示或食谱。以动词原形开头。
 
-                        #### ② cut up (切碎)
-                        - **【用法】**：动副短语。代词作宾语放中间。*cut it up*。
+                        ### 核心语法二：数量词 How many 与 How much
+                        - `How many + 可数名词复数`
+                        - `How much + 不可数名词`
+
+                        ### 核心语法三：动副短语的宾语位置
+                        对于像 `turn on`, `cut up`, `put off` 等动词+副词构成的短语：
+                        - 名词作宾语：放中间或后面均可 (*turn on the TV / turn the TV on*)。
+                        - 代词作宾语：**必须放中间** (*turn it on, cut them up*)。
+
+                        ### 中考真题特训
+                        
+                        *(2024·天津中考)* *Here are some apples. Please ________.*
+                        A. cut up them   B. cut them up   C. cut it up   D. cut up it
+                        
+                        **[解析]**：apples 是复数用 them，代词必须放在动副短语中间，选 **B**。
+
+                        *(2023·广东中考)* *— ________ honey do we need? — Only a little.*
+                        A. How many   B. How much   C. How long   D. How often
+                        
+                        **[解析]**：honey (蜂蜜) 是不可数名词，提问用 How much，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：序列词与祈使句
-                        **1. 序列词 (Sequence Words)**
-                        - First (首先)
-                        - Next (接下来)
-                        - Then (然后)
-                        - Finally (最后)
-                        这些词让过程描述逻辑清晰。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：如何制作一种食物 (How to make...)
+                        #### 1. 写作要点
+                        - **材料准备**：First, you need...
+                        - **制作步骤**：熟练运用表示顺序的连词（First, Next, Then, After that, Finally）。
+                        - **动作描写**：准确使用 cut, put, add, pour, turn on 等动词。
 
-                        **2. 祈使句在说明书中的应用**
-                        省略主语 you，直接动词原形开头。
-                        - *Add some salt.*
-                        - *Don't mix them up yet.*
+                        #### 2. 高分句式
+                        - *It's easy to make a fruit salad.*
+                        - *First, wash the apples and cut them up.*
+                        - *Next, put the fruit in a bowl.*
+                        - *Finally, add some yogurt to the fruit and mix it all up.*
 
-                        **3. 中考真题特训**
+                        #### 3. 满分范文
+                        **How to Make a Fruit Salad**
                         
-                        *(2024·天津中考)* *________ the meat into small pieces, and then put it into the pot.*
-                        A. Cut up   B. To cut up   C. Cutting up   D. Cuts up
+                        It's very easy to make a fruit salad. You need two apples, three bananas, a watermelon and some yogurt. 
                         
-                        **[解析]**：表示指令，用祈使句动词原形开头，选 **A**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：How to Make My Favourite Food (如何制作我最喜欢的食物)
-                        **My favourite food is fruit salad. It's easy to make.**
-                        
-                        **First**, buy some fresh fruit like apples, bananas and grapes. **Next**, wash the fruit and **cut them up** into small pieces. **Then**, put them into a large bowl. **After that**, add two spoons of salad cream. **Finally**, **mix them up**. Now you can enjoy the delicious fruit salad!
+                        First, wash the apples. Peel the apples and bananas. Then, cut up all the fruit. Next, put the fruit in a big bowl. After that, pour the yogurt into the bowl. Finally, mix it all up. Now, a delicious fruit salad is ready. You can enjoy it with your friends!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u9", "Unit 9", "Can you come to my party?",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与社会 (Man and Society)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：发出邀请，接受/拒绝邀请，礼貌社交 (Invitations)。
-
-                        ### 2. 单元主题内容
-                        本单元围绕“社交邀请”展开，重点学习如何得体地发出邀请（Can you...? / Would you like to...?）以及如何礼貌地做出应答。学生将学习在不同情境下（如 party, concert, exam study 等）平衡社交与责任。单元旨在培养学生的跨文化交际礼仪，学会在拒绝他人时给出合理的理由（excuses），维护和谐的人际关系。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 社交邀请与回应。
+                        *   **深层意义**：本单元围绕“发出、接受和拒绝邀请”展开。旨在培养学生在社交场合的礼貌用语和得体交际的能力。学会用适当的理由婉拒他人，并在安排日程时权衡各项活动的优先级，提升时间管理和社交情商。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **活动词汇**：party, concert, exam, competition, opening.
-                        - **回复词汇**：accept (接受), refuse (拒绝), invitation (邀请), reason (理由).
-                        - **核心动词**：prepare (准备), catch (赶上), hang (悬挂), delete (删除).
-                        - **高频短语**：have to (不得不), go to the doctor (看医生), study for a test (为考试复习), hang out (闲逛), look after (照顾).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **活动/事件**：exam (考试), concert (音乐会), event (事件), calendar (日历), daytime (白天)。
+                        - **动词**：prepare (准备), hang (悬挂), catch (抓住), invite (邀请), accept (接受), refuse (拒绝), reply (回复)。
+                        - **形容词/副词**：available (有空的), sad (悲伤的), glad (高兴的), forward (向前)。
+                        - **其他**：guest (客人), opening (开幕), without (没有)。
 
-                        ### 2. 核心句式
-                        1.  **发出邀请**：Can you come to my party on Saturday?
-                        2.  **接受邀请**：Sure, I'd love to. / Certainly.
-                        3.  **礼貌拒绝**：I'm sorry, I can't. I have to study for a test.
-                        4.  **告知日期**：The opening is on Monday, January 10th.
-
-                        ### 3. 重点语法
-                        - **情态动词 can** 表示发出邀请。
-                        - **be + v.-ing** 表示按计划将要发生的未来动作。
+                        ### 2. 核心短语金牌储备
+                        - `prepare for` 为...做准备
+                        - `go to the doctor` 去看医生
+                        - `have the flu` 得流感
+                        - `hang out` 闲逛；常去某处
+                        - `catch you on Monday` 咱们周一见
+                        - `turn down` 拒绝
+                        - `take a trip` 去旅行
+                        - `look forward to (doing) sth.` 期待做某事 (**必考：to是介词**)
+                        - `hear from sb.` 收到某人的来信
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Can you come to my party? (你能来参加我的派对吗？)
+                        - **【考点详解】**：`Can` 引导一般疑问句，用于发出邀请。
+                        - **【回答礼仪】**：
+                            *   接受：`Sure, I'd love to.`
+                            *   拒绝：`I'm sorry, I can't. I have to...` (拒绝时必须给出理由以示礼貌)。
                         
-                        **Jeff**: Hey, Mary. Can you come to my party on Saturday night?
+                        #### 2. I have to prepare for an exam. (我必须为考试做准备。)
+                        - **【结构剖析】**：`prepare for sth.` 意为“为...做准备”。
                         
-                        **Mary**: I'm sorry, Jeff. I can't. I have to look after my sister.
-                        
-                        **Jeff**: That's too bad. What about you, May?
-                        
-                        **May**: I'd love to, but I am going to the concert with my mom.
-                        
-                        **Jeff**: OK. Maybe next time.
-
-                        **【译文】**
-                        
-                        **杰夫**：嘿，玛丽。你周六晚上能来参加我的派对吗？
-                        
-                        **玛丽**：抱歉，杰夫。我不能去。我不得不照顾我的妹妹。
-                        
-                        **杰夫**：那太遗憾了。你呢，小梅？
-                        
-                        **小梅**：我很乐意去，但我打算和我妈妈一起去听音乐会。
-                        
-                        **杰夫**：好吧。也许下次吧。
-
-                        ### Section B (Reading) 阅读文段：An Invitation to a Moving Party
-                        **【原文】**
-                        
-                        Dear friends, I'm moving to a new house next week! I want to have a moving party. Can you come? It will be on Friday, June 5th at 6:00 p.m. We will have great food and games. Please reply to my invitation by Wednesday. I hope to see you all! Love, Ms. Steen.
-
-                        **【译文】**
-                        
-                        亲爱的朋友们，下周我要搬新家了！我想举办一个乔迁派对。你们能来吗？时间是6月5日，周五，下午6点。我们将会有美食和游戏。请在周三前回复我的邀请。我希望能见到你们大家！爱您的，斯汀女士。
+                        #### 3. I look forward to hearing from you. (我期待收到你的回信。)
+                        - **【句式金牌】**：`look forward to doing sth.` 重点考查 `to` 为介词，后接动名词。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① prepare (v. 准备)
-                        - **【用法】**：`prepare for sth.` 为某事做准备。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法一：情态动词 can 表邀请
+                        在口语中，`Can you...?` 常用于朋友或熟人间的邀请。更委婉的表达是 `Could you...?` 或 `Would you like to...?`。
+
+                        ### 核心语法二：介词 to 与不定式 to 的区分
+                        英语中很多含有 to 的短语，to 实际上是介词，后面必须接 **名词、代词或动名词(v.-ing)**。
+                        **必背介词to短语**：
+                        *   `look forward to doing` (期待做)
+                        *   `be/get used to doing` (习惯于做)
+                        *   `pay attention to doing` (注意做)
+                        *   `make a contribution to doing` (为...做贡献)
+
+                        ### 中考真题特训
                         
-                        #### ② look after (照顾)
-                        - **【同义词】**：`take care of`。
+                        *(2024·天津中考)* *— Can you come to my birthday party tomorrow? — ________. I have to look after my little sister.*
+                        A. Yes, I'd love to   B. Sure, no problem   C. I'm afraid not   D. That's a good idea
                         
-                        #### ③ reply to (回复)
-                        - **【注意】**：reply 是不及物动词，后接对象需加 to。
-                        - **【例题】**：
+                        **[解析]**：根据后文“得照顾妹妹”可知是拒绝邀请，选 **C**。
+
+                        *(2023·广东中考)* *We are all looking forward to ________ a great vacation in Beijing.*
+                        A. have   B. having   C. has   D. had
                         
-                        *Please ________ my email as soon as possible.*
-                        A. answer to   B. reply   C. reply to   D. answer for
-                        
-                        **[解析]**：reply to = answer，选 **C**。
+                        **[解析]**：look forward to doing sth. 期待做某事，选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：情态动词 can 的邀请功能
-                        **1. 邀请句式**
-                        - Can you come to ...?
-                        - Would you like to come to ...?
-                        
-                        **2. 答语的艺术**
-                        - 接受：Sure, I'd love to. / I'd be happy to.
-                        - 拒绝：I'm sorry, I'm afraid I can't. I have to ... (一定要加理由)。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：写邀请函及回复 (Invitations and Replies)
+                        #### 1. 写作要点
+                        - **邀请函 (Invitation)**：说明活动内容、时间、地点；表达希望对方参加的意愿。
+                        - **接受回复 (Accepting)**：表达感谢；确认参加。
+                        - **拒绝回复 (Refusing)**：表达感谢和歉意；说明不能参加的真实原因。
 
-                        **3. 含有 to 的不定式作宾语补足语**
-                        - `invite sb. to do sth.` (邀请某人做某事)
+                        #### 2. 高分句式
+                        - *I am having a party at my house this Saturday.*
+                        - *I would love to come to your party.*
+                        - *I am really sorry, but I can't come.*
+                        - *I look forward to seeing you soon.*
 
-                        **4. 中考真题特训**
+                        #### 3. 满分范文
+                        **An Invitation & A Reply**
                         
-                        *(2024·安徽中考)* *— Would you like to go to the museum with me? — ________, but I'm busy today.*
-                        A. No, I wouldn't   B. I'd love to   C. Yes, please   D. It doesn't matter
-                        
-                        **[解析]**：but 提示转折，前句应表示“我很想去”，选 **B**。
-                    """.trimIndent()),
-
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：An Invitation (一封邀请函)
-                        **Dear Jack,**
-                        
-                        How's it going? I'm having a **birthday party** at my home this Sunday afternoon. **Can you come?** We will have some **delicious food** and **play games**. The party starts at 2:00 p.m. 
-                        
-                        I really hope you can make it. Please **reply to me** by Friday. 
-                        
-                        Yours, 
+                        (Invitation)
+                        Dear Jane,
+                        I am going to have a birthday party at my house this Saturday evening. It will start at 7:00 p.m. We will eat delicious food and play games. Can you come to my party? I look forward to hearing from you.
+                        Yours,
                         Li Hua
+                        
+                        (Reply)
+                        Dear Li Hua,
+                        Thanks so much for your invitation. I'm really sorry, but I can't come to your party. I have a piano lesson this Saturday evening. Have a great time!
+                        Yours,
+                        Jane
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g8up_u10", "Unit 10", "If you go to the party, you'll have a great time!",
                 listOf(
-                    UnitDetailSection("🌍 单元主题透视", """
-                        ### 1. 单元主题层级
-                        *   **主题语境**：人与自我 (Man and Self)
-                        *   **主题群**：人际关系与社会交往 (Social communication)
-                        *   **子主题**：决策后果，问题解决，社交建议 (Decision making and advice)。
-
-                        ### 2. 单元主题内容
-                        本单元以“决策与后果”为核心，重点学习 `if` 引导的条件状语从句。通过讨论派对安排、职业选择及青少年面临的困惑（如 problem solving），学生能够运用“主将从现”的逻辑进行推理预测。单元旨在引导学生学会理性思考，明白每一个选择都有其相应的后果，并学习在遇到问题时积极寻求帮助，构建积极的人生态度。
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 决策与结果。
+                        *   **深层意义**：本单元围绕“假设与结果”展开，学习 `If` 引导的条件状语从句。旨在引导学生理解因果逻辑，学会在做决定前评估可能产生的后果。通过讨论青少年常见问题（如考试焦虑、友谊危机），培养解决问题的能力和为自己行为负责的意识。
                     """.trimIndent()),
 
-                    UnitDetailSection("💡 单元新知预览", """
-                        ### 1. 重点单词短语
-                        - **社交词汇**：party, meeting, video, chocolate, flower.
-                        - **问题解决**：solve (解决), experience (经验), advice (建议 - 不可数), share (分享).
-                        - **核心名词/动词**：expert (专家), trust (相信), mistake (错误), careless (粗心的).
-                        - **高频短语**：stay at home, have a great time, keep ... to oneself (保守秘密), in half (分成两半), solve a problem (解决问题).
+                    UnitDetailSection("💡 词汇短语全方位解析", """
+                        ### 1. 重点单词分类
+                        - **事件与问题**：meeting (会议), video (录像), step (步骤), mistake (错误), problem (问题), experience (经验)。
+                        - **动词**：organize (组织), travel (旅行), advise (建议), solve (解决), trust (信任)。
+                        - **形容词/副词**：upset (难过的), normal (正常的), certainly (无疑), angry (生气的), careless (粗心的)。
+                        - **其他**：else (别的), halfway (在中途)。
 
-                        ### 2. 核心句式
-                        1.  **条件预测**：If you go to the party, you'll have a great time.
-                        2.  **否定预测**：If you don't study hard, you won't pass the exam.
-                        3.  **询问后果**：What will happen if we have the party today?
-                        4.  **寻求建议**：What should I do? — You should talk to your parents.
-
-                        ### 3. 重点语法
-                        - **If 引导的条件状语从句** (主将从现)。
-                        - **情态动词 should** 表示建议。
+                        ### 2. 核心短语金牌储备
+                        - `have a great time` 玩得开心
+                        - `stay at home` 待在家里
+                        - `take a taxi` 乘出租车
+                        - `give sb. some advice` 给某人一些建议
+                        - `keep ... to oneself` 把...保守为秘密
+                        - `talk to sb.` 跟某人谈话
+                        - `in half` 分成两半
+                        - `make mistakes` 犯错误
+                        - `run away from` 逃避
                     """.trimIndent()),
 
-                    UnitDetailSection("📝 教材原文与译文", """
-                        ### Section A (1a-2d) 核心对话
-                        **【原文】**
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. If you go to the party, you'll have a great time! (如果你去参加派对，你会玩得很开心的！)
+                        - **【考点详解】**：`If` 引导条件状语从句。遵循**“主将从现”**原则，即主句用将来时(you'll)，从句用一般现在时(go)。
                         
-                        **Nancy**: Are you going to the party, Jeff?
+                        #### 2. What will happen if they have the party today? (如果他们今天举行派对，会发生什么？)
+                        - **【结构剖析】**：`happen` 是不及物动词，常用于 `Sth. happens to sb.` 结构。
                         
-                        **Jeff**: If I finish my homework, I'll go.
+                        #### 3. It is best not to run away from our problems. (最好不要逃避我们的问题。)
+                        - **【语法核心】**：`It's best (not) to do sth.` 意为“最好(不)做某事”。
                         
-                        **Nancy**: If you go, will you wear jeans?
-                        
-                        **Jeff**: No, I won't. If I wear jeans, the teacher won't let me in.
-                        
-                        **Nancy**: That's true. You should wear your school uniform.
-
-                        **【译文】**
-                        
-                        **南希**：你要去参加派对吗，杰夫？
-                        
-                        **杰夫**：如果我完成了作业，我就去。
-                        
-                        **南希**：如果你去，你会穿牛仔裤吗？
-                        
-                        **杰夫**：不，我不会。如果我穿牛仔裤，老师不会让我进去的。
-                        
-                        **南希**：那倒是。你应该穿校服。
-
-                        ### Section B (Reading) 阅读文段：Students' Problems
-                        **【原文】**
-                        
-                        Everyone has problems. Some students worry about their grades. Others worry about their friends. If you have a problem, you should talk to someone. Don't keep it to yourself. If you talk to an expert or a friend, they can help you solve it. Remember, sharing a problem is like cutting it in half.
-
-                        **【译文】**
-                        
-                        每个人都有问题。一些学生担心他们的成绩。另一些人担心他们的朋友。如果你有问题，你应该找人谈谈。不要闷在心里。如果你找专家或朋友谈，他们能帮你解决。记住，分享一个问题就像把它切成两半。
+                        #### 4. A problem shared is a problem halved. (与人分担一个烦恼，就像把烦恼减半了。)
+                        - **【经典佳句】**：英语谚语。`shared` 和 `halved` 都是过去分词作后置定语。
                     """.trimIndent()),
 
-                    UnitDetailSection("🔑 重点单词短语详解与例题", """
-                        #### ① advice (n. 建议)
-                        - **【用法总结】**：**不可数名词**。表示一条建议用 `a piece of advice`。
-                        - **【动词形式】**：`advise` (v. 建议)。
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：If 引导的条件状语从句
+                        **1. “主将从现” 原则**：
+                        当讨论未来的情况时，`if` 从句中不能用 will，必须用一般现在时表将来；而主句使用一般将来时。
+                        *   *If it **rains** tomorrow, we **will stay** at home.*
+
+                        **2. “主情从现” 与 “主祈从现”**：
+                        - 主句可以是含有情态动词的句子：*If you are tired, you **can rest**.*
+                        - 主句可以是祈使句：*If you don't know the word, **look** it up in a dictionary.*
+
+                        ### 中考真题特训
                         
-                        #### ② solve vs settlement
-                        - **【搭配】**：`solve a problem` 解决问题。
+                        *(2024·天津中考)* *We will go for a picnic if it ________ tomorrow.*
+                        A. won't rain   B. doesn't rain   C. didn't rain   D. hasn't rained
                         
-                        #### ③ keep ... to oneself (守口如瓶; 独自承受)
-                        - **【例题】**：
+                        **[解析]**：If引导的条件状语从句遵循“主将从现”，主句是将来时，从句用一般现在时表将来，选 **B**。
+
+                        *(2023·河北中考)* *If you want to be healthy, you ________ eat more vegetables.*
+                        A. must to   B. should   C. had to   D. are going to
                         
-                        *If you feel sad, you shouldn't ________. Share it with your mother.*
-                        A. keep it to yourself   B. keep it up   C. keep away   D. keep on
-                        
-                        **[解析]**：根据 Share it 可知，不要“闷在心里”，选 **A**。
+                        **[解析]**：主句用情态动词给出建议（主情从现），选 **B**。
                     """.trimIndent()),
 
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 语法核心：If 条件句之“主将从现”
-                        **1. 法则定义**
-                        在 if 引导的条件状语从句中，如果主句用一般将来时 (will)，从句要用**一般现在时**表示将来。
-                        
-                        **2. 句式结构**
-                        - 主句 (will) + if + 从句 (一般现在时).
-                        - If + 从句 (一般现在时), 主句 (will).
-                        
-                        **3. 特殊情况**
-                        如果主句是祈使句或含有情态动词 (should, can)，从句依然用一般现在时。
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：给面临困境的朋友写建议信 (Advice for a Friend)
+                        #### 1. 写作逻辑
+                        - **表达同情**：I am sorry to hear that you are upset.
+                        - **分析问题**：指出问题所在。
+                        - **提供建议**：使用 If 句型说明采取不同行动可能产生的结果。
+                        - **鼓励结语**：Don't worry. Everything will be OK.
 
-                        **4. 中考真题特训**
-                        
-                        *(2024·天津中考)* *If it ________ tomorrow, we ________ go to the park.*
-                        A. rains; won't   B. will rain; don't   C. rain; won't   D. raining; don't
-                        
-                        **[解析]**：if 从句用一般现在时（主语 it 用单三 rains），主句用将来时，选 **A**。
-                    """.trimIndent()),
+                        #### 2. 高分句式
+                        - *You should talk to your parents about your problems.*
+                        - *If you keep the problems to yourself, you will feel worse.*
+                        - *If you tell your friend the truth, he will understand you.*
+                        - *A problem shared is a problem halved.*
 
-                    UnitDetailSection("✍️ 单元写作微技能", """
-                        ### 写作主题：Giving Advice (提供建议)
-                        **Dear Friend,**
+                        #### 3. 满分范文
+                        **A Letter of Advice**
                         
-                        I know you are worried about your English study. **If you practice** every day, you **will improve** quickly. First, you should **listen to** English tapes. **If you have** problems, don't **keep them to yourself**. You should **talk to** your teacher. I believe you will do better.
+                        Dear Tom,
+                        I am sorry to hear that you had a fight with your best friend. Don't be too sad. Here is some advice for you. 
                         
-                        Best wishes!
+                        I think you should write a letter to him and say sorry. If you write a letter, he will know you still care about him. Also, you can invite him to play basketball this weekend. If you play together, you will soon become good friends again. It's best not to keep the problem to yourself. A problem shared is a problem halved. 
+                        
+                        I hope things will work out for you.
+                        Yours,
+                        Li Hua
                     """.trimIndent())
                 )
             )
         )
-        )
-        }
+    )
+}
