@@ -162,7 +162,6 @@ fun MainScreen(
                             )
                             InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
                             InsightTab.Analysis -> AnalysisTab(
-                                preferences = preferences,
                                 students = uiState.students
                             )
                             InsightTab.Profile -> ProfileTab(
@@ -756,11 +755,9 @@ fun HistoryCardByPoint(
 
 @Composable
 fun AnalysisTab(
-    preferences: UserPreferences,
     students: List<com.example.insight.data.local.entities.StudentEntity>
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
-    val surfaceColor = MaterialTheme.colorScheme.surface
     
     // 模拟班级多维度数据
     val capabilityScores = listOf(0.75f, 0.62f, 0.88f, 0.55f, 0.82f, 0.68f)
@@ -784,7 +781,7 @@ fun AnalysisTab(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     StatCardSmall(label = "班级平均分", value = "84.5", icon = Icons.Default.Assessment, color = primaryColor, modifier = Modifier.weight(1f))
-                    StatCardSmall(label = "周进步率", value = "+12.4%", icon = Icons.Default.TrendingUp, color = Color(0xFF4DB6AC), modifier = Modifier.weight(1f))
+                    StatCardSmall(label = "周进步率", value = "+12.4%", icon = Icons.AutoMirrored.Filled.TrendingUp, color = Color(0xFF4DB6AC), modifier = Modifier.weight(1f))
                 }
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     StatCardSmall(label = "人均扫描", value = "18.2次", icon = Icons.Default.CameraAlt, color = Color(0xFF7986CB), modifier = Modifier.weight(1f))
