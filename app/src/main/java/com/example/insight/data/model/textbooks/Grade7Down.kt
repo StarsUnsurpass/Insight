@@ -549,7 +549,7 @@ object Grade7Down {
                     """.trimIndent())
                 )
             ),
-        ,
+       
             TextbookUnit(
                 "g7down_u5", "Unit 5", "What are you doing?",
                 listOf(
@@ -1071,6 +1071,510 @@ object Grade7Down {
                     """.trimIndent())
                 )
             )
+        ,
+            TextbookUnit(
+                "g7down_u9", "Unit 9", "What did you do last weekend?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：周末活动，闲暇生活，个人经历分享 (Past activities)。
+
+                        ### 2. 单元主题内容
+                        本单元以“周末活动”为核心，正式引入一般过去时（Simple Past Tense）。学生将学习如何描述过去发生的动作或状态，包括规则动词与不规则动词的变化。通过分享周末的趣事或忙碌生活，引导学生学会合理安排业余时间，培养积极向上的生活态度，并增进同学间的相互了解。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **周末活动**：did homework, went to the cinema, played badminton, went boating, camped by the lake.
+                        - **不规则动词**：do -> did, go -> went, see -> saw, sit -> sat, eat -> ate, spend -> spent.
+                        - **核心名词**：weekend (周末), mountain (山), beach (海滩), fire (火), mouse (老鼠).
+                        - **高频短语**：last weekend, go camping (去野营), stay up late (熬夜), shout at (对...大声叫嚷).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问过去活动**：What did you do last weekend? — I went to the movies.
+                        2.  **询问感受**：How was your weekend? — It was great/boring.
+                        3.  **询问他人**：Did he go to the beach? — Yes, he did. / No, he didn't.
+                        4.  **描述经历**：I saw a big snake in the forest.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **一般过去时** 的构成、疑问句及回答。
+                        - **动词过去式** 的变化规则（规则与不规则）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Lucy**: Hi, Alice. What did you do last weekend?
+                        
+                        **Alice**: I went to the cinema with my family. We saw a very funny movie.
+                        
+                        **Lucy**: How was it?
+                        
+                        **Alice**: It was great! What about you?
+                        
+                        **Lucy**: I stayed at home and did my homework. It was kind of boring.
+
+                        **【译文】**
+                        
+                        **露西**：嗨，艾丽丝。你上周末做什么了？
+                        
+                        **艾丽丝**：我和家人一起去了电影院。我们看了一部非常有意思的电影。
+                        
+                        **露西**：怎么样？
+                        
+                        **艾丽丝**：太棒了！你呢？
+                        
+                        **露西**：我待在家里做作业了。有点无聊。
+
+                        ### Section B (Reading) 阅读文段：A Busy Weekend
+                        **【原文】**
+                        
+                        Last weekend was very busy for my family. On Saturday morning, I cleaned my room. In the afternoon, I played soccer. My parents went shopping. On Sunday, we went to the countryside. We had a picnic near a small river. We saw many flowers and birds. We were tired but we had a lot of fun.
+
+                        **【译文】**
+                        
+                        上周末对我们家来说非常忙碌。在周六上午，我打扫了房间。在下午，我踢了足球。我的父母去购物了。在周日，我们去了乡下。我们在一条小河边野餐。我们看到了许多花和鸟。我们很累但是玩得很开心。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What did you do last weekend? (你上周末做什么了？)
+                        - **【句式剖析】**：`did` 是助动词，用来辅助构成过去时的疑问句。后面的 `do` 必须用原形。
+                        
+                        #### 2. I went boating. (我去划船了。)
+                        - **【用法拓展】**：`go + v.-ing` 表示去从事某项活动。*go camping* (去野营)。
+                        
+                        #### 3. It was time to go to bed. (该睡觉了。)
+                        - **【词块归纳】**：`It's time to do sth.` 到该做某事的时间了。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① stay up late (熬夜)
+                        - **【例题】**：
+                        
+                        *Don't ________ too late. It is bad for your health.*
+                        A. stay up   B. sit up   C. stand up   D. get up
+                        
+                        **[解析]**：stay up late 熬夜，选 **A**。
+
+                        #### ② shout at (大声叫嚷)
+                        - **【辨析】**：`shout at` (因愤怒而大声呵斥)；`shout to` (因距离远而大声呼喊)。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：一般过去时 (Simple Past Tense)
+                        表示过去某个时间发生的动作或存在的状态。
+                        **1. 动词过去式的变化规则**
+                        *   直接加 ed：*work -> worked*。
+                        *   去e加 d：*love -> loved*。
+                        *   辅音+y变i加ed：*study -> studied*。
+                        *   双写末尾辅音加ed：*stop -> stopped*。
+                        *   不规则变化：*go -> went, have -> had, is -> was*。
+
+                        **2. 句式结构**
+                        - 肯定：主语 + 动词过去式 + 其他.
+                        - 否定：主语 + **didn't** + 动词原形.
+                        - 疑问：**Did** + 主语 + 动词原形 ...?
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·天津中考)* *I ________ a beautiful kite with my father yesterday.*
+                        A. make   B. made   C. am making   D. will make
+                        
+                        **[解析]**：yesterday 提示用过去式，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My Last Weekend (我的上周末)
+                        **Last weekend, I had a very happy time.**
+                        
+                        On Saturday morning, I **did my homework**. It was a bit difficult but I finished it. In the afternoon, I **went to the park** with my friends. We **played basketball** together. On Sunday, I **stayed at home** and read an interesting book. My mother **cooked** a delicious dinner for us. 
+                        
+                        I felt very relaxed. What about your weekend?
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u10", "Unit 10", "I'd like some noodles.",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与社会 (Man and Society)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：饮食与健康，订餐服务，中外饮食文化 (Food and ordering)。
+
+                        ### 2. 单元主题内容
+                        本单元以“订餐”为核心情境，学习各种食物名称（如 beef, mutton, noodles, cabbage 等）以及如何表达需求（would like）。通过模拟餐馆点餐，学生不仅掌握了数量与规格的表达（如 large, medium, small），还学习了中国传统美食文化（如生日面、饺子）。本单元旨在培养学生的社会实践能力，学会在公共服务场所进行得体、清晰的沟通。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **肉类蔬菜**：beef (牛肉), mutton (羊肉), chicken (鸡肉), cabbage (卷心菜), potato (土豆), tomato (西红柿), carrot (胡萝卜).
+                        - **主食饮品**：noodles (面条), rice (米饭), pancake (薄烤饼), porridge (粥), soup (汤), juice (果汁).
+                        - **规格数量**：size (尺寸), large (大号的), medium (中号的), small (小号的), bowl (碗).
+                        - **高频短语**：would like (想要), take one's order (点菜), what size (什么规格), birthday noodles (长寿面).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **表达想要**：I'd like a large bowl of beef noodles.
+                        2.  **询问点餐**：May I take your order? / What would you like to eat?
+                        3.  **询问规格**：What size bowl of noodles would you like?
+                        4.  **描述传统**：In China, people eat long noodles for their birthdays.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **would like** 的各种句式变换。
+                        - **可数名词与不可数名词**的分类及其数量表达（a bowl of...）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Waiter**: Hello! May I take your order?
+                        
+                        **Boy**: Yes. I'd like some noodles, please.
+                        
+                        **Waiter**: What kind of noodles would you like?
+                        
+                        **Boy**: I'd like beef and tomato noodles.
+                        
+                        **Waiter**: And what size would you like?
+                        
+                        **Boy**: A medium bowl, please.
+
+                        **【译文】**
+                        
+                        **服务员**：您好！可以点餐了吗？
+                        
+                        **男孩**：是的。请给我来点面条。
+                        
+                        **服务员**：您想要哪种面条？
+                        
+                        **男孩**：我想要牛肉西红柿面。
+                        
+                        **服务员**：那您想要多大碗的？
+                        
+                        **男孩**：请给我来个中碗的。
+
+                        ### Section B (Reading) 阅读文段：Birthday Food Around the World
+                        **【原文】**
+                        
+                        What do people eat on their birthdays? In many countries, people have a cake with candles. But in China, it's different. People often eat long noodles. They think long noodles mean a long life. In some places, people also eat red eggs. They are a symbol of good luck. What about you? What do you like to eat on your birthday?
+
+                        **【译文】**
+                        
+                        人们在生日那天吃什么？在许多国家，人们吃带蜡烛的蛋糕。但在中国，情况有所不同。人们经常吃长寿面。他们认为长寿面意味着长寿。在一些地方，人们也吃红鸡蛋。它们是好运的象征。你呢？你在生日那天喜欢吃什么？
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. I'd like some noodles. (我想要点面条。)
+                        - **【句式剖析】**：`I'd like` 是 `I would like` 的缩写。比 `I want` 更委婉、更有礼貌。
+                        
+                        #### 2. What kind of noodles would you like? (你想要哪种面条？)
+                        - **【词块归纳】**：`what kind of...` 意为“哪种/哪类...”。
+                        
+                        #### 3. It is a symbol of good luck. (它是好运的象征。)
+                        - **【要点精讲】**：`a symbol of...` ...的象征。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① would like (想要)
+                        - **【用法总结】**：
+                            *   `would like sth.` 想要某物。
+                            *   `would like to do sth.` 想要做某事。
+                        - **【例题】**：
+                        
+                        *Would you like ________ some orange juice?*
+                        A. drinking   B. drinks   C. to drink   D. drink
+                        
+                        **[解析]**：would like to do 固定搭配，选 **C**。
+
+                        #### ② potato / tomato (名词复数)
+                        - **【记忆口诀】**：英雄(hero)爱吃土豆(potato)和西红柿(tomato)，复数后面直接加 -es。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：数量的“精细化”表达
+                        **1. 可数与不可数的界限**
+                        *   可数：noodles (常用复数), potatoes, carrots.
+                        *   不可数：beef, mutton, rice, water, juice.
+                        
+                        **2. 不可数名词的数量表达**
+                        公式：`数词 + 容器/量词 + of + 不可数名词`。
+                        - *a bowl of rice* (一碗米饭)
+                        - *two glasses of juice* (两杯果汁)
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·广东中考)* *I'm hungry. I'd like ________ and ________.*
+                        A. two bowl of noodle; some beef   B. two bowls of noodles; some beef   C. two bowl of noodles; some beefs   D. two bowls of noodle; some beefs
+                        
+                        **[解析]**：bowl 和 noodle 需用复数，beef 为不可数无复数，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：Menu & Ordering (设计菜单与模拟订餐)
+                        #### 1. 常用句式
+                        *   *Can I help you? / May I take your order?*
+                        *   *I'd like ... bowl of ...*
+                        *   *What size would you like?*
+                        *   *Wait a minute, please.*
+
+                        #### 2. 满分范文
+                        Welcome to our restaurant! We have many kinds of food. For meat lovers, we have **beef and mutton**. For vegetables, we have **cabbages and potatoes**. **What would you like?** If you want noodles, we have **large, medium and small** bowls. We also have delicious **strawberry pancakes**. Please come and have a taste!
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u11", "Unit 11", "How was your school trip?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：学校组织的出游，研学经历，自然与科学观察 (School trips)。
+
+                        ### 2. 单元主题内容
+                        本单元以“学校组织的出游”为主题，深入学习一般过去时的进阶用法。通过描述农场参观、博物馆研学等经历，学生能够运用过去时态描述一连串的动作（如 milked a cow, rode a horse, saw some robots 等）并表达对这些经历的评价。本单元旨在引导学生走进自然、走进科学，在实践中学习，培养其观察力、好奇心和分享经历的社交能力。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **出游活动**：milked a cow (挤牛奶), rode a horse (骑马), fed chickens (喂鸡), took photos (照相), went for a walk (散步).
+                        - **场所/物品**：farm (农场), museum (博物馆), robot (机器人), gift (礼物), sun (太阳).
+                        - **评价形容词**：interesting (有趣的), exciting (令人兴奋的), lovely (可爱的), expensive (昂贵的), cheap (便宜的).
+                        - **高频短语**：all in all (总的来说), quite a lot (许多), fire station (消防站).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问出游感受**：How was your school trip? — It was excellent!
+                        2.  **询问具体活动**：What did you see? — I saw some robots.
+                        3.  **询问过程**：Did you go to the zoo? — No, I didn't.
+                        4.  **总结评价**：All in all, it was an exciting day.
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **一般过去时** 的不规则动词变化进阶（feed -> fed, ride -> rode, eat -> ate）。
+                        - **形容词评价语** 的丰富表达。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Eric**: Hi, Carol. How was your school trip?
+                        
+                        **Carol**: It was great! We went to a farm.
+                        
+                        **Eric**: Did you see any cows?
+                        
+                        **Carol**: Yes, I did. I even milked a cow. 
+                        
+                        **Eric**: Did you ride a horse? 
+                        
+                        **Carol**: No, I didn't. But I fed some chickens. It was so much fun!
+
+                        **【译文】**
+                        
+                        **埃里克**：嗨，卡罗尔。你的学校郊游怎么样？
+                        
+                        **卡罗尔**：太棒了！我们去了一个农场。
+                        
+                        **埃里克**：你看到牛了吗？
+                        
+                        **卡罗尔**：看到了。我甚至还挤了牛奶。
+                        
+                        **埃里克**：你骑马了吗？
+                        
+                        **卡罗尔**：没骑。但我喂了一些鸡。真的很有趣！
+
+                        ### Section B (Reading) 阅读文段：A School Trip to the Museum
+                        **【原文】**
+                        
+                        Yesterday we went to the Science Museum. First, we saw some robots. They were very cool! Then we went to the gift shop and bought some lovely gifts. The weather was a bit rainy, but it didn't stop us. All in all, the trip was very educational and I learned quite a lot about science.
+
+                        **【译文】**
+                        
+                        昨天我们去了科学博物馆。首先，我们看到了一些机器人。它们非常酷！然后我们去了礼品店，买了一些可爱的礼物。天气有点下雨，但这并没有阻碍我们。总的来说，这次旅行非常有教育意义，我学到了不少关于科学的知识。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. How was your school trip? (你的学校郊游怎么样？)
+                        - **【用法拓展】**：这里的 `was` 是 `is` 的过去式。
+                        
+                        #### 2. I learned quite a lot about science. (我学到了很多关于科学的知识。)
+                        - **【词块归纳】**：`quite a lot` 意为“很多/相当多”。
+                        
+                        #### 3. All in all, it was a great day. (总的来说，这是伟大的一天。)
+                        - **【要点精讲】**：`all in all` 常用于文章末尾进行总结。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① ride (v. 骑) -> rode (过去式)
+                        - **【词块归纳】**：`ride a bike` (骑自行车), `ride a horse` (骑马)。
+                        - **【例题】**：
+                        
+                        *Last Sunday, my brother ________ a horse on the farm.*
+                        A. ride   B. rides   C. riding   D. rode
+                        
+                        **[解析]**：Last Sunday 提示用过去时，选 **D**。
+
+                        #### ② exciting (令人兴奋的) vs excited (感到兴奋的)
+                        - **【辨析】**：`exciting` 修饰事物；`excited` 修饰人。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：一般过去时的评价与描述
+                        **1. 动词 be 的过去式**
+                        - I/He/She/It was ...
+                        - We/You/They were ...
+                        
+                        **2. 评价词的逻辑**
+                        - 积极评价：excellent, great, exciting, lovely.
+                        - 消极评价：terrible, boring, expensive.
+
+                        **3. 中考真题特训**
+                        
+                        *(2023·北京中考)* *— How ________ your trip to London last month? — It ________ wonderful!*
+                        A. is; is   B. was; was   C. is; was   D. was; is
+                        
+                        **[解析]**：last month 提示全用过去时，选 **B**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My School Trip (我的学校出游)
+                        **I went to the zoo for my school trip last Friday.**
+                        
+                        The weather was **sunny and warm**. First, we **saw many animals** like lions and elephants. They were **very lovely**. Then we **had lunch** together in the park. In the afternoon, we **took quite a lot of photos**. **All in all**, it was an **exciting** trip. I really enjoyed it!
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u12", "Unit 12", "What did you do last weekend?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题透视 (Unit Theme Analysis)", """
+                        ### 1. 单元主题层级
+                        *   **主题语境**：人与自我 (Man and Self)
+                        *   **主题群**：生活与学习 (Life and study)
+                        *   **子主题**：周末活动，个人经历，意外事件 (Weekend stories)。
+
+                        ### 2. 单元主题内容
+                        本单元作为七年级下册的收尾，是对一般过去时态的全面巩固与总结。通过描述学生周末的各种经历（如做作业、露营、甚至是遇到蛇等意外事件），旨在提高学生在真实语境中运用过去时态进行叙事的能力。单元通过“由忙碌到意外”的情节安排，鼓励学生勇于分享生活中的起伏，培养其乐观、幽默的沟通品格。
+                    """.trimIndent()),
+
+                    UnitDetailSection("💡 单元新知预览 (Unit Preview)", """
+                        ### 1. 重点单词短语 (Key Words & Phrases)
+                        - **日常活动**：did homework, went camping, played badminton, went boating.
+                        - **核心名词**：weekend (周末), mouse (老鼠), baby (婴儿), snake (蛇), forest (森林).
+                        - **核心动词/形容词**：shout (呼喊), fly (飞), scary (吓人的), high (高的).
+                        - **高频短语**：stay up late (熬夜), run away (跑掉), shout at (对...大声叫嚷), wake up (醒来).
+
+                        ### 2. 核心句式 (Key Sentences)
+                        1.  **询问过去**：What did you do last weekend? — I stayed at home.
+                        2.  **描述状态**：How was your weekend? — It was kind of busy.
+                        3.  **叙述事件**：Suddenly, I saw a big snake in the forest.
+                        4.  **表达惊讶**：That was a very scary weekend!
+
+                        ### 3. 重点语法 (Key Grammar)
+                        - **一般过去时** 的综合应用（特殊疑问句、一般疑问句及否定句）。
+                        - **不规则动词** 的集中巩固（fly -> flew, feel -> felt, wake -> woke）。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📝 教材原文与译文 (Text & Translation)", """
+                        ### Section A (1a-2d) 核心对话
+                        **【原文】**
+                        
+                        **Lucy**: Hi, Alice. What did you do last weekend?
+                        
+                        **Alice**: I stayed at home and did my homework. 
+                        
+                        **Lucy**: Was it boring?
+                        
+                        **Alice**: No, it wasn't. It was busy but I learned a lot. 
+                        
+                        **Lucy**: I went camping with my friends. We sat by the fire and told stories. 
+                        
+                        **Alice**: That sounds like a lot of fun!
+
+                        **【译文】**
+                        
+                        **露西**：嗨，艾丽丝。你上周末做什么了？
+                        
+                        **艾丽丝**：我待在家里做作业了。
+                        
+                        **露西**：无聊吗？
+                        
+                        **艾丽丝**：不，不无聊。虽然很忙但我学到了很多。
+                        
+                        **露西**：我和朋友们去露营了。我们坐在火堆旁讲故事。
+                        
+                        **艾丽丝**：那听起来非常有趣！
+
+                        ### Section B (Reading) 阅读文段：A Scary Weekend
+                        **【原文】**
+                        
+                        Last weekend, my brother and I went to the forest. We put up our tent and started a fire. We were very happy. But in the middle of the night, we woke up because we heard a strange sound. Suddenly, a big snake came into our tent! We were so scared that we ran away quickly. It was a very scary weekend.
+
+                        **【译文】**
+                        
+                        上周末，我和我弟弟去了森林。我们搭起帐篷并生了火。我们很快乐。但在半夜，我们醒了，因为我们听到了奇怪的声音。突然，一条大蛇爬进了我们的帐篷！我们太害怕了，飞快地跑开了。那是一个非常惊险的周末。
+                    """.trimIndent()),
+
+                    UnitDetailSection("📚 重点句子详解与翻译", """
+                        #### 1. What did you do last weekend? (你上周末做什么了？)
+                        - **【用法拓展】**：询问过去动作的标准句型。
+                        
+                        #### 2. I saw a big snake in the tent. (我在帐篷里看到一条大蛇。)
+                        - **【词块归纳】**：`saw` 是 `see` 的过去式。
+                        
+                        #### 3. We were so scared that we ran away. (我们如此害怕以至于跑开了。)
+                        - **【句式金牌】**：`so + 形容词 + that + 从句` (如此...以至于...)。
+                    """.trimIndent()),
+
+                    UnitDetailSection("🔑 重点单词短语详解与例题", """
+                        #### ① stay up late (熬夜)
+                        - **【注意】**：stay up 表示“不睡觉”。
+                        
+                        #### ② run away (跑掉; 逃跑)
+                        - **【例题】**：
+                        
+                        *When the thief saw the police, he ________ quickly.*
+                        A. ran away   B. ran into   C. ran after   D. ran out
+                        
+                        **[解析]**：看到警察后“跑掉”，选 **A**。
+
+                        #### ③ shout at vs shout to
+                        - **【辨析】**：`shout at` 往往带有生气的情绪；`shout to` 只是大声呼喊。
+                    """.trimIndent()),
+
+                    UnitDetailSection("⚙️ 语法精讲精练 (Grammar Master)", """
+                        ### 语法核心：一般过去时的终极巩固
+                        **1. 助动词 did 的统治地位**
+                        只要句子中有 did，后面的动词必须恢复原形。
+                        - *Did you go?* (不说 Did you went?)
+                        - *I didn't see.* (不说 I didn't saw?)
+                        
+                        **2. 动词过去式的三种读音**
+                        - [t]：清辅音结尾 (helped, washed).
+                        - [d]：浊辅音或元音结尾 (played, stayed).
+                        - [id]：t 或 d 结尾 (wanted, needed).
+
+                        **3. 中考真题特训**
+                        
+                        *(2024·山东中考)* *— ________ you ________ to the movies last Saturday? — Yes, I did.*
+                        A. Do; go   B. Did; went   C. Did; go   D. Do; went
+                        
+                        **[解析]**：过去时疑问句 Did ... go ...，选 **C**。
+                    """.trimIndent()),
+
+                    UnitDetailSection("✍️ 单元写作微技能 (Writing Skills)", """
+                        ### 写作主题：My Weekend Story (我的周末故事)
+                        **My weekend was interesting.** 
+                        
+                        On Saturday, I **did my homework**. On Sunday morning, I **went camping** with my parents. We **put up a tent** near a lake. It was **exciting**. But then, my little brother **fell into** the water! Luckily, my father **caught** him. It was a weekend **I will never forget**.
+                    """.trimIndent())
+                )
+            )
+
         )
         )
         }

@@ -491,7 +491,7 @@ object Grade8Up {
                     """.trimIndent())
                 )
             ),
-        ,
+       
             TextbookUnit(
                 "g8up_u5", "Unit 5", "Do you want to watch a game show?",
                 listOf(
