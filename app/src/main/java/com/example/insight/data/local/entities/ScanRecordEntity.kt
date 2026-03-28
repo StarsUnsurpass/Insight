@@ -11,7 +11,13 @@ data class ScanRecordEntity(
     val ocrText: String,
     val llmAnalysisJson: String,
     val coreKnowledgeId: String,
-    val studentId: String = "", // Foreign key to student_table
+    val studentId: String = "", 
     val isMastered: Boolean = false,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    
+    // 扩展字段：支持诊断级分析
+    val errorCategory: String? = null, // CONCEPT_GAP, MOTHER_TONGUE, COUPLING_ERROR, CARELESSNESS
+    val questionType: String? = null,  // MULTI_CHOICE, CLOZE, READING, WRITING
+    val difficulty: Int = 3,           // 1-5
+    val timeSpentMillis: Long = 0      // 用于效率分析
 )

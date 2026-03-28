@@ -12,8 +12,9 @@ import androidx.room.PrimaryKey
 data class KnowledgeNodeEntity(
     @PrimaryKey val nodeId: String,
     val title: String,
-    val category: Int, // 1: 词法, 2: 时态, 3: 句法, etc.
+    val category: Int, // 1: 词法, 2: 时态, 3: 句法, 4: 语篇, 5: 词形
     val importanceLevel: Int, // 1-5星
+    val isHighFrequency: Boolean = false, // 是否为中考高频必考点
     val canvasX: Float,
     val canvasY: Float,
     val description: String = ""

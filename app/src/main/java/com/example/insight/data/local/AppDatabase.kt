@@ -23,7 +23,7 @@ import com.example.insight.data.local.entities.*
         TimeSlotEntity::class,
         LessonTimeEntity::class
     ],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
