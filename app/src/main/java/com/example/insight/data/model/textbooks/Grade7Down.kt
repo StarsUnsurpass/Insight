@@ -16,7 +16,47 @@ object Grade7Down {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc7x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g7down_u1", "Unit 1", "Rules and Customs",
+                "g7down_s1", "Starter Unit 1", "Animal Friends",
+                listOf(
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **duck** /ˈdʌk/ n. 鸭子
+                        
+                        **chicken** /ˈtʃɪkɪn/ n. 鸡
+                        
+                        **rabbit** /ˈræbɪt/ n. 兔子
+                        
+                        **cow** /kaʊ/ n. 母牛；奶牛
+                        
+                        **horse** /hɔːs/ n. 马
+                        
+                        **sheep** /ʃiːp/ n. 绵羊
+                        
+                        **goat** /ɡəʊt/ n. 山羊
+                        
+                        **pig** /pɪɡ/ n. 猪
+                        
+                        **farm** /fɑːm/ n. 农场
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_s2", "Starter Unit 2", "No Rules, No Order",
+                listOf(
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **rule** /ruːl/ n. 规则；规章
+                        
+                        **order** /ˈɔːdə(r)/ n. 顺序；秩序
+                        
+                        **follow** /ˈfɒləʊ/ v. 遵循；跟随
+                        
+                        **must** /mʌst/ modal v. 必须
+                        
+                        **quiet** /ˈkwaɪət/ adj. 安静的
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u1", "Unit 1", "Let's Play Ball!",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -108,7 +148,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u2", "Unit 2", "Weather and Vacation",
+                "g7down_u2", "Unit 2", "Food and Health",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -151,7 +191,7 @@ object Grade7Down {
                         
                         **hot** /hɒt/ adj. 热的
                         
-                        **cold** /kəʊld/ adj. 冷的
+                        **cold** /kəʊld/ adj. 冷s的
                         
                         **cool** /kuːl/ adj. 凉爽的
                         
@@ -187,7 +227,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u3", "Unit 3", "Appearance",
+                "g7down_u3", "Unit 3", "Weather and Seasons",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -258,7 +298,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u4", "Unit 4", "Food and Health",
+                "g7down_u4", "Unit 4", "Eat Well",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         *   **主题语境**：人与自我 —— 饮食习惯与健康。
@@ -340,7 +380,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u5", "Unit 5", "School Trip",
+                "g7down_u5", "Unit 5", "Neighborhood",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         *   **主题语境**：人与社会 —— 过往经历（郊游）。
@@ -418,7 +458,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u6", "Unit 6", "Unforgettable Weekend",
+                "g7down_u6", "Unit 6", "Travel and Holidays",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **stay** /steɪ/ v. 停留；待
@@ -455,7 +495,7 @@ object Grade7Down {
                         
                         **mouse** /maʊs/ n. 老鼠
                         
-                        **mice** /maɪs/ n. (mouse的复数) 老鼠
+                        **mice** /maʊs/ n. (mouse的复数) 老鼠
                         
                         **baby** /ˈbeɪbi/ n. 婴儿
                         
@@ -488,7 +528,7 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u7", "Unit 7", "Around the World",
+                "g7down_u7", "Unit 7", "Shopping",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **world** /wɜːld/ n. 世界

@@ -16,7 +16,7 @@ object Grade8Down {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc8x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g8down_u1", "Unit 1", "Health and First Aid",
+                "g8down_u1", "Unit 1", "Time to Relax",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -164,7 +164,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u2", "Unit 2", "Volunteering and Responsibility",
+                "g8down_u2", "Unit 2", "Stay Healthy",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         *   **主题语境**：人与社会 —— 志愿服务。
@@ -247,7 +247,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u3", "Unit 3", "Family Chores",
+                "g8down_u3", "Unit 3", "Could you please clean your room?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **rubbish** /ˈrʌbɪʃ/ n. 垃圾；废物
@@ -299,7 +299,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u4", "Unit 4", "Communication and Advice",
+                "g8down_u4", "Unit 4", "Why don't you talk to your parents?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **allow** /əˈlaʊ/ v. 允许；准许
@@ -328,7 +328,7 @@ object Grade8Down {
                         
                         **cloud** /klaʊd/ n. 云；云朵
                         
-                        **elder** /ˈeldə(r)/ adj. 年纪较长的
+                        **elder** /ˈeldə(r)/ adj. 年记较长的
                         
                         **instead** /ɪnˈsted/ adv. 代替；反而
                         
@@ -385,7 +385,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u5", "Unit 5", "Memorable Events",
+                "g8down_u5", "Unit 5", "What were you doing when the rainstorm came?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **rainstorm** /ˈreɪnstɔːm/ n. 暴风雨
@@ -477,7 +477,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u6", "Unit 6", "Stories and Legends",
+                "g8down_u6", "Unit 6", "An old man tried to move the mountains.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **shoot** /ʃuːt/ v. 射击；发射
@@ -571,7 +571,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u7", "Unit 7", "Nature and Geography",
+                "g8down_u7", "Unit 7", "What's the highest mountain in the world?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **square** /skweə(r)/ n. 平方；正方形
@@ -674,7 +674,7 @@ object Grade8Down {
                         
                         **government** /ˈɡʌvnmənt/ n. 政府
                         
-                        **whale** /weɪl/ n. 鲸
+                        **whale** /we|l/ n. 鲸
                         
                         **oil** /ɔɪl/ n. 油；石油
                         
@@ -685,7 +685,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u8", "Unit 8", "Literature and Music",
+                "g8down_u8", "Unit 8", "Have you read Treasure Island yet?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **treasure** /ˈtreʒə(r)/ n. 珠宝；财富
@@ -769,7 +769,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u9", "Unit 9", "Experience and Progress",
+                "g8down_u9", "Unit 9", "Have you ever been to a museum?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **amusement** /əˈmjuːzmənt/ n. 娱乐；游戏
@@ -853,7 +853,7 @@ object Grade8Down {
                 )
             ),
             TextbookUnit(
-                "g8down_u10", "Unit 10", "Memories and Hometown",
+                "g8down_u10", "Unit 10", "I've had this bike for three years.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **yard** /jɑːd/ n. 院子

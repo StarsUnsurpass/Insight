@@ -16,7 +16,7 @@ object Grade8Up {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/sc8x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g8up_u1", "Unit 1", "Vacations and Experiences",
+                "g8up_u1", "Unit 1", "Where did you go on vacation?",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -84,7 +84,7 @@ object Grade8Up {
                         
                         **wet** /wet/ adj. 湿的；潮湿的
                         
-                        **below** /bɪˈləʊ/ prep. & adv. 在……下面
+                        **below** /bɪˈlɒʊ/ prep. & adv. 在……下面
                         
                         **enough** /ɪˈnʌf/ adj. 足够的；充分的
                         
@@ -107,7 +107,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u2", "Unit 2", "Habits and Health",
+                "g8up_u2", "Unit 2", "How often do you exercise?",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         ### 1. 核心语境
@@ -201,7 +201,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u3", "Unit 3", "Friends and Similarities",
+                "g8up_u3", "Unit 3", "I'm more outgoing than my sister.",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         *   **主题语境**：人与社会 —— 友谊。
@@ -269,7 +269,7 @@ object Grade8Up {
                         
                         **in fact** 事实上
                         
-                        **break** /breɪk/ v. 打碎；折断
+                        **break** /break/ v. 打碎；折断
                         
                         **arm** /ɑːm/ n. 手臂
                         
@@ -289,7 +289,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u4", "Unit 4", "Best in Town",
+                "g8up_u4", "Unit 4", "What's the best movie theater?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **theater** /ˈθɪətə(r)/ n. 剧场；电影院
@@ -377,7 +377,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u5", "Unit 5", "Entertainment",
+                "g8up_u5", "Unit 5", "Do you want to watch a game show?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **sitcom** /ˈsɪtkɒm/ n. 情景喜剧
@@ -398,7 +398,7 @@ object Grade8Up {
                         
                         **stand** /stænd/ v. 忍受
                         
-                        **happen** /ˈhæpən/ v. 发生
+                        **happen** /ˈæpən/ v. 发生
                         
                         **may** /meɪ/ modal v. 也许
                         
@@ -459,7 +459,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u6", "Unit 6", "Dreams and Resolutions",
+                "g8up_u6", "Unit 6", "I'm going to study computer science.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **doctor** /ˈdɒktə(r)/ n. 医生
@@ -525,7 +525,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u7", "Unit 7", "The Future",
+                "g8up_u7", "Unit 7", "Will people have robots?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **paper** /ˈpeɪpə(r)/ n. 纸
@@ -611,7 +611,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u8", "Unit 8", "Cooking and Recipes",
+                "g8up_u8", "Unit 8", "How do you make a banana milk shake?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **shake** /ʃeɪk/ n. & v. 摇动
@@ -695,7 +695,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u9", "Unit 9", "Invitations",
+                "g8up_u9", "Unit 9", "Can you come to my party?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **prepare** /prɪˈpeə(r)/ v. 准备
@@ -769,7 +769,7 @@ object Grade8Up {
                 )
             ),
             TextbookUnit(
-                "g8up_u10", "Unit 10", "Advice and Decisions",
+                "g8up_u10", "Unit 10", "If you go to the party, you'll have a great time!",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
                         **meeting** /ˈmiːtɪŋ/ n. 会议
