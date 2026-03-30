@@ -46,6 +46,8 @@ object Grade9Full {
                         
                         **note** /nəʊt/ n. 笔记；记录 v. 注意
                         
+                        **pal** /pæl/ n. 朋友；伙伴
+                        
                         **physics** /ˈfɪzɪks/ n. 物理；物理学
                         
                         **chemistry** /ˈkemɪstri/ n. 化学
@@ -62,7 +64,11 @@ object Grade9Full {
                         
                         **partner** /ˈpɑːtnə(r)/ n. 搭档；同伴
                         
+                        **born** /bɔːn/ v. 出生 adj. 天生的
+                        
                         **ability** /əˈbɪləti/ n. 能力；才能
+                        
+                        **create** /kriˈeɪt/ v. 创造；创建
                         
                         **brain** /breɪn/ n. 大脑
                         
@@ -70,7 +76,7 @@ object Grade9Full {
                         
                         **attention** /əˈtenʃn/ n. 注意；关注
                         
-                        **connect** /kəˈnekt/ v. （使）连接；与……有联系
+                        **connect** /kəˈnekt/ v. 连接；与……有联系
                         
                         **overnight** /ˌəʊvəˈnaɪt/ adv. 一夜之间；在夜间
                         
@@ -80,9 +86,9 @@ object Grade9Full {
                         
                         **wisely** /ˈwaɪzli/ adv. 明智地；聪明地
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：by 引导的方式状语
-                        - *I study English **by listening** to tapes.*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. How do you study for a test? — I study by working with a group.
+                        - **【考点】**：`by + doing` 结构，表示通过某种方式、方法或手段。
                     """.trimIndent())
                 )
             ),
@@ -101,7 +107,15 @@ object Grade9Full {
                         
                         **relative** /ˈrelətɪv/ n. 亲属；亲戚
                         
+                        **put on** 增加（体重）；发胖
+                        
                         **pound** /paʊnd/ n. 磅；英镑
+                        
+                        **folk** /fəʊk/ adj. 民间的；民俗的
+                        
+                        **goddess** /ˈɡɒdes/ n. 女神
+                        
+                        **whoever** /huːˈevə(r)/ pron. 无论谁
                         
                         **steal** /stiːl/ v. 偷；窃取
                         
@@ -112,6 +126,8 @@ object Grade9Full {
                         **admire** /ədˈmaɪə(r)/ v. 欣赏；仰慕
                         
                         **garden** /ˈɡɑːdn/ n. 花园；园子
+                        
+                        **tradition** /trəˈdɪʃn/ n. 传统
                         
                         **tie** /taɪ/ n. 领带 v. 捆；系
                         
@@ -147,9 +163,12 @@ object Grade9Full {
                         
                         **spread** /spred/ v. 传播；展开
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：宾语从句 (that 引导)
-                        - *I think **that** mooncakes are delicious!*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I know that the Water Festival is really fun.
+                        - **【考点】**：`that` 引导的**宾语从句**。
+                        
+                        #### 2. What a great day!
+                        - **【考点】**：`What` 和 `How` 引导的**感叹句**。
                     """.trimIndent())
                 )
             ),
@@ -207,7 +226,7 @@ object Grade9Full {
                         
                         **request** /rɪˈkwest/ n. & v. 要求；请求
                         
-                        **choice** /tʃɔɪs/ n. 选择
+                        **choice** /tɔɪs/ n. 选择
                         
                         **direction** /daɪˈrekʃn/ n. 方向；方位
                         
@@ -215,11 +234,15 @@ object Grade9Full {
                         
                         **direct** /dəˈrekt/ adj. 直接的；直率的
                         
+                        **whom** /huːm/ pron. 谁（who的宾格）
+                        
                         **address** /əˈdres/ n. 住址；地址
+                        
+                        **course** /kɔːs/ n. 课程；过程
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：宾语从句 (wh- 引导)
-                        - *Could you tell me **where the restrooms are**?*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. Could you tell me where the restrooms are?
+                        - **【考点】**：含有特殊疑问词的**宾语从句**（语序必须用陈述语序）。
                     """.trimIndent())
                 )
             ),
@@ -286,10 +309,12 @@ object Grade9Full {
                         **proud** /praʊd/ adj. 自豪的；骄傲的
                         
                         **general** /ˈdʒenrəl/ adj. 总的；普遍的
+                        
+                        **introduction** /ˌɪntrəˈdʌkʃn/ n. 介绍
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：used to do sth.
-                        - 表示过去常常做某事（现在不做了）。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I used to be short.
+                        - **【考点】**：`used to do sth.` 表示“过去常常做某事（现在不做了）”。
                     """.trimIndent())
                 )
             ),
@@ -297,8 +322,6 @@ object Grade9Full {
                 "g9_u5", "Unit 5", "What are the shirts made of?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
-                        **material** /məˈtɪəriəl/ n. 材料；原料
-                        
                         **chopstick** /ˈtʃɒpstɪk/ n. 筷子
                         
                         **coin** /kɔɪn/ n. 硬币
@@ -317,6 +340,10 @@ object Grade9Full {
                         
                         **fair** /feə(r)/ n. 展览会；游乐场
                         
+                        **environmental** /ɪnˌvaɪrənˈmentl/ adj. 环境的
+                        
+                        **grass** /ɡrɑːs/ n. 草；草地
+                        
                         **leaf** /liːf/ n. 叶；叶子 (pl. leaves)
                         
                         **produce** /prəˈdjuːs/ v. 生产；制造
@@ -325,19 +352,15 @@ object Grade9Full {
                         
                         **process** /ˈprəʊses/ v. 加工；处理
                         
-                        **France** /frɑːns/ n. 法国
+                        **product** /ˈprɒdʌkt/ n. 产品
                         
-                        **no matter** 不论；无论
+                        **France** /frɑːns/ n. 法国
                         
                         **local** /ˈləʊkl/ adj. 当地的；本地的
                         
                         **brand** /brænd/ n. 品牌
                         
                         **avoid** /əˈvɔɪd/ v. 避免；回避
-                        
-                        **product** /ˈprɒdʌkt/ n. 产品
-                        
-                        **hand-made** /ˌhænd ˈmeɪd/ adj. 手工制作的
                         
                         **mobile** /ˈməʊbaɪl/ adj. 可移动的
                         
@@ -349,6 +372,10 @@ object Grade9Full {
                         
                         **surface** /ˈsɜːfɪs/ n. 表面
                         
+                        **material** /məˈtɪəriəl/ n. 材料；原料
+                        
+                        **traffic** /'træfɪk/ n. 交通
+                        
                         **postman** /ˈpəʊstmən/ n. 邮递员
                         
                         **cap** /kæp/ n. （尤指有檐的）帽子
@@ -359,13 +386,25 @@ object Grade9Full {
                         
                         **competitor** /kəmˈpetɪtə(r)/ n. 参赛者
                         
-                        **its** /ɪts/ adj. 它的
+                        **form** /fɔːm/ n. 形式；类型
                         
-                        **pride** /praɪd/ n. 自豪；骄傲
+                        **clay** /kleɪ/ n. 黏土
+                        
+                        **balloon** /bəˈluːn/ n. 气球
+                        
+                        **scissors** /ˈsɪzəz/ n. 剪刀
+                        
+                        **lively** /ˈlaɪvli/ adj. 生气勃勃的
+                        
+                        **fairy tale** 童话故事
+                        
+                        **heat** /hiːt/ n. 热 v. 加热
+                        
+                        **complete** /kəmˈpliːt/ v. 完成 adj. 完整的
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：被动语态 (I)
-                        - *What **is** it **made of**?*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. What are the shirts made of? — They are made of cotton.
+                        - **【考点】**：**一般现在时的被动语态** (am/is/are + done)。注意 `be made of` 与 `be made from` 的区别。
                     """.trimIndent())
                 )
             ),
@@ -373,29 +412,17 @@ object Grade9Full {
                 "g9_u6", "Unit 6", "When was it invented?",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
-                        **heel** /hiːl/ n. 鞋后跟
-                        
-                        **scoop** /skuːp/ n. 勺子
-                        
                         **electricity** /ɪˌlekˈtrɪsəti/ n. 电；电能
                         
                         **style** /staɪl/ n. 样式；款式
                         
                         **project** /ˈprɒdʒekt/ n. 项目；工程
                         
-                        **pleasure** /ˈpleʒə(r)/ n. 愉快；快乐
-                        
                         **zipper** /ˈzɪpə(r)/ n. 拉链
-                        
-                        **daily** /ˈdeɪli/ adj. 每日的
                         
                         **website** /ˈwebsaɪt/ n. 网站
                         
                         **pioneer** /ˌpaɪəˈnɪə(r)/ n. 先驱
-                        
-                        **list** /lɪst/ v. 列表 n. 列表
-                        
-                        **mention** /ˈmenʃn/ v. 提到；说到
                         
                         **accidental** /ˌæksɪˈdentl/ adj. 意外的；偶然的
                         
@@ -405,21 +432,13 @@ object Grade9Full {
                         
                         **remain** /rɪˈmeɪn/ v. 保持不变；剩余
                         
-                        **smell** /smel/ n. 气味 v. 闻到
-                        
-                        **saint** /seɪnt/ n. 圣徒
-                        
                         **national** /ˈnæʃnəl/ adj. 国家的
                         
                         **trade** /treɪd/ n. 贸易；交易
                         
-                        **popularity** /ˌpɒpjuˈlærəti/ n. 普及；流行
-                        
                         **doubt** /daʊt/ n. 怀疑 v. 怀疑
                         
                         **fridge** /frɪdʒ/ n. 冰箱
-                        
-                        **low** /ləʊ/ adj. 低的
                         
                         **translate** /trænzˈleɪt/ v. 翻译
                         
@@ -437,11 +456,19 @@ object Grade9Full {
                         
                         **instrument** /ˈɪnstrəmənt/ n. 仪器；乐器
                         
-                        **bitter** /ˈbɪtə(r)/ adj. 苦的；有苦味的
+                        **customer** /'kʌstəmə(r)/ n. 顾客
+                        
+                        **divide** /dɪ'vaɪd/ v. 分开；划分
+                        
+                        **purpose** /ˈpɜːpəs/ n. 目的
+                        
+                        **hero** /'hɪərəʊ/ n. 英雄
+                        
+                        **professional** /prə'fəʃənl/ adj. 专业的
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：被动语态 (II) - 一般过去时
-                        - *When **was** it **invented**?*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. When was the telephone invented? — It was invented in 1876.
+                        - **【考点】**：**一般过去时的被动语态** (was/were + done)。
                     """.trimIndent())
                 )
             ),
@@ -469,7 +496,7 @@ object Grade9Full {
                         
                         **field** /fiːld/ n. 田野；场地
                         
-                        **hug** /hʌɡ/ v. & n. 拥抱
+                        **hug** /hʌɡ/ v. & n. 拥召
                         
                         **lift** /lɪft/ v. 举起
                         
@@ -483,11 +510,9 @@ object Grade9Full {
                         
                         **poem** /ˈpəʊɪm/ n. 诗；韵文
                         
+                        **bedroom** /'bedru:m/ n. 卧室
+                        
                         **community** /kəˈmjuːnəti/ n. 社区
-                        
-                        **keep away from** 远离；不接近
-                        
-                        **decision** /dɪˈsɪʒn/ n. 决定
                         
                         **educate** /ˈedjukeɪt/ v. 教育
                         
@@ -501,9 +526,9 @@ object Grade9Full {
                         
                         **choice** /tʃɔɪs/ n. 选择；挑选
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：含情态动词的被动语态
-                        - *Teenagers **should be allowed** to ...*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. Teenagers should be allowed to choose their own clothes.
+                        - **【考点】**：**含有情态动词的被动语态** (modal + be + done)。
                     """.trimIndent())
                 )
             ),
@@ -511,13 +536,11 @@ object Grade9Full {
                 "g9_u8", "Unit 8", "It must belong to Carla.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
-                        **whose** /huːz/ pron. 谁的
-                        
                         **truck** /trʌk/ n. 卡车；货车
                         
-                        **picnic** /ˈpɪknɪk/ n. 野餐
-                        
                         **rabbit** /ˈræbɪt/ n. 兔；野兔
+                        
+                        **whose** /huːz/ pron. 谁的
                         
                         **attend** /əˈtend/ v. 出席；参加
                         
@@ -525,9 +548,7 @@ object Grade9Full {
                         
                         **pink** /pɪŋk/ adj. & n. 粉红色
                         
-                        **anybody** /ˈenibɒdi/ pron. 任何人
-                        
-                        **happening** /ˈhæpnɪŋ/ n. 发生的事情
+                        **picnic** /ˈpɪknɪk/ n. 野餐
                         
                         **noise** /nɔɪz/ n. 声音；噪音
                         
@@ -549,15 +570,13 @@ object Grade9Full {
                         
                         **alien** /ˈeɪliən/ n. 外星人
                         
-                        **run after** 追逐；追赶
-                        
                         **suit** /suːt/ n. 西服 v. 适合
                         
                         **express** /ɪkˈspres/ v. 表达
                         
                         **circle** /ˈsɜːkl/ n. 圆圈 v. 圈出
                         
-                        **Britain** /ˈbrɪtn/ n. 英国
+                        **mystery** /'mɪstri/ n. 奥秘；神秘事物
                         
                         **receive** /rɪˈsiːv/ v. 接到；收到
                         
@@ -567,7 +586,7 @@ object Grade9Full {
                         
                         **purpose** /ˈpɜːpəs/ n. 目的
                         
-                        **prevent** /rɪˈsiːv/ v. 阻止；预防
+                        **prevent** /prɪ'vent/ v. 阻止；预防
                         
                         **energy** /ˈenədʒi/ n. 能量；精力
                         
@@ -576,12 +595,10 @@ object Grade9Full {
                         **victory** /ˈvɪktəri/ n. 胜利
                         
                         **enemy** /ˈenəmi/ n. 敌人
-                        
-                        **period** /ˈpɪəriəd/ n. 一段时间；时期
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：情态动词表推测
-                        - must (一定), might/could (可能), can't (不可能)。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. It must belong to Carla.
+                        - **【考点】**：`must, might, could, can't` 表示**推测**。`must` 的语气最强。
                     """.trimIndent())
                 )
             ),
@@ -611,8 +628,6 @@ object Grade9Full {
                         
                         **stick** /stɪk/ v. 粘贴；坚持
                         
-                        **down** /daʊn/ adj. 悲哀的；沮丧的
-                        
                         **dialogue** /ˈdaɪəlɒɡ/ n. 对话；谈话
                         
                         **ending** /ˈendɪŋ/ n. 结尾；结局
@@ -639,6 +654,10 @@ object Grade9Full {
                         
                         **moving** /ˈmuːvɪŋ/ adj. 动人的
                         
+                        **perform** /pə'fɔ:m/ v. 表演；执行
+                        
+                        **lifetime** /ˈlaɪftaɪm/ n. 一生
+                        
                         **pity** /ˈpɪti/ n. 遗憾；怜悯
                         
                         **total** /ˈtəʊtl/ adj. & n. 总数
@@ -650,12 +669,10 @@ object Grade9Full {
                         **recall** /rɪˈkɔːl/ v. 回忆起；回想起
                         
                         **wound** /wuːnd/ n. 伤；伤口 v. 使受伤
-                        
-                        **lifetime** /ˈlaɪftaɪm/ n. 一生
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：定语从句 (I)
-                        - 修饰人用 who/that，修饰物用 which/that。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I like music that I can dance to.
+                        - **【考点】**：`that, which, who` 引导的**定语从句**。
                     """.trimIndent())
                 )
             ),
@@ -689,8 +706,6 @@ object Grade9Full {
                         
                         **passport** /ˈpɑːspɔːt/ n. 护照
                         
-                        **clean** /kliːn/ v. 擦干净
-                        
                         **chalk** /tʃɔːk/ n. 粉笔
                         
                         **blackboard** /ˈblækbɔːd/ n. 黑板
@@ -703,19 +718,15 @@ object Grade9Full {
                         
                         **knock** /nɒk/ v. 敲
                         
-                        **eastern** /ˈiːstən/ adj. 东方的
-                        
                         **worth** /wɜːθ/ adj. 值得的
                         
                         **manner** /ˈmænə(r)/ n. 礼貌；方式
                         
-                        **empty** /ˈempti/ adj. 空的
+                        **empty** /ˈempti/ adj. 空s的
                         
                         **basic** /ˈbeɪsɪk/ adj. 基本的
                         
                         **exchange** /ɪksˈtʃeɪndʒ/ v. & n. 交换
-                        
-                        **granddaughter** /ˈɡrændɔːtə(r)/ n. 孙女
                         
                         **behave** /bɪˈheɪv/ v. 表现
                         
@@ -727,9 +738,9 @@ object Grade9Full {
                         
                         **suggestion** /səˈdʒestʃən/ n. 建议；提议
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：be supposed to do
-                        - 表示“应该做某事”。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. You're supposed to shake hands.
+                        - **【考点】**：`be supposed to do` 与 `be expected to do` 表示“应该”。
                     """.trimIndent())
                 )
             ),
@@ -737,17 +748,19 @@ object Grade9Full {
                 "g9_u11", "Unit 11", "Sad movies make me cry.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
+                        **rather** /'rɑːðə(r)/ adv. 相当；宁愿
+                        
                         **drive** /draɪv/ v. 迫使；驾驶
+                        
+                        **lately** /'leɪtli/ adv. 最近；不久前
                         
                         **friendship** /ˈfrendʃɪp/ n. 友谊；友情
                         
                         **king** /kɪŋ/ n. 君主；国王
                         
-                        **prime** /praɪm/ adj. 首要的；基本的
+                        **prime minister** 首相；总理
                         
-                        **minister** /ˈmɪnɪstə(r)/ n. 大臣；部长
-                        
-                        **banker** /ˈbæŋkə(r)/ n. 银行家
+                        **fame** /feɪm/ n. 名声；名望
                         
                         **pale** /peɪl/ adj. 苍白的
                         
@@ -779,14 +792,6 @@ object Grade9Full {
                         
                         **kick** /kɪk/ v. 踢
                         
-                        **courage** /ˈkʌrɪdʒ/ n. 勇气；胆量
-                        
-                        **rather** /ˈrɑːðə(r)/ adv. 相当；宁愿
-                        
-                        **pull** /pʊl/ v. 拉；拽
-                        
-                        **relief** /rɪˈliːf/ n. 解脱；轻松
-                        
                         **nod** /nɒd/ v. 点头
                         
                         **agreement** /əˈɡriːmənt/ n. 协议；协定
@@ -795,9 +800,9 @@ object Grade9Full {
                         
                         **disappoint** /ˌdɪsəˈpɒɪnt/ v. 使失望
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：make 的用法
-                        - make sb. do sth. (使某人做某事)。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. Sad movies make me cry.
+                        - **【考点】**：`make sb. do sth.` 与 `make sb. + adj.` 的用法。
                     """.trimIndent())
                 )
             ),
@@ -805,15 +810,13 @@ object Grade9Full {
                 "g9_u12", "Unit 12", "Life is full of the unexpected.",
                 listOf(
                     UnitDetailSection("📖 课本同步单词表", """
+                        **unexpected** /ˌʌnɪkˈspektɪd/ adj. 出乎意料的
+                        
                         **backpack** /ˈbækpæk/ n. 背包
                         
                         **oversleep** /ˌəʊvəˈsliːp/ v. 睡过头
                         
-                        **ring** /rɪŋ/ v. 响 n. 戒指
-                        
                         **block** /blɒk/ n. 街区
-                        
-                        **in line** 排队
                         
                         **worker** /ˈwɜːkə(r)/ n. 工作者；工人
                         
@@ -837,17 +840,17 @@ object Grade9Full {
                         
                         **workday** /ˈwɜːkdeɪ/ n. 工作日
                         
-                        **pie** /paɪ/ n. 馅饼
-                        
                         **bean** /biːn/ n. 豆
                         
                         **market** /ˈmɑːkɪt/ n. 市场
                         
-                        **believe** /bɪˈliːv/ v. 相信
+                        **costume** /'kɒstjuːm/ n. 戏装；服装
                         
-                        **believable** /bɪˈliːvəbl/ adj. 可信的
+                        **embarrassed** /ɪmˈbærəst/ adj. 尴尬的
                         
-                        **disappear** /ˌdɪsəˈpɪə(r)/ v. 消失
+                        **announce** /ə'naʊns/ v. 宣布；宣告
+                        
+                        **hoax** /həʊks/ n. 骗局；恶作剧
                         
                         **discovery** /dɪˈskʌvəri/ n. 发现
                         
@@ -855,13 +858,13 @@ object Grade9Full {
                         
                         **officer** /ˈɒfɪsə(r)/ n. 军官；官员
                         
-                        **unexpected** /ˌʌnɪkˈspektɪd/ adj. 出乎意料的
+                        **believable** /bɪˈliːvəbl/ adj. 可信的
                         
-                        **embarrassed** /ɪmˈbærəst/ adj. 尴尬的
+                        **disappear** /ˌdɪsəˈpɪə(r)/ v. 消失
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：过去完成时
-                        - 表示“过去的过去”。构成：had + 过去分词。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. By the time I got to school, the bell had rung.
+                        - **【考点】**：**过去完成时** (had + done)。
                     """.trimIndent())
                 )
             ),
@@ -877,8 +880,6 @@ object Grade9Full {
                         
                         **coal** /kəʊl/ n. 煤
                         
-                        **public** /ˈpʌblɪk/ adj. 公共的
-                        
                         **ugly** /ˈʌɡli/ adj. 丑陋的
                         
                         **advantage** /ədˈvɑːntɪdʒ/ n. 优点
@@ -889,7 +890,37 @@ object Grade9Full {
                         
                         **plastic** /ˈplæstɪk/ n. & adj. 塑料
                         
-                        **take action** 采取行动
+                        **bin** /bɪn/ n. 垃圾箱
+                        
+                        **shark** /ʃɑ:k/ n. 鲨鱼
+                        
+                        **fin** /fɪn/ n. 鱼鳍
+                        
+                        **method** /'meθəd/ n. 方法
+                        
+                        **cruel** /'kru:əl/ adj. 残酷的
+                        
+                        **harmful** /'hɑ:mfl/ adj. 有害的
+                        
+                        **chain** /tʃeɪn/ n. 链条；项链
+                        
+                        **ecosystem** /'i:kəʊsɪstəm/ n. 生态系统
+                        
+                        **industry** /'ɪndəstri/ n. 工业；行业
+                        
+                        **law** /lɔ:/ n. 法律
+                        
+                        **scientific** /ˌsaɪən'tɪfɪk/ adj. 科学的
+                        
+                        **reusable** /ˌriː'juːzəbl/ adj. 可重复使用的
+                        
+                        **transportation** /ˌtrænspɔː'teɪʃn/ n. 运输；交通
+                        
+                        **recycle** /ˌriːˈsaɪkl/ v. 回收
+                        
+                        **napkin** /ˈnæpkɪn/ n. 餐巾纸
+                        
+                        **throw away** 扔掉
                         
                         **gate** /ɡeɪt/ n. 大门
                         
@@ -899,19 +930,15 @@ object Grade9Full {
                         
                         **inspiration** /ˌɪnspəˈreɪʃn/ n. 灵感
                         
+                        **iron** /'aɪən/ n. 铁
+                        
                         **metal** /ˈmetl/ n. 金属
                         
-                        **recycle** /ˌriːˈsaɪkl/ v. 回收
-                        
-                        **napkin** /ˈnæpkɪn/ n. 餐巾纸
-                        
-                        **throw away** 扔掉
-                        
-                        **put to good use** 好好利用
-                        
-                        **pull down** 拆下
-                        
-                        **upside down** 颠倒
+                        **creativity** /ˌkrieɪ'tɪvəti/ n. 创造力
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. We're trying to save the earth!
+                        - **【考点】**：复习各类时态与被动语态在环保主题中的应用。
                     """.trimIndent())
                 )
             ),
@@ -935,35 +962,9 @@ object Grade9Full {
                         
                         **shall** /ʃæl/ modal v. 将要
                         
-                        **look back at** 回顾
-                        
                         **overcome** /ˌəʊvəˈkʌm/ v. 克服
                         
-                        **make a mess** 弄得一团糟
-                        
                         **graduate** /ˈɡrædʒueɪt/ v. 毕业
-                        
-                        **keep one's cool** 沉住气
-                        
-                        **caring** /ˈkeərɪŋ/ adj. 体贴人的
-                        
-                        **ours** /aʊəz/ pron. 我们的
-                        
-                        **senior** /ˈsiːniə(r)/ adj. 级别高的
-                        
-                        **text** /tekst/ n. 课文
-                        
-                        **go by** 逝去
-                        
-                        **level** /ˈlevl/ n. 水平
-                        
-                        **degree** /dɪˈɡriː/ n. 学位；度数
-                        
-                        **manager** /ˈmænɪdʒə(r)/ n. 经理
-                        
-                        **believe in** 信任
-                        
-                        **gentleman** /ˈdʒentlmən/ n. 先生
                         
                         **ceremony** /ˈserəməni/ n. 典礼
                         
@@ -971,9 +972,7 @@ object Grade9Full {
                         
                         **thirsty** /ˈθɜːsti/ adj. 渴望的；口渴的
                         
-                        **thankful** /ˈθæŋkfl/ adj. 感激的
-                        
-                        **lastly** /ˈlɑːstli/ adv. 最后
+                        **none** /nʌn/ pron. 一个也没有
                         
                         **task** /tɑːsk/ n. 任务
                         
@@ -983,11 +982,13 @@ object Grade9Full {
                         
                         **separate** /ˈsepəreɪt/ v. 分离
                         
+                        **set out** 出发；开始
+                        
                         **wing** /wɪŋ/ n. 翅膀
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：remember doing vs remember to do
-                        - doing: 记得做过某事；to do: 记得要做某事。
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I remember meeting all of you in Grade 7.
+                        - **【考点】**：`remember doing` 与 `remember to do` 的区别。
                     """.trimIndent())
                 )
             )

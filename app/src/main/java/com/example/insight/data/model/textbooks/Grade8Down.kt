@@ -16,538 +16,381 @@ object Grade8Down {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/xc8x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g8down_u1", "Unit 1", "What's the matter?",
+                "g8down_u1", "Unit 1", "Time to Relax",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 健康生活、突发事件与应急处理。
-                        *   **深层意义**：本单元聚焦于描述病痛及急救处理，引导学生关爱他人并学会基本的生存技能。
+                        *   **主题语境**：人与自我 —— 放松时光与兴趣爱好。
+                        *   **核心内容**：探讨学习与休闲的平衡，学习如何通过兴趣爱好减轻压力。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **matter** /ˈmætə(r)/ n. 问题；事情
+                        **calligraphy** /kəˈlɪɡrəfi/ n. 书法
                         
-                        **What's the matter?** 怎么了？出什么事了？
+                        **ski** /skiː/ v. 滑雪
                         
-                        **stomachache** /ˈstʌməkeɪk/ n. 胃痛；腹痛
+                        **program** /ˈprəʊɡræm/ v. 编写程序 n. 程序；节目
                         
-                        **throat** /θrəʊt/ n. 咽喉；喉咙
+                        **express** /ɪkˈspres/ v. 表达；表示
                         
-                        **fever** /ˈfiːvə(r)/ n. 发烧
+                        **ice skating** 滑冰；溜冰
                         
-                        **cough** /kɒf/ v. & n. 咳嗽
+                        **instructor** /ɪnˈstʌktə(r)/ n. 教练；指导者
                         
-                        **X-ray** /ˈeks reɪ/ n. X光；X射线
+                        **scared** /skeəd/ adj. 害怕的；惊慌的
                         
-                        **toothache** /ˈtuːθeɪk/ n. 牙痛
+                        **fear** /fɪə(r)/ n. & v. 害怕；担忧
+                        
+                        **get over** 克服（困难）；解决（问题）
+                        
+                        **up to** 正在做；由某人决定
+                        
+                        **poem** /ˈpəʊɪm/ n. 诗
+                        
+                        **single** /ˈsɪŋɡl/ adj. 单个的；单身的
+                        
+                        **stroke** /strəʊk/ n. 笔画；击球
+                        
+                        **give up** 放弃
+                        
+                        **ink** /ɪŋk/ n. 墨水
+                        
+                        **return** /rɪˈtɜːn/ n. & v. 回来；归还
+                        
+                        **in return** 作为回报
+                        
+                        **deal** /diːl/ n. 交易；协议 v. 对付
+                        
+                        **manage** /ˈmænɪdʒ/ v. 完成（困难的事）；管理
+                        
+                        **get into** 开始做某事；进入
+                        
+                        **give it a go** 试一试
+                        
+                        **kung fu** /ˌkʌŋ ˈfuː/ n. 功夫
+                        
+                        **push** /pʊʃ/ v. 鞭策；推
+                        
+                        **myself** /maɪˈself/ pron. 我自己
+                        
+                        **once in a while** 偶尔；间或
+                        
+                        **chat** /tʃæt/ v. & n. 闲聊
+                        
+                        **outing** /ˈaʊtɪŋ/ n. 外出游玩；远足
+                        
+                        **reduce** /rɪˈdjuːs/ v. 减少
+                        
+                        **stress** /stres/ n. 精神压力；紧张
+                        
+                        **yoga** /ˈjəʊɡə/ n. 瑜伽
+                        
+                        **object** /ˈɒbdʒɪkt/ n. 物品；宾语
+                        
+                        **Italian** /ɪˈtæliən/ adj. 意大利的 n. 意大利人/语
+                        
+                        **programmer** /ˈprəʊɡræmə(r)/ n. 程序设计员
+                        
+                        **allow** /əˈlaʊ/ v. 允许；使……成为可能
+                        
+                        **sense** /sens/ n. 感觉；感官
+                        
+                        **achievement** /əˈˈtʃiːvmənt/ n. 成就
+                        
+                        **coin** /kɔɪn/ n. 硬币
+                        
+                        **stamp** /stæmp/ n. 邮票
+                        
+                        **teenage** /ˈtiːneɪdʒ/ adj. 青少年的
+                        
+                        **postcard** /ˈpəʊstkɑːd/ n. 明信片
+                        
+                        **rather** /ˈrɑːðə(r)/ adv. 相当；更准确地说
+                        
+                        **old-fashioned** adj. 过时的；守旧的
+                        
+                        **foreign** /ˈfɒrən/ adj. 外国的
+                        
+                        **dream of** 梦想；希望
+                        
+                        **suggestion** /səˈdʒestʃən/ n. 建议
+                        
+                        **failure** /ˈfeɪljə(r)/ n. 失败
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I play the flute to relax.
+                        - **【考点】**：动词不定式作**目的状语**。
+                        
+                        #### 2. My dad is teaching me to play the guitar.
+                        - **【考点】**：动词不定式作**宾语补足语**（teach sb. to do sth.）。
+                        
+                        #### 3. Why not join the English club?
+                        - **【考点】**：提出建议的常用句型 `Why not do...?`
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8down_u2", "Unit 2", "Stay Healthy",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 安全与健康。
+                        *   **核心内容**：描述身体症状，学习急救知识与健康建议。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **ourselves** /ˌaʊəˈselvz/ pron. 我们自己
+                        
+                        **sore** /sɔː(r)/ adj. 疼痛的；酸痛的
+                        
+                        **throat** /θrəʊt/ n. 喉咙
+                        
+                        **stomachache** /ˈstʌmək eɪk/ n. 胃痛
                         
                         **headache** /ˈhedeɪk/ n. 头痛
                         
-                        **passenger** /ˈpæsɪndʒə(r)/ n. 乘客；旅客
+                        **toothache** /ˈtuːθeɪk/ n. 牙痛
                         
-                        **trouble** /ˈtrʌbl/ n. 问题；苦恼
+                        **backache** /ˈbækeɪk/ n. 背痛
                         
-                        **herself** /hɜːˈself/ pron. 她自己
+                        **press** /pres/ v. 压；按
                         
-                        **bandage** /ˈbændɪdʒ/ n. 绷带 v. 用绷带包扎
+                        **nosebleed** /ˈnəʊzbliːd/ n. 鼻出血
                         
-                        **sick** /sɪk/ adj. 生病的；有病的
+                        **dentist** /ˈdentɪst/ n. 牙科医生
                         
-                        **knee** /niː/ n. 膝盖
+                        **fever** /ˈfɪːvə(r)/ n. 发烧
                         
-                        **situation** /ˌsɪtʃuˈeɪʃn/ n. 情况；状况
+                        **stomach** /ˈstʌmək/ n. 胃；腹部
                         
-                        **blood** /blʌd/ n. 血
+                        **avoid** /əˈvɔɪd/ v. 避免
                         
-                        **decision** /dɪˈsɪʒn/ n. 决定；抉择
+                        **flu** /fluː/ n. 流行性感冒
                         
-                        **death** /deθ/ n. 死；死亡
+                        **injury** /ˈɪndʒəri/ n. 伤害；损伤
+                        
+                        **X-ray** /ˈeksreɪ/ n. X光照片
+                        
+                        **first aid** 急救
+                        
+                        **safety** /ˈseɪfti/ n. 安全
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法：反身代词
-                        - *I cut **myself**.*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. What's the matter? / What's the trouble?
+                        - **【考点】**：询问身体状况或麻烦的常用语。
+                        
+                        #### 2. I hurt myself when I fell off my bike.
+                        - **【考点】**：**反身代词** (Reflexive Pronouns) 的用法。
+                        
+                        #### 3. You should lie down and rest.
+                        - **【考点】**：情态动词 `should` 表示建议。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8down_u2", "Unit 2", "I'll help to clean up the city parks.",
+                "g8down_u3", "Unit 3", "Growing Up",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与社会 —— 志愿服务。
+                        *   **主题语境**：人与自我 —— 青春期成长与心理调节。
+                        *   **核心内容**：讨论成长中的烦恼，学习情绪管理与人际沟通。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **clean up** 打扫（或清除）干净
+                        **deal with** 处理；对付
                         
-                        **cheer up** （使）变得更高兴
+                        **emotion** /ɪˈməʊʃn/ n. 情感；情绪
                         
-                        **volunteer** /ˌvɒlənˈtɪə(r)/ v. 义务做 n. 志愿者
+                        **upset** /ʌpˈset/ adj. 难过的；沮丧的
                         
-                        **come up with** 想出；提出
+                        **lonely** /ˈləʊnli/ adj. 孤独的
                         
-                        **used to** 曾经……；过去……
+                        **shocked** /ʃɒkt/ adj. 震惊的
                         
-                        **lonely** /ˈləʊnli/ adj. 孤独的；寂寞的
+                        **alone** /əˈləʊn/ adv. 独自；单独
                         
-                        **several** /ˈsevrəl/ pron. 几个；数个
+                        **control** /kənˈtrəʊl/ v. & n. 控制
                         
-                        **satisfaction** /ˌsætɪsˈfækʃn/ n. 满意；欣慰
+                        **anger** /ˈæŋɡə(r)/ n. 怒火
                         
-                        **journey** /ˈdʒɜːni/ n. 旅行；行程
+                        **advise** /ədˈvaɪz/ v. 建议；劝告
                         
-                        **raise** /reɪz/ v. 筹集；养育
+                        **hurtful** /ˈhɜːtfl/ adj. 伤感情的
                         
-                        **repair** /rɪˈpeə(r)/ v. 修理；修补
+                        **in future** 今后
                         
-                        **fix up** 修理；装饰
+                        **forgive** /fəˈɡɪv/ v. 原谅；宽恕
                         
-                        **disabled** /dɪsˈeɪbld/ adj. 有残疾的
-                        
-                        **blind** /blaɪnd/ adj. 瞎的；失明的
-                        
-                        **deaf** /def/ adj. 聋的
-                        
-                        **imagine** /ˈmædʒɪn/ v. 想象；设想
-                        
-                        **difficulty** /ˌdɪfɪkəlti/ n. 困难；难题
-                        
-                        **kindness** /ˈkaɪndnəs/ n. 仁慈；善良
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8down_u3", "Unit 3", "Could you please clean your room?",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **rubbish** /ˈrʌbɪʃ/ n. 垃圾；废物
-                        
-                        **sweep** /swɪp/ v. 扫；打扫
-                        
-                        **floor** /flɔː(r)/ n. 地板
-                        
-                        **mess** /mes/ n.杂乱；不整洁
-                        
-                        **throw** /θrəʊ/ v. 扔；掷
-                        
-                        **neither** /ˈnaɪðə(r)/ adv. 也不
-                        
-                        **shirt** /ʃɜːt/ n. 衬衫
-                        
-                        **pass** /pɑːs/ v. 给；递；经过
-                        
-                        **borrow** /ˈbɒrəʊ/ v. 借；借用
-                        
-                        **lend** /lend/ v. 借给；借出
-                        
-                        **finger** /ˈfɪŋɡə(r)/ n. 手指
-                        
-                        **hate** /he|t/ v. 憎恶；讨厌
-                        
-                        **chore** /tʃɔː(r)/ n. 杂务；乏味无聊的工作
-                        
-                        **while** /waɪl/ conj. 与……同时
-                        
-                        **waste** /weɪst/ n. 浪费；滥用
-                        
-                        **provide** /prəˈvaɪd/ v. 提供；供应
-                        
-                        **anyway** /ˈeɪniweɪ/ adv. 而且；加之
-                        
-                        **depend** /dɪˈpend/ v. 依靠；信赖
-                        
-                        **independent** /ˌɪndɪˈpendənt/ adj. 独立的
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8down_u4", "Unit 4", "Why don't you talk to your parents?",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **allow** /əˈlaʊ/ v. 允许；准许
-                        
-                        **wrong** /rɒŋ/ adj. 错误的；有毛病的
-                        
-                        **What's wrong?** 怎么了？
-                        
-                        **guess** /ɡes/ v. 猜测；估计
-                        
-                        **deal** /diːl/ n. 协议；交易
-                        
-                        **relation** /rɪˈleɪʃn/ n. 关系；联系
-                        
-                        **communication** /kəˌmjuːnɪˈkeɪʃn/ n. 交流；沟通
-                        
-                        **argue** /ˈɑːɡjuː/ v. 争吵；争论
-                        
-                        **cloud** /klaʊd/ n. 云；云朵
-                        
-                        **elder** /ˈeldə(r)/ adj. 年纪较长的
-                        
-                        **instead** /ɪnˈsted/ adv. 代替；反而
+                        **fault** /fɔːlt/ n. 过错；缺点
                         
                         **pressure** /ˈpreʃə(r)/ n. 压力
                         
-                        **compete** /kəmˈpiːt/ v. 竞争；对抗
+                        **bully** /ˈbʊli/ v. 霸凌 n. 恶霸
                         
-                        **opinion** /əˈpɪnjən/ n. 意见；想法
-                        
-                        **skill** /skɪl/ n. 技能；技巧
-                        
-                        **typical** /ˈtɪpɪkl/ adj. 典型的
-                        
-                        **continue** /kənˈtɪnjuː/ v. 持续；继续
-                        
-                        **compare** /kəmˈpeə(r)/ v. 比较
-                        
-                        **crazy** /ˈkreɪzi/ adj. 不理智的；疯狂的
-                        
-                        **push** /pʊʃ/ v. 鞭策；督促
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8down_u5", "Unit 5", "What were you doing when the rainstorm came?",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **rainstorm** /ˈreɪnstɔːm/ n. 暴风雨
-                        
-                        **alarm** /əˈlɑːm/ n. 闹钟
-                        
-                        **begin** /bɪˈɡɪn/ v. 开始
-                        
-                        **heavily** /ˈhevɪli/ adv. 大量地
-                        
-                        **suddenly** /ˈsʌdənli/ adv. 突然；忽然
-                        
-                        **strange** /ˈstreɪndʒ/ adj. 奇特的；奇怪的
-                        
-                        **storm** /stɔːm/ n. 暴风雨
-                        
-                        **wind** /wɪnd/ n. 风
-                        
-                        **light** /laɪt/ n. 光；光线；灯
-                        
-                        **report** /rɪˈpɔːt/ v. & n. 报告；汇报
-                        
-                        **area** /ˈeəriə/ n. 地域；地区
-                        
-                        **wood** /wʊd/ n. 木；木头
-                        
-                        **window** /ˈwɪndəʊ/ n. 窗户
-                        
-                        **flashlight** /ˈflæʃlaɪt/ n. 手电筒
-                        
-                        **beat** /biːt/ v. 敲打；打败
-                        
-                        **against** /əˈɡenst/ prep. 反对；倚；碰
-                        
-                        **asleep** /əˈsliːp/ adj. 睡着的
-                        
-                        **rise** /raɪz/ v. & n. 上升；升起
-                        
-                        **fallen** /ˈfɔːlən/ adj. 倒下的；落下的
-                        
-                        **apart** /əˈpɑːt/ adv. 分离；分开
+                        **solution** /səˈluːʃn/ n. 解决办法
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：过去进行时
-                        - *I **was doing** my homework when it began to rain.*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. Although I was tired, I finished my homework.
+                        - **【考点】**：`although/though` 引导的**让步状语从句**（注意不能与 but 连用）。
+                        
+                        #### 2. I didn't go to bed until I finished my work.
+                        - **【考点】**：`not... until` 引导的时间状语从句。
+                        
+                        #### 3. We should talk to our parents so that they can understand us.
+                        - **【考点】**：`so that` 引导的**目的状语从句**。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8down_u6", "Unit 6", "An old man tried to move the mountains.",
+                "g8down_u4", "Unit 4", "The Wonder of Nature",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自然 —— 自然奇观与探索。
+                        *   **核心内容**：描述自然界的奇迹（如珠峰），学习比较级与最高级的进阶用法。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **shoot** /ʃuːt/ v. 射击；发射
+                        **earthquake** /ˈɜːθkweɪk/ n. 地震
                         
-                        **stone** /stəʊn/ n. 石头
+                        **wildfire** /ˈwaɪldfaɪə(r)/ n. 野火
                         
-                        **weak** /wiːk/ adj. 虚弱的；无力的
+                        **drought** /draʊt/ n. 旱灾
                         
-                        **god** /ɡɒd/ n. 神；上帝
+                        **tornado** /tɔːˈneɪdəʊ/ n. 龙卷风
                         
-                        **remind** /rɪˈmaɪnd/ v. 提醒；使想起
+                        **thick smoke** 浓烟
                         
-                        **bit** /bɪt/ n. 一点；小块
+                        **dense fog** 浓雾
                         
-                        **silly** /ˈsɪli/ adj. 愚蠢的；傻的
+                        **strike** /straɪk/ v. 侵袭；爆发
                         
-                        **object** /ˈɒbdʒekt/ n. 物体；物品
+                        **hit** /hɪt/ v. 击中；打击
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. What's the highest mountain in the world?
+                        - **【考点】**：形容词/副词的**最高级**。
                         
-                        **hide** /haɪd/ v. 隐藏；隐蔽
-                        
-                        **magic** /ˈmædʒɪk/ adj. 有魔力的
-                        
-                        **stick** /stɪk/ n. 棍；棒
-                        
-                        **western** /ˈwestən/ adj. 西方的
-                        
-                        **fit** /fɪt/ v. 适合；合身
-                        
-                        **couple** /ˈkʌpl/ n. （一）对；夫妇
-                        
-                        **smile** /smaɪl/ v. & n. 微笑
-                        
-                        **marry** /ˈmæri/ v. 结婚
-                        
-                        **gold** /ɡəʊld/ n. 金子 adj. 金色的
-                        
-                        **silk** /sɪlk/ n. 丝绸
-                        
-                        **stupid** /ˈstjuːpɪd/ adj. 愚蠢的
-                        
-                        **cheat** /tʃiːt/ v. 欺骗；蒙骗
+                        #### 2. Qomolangma is higher than any other mountain.
+                        - **【考点】**：比较级表示最高级含义的结构：`比较级 + than any other + 名词单数`。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8down_u7", "Unit 7", "What's the highest mountain in the world?",
+                "g8down_u5", "Unit 5", "Nature's Power",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自然 —— 自然的力量与防灾。
+                        *   **核心内容**：描述过去发生的自然灾害，学习过去进行时。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **square** /skweə(r)/ n. 平方；正方形
+                        **square kilometre** 平方千米
                         
-                        **meter** /ˈmiːtə(r)/ n. 米；公尺
+                        **below** /bɪˈləʊ/ prep. & adv. 在……下面；低于
                         
-                        **deep** /diːp/ adj. 深的；纵深的
+                        **level** /ˈlevl/ n. 高度；水平
                         
-                        **desert** /ˈdezət/ n. 沙漠
+                        **surface** /ˈsɜːfɪs/ n. 表面
                         
-                        **population** /ˌpɒpjuˈleɪʃn/ n. 人口；人口数量
+                        **explorer** /ɪkˈsplɔːrə(r)/ n. 探险者
                         
-                        **Asia** /ˈeɪʒə/ n. 亚洲
+                        **simply** /ˈsɪmpli/ adv. 仅仅；简单地
                         
-                        **wall** /wɔːl/ n. 墙
+                        **risky** /ˈrɪski/ adj. 有危险的
                         
-                        **tourist** /ˈtʊərɪst/ n. 旅行者；观光者
+                        **waterfall** /ˈwɔːtəfɔːl/ n. 瀑布
                         
-                        **amazing** /əˈmeɪzɪŋ/ adj. 令人惊奇的
+                        **civilization** /ˌsɪvəlaɪˈzeɪʃn/ n. 文明
                         
-                        **ancient** /ˈeɪnʃənt/ adj. 古代的；古老的
+                        **means** /miːnz/ n. 方式；途径
                         
-                        **protect** /prəˈtekt/ v. 保护；防护
+                        **development** /dɪˈveləpmənt/ n. 发展
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. What were you doing when the rainstorm came?
+                        - **【考点】**：**过去进行时** (was/were + doing) 的用法。
                         
-                        **wide** /waɪd/ adj. 宽的；宽阔的
-                        
-                        **achievement** /əˈtʃiːvmənt/ n. 成就；成绩
-                        
-                        **thick** /θɪk/ adj. 厚的；浓的
-                        
-                        **condition** /kənˈdɪʃn/ n. 条件；状况
-                        
-                        **succeed** /səkˈsiːd/ v. 成功
-                        
-                        **challenge** /ˈtʃælɪndʒ/ v. & n. 挑战；考验
-                        
-                        **ocean** /ˈəʊʃn/ n. 大洋；海洋
-                        
-                        **nature** /ˈneɪtʃə(r)/ n. 自然界；大自然
-                        
-                        **weigh** /weɪ/ v. 重量有……；重……
-                        
-                        **bamboo** /ˌbæmˈbuː/ n. 竹子
-                        
-                        **endangered** /ɪnˈdeɪndʒəd/ adj. 濒危的
-                        
-                        **research** /rɪˈsɜːtʃ/ n. & v. 研究；调查
+                        #### 2. I was sleeping while my brother was doing his homework.
+                        - **【考点】**：`while` 引导的时间状语从句，表示两个动作同时在进行。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8down_u8", "Unit 8", "Have you read Treasure Island yet?",
+                "g8down_u6", "Unit 6", "Cultural Traditions",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 文化传统与礼仪。
+                        *   **核心内容**：介绍国内外传统习俗，初探现在完成时。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **jeans** /dʒiːnz/ n. 牛子裤
+                        
+                        **proper** /ˈpɒpə(r)/ adj. 恰当的；合适的
+                        
+                        **custom** /ˈkʌstəm/ n. 风俗；习惯
+                        
+                        **manner** /ˈmænə(r)/ n. 礼貌；方式
+                        
+                        **host** /həʊst/ n. 主人
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. Have you ever heard of that custom before?
+                        - **【考点】**：**现在完成时**表示过去的经验（already, yet, ever, never）。
+                        
+                        #### 2. You're supposed to shake hands.
+                        - **【考点】**：`be supposed to do` 表示“应该”。
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8down_u7", "Unit 7", "Literature and Life",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 文学鉴赏。
+                        *   **核心内容**：品读经典名著，深入掌握现在完成时的持续性用法。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **treasure** /ˈtreʒə(r)/ n. 珠宝；财富
                         
                         **island** /ˈaɪlənd/ n. 岛
                         
-                        **classic** /ˈklæsɪk/ n. 经典著作；名著
+                        **classic** /ˈklæsɪk/ n. 经典作品
                         
-                        **page** /peɪdʒ/ n. （书刊的）页
+                        **page** /peɪdʒ/ n. 页
                         
-                        **hurry** /ˈhʌri/ v. 匆忙；赶快
+                        **turn off** 关闭
                         
-                        **due** /djuː/ adj. 预期；到期
+                        **absent** /ˈæbsənt/ adj. 缺席的
                         
-                        **ship** /ʃɪp/ n. 船
-                        
-                        **tool** /tuːl/ n. 工具
-                        
-                        **gun** /ɡʌn/ n. 枪；炮
-                        
-                        **mark** /mɑːk/ n. 记号；分数 v. 做记号
-                        
-                        **sand** /sænd/ n. 沙；沙滩
-                        
-                        **cannibal** /ˈkænɪbl/ n. 食人肉者
-                        
-                        **towards** /təˈwɔːdz/ prep. 朝；向
-                        
-                        **land** /lænd/ n. 陆地；大地
-                        
-                        **fiction** /ˈfɪkʃn/ n. 小说
-                        
-                        **technology** /tekˈnɒlədʒi/ n. 科技；工艺
-                        
-                        **French** /frentʃ/ n. 法语 adj. 法国的
-                        
-                        **pop** /pɒp/ n. 流行音乐
-                        
-                        **rock** /rɒk/ n. 摇滚乐
-                        
-                        **forever** /fəˈrevə(r)/ adv. 永远
-                        
-                        **abroad** /əˈbrɔːd/ adv. 在国外
-                        
-                        **fan** /fæn/ n. 迷；狂热爱好者
-                        
-                        **southern** /ˈsʌðən/ adj. 南方的
-                        
-                        **modern** /ˈmɒdn/ adj. 现代的
-                        
-                        **success** /səkˈses/ n. 成功
+                        **become** /bɪˈkʌm/ v. 变成
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：现在完成时
-                        - *I **have** already **read** it.*
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. I have had this book for three years.
+                        - **【考点】**：现在完成时搭配 `for + 时间段`。
+                        
+                        #### 2. She has lived here since 2010.
+                        - **【考点】**：现在完成时搭配 `since + 时间点/从句`。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8down_u9", "Unit 9", "Have you ever been to a museum?",
+                "g8down_u8", "Unit 8", "Giving a Helping Hand",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 志愿服务与奉献。
+                        *   **核心内容**：参与慈善活动，掌握常见动词短语与不定式进阶应用。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **amusement** /əˈmjuːzmənt/ n. 娱乐；游戏
+                        **volunteer** /ˌvɒlənˈtɪə(r)/ v. & n. 志愿者
                         
-                        **somewhere** /ˈsʌmweə(r)/ adv. 在某处；到某处
+                        **charity** /ˈtʃærəti/ n. 慈善机构
                         
-                        **camera** /ˈkæmrə/ n. 照相机
+                        **disabled** /dɪsˈeɪbld/ adj. 残疾的
                         
-                        **invention** /ɪnˈvenʃn/ n. 发明；发明物
+                        **blind** /blaɪnd/ adj. 失明的
                         
-                        **unbelievable** /ˌʌnbɪˈliːvəbl/ adj. 难以置信的
+                        **imagine** /ɪˈmædʒɪn/ v. 想象
                         
-                        **progress** /prəˈɡres/ v. & n. 进步；进展
+                        **kindness** /ˈkaɪndnəs/ n. 善良
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子与语法", """
+                        #### 1. We could clean up the city parks.
+                        - **【考点】**：**短语动词** (Phrasal Verbs) 的用法。
                         
-                        **rapid** /ˈræpɪd/ adj. 迅速的；快速的
-                        
-                        **unusual** /ʌnˈjuːʒuəl/ adj. 特别的；不寻常的
-                        
-                        **toilet** /ˈtɔɪlət/ n. 坐便器；厕所
-                        
-                        **encourage** /ɪnˈkʌrɪdʒ/ v. 鼓励
-                        
-                        **social** /ˈsəʊʃl/ adj. 社会的
-                        
-                        **peaceful** /ˈpiːsfl/ adj. 和平的；安宁的
-                        
-                        **tea** /tiː/ n. 茶；茶叶
-                        
-                        **performance** /pəˈfɔːməns/ n. 表演；演出
-                        
-                        **perfect** /ˈpɜːfɪkt/ adj. 完美的；完全的
-                        
-                        **itself** /ɪtˈself/ pron. 它自己
-                        
-                        **collect** /kəˈlekt/ v. 收集；采集
-                        
-                        **German** /ˈdʒɜːmən/ adj. 德国的 n. 德语
-                        
-                        **ride** /raɪd/ n. 游乐设施 v. 骑
-                        
-                        **province** /ˈprɒvɪns/ n. 省份
-                        
-                        **thousand** /ˈθaʊznd/ num. 一千
-                        
-                        **safe** /seɪf/ adj. 安全的
-                        
-                        **simply** /ˈsɪmpli/ adv. 仅仅；简单地
-                        
-                        **fear** /fɪə(r)/ v. & n. 害怕；惧怕
-                        
-                        **whether** /ˈweðə(r)/ conj. 不管……（还是）；是否
-                        
-                        **Indian** /ˈɪndiən/ adj. 印度的 n. 印度人
-                        
-                        **Japanese** /ˌdʒæpəˈniːz/ adj. 日本的 n. 日语
-                        
-                        **fox** /fɒks/ n. 狐狸
-                        
-                        **whenever** /wenˈevə(r)/ conj. 无论何时
-                        
-                        **spring** /sprɪŋ/ n. 春天
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8down_u10", "Unit 10", "I've had this bike for three years.",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **yard** /jɑːd/ n. 院子
-                        
-                        **sweet** /swiːt/ adj. 甜的；可爱的
-                        
-                        **memory** /ˈmeməri/ n. 记忆；回忆
-                        
-                        **cent** /sent/ n. 分；分币
-                        
-                        **toy** /tɔɪ/ n. 玩具
-                        
-                        **bear** /beə(r)/ n. 熊
-                        
-                        **maker** /ˈmeɪkə(r)/ n. 生产者；制订者
-                        
-                        **scarf** /skɑːf/ n. 围巾；披巾
-                        
-                        **soft** /sɒft/ adj. 软的；柔软的
-                        
-                        **check** /tʃek/ v. & n. 检查；审查
-                        
-                        **board** /bɔːd/ n. 板；木板
-                        
-                        **junior** /ˈdʒuːniə(r)/ adj. 地位（或等级）较低的
-                        
-                        **clear** /klɪə(r)/ v. 清理；清除
-                        
-                        **bedroom** /ˈbedruːm/ n. 卧室
-                        
-                        **no longer** 不再；不复
-                        
-                        **own** /əʊn/ v. 拥有 adj. 自己的
-                        
-                        **railway** /ˈreɪlweɪ/ n. 铁路；铁道
-                        
-                        **part** /pɑːt/ v. 离开；分开 n. 部分
-                        
-                        **certain** /ˈsɜːtn/ adj. 某种；确信的
-                        
-                        **honest** /ˈɒnɪst/ adj. 诚实的；正直的
-                        
-                        **while** /waɪl/ n. 一段时间；一会儿
-                        
-                        **truth** /truːθ/ n. 真理；真相；事实
-                        
-                        **hometown** /ˈhəʊmtaʊn/ n. 家乡；故乡
-                        
-                        **search** /sɜːtʃ/ v. & n. 搜索；搜查
-                        
-                        **among** /əˈmʌŋ/ prep. 在（其）中
-                        
-                        **shame** /ʃeɪm/ n. 羞耻；遗憾
-                        
-                        **regard** /rɪˈɡɑːd/ v. 将……视为
-                        
-                        **count** /kaʊnt/ v. 数数
-                        
-                        **century** /ˈsentʃəri/ n. 世纪；百年
-                        
-                        **opposite** /ˈɒpəzɪt/ prep. 在……对面 adj. 对面的
-                        
-                        **especially** /ɪˈspeʃəli/ adv. 尤其；特别
-                        
-                        **childhood** /ˈtʃaɪldhʊd/ n. 童年；幼年
-                        
-                        **consider** /kənˈsɪdə(r)/ v. 注视；仔细考虑
-                        
-                        **close to** 几乎；接近；亲近
+                        #### 2. I'd like to volunteer to help kids.
+                        - **【考点】**：`would like to do` 表达意愿。
                     """.trimIndent())
                 )
             )

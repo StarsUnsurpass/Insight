@@ -482,132 +482,172 @@ object Grade7Up {
                 )
             ),
             TextbookUnit(
-                "g7up_u4", "Unit 4", "My Favourite Food",
+                "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与自我 —— 饮食习惯与健康。
+                        ### 1. 核心语境
+                        *   **主题语境**：人与自我 —— 学校生活与兴趣。
+                        *   **深层意义**：引导学生发现自身兴趣，合理安排学习生活，培养对知识的热爱。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **food** /fuːd/ n. 食物
+                        **biology** /baɪˈɒlədʒi/ n. 生物学
                         
-                        **fruit** /fruːt/ n. 水果
+                        **IT** /ˌaɪ ˈtiː/ n. 信息技术 (=Information Technology)
                         
-                        **vegetable** /ˈvedʒtəbl/ n. 蔬菜
+                        **geography** /dʒiˈɒɡrəfi/ n. 地理(学)
                         
-                        **apple** /ˈæpl/ n. 苹果
+                        **history** /ˈhɪstri/ n. 历史(学)
                         
-                        **banana** /bəˈnɑːnə/ n. 香蕉
+                        **art** /ɑːt/ n. 艺术；美术
                         
-                        **orange** /ˈɒrɪndʒ/ n. 橙子
+                        **maths** /mæθs/ n. 数学
                         
-                        **tomato** /təˈmɑːtəʊ/ n. 西红柿；番茄
+                        **subject** /ˈsʌbdʒɪkt/ n. 学科；科目
                         
-                        **potato** /pəˈteɪtəʊ/ n. 马铃薯；土豆
+                        **because** /bɪˈkɒz/ conj. 因为
                         
-                        **carrot** /ˈkærət/ n. 胡萝卜
+                        **why** /waɪ/ adv. 为什么
                         
-                        **chicken** /ˈtʃɪkɪn/ n. 鸡肉
+                        **Wednesday** /ˈwenzdeɪ/ n. 星期三
                         
-                        **beef** /biːf/ n. 牛肉
+                        **Monday** /ˈmʌndeɪ/ n. 星期一
                         
-                        **fish** /fɪʃ/ n. 鱼；鱼肉
+                        **Tuesday** /ˈtjuːzdeɪ/ n. 星期二
                         
-                        **rice** /raɪs/ n. 大米；米饭
+                        **Thursday** /ˈθɜːzdeɪ/ n. 星期四
                         
-                        **noodles** /ˈnuːdlz/ n. 面条
+                        **Friday** /ˈfraɪdeɪ/ n. 星期五
                         
-                        **bread** /bred/ n. 面包
+                        **Saturday** /ˈsætədeɪ/ n. 星期六
                         
-                        **milk** /mɪlk/ n. 牛奶
+                        **Sunday** /ˈsʌndeɪ/ n. 星期日
                         
-                        **juice** /dʒuːs/ n. 果汁
+                        **useful** /ˈjuːsfl/ adj. 有用的；有益的
                         
-                        **water** /ˈwɔːtə(r)/ n. 水
+                        **boring** /ˈbɔːrɪŋ/ adj. 乏味的；令人厌烦的
                         
-                        **breakfast** /ˈbrekfəst/ n. 早餐
+                        **exciting** /ɪkˈsaɪtɪŋ/ adj. 令人激动的；使人兴奋的
                         
-                        **lunch** /lʌntʃ/ n. 午餐
+                        **difficult** /ˈdɪfɪkəlt/ adj. 困难的；难懂的
                         
-                        **dinner** /ˈdɪnə(r)/ n. 正餐；晚餐
+                        **easy** /ˈiːzi/ adj. 容易的；不费力的
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What’s your favourite subject? (你最喜欢的科目是什么？)
+                        - **【结构剖析】**：`favourite` 作形容词修饰 `subject`。回答用 `My favourite subject is...` 或 `I like... best.`
                         
-                        **healthy** /ˈhelθi/ adj. 健康的
-                        
-                        **delicious** /dɪˈlɪʃəs/ adj. 美味的
-                        
-                        **favourite** /ˈfeɪvərɪt/ adj. & n. 最喜爱的（人或物）
-                        
-                        **hamburger** /ˈhæmbɜːɡə(r)/ n. 汉堡包
-                        
-                        **ice cream** /ˌaɪs ˈkriːm/ n. 冰激凌
-                        
-                        **salad** /ˈsæləd/ n. 沙拉
-                        
-                        **sugar** /ˈʃʊɡə(r)/ n. 糖
-                        
-                        **egg** /eɡ/ n. 蛋；鸡蛋
+                        #### 2. Why do you like history? — Because it’s interesting. (你为什么喜欢历史？—因为它很有趣。)
+                        - **【逻辑关联】**：`Why` 引导特殊疑问句询问原因，`because` 引导从句回答。
                     """.trimIndent()),
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法：Why 与 Because 的因果链
-                        - *— **Why** do you like math? — **Because** it's interesting.*
+                        ### 核心语法：特殊疑问句 (Wh-questions)
+                        **1. 特殊疑问词汇总**
+                        *   `What`: 询问事物。
+                        *   `Why`: 询问原因。
+                        *   `When`: 询问时间。
+                        *   `Who`: 询问人。
+                        
+                        **2. 时间介词搭配**
+                        - `on` + 具体某一天 (on Monday)。
+                        - `at` + 具体时刻 (at 8:00)。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7up_u5", "Unit 5", "Amazing Animals",
+                "g7up_u5", "Unit 5", "Fun Clubs",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与自我 —— 动物特征。
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 课外活动与社交。
+                        *   **深层意义**：通过参与不同社团，引导学生发现潜能，培养团队协作与社交能力。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **animal** /ˈænɪml/ n. 动物
+                        **club** /klʌb/ n. 俱乐部；社团
                         
-                        **tiger** /ˈtaɪɡə(r)/ n. 老虎
+                        **join** /dʒɔɪn/ v. 参加；加入
                         
-                        **elephant** /ˈelɪfənt/ n. 大象
+                        **choose** /tʃuːz/ v. 选择；挑选
                         
-                        **lion** /ˈlaɪən/ n. 狮子
+                        **drama** /ˈdrɑːmə/ n. 戏剧；戏剧表演
                         
-                        **giraffe** /dʒəˈrɑːf/ n. 长颈鹿
+                        **chess** /tʃes/ n. 国际象棋
                         
-                        **panda** /ˈpændə/ n. 熊猫
+                        **play Chinese chess** 下中国象棋
                         
-                        **monkey** /ˈmʌŋki/ n. 猴子
+                        **feeling** /ˈfiːlɪŋ/ n. 感觉；情感
                         
-                        **rabbit** /ˈræbɪt/ n. 兔子
+                        **news** /njuːz/ n. 消息；新闻
                         
-                        **bird** /bɜːd/ n. 鸟
+                        **musical** /ˈmjuːzɪkl/ adj. 音乐的；有音乐天赋的
                         
-                        **snake** /sneɪk/ n. 蛇
+                        **musical instrument** 乐器
                         
-                        **bat** /bæt/ n. 蝙蝠
+                        **exactly** /ɪɡˈzæktli/ adv. 正是如此；准确地
                         
-                        **wing** /wɪŋ/ n. 翅膀
+                        **drum** /drʌm/ n. 鼓
                         
-                        **neck** /nek/ n. 脖子
+                        **ability** /əˈbɪləti/ n. 能力；才能
                         
-                        **tail** /teɪl/ n. 尾巴
-                        
-                        **fur** /fɜː(r)/ n. 毛皮；软毛
-                        
-                        **feather** /ˈfeðə(r)/ n. 羽毛
+                        **paint** /peɪnt/ v. 用颜料画 n. 油漆；涂料
                         
                         **climb** /klaɪm/ v. 攀登；爬
                         
-                        **jump** /dʒʌmp/ v. 跳跃
+                        **more** /mɔː(r)/ adj. & pron. 更多（的）
                         
-                        **run** /rʌn/ v. 跑
+                        **act** /ækt/ v. 扮演；行动 n. 一幕
                         
-                        **swim** /swɪm/ v. 游泳
+                        **act out** 表演；将……表演出来
                         
-                        **fly** /flaɪ/ v. 飞
+                        **at home** 在家里
                         
-                        **nature** /ˈneɪtʃə(r)/ n. 大自然
+                        **interested** /ˈɪntrəstɪd/ adj. 感感性趣的
                         
-                        **wildlife** /ˈwaɪldlaɪf/ n. 野生动物
+                        **interested in** 对……感兴趣
                         
-                        **discover** /dɪˈskʌvə(r)/ v. 发现
+                        **nature** /ˈneɪtʃə(r)/ n. 自然界；大自然
+                        
+                        **beef** /biːf/ n. 牛肉
+                        
+                        **soon** /suːn/ adv. 不久；很快
+                        
+                        **than** /ðən/ prep. & conj. 比
+                        
+                        **more than** 多于；超出
+                        
+                        **mind** /maɪnd/ n. 头脑；心思
+                        
+                        **fall** /fɔːl/ v. & n. 掉落；跌倒 n. (美)秋天
+                        
+                        **fall in love with** 爱上
+                        
+                        **take photos** 拍照
+                        
+                        **collect** /kəˈlekt/ v. 收集；采集
                         
                         **insect** /ˈɪnsekt/ n. 昆虫
+                        
+                        **discover** /dɪˈskʌvə(r)/ v. 发现；发觉
+                        
+                        **wildlife** /ˈwaɪldlaɪf/ n. 野生动物；野生生物
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What club do you want to join? (你想加入什么社团？)
+                        - **【句型分析】**：`want to do sth.` 想要做某事。`join` 指加入某个团体。
+                        
+                        #### 2. I can dance and sing. (我会跳舞和唱歌。)
+                        - **【能力表达】**：`can` + 动词原形，表示具备某种能力。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：情态动词 can
+                        **1. 基本用法**：表示“能”、“会”。
+                        **2. 句式结构**：
+                        - 肯定：I can swim.
+                        - 否定：I can't swim.
+                        - 疑问：Can you swim?
+                        
+                        **3. 常用固定搭配**
+                        - `be good at` 擅长……
+                        - `be interested in` 对……感兴趣
                     """.trimIndent())
                 )
             ),
