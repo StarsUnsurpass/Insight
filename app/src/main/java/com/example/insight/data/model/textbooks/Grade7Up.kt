@@ -45,12 +45,21 @@ object Grade7Up {
                         **oh** /əʊ/ interj. 哦；啊
                         
                         **bell** /bel/ n. 铃（声）；钟（声）
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲与核心考点", """
+                        *   **greet**：常用结构 *greet sb. with a smile*。
+                        *   **everyone**：复合不定代词，谓语用单数。
+                        *   **拼写句型**：*How do you spell your name?*
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_s2", "Starter Unit 2", "Keep Tidy!",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 生活习惯（整洁）。
+                        *   **深层意义**：引导学生学会整理个人物品，养成良好的生活自理习惯。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **bottle** /ˈbɒtl/ n. 瓶子
                         
@@ -81,6 +90,10 @@ object Grade7Up {
                         **please** /pliːz/ interj. 请
                         
                         **schoolbag** /ˈskuːlbæɡ/ n. 书包
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲与核心考点", """
+                        *   **There be 句型**：初步接触物体的存在表达。
+                        *   **Where 引导的疑问句**：询问位置。
                     """.trimIndent())
                 )
             ),
@@ -220,12 +233,44 @@ object Grade7Up {
                         **Australia** /ɒˈstreɪliə/ 澳大利亚
                         
                         **Singapore** /ˌsɪŋəˈpɔː(r)/ 新加坡
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. What club do you want to join? (你想加入什么社团？)
+                        - **【结构剖析】**：`want to do sth.` 想要做某事。`join` 指加入某个组织或团体。
+                        
+                        #### 2. Are you good with kids? (你善于和孩子们相处吗？)
+                        - **【词法精辨】**：
+                            *   `be good at`：擅长...
+                            *   `be good with`：善于对待.../与...相处得好。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：情态动词 can
+                        **1. 基本用法**
+                        *   表示能力 (Ability)：*I can swim.*
+                        **2. 句式结构**
+                        - **肯定句**：主语 + can + 动词原形.
+                        - **否定句**：主语 + can't + 动词原形.
+
+                        ### 中考真题特训
+                        *(2024·南京中考)* *— ________ you play the violin? — Yes, I ________.*
+                        A. Can; can   B. Do; do   C. Must; must   D. Should; should
+                        **[解析]**：询问能力，选 **A**。
+                    """.trimIndent()),
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：自我介绍 (Self-introduction)
+                        **满分范文**：
+                        Hello, everyone! My name is Li Hua. I am 13 years old. I am in Grade 7. My first name is Hua and my last name is Li. I like music very much and I can play the guitar. My hobby is playing tennis. I want to make friends with you.
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u2", "Unit 2", "We're Family!",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 家庭成员与亲情。
+                        *   **深层意义**：引导学生学会关爱家人，增进家庭和谐。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **husband** /ˈhʌzbənd/ n. 丈夫
                         
@@ -306,12 +351,30 @@ object Grade7Up {
                         **family tree** 家谱
                         
                         **pink** /pɪŋk/ adj. & n. 粉红色
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. These are my parents. (这些是我的父母。)
+                        - **【结构剖析】**：`These are...` 后接名词复数。注意 `parents` 指双亲。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：名词所有格
+                        - 单数后加 *'s*：*father's book*。
+                        - 以 s 结尾的复数后只加 *'*：*parents' room*。
+                    """.trimIndent()),
+                    UnitDetailSection("✍️ 单元写作专项指导", """
+                        ### 写作主题：全家福介绍
+                        **满分范文**：
+                        Look at this photo! This is my family. These are my grandparents. They are very healthy. This handsome man is my father. He is a teacher. This is my mother. She is excellent at cooking. The girl next to me is my sister. We often have fun playing the violin together. I love my family!
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u3", "Unit 3", "My School",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        ### 1. 核心语境
+                        *   **主题语境**：人与社会 —— 校园环境与设施。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **hall** /hɔːl/ n. 大厅；会堂
                         
@@ -398,12 +461,24 @@ object Grade7Up {
                         **next to** 紧挨着
                         
                         **wall** /wɔːl/ n. 墙
+                    """.trimIndent()),
+                    UnitDetailSection("📚 重点句子深度解剖", """
+                        #### 1. Where are my keys? (我的钥匙在哪？)
+                        - **【语法核心】**：复数名词提问，助动词用 `are`。回答用 `They're...`。
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：There be 结构
+                        **1. 含义**：表示“某地有某物”。
+                        **2. 主谓一致**：遵循“就近原则”。
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u4", "Unit 4", "My Favourite Subject",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 学校生活与学科偏好。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **subject** /ˈsʌbdʒɪkt/ n. 学科；科目
                         
@@ -482,12 +557,19 @@ object Grade7Up {
                         **quarter** /ˈkwɔːtə(r)/ n. 一刻钟
                         
                         **half** /hɑːf/ n. 一半
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
+                        ### 核心语法：Why 与 Because 的因果链
+                        - *— **Why** do you like math? — **Because** it's interesting.*
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
                 "g7up_u5", "Unit 5", "Fun Clubs",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 个人爱好与特长。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **club** /klʌb/ n. 俱乐部；社团
                         
@@ -552,6 +634,9 @@ object Grade7Up {
             TextbookUnit(
                 "g7up_u6", "Unit 6", "A Day in the Life",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 生活习惯与日常作息。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **o'clock** /əˈklɒk/ adv. ……点钟
                         
@@ -640,6 +725,9 @@ object Grade7Up {
             TextbookUnit(
                 "g7up_u7", "Unit 7", "Happy Birthday!",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 个人庆典与人际交往。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **month** /mʌnθ/ n. 月份
                         
