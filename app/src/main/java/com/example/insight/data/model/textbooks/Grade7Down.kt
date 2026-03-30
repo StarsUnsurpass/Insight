@@ -18,12 +18,16 @@ object Grade7Down {
             TextbookUnit(
                 "g7down_s1", "Starter Unit 1", "Animal Friends",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自然 —— 常见动物。
+                        *   **核心内容**：学习常见农场动物名称及其基础表达。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **duck** /ˈdʌk/ n. 鸭子
                         
                         **chicken** /ˈtʃɪkɪn/ n. 鸡
                         
-                        **rabbit** /ˈræbɪt/ n. 兔子
+                        **rabbit** /ˈræbit/ n. 兔子
                         
                         **cow** /kaʊ/ n. 母牛；奶牛
                         
@@ -33,7 +37,7 @@ object Grade7Down {
                         
                         **goat** /ɡəʊt/ n. 山羊
                         
-                        **pig** /pɪɡ/ n. 猪
+                        **pig** /piɡ/ n. 猪
                         
                         **farm** /fɑːm/ n. 农场
                     """.trimIndent())
@@ -42,6 +46,9 @@ object Grade7Down {
             TextbookUnit(
                 "g7down_s2", "Starter Unit 2", "No Rules, No Order",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 秩序与规则。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **rule** /ruːl/ n. 规则；规章
                         
@@ -56,540 +63,210 @@ object Grade7Down {
                 )
             ),
             TextbookUnit(
-                "g7down_u1", "Unit 1", "Let's Play Ball!",
+                "g7down_u1", "Unit 1", "Animal Friends",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与社会 —— 社会规则与文化习俗。
-                        *   **深层意义**：本单元聚焦于公共场所及家庭内部的规则（Rules），并延伸至不同文化背景下的礼仪习俗（Customs）。旨在引导学生建立契约意识、自律精神，同时培养文化包容性。
+                        *   **主题语境**：人与自然 —— 保护动物与自然。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **rule** /ruːl/ n. 规则；规章
+                        **fox** /fɒks/ n. 狐狸
                         
-                        **hallway** /ˈhɔːlweɪ/ n. 走廊；过道
+                        **giraffe** /dʒɪˈrɑːf/ n. 长颈鹿
                         
-                        **hall** /hɔːl/ n. 大厅；礼堂
+                        **eagle** /ˈiːɡl/ n. 雕；鹰
                         
-                        **listen** /ˈlɪsn/ v. 听；倾听
+                        **wolf** /wʊlf/ n. 狼 (pl. wolves)
                         
-                        **listen to** 听……
+                        **penguin** /ˈpeŋɡwɪn/ n. 企鹅
                         
-                        **fight** /faɪt/ v. & n. 打架；战斗
+                        **snake** /sneɪk/ n. 蛇
                         
-                        **sorry** /ˈsɒri/ adj. 抱歉的；难过的
+                        **shark** /ʃɑːk/ n. 鲨鱼
                         
-                        **outside** /ˌaʊtˈsaɪd/ adv. 在外面 adj. 外面的
+                        **whale** /weɪl/ n. 鲸
                         
-                        **wear** /weə(r)/ v. 穿；戴
+                        **scary** /ˈskeəri/ adj. 吓人的
                         
-                        **important** /ɪmˈpɔːtnt/ adj. 重要的
+                        **huge** /hjuːd/ adj. 巨大的
                         
-                        **bring** /brɪn/ v. 带来；取来
+                        **dangerous** /ˈdeɪndʒərəs/ adj. 危险的
                         
-                        **uniform** /ˈjuːnɪfɔːm/ n. 制服；校服
+                        **save** /seɪv/ v. 救；保存
                         
-                        **quiet** /ˈkwaɪət/ adj. 安静的
+                        **culture** /ˈkʌltʃə(r)/ n. 文化
                         
-                        **quietly** /ˈkwaɪətli/ adv. 安静地
+                        **danger** /ˈdeɪndʒə(r)/ n. 危险
                         
-                        **late** /leɪt/ adj. & adv. 晚；迟
+                        **in danger** 处于危险中
                         
-                        **be late for** 迟到
+                        **forest** /ˈfɒrɪst/ n. 森林
                         
-                        **on time** 准时
+                        **friendly** /ˈfrendli/ adj. 友好的
                         
-                        **eat** /iːt/ v. 吃
+                        **Antarctica** /ænˈtɑːktɪkə/ n. 南极洲
                         
-                        **in class** 在课堂上
+                        **Africa** /ˈæfrɪkə/ n. 非洲
+                    """.trimIndent()),
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 核心语法：名词复数的不规则变化
+                        - *wolf -> wolves*
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u2", "Unit 2", "No Rules, No Order",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 学校与生活规则。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **rule** /ruːl/ n. 规则
                         
-                        **library** /ˈlaɪbrəri/ n. 图书馆
-                        
-                        **must** /mʌst/ modal v. 必须
+                        **order** /ˈɔːdə(r)/ n. 顺序；命令
                         
                         **follow** /ˈfɒləʊ/ v. 遵循；跟随
                         
-                        **follow the rules** 遵守规则
+                        **arrive** /əˈraɪv/ v. 到达
                         
-                        **can** /kæn/ modal v. 能；可以
+                        **on time** 准时
                         
-                        **can't** (cannot) 不能
+                        **uniform** /ˈjuːnɪfɔːm/ n. 制服
                         
-                        **dishes** /ˈdɪʃɪz/ n. 餐具；盘碟
+                        **litter** /ˈlɪtə(r)/ v. 乱扔垃圾 n. 垃圾
                         
-                        **do the dishes** 清洗餐具
+                        **polite** /pəˈlaɪt/ adj. 有礼貌的
                         
-                        **before** /bɪˈfɔː(r)/ prep. & conj. 在……以前
+                        **noise** /nɔɪz/ n. 噪音
                         
-                        **after** /ˈɑːftə(r)/ prep. & conj. 在……以后
+                        **practise** /ˈpræktɪs/ v. 练习
                         
-                        **strict** /strɪkt/ adj. 严格的；严厉的
+                        **awful** /ˈɔːfl/ adj. 糟糕的
                         
-                        **be strict with sb.** 对某人严厉
+                        **become** /bɪˈkʌm/ v. 变成
                         
-                        **remember** /rɪˈmembə(r)/ v. 记住；记起
+                        **focus** /ˈfəʊkəs/ v. 集中（注意力）
                         
-                        **luck** /lʌk/ n. 运气；幸运
+                        **focus on** 专注于
                         
-                        **keep** /kiːp/ v. 保持；保留
-                        
-                        **hair** /heə(r)/ n. 头发；毛发
-                        
-                        **learn** /lɜːn/ v. 学习；学会
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法一：祈使句 (Imperatives)
-                        **1. 肯定形式**：动词原形开头。 *Listen to the teacher!*
-                        **2. 否定形式**：`Don't + 动词原形`。 *Don't fight!*
-                        
-                        ### 核心语法二：情态动词 must 与 can
-                        - **must** 表示“必须”，语气强烈。
-                        - **can** 表示“许可”。
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u2", "Unit 2", "Food and Health",
-                listOf(
-                    UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自然 —— 天气状况与假期生活。
-                    """.trimIndent()),
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **rain** /reɪn/ v. 下雨 n. 雨
-                        
-                        **rainy** /ˈreɪni/ adj. 下雨的；有雨的
-                        
-                        **snow** /snəʊ/ v. 下雪 n. 雪
-                        
-                        **snowy** /ˈsnəʊi/ adj. 下雪的
-                        
-                        **cloud** /klaʊd/ n. 云
-                        
-                        **cloudy** /ˈklaʊdi/ adj. 多云的
-                        
-                        **sun** /sʌn/ n. 太阳
-                        
-                        **sunny** /ˈsʌni/ adj. 晴朗的
-                        
-                        **wind** /wɪnd/ n. 风
-                        
-                        **windy** /ˈwɪndi/ adj. 多风的
-                        
-                        **weather** /ˈweðə(r)/ n. 天气
-                        
-                        **How's the weather?** 天气怎么样？
-                        
-                        **What's the weather like?** 天气怎么样？
-                        
-                        **cook** /kʊk/ v. 做饭
-                        
-                        **bad** /bæd/ adj. 坏的；糟糕的
-                        
-                        **terrible** /ˈterəbl/ adj. 糟糕的；可怕的
-                        
-                        **pretty** /ˈprɪti/ adv. 相当；很
-                        
-                        **hot** /hɒt/ adj. 热的
-                        
-                        **cold** /kəʊld/ adj. 冷s的
-                        
-                        **cool** /kuːl/ adj. 凉爽的
-                        
-                        **warm** /wɔːm/ adj. 温暖的
-                        
-                        **visit** /ˈvɪzɪt/ v. 访问；拜访
-                        
-                        **vacation** /veɪˈkeɪʃn/ n. 假期
-                        
-                        **on vacation** 在度假
-                        
-                        **postcard** /ˈpəʊstkɑːd/ n. 明信片
-                        
-                        **photo** /ˈfəʊtəʊ/ n. 照片
-                        
-                        **take a photo** 拍照
-                        
-                        **beach** /biːtʃ/ n. 海滩
-                        
-                        **group** /ɡruːp/ n. 组；群
-                        
-                        **surprise** /səˈpraɪz/ n. 惊奇；惊讶
-                        
-                        **to one's surprise** 令某人惊讶的是
-                        
-                        **relaxed** /rɪˈlækst/ adj. 放松的
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法：询问天气的句型转换
-                        1. `How is the weather?`
-                        2. `What is the weather like?`
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u3", "Unit 3", "Weather and Seasons",
-                listOf(
-                    UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 人物外貌特征。
-                    """.trimIndent()),
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **short** /ʃɔːt/ adj. 短的；矮的
-                        
-                        **tall** /tɔːl/ adj. 高的
-                        
-                        **height** /haɪt/ n. 高度
-                        
-                        **of medium height** 中等身高
-                        
-                        **thin** /θɪn/ adj. 瘦的
-                        
-                        **heavy** /ˈhevi/ adj. 重的
-                        
-                        **build** /build/ n. 体格；身材
-                        
-                        **of medium build** 中等身材
-                        
-                        **hair** /heə(r)/ n. 头发
-                        
-                        **straight** /streɪt/ adj. 直的
-                        
-                        **curly** /ˈkɜːli/ adj. 卷曲的
-                        
-                        **long** /lɒŋ/ adj. 长的
-                        
-                        **blonde** /blɒnd/ adj. 金黄色的
-                        
-                        **brown** /braʊn/ adj. 棕色的
-                        
-                        **glasses** /ˈɡlɑːsɪz/ n. 眼镜
-                        
-                        **wear glasses** 戴眼镜
-                        
-                        **look like** 看起来像
-                        
-                        **actor** /ˈæktə(r)/ n. 演员
-                        
-                        **actress** /ˈæktrəs/ n. 女演员
-                        
-                        **person** /ˈpɜːsn/ n. 人
-                        
-                        **nose** /nəʊz/ n. 鼻子
-                        
-                        **mouth** /mʌʊθ/ n. 嘴
-                        
-                        **eye** /aɪ/ n. 眼睛
-                        
-                        **face** /feɪs/ n. 脸
-                        
-                        **singer** /ˈsɪŋə(r)/ n. 歌手
-                        
-                        **artist** /ˈɑːtɪst/ n. 艺术家
-                        
-                        **handsome** /ˈhænsəm/ adj. 英俊的
-                        
-                        **beautiful** /ˈbjuːtɪfl/ adj. 美丽的
+                        **relax** /rɪˈlæks/ v. 放松
                     """.trimIndent()),
                     UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：描述外貌的 be 与 have
-                        1. **be 动词**：描述身高、体格。
-                        2. **have / has**：描述发型、五官。
+                        ### 核心语法：祈使句与情态动词 must/can
+                        - *Don't litter!*
+                        - *We must wear the school uniform.*
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7down_u4", "Unit 4", "Eat Well",
+                "g7down_u3", "Unit 3", "Keep Fit",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 体育运动与锻炼。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **volleyball** /ˈvɒlibɔːl/ n. 排球
+                        
+                        **jog** /dʒɒɡ/ v. 慢跑
+                        
+                        **skateboarding** /ˈskeɪtbɔːdɪŋ/ n. 滑板运动
+                        
+                        **goal** /ɡəʊl/ n. 目标；进球
+                        
+                        **work out** 锻炼
+                        
+                        **progress** /ˈprəʊɡres/ n. 进步
+                        
+                        **match** /mætʃ/ n. 比赛
+                        
+                        **team** /tiːm/ n. 队伍
+                        
+                        **spirit** /ˈspɪrɪt/ n. 精神
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u4", "Unit 4", "Food and Healthy Diet",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
                         *   **主题语境**：人与自我 —— 饮食习惯与健康。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **noodle** /ˈnuːdl/ n. 面条
+                        **salt** /sɔːlt/ n. 盐
                         
-                        **mutton** /ˈmʌtn/ n. 羊肉
+                        **fat** /fæt/ n. 脂肪 adj. 肥胖的
                         
-                        **beef** /biːf/ n. 牛肉
+                        **weight** /weɪt/ n. 体重
                         
-                        **cabbage** /ˈkæbɪdʒ/ n. 卷心菜
+                        **put on weight** 增加体重
                         
-                        **potato** /pəˈteɪtəʊ/ n. 土豆
+                        **cause** /kɔːz/ v. 造成；导致
                         
-                        **tomato** /təˈmɑːtəʊ/ n. 西红柿
+                        **balanced** /ˈbælənst/ adj. 均衡的
                         
-                        **special** /ˈspeʃl/ n. 特色菜 adj. 特别的
+                        **result** /rɪˈzʌlt/ n. 结果
                         
-                        **size** /saɪz/ n. 尺寸；大小
+                        **improve** /ɪmˈpruːv/ v. 改进；改善
                         
-                        **bowl** /bəʊl/ n. 碗
+                        **habit** /ˈhæbɪt/ n. 习惯
                         
-                        **a bowl of** 一碗……
-                        
-                        **large** /lɑːdʒ/ adj. 大号的
-                        
-                        **medium** /ˈmiːdiəm/ adj. 中号的
-                        
-                        **small** /smɔːl/ adj. 小号的
-                        
-                        **order** /ˈɔːdə(r)/ n. & v. 点菜；订购
-                        
-                        **take one's order** 点菜
-                        
-                        **tofu** /ˈtəʊfuː/ n. 豆腐
-                        
-                        **pancake** /ˈpænkeɪk/ n. 薄饼
-                        
-                        **juice** /dʒuːs/ n. 果汁
-                        
-                        **porridge** /ˈpɒrɪdʒ/ n. 粥
-                        
-                        **tea** /tiː/ n. 茶
-                        
-                        **dumpling** /ˈdʌmplɪŋ/ n. 饺子
-                        
-                        **rice** /raɪs/ n. 米饭
-                        
-                        **fish** /fɪʃ/ n. 鱼
-                        
-                        **meat** /miːt/ n. 肉
-                        
-                        **vegetable** /ˈvedʒtəbl/ n. 蔬菜
-                        
-                        **fruit** /fruːt/ n. 水果
-                        
-                        **answer** /ˈɑːnsə(r)/ v. 回答
-                        
-                        **different** /ˈdɪfrənt/ adj. 不同的
-                        
-                        **birthday** /ˈɜːθdeɪ/ n. 生日
-                        
-                        **cake** /keɪk/ n. 蛋糕
-                        
-                        **candle** /ˈkændl/ n. 蜡烛
-                        
-                        **blow** /bləʊ/ v. 吹
-                        
-                        **wish** /wɪʃ/ n. 愿望
-                        
-                        **make a wish** 许愿
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：would like 的用法
-                        1. `would like sth.` 想要某物。
-                        2. `would like to do sth.` 想要做某事。
+                        **fast food** 快餐
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g7down_u5", "Unit 5", "Neighborhood",
+                "g7down_u5", "Unit 5", "Daily Activities and Festivals",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与社会 —— 过往经历（郊游）。
+                        *   **主题语境**：人与社会 —— 日常活动与文化。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **went** /went/ v. (go的过去式) 去
+                        **activity** /ækˈtɪvəti/ n. 活动
                         
-                        **farm** /fɑːm/ n. 农场
+                        **festival** /ˈfestɪvl/ n. 节日
                         
-                        **farmer** /ˈfɑːmə(r)/ n. 农民
-                        
-                        **show** /ʃəʊ/ v. 表演；展示
-                        
-                        **show sb. around** 带某人参观
-                        
-                        **anything** /ˈeniθɪŋ/ pron. 任何事
-                        
-                        **saw** /sɔː/ v. (see的过去式) 看见
-                        
-                        **cow** /kaʊ/ n. 奶牛
-                        
-                        **milk** /mɪlk/ v. 挤奶
-                        
-                        **milk a cow** 给奶牛挤奶
-                        
-                        **horse** /hɔːs/ n. 马
-                        
-                        **ride a horse** 骑马
-                        
-                        **feed** /fiːd/ v. 喂养
-                        
-                        **feed chickens** 喂鸡
-                        
-                        **expensive** /ɪkˈspensɪv/ adj. 昂贵的
-                        
-                        **cheap** /tʃiːp/ adj. 便宜的
-                        
-                        **fast** /fɑːst/ adj. 快的
-                        
-                        **slow** /sləʊ/ adj. 慢的
-                        
-                        **exciting** /ɪkˈsaɪtɪŋ/ adj. 令人兴奋的
-                        
-                        **lovely** /ˈlʌvli/ adj. 可爱的
-                        
-                        **museum** /mjuˈziːəm/ n. 博物馆
-                        
-                        **gift** /ɡɪft/ n. 礼物
-                        
-                        **gift shop** 礼品店
-                        
-                        **all in all** 总的来说
-                        
-                        **everything** /ˈevriθɪŋ/ pron. 所有事物
-                        
-                        **robot** /ˈrəʊbɒt/ n. 机器人
-                        
-                        **guide** /ɡaɪd/ n. 导游
-                        
-                        **yesterday** /ˈjestədeɪ/ n. & adv. 昨天
-                        
-                        **flower** /ˈflaʊə(r)/ n. 花
-                        
-                        **pick** /pɪk/ v. 采；摘
-                        
-                        **sun** /sʌn/ n. 太阳
-                        
-                        **worry** /ˈwʌri/ v. 担心
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：一般过去时 (Simple Past Tense)
-                        **1. be 动词**：was/were。
-                        **2. 实义动词**：规则动词加 -ed。
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u6", "Unit 6", "Travel and Holidays",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **stay** /steɪ/ v. 停留；待
-                        
-                        **stay up late** 熬夜
-                        
-                        **practice** /ˈpræktɪs/ v. & n. 练习
-                        
-                        **competition** /ˌkɒmpəˈtɪʃn/ n. 比赛；竞争
-                        
-                        **win** /wɪn/ v. 赢得
-                        
-                        **won** /wʌn/ v. (win的过去式) 赢
-                        
-                        **prize** /praɪz/ n. 奖品；奖赏
-                        
-                        **nature** /ˈneɪtʃə(r)/ n. 自然
-                        
-                        **camping** /ˈkæmpɪŋ/ n. 露营
-                        
-                        **go camping** 去露营
-                        
-                        **lake** /leɪk/ n. 湖
-                        
-                        **beach** /biːtʃ/ n. 海滩
-                        
-                        **badminton** /ˈbædmɪntən/ n. 羽毛球
-                        
-                        **sheep** /ʃiːp/ n. 绵羊
-                        
-                        **butterfly** /ˈbʌtəflaɪ/ n. 蝴蝶
-                        
-                        **visitor** /ˈvɪzɪtə(r)/ n. 游客；访问者
-                        
-                        **mouse** /maʊs/ n. 老鼠
-                        
-                        **mice** /maʊs/ n. (mouse的复数) 老鼠
-                        
-                        **baby** /ˈbeɪbi/ n. 婴儿
-                        
-                        **shout** /ʃaʊt/ v. 呼喊；叫嚷
-                        
-                        **shout at** 对……大声叫嚷
-                        
-                        **shout to** 对……大声喊
-                        
-                        **jump** /dʒʌmp/ v. 跳跃
-                        
-                        **jump up and down** 上下跳跃
-                        
-                        **scary** /ˈskeəri/ adj. 吓人的
-                        
-                        **snake** /sneɪk/ n. 蛇
-                        
-                        **forest** /ˈfɒrɪst/ n. 森林
-                        
-                        **wake** /weɪk/ v. 醒来
-                        
-                        **wake up** 醒来
-                        
-                        **into** /ˈɪntə/ prep. 到……里面
-                        
-                        **moon** /muːn/ n. 月亮
-                        
-                        **amazed** /əˈmeɪzd/ adj. 惊奇的
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g7down_u7", "Unit 7", "Shopping",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **world** /wɜːld/ n. 世界
-                        
-                        **around the world** 全世界
-                        
-                        **country** /ˈkʌntri/ n. 国家
-                        
-                        **Canada** /ˈkænədə/ n. 加拿大
-                        
-                        **France** /frɑːns/ n. 法国
-                        
-                        **Japan** /dʒəˈpæn/ n. 日本
-                        
-                        **USA** 美国
-                        
-                        **UK** 英国
-                        
-                        **language** /ˈlæŋɡwɪdʒ/ n. 语言
-                        
-                        **capital** /ˈkæpɪtl/ n. 首都；省会
-                        
-                        **tower** /ˈtaʊə(r)/ n. 塔
-                        
-                        **mountain** /ˈmaʊntən/ n. 山
-                        
-                        **vacation** /veɪˈkeɪʃn/ n. 假期
-                        
-                        **summer** /ˈsʌmə(r)/ n. 夏天
-                        
-                        **winter** /ˈwɪntə(r)/ n. 冬天
-                        
-                        **spring** /sprɪŋ/ n. 春天
-                        
-                        **autumn** /ˈɔːtəm/ n. 秋天
-                        
-                        **palace** /ˈpæləs/ n. 宫殿
-                        
-                        **museum** /mjuˈziːəm/ n. 博物馆
-                        
-                        **flag** /flæɡ/ n. 旗帜
-                        
-                        **symbol** /ˈsɪmbl/ n. 象征
-                        
-                        **map** /mæp/ n. 地图
-                        
-                        **passport** /ˈpɑːspɔːt/ n. 护照
-                        
-                        **famous** /ˈfeɪməs/ adj. 著名的
-                        
-                        **interesting** /ˈɪntrestɪŋ/ adj. 有趣的
-                        
-                        **different** /ˈdɪfrənt/ adj. 不同的
+                        **celebrate** /ˈselɪbreɪt/ v. 庆祝
                         
                         **traditional** /trəˈdɪʃənl/ adj. 传统的
                         
-                        **food** /fuːd/ n. 食物
+                        **right now** 此刻；现在
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u6", "Unit 6", "Weather and Travel",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自然 —— 天气描述与旅游计划。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **rain** /reɪn/ v. 下雨 n. 雨
                         
-                        **wish** /wɪʃ/ v. & n. 愿望
+                        **stormy** /ˈstɔːmi/ adj. 有暴风雨的
                         
-                        **hope** /həʊp/ v. & n. 希望
+                        **affect** /əˈfekt/ v. 影响
+                        
+                        **dry** /draɪ/ adj. 干燥的
+                        
+                        **lucky** /ˈlʌki/ adj. 幸运的
+                        
+                        **centre** /ˈsentə(r)/ n. 中心
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g7down_u7", "Unit 7", "Social Activities and Explorations",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 社会实践与探索精神。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **explore** /ɪkˈsplɔː(r)/ v. 探索
+                        
+                        **social** /ˈsəʊʃl/ adj. 社会的
+                        
+                        **experience** /ɪkˈspɪəriəns/ n. 经验；经历
+                        
+                        **skill** /skɪl/ n. 技能
                     """.trimIndent())
                 )
             )
