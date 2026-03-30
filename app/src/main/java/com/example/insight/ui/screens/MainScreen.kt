@@ -506,49 +506,61 @@ fun HomeTab(
                 )
                 
                 sections.forEach { sectionName ->
-                    item(key = "section_$sectionName") {
-                        val isExpanded = expandedSections.contains(sectionName)
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(RoundedCornerShape(12.dp))
-                                .hapticClickable(preferences) {
-                                    if (isExpanded) expandedSections.remove(sectionName)
-                                    else expandedSections.add(sectionName)
-                                }
-                                .padding(vertical = 8.dp, horizontal = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = sectionName,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = primaryColor
-                            )
-                            Icon(
-                                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                contentDescription = if (isExpanded) "Collapse" else "Expand",
-                                tint = primaryColor,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
-
                     val isExpanded = expandedSections.contains(sectionName)
-                    if (isExpanded) {
-                        val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
-                        items(
-                            items = sectionPoints,
-                            key = { it.id }
-                        ) { point ->
-                            HistoryCardByPoint(
-                                point = point, 
-                                preferences = preferences, 
-                                cleanedDescription = cleanedDescriptions[point.id] ?: "",
-                                onUpdateStatus = onUpdateStatus,
-                                onClick = { onNavigateToKnowledgeDetail(point.id) }
-                            )
+                    val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                    
+                    item(key = "section_$sectionName") {
+                        Column {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .hapticClickable(preferences) {
+                                        if (isExpanded) expandedSections.remove(sectionName)
+                                        else expandedSections.add(sectionName)
+                                    }
+                                    .padding(vertical = 8.dp, horizontal = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = sectionName,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = primaryColor
+                                )
+                                Icon(
+                                    imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = if (isExpanded) "Collapse" else "Expand",
+                                    tint = primaryColor,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                            
+                            AnimatedVisibility(
+                                visible = isExpanded,
+                                enter = expandVertically(
+                                    animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow)
+                                ) + fadeIn(animationSpec = tween(300)),
+                                exit = shrinkVertically(
+                                    animationSpec = spring(dampingRatio = 0.8f, stiffness = Spring.StiffnessLow)
+                                ) + fadeOut(animationSpec = tween(250))
+                            ) {
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                                    modifier = Modifier.padding(bottom = 8.dp)
+                                ) {
+                                    sectionPoints.forEach { point ->
+                                        HistoryCardByPoint(
+                                            point = point, 
+                                            preferences = preferences, 
+                                            cleanedDescription = cleanedDescriptions[point.id] ?: "",
+                                            onUpdateStatus = onUpdateStatus,
+                                            onClick = { onNavigateToKnowledgeDetail(point.id) }
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }

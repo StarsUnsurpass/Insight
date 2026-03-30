@@ -106,45 +106,51 @@ object Grade7Up {
                         *   **深层意义**：本单元旨在引导学生发现自身潜能，建立自信。通过社团招新的情境，培养学生的社会参与意识与团队协作精神。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表 (完全一致)", """
-                        **make** /meɪk/ v. 制造；做
-                        **friend** /frend/ n. 朋友
-                        **make friends** 交朋友
-                        **get** /ɡet/ v. 得到；买；到达
-                        **know** /nəʊ/ v. 知道；了解
-                        **get to know** 认识；了解
                         **each** /iːtʃ/ adj. & pron. 每个；各自
-                        **other** /'ʌðə(r)/ pron. 另外的人（或物）
+                        **other** /ˈʌðə(r)/ pron. & adj. 另外的人（或物）；另外的
                         **each other** 互相；彼此
-                        **full** /fʊl/ adj. 满的；完整的
+                        **full** /fʊl/ adj. 完整的；满的
                         **full name** 全名
                         **grade** /ɡreɪd/ n. 年级；等级
-                        **last** /lɑːst/ adj. 最后的；末尾的
-                        **last name** 姓
-                        **classmate** /'klɑːsmeɪt/ n. 同班同学
-                        **teacher** /'tiːtʃə(r)/ n. 老师
+                        **last** /lɑːst/ adj. 最近的；最后的；末尾
+                        **last name** 姓氏
+                        **classmate** /ˈklɑːsmeɪt/ n. 同班同学
                         **class teacher** 班主任
-                        **first** /fɜːst/ adj. 第一的
+                        **first** /fɜːst/ adj. & n. 第一；最初
                         **first name** 名字
-                        **mistake** /mɪ'steɪk/ n. 错误；失误
-                        **country** /'kʌntri/ n. 国家
+                        **mistake** /mɪˈsteɪk/ n. 错误；失误
+                        **country** /ˈkʌntri/ n. 国家
                         **same** /seɪm/ adj. 相同的
-                        **twin** /twɪn/ n. 双胞胎之一
+                        **twin** /twɪn/ n. & adj. 双胞胎之一；双胞胎之一的
                         **both** /bəʊθ/ adj. & pron. 两个；两个都
                         **band** /bænd/ n. 乐队
                         **pot** /pɒt/ n. 锅
+                        **hot pot** 火锅
                         **a lot** 很；非常
-                        **tofu** /'təʊfuː/ n. 豆腐
-                        **parrot** /'pærət/ n. 鹦鹉
-                        **guitar** /ɡɪ'tɑː(r)/ n. 吉他
-                        **tennis** /'tenɪs/ n. 网球
-                        **post** /pəʊst/ v. 邮寄；发布 n. 帖子
-                        **even** /'iːvn/ adv. 甚至；连
+                        **tofu** /ˈtəʊfuː/ n. 豆腐
+                        **parrot** /ˈpærət/ n. 鹦鹉
+                        **guitar** /ɡɪˈtɑː(r)/ n. 吉他
+                        **tennis** /ˈtenɪs/ n. 网球
+                        **post** /pəʊst/ n. & v. 帖子；邮寄；发布
+                        **even** /ˈiːvn/ adv. 甚至；连
                         **hey** /heɪ/ interj. 嘿；喂
-                        **play the guitar** 弹吉他
-                        **would** /wʊd/ modal v. (will的过去式) 意愿
-                        **would like to** 愿意；想要
-                        **information** /ˌɪnfə'meɪʃn/ n. 信息；消息
-                        **hobby** /'hɒbi/ n. 业余爱好
+                        **would** /wʊd/ modal v. 想（用于礼貌邀请）
+                        **would like to** 想要
+                        **information** /ˌɪnfəˈmeɪʃn/ n. 信息
+                        **hobby** /ˈhɒbi/ n. 爱好
+
+                        **[专有名词]**
+                        **Green** /ɡriːn/ 格林（姓）
+                        **UK** /ˌjuː ˈkeɪ/ 英国
+                        **US** /ˌjuː ˈes/ 美国
+                        **Smith** /smɪθ/ 史密斯（姓）
+                        **Lisa** /ˈliːsə/ 莉萨（女名）
+                        **Tom** /tɒm/ 汤姆（男名）
+                        **Sally** /ˈsæli/ 萨莉（女名）
+                        **Wood** /wʊd/ 伍德（姓）
+                        **Sydney** /ˈsɪdni/ 悉尼（澳大利亚城市）
+                        **Australia** /ɒˈstreɪliə/ 澳大利亚
+                        **Singapore** /ˌsɪŋəˈpɔː(r)/ 新加坡
                     """.trimIndent()),
                     UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. What club do you want to join? (你想加入什么社团？)
