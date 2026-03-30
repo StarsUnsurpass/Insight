@@ -136,7 +136,7 @@ fun MarkdownText(
                 for (line in lines) {
                     processedLines.add(line.trim())
                 }
-                cleanMarkdown = processedLines.joinToString("\n")
+                cleanMarkdown = processedLines.joinToString("  \n")
                 markwon.setMarkdown(view, cleanMarkdown)
             } catch (e: Exception) {
                 view.text = markdown
