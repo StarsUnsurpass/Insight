@@ -31,6 +31,15 @@ class InsightViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(InsightUiState())
     val uiState: StateFlow<InsightUiState> = _uiState.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    private val _filteredKnowledgePoints = MutableStateFlow<List<com.example.insight.data.model.KnowledgePoint>>(emptyList())
+    val filteredKnowledgePoints: StateFlow<List<com.example.insight.data.model.KnowledgePoint>> = _filteredKnowledgePoints.asStateFlow()
+
+    private val _cleanedDescriptions = mutableMapOf<String, String>()
+    val cleanedDescriptions: Map<String, String> get() = _cleanedDescriptions
+
     private val _aiOutput = MutableStateFlow("")
     val aiOutput: StateFlow<String> = _aiOutput.asStateFlow()
 
@@ -38,6 +47,11 @@ class InsightViewModel @Inject constructor(
     val currentScanStudentId: StateFlow<String?> = _currentScanStudentId.asStateFlow()
 
     init {
+        // Pre-clean descriptions
+        com.example.insight.data.model.KnowledgeProvider.allPoints.forEach { point ->
+            _cleanedDescriptions[point.id] = cleanDescription(point.description)
+        }
+
         // Collect preferences from DataStore
         viewModelScope.launch {
             repository.userPreferencesFlow.collect { prefs ->
@@ -93,6 +107,27 @@ class InsightViewModel @Inject constructor(
                 _uiState.update { it.copy(allScans = scans) }
             }
         }
+    }
+
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
+        viewModelScope.launch {
+            if (query.isEmpty()) {
+                _filteredKnowledgePoints.value = emptyList()
+            } else {
+                val q = query.lowercase()
+                _filteredKnowledgePoints.value = com.example.insight.data.model.KnowledgeProvider.allPoints.filter { point ->
+                    point.title.lowercase().contains(q) ||
+                    point.description.lowercase().contains(q)
+                }
+            }
+        }
+    }
+
+    private fun cleanDescription(description: String): String {
+        var cleaned = description.replace(Regex("### [^\\n]+\\n?"), "")
+        cleaned = cleaned.replace(Regex("[*`#\\n]"), " ").replace(Regex("\\s+"), " ").trim()
+        return if (cleaned.length > 80) cleaned.take(77) + "..." else cleaned
     }
 
     private suspend fun initializeMockKnowledgeGraph() {
