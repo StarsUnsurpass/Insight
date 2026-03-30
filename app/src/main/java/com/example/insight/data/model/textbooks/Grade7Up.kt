@@ -45,6 +45,18 @@ object Grade7Up {
                         **oh** /əʊ/ interj. 哦；啊
                         
                         **bell** /bel/ n. 铃（声）；钟（声）
+                        
+                        **Helen** /ˈhelən/ 海伦（女名）
+                        
+                        **Ella** /ˈelə/ 埃拉（女名）
+                        
+                        **Emma** /ˈemə/ 埃玛（女名）
+                        
+                        **Peter** /ˈpiːtə(r)/ 彼得（男名）
+                        
+                        **Brown** /braʊn/ 布朗（姓）
+                        
+                        **Miller** /ˈmɪlə(r)/ 米勒（姓）
                     """.trimIndent()),
                     UnitDetailSection("⚙️ 语法精讲与核心考点", """
                         *   **greet**：常用结构 *greet sb. with a smile*。
@@ -71,6 +83,18 @@ object Grade7Up {
                         
                         **need** /niːd/ v. & n. 需要
                         
+                        **ruler** /ˈruːlə(r)/ n. 尺子
+                        
+                        **schoolbag** /ˈskuːlbæɡ/ n. 书包
+                        
+                        **pencil** /ˈpensl/ n. 铅笔
+                        
+                        **cup** /kʌp/ n. 杯子
+                        
+                        **box** /bɒks/ n. 盒；箱
+                        
+                        **cap** /kæp/ n. 帽子
+                        
                         **You're welcome.** 别客气；不用谢。
                         
                         **tidy** /ˈtaɪdi/ adj. 整洁的；整齐的
@@ -88,8 +112,6 @@ object Grade7Up {
                         **lost and found** 失物招领（处）
                         
                         **please** /pliːz/ interj. 请
-                        
-                        **schoolbag** /ˈskuːlbæɡ/ n. 书包
                     """.trimIndent()),
                     UnitDetailSection("⚙️ 语法精讲与核心考点", """
                         *   **There be 句型**：初步接触物体的存在表达。
@@ -117,19 +139,21 @@ object Grade7Up {
                         
                         **else** /els/ adv. 其他的；别的
                         
-                        **look** /lʊk/ v. 看；瞧
-                        
                         **look at** 看；瞧
                         
-                        **circle** /ˈsɜːkl/ v. 圈出 n. 圆形
-                        
-                        **welcome** /ˈwelkəm/ adj. & v. 欢迎
+                        **circle** /ˈsɜːkl/ v. & n. 圈出；圆形
                         
                         **tomato** /təˈmɑːtəʊ/ n. 西红柿
+                        
+                        **apple** /ˈæpl/ n. 苹果
                         
                         **potato** /pəˈteɪtəʊ/ n. 马铃薯；土豆
                         
                         **animal** /ˈænɪml/ n. 动物
+                        
+                        **cow** /kaʊ/ n. 母牛；奶牛
+                        
+                        **horse** /hɔːs/ n. 马
                         
                         **many** /ˈmeni/ adj. & pron. 许多
                         
@@ -184,10 +208,6 @@ object Grade7Up {
                         
                         **pot** /pɒt/ n. 锅
                         
-                        **hot pot** 火锅
-                        
-                        **a lot** 很；非常
-                        
                         **tofu** /ˈtəʊfuː/ n. 豆腐
                         
                         **parrot** /ˈpærət/ n. 鹦鹉
@@ -196,19 +216,13 @@ object Grade7Up {
                         
                         **tennis** /ˈtenɪs/ n. 网球
                         
-                        **post** /pəʊst/ n. & v. 帖子；邮寄；发布
-                        
-                        **even** /ˈiːvn/ adv. 甚至；连
-                        
-                        **hey** /heɪ/ interj. 嘿；喂
-                        
-                        **would** /wʊd/ modal v. 想（用于礼貌邀请）
-                        
-                        **would like to** 想要
-                        
-                        **information** /ˌɪnfəˈmeɪʃn/ n. 信息
-                        
                         **hobby** /ˈhɒbi/ n. 爱好
+                        
+                        **information** /ˌɪnfəˈmeɪʃn/ n. 信息；消息
+                        
+                        **make friends** 交朋友
+                        
+                        **get to know** 认识；了解
 
                         **[专有名词]**
                         
@@ -272,85 +286,85 @@ object Grade7Up {
                         *   **深层意义**：引导学生学会关爱家人，增进家庭和谐。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **husband** /ˈhʌzbənd/ n. 丈夫
+                        **family** /ˈfæməli/ n. 家；家庭
                         
-                        **wife** /waɪf/ n. 妻子
+                        **grandfather** /ˈɡrænfɑːðə(r)/ n. (外)祖父
                         
-                        **grandchild** /ˈɡræntʃaɪld/ n. (外)孙子；(外)孙女
+                        **grandmother** /ˈɡrænmʌðə(r)/ n. (外)祖母
                         
-                        **son** /sʌn/ n. 儿子
-                        
-                        **daughter** /ˈdɔːtə(r)/ n. 女儿
-                        
-                        **cousin** /ˈkʌzn/ n. 堂（表）兄弟姐妹
-                        
-                        **hike** /haɪk/ v. & n. 远足；徒步旅行
-                        
-                        **go hiking** 去远足
-                        
-                        **together** /təˈɡeðə(r)/ adv. 在一起；共同
-                        
-                        **spend** /spend/ v. 花（时间、金钱等）
-                        
-                        **really** /ˈrɪəli/ adv. 真正地；确实
-                        
-                        **chess** /tʃes/ n. 国际象棋
-                        
-                        **funny** /ˈfʌni/ adj. 好笑的；奇怪的
-                        
-                        **laugh** /lɑːf/ v. 笑；发笑
-                        
-                        **different** /ˈdɪfrənt/ adj. 不同的
-                        
-                        **violin** /ˌvaɪəˈlɪn/ n. 小提琴
-                        
-                        **play the violin** 拉小提琴
-                        
-                        **have fun** 玩得开心
-                        
-                        **hat** /hæt/ n. 帽子
-                        
-                        **handsome** /ˈhænsəm/ adj. 英俊的
-                        
-                        **knee** /niː/ n. 膝；膝盖
-                        
-                        **as** /æz/ prep. 如同；作为
-                        
-                        **AM** /ˌeɪ 'em/ 上午
-                        
-                        **PM** /ˌpiː 'em/ 下午
-                        
-                        **French** /frentʃ/ n. 法语 adj. 法国的
-                        
-                        **excellent** /ˈeksələnt/ adj. 优秀的；极好的
-                        
-                        **instrument** /ˈɪnstrəmənt/ n. 乐器；工具
-                        
-                        **relative** /ˈrelətɪv/ n. 亲戚
+                        **grandparent** /ˈɡræmpeərənt/ n. 祖父(母)；外祖父(母)
                         
                         **father** /ˈfɑːðə(r)/ n. 父亲
                         
                         **mother** /ˈmʌðə(r)/ n. 母亲
                         
-                        **parents** /ˈpeərənts/ n. 父母
+                        **parent** /ˈpeərənt/ n. 父(母)亲
                         
-                        **brother** /ˈbrʌðə(r)/ n. 兄弟
+                        **brother** /ˈbrʌðə(r)/ n. 兄；弟
                         
                         **sister** /ˈsɪstə(r)/ n. 姐；妹
                         
-                        **grandfather** /ˈɡrænfɑːðə(r)/ n. 祖父；外祖父
+                        **uncle** /ˈʌŋkl/ n. 舅父；叔父；伯父；姑父；姨父
                         
-                        **grandmother** /ˈɡrænmʌðə(r)/ n. 祖母；外祖母
+                        **aunt** /ɑːnt/ n. 姨母；姑母；伯母；婶母；舅母
                         
-                        **grandparents** /ˈɡrænpeərənts/ n. 祖父母；外祖父母
+                        **cousin** /ˈkʌzn/ n. 堂兄(弟、姐、妹)；表兄(弟、姐、妹)
                         
-                        **uncle** /ˈʌŋkl/ n. 叔；伯；舅
+                        **son** /sʌn/ n. 儿子
                         
-                        **aunt** /ˈɑːnt/ n. 姨；婶；姑
+                        **daughter** /ˈdɔːtə(r)/ n. 女儿
                         
-                        **family tree** 家谱
+                        **photo** /ˈfəʊtəʊ/ n. 照片
                         
-                        **pink** /pɪŋk/ adj. & n. 粉红色
+                        **picture** /ˈpɪktʃə(r)/ n. 照片；图画
+                        
+                        **these** /ðiːz/ pron. & adj. 这些
+                        
+                        **those** /ðəʊz/ pron. & adj. 那些
+                        
+                        **who** /huː/ pron. 谁；什么人
+                        
+                        **they** /ðeɪ/ pron. 他(她、它)们
+                        
+                        **well** /wel/ interj. 嗯；好吧
+                        
+                        **have** /hæv/ v. 有
+                        
+                        **a lot of** /ə lɒt əv/ 大量；许多
+                        
+                        **tennis** /ˈtenɪs/ n. 网球
+                        
+                        **ball** /bɔːl/ n. 球
+                        
+                        **ping-pong** /ˈpɪŋ pɒŋ/ n. 乒乓球
+                        
+                        **bat** /bæt/ n. 球棒；球拍
+                        
+                        **play** /pleɪ/ v. 参加(体育运动或比赛)；玩耍
+                        
+                        **but** /bʌt/ conj. 但是
+                        
+                        **only** /ˈəʊnli/ adv. 只；仅
+                        
+                        **very** /ˈveri/ adv. 很；非常
+                        
+                        **much** /mʌtʃ/ adv. & adj. 非常；很多
+                        
+                        **love** /lʌv/ v. & n. 爱；喜爱
+                        
+                        **together** /təˈɡeðə(r)/ adv. 在一起；共同
+                        
+                        **really** /ˈrɪəli/ adv. 真正地；确实
+                        
+                        **great** /ɡreɪt/ adj. 伟大的；棒极了
+                        
+                        **fun** /fʌn/ n. & adj. 有趣的事；有趣的
+                        
+                        **sport** /spɔːt/ n. 体育运动
+                        
+                        **every** /ˈevri/ adj. 每一；每个
+                        
+                        **day** /deɪ/ n. 一天；一日
                     """.trimIndent()),
                     UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. These are my parents. (这些是我的父母。)
@@ -376,91 +390,85 @@ object Grade7Up {
                         *   **主题语境**：人与社会 —— 校园环境与设施。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **hall** /hɔːl/ n. 大厅；会堂
-                        
-                        **dining hall** 餐厅；食堂
-                        
-                        **gym** /dʒɪm/ n. 体育馆；健身房
-                        
-                        **field** /fiːld/ n. 田地；场地
-                        
-                        **sports field** 运动场
-                        
-                        **office** /ˈɒfɪs/ n. 办公室
-                        
-                        **large** /lɑːdʒ/ adj. 大的；宽敞的
-                        
-                        **special** /ˈspeʃl/ adj. 特别的；特殊的
-                        
-                        **smart** /smɑːt/ adj. 智能的；聪明的
-                        
-                        **whiteboard** /ˈwaɪtbɔːd/ n. 白板
-                        
-                        **important** /ɪmˈpɔːtnt/ adj. 重要的
-                        
-                        **notice** /ˈnəʊtɪs/ n. 通知；公告 v. 注意到
-                        
-                        **locker** /ˈlɒkə(r)/ n. 储物柜
-                        
-                        **drawer** /drɔː(r)/ n. 抽屉
-                        
-                        **back** /bæk/ n. 后面；背部
-                        
-                        **at the back (of)** 在……后面
-                        
-                        **corner** /ˈkɔːnə(r)/ n. 角落；拐角
-                        
-                        **bookcase** /ˈbʊkkeɪs/ n. 书柜；书架
-                        
-                        **screen** /skriːn/ n. 屏幕；银幕
-                        
                         **school** /skuːl/ n. 学校
-                        
-                        **at school** 在学校
-                        
-                        **modern** /ˈmɒdn/ adj. 现代的；时髦的
-                        
-                        **exercise** /ˈeksəsaɪz/ n. & v. 练习；运动
-                        
-                        **do exercises** 做运动；做操
-                        
-                        **put** /pʊt/ v. 放
-                        
-                        **up** /ʌp/ adv. 向上
-                        
-                        **put up** 张贴；搭建
                         
                         **classroom** /ˈklɑːsruːm/ n. 教室
                         
                         **library** /ˈlaɪbrəri/ n. 图书馆
                         
+                        **lab** /læb/ n. 实验室 (=laboratory)
+                        
+                        **gym** /dʒɪm/ n. 体育馆；健身房
+                        
                         **playground** /ˈplaɪɡraʊnd/ n. 操场
                         
-                        **building** /ˈbɪldɪŋ/ n. 建筑物
+                        **office** /ˈɒfɪs/ n. 办公室
                         
-                        **science** /ˈsaɪəns/ n. 科学
+                        **building** /ˈbɪldɪŋ/ n. 建筑物；房子
                         
-                        **lab** /læb/ n. 实验室
+                        **gate** /ɡeɪt/ n. 大门
                         
-                        **science lab** 科学实验室
+                        **hall** /hɔːl/ n. 礼堂；大厅
                         
-                        **behind** /bɪˈhaɪnd/ prep. 在...后面
+                        **dining hall** /ˈdaɪnɪŋ hɔːl/ 餐厅；食堂
                         
-                        **between** /bɪˈtwiːn/ prep. 在...之间
+                        **sports field** /spɔːts fiːld/ 运动场
                         
-                        **front** /frʌnt/ n. 前面
+                        **behind** /bɪˈhaɪnd/ prep. 在……后面
                         
-                        **in front of** 在...前面
+                        **between** /bɪˈtwiːn/ prep. 在……中间
                         
-                        **across** /əˈrɒs/ adv. & prep. 穿过
+                        **in front of** /ɪn frʌnt əv/ 在……前面
                         
-                        **across from** 在...对面
+                        **next to** /ˈnekst tu/ 紧挨着；在……隔壁
                         
-                        **next** /nekst/ adj. 下一个的
+                        **across from** /əˈrɒs frəm/ 在……对面
                         
-                        **next to** 紧挨着
+                        **far from** /fɑː(r) frəm/ 离……远
+                        
+                        **near** /nɪə(r)/ prep. 在……附近
+                        
+                        **map** /mæp/ n. 地图
+                        
+                        **desk** /desk/ n. 书桌
+                        
+                        **chair** /ʃeə(r)/ n. 椅子
+                        
+                        **blackboard** /ˈblækbɔːd/ n. 黑板
+                        
+                        **computer** /kəmˈpjuːtə(r)/ n. 计算机；电脑
+                        
+                        **teacher** /ˈtiːtʃə(r)/ n. 老师
+                        
+                        **student** /ˈstjuːdnt/ n. 学生
+                        
+                        **class** /klɑːs/ n. 班级；课
+                        
+                        **lesson** /ˈlesn/ n. 课；教训
+                        
+                        **subject** /ˈsʌbdʒɪkt/ n. 学科；科目
+                        
+                        **modern** /ˈmɒdn/ adj. 现代的；当代的
+                        
+                        **large** /lɑːdʒ/ adj. 大的；宽敞的
+                        
+                        **clean** /kliːn/ adj. 干净的
+                        
+                        **beautiful** /ˈbjuːtɪfl/ adj. 美丽的；美好的
                         
                         **wall** /wɔːl/ n. 墙
+                        
+                        **floor** /flɔː(r)/ n. 地板；地面
+                        
+                        **window** /ˈwɪndəʊ/ n. 窗户
+                        
+                        **door** /dɔː(r)/ n. 门
+                        
+                        **some** /sʌm/ det. & pron. 一些；某些
+                        
+                        **any** /ˈeni/ det. & pron. 任何；一些
+                        
+                        **many** /ˈmeni/ det. & pron. 许多；很多
                     """.trimIndent()),
                     UnitDetailSection("📚 重点句子深度解剖", """
                         #### 1. Where are my keys? (我的钥匙在哪？)
@@ -474,89 +482,69 @@ object Grade7Up {
                 )
             ),
             TextbookUnit(
-                "g7up_u4", "Unit 4", "My Favourite Subject",
+                "g7up_u4", "Unit 4", "My Favourite Food",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与自我 —— 学校生活与学科偏好。
+                        *   **主题语境**：人与自我 —— 饮食习惯与健康。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **subject** /ˈsʌbdʒɪkt/ n. 学科；科目
+                        **food** /fuːd/ n. 食物
                         
-                        **biology** /baɪˈɒlədʒi/ n. 生物学
+                        **fruit** /fruːt/ n. 水果
                         
-                        **IT** /ˌaɪ 'tiː/ n. 信息技术 (Information Technology)
+                        **vegetable** /ˈvedʒtəbl/ n. 蔬菜
                         
-                        **history** /ˈhɪstri/ n. 历史
+                        **apple** /ˈæpl/ n. 苹果
                         
-                        **geography** /dʒiˈɒɡrəfi/ n. 地理
+                        **banana** /bəˈnɑːnə/ n. 香蕉
                         
-                        **PE** /ˌpiː 'iː/ n. 体育 (Physical Education)
+                        **orange** /ˈɒrɪndʒ/ n. 橙子
                         
-                        **art** /ɑːt/ n. 艺术；美术
+                        **tomato** /təˈmɑːtəʊ/ n. 西红柿；番茄
                         
-                        **music** /ˈmjuːzɪk/ n. 音乐
+                        **potato** /pəˈteɪtəʊ/ n. 马铃薯；土豆
                         
-                        **math** /mæθ/ n. 数学
+                        **carrot** /ˈkærət/ n. 胡萝卜
                         
-                        **Chinese** /ˌtʃaɪˈniːz/ n. 语文；汉语
+                        **chicken** /ˈtʃɪkɪn/ n. 鸡肉
                         
-                        **English** /ˈɪŋɡlɪʃ/ n. 英语
+                        **beef** /biːf/ n. 牛肉
                         
-                        **because** /bɪˈkɒz/ conj. 因为
+                        **fish** /fɪʃ/ n. 鱼；鱼肉
                         
-                        **reason** /ˈriːzn/ n. 原因；理由
+                        **rice** /raɪs/ n. 大米；米饭
                         
-                        **useful** /ˈjuːsfl/ adj. 有用的；有益的
+                        **noodles** /ˈnuːdlz/ n. 面条
                         
-                        **interesting** /ˈintristiŋ/ adj. 有趣的
+                        **bread** /bred/ n. 面包
                         
-                        **relaxing** /rɪˈlæksɪŋ/ adj. 令人放松的
+                        **milk** /mɪlk/ n. 牛奶
                         
-                        **difficult** /ˈdɪfɪkəlt/ adj. 困难的
+                        **juice** /dʒuːs/ n. 果汁
                         
-                        **boring** /ˈbɔːrɪŋ/ adj. 乏味的；无聊的
+                        **water** /ˈwɔːtə(r)/ n. 水
                         
-                        **easy** /ˈiːzi/ adj. 容易的
+                        **breakfast** /ˈbrekfəst/ n. 早餐
                         
-                        **Monday** /ˈmʌndeɪ/ n. 星期一
+                        **lunch** /lʌntʃ/ n. 午餐
                         
-                        **Tuesday** /ˈtjuːzdeɪ/ n. 星期二
+                        **dinner** /ˈdɪnə(r)/ n. 正餐；晚餐
                         
-                        **Wednesday** /ˈwenzdeɪ/ n. 星期三
+                        **healthy** /ˈhelθi/ adj. 健康的
                         
-                        **Thursday** /ˈθɜːzdeɪ/ n. 星期四
+                        **delicious** /dɪˈlɪʃəs/ adj. 美味的
                         
-                        **Friday** /ˈfraɪdeɪ/ n. 星期五
+                        **favourite** /ˈfeɪvərɪt/ adj. & n. 最喜爱的（人或物）
                         
-                        **Saturday** /ˈsætədeɪ/ n. 星期六
+                        **hamburger** /ˈhæmbɜːɡə(r)/ n. 汉堡包
                         
-                        **Sunday** /ˈsʌndeɪ/ n. 星期日
+                        **ice cream** /ˌaɪs ˈkriːm/ n. 冰激凌
                         
-                        **week** /wiːk/ n. 星期；周
+                        **salad** /ˈsæləd/ n. 沙拉
                         
-                        **day** /deɪ/ n. 一天；白昼
+                        **sugar** /ˈʃʊɡə(r)/ n. 糖
                         
-                        **time** /taɪm/ n. 时间
-                        
-                        **schedule** /ˈʃedjuːl/ n. 日程表；时刻表
-                        
-                        **lesson** /ˈlesn/ n. 课；教训
-                        
-                        **class** /klɑːs/ n. 班级；课
-                        
-                        **why** /waɪ/ adv. 为什么
-                        
-                        **when** /wen/ adv. 什么时候
-                        
-                        **start** /stɑːt/ v. 开始
-                        
-                        **finish** /ˈfɪnɪʃ/ v. 完成；结束
-                        
-                        **past** /pɑːst/ prep. 晚于；过
-                        
-                        **quarter** /ˈkwɔːtə(r)/ n. 一刻钟
-                        
-                        **half** /hɑːf/ n. 一半
+                        **egg** /eɡ/ n. 蛋；鸡蛋
                     """.trimIndent()),
                     UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
                         ### 核心语法：Why 与 Because 的因果链
@@ -565,69 +553,61 @@ object Grade7Up {
                 )
             ),
             TextbookUnit(
-                "g7up_u5", "Unit 5", "Fun Clubs",
+                "g7up_u5", "Unit 5", "Amazing Animals",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与自我 —— 个人爱好与特长。
+                        *   **主题语境**：人与自我 —— 动物特征。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **club** /klʌb/ n. 俱乐部；社团
+                        **animal** /ˈænɪml/ n. 动物
                         
-                        **join** /dʒɔɪn/ v. 加入；参加
+                        **tiger** /ˈtaɪɡə(r)/ n. 老虎
                         
-                        **ability** /əˈbɪləti/ n. 能力；才能
+                        **elephant** /ˈelɪfənt/ n. 大象
                         
-                        **paint** /peɪnt/ v. 用颜料画；刷漆
+                        **lion** /ˈlaɪən/ n. 狮子
                         
-                        **swim** /swɪm/ v. 游泳
+                        **giraffe** /dʒəˈrɑːf/ n. 长颈鹿
                         
-                        **dance** /dɑːns/ v. 跳舞
+                        **panda** /ˈpændə/ n. 熊猫
                         
-                        **act** /ækt/ v. 表演；行动
+                        **monkey** /ˈmʌŋki/ n. 猴子
                         
-                        **instrument** /ˈɪnstrəmənt/ n. 乐器；工具
+                        **rabbit** /ˈræbɪt/ n. 兔子
                         
-                        **drum** /drʌm/ n. 鼓
+                        **bird** /bɜːd/ n. 鸟
                         
-                        **collect** /kəˈlekt/ v. 收集；采集
+                        **snake** /sneɪk/ n. 蛇
                         
-                        **choose** /tʃuːz/ v. 选择；挑选
+                        **bat** /bæt/ n. 蝙蝠
                         
-                        **drama** /ˈdrɑːmə/ n. 戏剧；戏剧表演
+                        **wing** /wɪŋ/ n. 翅膀
                         
-                        **chess** /tʃes/ n. 象棋
+                        **neck** /nek/ n. 脖子
                         
-                        **feeling** /ˈfiːlɪŋ/ n. 感觉；情感
+                        **tail** /teɪl/ n. 尾巴
                         
-                        **news** /njuːz/ n. 消息；新闻
+                        **fur** /fɜː(r)/ n. 毛皮；软毛
                         
-                        **musical** /ˈmjuːzɪkl/ adj. 音乐的
-                        
-                        **exactly** /ɪɡˈzæktli/ adv. 正是如此
+                        **feather** /ˈfeðə(r)/ n. 羽毛
                         
                         **climb** /klaɪm/ v. 攀登；爬
                         
-                        **more** /mɔː(r)/ adj. & pron. 更多（的）
+                        **jump** /dʒʌmp/ v. 跳跃
                         
-                        **nature** /ˈneɪtʃə(r)/ n. 自然界
+                        **run** /rʌn/ v. 跑
                         
-                        **beef** /biːf/ n. 牛肉
+                        **swim** /swɪm/ v. 游泳
                         
-                        **soon** /suːn/ adv. 不久；很快
+                        **fly** /flaɪ/ v. 飞
                         
-                        **than** /ðən/ prep. & conj. 比
-                        
-                        **mind** /maɪnd/ n. 头脑；心思
-                        
-                        **fall** /fɔːl/ v. & n. 进入；落下；秋天
-                        
-                        **photo** /ˈfəʊtəʊ/ n. 照片
-                        
-                        **insect** /ˈɪnsekt/ n. 昆虫
-                        
-                        **discover** /dɪˈskʌvə(r)/ v. 发现；发觉
+                        **nature** /ˈneɪtʃə(r)/ n. 大自然
                         
                         **wildlife** /ˈwaɪldlaɪf/ n. 野生动物
+                        
+                        **discover** /dɪˈskʌvə(r)/ v. 发现
+                        
+                        **insect** /ˈɪnsekt/ n. 昆虫
                     """.trimIndent())
                 )
             ),
@@ -638,87 +618,51 @@ object Grade7Up {
                         *   **主题语境**：人与自我 —— 生活习惯与日常作息。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **o'clock** /əˈklɒk/ adv. ……点钟
-                        
-                        **past** /pɑːst/ prep. 晚于；经过
-                        
-                        **quarter** /ˈkwɔːtə(r)/ n. 一刻钟；四分之一
-                        
                         **shower** /ˈʃaʊə(r)/ n. & v. 淋浴
                         
-                        **brush** /brʌʃ/ v. 刷；梳
+                        **brush** /brʌʃ/ v. & n. 刷；刷子
                         
-                        **teeth** /tiːθ/ n. 牙齿 (pl. of tooth)
+                        **tooth** /tuːθ/ n. 牙齿 (pl. teeth)
                         
                         **usually** /ˈjuːʒuəli/ adv. 通常地
-                        
-                        **homework** /ˈhəʊmwɜːk/ n. 家庭作业
-                        
-                        **never** /ˈnevə(r)/ adv. 从不；绝不
-                        
-                        **early** /ˈɜːli/ adj. & adv. 早的（地）
-                        
-                        **use** /juːz/ v. 使用；利用
-                        
-                        **dress** /dres/ v. 穿衣服 n. 连衣裙
-                        
-                        **duty** /ˈdjuːti/ n. 值班；职责
-                        
-                        **up** /ʌp/ adv. 向上
                         
                         **reporter** /rɪˈpɔːtə(r)/ n. 记者
                         
                         **around** /əˈraʊnd/ prep. & adv. 大约；环绕
                         
-                        **bed** /bed/ n. 床
+                        **homework** /ˈhəʊmwɜːk/ n. 家庭作业
                         
-                        **saying** /ˈseɪɪŋ/ n. 谚语；格言
+                        **routine** /ruːˈtiːn/ n. 常规；日常事务
                         
-                        **rise** /raɪz/ v. 起床；升起
-                        
-                        **stay** /steɪ/ v. 停留；待
-                        
-                        **routine** /ruːˈtiːn/ n. 常规
-                        
-                        **restaurant** /ˈrestrɒnt/ n. 餐馆；餐厅
+                        **restaurant** /ˈrestrɒnt/ n. 餐馆
                         
                         **housework** /ˈhaʊswɜːk/ n. 家务劳动
                         
-                        **while** /waɪl/ conj. 当……的时候
-                        
                         **weekend** /ˌwiːkˈend/ n. 周末
                         
-                        **daily** /ˈdeɪli/ adj. 每日的
+                        **daily** /ˈdeɪli/ adj. 每日的；日常的
                         
-                        **only** /ˈəʊnli/ adv. 只；仅
+                        **break** /breɪk/ n. & v. 休息；打破
                         
-                        **break** /breɪk/ n. 休息；间断
+                        **finish** /ˈfɪnɪʃ/ v. 结束；完成
                         
-                        **already** /ɔːlˈredi/ adv. 已经；早已
-                        
-                        **dark** /dɑːk/ adj. 昏暗的；深色的
+                        **already** /ɔːlˈredi/ adv. 已经
                         
                         **outside** /ˌaʊtˈsaɪd/ adv. & prep. 在外面
-                        
-                        **part** /pɑːt/ n. 部分
-                        
-                        **everyday** /ˈevrideɪ/ adj. 每天的
                         
                         **prepare** /prɪˈpeə(r)/ v. 准备
                         
                         **begin** /bɪˈɡɪn/ v. 开始
                         
-                        **dinner** /ˈdɪnə(r)/ n. 正餐
+                        **early** /ˈɜːli/ adj. & adv. 早的；提前
                         
-                        **ask** /ɑːsk/ v. 询问；请求
+                        **o'clock** /əˈklɒk/ adv. ……点钟
                         
-                        **lunch** /lʌntʃ/ n. 午餐
+                        **half** /hɑːf/ n. & pron. 一半
                         
-                        **film** /fɪlm/ n. 电影
+                        **quarter** /ˈkwɔːtə(r)/ n. 一刻钟；四分之一
                         
-                        **breakfast** /ˈbrekfəst/ n. 早餐
-                        
-                        **before** /bɪˈfɔː(r)/ prep. & conj. 在……以前
+                        **stay** /steɪ/ v. 停留；待
                     """.trimIndent())
                 )
             ),
@@ -729,69 +673,51 @@ object Grade7Up {
                         *   **主题语境**：人与社会 —— 个人庆典与人际交往。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **month** /mʌnθ/ n. 月份
+                        **celebrate** /ˈselɪbreɪt/ v. 庆祝；庆贺
                         
-                        **January** /ˈdʒænjuəri/ n. 一月
+                        **surprise** /səˈpraɪz/ n. & v. 惊喜；使惊讶
                         
-                        **February** /ˈfebruəri/ n. 二月
+                        **something** /ˈsʌmθɪŋ/ pron. 某事；某物
                         
-                        **August** /ˈɔːɡəst/ n. 八月
+                        **sale** /seɪl/ n. 出售；销售
                         
-                        **December** /dɪˈsembə(r)/ n. 十二月
+                        **kilo** /ˈkiːləʊ/ n. 千克；公斤
+                        
+                        **yogurt** /ˈjɒɡət/ n. 酸奶
+                        
+                        **total** /ˈtəʊtl/ adj. & n. 总的；总数
+                        
+                        **price** /praɪs/ n. 价格
+                        
+                        **balloon** /bəˈluːn/ n. 气球
+                        
+                        **chocolate** /ˈtʃɒklət/ n. 巧克力
+                        
+                        **pizza** /ˈpiːtsə/ n. 比萨饼
+                        
+                        **list** /lɪst/ n. & v. 清单；列表
+                        
+                        **own** /əʊn/ adj. & pron. 自己的
+                        
+                        **example** /ɪɡˈzɑːmpl/ n. 例子；范例
+                        
+                        **language** /ˈlæŋɡwɪdʒ/ n. 语言
+                        
+                        **international** /ˌɪntəˈnæʃnəl/ adj. 国际的
+                        
+                        **mark** /mɑːk/ v. & n. 做记号；分数
                         
                         **date** /deɪt/ n. 日期
                         
-                        **birthday** /ˈbɜːθdeɪ/ n. 生日
+                        **national** /ˈnæʃnəl/ adj. 国家的；民族的
                         
-                        **happy** /ˈhæpi/ adj. 高兴的；快乐的
+                        **meaningful** /ˈmiːnɪŋfl/ adj. 有意义的；重要的
                         
-                        **party** /ˈpɑːti/ n. 聚会；派对
-                        
-                        **present** /ˈpreznt/ n. 礼物
-                        
-                        **buy** /baɪ/ v. 买
-                        
-                        **store** /stɔː(r)/ n. 商店
-                        
-                        **shop** /ʃɒp/ n. 商店；v. 逛商店
-                        
-                        **woman** /ˈwʊmən/ n. 女人 (pl. women)
-                        
-                        **celebrate** /ˈselɪbreɪt/ v. 庆祝；庆贺
-                        
-                        **surprise** /səˈpraɪz/ n. 惊奇；v. 使意外
-                        
-                        **meaningful** /ˈmiːnɪŋfl/ adj. 有意义的
-                        
-                        **wish** /wɪʃ/ n. & v. 愿望；希望
-                        
-                        **celebration** /ˌselɪˈbreɪʃn/ n. 庆祝活动
-                        
-                        **post** /pəʊst/ n. & v. 帖子；发布
-                        
-                        **contact** /ˈkɒntækt/ v. & n. 联系
-                        
-                        **symbol** /ˈsɪmbl/ n. 象征
-                        
-                        **village** /ˈvɪlɪdʒ/ n. 村庄
-                        
-                        **grow** /ɡrəʊ/ v. 生长；成长
+                        **wish** /w/ɪʃ/ v. & n. 希望；祝愿
                         
                         **blow** /bləʊ/ v. 吹
                         
-                        **enjoy** /ɪnˈdʒɔɪ/ v. 享受；喜爱
-                        
-                        **height** /haɪt/ n. 高度
-                        
-                        **later** /ˈleɪtə(r)/ adv. 后来；以后
-                        
-                        **noodles** /ˈnuːdlz/ n. 面条
-                        
-                        **open** /ˈəʊpən/ v. 打开
-                        
-                        **cake** /keɪk/ n. 蛋糕
-                        
-                        **song** /sɒŋ/ n. 歌曲
+                        **village** /ˈvɪlɪdʒ/ n. 村庄
                     """.trimIndent())
                 )
             )
