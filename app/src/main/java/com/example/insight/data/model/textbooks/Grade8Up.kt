@@ -16,823 +16,477 @@ object Grade8Up {
         coverImageUrl = "http://www.dzkbw.com/books/rjb/yingyu/sc8x_2024/coverbig.jpg",
         units = listOf(
             TextbookUnit(
-                "g8up_u1", "Unit 1", "Where did you go on vacation?",
+                "g8up_u1", "Unit 1", "Happy Holiday",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
                         *   **主题语境**：人与自我 —— 个人经历、旅游与休闲。
-                        *   **深层意义**：本单元聚焦于分享旅行见闻，引导学生记录生活、分享快乐。同时重点掌握复合不定代词的语法规律。
+                        *   **核心内容**：分享旅行见闻，记录假期生活。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **anyone** /ˈeniwʌn/ pron. 任何人
+                        **ancient** /ˈeɪnʃənt/ adj. 古代的；古老的
                         
-                        **anywhere** /ˈeniweə(r)/ adv. 在任何地方
+                        **camp** /kæmp/ n. & v. 度假营；露营
                         
-                        **wonderful** /ˈwʌndəfl/ adj. 精彩的；绝妙的
+                        **landscape** /ˈlændskeɪp/ n. 风景；景色
                         
-                        **few** /fjuː/ adj. & pron. 不多；很少
+                        **strange** /streɪndʒ/ adj. 奇怪的；陌生的
                         
-                        **quite a few** 相当多；不少
+                        **vacation** /vəˈkeɪʃn/ n. 假期；度假
                         
-                        **most** /məʊst/ adj. & adv. 最多；大多数
+                        **fantastic** /fænˈtæstɪk/ adj. 极好的；了不起的
                         
-                        **something** /ˈsʌmθɪŋ/ pron. 某事；某物
+                        **town** /taʊn/ n. 镇；商业区
                         
-                        **nothing** /ˈnʌθɪŋ/ pron. 没有什么；没有一件东西
+                        **breath** /breθ/ n. 呼吸的空气；一口气
                         
-                        **myself** /maɪˈself/ pron. 我自己；我本人
+                        **especially** /ɪˈspeʃəli/ adv. 尤其；特别
                         
-                        **everyone** /ˈevriwʌn/ pron. 每人；人人
+                        **anywhere** /ˈeniweə(r)/ adv. & pron. 在任何地方
                         
-                        **yourself** /jɔːˈself/ pron. 你自己；您自己
+                        **nothing** /ˈnʌθɪŋ/ pron. 没有任何东西
                         
-                        **hen** /hen/ n. 母鸡
+                        **guide** /ɡaɪd/ n. & v. 导游；指导
                         
-                        **pig** /pɪɡ/ n. 猪
+                        **scenery** /ˈsiːnəri/ n. 风景；景色
                         
-                        **seem** /siːm/ v. 好像；似乎
+                        **silk** /sɪlk/ n. 丝绸；丝
+                        
+                        **scarf** /skɑːf/ n. 围巾；披巾
+                        
+                        **ready** /ˈredi/ adj. 准备好的
+                        
+                        **somewhere** /ˈsʌmweə(r)/ adv. & pron. 在某处；某地
+                        
+                        **myself** /maɪˈself/ pron. 我自己
+                        
+                        **hotel** /həʊˈtel/ n. 旅馆；旅社
+                        
+                        **comfortable** /ˈkʌmftəbl/ adj. 舒适的；使人舒服的
                         
                         **bored** /bɔːd/ adj. 厌倦的；烦闷的
                         
-                        **someone** /ˈsʌmwʌn/ pron. 某人
+                        **sky** /skaɪ/ n. 天；天空
                         
-                        **diary** /ˈdaɪəri/ n. 日记；记事簿
+                        **towards** /təˈwɔːdz/ prep. 向；朝
                         
-                        **activity** /ækˈtɪvəti/ n. 活动
+                        **rainbow** /ˈreɪnbəʊ/ n. 虹；彩虹
                         
-                        **decide** /dɪˈsaɪd/ v. 决定；选定
-                        
-                        **try** /traɪ/ v. 尝试；设法
-                        
-                        **bird** /bɜːd/ n. 鸟
-                        
-                        **bicycle** /ˈbaɪsɪkl/ n. 自行车
-                        
-                        **building** /ˈbɪldɪŋ/ n. 建筑物；房子
-                        
-                        **trader** /ˈtreɪdə(r)/ n. 商人
-                        
-                        **wonder** /ˈwʌndə(r)/ v. 想知道；琢磨
-                        
-                        **difference** /ˈdɪfrəns/ n. 差别；差异
-                        
-                        **top** /tɒp/ n. 顶部；表面
-                        
-                        **wait** /weɪt/ v. 等待；等候
-                        
-                        **umbrella** /ʌmˈbrelə/ n. 伞；雨伞
-                        
-                        **wet** /wet/ adj. 湿的；潮湿的
-                        
-                        **below** /bɪˈlɒʊ/ prep. & adv. 在……下面
-                        
-                        **enough** /ɪˈnʌf/ adj. 足够的；充分的
-                        
-                        **hungry** /ˈhʌŋɡri/ adj. 极饿的
-                        
-                        **as** /əz/ adv. 像……一样；如同
-                        
-                        **hill** /hɪl/ n. 小山；山丘
-                        
-                        **duck** /dʌk/ n. 鸭
-                        
-                        **dislike** /dɪsˈlaɪk/ v. & n. 不喜爱；厌恶
+                        **square** /skweə(r)/ n. 广场 adj. 正方形的
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练 (中考标准)", """
-                        ### 核心语法：复合不定代词 (Compound Indefinite Pronouns)
-                        **1. 构成**：some/any/no/every + thing/body/one。
-                        **2. 形容词位置**：形容词修饰复合不定代词时，**必须后置**。
-                        - *something **special*** (特别的东西)。
+                    UnitDetailSection("⚙️ 语法精讲精练", """
+                        ### 核心语法：复合不定代词
+                        - *something special* (形容词后置)
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8up_u2", "Unit 2", "How often do you exercise?",
+                "g8up_u2", "Unit 2", "How do we communicate?",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        ### 1. 核心语境
-                        *   **主题语境**：人与自我 —— 生活方式与健康习惯。
+                        *   **主题语境**：人与社会 —— 沟通与交流。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **full** /fʊl/ adj. 忙的；满的
+                        
+                        **online** /ˌɒnˈlaɪn/ adj. & adv. 在线的；联网的
+                        
+                        **grade** /ɡreɪd/ n. 成绩等级；评分等级
+                        
+                        **hand** /hænd/ n. & v. 手；交，递
+                        
+                        **heart** /hɑːt/ n. 内心；心脏
+                        
+                        **information** /ˌɪnfəˈmeɪʃn/ n. 信息；消息
+                        
+                        **communicate** /kəˈmjuːnɪkeɪt/ v. 交流；沟通
+                        
+                        **communication** /kəˌmjuːnɪˈkeɪʃn/ n. 交流；通讯
+                        
+                        **message** /ˈmesɪdʒ/ n. 信息；消息
+                        
+                        **call** /kɔːl/ v. & n. 打电话；呼叫
+                        
+                        **text** /tekst/ n. & v. 正文；发短信
+                        
+                        **internet** /ˈɪntənet/ n. 因特网
+                        
+                        **social media** /ˌsəʊʃl ˈmiːdiə/ n. 社交媒体
+                        
+                        **better** /ˈbetə(r)/ adj. & adv. 更好的（地）
+                        
+                        **understand** /ˌʌndəˈstænd/ v. 理解；明白
+                        
+                        **difference** /ˈdɪfrəns/ n. 差别；差异
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u3", "Unit 3", "What can you do for your home?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 家庭责任。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
                         **housework** /ˈhaʊswɜːk/ n. 家务劳动
                         
-                        **hardly** /ˈhɑːdli/ adv. 几乎不；简直不
+                        **chore** /tʃɔː(r)/ n. 杂务；琐事
                         
-                        **ever** /ˈevə(r)/ adv. 在任何时候；从来
+                        **clean** /kliːn/ v. & adj. 打扫；干净的
                         
-                        **hardly ever** 几乎从不
+                        **sweep** /swɪp/ v. 扫；打扫
                         
-                        **once** /wʌns/ adv. 一次；曾经
+                        **floor** /flɔː(r)/ n. 地板；地面
                         
-                        **twice** /twaɪs/ adv. 两次；两倍
+                        **kitchen** /ˈkɪtʃɪn/ n. 厨房
                         
-                        **Internet** /ˈɪntənet/ n. 因特网
+                        **living room** /ˈlɪvɪŋ ruːm/ n. 客厅
                         
-                        **program** /ˈprəʊɡræm/ n. 节目
+                        **arrival** /əˈraɪvl/ n. 到达
                         
-                        **full** /fʊl/ adj. 忙的；满的
+                        **yet** /jet/ adv. 还；仍然
                         
-                        **swing** /swɪŋ/ n. & v. 摇摆；秋千
+                        **add** /æd/ v. 添加；加
                         
-                        **maybe** /ˈmeɪbi/ adv. 大概；也许
+                        **biscuit** /ˈbɪskɪt/ n. 饼干
                         
-                        **least** /liːst/ adv. 最小；最少
+                        **borrow** /ˈbɒrəʊ/ v. 借；借入
                         
-                        **at least** 至少；不少于
+                        **take notes** 短语 做笔记
                         
-                        **junk** /dʒʌŋk/ n. 无用的东西
+                        **clean up** 短语 打扫干净
                         
-                        **junk food** 垃圾食品
+                        **community** /kəˈmjuːnɪti/ n. 社区；社团
                         
-                        **coffee** /ˈkɒfi/ n. 咖啡
+                        **rubbish** /ˈrʌbɪʃ/ n. 垃圾
                         
-                        **health** /helθ/ n. 健康；身体状况
+                        **almost** /ˈɔːlməʊst/ adv. 差不多；几乎
                         
-                        **result** /rɪˈzʌlt/ n. 结果；后果
-                        
-                        **percent** /pəˈsent/ n. 百分之……
-                        
-                        **online** /ˌɒnˈlaɪn/ adj. & adv. 在线（的）
-                        
-                        **television** /ˈtelɪvɪʒn/ n. 电视机；电视节目
-                        
-                        **although** /ɔːlˈðəʊ/ conj. 虽然；尽管
-                        
-                        **through** /θruː/ prep. 穿过；凭借
-                        
-                        **mind** /maɪnd/ n. 头脑；心智
-                        
-                        **body** /ˈbɒdi/ n. 身体
-                        
-                        **such** /sʌtʃ/ adj. & pron. 这样的
-                        
-                        **such as** 例如
-                        
-                        **together** /təˈɡeðə(r)/ adv. 在一起；共同
-                        
-                        **die** /daɪ/ v. 消失；死亡
-                        
-                        **writer** /ˈraɪtə(r)/ n. 作者；作家
-                        
-                        **dentist** /ˈdentɪst/ n. 牙科医生
-                        
-                        **magazine** /ˌmæɡəˈziːn/ n. 杂志
-                        
-                        **however** /haʊˈevə(r)/ adv. 然而；可是
-                        
-                        **than** /ðæn/ conj. 比
-                        
-                        **more than** 多于
-                        
-                        **almost** /ˈɔːlməʊst/ adv. 几乎
-                        
-                        **none** /nʌn/ pron. 没有一个
-                        
-                        **less** /les/ adv. 较少；较小
-                        
-                        **less than** 少于
-                        
-                        **point** /pɔɪnt/ n. 得分；点
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：频度副词
-                        - 询问频率：统一用 **How often**。
+                        **journey** /ˈdʒɜːni/ n. & v. 旅行；历程
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8up_u3", "Unit 3", "I'm more outgoing than my sister.",
+                "g8up_u4", "Unit 4", "Nature's wonders",
                 listOf(
                     UnitDetailSection("🌍 单元主题深度透视", """
-                        *   **主题语境**：人与社会 —— 友谊。
+                        *   **主题语境**：人与自然 —— 自然奇观。
                     """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **outgoing** /ˈaʊtɡəʊɪŋ/ adj. 外向的
+                        **moss** /mɒs/ n. 苔藓
                         
-                        **better** /ˈbetə(r)/ adj. & adv. 更好的
+                        **redwood** /ˈredwʊd/ n. 红杉；红木
                         
-                        **loudly** /ˈlaʊdli/ adv. 大声地
+                        **cheetah** /ˈtʃiːtə/ n. 猎豹
                         
-                        **quietly** /ˈkwaɪətli/ adv. 轻声地
+                        **folding** /ˈfəʊldɪŋ/ adj. 折叠式的
                         
-                        **hard-working** /ˌhɑːd ˈwɜːkɪŋ/ adj. 工作努力的
+                        **bamboo** /bæmˈbuː/ n. 竹子
                         
-                        **competition** /ˌkɒmpəˈtɪʃn/ n. 比赛；竞争
+                        **popular** /ˈpɒpjələ(r)/ adj. 受欢迎的；流行的
                         
-                        **fantastic** /fænˈtæstɪk/ adj. 极好的
+                        **tool** /tuːl/ n. 工具；手段
                         
-                        **which** /wɪtʃ/ pron. & adj. 哪一个
+                        **actually** /ˈæktʃuəli/ adv. 实际上；居然
                         
-                        **clearly** /ˈklɪəli/ adv. 清楚地
+                        **shoot** /ʃuːt/ n. & v. 幼苗；射击
                         
-                        **win** /wɪn/ v. 获胜
+                        **appear** /əˈpɪə(r)/ v. 出现；呈现
                         
-                        **though** /ðəʊ/ conj. & adv. 虽然；不过
+                        **land** /lænd/ n. & v. 陆地；降落
                         
-                        **talented** /ˈtæləntɪd/ adj. 有天赋的
+                        **African** /ˈæfrɪkən/ adj. & n. 非洲的；非洲人
                         
-                        **truly** /ˈtruːli/ adv. 真正；确实
+                        **rose** /rəʊz/ n. 玫瑰；蔷薇
                         
-                        **care** /keə(r)/ v. 在意；担忧
+                        **peony** /ˈpiːəni/ n. 牡丹；芍药
                         
-                        **care about** 关心；在意
+                        **lotus** /ˈləʊtəs/ n. 莲花
                         
-                        **serious** /ˈsɪəriəs/ adj. 严肃的
+                        **butterfly** /ˈbʌtəflaɪ/ n. 蝴蝶
                         
-                        **mirror** /ˈmɪrə(r)/ n. 镜子
+                        **wing** /wɪŋ/ n. 翅膀；翼
                         
-                        **kid** /kɪd/ n. 小孩
+                        **frog** /frɒɡ/ n. 青蛙
                         
-                        **as long as** 只要
+                        **weigh** /weɪ/ v. 有……重；称重
                         
-                        **necessary** /ˈnesəsəri/ adj. 必要的
+                        **kg** /ˌkiːləʊˈɡræm/ n. 千克；公斤
                         
-                        **both** /bəʊθ/ adj. & pron. 两个都
+                        **ginkgo** /ˈɡɪŋkɡəʊ/ n. 银杏
                         
-                        **bring out** 使显现
+                        **province** /ˈprɒvɪns/ n. 省份
                         
-                        **grade** /ɡreɪd/ n. 成绩
+                        **connect** /kəˈnekt/ v. 连接；关联
                         
-                        **should** /ʃʊd/ modal v. 应该
+                        **without** /wɪˈðaʊt/ prep. 没有；缺乏
                         
-                        **saying** /ˈseɪɪŋ/ n. 谚语；格言
-                        
-                        **reach** /riːtʃ/ v. 伸手；到达
-                        
-                        **hand** /hænd/ n. 手
-                        
-                        **touch** /tʌtʃ/ v. 感动；触摸
-                        
-                        **heart** /hɑːt/ n. 内心；心脏
-                        
-                        **fact** /fækt/ n. 事实
-                        
-                        **in fact** 事实上
-                        
-                        **break** /break/ v. 打碎；折断
-                        
-                        **arm** /ɑːm/ n. 手臂
-                        
-                        **share** /ʃeə(r)/ v. 分享
-                        
-                        **loud** /laʊd/ adj. 响亮的
-                        
-                        **similar** /ˈsɪmələ(r)/ adj. 相像的
-                        
-                        **be similar to** 与……相像
+                        **imagine** /ɪˈmædʒɪn/ v. 想象；猜想
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u5", "Unit 5", "What a Delicious Meal!",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 饮食文化。
                     """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：比较级
-                        - 变y为i加er：*funny -> funnier*。
-                        - 多音节加 more：*more outgoing*。
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8up_u4", "Unit 4", "What's the best movie theater?",
-                listOf(
                     UnitDetailSection("📖 课本同步单词表", """
-                        **theater** /ˈθɪətə(r)/ n. 剧场；电影院
+                        **honey** /ˈhʌni/ n. 蜂蜜
                         
-                        **comfortable** /ˈkʌmftəbl/ adj. 舒服的
+                        **disappointed** /ˌdɪsəˈpɔɪntɪd/ adj. 失望的；沮丧的
                         
-                        **seat** /siːt/ n. 座位
+                        **connection** /kəˈnekʃn/ n. 联系；连接
                         
-                        **screen** /skriːn/ n. 屏幕
+                        **pollination** /ˌpɒləˈneɪʃn/ n. 授粉
                         
-                        **close** /kləʊs/ adj. 近的
+                        **pollen** /ˈpɒlən/ n. 花粉
                         
-                        **ticket** /ˈtɪkɪt/ n. 票
+                        **action** /ˈækʃn/ n. 行动；行为
                         
-                        **worst** /wɜːst/ adj. & adv. 最坏的
-                        
-                        **cheaply** /ˈtʃiːpli/ adv. 便宜地
-                        
-                        **song** /sɒŋ/ n. 歌曲
-                        
-                        **choose** /tʃuːz/ v. 选择
-                        
-                        **carefully** /ˈkeəfəli/ adv. 细致地
-                        
-                        **reporter** /rɪˈpɔːtə(r)/ n. 记者
-                        
-                        **fresh** /freʃ/ adj. 新鲜的
-                        
-                        **comfortably** /ˈkʌmftəbli/ adv. 舒适地
-                        
-                        **worse** /wɜːs/ adj. & adv. 更坏的
-                        
-                        **service** /ˈsɜːvɪs/ n. 服务
-                        
-                        **pretty** /ˈprɪti/ adv. 相当
-                        
-                        **menu** /ˈmenjuː/ n. 菜单
-                        
-                        **act** /ækt/ v. 表演
-                        
-                        **meal** /miːl/ n. 晚餐
-                        
-                        **creative** /kriˈeɪtɪv/ adj. 有创造力的
-                        
-                        **performer** /pəˈfɔːmə(r)/ n. 表演者
-                        
-                        **talent** /ˈtælənt/ n. 天资
-                        
-                        **common** /ˈkɒmən/ adj. 常见的
-                        
-                        **magician** /məˈdʒɪʃn/ n. 魔术师
-                        
-                        **all kinds of** 各种各样的
-                        
-                        **beautifully** /ˈbjuːtɪfli/ adv. 美丽地
-                        
-                        **role** /rəʊl/ n. 角色
-                        
-                        **play a role** 发挥作用
-                        
-                        **winner** /ˈwɪnə(r)/ n. 获胜者
-                        
-                        **prize** /praɪz/ n. 奖品
-                        
-                        **everybody** /ˈevribɒdi/ pron. 每人
-                        
-                        **make up** 编造
-                        
-                        **example** /ɪɡˈzɑːmpl/ n. 例子
-                        
-                        **for example** 例如
-                        
-                        **poor** /pɔː(r)/ adj. 贫穷的
-                        
-                        **seriously** /ˈsɪəriəsli/ adv. 严重地
-                        
-                        **give** /ɡɪv/ v. 给
-                        
-                        **crowded** /ˈkraʊdɪd/ adj. 拥挤的
-                    """.trimIndent()),
-                    UnitDetailSection("⚙️ 语法精讲精练", """
-                        ### 核心语法：最高级
-                        - the + adj.est / most + adj.
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8up_u5", "Unit 5", "Do you want to watch a game show?",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **sitcom** /ˈsɪtkɒm/ n. 情景喜剧
-                        
-                        **news** /njuːz/ n. 新闻
-                        
-                        **soap** /səʊp/ n. 肥皂
-                        
-                        **soap opera** 肥皂剧
-                        
-                        **educational** /ˌedʒuˈkeɪʃənl/ adj. 教育的
-                        
-                        **plan** /plæn/ v. & n. 计划
-                        
-                        **hope** /həʊp/ v. & n. 希望
-                        
-                        **discussion** /dɪˈskʌʃn/ n. 讨论
-                        
-                        **stand** /stænd/ v. 忍受
-                        
-                        **happen** /ˈæpən/ v. 发生
-                        
-                        **may** /meɪ/ modal v. 也许
-                        
-                        **expect** /ɪkˈspekt/ v. 期待
-                        
-                        **joke** /dʒəʊk/ n. 玩笑
-                        
-                        **comedy** /ˈkɒmədi/ n. 喜剧
-                        
-                        **meaningless** /ˈmiːnɪŋləs/ adj. 毫无意义的
-                        
-                        **action** /ˈækʃn/ n. 行动
-                        
-                        **action movie** 动作片
-                        
-                        **cartoon** /kɑːˈtuːn/ n. 动画片
-                        
-                        **culture** /ˈkʌltʃə(r)/ n. 文化
-                        
-                        **famous** /ˈfeɪməs/ adj. 著名的
-                        
-                        **appear** /əˈpɪə(r)/ v. 出现
-                        
-                        **become** /bɪˈkʌm/ v. 变成
-                        
-                        **rich** /rɪtʃ/ adj. 富有的
-                        
-                        **successful** /səkˈsesfl/ adj. 成功的
-                        
-                        **might** /maɪt/ modal v. 可能
-                        
-                        **main** /meɪn/ adj. 主要的
-                        
-                        **reason** /ˈriːzn/ n. 原因
-                        
-                        **film** /fɪlm/ n. 电影
-                        
-                        **unlucky** /ʌnˈlʌki/ adj. 不幸的
-                        
-                        **lose** /luːz/ v. 丢失
-                        
-                        **ready** /ˈredi/ adj. 愿意的
-                        
-                        **be ready to** 准备好
-                        
-                        **character** /ˈkærəktə(r)/ n. 人物
-                        
-                        **simple** /ˈsɪmpl/ adj. 简单的
-                        
-                        **dress up** 装扮
-                        
-                        **take sb's place** 代替
-                        
-                        **army** /ˈɑːmi/ n. 军队
-                        
-                        **do a good job** 工作出色
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8up_u6", "Unit 6", "I'm going to study computer science.",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **doctor** /ˈdɒktə(r)/ n. 医生
-                        
-                        **engineer** /ˌendʒɪˈnɪə(r)/ n. 工程师
-                        
-                        **violinist** /ˌvaɪəˈlɪnɪst/ n. 小提琴手
-                        
-                        **pilot** /ˈpaɪlət/ n. 飞行员
-                        
-                        **pianist** /ˈpɪənɪst/ n. 钢琴家
-                        
-                        **scientist** /ˈsaɪəntɪst/ n. 科学家
-                        
-                        **college** /ˈkɒlɪdʒ/ n. 学院
-                        
-                        **education** /ˌedʒuˈkeɪʃn/ n. 教育
-                        
-                        **medicine** /ˈmedsn/ n. 药
-                        
-                        **university** /ˌjuːnɪˈvɜːsəti/ n. 大学
-                        
-                        **article** /ˈɑːtɪkl/ n. 文章
-                        
-                        **send** /send/ v. 邮寄
-                        
-                        **resolution** /ˌrezəˈluːʃn/ n. 决心
-                        
-                        **team** /tiːm/ n. 队
-                        
-                        **foreign** /ˈfɒrən/ adj. 外国的
-                        
-                        **able** /ˈeɪbl/ adj. 能够
-                        
-                        **be able to** 能够
-                        
-                        **question** /ˈkwestʃən/ v. 提问
-                        
-                        **meaning** /ˈmiːnɪŋ/ n. 意义
-                        
-                        **discuss** /dɪˈskʌs/ v. 讨论
-                        
-                        **promise** /ˈprɒmɪs/ v. & n. 承诺
-                        
-                        **beginning** /bɪˈɡɪn/ n. 开头
-                        
-                        **at the beginning of** 在……开始
-                        
-                        **improve** /ɪmˈpruːv/ v. 改进
-                        
-                        **physical** /ˈfɪzɪkl/ adj. 身体的
-                        
-                        **self-improvement** /ˌself ɪmˈpruːvmənt/ n. 自我改进
-                        
-                        **hobby** /ˈhɒbi/ n. 业余爱好
-                        
-                        **own** /əʊn/ adj. 自己的
-                        
-                        **personal** /ˈpɜːsənl/ adj. 个人的
-                        
-                        **relationship** /rɪˈleɪʃnʃɪp/ n. 关系
-                    """.trimIndent())
-                )
-            ),
-            TextbookUnit(
-                "g8up_u7", "Unit 7", "Will people have robots?",
-                listOf(
-                    UnitDetailSection("📖 课本同步单词表", """
-                        **paper** /ˈpeɪpə(r)/ n. 纸
-                        
-                        **pollution** /pəˈluːʃn/ n. 污染
-                        
-                        **prediction** /prɪˈdɪkʃn/ n. 预测
-                        
-                        **future** /ˈfjuːtʃə(r)/ n. 将来
-                        
-                        **pollute** /pəˈluːt/ v. 污染
-                        
-                        **environment** /ɪnˈvaɪrənmənt/ n. 环境
+                        **percent** /pəˈsent/ n. & adj. 百分之……
                         
                         **planet** /ˈplænɪt/ n. 行星
                         
-                        **earth** /ɜːθ/ n. 地球
+                        **store** /stɔː(r)/ v. & n. 储存；商店
                         
-                        **plant** /plɑːnt/ v. 种植
+                        **delicious** /dɪˈlɪʃəs/ adj. 美味的
                         
-                        **part** /pɑːt/ n. 部分
+                        **meal** /miːl/ n. 早（或午、晚）餐
                         
-                        **play a part** 参与
+                        **cooking** /ˈkʊkɪŋ/ n. 烹饪；厨艺
                         
-                        **peace** /piːs/ n. 和平
+                        **food** /fuːd/ n. 食物
                         
-                        **sea** /siː/ n. 海
+                        **recipe** /ˈresəpi/ n. 食谱
                         
-                        **build** /bɪld/ v. 建筑
-                        
-                        **sky** /skaɪ/ n. 天空
-                        
-                        **astronaut** /ˈæstrənɔːt/ n. 宇航员
-                        
-                        **apartment** /əˈpɑːtmənt/ n. 公寓
-                        
-                        **rocket** /ˈrɒkɪt/ n. 火箭
-                        
-                        **space** /speɪs/ n. 太空
-                        
-                        **space station** 太空站
-                        
-                        **human** /ˈhjuːmən/ adj. 人的
-                        
-                        **servant** /ˈsɜːvənt/ n. 仆人
-                        
-                        **dangerous** /ˈdeɪndʒərəs/ adj. 危险的
-                        
-                        **already** /ɔːlˈredi/ adv. 已经
-                        
-                        **factory** /ˈfæktri/ n. 工厂
-                        
-                        **believe** /bɪˈliːv/ v. 相信
-                        
-                        **disagree** /ˌdɪsəˈɡriː/ v. 不同意
-                        
-                        **even** /ˈiːvn/ adv. 甚至
-                        
-                        **agree** /əˈɡriː/ v. 同意
-                        
-                        **shape** /ʃeɪp/ n. 形状
-                        
-                        **fall** /fɔːl/ v. 倒塌
-                        
-                        **fall down** 突然倒下
-                        
-                        **inside** /ˌinˈsaɪd/ adv. 在里面
-                        
-                        **possible** /ˈpɒsəbl/ adj. 可能的
-                        
-                        **impossible** /ɪmˈpɒsəbl/ adj. 不可能的
-                        
-                        **side** /saɪd/ n. 一方
-                        
-                        **probably** /ˈprɒbəbli/ adv. 很可能
-                        
-                        **during** /ˈdjʊərɪŋ/ prep. 在……期间
-                        
-                        **holiday** /ˈɒlədeɪ/ n. 假期
-                        
-                        **word** /wɜːd/ n. 单词
+                        **ingredient** /ɪnˈɡriːdiənt/ n. 原料；成分
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8up_u8", "Unit 8", "How do you make a banana milk shake?",
+                "g8up_u6", "Unit 6", "Plan for Yourself",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自我 —— 个人规划与未来理想。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **shake** /ʃeɪk/ n. & v. 摇动
+                        **yourself** /jɔːˈself/ pron. 你自己
                         
-                        **milk shake** 奶昔
+                        **yourselves** /jɔːˈselvz/ pron. 你们自己
                         
-                        **blender** /ˈblendə(r)/ n. 搅拌机
+                        **engineer** /ˌendʒɪˈnɪə(r)/ n. 工程师
                         
-                        **turn on** 打开
+                        **fashion** /ˈfæʃn/ n. 时尚；流行样式
                         
-                        **peel** /piːl/ v. 剥皮
+                        **designer** /dɪˈzaɪnə(r)/ n. 设计者；设计家
                         
-                        **pour** /pɔː(r)/ v. 倒出
+                        **director** /dəˈrektə(r)/ n. 导演；部门负责人
                         
-                        **yogurt** /ˈjɒɡət/ n. 酸奶
+                        **musician** /mjuˈzɪʃn/ n. 音乐家
                         
-                        **honey** /ˈhʌni/ n. 蜂蜜
+                        **intelligence** /ɪnˈtelɪdʒəns/ n. 智力；才智
                         
-                        **watermelon** /ˈwɔːtəmelən/ n. 西瓜
+                        **essay** /ˈeseɪ/ n. 文章；短文
                         
-                        **spoon** /spuːn/ n. 勺
+                        **classic** /ˈklæsɪk/ adj. & n. 经典的；经典著作
                         
-                        **pot** /pɒt/ n. 锅
+                        **literature** /ˈlɪtrətʃə(r)/ n. 文学
                         
-                        **add** /æd/ v. 增加
+                        **athlete** /ˈæθliːt/ n. 运动员
                         
-                        **finally** /ˈfaɪnəli/ adv. 最后
+                        **fireman** /ˈfaɪəmən/ n. 消防员
                         
-                        **salt** /sɔːlt/ n. 盐
+                        **photographer** /fəˈtɒɡrəfə(r)/ n. 摄影师
                         
-                        **sugar** /ˈʃʊɡə(r)/ n. 糖
+                        **painter** /ˈpeɪntə(r)/ n. 画家
                         
-                        **cheese** /tʃiːz/ n. 奶酪
+                        **businessman** /ˈbɪznəsmæn/ n. 商人
                         
-                        **popcorn** /ˈpɒpkɔːn/ n. 爆米花
+                        **actress** /ˈæktrəs/ n. 女演员
                         
-                        **corn** /kɔːn/ n. 玉米
+                        **lawyer** /ˈlɔːjə(r)/ n. 律师
                         
-                        **machine** /məˈʃiːn/ n. 机器
+                        **law** /lɔː/ n. 法律
                         
-                        **dig** /dɪɡ/ v. 掘
+                        **miss** /mɪs/ v. 错过；思念
                         
-                        **hole** /həʊl/ n. 洞
+                        **able** /ˈeɪbl/ adj. 能够；有能力的
                         
-                        **sandwich** /ˈsænwɪtʃ/ n. 三明治
+                        **stick** /stɪk/ v. 坚持；粘贴
                         
-                        **butter** /ˈbʌtə(r)/ n. 黄油
+                        **achieve** /əˈtʃiːv/ v. 达到；完成
                         
-                        **turkey** /ˈtɜːki/ n. 火鸡
+                        **confident** /ˈkɒnfɪdənt/ adj. 自信的
                         
-                        **lettuce** /ˈletɪs/ n. 生菜
+                        **organized** /ˈɔːɡənaɪzd/ adj. 有组织的；有条理的
                         
-                        **piece** /piːs/ n. 片
+                        **wisely** /ˈwaɪzli/ adv. 明智地
                         
-                        **traditional** /trəˈdɪʃənl/ adj. 传统的
+                        **paragraph** /ˈpærəɡrɑːf/ n. 段落
                         
-                        **autumn** /ˈɔːtəm/ n. 秋天
+                        **fail** /feɪl/ v. 失败；不及格
                         
-                        **traveler** /ˈtrævələ(r)/ n. 旅行者
+                        **introduce** /ˌɪntrəˈdjuːs/ v. 介绍
                         
-                        **celebrate** /ˈselɪbreɪt/ v. 庆祝
+                        **meaning** /ˈmiːnɪŋ/ n. 意义；意思
                         
-                        **mix** /mɪks/ v. 混合
+                        **relationship** /rɪˈleɪʃnʃɪp/ n. 关系
                         
-                        **pepper** /ˈpepə(r)/ n. 胡椒
-                        
-                        **fill** /fɪl/ v. 充满
-                        
-                        **oven** /ˈʌvn/ n. 烤箱
-                        
-                        **plate** /pleɪt/ n. 盘子
-                        
-                        **cover** /ˈkʌvə(r)/ v. 覆盖
-                        
-                        **gravy** /ˈɡreɪvi/ n. 肉汁
-                        
-                        **serve** /sɜːv/ v. 服务
-                        
-                        **temperature** /ˈtemprətʃə(r)/ n. 温度
+                        **energetic** /ˌenəˈdʒetɪk/ adj. 精力充沛的
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8up_u9", "Unit 9", "Can you come to my party?",
+                "g8up_u7", "Unit 7", "How do we communicate?",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 沟通与交流。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **prepare** /prɪˈpeə(r)/ v. 准备
+                        **communicate** /kəˈmjuːnɪkeɪt/ v. 交流；沟通
                         
-                        **prepare for** 为……做准备
+                        **communication** /kəˌmjuːnɪˈkeɪʃn/ n. 交流；通讯
                         
-                        **exam** /ɪɡˈzæm/ n. 考试
+                        **message** /ˈmesɪdʒ/ n. 信息；消息
                         
-                        **flu** /fluː/ n. 流感
+                        **social** /ˈsəʊʃl/ adj. 社会的；社交的
                         
-                        **available** /əˈveɪləbl/ adj. 有空的
+                        **media** /ˈmiːdiə/ n. 媒体
                         
-                        **until** /ənˈtɪl/ conj. & prep. 直到
+                        **smartphone** /ˈsmɑːtfəʊn/ n. 智能手机
                         
-                        **hang** /hæŋ/ v. 悬挂
+                        **app** /æp/ n. 应用程序
                         
-                        **hang out** 闲逛
+                        **online** /ˌɒnˈlaɪn/ adj. & adv. 在线的；联网地
                         
-                        **catch** /ætʃ/ v. 抓住
+                        **connect** /kəˈnekt/ v. 连接；与……建立联系
                         
-                        **invite** /ɪnˈvaɪt/ v. 邀请
+                        **express** /ɪkˈspres/ v. 表达；表示
+                        
+                        **feeling** /ˈfiːlɪŋ/ n. 感觉；情感
+                        
+                        **opinion** /əˈpɪnjən/ n. 意见；看法
+                        
+                        **gesture** /ˈdʒestʃə(r)/ n. 手势；姿态
+                        
+                        **body language** n. 身势语；肢体语言
+                        
+                        **face-to-face** adj. & adv. 面对面的
+                        
+                        **misunderstand** /ˌmɪsʌndəˈstænd/ v. 误解；误会
+                        
+                        **polite** /pəˈlaɪt/ adj. 有礼貌的
+                        
+                        **reply** /rɪˈply/ v. & n. 回答；答复
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u8", "Unit 8", "How do we understand differences?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 文化差异与尊重。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **difference** /ˈdɪfrəns/ n. 差异；不同
+                        
+                        **different** /ˈdɪfrənt/ adj. 不同的
+                        
+                        **culture** /ˈkʌltʃə(r)/ n. 文化
+                        
+                        **custom** /ˈkʌstəm/ n. 风俗；习惯
+                        
+                        **tradition** /trəˈdɪʃn/ n. 传统
+                        
+                        **respect** /rɪˈspekt/ v. & n. 尊重；敬重
                         
                         **accept** /əkˈsept/ v. 接受
                         
-                        **refuse** /rɪˈfjuːz/ v. 拒绝
+                        **similar** /ˈsɪmələ(r)/ adj. 相似的
                         
-                        **invitation** /ˌɪnvɪˈteɪʃn/ n. 邀请
+                        **background** /ˈbækɡraʊnd/ n. 背景
                         
-                        **reply** /rɪˈplaɪ/ v. & n. 回答
+                        **experience** /ɪkˈspɪəriəns/ n. & v. 经验；经历
                         
-                        **forward** /ˈfɔːwəd/ v. 转寄
+                        **understand** /ˌʌndəˈstænd/ v. 理解；懂
                         
-                        **delete** /dɪˈliːt/ v. 删除
+                        **valuable** /ˈvæljuəbl/ adj. 有价值的
                         
-                        **print** /prɪnt/ v. 打印
+                        **unique** /juˈniːk/ adj. 唯一的；独特的
                         
-                        **sad** /sæd/ adj. 悲伤的
-                        
-                        **goodbye** /ˌɡʊdˈbaɪ/ interj. & n. 再见
-                        
-                        **take a trip** 去旅行
-                        
-                        **glad** /ɡlæd/ adj. 高兴的
-                        
-                        **preparation** /ˌprepəˈreɪʃn/ n. 准备
-                        
-                        **glue** /ɡluː/ n. 胶水
-                        
-                        **without** /wɪˈðəʊt/ prep. 没有
-                        
-                        **surprised** /səˈpraɪzd/ adj. 惊奇的
-                        
-                        **look forward to** 盼望
-                        
-                        **hear from** 接到……的信
-                        
-                        **housewarming** /ˈhaʊswɔːmɪŋ/ n. 乔迁宴
-                        
-                        **opening** /ˈəʊpnɪŋ/ n. 开幕式
-                        
-                        **concert** /ˈkɒnsət/ n. 音乐会
-                        
-                        **headmaster** /ˌhedˈmɑːstə(r)/ n. 校长
-                        
-                        **event** /ɪˈvent/ n. 大事
-                        
-                        **guest** /ɡest/ n. 客人
-                        
-                        **calendar** /ˈælɪndə(r)/ n. 日历
+                        **diverse** /daɪˈvɜːs/ adj. 多样的；不同的
                     """.trimIndent())
                 )
             ),
             TextbookUnit(
-                "g8up_u10", "Unit 10", "If you go to the party, you'll have a great time!",
+                "g8up_u9", "Unit 9", "How do we help others?",
                 listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与社会 —— 志愿服务与帮助他人。
+                    """.trimIndent()),
                     UnitDetailSection("📖 课本同步单词表", """
-                        **meeting** /ˈmiːtɪŋ/ n. 会议
+                        **volunteer** /ˌvɒlənˈtɪə(r)/ v. & n. 自愿；志愿者
                         
-                        **video** /ˈvɪdiəʊ/ n. 视频
+                        **community** /kəˈmjuːnɪti/ n. 社区；社团
                         
-                        **organize** /ˈɔːɡənaɪz/ v. 组织
+                        **service** /ˈsɜːvɪs/ n. 服务
                         
-                        **potato chips** 炸土豆片
+                        **charity** /ˈtʃærəti/ n. 慈善机构
                         
-                        **chocolate** /ˈtʃɒklət/ n. 巧克力
+                        **donation** /dəʊˈneɪʃn/ n. 捐赠；捐款
                         
-                        **upset** /ʌpˈset/ adj. 难过的
+                        **support** /səˈpɔːt/ v. & n. 支持；帮助
                         
-                        **taxi** /ˈtæksi/ n. 出租车
+                        **kindness** /ˈkaɪndnəs/ n. 仁慈；善良
                         
-                        **advice** /ədˈvaɪs/ n. 建议
+                        **generous** /ˈdʒenərəs/ adj. 慷慨的；大方的
                         
-                        **travel** /ˈtrævl/ v. & n. 旅行
+                        **helpful** /ˈhelpfl/ adj. 有帮助的
                         
-                        **agent** /ˈeɪdʒənt/ n. 代理人
+                        **care** /keə(r)/ v. & n. 照顾；关怀
                         
-                        **expert** /ˈekspɜːt/ n. 专家
+                        **homeless** /ˈhəʊmləs/ adj. 无家可归的
                         
-                        **keep to oneself** 保守秘密
+                        **disabled** /dɪsˈeɪbld/ adj. 有残疾的
                         
-                        **teenager** /ˈtiːneɪdʒə(r)/ n. 青少年
+                        **encourage** /ɪnˈkʌrɪdʒ/ v. 鼓励
+                    """.trimIndent())
+                )
+            ),
+            TextbookUnit(
+                "g8up_u10", "Unit 10", "How do we protect the environment?",
+                listOf(
+                    UnitDetailSection("🌍 单元主题深度透视", """
+                        *   **主题语境**：人与自然 —— 环境保护。
+                    """.trimIndent()),
+                    UnitDetailSection("📖 课本同步单词表", """
+                        **environment** /ɪnˈvaɪrənmənt/ n. 环境
                         
-                        **normal** /ˈnɔːml/ adj. 正常的
+                        **protect** /pəˈtekt/ v. 保护
                         
-                        **unless** /ənˈles/ conj. 除非
+                        **protection** /pəˈtekʃn/ n. 保护
                         
-                        **certainly** /ˈsɜːtnli/ adv. 无疑
+                        **pollution** /pəˈluːʃn/ n. 污染
                         
-                        **wallet** /ˈwɒlɪt/ n. 钱包
+                        **recycle** /ˌriːˈsaɪkl/ v. 回收利用
                         
-                        **mile** /maɪl/ n. 英里
+                        **waste** /weɪst/ n. & v. 浪费；废料
                         
-                        **angry** /ˈæŋɡri/ adj. 发怒的
+                        **plastic** /ˈplæstɪk/ n. & adj. 塑料（的）
                         
-                        **understanding** /ˌʌndəˈstændɪŋ/ adj. 善解人意的
+                        **energy** /ˈenədʒi/ n. 能量；能源
                         
-                        **careless** /ˈkeələs/ adj. 粗心的
+                        **nature** /ˈneɪtʃə(r)/ n. 自然
                         
-                        **mistake** /mɪˈsteɪk/ n. 错误
+                        **wildlife** /ˈwaɪldlaɪf/ n. 野生动物
                         
-                        **himself** /hɪmˈself/ pron. 他自己
+                        **reduce** /rɪˈdjuːs/ v. 减少
                         
-                        **careful** /ˈkeəfl/ adj. 小心的
+                        **reuse** /ˌriːˈjuːz/ v. 再次使用
                         
-                        **advise** /ədˈvaɪs/ v. 建议
+                        **earth** /ɜːθ/ n. 地球；大地
                         
-                        **solve** /sɒlv/ v. 解决
-                        
-                        **step** /step/ n. 步骤
-                        
-                        **trust** /trʌst/ v. 相信
-                        
-                        **experience** /ɪkˈspɪəriəns/ n. 经验
-                        
-                        **halfway** /ˌhɑːfˈweɪ/ adj. 中途的
-                        
-                        **else** /els/ adv. 别的
+                        **global warming** n. 全球变暖
                     """.trimIndent())
                 )
             )
