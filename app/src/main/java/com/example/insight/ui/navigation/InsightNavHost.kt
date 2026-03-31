@@ -219,6 +219,11 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                     viewModel.onImageCaptured(bitmap)
                     navController.navigate(Route.Solution.path)
                 },
+                onTextCaptured = { text ->
+                    // 方案 A：直接将 OCR 结果传给 ViewModel 进行 AI 优化
+                    viewModel.onTextCaptured(text)
+                    navController.navigate(Route.Solution.path)
+                },
                 onError = { /* Handle error */ },
                 preferences = uiState.preferences
             )

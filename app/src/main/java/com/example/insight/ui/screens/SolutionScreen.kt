@@ -46,10 +46,20 @@ fun SolutionScreen(
     val primaryColor = MaterialTheme.colorScheme.primary
     val selectedStudent = students.find { it.studentId == selectedStudentId }
 
-    // Auto-scroll when AI is streaming
+    // Smart Auto-scroll: Only scroll if user is already near bottom or hasn't scrolled manually
     LaunchedEffect(aiOutput) {
         if (isStreaming && aiOutput.isNotBlank()) {
-            scrollState.animateScrollToItem(scrollState.layoutInfo.totalItemsCount - 1)
+            val layoutInfo = scrollState.layoutInfo
+            val visibleItemsInfo = layoutInfo.visibleItemsInfo
+            if (visibleItemsInfo.isNotEmpty()) {
+                val lastVisibleItemIndex = visibleItemsInfo.last().index
+                val totalItemsCount = layoutInfo.totalItemsCount
+                
+                // If the last visible item is close to the end (e.g., within 2 items), auto-scroll
+                if (lastVisibleItemIndex >= totalItemsCount - 3) {
+                    scrollState.animateScrollToItem(totalItemsCount - 1)
+                }
+            }
         }
     }
 

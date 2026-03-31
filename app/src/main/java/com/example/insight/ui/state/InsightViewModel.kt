@@ -323,18 +323,34 @@ class InsightViewModel @Inject constructor(
                 return@launch
             }
 
+            // 方案 A：针对 OCR 乱序和识别错误的专用 Prompt
+            val systemPrompt = """
+                你是一位资深的英语教育专家。
+                以下文字是通过 OCR 识别出的原始文本，可能存在：
+                1. 识别错误（如 'I' 识别为 'l'，'0' 识别为 'O'）。
+                2. 换行混乱或单词断开。
+                3. 手写体导致的逻辑不连贯。
+                
+                请你执行以下操作：
+                - 修正拼写错误并还原正确的排版。
+                - 识别内容类型（如：试题、笔记、教案）。
+                - 如果是题目，请给出详细的解析和知识点。
+                - 如果是教案，请按“教学目标、重点、流程”进行结构化输出。
+                - 严禁输出多余的解释，直接输出修正后的 Markdown 内容。
+            """.trimIndent()
+
             try {
                 deepSeekRepository.streamChat(
                     apiKey,
                     listOf(
-                        DeepSeekMessage("system", "你是一位资深的英语老师。请详细解析以下内容，指出考点和解题思路。使用 Markdown 格式。"),
-                        DeepSeekMessage("user", text)
+                        DeepSeekMessage("system", systemPrompt),
+                        DeepSeekMessage("user", "这是识别出的原始文本：\n$text")
                     )
                 ).collect { chunk ->
                     _aiOutput.value += chunk
                 }
             } catch (e: Exception) {
-                _aiOutput.value = "分析出错: ${e.message}"
+                _aiOutput.value = "AI 分析出错: ${e.message}"
             } finally {
                 _uiState.update { it.copy(isStreaming = false) }
             }

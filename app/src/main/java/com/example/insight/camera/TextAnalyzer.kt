@@ -9,7 +9,8 @@ import com.google.mlkit.vision.text.TextRecognizer
 import javax.inject.Inject
 
 class TextAnalyzer @Inject constructor(
-    private val recognizer: TextRecognizer
+    private val recognizer: TextRecognizer,
+    private val onTextDetected: (String) -> Unit
 ) : ImageAnalysis.Analyzer {
 
     @ExperimentalGetImage
@@ -18,8 +19,10 @@ class TextAnalyzer @Inject constructor(
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             recognizer.process(image)
-                .addOnSuccessListener { _ ->
-                    // Logic to handle detected text could be passed via callback or shared state
+                .addOnSuccessListener { visionText ->
+                    if (visionText.text.isNotBlank()) {
+                        onTextDetected(visionText.text)
+                    }
                 }
                 .addOnFailureListener { e ->
                     Log.e("TextAnalyzer", "Text recognition failed", e)
