@@ -756,7 +756,12 @@ fun HistoryCardByPoint(
     val currentStatus = preferences.knowledgeStatuses[point.id] ?: com.example.insight.ui.state.KnowledgeStatus.PRACTICING
     
     Card(
-        modifier = modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer { 
+                clip = true
+            }
+            .hapticClickable(preferences) { onClick() }, 
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), 
         shape = RoundedCornerShape(20.dp)

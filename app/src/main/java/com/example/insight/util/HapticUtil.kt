@@ -12,8 +12,12 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.runtime.remember
+
 /**
- * 支持震感反馈的点击修饰符
+ * 支持震感反馈的高性能点击修饰符
  */
 fun Modifier.hapticClickable(
     preferences: UserPreferences,
@@ -21,9 +25,12 @@ fun Modifier.hapticClickable(
     onClick: () -> Unit
 ): Modifier = composed {
     val context = LocalContext.current
+    val interactionSource = remember { MutableInteractionSource() }
     
     this.clickable(
         enabled = enabled,
+        interactionSource = interactionSource,
+        indication = rememberRipple(),
         onClick = {
             if (preferences.hapticEnabled) {
                 performVibration(context, preferences.hapticIntensity)
