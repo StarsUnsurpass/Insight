@@ -1,5 +1,9 @@
 package com.example.insight.data.model
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+
+@Immutable
 data class ExampleProblem(
     val question: String,
     val options: List<String>,
@@ -7,6 +11,7 @@ data class ExampleProblem(
     val explanation: String
 )
 
+@Immutable
 data class PastExamQuestion(
     val year: String,
     val location: String,
@@ -18,17 +23,20 @@ data class PastExamQuestion(
     val translation: String? = null
 )
 
+@Immutable
 data class HighlightedSentence(
     val text: String,
     val analysis: String
 )
 
+@Immutable
 data class TextbookParagraph(
     val content: String,
     val highlightedSentences: List<HighlightedSentence>,
     val source: String
 )
 
+@Immutable
 data class ExampleSentence(
     val english: String,
     val chinese: String,
@@ -36,17 +44,20 @@ data class ExampleSentence(
     val difficulty: String = "中考难度"
 )
 
+@Immutable
 data class RelatedPoint(
     val title: String,
     val description: String,
     val connectionReason: String
 )
 
+@Immutable
 data class TeachingNote(
     val title: String,
     val content: String
 )
 
+@Stable
 data class KnowledgePoint(
     val id: String,
     val section: String,
