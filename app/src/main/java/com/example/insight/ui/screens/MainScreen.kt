@@ -120,7 +120,6 @@ fun MainScreen(
     var selectedTab by rememberSaveable { mutableStateOf(InsightTab.Home) }
     var isDockVisible by remember { mutableStateOf(true) }
     var isRevealing by remember { mutableStateOf(false) }
-    var isInitialized by remember { mutableStateOf(false) }
 
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
@@ -430,6 +429,11 @@ fun HomeTab(
         dailyQuotes[dayOfYear % dailyQuotes.size]
     }
 
+    // Pre-group knowledge points to avoid O(N) filtering during scroll
+    val groupedPoints = remember {
+        KnowledgeProvider.allPoints.groupBy { it.section }
+    }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -573,7 +577,8 @@ fun HomeTab(
                     }
 
                     if (isExpanded) {
-                        val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                        // Use pre-grouped points for O(1) access
+                        val sectionPoints = groupedPoints[sectionName] ?: emptyList()
                         items(
                             items = sectionPoints,
                             key = { "point_${it.id}" }
@@ -752,40 +757,77 @@ fun HistoryCardByPoint(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
     val currentStatus = preferences.knowledgeStatuses[point.id] ?: com.example.insight.ui.state.KnowledgeStatus.PRACTICING
     
+    // Aesthetic Color Mapping based on section - Cached for performance
+    val (iconColor, bgColor) = remember(point.section) {
+        when {
+            point.section.contains("词法") -> Color(0xFF007AFF) to Color(0xFF007AFF).copy(alpha = 0.12f)
+            point.section.contains("时态") || point.section.contains("语态") -> Color(0xFF34C759) to Color(0xFF34C759).copy(alpha = 0.12f)
+            point.section.contains("句法") -> Color(0xFF5856D6) to Color(0xFF5856D6).copy(alpha = 0.12f)
+            else -> Color(0xFFFF9500) to Color(0xFFFF9500).copy(alpha = 0.12f)
+        }
+    }
+    
+    val icon = remember(point.id, point.title) { getPointIcon(point.id, point.title) }
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .graphicsLayer { 
                 clip = true
+                shape = RoundedCornerShape(20.dp)
             }
             .hapticClickable(preferences) { onClick() }, 
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), 
-        shape = RoundedCornerShape(20.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
-                modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant), 
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(bgColor), 
                 contentAlignment = Alignment.Center
             ) {
-                Icon(getPointIcon(point.id, point.title), null, tint = primaryColor.copy(alpha = 0.5f))
+                Icon(
+                    imageVector = icon, 
+                    contentDescription = null, 
+                    tint = iconColor,
+                    modifier = Modifier.size(28.dp)
+                )
             }
             Spacer(modifier = Modifier.width(16.dp))
-            Column {
-                Text(point.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-                Text(cleanedDescription, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = point.title, 
+                    style = MaterialTheme.typography.titleSmall, 
+                    fontWeight = FontWeight.Bold, 
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1
+                )
+                Text(
+                    text = cleanedDescription, 
+                    style = MaterialTheme.typography.labelSmall, 
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), 
+                    maxLines = 1, 
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
                 Spacer(modifier = Modifier.height(8.dp))
+                
+                val statusColor = when(currentStatus) { 
+                    com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> Color(0xFF34C759)
+                    com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> Color(0xFF007AFF)
+                    com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color(0xFFFF3B30) 
+                }
+
                 Surface(
-                    color = when(currentStatus) { 
-                        com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> primaryColor.copy(alpha = 0.1f)
-                        com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
-                        com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color.Red.copy(alpha = 0.05f) 
-                    }, 
+                    color = statusColor.copy(alpha = 0.1f), 
                     shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.clickable {
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
                         val nextStatus = when(currentStatus) {
                             com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW
                             com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> com.example.insight.ui.state.KnowledgeStatus.COMPLETED
@@ -798,14 +840,17 @@ fun HistoryCardByPoint(
                         text = currentStatus.label, 
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), 
                         style = MaterialTheme.typography.labelSmall, 
-                        color = when(currentStatus) { 
-                            com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> primaryColor
-                            com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> MaterialTheme.colorScheme.secondary
-                            com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color.Red 
-                        }
+                        color = statusColor,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }
@@ -848,7 +893,7 @@ fun StudentRankCard(student: com.example.insight.data.local.entities.StudentEnti
             Column(modifier = Modifier.weight(1f)) {
                 Text(student.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 LinearProgressIndicator(
-                    progress = student.latestScore / 100f,
+                    progress = { student.latestScore / 100f },
                     modifier = Modifier.fillMaxWidth(0.7f).height(4.dp).clip(CircleShape),
                     color = primaryColor,
                     trackColor = primaryColor.copy(alpha = 0.1f)
@@ -1197,25 +1242,50 @@ fun SearchResultItemData(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
     val snippet = getSnippet(point, query)
     
+    // Aesthetic Color Mapping
+    val (iconColor, bgColor) = remember(point.section) {
+        when {
+            point.section.contains("词法") -> Color(0xFF007AFF) to Color(0xFF007AFF).copy(alpha = 0.12f)
+            point.section.contains("时态") || point.section.contains("语态") -> Color(0xFF34C759) to Color(0xFF34C759).copy(alpha = 0.12f)
+            point.section.contains("句法") -> Color(0xFF5856D6) to Color(0xFF5856D6).copy(alpha = 0.12f)
+            else -> Color(0xFFFF9500) to Color(0xFFFF9500).copy(alpha = 0.12f)
+        }
+    }
+
     Card(
-        modifier = modifier.fillMaxWidth().hapticClickable(preferences) { onClick() },
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer { clip = true }
+            .hapticClickable(preferences) { onClick() },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(getPointIcon(point.id, point.title), contentDescription = null, tint = primaryColor, modifier = Modifier.size(20.dp))
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(bgColor),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = getPointIcon(point.id, point.title), 
+                        contentDescription = null, 
+                        tint = iconColor, 
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
                 Spacer(modifier = Modifier.width(12.dp))
                 HighlightedText(
                     text = point.title, 
                     keyword = query, 
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), 
                     color = MaterialTheme.colorScheme.onSurface,
-                    highlightColor = primaryColor
+                    highlightColor = iconColor
                 )
             }
             Spacer(modifier = Modifier.height(12.dp))
@@ -1224,7 +1294,7 @@ fun SearchResultItemData(
                 keyword = query,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                highlightColor = primaryColor,
+                highlightColor = iconColor.copy(alpha = 0.2f),
                 maxLines = 3,
                 overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )

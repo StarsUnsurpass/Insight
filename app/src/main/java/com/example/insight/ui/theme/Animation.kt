@@ -13,28 +13,28 @@ import androidx.compose.ui.unit.dp
  */
 object InsightAnimation {
     
-    // 基础的 iOS 丝滑弹簧 (高阻尼，适中刚度)
+    // 基础的 iOS 丝滑弹簧 (高阻尼，适中刚度) - 调优版
     val IosSpring = spring<Float>(
-        dampingRatio = 0.82f,
-        stiffness = 380f
+        dampingRatio = 0.85f,
+        stiffness = 320f
     )
 
     // Dp 类型的 iOS 弹簧
     val IosDpSpring = spring<Dp>(
-        dampingRatio = 0.82f,
-        stiffness = 380f
+        dampingRatio = 0.85f,
+        stiffness = 320f
     )
 
     // 偏移量类型的 iOS 弹簧
     val IosOffsetSpring = spring<IntOffset>(
-        dampingRatio = 0.82f,
-        stiffness = 380f
+        dampingRatio = 0.85f,
+        stiffness = 320f
     )
 
     // 更有弹性的动画 (中阻尼，低刚度)
     val BouncySpring = spring<Float>(
-        dampingRatio = 0.65f,
-        stiffness = 180f
+        dampingRatio = 0.7f,
+        stiffness = 150f
     )
 
     // 快速响应的弹簧
