@@ -771,21 +771,21 @@ fun HistoryCardByPoint(
     
     val icon = remember(point.id, point.title) { getPointIcon(point.id, point.title) }
 
-    // Use a lightweight Box instead of Card to avoid expensive shadow calculations during fast scroll
+    val cardShape = remember { RoundedCornerShape(20.dp) }
     Box(
         modifier = modifier
             .fillMaxWidth()
             .graphicsLayer { 
                 clip = true
-                shape = RoundedCornerShape(20.dp)
+                shape = cardShape
             }
             .background(MaterialTheme.colorScheme.surface)
             .border(
                 width = 1.dp, 
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), 
-                shape = RoundedCornerShape(20.dp)
+                shape = cardShape
             )
-            .hapticClickable(preferences) { onClick() }
+            .hapticClickable(preferences, shape = cardShape) { onClick() }
             .padding(12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

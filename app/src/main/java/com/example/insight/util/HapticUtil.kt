@@ -15,22 +15,27 @@ import android.os.VibratorManager
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 
 /**
- * 支持震感反馈的高性能点击修饰符
+ * 支持震感反馈的高性能点击修饰符，自动处理形状裁剪和涟漪范围
  */
 fun Modifier.hapticClickable(
     preferences: UserPreferences,
     enabled: Boolean = true,
+    shape: Shape? = null,
     onClick: () -> Unit
 ): Modifier = composed {
     val context = LocalContext.current
     val interactionSource = remember { MutableInteractionSource() }
     
-    this.clickable(
+    val baseModifier = if (shape != null) this.clip(shape) else this
+    
+    baseModifier.clickable(
         enabled = enabled,
         interactionSource = interactionSource,
-        indication = rememberRipple(),
+        indication = rememberRipple(bounded = true),
         onClick = {
             if (preferences.hapticEnabled) {
                 performVibration(context, preferences.hapticIntensity)

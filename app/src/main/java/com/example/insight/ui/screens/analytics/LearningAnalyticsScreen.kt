@@ -85,7 +85,7 @@ fun LearningAnalyticsScreen(
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Row(modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Text(state.selectedClass, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(preferences.className, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                             Icon(Icons.Default.ArrowDropDown, null, modifier = Modifier.size(16.dp))
                         }
                     }
@@ -107,7 +107,7 @@ fun LearningAnalyticsScreen(
                 if (viewType == AnalyticsViewType.CLASS) {
                     ClassOverviewSection(state, preferences, onNavigateToDetail)
                 } else {
-                    IndividualDiagnosisSection(state, preferences, onSelectStudent, onNavigateToDetail)
+                    IndividualDiagnosisSection(state, preferences, preferences.className, onSelectStudent, onNavigateToDetail)
                 }
             }
         }
@@ -122,6 +122,7 @@ fun ClassOverviewSection(
 ) {
     val context = LocalContext.current
     val totalStudents = state.studentList.size
+    val className = preferences.className
     
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -135,7 +136,7 @@ fun ClassOverviewSection(
                     Text("班级状态全景舱", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     TextButton(onClick = {
                         triggerHaptic(preferences, context)
-                        val report = StringBuilder("【${state.selectedClass} 班级群像深度报告】\n\n")
+                        val report = StringBuilder("【$className 班级群像深度报告】\n\n")
                         report.append("● 班级人数：${totalStudents}人\n")
                         report.append("● 平均得分：${state.classVitals.classHealthScore}分\n")
                         report.append("● 作业完成率：${(state.classVitals.yesterdayCompletionRate * 100).toInt()}%\n")
@@ -458,6 +459,7 @@ fun ScoreDistributionChart(distribution: List<ScoreStageCount>) {
 fun IndividualDiagnosisSection(
     state: AnalyticsState, 
     preferences: UserPreferences,
+    className: String,
     onSelectStudent: (String) -> Unit,
     onNavigateToDetail: (String, String) -> Unit
 ) {
@@ -650,10 +652,13 @@ fun TeacherDualTab(selectedView: AnalyticsViewType, onViewChange: (AnalyticsView
 }
 
 @Composable
-fun VitalsCard(label: String, value: String, icon: ImageVector, color: Color, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun VitalsCard(preferences: UserPreferences, label: String, value: String, icon: ImageVector, color: Color, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val cardShape = remember { RoundedCornerShape(20.dp) }
     Card(
-        modifier = modifier.height(100.dp).clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
+        modifier = modifier
+            .height(100.dp)
+            .hapticClickable(preferences, shape = cardShape, onClick = onClick),
+        shape = cardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
