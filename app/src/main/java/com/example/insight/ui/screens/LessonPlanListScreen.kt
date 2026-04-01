@@ -22,10 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.insight.data.local.entities.LessonPlanEntity
 import com.example.insight.ui.theme.SageGreen
+import com.example.insight.ui.theme.InsightAnimation
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.compose.foundation.ExperimentalFoundationApi
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun LessonPlanListScreen(
     plans: List<LessonPlanEntity>,
@@ -73,11 +75,15 @@ fun LessonPlanListScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items(plans) { plan ->
+                items(
+                    items = plans,
+                    key = { it.planId }
+                ) { plan ->
                     LessonPlanCard(
                         plan = plan,
                         onClick = { onPlanClick(plan.planId) },
-                        onDelete = { onDeletePlan(plan) }
+                        onDelete = { onDeletePlan(plan) },
+                        modifier = Modifier.animateItemPlacement(animationSpec = InsightAnimation.IosOffsetSpring)
                     )
                 }
             }
@@ -89,12 +95,13 @@ fun LessonPlanListScreen(
 fun LessonPlanCard(
     plan: LessonPlanEntity,
     onClick: () -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val dateFormat = remember { SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()) }
     
     Card(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
+        modifier = modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),

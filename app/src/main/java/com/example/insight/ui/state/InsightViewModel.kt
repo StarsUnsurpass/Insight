@@ -323,38 +323,73 @@ class InsightViewModel @Inject constructor(
                 return@launch
             }
 
-            // 方案 A：针对 OCR 乱序和识别错误的专用 Prompt
             val systemPrompt = """
-                你是一位资深的英语教育专家。
-                以下文字是通过 OCR 识别出的原始文本，可能存在：
-                1. 识别错误（如 'I' 识别为 'l'，'0' 识别为 'O'）。
-                2. 换行混乱或单词断开。
-                3. 手写体导致的逻辑不连贯。
+                你是一位具备联网搜索能力的英语教育专家。
                 
-                请你执行以下操作：
-                - 修正拼写错误并还原正确的排版。
-                - 识别内容类型（如：试题、笔记、教案）。
-                - 如果是题目，请给出详细的解析和知识点。
-                - 如果是教案，请按“教学目标、重点、流程”进行结构化输出。
-                - 严禁输出多余的解释，直接输出修正后的 Markdown 内容。
+                【核心任务】
+                1. **题目出处检索**：
+                   - 请在你的知识库中检索该题目的确切来源（例如：2023年江苏省中考英语真题、2024年北京海淀区模拟考）。
+                   - 如果是阅读/完形，请还原全文，并标注文章的题材（如：科技说明文、人物传记）。
+                   - **严禁输出思考过程**，直接以“【题目出处】”开头。
+                2. **解析与答案**：
+                   - 给出标准答案并进行深度逻辑拆解。
+                3. **知识点关联**：
+                   - 请从以下标准分类中选择最相关的 2-3 个考点关键词：[时态, 从句, 非谓语, 词义辨析, 介词, 代词, 连词, 逻辑推理]。
+                   - 在输出末尾，以“TAGS: [关键词1, 关键词2]”的格式展示。
+
+                请直接输出 Markdown，确保结构如下：
+                # 题目解析报告
+                > **出处：** [搜索到的确切来源]
+                
+                ### 完整题目还原
+                [原文及选项]
+                
+                ### 深度解析
+                [逻辑分析]
+                
+                ### 精确考点
+                - [具体考点名称]
+                
+                TAGS: [关键词1, 关键词2]
             """.trimIndent()
 
             try {
+                var fullResponse = ""
                 deepSeekRepository.streamChat(
                     apiKey,
                     listOf(
                         DeepSeekMessage("system", systemPrompt),
-                        DeepSeekMessage("user", "这是识别出的原始文本：\n$text")
+                        DeepSeekMessage("user", "识别出的文本：\n$text")
                     )
                 ).collect { chunk ->
-                    _aiOutput.value += chunk
+                    fullResponse += chunk
+                    _aiOutput.value = fullResponse
                 }
+
+                // 自动匹配本地知识点
+                val tags = extractTags(fullResponse)
+                val matchedPoints = com.example.insight.data.model.KnowledgeProvider.allPoints.filter { point ->
+                    tags.any { tag -> point.title.contains(tag) || tag.contains(point.title) }
+                }
+                
+                _uiState.update { it.copy(
+                    screen = (it.screen as? ScreenState.Solution)?.copy(
+                        concepts = matchedPoints.map { p -> p.title }
+                    ) ?: it.screen
+                ) }
+
             } catch (e: Exception) {
                 _aiOutput.value = "AI 分析出错: ${e.message}"
             } finally {
                 _uiState.update { it.copy(isStreaming = false) }
             }
         }
+    }
+
+    private fun extractTags(text: String): List<String> {
+        val regex = Regex("TAGS: \\[(.*?)\\]")
+        val match = regex.find(text)
+        return match?.groupValues?.get(1)?.split(",")?.map { it.trim() } ?: emptyList()
     }
 
     fun generateWeeklyReport() {

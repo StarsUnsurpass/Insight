@@ -38,6 +38,7 @@ fun SolutionScreen(
     selectedStudentId: String?,
     onBack: () -> Unit,
     onShowGraph: () -> Unit,
+    onNavigateToKnowledge: (String) -> Unit,
     onGenerateSimilar: (String) -> Unit,
     onStudentSelected: (String) -> Unit
 ) {
@@ -45,19 +46,21 @@ fun SolutionScreen(
     var showStudentPicker by remember { mutableStateOf(false) }
     val primaryColor = MaterialTheme.colorScheme.primary
     val selectedStudent = students.find { it.studentId == selectedStudentId }
+    val allKnowledgePoints = remember { com.example.insight.data.model.KnowledgeProvider.allPoints }
 
-    // Smart Auto-scroll: Only scroll if user is already near bottom or hasn't scrolled manually
+    // Optimized Auto-scroll: Eliminate jittering by using scrollToItem and detecting user touch
+    val isUserScrolling = scrollState.isScrollInProgress
     LaunchedEffect(aiOutput) {
-        if (isStreaming && aiOutput.isNotBlank()) {
+        if (isStreaming && aiOutput.isNotBlank() && !isUserScrolling) {
             val layoutInfo = scrollState.layoutInfo
             val visibleItemsInfo = layoutInfo.visibleItemsInfo
             if (visibleItemsInfo.isNotEmpty()) {
                 val lastVisibleItemIndex = visibleItemsInfo.last().index
                 val totalItemsCount = layoutInfo.totalItemsCount
                 
-                // If the last visible item is close to the end (e.g., within 2 items), auto-scroll
-                if (lastVisibleItemIndex >= totalItemsCount - 3) {
-                    scrollState.animateScrollToItem(totalItemsCount - 1)
+                // Only snap to bottom if we are already close to the end
+                if (lastVisibleItemIndex >= totalItemsCount - 2) {
+                    scrollState.scrollToItem(totalItemsCount - 1)
                 }
             }
         }
@@ -149,7 +152,7 @@ fun SolutionScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = null, tint = SageGreen, modifier = Modifier.size(20.dp))
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("解析结果", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
+                            Text("深度解析报告", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
                             if (isStreaming) {
                                 Spacer(modifier = Modifier.width(8.dp))
                                 CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 2.dp)
@@ -164,7 +167,7 @@ fun SolutionScreen(
                                 .padding(16.dp)
                         ) {
                             MarkdownText(
-                                markdown = if (aiOutput.isNotBlank()) aiOutput else "正在深度思考中...",
+                                markdown = if (aiOutput.isNotBlank()) aiOutput else "正在联网检索题目出处...",
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
@@ -198,54 +201,43 @@ fun SolutionScreen(
                     }
                 }
 
-                // Module 4: Knowledge Tags
-                item {
-                    Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
-                        Text("关联知识点", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(12.dp))
-                        FlowRow(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            concepts.forEach { concept ->
-                                Surface(
-                                    color = MaterialTheme.colorScheme.surfaceVariant,
-                                    shape = RoundedCornerShape(12.dp),
-                                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
-                                ) {
-                                    Text(
-                                        text = concept,
-                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                                        style = MaterialTheme.typography.labelMedium,
-                                        color = primaryColor
-                                    )
-                                }
+                // Module 4: Interactive Knowledge Tags
+                if (concepts.isNotEmpty()) {
+                    item {
+                        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Default.Link, null, tint = SageGreen, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("联动星图考点", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
                             }
-                        }
-                    }
-                }
-
-                // Module 4: Knowledge Tags
-                item {
-                    Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
-                        Text("关联知识点", style = MaterialTheme.typography.labelMedium, color = SageGreen, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(12.dp))
-                        FlowRow(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            concepts.forEach { concept ->
-                                Surface(
-                                    color = MaterialTheme.colorScheme.surfaceVariant,
-                                    shape = RoundedCornerShape(12.dp),
-                                    border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.1f))
-                                ) {
-                                    Text(
-                                        text = concept,
-                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                                        style = MaterialTheme.typography.labelMedium,
-                                        color = primaryColor
-                                    )
+                            Spacer(modifier = Modifier.height(12.dp))
+                            FlowRow(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                concepts.forEach { conceptName ->
+                                    val point = allKnowledgePoints.find { it.title.contains(conceptName) || conceptName.contains(it.title) }
+                                    Surface(
+                                        onClick = { point?.let { onNavigateToKnowledge(it.id) } },
+                                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                                        shape = RoundedCornerShape(12.dp),
+                                        border = BorderStroke(1.dp, primaryColor.copy(alpha = 0.2f))
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Text(
+                                                text = conceptName,
+                                                style = MaterialTheme.typography.labelMedium,
+                                                color = primaryColor
+                                            )
+                                            if (point != null) {
+                                                Icon(Icons.Default.OpenInNew, null, modifier = Modifier.size(12.dp).padding(start = 4.dp), tint = primaryColor)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -271,28 +263,28 @@ fun SolutionScreen(
                 }
             }
         }
-    }
 
-    if (showStudentPicker) {
-        ModalBottomSheet(onDismissRequest = { showStudentPicker = false }) {
-            LazyColumn(modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)) {
-                item {
-                    Text("选择归属学生", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold)
-                }
-                items(students) { student ->
-                    ListItem(
-                        headlineContent = { Text(student.name) },
-                        supportingContent = { Text(student.className) },
-                        leadingContent = {
-                            Box(modifier = Modifier.size(32.dp).clip(CircleShape).background(SageGreen.copy(alpha = 0.2f)), contentAlignment = Alignment.Center) {
-                                Text(student.name.take(1), style = MaterialTheme.typography.labelSmall, color = SageGreen)
+        if (showStudentPicker) {
+            ModalBottomSheet(onDismissRequest = { showStudentPicker = false }) {
+                LazyColumn(modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)) {
+                    item {
+                        Text("选择归属学生", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold)
+                    }
+                    items(students) { student ->
+                        ListItem(
+                            headlineContent = { Text(student.name) },
+                            supportingContent = { Text(student.className) },
+                            leadingContent = {
+                                Box(modifier = Modifier.size(32.dp).clip(CircleShape).background(SageGreen.copy(alpha = 0.2f)), contentAlignment = Alignment.Center) {
+                                    Text(student.name.take(1), style = MaterialTheme.typography.labelSmall, color = SageGreen)
+                                }
+                            },
+                            modifier = Modifier.clickable {
+                                onStudentSelected(student.studentId)
+                                showStudentPicker = false
                             }
-                        },
-                        modifier = Modifier.clickable {
-                            onStudentSelected(student.studentId)
-                            showStudentPicker = false
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }

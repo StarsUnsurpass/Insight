@@ -26,9 +26,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.insight.data.local.entities.StudentEntity
 import com.example.insight.ui.theme.SageGreen
+import com.example.insight.ui.theme.InsightAnimation
 import com.example.insight.util.StudentImporter
+import androidx.compose.foundation.ExperimentalFoundationApi
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun StudentListScreen(
     students: List<StudentEntity>,
@@ -42,7 +44,9 @@ fun StudentListScreen(
     var showHelpDialog by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
     
-    val filteredStudents = students.filter { it.name.contains(searchQuery, ignoreCase = true) }
+    val filteredStudents = remember(students, searchQuery) {
+        students.filter { it.name.contains(searchQuery, ignoreCase = true) }
+    }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -120,8 +124,15 @@ fun StudentListScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items(filteredStudents) { student ->
-                    StudentCard(student = student, onClick = { onStudentClick(student.studentId) })
+                items(
+                    items = filteredStudents,
+                    key = { it.studentId }
+                ) { student ->
+                    StudentCard(
+                        student = student, 
+                        onClick = { onStudentClick(student.studentId) },
+                        modifier = Modifier.animateItemPlacement(animationSpec = InsightAnimation.IosOffsetSpring)
+                    )
                 }
             }
         }
@@ -164,9 +175,9 @@ fun ImportHelpDialog(onDismiss: () -> Unit) {
 }
 
 @Composable
-fun StudentCard(student: StudentEntity, onClick: () -> Unit) {
+fun StudentCard(student: StudentEntity, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),

@@ -248,6 +248,9 @@ fun InsightNavHost(viewModel: InsightViewModel) {
                     onShowGraph = {
                         navController.navigate(Route.Starfield.path)
                     },
+                    onNavigateToKnowledge = { nodeId ->
+                        navController.navigate(Route.KnowledgeDetail.createRoute(nodeId))
+                    },
                     onGenerateSimilar = { viewModel.generateSimilarQuestions(it) },
                     onStudentSelected = { viewModel.setCurrentScanStudent(it) }
                 )

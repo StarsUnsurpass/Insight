@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -76,6 +77,7 @@ import com.example.insight.data.model.KnowledgeProvider
 import kotlin.collections.*
 import coil.compose.AsyncImage
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.ExperimentalFoundationApi
 
 
 enum class InsightTab(
@@ -123,9 +125,10 @@ fun MainScreen(
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                if (available.y < -12f && !isRevealing && isDockVisible) {
+                // Threshold sensitivity adjustment for smoother dock visibility toggle
+                if (available.y < -15f && isDockVisible) {
                     isDockVisible = false
-                } else if (available.y > 12f && !isRevealing && !isDockVisible) {
+                } else if (available.y > 15f && !isDockVisible) {
                     isDockVisible = true
                 }
                 return Offset.Zero
@@ -133,93 +136,124 @@ fun MainScreen(
         }
     }
 
-    val dockBounceY = remember { Animatable(0f) }
-    LaunchedEffect(selectedTab) {
-        if (isInitialized) {
-            launch {
-                dockBounceY.animateTo(-10f, spring(stiffness = Spring.StiffnessMediumLow))
-                dockBounceY.animateTo(0f, spring(dampingRatio = 0.65f, stiffness = Spring.StiffnessLow))
-            }
-        } else {
-            isInitialized = true
+    // Use derivedStateOf to prevent excessive recompositions during scroll
+    val isDockActuallyVisible by remember { derivedStateOf { isDockVisible } }
+
+    val dockTranslationY by animateFloatAsState(
+        targetValue = if (isDockActuallyVisible) 0f else 180f,
+        animationSpec = spring(dampingRatio = 0.85f, stiffness = 400f),
+        label = "dock_translation"
+    )
+
+    val dockAlpha by animateFloatAsState(
+        targetValue = if (isDockActuallyVisible) 1f else 0f,
+        animationSpec = tween(300),
+        label = "dock_alpha"
+    )
+
+    // Move dockWidth to a more stable state
+    val targetDockWidth = if (isDockActuallyVisible) 340.dp else 72.dp
+    val dockWidth by animateDpAsState(
+        targetValue = targetDockWidth,
+        animationSpec = InsightAnimation.IosDpSpring,
+        label = "dock_width"
+    )
+
+    // Stable lambdas
+    val onTabSelectedLambda = remember { { tab: InsightTab -> selectedTab = tab } }
+    val onCameraClickLambda = remember {
+        {
+            triggerHaptic(preferences, context)
+            isRevealing = true
         }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
-            Box(modifier = Modifier.fillMaxSize().nestedScroll(nestedScrollConnection)) {
-                Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-                    AnimatedContent(
-                        targetState = selectedTab,
-                        transitionSpec = {
-                            (scaleIn(initialScale = 0.85f, animationSpec = tween(300, easing = FastOutSlowInEasing)) + 
-                             fadeIn(animationSpec = tween(300)))
-                            .togetherWith(
-                             scaleOut(targetScale = 1.15f, animationSpec = tween(300, easing = FastOutSlowInEasing)) + 
-                             fadeOut(animationSpec = tween(300)))
-                        },
-                        label = "tab_transition"
-                    ) { targetTab ->
-                        when (targetTab) {
-                            InsightTab.Home -> HomeTab(
-                                preferences = preferences, 
-                                searchQuery = searchQuery,
-                                filteredResults = filteredResults,
-                                cleanedDescriptions = viewModel.cleanedDescriptions,
-                                onSearchQueryChange = { viewModel.updateSearchQuery(it) },
-                                onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail,
-                                onNavigateToTextbookDetail = onNavigateToTextbookDetail,
-                                onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
-                            )
-                            InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
-                            InsightTab.Analysis -> LearningAnalyticsScreen(
-                                state = analyticsState,
-                                preferences = preferences,
-                                onViewChange = { analyticsViewModel.updateView(it) },
-                                onNavigateToDetail = onNavigateToAnalyticsDetail,
-                                onSelectStudent = { analyticsViewModel.selectStudent(it) }
-                            )
-                            InsightTab.Profile -> ProfileTab(
-                                preferences = preferences,
-                                studentCount = uiState.students.size,
-                                lessonPlanCount = uiState.lessonPlans.size,
-                                onManageStudents = onNavigateToStudentList,
-                                onManageLessonPlans = onNavigateToLessonPlans,
-                                onNavigateToMindMap = onNavigateToMindMap,
-                                onNavigateToSchedule = onNavigateToSchedule,
-                                onNavigateToSettings = onNavigateToSettings,
-                                onNavigateToExport = onNavigateToExport,
-                                onNavigateToCourseware = onNavigateToCourseware,
-                                onNavigateToLessonPlanSample = onNavigateToLessonPlanSample
-                            )
+            // Use a separate Box for content to isolate scroll connection
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .nestedScroll(nestedScrollConnection)
+                    .padding(innerPadding)
+            ) {
+                // Content Layer - Wrapped in remember to skip recomposition when dock animates
+                val currentTabContent = remember(selectedTab, searchQuery, filteredResults, uiState) {
+                    movableContentOf {
+                        AnimatedContent(
+                            targetState = selectedTab,
+                            transitionSpec = {
+                                (scaleIn(initialScale = 0.95f, animationSpec = InsightAnimation.IosSpring) + 
+                                 fadeIn(animationSpec = InsightAnimation.IosSpring))
+                                .togetherWith(
+                                 scaleOut(targetScale = 1.05f, animationSpec = InsightAnimation.IosSpring) + 
+                                 fadeOut(animationSpec = InsightAnimation.IosSpring))
+                            },
+                            label = "tab_transition"
+                        ) { targetTab ->
+                            when (targetTab) {
+                                InsightTab.Home -> HomeTab(
+                                    preferences = preferences, 
+                                    searchQuery = searchQuery,
+                                    filteredResults = filteredResults,
+                                    cleanedDescriptions = viewModel.cleanedDescriptions,
+                                    onSearchQueryChange = { viewModel.updateSearchQuery(it) },
+                                    onNavigateToKnowledgeDetail = onNavigateToKnowledgeDetail,
+                                    onNavigateToTextbookDetail = onNavigateToTextbookDetail,
+                                    onUpdateStatus = { id, status -> viewModel.updateKnowledgeStatus(id, status) }
+                                )
+                                InsightTab.Map -> MapTab(preferences, onNavigateToKnowledgeDetail)
+                                InsightTab.Analysis -> LearningAnalyticsScreen(
+                                    state = analyticsState,
+                                    preferences = preferences,
+                                    onViewChange = { analyticsViewModel.updateView(it) },
+                                    onNavigateToDetail = onNavigateToAnalyticsDetail,
+                                    onSelectStudent = { analyticsViewModel.selectStudent(it) }
+                                )
+                                InsightTab.Profile -> ProfileTab(
+                                    preferences = preferences,
+                                    studentCount = uiState.students.size,
+                                    lessonPlanCount = uiState.lessonPlans.size,
+                                    onManageStudents = onNavigateToStudentList,
+                                    onManageLessonPlans = onNavigateToLessonPlans,
+                                    onNavigateToMindMap = onNavigateToMindMap,
+                                    onNavigateToSchedule = onNavigateToSchedule,
+                                    onNavigateToSettings = onNavigateToSettings,
+                                    onNavigateToExport = onNavigateToExport,
+                                    onNavigateToCourseware = onNavigateToCourseware,
+                                    onNavigateToLessonPlanSample = onNavigateToLessonPlanSample
+                                )
+                            }
                         }
                     }
                 }
+                
+                currentTabContent()
+            }
 
-                val dockWidth by animateDpAsState(
-                    targetValue = if (isDockVisible) 340.dp else 72.dp,
-                    animationSpec = spring(dampingRatio = 0.75f, stiffness = 50f),
-                    label = "dock_width"
-                )
-
+            // Dock Layer - Hardware accelerated via graphicsLayer
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 32.dp),
+                contentAlignment = Alignment.BottomCenter
+            ) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 32.dp)
+                        .graphicsLayer { 
+                            translationY = dockTranslationY
+                            alpha = dockAlpha
+                        }
                         .width(dockWidth)
                         .height(72.dp)
-                        .graphicsLayer { translationY = dockBounceY.value }
                 ) {
                     GooeyDockContent(
                         selectedTab = selectedTab,
-                        isVisible = isDockVisible,
+                        isVisible = isDockActuallyVisible,
                         currentDockWidth = dockWidth,
                         preferences = preferences,
-                        onTabSelected = { selectedTab = it },
-                        onCameraClick = { 
-                            triggerHaptic(preferences, context)
-                            isRevealing = true 
-                        }
+                        onTabSelected = onTabSelectedLambda,
+                        onCameraClick = onCameraClickLambda
                     )
                 }
             }
@@ -365,6 +399,7 @@ enum class HomeMode(val label: String) {
     TEXTBOOK_SYNC("教材同步")
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeTab(
     preferences: UserPreferences, 
@@ -381,6 +416,19 @@ fun HomeTab(
     var currentMode by rememberSaveable { mutableStateOf(HomeMode.EXAM_NETWORK) }
 
     val focusManager = androidx.compose.ui.platform.LocalFocusManager.current
+    
+    // Remember static/rarely changing values to avoid recalculation during scroll
+    val todayQuote = remember {
+        val calendar = java.util.Calendar.getInstance()
+        val dayOfYear = calendar.get(java.util.Calendar.DAY_OF_YEAR)
+        val dailyQuotes = listOf(
+            "Education is the most powerful weapon which you can use to change the world.",
+            "The roots of education are bitter, but the fruit is sweet.",
+            "A teacher affects eternity; he can never tell where his influence stops.",
+            "I hear and I forget. I see and I remember. I do and I understand."
+        )
+        dailyQuotes[dayOfYear % dailyQuotes.size]
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -393,19 +441,7 @@ fun HomeTab(
         contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 120.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item {
-            val calendar = java.util.Calendar.getInstance()
-            val dayOfYear = calendar.get(java.util.Calendar.DAY_OF_YEAR)
-            
-            val dailyQuotes = listOf(
-                "Education is the most powerful weapon which you can use to change the world.",
-                "The roots of education are bitter, but the fruit is sweet.",
-                "A teacher affects eternity; he can never tell where his influence stops.",
-                "I hear and I forget. I see and I remember. I do and I understand."
-            )
-            
-            val todayQuote = dailyQuotes[dayOfYear % dailyQuotes.size]
-            
+        item(key = "header") {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = "您好，${preferences.username}${if (preferences.role == UserRole.Teacher) "老师" else "学生"}",
@@ -478,7 +514,7 @@ fun HomeTab(
         }
 
         if (currentMode == HomeMode.EXAM_NETWORK) {
-            item {
+            item(key = "search_bar") {
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = onSearchQueryChange,
@@ -507,66 +543,55 @@ fun HomeTab(
                 
                 sections.forEach { sectionName ->
                     val isExpanded = expandedSections.contains(sectionName)
-                    val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
                     
-                    item(key = "section_$sectionName") {
-                        Column {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .hapticClickable(preferences) {
-                                        if (isExpanded) expandedSections.remove(sectionName)
-                                        else expandedSections.add(sectionName)
-                                    }
-                                    .padding(vertical = 8.dp, horizontal = 4.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = sectionName,
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = primaryColor
-                                )
-                                Icon(
-                                    imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                    contentDescription = if (isExpanded) "Collapse" else "Expand",
-                                    tint = primaryColor,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                            
-                            AnimatedVisibility(
-                                visible = isExpanded,
-                                enter = expandVertically(
-                                    animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow)
-                                ) + fadeIn(animationSpec = tween(300)),
-                                exit = shrinkVertically(
-                                    animationSpec = spring(dampingRatio = 0.8f, stiffness = Spring.StiffnessLow)
-                                ) + fadeOut(animationSpec = tween(250))
-                            ) {
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                                    modifier = Modifier.padding(bottom = 8.dp)
-                                ) {
-                                    sectionPoints.forEach { point ->
-                                        HistoryCardByPoint(
-                                            point = point, 
-                                            preferences = preferences, 
-                                            cleanedDescription = cleanedDescriptions[point.id] ?: "",
-                                            onUpdateStatus = onUpdateStatus,
-                                            onClick = { onNavigateToKnowledgeDetail(point.id) }
-                                        )
-                                    }
+                    item(key = "section_header_$sectionName") {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .hapticClickable(preferences) {
+                                    if (isExpanded) expandedSections.remove(sectionName)
+                                    else expandedSections.add(sectionName)
                                 }
-                            }
+                                .padding(vertical = 8.dp, horizontal = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = sectionName,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = primaryColor
+                            )
+                            Icon(
+                                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                contentDescription = if (isExpanded) "Collapse" else "Expand",
+                                tint = primaryColor,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+
+                    if (isExpanded) {
+                        val sectionPoints = KnowledgeProvider.allPoints.filter { it.section == sectionName }
+                        items(
+                            items = sectionPoints,
+                            key = { "point_${it.id}" }
+                        ) { point ->
+                            HistoryCardByPoint(
+                                point = point, 
+                                preferences = preferences, 
+                                cleanedDescription = cleanedDescriptions[point.id] ?: "",
+                                onUpdateStatus = onUpdateStatus,
+                                onClick = { onNavigateToKnowledgeDetail(point.id) },
+                                modifier = Modifier.animateItemPlacement(animationSpec = InsightAnimation.IosOffsetSpring)
+                            )
                         }
                     }
                 }
             } else {
                 if (filteredResults.isEmpty()) {
-                    item {
+                    item(key = "no_results") {
                         Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
                             Text("未找到相关知识点", color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
                         }
@@ -574,14 +599,20 @@ fun HomeTab(
                 } else {
                     items(
                         items = filteredResults,
-                        key = { "search_${it.id}" }
+                        key = { "search_result_${it.id}" }
                     ) { point ->
-                        SearchResultItemData(point, searchQuery, preferences) { onNavigateToKnowledgeDetail(point.id) }
+                        SearchResultItemData(
+                            point = point, 
+                            query = searchQuery, 
+                            preferences = preferences, 
+                            onClick = { onNavigateToKnowledgeDetail(point.id) },
+                            modifier = Modifier.animateItemPlacement(animationSpec = InsightAnimation.IosOffsetSpring)
+                        )
                     }
                 }
             }
         } else {
-            item {
+            item(key = "textbook_view") {
                 TextbookSyncView(onNavigateToTextbookDetail)
             }
         }
@@ -718,13 +749,14 @@ fun HistoryCardByPoint(
     preferences: UserPreferences, 
     cleanedDescription: String,
     onUpdateStatus: (String, com.example.insight.ui.state.KnowledgeStatus) -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val currentStatus = preferences.knowledgeStatuses[point.id] ?: com.example.insight.ui.state.KnowledgeStatus.PRACTICING
     
     Card(
-        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
+        modifier = modifier.fillMaxWidth().hapticClickable(preferences) { onClick() }, 
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), 
         shape = RoundedCornerShape(20.dp)
@@ -1153,12 +1185,18 @@ fun HighlightedText(
 }
 
 @Composable
-fun SearchResultItemData(point: com.example.insight.data.model.KnowledgePoint, query: String, preferences: UserPreferences, onClick: () -> Unit) {
+fun SearchResultItemData(
+    point: com.example.insight.data.model.KnowledgePoint, 
+    query: String, 
+    preferences: UserPreferences, 
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val snippet = getSnippet(point, query)
     
     Card(
-        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onClick() },
+        modifier = modifier.fillMaxWidth().hapticClickable(preferences) { onClick() },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(16.dp)
