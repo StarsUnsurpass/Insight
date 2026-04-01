@@ -759,35 +759,40 @@ fun HistoryCardByPoint(
 ) {
     val currentStatus = preferences.knowledgeStatuses[point.id] ?: com.example.insight.ui.state.KnowledgeStatus.PRACTICING
     
-    // Aesthetic Color Mapping based on section - Cached for performance
+    // Static asset caching
     val (iconColor, bgColor) = remember(point.section) {
         when {
-            point.section.contains("词法") -> Color(0xFF007AFF) to Color(0xFF007AFF).copy(alpha = 0.12f)
-            point.section.contains("时态") || point.section.contains("语态") -> Color(0xFF34C759) to Color(0xFF34C759).copy(alpha = 0.12f)
-            point.section.contains("句法") -> Color(0xFF5856D6) to Color(0xFF5856D6).copy(alpha = 0.12f)
-            else -> Color(0xFFFF9500) to Color(0xFFFF9500).copy(alpha = 0.12f)
+            point.section.contains("词法") -> Color(0xFFFF3B30) to Color(0xFFFF3B30).copy(alpha = 0.12f)
+            point.section.contains("时态") || point.section.contains("语态") -> Color(0xFFFF9500) to Color(0xFFFF9500).copy(alpha = 0.12f)
+            point.section.contains("句法") -> Color(0xFFFFCC00) to Color(0xFFFFCC00).copy(alpha = 0.12f)
+            else -> Color(0xFF007AFF) to Color(0xFF007AFF).copy(alpha = 0.12f)
         }
     }
     
     val icon = remember(point.id, point.title) { getPointIcon(point.id, point.title) }
 
-    Card(
+    // Use a lightweight Box instead of Card to avoid expensive shadow calculations during fast scroll
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .graphicsLayer { 
                 clip = true
                 shape = RoundedCornerShape(20.dp)
             }
-            .hapticClickable(preferences) { onClick() }, 
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), 
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .border(
+                width = 1.dp, 
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), 
+                shape = RoundedCornerShape(20.dp)
+            )
+            .hapticClickable(preferences) { onClick() }
+            .padding(12.dp)
     ) {
-        Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier = Modifier
                     .size(56.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(bgColor), 
+                    .background(bgColor, RoundedCornerShape(16.dp)), 
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -815,30 +820,34 @@ fun HistoryCardByPoint(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 
-                val statusColor = when(currentStatus) { 
-                    com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> Color(0xFF34C759)
-                    com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> Color(0xFF007AFF)
-                    com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color(0xFFFF3B30) 
+                // Optimized status indicator: Use simple background + text
+                val (statusLabel, statusColor) = remember(currentStatus) {
+                    currentStatus.label to when(currentStatus) { 
+                        com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> Color(0xFF34C759)
+                        com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> Color(0xFF007AFF)
+                        com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> Color(0xFFFF3B30) 
+                    }
                 }
 
-                Surface(
-                    color = statusColor.copy(alpha = 0.1f), 
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null
-                    ) {
-                        val nextStatus = when(currentStatus) {
-                            com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW
-                            com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> com.example.insight.ui.state.KnowledgeStatus.COMPLETED
-                            com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> com.example.insight.ui.state.KnowledgeStatus.PRACTICING
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(statusColor.copy(alpha = 0.1f))
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
+                            val nextStatus = when(currentStatus) {
+                                com.example.insight.ui.state.KnowledgeStatus.PRACTICING -> com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW
+                                com.example.insight.ui.state.KnowledgeStatus.TO_REVIEW -> com.example.insight.ui.state.KnowledgeStatus.COMPLETED
+                                com.example.insight.ui.state.KnowledgeStatus.COMPLETED -> com.example.insight.ui.state.KnowledgeStatus.PRACTICING
+                            }
+                            onUpdateStatus(point.id, nextStatus)
                         }
-                        onUpdateStatus(point.id, nextStatus)
-                    }
+                        .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
                     Text(
-                        text = currentStatus.label, 
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), 
+                        text = statusLabel, 
                         style = MaterialTheme.typography.labelSmall, 
                         color = statusColor,
                         fontWeight = FontWeight.SemiBold
@@ -944,13 +953,19 @@ fun ProfileTab(
     onNavigateToLessonPlanSample: (String) -> Unit
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
+    
+    // Stable shared styles to avoid allocation during scroll
+    val cardShape = remember { RoundedCornerShape(24.dp) }
+    val cardBorder = remember { BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f)) }
+    val cardColors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    val cardElevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 120.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        item {
+        item(key = "profile_header") {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(modifier = Modifier.size(64.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape), contentAlignment = Alignment.Center) {        
                     Icon(imageVector = when(preferences.role) {
@@ -971,7 +986,7 @@ fun ProfileTab(
             }
         }
 
-        item {
+        item(key = "stats_row") {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 StatCard(
                     preferences = preferences,
@@ -991,88 +1006,86 @@ fun ProfileTab(
         }
 
         if (preferences.role == UserRole.Teacher) {
-            item {
+            item(key = "teacher_management") {
                 Text("教务管理", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(12.dp))
                 
-                // --- Class Management ---
-                Card(
-                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageStudents() },
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-                ) {
-                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.Group, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    // --- Class Management ---
+                    Card(
+                        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageStudents() },
+                        shape = cardShape,
+                        colors = cardColors,
+                        elevation = cardElevation,
+                        border = cardBorder
+                    ) {
+                        Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                                Icon(Icons.Default.Group, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                            }
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                            }
+                            Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                         }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text("班级学生名册", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                            Text("批量导入名单、管理学生及查看档案", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                        }
-                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }
-                }
-                
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // --- Schedule Management (Moved Here) ---
-                Card(
-                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onNavigateToSchedule() },
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-                ) {
-                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.DateRange, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                    
+                    // --- Schedule Management ---
+                    Card(
+                        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onNavigateToSchedule() },
+                        shape = cardShape,
+                        colors = cardColors,
+                        elevation = cardElevation,
+                        border = cardBorder
+                    ) {
+                        Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                                Icon(Icons.Default.DateRange, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                            }
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text("全能课表管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                            }
+                            Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                         }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text("全能课表管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                            Text("拍照导入、多课表管理与自动上课提醒", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                        }
-                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }
-                }
-                
-                Spacer(modifier = Modifier.height(12.dp))
-                
-                // --- Lesson Plan Management ---
-                Card(
-                    modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageLessonPlans() },
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-                ) {
-                    Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.AutoAwesome, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                    
+                    // --- Lesson Plan Management ---
+                    Card(
+                        modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onManageLessonPlans() },
+                        shape = cardShape,
+                        colors = cardColors,
+                        elevation = cardElevation,
+                        border = cardBorder
+                    ) {
+                        Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
+                                Icon(Icons.Default.AutoAwesome, null, tint = primaryColor, modifier = Modifier.size(24.dp))
+                            }
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text("AI 智能教案管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                                Text("AI 辅助备课、教案编写与教学输出", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+                            }
+                            Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                         }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text("AI 智能教案管理", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                            Text("AI 辅助备课、教案编写与教学输出", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                        }
-                        Icon(Icons.Default.ChevronRight, null, tint = primaryColor.copy(alpha = 0.5f))
                     }
                 }
             }
         }
 
-        item {
+        item(key = "ai_lab") {
             Text("AI 实验室", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
             Card(
                 modifier = Modifier.fillMaxWidth().hapticClickable(preferences) { onNavigateToMindMap() },
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                shape = cardShape,
+                colors = cardColors,
+                elevation = cardElevation,
+                border = cardBorder
             ) {
                 Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
                     Box(modifier = Modifier.size(48.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
@@ -1088,16 +1101,16 @@ fun ProfileTab(
             }
         }
 
-        item {
+        item(key = "resources") {
             Text("教学资源示例 (示例数据)", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 Card(
                     modifier = Modifier.weight(1f).hapticClickable(preferences) { onNavigateToLessonPlanSample(com.example.insight.data.model.sampleLessonPlans.first().id) },
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                    shape = cardShape,
+                    colors = cardColors,
+                    elevation = cardElevation,
+                    border = cardBorder
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
@@ -1111,10 +1124,10 @@ fun ProfileTab(
 
                 Card(
                     modifier = Modifier.weight(1f).hapticClickable(preferences) { onNavigateToCourseware(com.example.insight.data.model.sampleCoursewares.first().id) },
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                    shape = cardShape,
+                    colors = cardColors,
+                    elevation = cardElevation,
+                    border = cardBorder
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Box(modifier = Modifier.size(40.dp).background(primaryColor.copy(alpha = 0.1f), CircleShape), contentAlignment = Alignment.Center) {
@@ -1128,15 +1141,15 @@ fun ProfileTab(
             }
         }
 
-        item {
+        item(key = "app_config") {
             Text("应用配置", style = MaterialTheme.typography.labelMedium, color = primaryColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                shape = cardShape,
+                colors = cardColors,
+                elevation = cardElevation,
+                border = cardBorder
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     val exportTitle = if (preferences.role == UserRole.Student) "导出错题本 (PDF)" else "导出班级报告 (PDF)"
